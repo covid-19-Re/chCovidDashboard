@@ -1,6 +1,6 @@
 server <- function(input, output, session) {
 # global
-
+  
 # contact tracing
   ctServer("contactTracing")
 

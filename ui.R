@@ -1,8 +1,11 @@
-fluidPage(width = "100%", class = "main-container", theme = "theme.min.css",
+library("shinyjs")
+
+tagList(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
   ),
-  navbarPage("CH Covid-19 Dashboard", id = ".main",
+  useShinyjs(),
+  navbarPage("CH Covid-19 Dashboard", id = ".main", theme = "theme.min.css",
     tabPanel("Time series - cases",
       tsCasesUI("tsCases")
     ),
@@ -15,5 +18,6 @@ fluidPage(width = "100%", class = "main-container", theme = "theme.min.css",
     tabPanel("Quarantine duration",
       quarantineDurationUI("quarantineDuration")
     )
-  )
+  ),
+  tags$script(src = "navbarRight.js")
 )
