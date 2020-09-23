@@ -1,0 +1,12 @@
+.main-container {
+  margin-right: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.helptext {
+  font-weight: 100 !important;
+  font-style: italic;
+  padding-left: 10px !important;
+}
