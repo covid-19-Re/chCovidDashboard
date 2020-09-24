@@ -199,7 +199,7 @@ quarantineDurationUI <- function(id) {
         column(4,
           bootstrapPanel(heading = "Parameter 4", class = "panel-primary",
             selectizeInput(
-              ns("travelduration"),
+              ns("travelDuration"),
               extLabel("y", "duration of travel"),
               choices = as.character(1:21),
               selected = as.character(c(1, 2, 3, 5, 7, 10, 14)),
@@ -211,10 +211,10 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Quarantine utility",
             class = "panel-primary",
             fluidRow(
-              column(6, "plot"),
-              column(6, "plot")
-            )#,
-            # uiOutput(ns("noTestCaption"))
+              column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px")),
+              column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px")),
+            ),
+            uiOutput(ns("travellerNoTestCaption"))
           )
         )
       )

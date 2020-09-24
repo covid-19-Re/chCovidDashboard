@@ -233,38 +233,40 @@ quarantineDurationServer <- function(id) {
 
       travellerFracPars <- reactive({
         travellerFracPars <- list(
-          y.vals = seq(input$quarantineDuration[1], input$quarantineDuration[2]))
+          y.vals = na.omit(as.integer(input$travelDuration)))
       })
 
       travellerFracNoTest <- reactive({
-        tE <- fracPars()$tE
         nCompare <- fracPars()$nCompare
-        DeltaQ.vals <- fracPars()$DeltaQ.vals
+        y.vals <- travellerFracPars()$y.vals
         n.vals <- fracPars()$n.vals
 
-        travellerFracNoTest <- lapply(DeltaQ.vals, function(DeltaQ) {
-          n <- n.vals[n.vals > DeltaQ]
-          frac <- getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams())
-          data.frame(
-            DeltaQ = factor(DeltaQ, levels = DeltaQ),
-            n = n,
-            fraction = frac
-          )
+        travellerFracNoTest <- lapply(y.vals, function(y) {
+          tE.vals <- seq(-y, 0)
+          frac <- lapply(n.vals, function(n) {
+            frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
+            data.frame(
+              y = factor(y, levels = y.vals),
+              n = n,
+              fraction = frac
+            )
+          }) %>% bind_rows()
         }) %>% bind_rows()
 
-        fracRelUtility <- lapply(DeltaQ.vals, function(DeltaQ) {
-          nPrime <- n.vals[n.vals > DeltaQ]
-          relUtility <-
-            (getIntegral(upper = tE + nPrime, lower = DeltaQ, tE = tE, params = genParams()) / (tE + nPrime - DeltaQ)) /
-            (getIntegral(upper = tE + nCompare, lower = DeltaQ, tE = tE, params = genParams()) / (tE + nCompare - DeltaQ))
-              data.frame(
-                DeltaQ = factor(DeltaQ, levels = DeltaQ),
-                n = nPrime,
-                relUtility = relUtility
-              )
-            }) %>% bind_rows()
+        travellerFracRelUtility <- lapply(y.vals, function(y) {
+          tE.vals <- seq(-y, 0)
+          relUtility <- lapply(n.vals[n.vals > 0], function(n) {
+            relUtility <- ( mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))/n )/
+              (mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()))/nCompare )
+            data.frame(
+              y = factor(y, levels = y.vals),
+              n = n,
+              relUtility = relUtility
+            )
+          }) %>% bind_rows()
+        }) %>% bind_rows()
 
-        return(list(frac = fracNoTest, utility = fracRelUtility))
+        return(list(frac = travellerFracNoTest, utility = travellerFracRelUtility))
       })
 
       # outputs
@@ -392,7 +394,6 @@ quarantineDurationServer <- function(id) {
         DeltaT <- fracTestPars()$DeltaT
         s <- fracTestPars()$s
         r <- fracTestPars()$r
-        
 
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
@@ -456,6 +457,49 @@ quarantineDurationServer <- function(id) {
           "on the infectivity profile.",
           "</span>"))
       })
+
+      output$travellerFracNoTestPlot <- renderPlot({
+        ggplot(travellerFracNoTest()$frac, aes(x = n, y = fraction, colour = y)) + 
+          geom_line(size = 1.2) +
+          geom_point(size = 3) +
+          scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
+          scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
+          scale_colour_viridis_d(option = "inferno", end = 0.9,
+            aesthetics = c("colour","fill"), name = "duration\nof travel") +
+          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
+          plotTheme +
+          theme(legend.position = "left", legend.background = element_blank(), legend.key.height = unit(0.5, "cm"))
+      })
+
+      output$travellerFracNoTestRelUtilityPlot <- renderPlot({
+        ggplot(travellerFracNoTest()$utility, aes(x = n, y = relUtility, colour = y)) + 
+          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
+          geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
+          geom_line(size = 1.2) +
+          geom_point(size = 3) +
+          scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
+          #scale_y_continuous(limits = c(0,1), labels = scales::percent) +
+          scale_colour_viridis_d(option = "inferno", end = 0.9,
+            aesthetics = c("colour","fill"), name = "duration\nof travel") +
+          labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
+          plotTheme + theme(legend.position = "None")
+      })
+
+      output$travellerNoTestCaption <- renderUI({
+        nCompare <- fracPars()$nCompare
+        tE <- fracPars()$tE
+        DeltaQ <- fracPars()$DeltaQ
+        tS <- fracAdherencePars()$tS
+
+        HTML(glue(
+          "<span class='help-block' style='font-size:15px;'>",
+          "(left) The fraction of total onward transmission per quarantined traveller that is prevented by quarantine. ",
+          "(right) The relative utility of different quarantine strategies (x-axis) compared to n = {nCompare} days. ",
+          "Colours represent the duration of travel y and we assume infection can occur on any day ",
+          "-y &le; t<sub>E</sub> &le; 0 with uniform probability.",
+          "</span>"))
+      })
+
 
     }
   )
