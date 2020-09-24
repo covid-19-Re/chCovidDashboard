@@ -102,9 +102,3 @@
     tertiaryCasesMLE <- do.call(rbind, tertiaryCasesMLE)
     return(tertiaryCasesMLE)
   }
-
-  # quarantine module
-  getIntegral <- function(upper, lower, params) {
-    getInfectivityProfile(times = upper, params = params, CDF = TRUE) -
-      getInfectivityProfile(times = lower, params = params, CDF = TRUE)
-  }

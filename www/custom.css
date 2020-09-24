@@ -3,3 +3,11 @@
   font-style: italic;
   padding-left: 10px !important;
 }
+
+.ttIndicator {
+  padding-left: 5px !important;
+}
+
+.tooltip-inner {
+  width: 350px; 
+}
