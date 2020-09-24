@@ -5,12 +5,12 @@ ctUI <- function(id) {
   ns <- NS(id)
   tagList(
     fluidPage(
-      fluidRow(
-        column(12,
-          bootstrapPanel(heading = "Contact Tracing & the number of tertiary cases", class = "panel-primary",
-            "text")
-        )
-      ),
+      # fluidRow(
+      #   column(12,
+      #     bootstrapPanel(heading = "Contact Tracing & the number of tertiary cases", class = "panel-primary",
+      #       "text")
+      #   )
+      # ),
       fluidRow(
         column(3,
           bootstrapPanel(heading = "Parameter", class = "panel-primary",
