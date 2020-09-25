@@ -1,5 +1,5 @@
-# chCovidDashboard
-Covid-19 Dashboard for Switzerland
+# CH Covid-19 Dashboard
+Covid-19 Dashboard for Switzerland. A collection of exploratory data bites.
 
 # Contributors
 

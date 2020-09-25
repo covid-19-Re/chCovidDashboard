@@ -8,6 +8,41 @@ bootstrapPanel <- function(heading, class = "panel-primary", ..., id = NULL) {
   )
 }
 
+# bootstrap panel for shiny
+thumbnailPanel <- function(title, authors, affiliation, thumbnail, tabId) {
+  div(class = "col-sm-3", style = "width: 300px; height: 300px;",
+    div(class = "panel panel-primary",
+      div(class = "panel-body",
+        img(src = thumbnail, width = "100%", class = "thumbImg"),
+        div(class = "thumbText",
+            tags$a(id = tabId, href = "#", class = "action-button shiny-bound-input",
+              HTML("<p class = 'thumbTitle'>", title, "</p>")
+            ),
+            HTML("<p>", authors, "</p>"),
+            HTML("<p>", affiliation, "</p>")
+          )
+      )
+    )
+  )
+}
+
+thumbnailPanelExt <- function(title, authors, affiliation, thumbnail, href) {
+  div(class = "col-sm-3", style = "width: 300px; height: 300px;",
+    div(class = "panel panel-primary",
+      div(class = "panel-body",
+        img(src = thumbnail, width = "100%", class = "thumbImg"),
+        div(class = "thumbText",
+            tags$a(href = href, target = "_blank",
+              HTML("<p class = 'thumbTitle'>", title, "</p>")
+            ),
+            HTML("<p>", authors, "</p>"),
+            HTML("<p>", affiliation, "</p>")
+          )
+      )
+    )
+  )
+}
+
 # shiny input label with helptext
 extLabel <- function(name, helptext, tooltip = NULL, tooltipPlacement = "right") {
   extLabel <- glue::glue(

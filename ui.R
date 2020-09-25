@@ -1,26 +1,50 @@
 library("shinyjs")
 
-tagList(
-  tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
-  ),
-  useShinyjs(),
-  navbarPage("CH Covid-19 Dashboard", id = "main", theme = "theme.min.css",
-    tabPanel("Time series - cases",
-      tsCasesUI("tsCases")
+ui <- function(request){
+  tagList(
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
     ),
-    tabPanel("Time series - proportions",
-      tsProportionsUI("tsProportions")
+    useShinyjs(),
+    navbarPage("CH Covid-19 Dashboard", id = "tab", theme = "theme.min.css", collapsible = TRUE,
+      tabPanel("",  value = "home", icon = icon("home"),
+        fluidRow(
+          thumbnailPanel(
+            title = "Quantifying the impact of quarantine duration on COVID-19 transmission",
+            authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
+            affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland",
+            thumbnail = "quarantineModule-thumbnail.png",
+            tabId = "selectQuarantine"
+          )
+        ),
+        hr(),
+        fluidRow(
+          thumbnailPanelExt(
+            title = "R<sub>e</sub> Estimation",
+            authors = "Jérémie Scire, Jana S. Huisman et al.",
+            affiliation = "ETH Zürich, D-BSSE & D-USYS <br><br> <i>(opens in a new window)</i>",
+            thumbnail = "re-thumbnail.png",
+            href = "https://ibz-shiny.ethz.ch/covid-19-re/"
+          )
+        ),
+      ),
+      # tabPanel("Time series - cases", value = "tsCases",
+      #   tsCasesUI("tsCases")
+      # ),
+      # tabPanel("Time series - proportions", value = "tsProportions",
+      #   tsProportionsUI("tsProportions")
+      # ),
+      # tabPanel("Contact tracing",
+      #   ctUI("contactTracing")
+      # ),
+      tabPanel("Quarantine duration", value = "quarantineDuration",
+        quarantineDurationUI("quarantineDuration")
+      ),
+      navbarMenu("About",
+        tabPanel("About", icon = icon("question-circle"), value = "about",
+          includeMarkdown("README.md")
+        )
+      )
     ),
-    tabPanel("Contact tracing",
-      ctUI("contactTracing")
-    ),
-    tabPanel("Quarantine duration",
-      quarantineDurationUI("quarantineDuration")
-    ),
-    navbarMenu("About",
-      tabPanel("About", icon = icon("question-circle"))
-    )
-  ),
-  tags$script(src = "navbarRight.js")
-)
+    tags$script(src = "navbarRight.js")
+)}

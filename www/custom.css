@@ -29,3 +29,27 @@
   color: rgb(200, 200, 200);
   color: rgba(0, 0, 0, 0.3);
 }
+
+.container {
+  text-align: center;
+  color: white;
+}
+
+.thumbText {
+  position: absolute;
+  text-align: center;
+  top: 15px;
+  left: 30px;
+  right: 30px;
+}
+
+.thumbImg {
+  -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+  filter: blur(2px) opacity(30%);
+
+}
+
+.thumbTitle {
+  font-size: 20px;
+  font-weight: 900;
+}

@@ -1,9 +1,8 @@
-$('*[data-value="Quarantine duration"]').on('shown.bs.tab', function() {
+$('*[data-value="quarantineDuration"]').on('shown.bs.tab', function() {
   $('#pars1').connections({
     to: '#parsDistr',
     'class': 'parsConnected'  
   });
-
   $('#pars1').connections({
     to: '#pars2',
     'class': 'parsConnected'  
@@ -48,7 +47,6 @@ $('*[data-value="Quarantine duration"]').on('shown.bs.tab', function() {
     to: '#pars6',
     'class': 'parsToPlot'  
   });
- 
 });
 
 $(document).on('shiny:visualchange', function(event) {
