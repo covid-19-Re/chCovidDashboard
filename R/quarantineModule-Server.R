@@ -756,6 +756,22 @@ quarantineDurationServer <- function(id) {
           plotTheme + theme(legend.position = "right", legend.background = element_blank())
       })
 
+      output$travellerAdherenceCaption <- renderUI({
+          nCompare <- fracPars()$nCompare
+          y <- travellerTestPars()$y
+          meanInc <- round(incParams()$mean, 0)
+
+          HTML(glue(
+            "<span class='help-block' style='font-size:15px;'>",
+            "<i>(left)</i> The change in adherence needed to maintain quarantine efficacy of the ",
+            "<strong>n = {nCompare}</strong> day strategy if we change the quarantine duration to n' days (x-axis). ",
+            "<i>(right)</i> The impact of symptomatic cases on the fraction of total onward transmission per quarantined ",
+            "traveller that is prevented by quarantine. We fix the travel duration to <strong>y = {y}</strong> days ",
+            "and assume t<sub>E</sub> is uniformly distributed between -y and 0. We use the mean incubation time of ",
+            "<strong>{meanInc}</strong> days, such that <strong>t<sub>S</sub> = t<sub>E</sub> + {meanInc}</strong>.",
+            "</span>"))
+        })
+
     }
   )
 }

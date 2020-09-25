@@ -267,13 +267,13 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Testing returning travellers", id = "plots6",
+          bootstrapPanel(heading = "Adherence and symptoms", id = "plots6",
             class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px")),
               column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px")),
             ),
-            # uiOutput(ns("travellerTestCaption"))
+            uiOutput(ns("travellerAdherenceCaption"))
           )
         )
       )
