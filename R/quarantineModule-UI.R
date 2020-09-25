@@ -19,7 +19,7 @@ quarantineDurationUI <- function(id) {
       # empirical distributions
       fluidRow(
         column(8,
-          bootstrapPanel(heading = "Empirical distributions", class = "panel-primary",
+          bootstrapPanel(heading = "Empirical distributions", class = "panel-info", id = "parsDistr",
             fluidRow(
               column(4,
                 plotOutput(ns("genTimePlot"), height = "200px"),
@@ -65,11 +65,11 @@ quarantineDurationUI <- function(id) {
         )
       ),
       # Scenario 1: Quarantining secondary cases after contact tracing
-      h1("Scenario 1: Quarantining secondary cases after contact tracing"),
+      h1("Scenario 1: Quarantining secondary cases after contact tracing", style = "background-color:rgb(238, 238, 238);"),
       br(),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 1", class = "panel-primary",
+          bootstrapPanel(heading = "Parameter 1", class = "panel-primary", id = "pars1",
             img(src = "quarantineModule/timeline.png", width = "100%"),
             sliderInput(
               ns("quarantineDelay"),
@@ -92,8 +92,8 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Quarantine utility",
-            class = "panel-primary",
+          bootstrapPanel(heading = "Quarantine utility", id = "plots1",
+            class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("fracNoTestPlot"), height = "450px")),
               column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px"))
@@ -104,7 +104,7 @@ quarantineDurationUI <- function(id) {
       ),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 2", class = "panel-primary",
+          bootstrapPanel(heading = "Parameter 2", class = "panel-primary", id = "pars2",
             sliderInput(
               ns("testDay"),
               extLabel("t<sub>T</sub>", "day on which test is conducted"),
@@ -141,8 +141,8 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Testing and Releasing",
-            class = "panel-primary",
+          bootstrapPanel(heading = "Testing and Releasing", id = "plots2",
+            class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("fracTestPlot"), height = "450px")),
               column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px"))
@@ -153,7 +153,7 @@ quarantineDurationUI <- function(id) {
       ),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 3", class = "panel-primary",
+          bootstrapPanel(heading = "Parameter 3", class = "panel-primary", id = "pars3",
             fluidRow(
               column(8,
                 sliderInput(
@@ -183,8 +183,8 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Adherence and symptoms",
-            class = "panel-primary",
+          bootstrapPanel(heading = "Adherence and symptoms", id = "plots3",
+            class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("relAdherencePlot"), height = "450px")),
               column(6, plotOutput(ns("fracAdherencePlot"), height = "450px"))
@@ -193,11 +193,11 @@ quarantineDurationUI <- function(id) {
           )
         )
       ),
-      h1("Scenario 2: Quarantining returning travellers"),
+      h1("Scenario 2: Quarantining returning travellers", style = "background-color:rgb(238, 238, 238);"),
       br(),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 4", class = "panel-primary",
+          bootstrapPanel(heading = "Parameter 4", class = "panel-primary", id = "pars4",
             selectizeInput(
               ns("travelDuration"),
               extLabel("y", "duration of travel"),
@@ -208,8 +208,8 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Quarantine utility",
-            class = "panel-primary",
+          bootstrapPanel(heading = "Quarantine utility", id = "plots4",
+            class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px")),
               column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px")),
@@ -217,7 +217,69 @@ quarantineDurationUI <- function(id) {
             uiOutput(ns("travellerNoTestCaption"))
           )
         )
+      ),
+      fluidRow(
+        column(4,
+          bootstrapPanel(heading = "Parameter 5", class = "panel-primary", id = "pars5",
+            selectizeInput(
+              ns("yFocus"),
+              extLabel("y", "focal travel duration"),
+              choices = as.character(1:21),
+              selected = as.character(7),
+              multiple = FALSE,
+              options = list(delimiter = ", ")),
+            sliderInput(
+              ns("travellerTestDay"),
+              extLabel("t<sub>T</sub>", "day after return on which test is conducted"),
+              min = 0, max = 10, value = c(0, 5),
+              step = 1,
+              width = "100%"),
+          )
+        ),
+        column(8,
+          bootstrapPanel(heading = "Testing returning travellers", id = "plots5",
+            class = "panel-info",
+            fluidRow(
+              column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px")),
+              column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px")),
+            ),
+            uiOutput(ns("travellerTestCaption"))
+          )
+        )
+      ),
+      fluidRow(
+        column(4,
+          bootstrapPanel(heading = "Parameter 6", class = "panel-default", id = "pars6",
+            tags$i("no additional parameter :(")
+            # selectizeInput(
+            #   ns("yFocus"),
+            #   extLabel("y", "focal travel duration"),
+            #   choices = as.character(1:21),
+            #   selected = as.character(7),
+            #   multiple = FALSE,
+            #   options = list(delimiter = ", ")),
+            # sliderInput(
+            #   ns("travellerTestDay"),
+            #   extLabel("t<sub>T</sub>", "day after return on which test is conducted"),
+            #   min = 0, max = 10, value = c(0, 5),
+            #   step = 1,
+            #   width = "100%"),
+          )
+        ),
+        column(8,
+          bootstrapPanel(heading = "Testing returning travellers", id = "plots6",
+            class = "panel-info",
+            fluidRow(
+              column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px")),
+              column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px")),
+            ),
+            # uiOutput(ns("travellerTestCaption"))
+          )
+        )
       )
-    )
+
+    ),
+    tags$script(src = "quarantineModule/jquery.connections.js"),
+    tags$script(src = "quarantineModule/quarantineModule.js")
   )
 }

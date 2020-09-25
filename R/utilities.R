@@ -1,6 +1,6 @@
 # bootstrap panel for shiny
-bootstrapPanel <- function(heading, class = "panel-primary", ...) {
-  div(class = str_c("panel", class, sep = " "),
+bootstrapPanel <- function(heading, class = "panel-primary", ..., id = NULL) {
+  div(class = str_c("panel", class, sep = " "), id = id,
     div(class = "panel-heading", heading),
     div(class = "panel-body",
       ...

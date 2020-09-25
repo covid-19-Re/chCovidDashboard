@@ -11,3 +11,21 @@
 .tooltip-inner {
   width: 350px; 
 }
+
+.parsConnected {
+  border: 10px single;
+  z-index: -20;
+  display: table;
+  /*pointer-events:none;*/
+  color: rgb(200, 200, 200);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.parsToPlot {
+  border: 10px single;
+  z-index: -20;
+  display: table;
+  /*pointer-events:none;*/
+  color: rgb(200, 200, 200);
+  color: rgba(0, 0, 0, 0.3);
+}
