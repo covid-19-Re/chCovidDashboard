@@ -11,6 +11,25 @@ server <- function(input, output, session) {
       selected = "quarantineDuration"
     )
   })
+  observeEvent(input$selectContactTracing, {
+    print(input$tab)
+    updateTabsetPanel(session, "tab",
+      selected = "contactTracing"
+    )
+  })
+  observeEvent(input$selectTsProportions, {
+    print(input$tab)
+    updateTabsetPanel(session, "tab",
+      selected = "tsProportions"
+    )
+  })
+  observeEvent(input$selectTsCases, {
+    print(input$tab)
+    updateTabsetPanel(session, "tab",
+      selected = "tsCases"
+    )
+  })
+
 
   onBookmarked(function(url) {
     updateQueryString(url)
@@ -24,15 +43,15 @@ server <- function(input, output, session) {
   })
 
 # contact tracing
-  #ctServer("contactTracing")
+  ctServer("contactTracing")
 
 # quarantine duration
   quarantineDurationServer("quarantineDuration")
 
 # Cases time series
-  #tsCasesServer("tsCases")
+  tsCasesServer("tsCases")
 
 # Proportions time series
-  #tsProportionsServer("tsProportions")
+  tsProportionsServer("tsProportions")
 
 }
