@@ -30,12 +30,9 @@ server <- function(input, output, session) {
     )
   })
 
-
   onBookmarked(function(url) {
     updateQueryString(url)
   })
-
-  ExcludedIDs <- reactiveVal(value = NULL)
 
   observe({
     toExclude <- setdiff(names(input), "tab")
