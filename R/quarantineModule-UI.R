@@ -95,8 +95,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Quarantine utility", id = "plots1",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("fracNoTestPlot"), height = "450px")),
-              column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px"))
+              column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
             ),
             uiOutput(ns("noTestCaption"))
           )
