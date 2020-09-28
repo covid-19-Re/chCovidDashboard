@@ -10,7 +10,10 @@ quarantineDurationUI <- function(id) {
       fluidRow(
         column(12,
           bootstrapPanel(
-            heading = "Quantifying the impact of quarantine duration on COVID-19 transmission",
+            heading = HTML(
+              "<h1>Quantifying the impact of quarantine duration on COVID-19 transmission</h1><br>",
+              "<i>Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i>"
+            ),
             class = "panel-primary",
             includeMarkdown("R/quarantineModuleFiles/abstract.md")
           )
@@ -22,7 +25,7 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Empirical distributions", class = "panel-info", id = "parsDistr",
             fluidRow(
               column(4,
-                plotOutput(ns("genTimePlot"), height = "200px"),
+                plotOutput(ns("genTimePlot"), height = "200px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("genShape"), "shape", step = 0.001, value = 3.2862)
@@ -34,7 +37,7 @@ quarantineDurationUI <- function(id) {
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516", doi = "10.1101/2020.09.04.20188516")
               ),
               column(4,
-                plotOutput(ns("infProfPlot"), height = "200px"),
+                plotOutput(ns("infProfPlot"), height = "200px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("infShift"), "shift", step = 0.001, value = -0.0747)
@@ -49,7 +52,7 @@ quarantineDurationUI <- function(id) {
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516", doi = "10.1101/2020.09.04.20188516")
               ),
               column(4,
-                plotOutput(ns("incDistPlot"), height = "200px"),
+                plotOutput(ns("incDistPlot"), height = "200px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("incMeanLog"), "log(mean)", step = 0.001, value = 1.42)
@@ -95,8 +98,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Standard n-day quarantine", id = "plots1",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("fracNoTestPlot"), height = "450px")),
-              column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px"))
+              column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
             ),
             uiOutput(ns("noTestCaption"))
           )
@@ -107,9 +110,9 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars2",
             sliderInput(
               ns("testDay"),
-              extLabel("t<sub>T</sub>", "day on which test is conducted"),
+              extLabel("t<sub>T</sub>", "day on which test is conducted",
+                tooltip = "days after exposure (t<sub>E</sub>), !> &Delta;<sub>T</sub>"),
               min = 0, max = 10, value = c(3, 8),
-              step = 1,
               width = "100%"),
             fluidRow(
               column(5,
@@ -122,7 +125,8 @@ quarantineDurationUI <- function(id) {
               column(5,
                 numericInput(
                   ns("testSpecificity"),
-                  extLabel("s", "quarantine specificity", tooltip = "fraction of quarantined persons who are infected"),
+                  extLabel("s", "quarantine specificity",
+                    tooltip = "fraction of quarantined persons who are infected"),
                   value = 0.1,
                   step = 0.05)
               )
@@ -149,8 +153,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Test-and-release", id = "plots2",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("fracTestPlot"), height = "450px")),
-              column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px"))
+              column(6, plotOutput(ns("fracTestPlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px") %>% withSpinner())
             ),
             uiOutput(ns("testCaption"))
           )
@@ -180,7 +184,8 @@ quarantineDurationUI <- function(id) {
               column(5,
                 disabled(numericInput(
                   ns("tSymptoms"),
-                  extLabel("t<sub>S</sub>", "time to symptoms", tooltip = "equal to t<sub>E</sub> + mean of incubation period distribution t<sub>S</sub>"),
+                  extLabel("t<sub>S</sub>", "time to symptoms",
+                    tooltip = "equal to t<sub>E</sub> + mean of incubation period distribution t<sub>S</sub>"),
                   value = 5,
                   step = 0.5))
               )
@@ -191,8 +196,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Adherence and symptoms", id = "plots3",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("relAdherencePlot"), height = "450px")),
-              column(6, plotOutput(ns("fracAdherencePlot"), height = "450px"))
+              column(6, plotOutput(ns("relAdherencePlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("fracAdherencePlot"), height = "450px") %>% withSpinner())
             ),
             uiOutput(ns("adherenceCaption"))
           )
@@ -216,8 +221,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Standard n-day quarantine", id = "plots4",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px")),
-              column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px")),
+              column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
             ),
             uiOutput(ns("travellerNoTestCaption"))
           )
@@ -245,8 +250,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Test-and-release", id = "plots5",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px")),
-              column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px")),
+              column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
             ),
             uiOutput(ns("travellerTestCaption"))
           )
@@ -256,29 +261,16 @@ quarantineDurationUI <- function(id) {
         column(4,
           bootstrapPanel(heading = "Parameter 6", class = "panel-default", id = "pars6",
             tags$i("no additional parameter :(")
-            # selectizeInput(
-            #   ns("yFocus"),
-            #   extLabel("y", "focal travel duration"),
-            #   choices = as.character(1:21),
-            #   selected = as.character(7),
-            #   multiple = FALSE,
-            #   options = list(delimiter = ", ")),
-            # sliderInput(
-            #   ns("travellerTestDay"),
-            #   extLabel("t<sub>T</sub>", "day after return on which test is conducted"),
-            #   min = 0, max = 10, value = c(0, 5),
-            #   step = 1,
-            #   width = "100%"),
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Testing returning travellers", id = "plots6",
+          bootstrapPanel(heading = "Adherence and symptoms", id = "plots6",
             class = "panel-info",
             fluidRow(
-              column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px")),
-              column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px")),
+              column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px") %>% withSpinner()),
+              column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px") %>% withSpinner()),
             ),
-            # uiOutput(ns("travellerTestCaption"))
+            uiOutput(ns("travellerAdherenceCaption"))
           )
         )
       )

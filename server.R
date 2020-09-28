@@ -1,14 +1,29 @@
 server <- function(input, output, session) {
 # global
   observe({
-    # Trigger this observer every time an input changes
+    # Trigger this observer every time the tab changes
     input$tab
     session$doBookmark()
   })
+  
   observeEvent(input$selectQuarantine, {
-    print(input$tab)
     updateTabsetPanel(session, "tab",
       selected = "quarantineDuration"
+    )
+  })
+  observeEvent(input$selectContactTracing, {
+    updateTabsetPanel(session, "tab",
+      selected = "contactTracing"
+    )
+  })
+  observeEvent(input$selectTsProportions, {
+    updateTabsetPanel(session, "tab",
+      selected = "tsProportions"
+    )
+  })
+  observeEvent(input$selectTsCases, {
+    updateTabsetPanel(session, "tab",
+      selected = "tsCases"
     )
   })
 
@@ -16,23 +31,21 @@ server <- function(input, output, session) {
     updateQueryString(url)
   })
 
-  ExcludedIDs <- reactiveVal(value = NULL)
-
   observe({
     toExclude <- setdiff(names(input), "tab")
     setBookmarkExclude(toExclude)
   })
 
 # contact tracing
-  #ctServer("contactTracing")
+  ctServer("contactTracing")
 
 # quarantine duration
   quarantineDurationServer("quarantineDuration")
 
 # Cases time series
-  #tsCasesServer("tsCases")
+  tsCasesServer("tsCases")
 
 # Proportions time series
-  #tsProportionsServer("tsProportions")
+  tsProportionsServer("tsProportions")
 
 }
