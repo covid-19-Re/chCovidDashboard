@@ -66,7 +66,7 @@ quarantineDurationServer <- function(id) {
           )
           return(infProf)
         })
-        
+
         yLim <- c(0, 0.22)
         labY <- 0.21
         output$incDistPlot <- renderPlot({
@@ -80,7 +80,7 @@ quarantineDurationServer <- function(id) {
             coord_cartesian(ylim = yLim) +
             labs(x = "incubation period (days)", y = "probability density") +
             ggtitle("C: incubation period") +
-            plotTheme
+            plotTheme + theme(plot.title = element_text(size = plotTheme$text$size, face = "bold"))
         })
 
         output$infProfPlot <- renderPlot({
@@ -95,7 +95,7 @@ quarantineDurationServer <- function(id) {
             coord_cartesian(ylim = yLim) +
             labs(x = "days after onset of symptoms", y = "probability density") +
             ggtitle("B: infectivity profile") +
-            plotTheme
+            plotTheme + theme(plot.title = element_text(size = plotTheme$text$size, face = "bold"))
         })
 
         output$genTimePlot <- renderPlot({
@@ -109,7 +109,7 @@ quarantineDurationServer <- function(id) {
             coord_cartesian(ylim = yLim) +
             labs(x = "generation time", y = "probability density") +
             ggtitle("A: generation time dist.") +
-            plotTheme
+            plotTheme + theme(plot.title = element_text(size = plotTheme$text$size, face = "bold"))
         })
 
       # SC1: QUARTANTINE UTILITY, NO TESTING
@@ -176,7 +176,7 @@ quarantineDurationServer <- function(id) {
             geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
             geom_line(size = 1.2) +
             geom_point(size = 3) +
-            scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
+            coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2]), ylim = c(0,4)) +
             #scale_y_continuous(limits = c(0,1), labels = scales::percent) +
             scale_colour_viridis_d(option = "inferno", end = 0.9,
               aesthetics = c("colour", "fill"), name = "delay to\nquarantine") +
@@ -310,13 +310,13 @@ quarantineDurationServer <- function(id) {
         })
 
         output$fracTestRelUtilityPlot <- renderPlot({
-          ggplot(fracTest()$utility, aes(x = n, y = relUtility, colour = x)) + 
+          ggplot(fracTest()$utility, aes(x = n, y = relUtility, colour = x)) +
             geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
             geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
             geom_line(data = fracTest()$utilityReduced, linetype = "dotted", size = 1.2) +
             geom_line(size = 1.2) +
             geom_point(size = 3) +
-            coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
+            coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2]), ylim = c(0,4)) +
             #scale_y_continuous(limits = c(0,1), labels = scales::percent) +
             scale_colour_viridis_d(option = "viridis", end = 0.9,
               aesthetics = c("colour", "fill"), name = "day of test") +
@@ -342,10 +342,10 @@ quarantineDurationServer <- function(id) {
             "We use t<sub>E</sub> = 0, which from the infectivity profile is the mean infection time of contacts ",
             "if the index case develops symptoms at t = 0, and <strong>&Delta;<sub>Q</sub> = {DeltaQ}</strong> ",
             "as the delay until quarantine begins. ",
-            "Individuals are tested on day x after exposure (colour) and released on day x+{DeltaT} if negative ",
+            "Individuals are tested on day x after exposure (colour) and released on day x+&Delta;<sub>T</sub> if negative ",
             "(we assume it takes <strong>&Delta;<sub>T</sub> = {DeltaT}</strong> days to receive a test result). ",
             "We assume a specificity of <strong>s = {s}</strong> and that there are no false-positive tests. ",
-            "Dotted lines assume the released individuals have a {r*100}% reduced transmission ",
+            "Dotted lines assume the released individuals have a reduced transmission ",
             "(<strong>r = {r}</strong>) due to extra hygiene and social distancing measures imposed ",
             "by reduced quarantine",
             "</span>"))
@@ -493,7 +493,7 @@ quarantineDurationServer <- function(id) {
         })
 
         output$travellerFracNoTestPlot <- renderPlot({
-          ggplot(travellerFracNoTest()$frac, aes(x = n, y = fraction, colour = y)) + 
+          ggplot(travellerFracNoTest()$frac, aes(x = n, y = fraction, colour = y)) +
             geom_line(size = 1.2) +
             geom_point(size = 3) +
             scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
@@ -506,12 +506,12 @@ quarantineDurationServer <- function(id) {
         })
 
         output$travellerFracNoTestRelUtilityPlot <- renderPlot({
-          ggplot(travellerFracNoTest()$utility, aes(x = n, y = relUtility, colour = y)) + 
+          ggplot(travellerFracNoTest()$utility, aes(x = n, y = relUtility, colour = y)) +
             geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
             geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
             geom_line(size = 1.2) +
             geom_point(size = 3) +
-            scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
+            coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2]), ylim = c(0,4)) +
             #scale_y_continuous(limits = c(0,1), labels = scales::percent) +
             scale_colour_viridis_d(option = "inferno", end = 0.9,
               aesthetics = c("colour","fill"), name = "duration\nof travel") +
@@ -641,7 +641,7 @@ quarantineDurationServer <- function(id) {
             geom_point(size = 3) +
             scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
             scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-            scale_colour_viridis_d(option = "inferno", direction = -1, end = 0.9,
+            scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
               aesthetics = c("colour", "fill"), name = "day of test") +
             labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
             plotTheme + theme(legend.position = "right")
@@ -654,8 +654,8 @@ quarantineDurationServer <- function(id) {
             geom_line(data = travellerFracTest()$utilityReduced, linetype = "dotted", size = 1.2) +
             geom_line(size = 1.2) +
             geom_point(size = 3) +
-            scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
-            scale_colour_viridis_d(option = "inferno", direction = -1, end = 0.9,
+            coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2]), ylim = c(0,4)) +
+            scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
               aesthetics = c("colour", "fill"), name = "day of test") +
             labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
             plotTheme + theme(legend.position = "none")
@@ -677,11 +677,11 @@ quarantineDurationServer <- function(id) {
             "standard quarantine with duration <strong>n = {nCompare}</strong> days. ",
             "We consider a travel duration of <strong>y = {y}</strong> days and we assume infection can occur on any ",
             "day -y &le; t<sub>E</sub> &le; 0 with uniform probability. Individuals are tested on day x (colour) ",
-            "after returning on day 0 and released on day x + {DeltaT} if negative ",
+            "after returning on day 0 and released on day x + &Delta; if negative ",
             "(we assume it takes <strong>&Delta;<sub>T</sub> = {DeltaT}</strong> days to receive a test result). ",
             "We assume a specificity of <strong>s = {s}</strong> and that there are no false-positive test results. ",
             "Dotted lines in both panels assume the released travellers have ",
-            "a {r*100}% reduced transmission (<strong>r = {r}</strong>) due to extra hygiene and social distancing ",
+            "a reduced transmission (<strong>r = {r}</strong>) due to extra hygiene and social distancing ",
             "measures imposed by reduced quarantine.",
             "</span>"))
         })
@@ -727,7 +727,7 @@ quarantineDurationServer <- function(id) {
       })
 
       output$travellerFracAdherencePlot <- renderPlot({
-        ggplot(travellerFracAdherence()$relAdherence, aes(x = n, y = relAdherence, colour = y)) + 
+        ggplot(travellerFracAdherence()$relAdherence, aes(x = n, y = relAdherence, colour = y)) +
           geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
           geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
           geom_line(size = 1.2) +
