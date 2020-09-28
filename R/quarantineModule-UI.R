@@ -11,8 +11,8 @@ quarantineDurationUI <- function(id) {
         column(12,
           bootstrapPanel(
             heading = HTML(
-              "Quantifying the impact of quarantine duration on COVID-19 transmission<br>",
-              "<small><i>Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i></small>"
+              "<h1>Quantifying the impact of quarantine duration on COVID-19 transmission</h1><br>",
+              "<i>Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i>"
             ),
             class = "panel-primary",
             includeMarkdown("R/quarantineModuleFiles/abstract.md")
@@ -110,9 +110,9 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(heading = "Parameter 2", class = "panel-primary", id = "pars2",
             sliderInput(
               ns("testDay"),
-              extLabel("t<sub>T</sub>", "day on which test is conducted"),
+              extLabel("t<sub>T</sub>", "day on which test is conducted",
+                tooltip = "days after exposure (t<sub>E</sub>), !> &Delta;<sub>T</sub>"),
               min = 0, max = 10, value = c(3, 8),
-              step = 1,
               width = "100%"),
             fluidRow(
               column(5,
@@ -125,7 +125,8 @@ quarantineDurationUI <- function(id) {
               column(5,
                 numericInput(
                   ns("testSpecificity"),
-                  extLabel("s", "quarantine specificity", tooltip = "fraction of quarantined persons who are infected"),
+                  extLabel("s", "quarantine specificity",
+                    tooltip = "fraction of quarantined persons who are infected"),
                   value = 0.1,
                   step = 0.05)
               )
@@ -178,7 +179,8 @@ quarantineDurationUI <- function(id) {
               column(5,
                 disabled(numericInput(
                   ns("tSymptoms"),
-                  extLabel("t<sub>S</sub>", "time to symptoms", tooltip = "equal to t<sub>E</sub> + mean of incubation period distribution t<sub>S</sub>"),
+                  extLabel("t<sub>S</sub>", "time to symptoms",
+                    tooltip = "equal to t<sub>E</sub> + mean of incubation period distribution t<sub>S</sub>"),
                   value = 5,
                   step = 0.5))
               )

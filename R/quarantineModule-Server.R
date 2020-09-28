@@ -213,7 +213,9 @@ quarantineDurationServer <- function(id) {
 
         # earliest test date is first day of quarantine
         observe({
-          updateSliderInput(session, "testDay", min = input$quarantineDelay)
+          sliderValue <- input$testDay
+          updateSliderInput(session, "testDay", min = 0, max = 10,
+            value = c(max(sliderValue[1], input$quarantineDelay), sliderValue[2]))
         })
 
         fracTest <- reactive({
