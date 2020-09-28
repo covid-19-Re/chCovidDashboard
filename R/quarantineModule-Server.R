@@ -325,7 +325,7 @@ quarantineDurationServer <- function(id) {
             geom_point(size = 3) +
             coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2]), ylim = c(0,4)) +
             #scale_y_continuous(limits = c(0,1), labels = scales::percent) +
-            scale_colour_viridis_d(option = "inferno", end = 0.9,
+            scale_colour_viridis_d(option = "viridis", end = 0.9,
               aesthetics = c("colour", "fill"), name = "day of test") +
             labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
             plotTheme + theme(legend.position = "none")
@@ -414,7 +414,7 @@ quarantineDurationServer <- function(id) {
             geom_point(size = 3) +
             scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
             scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-            scale_colour_viridis_d(option = "inferno", end = 0.9,
+            scale_colour_viridis_d(option = "viridis", end = 0.9,
               aesthetics = c("colour","fill"), name = "fraction\nasymptomatic", labels = labs) +
             labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
             plotTheme + theme(legend.position = "right", legend.background = element_blank())
@@ -779,7 +779,7 @@ quarantineDurationServer <- function(id) {
           geom_point(size = 3) +
           scale_x_continuous(limits = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2])) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-          scale_colour_viridis_d(option = "inferno", direction = -1, end = 0.9,
+          scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
             aesthetics = c("colour", "fill"), name = "fraction\nasymptomatic", labels = labs) +
           labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
           plotTheme + theme(legend.position = "right", legend.background = element_blank())
