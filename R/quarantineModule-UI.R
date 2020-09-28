@@ -65,11 +65,11 @@ quarantineDurationUI <- function(id) {
         )
       ),
       # Scenario 1: Quarantining secondary cases after contact tracing
-      h1("Scenario 1: Quarantining secondary cases after contact tracing", style = "background-color:rgb(238, 238, 238);"),
+      h1("Scenario 1: Quarantining traced contacts", style = "background-color:rgb(238, 238, 238);"),
       br(),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 1", class = "panel-primary", id = "pars1",
+          bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "pars1",
             img(src = "quarantineModule/timeline.png", width = "100%"),
             sliderInput(
               ns("quarantineDelay"),
@@ -92,7 +92,7 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Quarantine utility", id = "plots1",
+          bootstrapPanel(heading = "Standard n-day quarantine", id = "plots1",
             class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("fracNoTestPlot"), height = "450px")),
@@ -104,7 +104,7 @@ quarantineDurationUI <- function(id) {
       ),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 2", class = "panel-primary", id = "pars2",
+          bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars2",
             sliderInput(
               ns("testDay"),
               extLabel("t<sub>T</sub>", "day on which test is conducted"),
@@ -132,16 +132,21 @@ quarantineDurationUI <- function(id) {
                 numericInput(
                   ns("transmissionReduction"),
                   extLabel("r", "transmission reduction",
-                    tooltip = str_c("reduced transmission due to extra hygiene and",
-                      "social distancing measures imposed by reduced quarantine")),
+                    tooltip = str_c("reduced transmission due to extra hygiene and ",
+                      "social distancing measures imposed by reduced quarantine ",
+                      "after release")),
                   value = 0.5,
                   step = 0.05)
               )
+            ),
+            fluidRow(
+                tags$i("*tests are subject to time-dependent false-negative results:"),
+                sourceLink("Kucirka et al., Ann. Intern. Med. 2020 173:262-267 ", doi = "10.7326/M20-1495")
             )
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Testing and Releasing", id = "plots2",
+          bootstrapPanel(heading = "Test-and-release", id = "plots2",
             class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("fracTestPlot"), height = "450px")),
@@ -151,14 +156,14 @@ quarantineDurationUI <- function(id) {
           )
         )
       ),
-      fluidRow(
+      fluidRow(# PA: I'm tempted to remove this entire row, as it is a minor result in the MS
         column(4,
           bootstrapPanel(heading = "Parameter 3", class = "panel-primary", id = "pars3",
             fluidRow(
               column(8,
                 sliderInput(
                   ns("adherence"),
-                  extLabel("a", "adherence to quarantine"),
+                  extLabel("a", "adherence to quarantine"), #' This a is the fraction of asymptomatics, and only applies to the right panel
                   min = 0, max = 1, value = c(0, 1),
                   step = 0.05,
                   width = "100%")
@@ -197,7 +202,7 @@ quarantineDurationUI <- function(id) {
       br(),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 4", class = "panel-primary", id = "pars4",
+          bootstrapPanel(heading = "Duration of travel", class = "panel-primary", id = "pars4",
             selectizeInput(
               ns("travelDuration"),
               extLabel("y", "duration of travel"),
@@ -208,7 +213,7 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Quarantine utility", id = "plots4",
+          bootstrapPanel(heading = "Standard n-day quarantine", id = "plots4",
             class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px")),
@@ -220,7 +225,7 @@ quarantineDurationUI <- function(id) {
       ),
       fluidRow(
         column(4,
-          bootstrapPanel(heading = "Parameter 5", class = "panel-primary", id = "pars5",
+          bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars5",
             selectizeInput(
               ns("yFocus"),
               extLabel("y", "focal travel duration"),
@@ -237,7 +242,7 @@ quarantineDurationUI <- function(id) {
           )
         ),
         column(8,
-          bootstrapPanel(heading = "Testing returning travellers", id = "plots5",
+          bootstrapPanel(heading = "Test-and-release", id = "plots5",
             class = "panel-info",
             fluidRow(
               column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px")),
@@ -247,7 +252,7 @@ quarantineDurationUI <- function(id) {
           )
         )
       ),
-      fluidRow(
+      fluidRow(# PA: Again remove I think.
         column(4,
           bootstrapPanel(heading = "Parameter 6", class = "panel-default", id = "pars6",
             tags$i("no additional parameter :(")
