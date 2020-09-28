@@ -10,7 +10,10 @@ quarantineDurationUI <- function(id) {
       fluidRow(
         column(12,
           bootstrapPanel(
-            heading = "Quantifying the impact of quarantine duration on COVID-19 transmission",
+            heading = HTML(
+              "Quantifying the impact of quarantine duration on COVID-19 transmission<br>",
+              "<small><i>Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i></small>"
+            ),
             class = "panel-primary",
             includeMarkdown("R/quarantineModuleFiles/abstract.md")
           )
