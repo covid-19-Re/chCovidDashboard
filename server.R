@@ -1,30 +1,27 @@
 server <- function(input, output, session) {
 # global
   observe({
-    # Trigger this observer every time an input changes
+    # Trigger this observer every time the tab changes
     input$tab
     session$doBookmark()
   })
+  
   observeEvent(input$selectQuarantine, {
-    print(input$tab)
     updateTabsetPanel(session, "tab",
       selected = "quarantineDuration"
     )
   })
   observeEvent(input$selectContactTracing, {
-    print(input$tab)
     updateTabsetPanel(session, "tab",
       selected = "contactTracing"
     )
   })
   observeEvent(input$selectTsProportions, {
-    print(input$tab)
     updateTabsetPanel(session, "tab",
       selected = "tsProportions"
     )
   })
   observeEvent(input$selectTsCases, {
-    print(input$tab)
     updateTabsetPanel(session, "tab",
       selected = "tsCases"
     )
