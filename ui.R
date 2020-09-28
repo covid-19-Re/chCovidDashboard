@@ -55,7 +55,7 @@ ui <- function(request){
       tabPanel("Time series - proportions", value = "tsProportions",
         tsProportionsUI("tsProportions")
       ),
-      tabPanel("Contact tracing",
+      tabPanel("Contact tracing", value = "contactTracing",
         ctUI("contactTracing")
       ),
       tabPanel("Quarantine duration", value = "quarantineDuration",
