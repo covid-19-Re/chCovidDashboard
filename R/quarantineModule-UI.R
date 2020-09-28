@@ -1,6 +1,7 @@
 library(shiny)
 library(tidyverse)
 library(shinycssloaders)
+library(shinyWidgets)
 library(glue)
 
 quarantineDurationUI <- function(id) {
@@ -12,7 +13,7 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(
             heading = HTML(
               "<h1>Quantifying the impact of quarantine duration on COVID-19 transmission</h1><br>",
-              "<i>Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i>"
+              "<i>Peter Ashcroft, Sonja Lehtinen, Daniel Angst and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i>"
             ),
             class = "panel-primary",
             includeMarkdown("R/quarantineModuleFiles/abstract.md")
@@ -209,7 +210,14 @@ quarantineDurationUI <- function(id) {
                   extLabel("n<sub>compare</sub>", "compare to quarantine duration"),
                   min = 0, max = 30, value = 10,
                   step = 1,
-                  width = "100%")
+                  width = "100%"),
+                extLabel("Normalisation", "Normalise to local transmission or total transmission"),
+                switchInput(
+                  inputId = ns("normalisation"),
+                  onLabel = "local",
+                  offLabel = "total",
+                  value = TRUE
+                  )
               )
             ),
             column(8,
@@ -307,8 +315,8 @@ quarantineDurationUI <- function(id) {
           )
         )))
       )
-    )
-    # tags$script(src = "quarantineModule/jquery.connections.js"),
-    # tags$script(src = "quarantineModule/quarantineModule.js")
+    ),
+     tags$script(src = "quarantineModule/jquery.connections.js"),
+     tags$script(src = "quarantineModule/quarantineModule.js")
   )
 }

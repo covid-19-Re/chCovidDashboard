@@ -459,7 +459,8 @@ quarantineDurationServer <- function(id) {
           travellerFracPars <- list(
             nCompare = input$nCompareSC2,
             y.vals = na.omit(as.integer(input$travelDuration)),
-            n.vals = seq(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2])
+            n.vals = seq(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2]),
+            normalisation = input$normalisation # TRUE: local, FALSE: total
             )
         })
 
@@ -472,18 +473,33 @@ quarantineDurationServer <- function(id) {
           nCompare <- travellerFracPars()$nCompare
           y.vals <- travellerFracPars()$y.vals
           n.vals <- travellerFracPars()$n.vals
+          normalisation <- travellerFracPars()$normalisation
 
-          travellerFracNoTest <- lapply(y.vals, function(y) {
-            tE.vals <- seq(-y, 0)
-            frac <- lapply(n.vals, function(n) {
-              frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
-              data.frame(
-                y = factor(y, levels = y.vals),
-                n = n,
-                fraction = frac
-              )
+          if (normalisation) {
+            travellerFracNoTest <- lapply(y.vals, function(y) {
+              tE.vals <- seq(-y, 0)
+              frac <- lapply(n.vals, function(n) {
+                frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
+                data.frame(
+                  y = factor(y, levels = y.vals),
+                  n = n,
+                  fraction = frac
+                )
+              }) %>% bind_rows()
             }) %>% bind_rows()
-          }) %>% bind_rows()
+          } else {
+            travellerFracNoTest <- lapply(y.vals, function(y) {
+              tE.vals <- seq(-y, 0)
+              frac <- lapply(n.vals, function(n) {
+                frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
+                data.frame(
+                  y = factor(y, levels = y.vals),
+                  n = n,
+                  fraction = frac
+                )
+              }) %>% bind_rows()
+            }) %>% bind_rows()
+          }
 
           travellerFracRelUtility <- lapply(y.vals, function(y) {
             tE.vals <- seq(-y, 0)
@@ -569,6 +585,8 @@ quarantineDurationServer <- function(id) {
           n.vals <- travellerFracPars()$n.vals
           x.vals <- travellerTestPars()$x.vals
           DeltaT <- travellerTestPars()$DeltaT
+
+          normalisation <- travellerFracPars()$normalisation
 
           fracTest <- lapply(x.vals, function(x) {
             frac <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
@@ -700,6 +718,8 @@ quarantineDurationServer <- function(id) {
         y.vals <- travellerFracPars()$y.vals
         nCompare <- travellerFracPars()$nCompare
         n.vals <- travellerFracPars()$n.vals
+
+        normalisation <- travellerFracPars()$normalisation
 
         relAdherence <- lapply(y.vals, function(y) {
           tE.vals <- seq(-y, 0)
