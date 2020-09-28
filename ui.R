@@ -1,6 +1,6 @@
 library("shinyjs")
 
-ui <- function(request){
+ui <- function(request) {
   tagList(
     tags$head(
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
