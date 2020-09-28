@@ -53,3 +53,25 @@
   font-size: 20px;
   font-weight: 900;
 }
+
+.panel-tab {
+  background-color: aliceblue !important;
+}
+
+.nav-pills > li{
+  margin-left: 0px;
+  border-top: 1px solid #008cba;
+  border-right: 1px solid #008cba;
+  border-left: 1px solid #008cba;
+}
+.nav-pills > li + li{
+  margin-left: 0px !important;
+}
+
+.nav-pills > li.active{
+  margin-left: 0px;
+  border-top: 1px solid #008cba;
+  border-right: 1px solid #008cba;
+  border-left: 1px solid #008cba;
+}
+

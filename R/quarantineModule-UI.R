@@ -67,219 +67,248 @@ quarantineDurationUI <- function(id) {
           )
         )
       ),
-      # Scenario 1: Quarantining secondary cases after contact tracing
-      h1("Scenario 1: Quarantining traced contacts", style = "background-color:rgb(238, 238, 238);"),
-      br(),
-      fluidRow(
-        column(4,
-          bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "pars1",
-            img(src = "quarantineModule/timeline.png", width = "100%"),
-            sliderInput(
-              ns("quarantineDelay"),
-              extLabel("&Delta;<sub>Q</sub> (= t<sub>Q</sub> - t<sub>E</sub>)", "delay to quarantine"),
-              min = 0, max = 10, value = 3,
-              step = 1,
-              width = "100%"),
-            sliderInput(
-              ns("quarantineDuration"),
-              extLabel("n (= t<sub>R</sub> - t<sub>E</sub>)", "duration of quarantine from last exposure"),
-              min = 0, max = 30, value = c(0, 15),
-              step = 1,
-              width = "100%"),
-            sliderInput(
-              ns("nCompare"),
-              extLabel("n<sub>compare</sub>", "compare to quarantine duration"),
-              min = 0, max = 30, value = 10,
-              step = 1,
-              width = "100%")
-          )
-        ),
-        column(8,
-          bootstrapPanel(heading = "Standard n-day quarantine", id = "plots1",
-            class = "panel-info",
-            fluidRow(
-              column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
-              column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
-            ),
-            uiOutput(ns("noTestCaption"))
-          )
-        )
-      ),
-      fluidRow(
-        column(4,
-          bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars2",
-            sliderInput(
-              ns("testDay"),
-              extLabel("t<sub>T</sub>", "day on which test is conducted",
-                tooltip = "days after exposure (t<sub>E</sub>), !> &Delta;<sub>T</sub>"),
-              min = 0, max = 10, value = c(3, 8),
-              width = "100%"),
-            fluidRow(
-              column(5,
-                numericInput(
-                  ns("testDuration"),
-                  extLabel("&Delta;<sub>T</sub>", "days until test result"),
-                  value = 2,
-                  step = 0.5)
-              ),
-              column(5,
-                numericInput(
-                  ns("testSpecificity"),
-                  extLabel("s", "quarantine specificity",
-                    tooltip = "fraction of quarantined persons who are infected"),
-                  value = 0.1,
-                  step = 0.05)
-              )
-            ),
-            fluidRow(
-              column(5,
-                numericInput(
-                  ns("transmissionReduction"),
-                  extLabel("r", "transmission reduction",
-                    tooltip = str_c("reduced transmission due to extra hygiene and ",
-                      "social distancing measures imposed by reduced quarantine ",
-                      "after release")),
-                  value = 0.5,
-                  step = 0.05)
-              )
-            ),
-            fluidRow(
-              column(12,
-                helpText(style = "font-size:15px",
-                  HTML("<sup>*</sup>tests are subject to time-dependent false-negative results:"),
-                sourceLink("Kucirka et al., Ann. Intern. Med. 2020 173:262-267 ", doi = "10.7326/M20-1495"))
-              )
-            )
-          )
-        ),
-        column(8,
-          bootstrapPanel(heading = "Test-and-release", id = "plots2",
-            class = "panel-info",
-            fluidRow(
-              column(6, plotOutput(ns("fracTestPlot"), height = "450px") %>% withSpinner()),
-              column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px") %>% withSpinner())
-            ),
-            uiOutput(ns("testCaption"))
-          )
-        )
-      ),
-      fluidRow(# PA: I'm tempted to remove this entire row, as it is a minor result in the MS
-        column(4,
-          bootstrapPanel(heading = "Parameter 3", class = "panel-primary", id = "pars3",
-            fluidRow(
-              column(8,
+      tabsetPanel(type = "pills", id = "scenarioTabs",
+        tabPanel(h3("Scenario 1: Quarantining traced contacts"), value = "sc1",
+        div(class = "panel panel-primary panel-tab", div(class = "panel-body",
+          fluidRow(
+            column(4,
+              bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "pars1",
+                img(src = "quarantineModule/timeline.png", width = "100%"),
                 sliderInput(
-                  ns("adherence"),
-                  extLabel("a", "fraction of asymptomatics"), #' This a is the fraction of asymptomatics, and only applies to the right panel
-                  min = 0, max = 1, value = c(0, 1),
-                  step = 0.05,
+                  ns("quarantineDelay"),
+                  extLabel("&Delta;<sub>Q</sub> (= t<sub>Q</sub> - t<sub>E</sub>)", "delay to quarantine"),
+                  min = 0, max = 10, value = 3,
+                  step = 1,
+                  width = "100%"),
+                sliderInput(
+                  ns("quarantineDuration"),
+                  extLabel("n (= t<sub>R</sub> - t<sub>E</sub>)", "duration of quarantine from last exposure"),
+                  min = 0, max = 30, value = c(0, 15),
+                  step = 1,
+                  width = "100%"),
+                sliderInput(
+                  ns("nCompare"),
+                  extLabel("n<sub>compare</sub>", "compare to quarantine duration"),
+                  min = 0, max = 30, value = 10,
+                  step = 1,
                   width = "100%")
-              ),
-              column(4,
-                numericInput(
-                  ns("adherenceBy"),
-                  extLabel("by", ""),
-                  value = 0.25,
-                  step = 0.01)
               )
             ),
-            fluidRow(
-              column(5,
-                disabled(numericInput(
-                  ns("tSymptoms"),
-                  extLabel("t<sub>S</sub>", "time to symptoms",
-                    tooltip = "equal to t<sub>E</sub> + mean of incubation period distribution t<sub>S</sub>"),
-                  value = 5,
-                  step = 0.5))
+            column(8,
+              bootstrapPanel(heading = "Standard n-day quarantine", id = "plots1",
+                class = "panel-info",
+                fluidRow(
+                  column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
+                  column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
+                ),
+                uiOutput(ns("noTestCaption"))
+              )
+            )
+          ),
+          fluidRow(
+            column(4,
+              bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars2",
+                sliderInput(
+                  ns("testDay"),
+                  extLabel("t<sub>T</sub>", "day on which test is conducted",
+                    tooltip = "days after exposure (t<sub>E</sub>), !> &Delta;<sub>T</sub>"),
+                  min = 0, max = 10, value = c(3, 8),
+                  width = "100%"),
+                fluidRow(
+                  column(5,
+                    numericInput(
+                      ns("testDuration"),
+                      extLabel("&Delta;<sub>T</sub>", "days until test result"),
+                      value = 2,
+                      step = 0.5)
+                  ),
+                  column(5,
+                    numericInput(
+                      ns("testSpecificity"),
+                      extLabel("s", "quarantine specificity",
+                        tooltip = "fraction of quarantined persons who are infected"),
+                      value = 0.1,
+                      step = 0.05)
+                  )
+                ),
+                fluidRow(
+                  column(5,
+                    numericInput(
+                      ns("transmissionReduction"),
+                      extLabel("r", "transmission reduction",
+                        tooltip = str_c("reduced transmission due to extra hygiene and ",
+                          "social distancing measures imposed by reduced quarantine ",
+                          "after release")),
+                      value = 0.5,
+                      step = 0.05)
+                  )
+                ),
+                fluidRow(
+                  column(12,
+                    helpText(style = "font-size:15px",
+                      HTML("<sup>*</sup>tests are subject to time-dependent false-negative results:"),
+                    sourceLink("Kucirka et al., Ann. Intern. Med. 2020 173:262-267 ", doi = "10.7326/M20-1495"))
+                  )
+                )
+              )
+            ),
+            column(8,
+              bootstrapPanel(heading = "Test-and-release", id = "plots2",
+                class = "panel-info",
+                fluidRow(
+                  column(6, plotOutput(ns("fracTestPlot"), height = "450px") %>% withSpinner()),
+                  column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px") %>% withSpinner())
+                ),
+                uiOutput(ns("testCaption"))
+              )
+            )
+          ),
+          fluidRow(# PA: I'm tempted to remove this entire row, as it is a minor result in the MS
+            column(4,
+              bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "pars3",
+                fluidRow(
+                  column(12,
+                   "some Text"
+                  ),
+                )
+              )
+            ),
+            column(8,
+              bootstrapPanel(heading = "Adherence and symptoms", id = "plots3",
+                class = "panel-info",
+                fluidRow(
+                  column(6, plotOutput(ns("relAdherencePlot"), height = "450px") %>% withSpinner()),
+                  column(6, plotOutput(ns("fracAdherencePlot"), height = "450px") %>% withSpinner())
+                ),
+                uiOutput(ns("adherenceCaption"))
               )
             )
           )
-        ),
-        column(8,
-          bootstrapPanel(heading = "Adherence and symptoms", id = "plots3",
-            class = "panel-info",
-            fluidRow(
-              column(6, plotOutput(ns("relAdherencePlot"), height = "450px") %>% withSpinner()),
-              column(6, plotOutput(ns("fracAdherencePlot"), height = "450px") %>% withSpinner())
+        ))),
+        tabPanel(h3("Scenario 2: Quarantining returning travellers"), value = "sc2",
+        div(class = "panel panel-primary panel-tab", div(class = "panel-body",
+          fluidRow(
+            column(4,
+              bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "pars1",
+                img(src = "quarantineModule/timeline.png", width = "100%"),
+                selectizeInput(
+                  ns("travelDuration"),
+                  extLabel("y", "duration of travel"),
+                  choices = as.character(1:21),
+                  selected = as.character(c(1, 2, 3, 5, 7, 10, 14)),
+                  multiple = TRUE,
+                  options = list(delimiter = ", ", create = TRUE)),
+                sliderInput(
+                  ns("quarantineDurationSC2"),
+                  extLabel("n (= t<sub>R</sub> - t<sub>E</sub>)", "duration of quarantine from last exposure"),
+                  min = 0, max = 30, value = c(0, 15),
+                  step = 1,
+                  width = "100%"),
+                sliderInput(
+                  ns("nCompareSC2"),
+                  extLabel("n<sub>compare</sub>", "compare to quarantine duration"),
+                  min = 0, max = 30, value = 10,
+                  step = 1,
+                  width = "100%")
+              )
             ),
-            uiOutput(ns("adherenceCaption"))
-          )
-        )
-      ),
-      h1("Scenario 2: Quarantining returning travellers", style = "background-color:rgb(238, 238, 238);"),
-      br(),
-      fluidRow(
-        column(4,
-          bootstrapPanel(heading = "Duration of travel", class = "panel-primary", id = "pars4",
-            selectizeInput(
-              ns("travelDuration"),
-              extLabel("y", "duration of travel"),
-              choices = as.character(1:21),
-              selected = as.character(c(1, 2, 3, 5, 7, 10, 14)),
-              multiple = TRUE,
-              options = list(delimiter = ", ", create = TRUE))
-          )
-        ),
-        column(8,
-          bootstrapPanel(heading = "Standard n-day quarantine", id = "plots4",
-            class = "panel-info",
-            fluidRow(
-              column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px") %>% withSpinner()),
-              column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
+            column(8,
+              bootstrapPanel(heading = "Standard n-day quarantine", id = "plots4",
+                class = "panel-info",
+                fluidRow(
+                  column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px") %>% withSpinner()),
+                  column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
+                ),
+                uiOutput(ns("travellerNoTestCaption"))
+              )
+            )
+          ),
+          fluidRow(
+            column(4,
+              bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars5",
+                selectizeInput(
+                  ns("yFocus"),
+                  extLabel("y", "focal travel duration"),
+                  choices = as.character(1:21),
+                  selected = as.character(7),
+                  multiple = FALSE,
+                  options = list(delimiter = ", ")),
+                sliderInput(
+                  ns("testDaySC2"),
+                  extLabel("t<sub>T</sub>", "day on which test is conducted",
+                    tooltip = "days after return (t<sub>E</sub>)"),
+                  min = 0, max = 10, value = c(0, 5),
+                  width = "100%"),
+                fluidRow(
+                  column(5,
+                    numericInput(
+                      ns("testDurationSC2"),
+                      extLabel("&Delta;<sub>T</sub>", "days until test result"),
+                      value = 2,
+                      step = 0.5)
+                  ),
+                  column(5,
+                    numericInput(
+                      ns("testSpecificitySC2"),
+                      extLabel("s", "quarantine specificity",
+                        tooltip = "fraction of quarantined persons who are infected"),
+                      value = 0.1,
+                      step = 0.05)
+                  )
+                ),
+                fluidRow(
+                  column(5,
+                    numericInput(
+                      ns("transmissionReductionSC2"),
+                      extLabel("r", "transmission reduction",
+                        tooltip = str_c("reduced transmission due to extra hygiene and ",
+                          "social distancing measures imposed by reduced quarantine ",
+                          "after release")),
+                      value = 0.5,
+                      step = 0.05)
+                  )
+                ),
+                fluidRow(
+                  column(12,
+                    helpText(style = "font-size:15px",
+                      HTML("<sup>*</sup>tests are subject to time-dependent false-negative results:"),
+                    sourceLink("Kucirka et al., Ann. Intern. Med. 2020 173:262-267 ", doi = "10.7326/M20-1495"))
+                  )
+                )
+              )
             ),
-            uiOutput(ns("travellerNoTestCaption"))
-          )
-        )
-      ),
-      fluidRow(
-        column(4,
-          bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars5",
-            selectizeInput(
-              ns("yFocus"),
-              extLabel("y", "focal travel duration"),
-              choices = as.character(1:21),
-              selected = as.character(7),
-              multiple = FALSE,
-              options = list(delimiter = ", ")),
-            sliderInput(
-              ns("travellerTestDay"),
-              extLabel("t<sub>T</sub>", "day after return on which test is conducted"),
-              min = 0, max = 10, value = c(0, 5),
-              step = 1,
-              width = "100%"),
-          )
-        ),
-        column(8,
-          bootstrapPanel(heading = "Test-and-release", id = "plots5",
-            class = "panel-info",
-            fluidRow(
-              column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px") %>% withSpinner()),
-              column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
+            column(8,
+              bootstrapPanel(heading = "Test-and-release", id = "plots5",
+                class = "panel-info",
+                fluidRow(
+                  column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px") %>% withSpinner()),
+                  column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
+                ),
+                uiOutput(ns("travellerTestCaption"))
+              )
+            )
+          ),
+          fluidRow(# PA: Again remove I think.
+            column(4,
+              bootstrapPanel(heading = "Further considerations", class = "panel-default", id = "pars6",
+                "some text"
+              )
             ),
-            uiOutput(ns("travellerTestCaption"))
+            column(8,
+              bootstrapPanel(heading = "Adherence and symptoms", id = "plots6",
+                class = "panel-info",
+                fluidRow(
+                  column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px") %>% withSpinner()),
+                  column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px") %>% withSpinner()),
+                ),
+                uiOutput(ns("travellerAdherenceCaption"))
+              )
+            )
           )
-        )
-      ),
-      fluidRow(# PA: Again remove I think.
-        column(4,
-          bootstrapPanel(heading = "Parameter 6", class = "panel-default", id = "pars6",
-            tags$i("no additional parameter :(")
-          )
-        ),
-        column(8,
-          bootstrapPanel(heading = "Adherence and symptoms", id = "plots6",
-            class = "panel-info",
-            fluidRow(
-              column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px") %>% withSpinner()),
-              column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px") %>% withSpinner()),
-            ),
-            uiOutput(ns("travellerAdherenceCaption"))
-          )
-        )
+        )))
       )
-
-    ),
-    tags$script(src = "quarantineModule/jquery.connections.js"),
-    tags$script(src = "quarantineModule/quarantineModule.js")
+    )
+    # tags$script(src = "quarantineModule/jquery.connections.js"),
+    # tags$script(src = "quarantineModule/quarantineModule.js")
   )
 }
