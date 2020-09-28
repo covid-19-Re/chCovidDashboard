@@ -144,8 +144,11 @@ quarantineDurationUI <- function(id) {
               )
             ),
             fluidRow(
-                tags$i("*tests are subject to time-dependent false-negative results:"),
-                sourceLink("Kucirka et al., Ann. Intern. Med. 2020 173:262-267 ", doi = "10.7326/M20-1495")
+              column(12,
+                helpText(style = "font-size:15px",
+                  HTML("<sup>*</sup>tests are subject to time-dependent false-negative results:"),
+                sourceLink("Kucirka et al., Ann. Intern. Med. 2020 173:262-267 ", doi = "10.7326/M20-1495"))
+              )
             )
           )
         ),
@@ -167,7 +170,7 @@ quarantineDurationUI <- function(id) {
               column(8,
                 sliderInput(
                   ns("adherence"),
-                  extLabel("a", "adherence to quarantine"), #' This a is the fraction of asymptomatics, and only applies to the right panel
+                  extLabel("a", "fraction of asymptomatics"), #' This a is the fraction of asymptomatics, and only applies to the right panel
                   min = 0, max = 1, value = c(0, 1),
                   step = 0.05,
                   width = "100%")
