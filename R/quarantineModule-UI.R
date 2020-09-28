@@ -164,7 +164,7 @@ quarantineDurationUI <- function(id) {
               )
             )
           ),
-          fluidRow(# PA: I'm tempted to remove this entire row, as it is a minor result in the MS
+          fluidRow(
             column(4,
               bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "parsSC1-3",
                 fluidRow(
@@ -296,7 +296,7 @@ quarantineDurationUI <- function(id) {
               )
             )
           ),
-          fluidRow(# PA: Again remove I think.
+          fluidRow(
             column(4,
               bootstrapPanel(heading = "Further considerations", class = "panel-default", id = "parsSC2-6",
                 "some text"
