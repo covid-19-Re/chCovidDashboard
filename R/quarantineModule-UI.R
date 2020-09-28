@@ -73,7 +73,7 @@ quarantineDurationUI <- function(id) {
         div(class = "panel panel-primary panel-tab", div(class = "panel-body",
           fluidRow(
             column(4,
-              bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "pars1",
+              bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "parsSC1-1",
                 img(src = "quarantineModule/timeline.png", width = "100%"),
                 sliderInput(
                   ns("quarantineDelay"),
@@ -96,7 +96,7 @@ quarantineDurationUI <- function(id) {
               )
             ),
             column(8,
-              bootstrapPanel(heading = "Standard n-day quarantine", id = "plots1",
+              bootstrapPanel(heading = "Standard n-day quarantine", id = "plotsSC1-1",
                 class = "panel-info",
                 fluidRow(
                   column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
@@ -108,7 +108,7 @@ quarantineDurationUI <- function(id) {
           ),
           fluidRow(
             column(4,
-              bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars2",
+              bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "parsSC1-2",
                 sliderInput(
                   ns("testDay"),
                   extLabel("t<sub>T</sub>", "day on which test is conducted",
@@ -154,7 +154,7 @@ quarantineDurationUI <- function(id) {
               )
             ),
             column(8,
-              bootstrapPanel(heading = "Test-and-release", id = "plots2",
+              bootstrapPanel(heading = "Test-and-release", id = "plotsSC1-2",
                 class = "panel-info",
                 fluidRow(
                   column(6, plotOutput(ns("fracTestPlot"), height = "450px") %>% withSpinner()),
@@ -166,7 +166,7 @@ quarantineDurationUI <- function(id) {
           ),
           fluidRow(# PA: I'm tempted to remove this entire row, as it is a minor result in the MS
             column(4,
-              bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "pars3",
+              bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "parsSC1-3",
                 fluidRow(
                   column(12,
                    "some Text"
@@ -175,7 +175,7 @@ quarantineDurationUI <- function(id) {
               )
             ),
             column(8,
-              bootstrapPanel(heading = "Adherence and symptoms", id = "plots3",
+              bootstrapPanel(heading = "Adherence and symptoms", id = "plotsSC1-3",
                 class = "panel-info",
                 fluidRow(
                   column(6, plotOutput(ns("relAdherencePlot"), height = "450px") %>% withSpinner()),
@@ -190,7 +190,7 @@ quarantineDurationUI <- function(id) {
         div(class = "panel panel-primary panel-tab", div(class = "panel-body",
           fluidRow(
             column(4,
-              bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "pars1",
+              bootstrapPanel(heading = "Quarantine duration parameters", class = "panel-primary", id = "parsSC2-4",
                 img(src = "quarantineModule/timeline.png", width = "100%"),
                 selectizeInput(
                   ns("travelDuration"),
@@ -221,7 +221,7 @@ quarantineDurationUI <- function(id) {
               )
             ),
             column(8,
-              bootstrapPanel(heading = "Standard n-day quarantine", id = "plots4",
+              bootstrapPanel(heading = "Standard n-day quarantine", id = "plotsSC2-4",
                 class = "panel-info",
                 fluidRow(
                   column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px") %>% withSpinner()),
@@ -233,7 +233,7 @@ quarantineDurationUI <- function(id) {
           ),
           fluidRow(
             column(4,
-              bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "pars5",
+              bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "parsSC2-5",
                 selectizeInput(
                   ns("yFocus"),
                   extLabel("y", "focal travel duration"),
@@ -286,7 +286,7 @@ quarantineDurationUI <- function(id) {
               )
             ),
             column(8,
-              bootstrapPanel(heading = "Test-and-release", id = "plots5",
+              bootstrapPanel(heading = "Test-and-release", id = "plotsSC2-5",
                 class = "panel-info",
                 fluidRow(
                   column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px") %>% withSpinner()),
@@ -298,12 +298,12 @@ quarantineDurationUI <- function(id) {
           ),
           fluidRow(# PA: Again remove I think.
             column(4,
-              bootstrapPanel(heading = "Further considerations", class = "panel-default", id = "pars6",
+              bootstrapPanel(heading = "Further considerations", class = "panel-default", id = "parsSC2-6",
                 "some text"
               )
             ),
             column(8,
-              bootstrapPanel(heading = "Adherence and symptoms", id = "plots6",
+              bootstrapPanel(heading = "Adherence and symptoms", id = "plotsSC2-6",
                 class = "panel-info",
                 fluidRow(
                   column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px") %>% withSpinner()),
@@ -316,7 +316,7 @@ quarantineDurationUI <- function(id) {
         )))
       )
     ),
-     tags$script(src = "quarantineModule/jquery.connections.js"),
-     tags$script(src = "quarantineModule/quarantineModule.js")
+    tags$script(src = "quarantineModule/jquery.connections.js"),
+    tags$script(src = "quarantineModule/quarantineModule.js")
   )
 }

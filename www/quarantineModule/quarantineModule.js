@@ -1,51 +1,90 @@
-$('*[data-value="quarantineDuration"]').on('shown.bs.tab', function() {
-  $('#pars1').connections({
+// initial connections
+$('*[data-value="quarantineDuration"][data-toggle="tab"]').one('shown.bs.tab', function() {
+  console.log("shown.bs.tab");
+  $('[id^=parsSC2]').connections('remove');
+  $('[id^=plotsSC2]').connections('remove');
+  $('#parsSC1-1').connections({
     to: '#parsDistr',
-    'class': 'parsConnected'  
+    'class': 'distParsConnection'  
   });
-  $('#pars1').connections({
-    to: '#pars2',
-    'class': 'parsConnected'  
+  $('#parsSC1-1').connections({
+    to: '#parsSC1-2',
+    'class': 'parsConnection'  
   });
-  $('#pars2').connections({
-    to: '#pars3',
-    'class': 'parsConnected'  
+  $('#parsSC1-2').connections({
+    to: '#parsSC1-3',
+    'class': 'parsConnection'  
   });
-  $('#pars3').connections({
-    to: '#pars4',
-    'class': 'parsConnected'  
+  $('#plotsSC1-1').connections({
+    to: '#parsSC1-1',
+    'class': 'parsPlotConnection'  
   });
-  $('#pars4').connections({
-    to: '#pars5',
-    'class': 'parsConnected'  
+  $('#plotsSC1-2').connections({
+    to: '#parsSC1-2',
+    'class': 'parsPlotConnection'  
   });
-  $('#pars5').connections({
-    to: '#pars6',
-    'class': 'parsConnected'  
+  $('#plotsSC1-3').connections({
+    to: '#parsSC1-3',
+    'class': 'parsPlotConnection'  
   });
-  $('#plots1').connections({
-    to: '#pars1',
-    'class': 'parsToPlot'  
+});
+
+$('*[data-value="sc1"]').on('shown.bs.tab', function() {
+  console.log("sc1");
+  $('[id^=parsSC2]').connections('remove');
+  $('[id^=plotsSC2]').connections('remove');
+  $('#parsSC1-1').connections({
+    to: '#parsDistr',
+    'class': 'distParsConnection'  
   });
-  $('#plots2').connections({
-    to: '#pars2',
-    'class': 'parsToPlot'  
+  $('#parsSC1-1').connections({
+    to: '#parsSC1-2',
+    'class': 'parsConnection'  
   });
-  $('#plots3').connections({
-    to: '#pars3',
-    'class': 'parsToPlot'  
+  $('#parsSC1-2').connections({
+    to: '#parsSC1-3',
+    'class': 'parsConnection'  
   });
-  $('#plots4').connections({
-    to: '#pars4',
-    'class': 'parsToPlot'  
+  $('#plotsSC1-1').connections({
+    to: '#parsSC1-1',
+    'class': 'parsPlotConnection'  
+  });
+  $('#plotsSC1-2').connections({
+    to: '#parsSC1-2',
+    'class': 'parsPlotConnection'  
+  });
+  $('#plotsSC1-3').connections({
+    to: '#parsSC1-3',
+    'class': 'parsPlotConnection'  
+  });
+});
+
+$('*[data-value="sc2"]').on('shown.bs.tab', function() {
+  console.log("sc2")
+  $('[id^=parsSC1]').connections('remove');
+  $('#parsSC2-4').connections({
+    to: '#parsDistr',
+    'class': 'distParsConnection'  
+  });
+  $('#parsSC2-4').connections({
+    to: '#parsSC2-5',
+    'class': 'parsConnection'  
+  });
+  $('#parsSC2-5').connections({
+    to: '#parsSC2-6',
+    'class': 'parsConnection'  
+  });
+  $('#plotsSC2-4').connections({
+    to: '#parsSC2-4',
+    'class': 'parsPlotConnection'  
   });
   $('#plots5').connections({
-    to: '#pars5',
-    'class': 'parsToPlot'  
+    to: '#parsSC2-5',
+    'class': 'parsPlotConnection'  
   });
   $('#plots6').connections({
-    to: '#pars6',
-    'class': 'parsToPlot'  
+    to: '#parsSC2-6',
+    'class': 'parsPlotConnection'  
   });
 });
 
@@ -53,4 +92,3 @@ $(document).on('shiny:visualchange', function(event) {
   $('[id^=pars]').connections('update');
   $('[id^=plots]').connections('update');
 });
-
