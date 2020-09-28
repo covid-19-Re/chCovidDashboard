@@ -15,28 +15,28 @@ ui <- function(request) {
             affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland",
             thumbnail = "quarantineModule-thumbnail.png",
             tabId = "selectQuarantine"
-          ),
-          thumbnailPanel(
-            title = "Time Series of Cases",
-            authors = "Timothy Vaughan, Tanja Stadler",
-            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-            thumbnail = "tsCases-thumbnail.png",
-            tabId = "selectTsCases"
-          ),
-          thumbnailPanel(
-            title = "Relative frequency of clinical events",
-            authors = "Timothy Vaughan, Tanja Stadler",
-            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-            thumbnail = "tsProportions-thumbnail.png",
-            tabId = "selectTsProportions"
-          ),
-          thumbnailPanel(
-            title = "Effectiveness of Contact Tracing",
-            authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
-            affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-            thumbnail = "ct-thumbnail.png",
-            tabId = "selectContactTracing"
-          )
+          )#,
+          # thumbnailPanel(
+          #   title = "Time Series of Cases",
+          #   authors = "Timothy Vaughan, Tanja Stadler",
+          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
+          #   thumbnail = "tsCases-thumbnail.png",
+          #   tabId = "selectTsCases"
+          # ),
+          # thumbnailPanel(
+          #   title = "Relative frequency of clinical events",
+          #   authors = "Timothy Vaughan, Tanja Stadler",
+          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
+          #   thumbnail = "tsProportions-thumbnail.png",
+          #   tabId = "selectTsProportions"
+          # ),
+          # thumbnailPanel(
+          #   title = "Effectiveness of Contact Tracing",
+          #   authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
+          #   affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
+          #   thumbnail = "ct-thumbnail.png",
+          #   tabId = "selectContactTracing"
+          # )
         ),
         hr(),
         fluidRow(
@@ -64,15 +64,15 @@ ui <- function(request) {
           )
         ),
       ),
-      tabPanel("Time series - cases", value = "tsCases",
-        tsCasesUI("tsCases")
-      ),
-      tabPanel("Time series - proportions", value = "tsProportions",
-        tsProportionsUI("tsProportions")
-      ),
-      tabPanel("Contact tracing", value = "contactTracing",
-        ctUI("contactTracing")
-      ),
+      # tabPanel("Time series - cases", value = "tsCases",
+      #   tsCasesUI("tsCases")
+      # ),
+      # tabPanel("Time series - proportions", value = "tsProportions",
+      #   tsProportionsUI("tsProportions")
+      # ),
+      # tabPanel("Contact tracing", value = "contactTracing",
+      #   ctUI("contactTracing")
+      # ),
       tabPanel("Quarantine duration", value = "quarantineDuration",
         quarantineDurationUI("quarantineDuration")
       ),
