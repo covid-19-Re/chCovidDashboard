@@ -12,7 +12,8 @@ trendsUI <- function(id) {
               "<i>Nanina Anderegg, Julien Riou, Christian L. Althaus (ISPM, Universität Bern)</i>"
             ),
             class = "panel-primary",
-            "some text, maybe?"
+            "some text, maybe?",
+            uiOutput(ns("lastDataUpdate"))
           )
         )
       ),

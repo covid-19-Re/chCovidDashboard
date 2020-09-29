@@ -65,7 +65,7 @@ plotPredictions <- function(predictions, doublingTimes, regionSelect, eventSelec
 }
 
 trendsServer <- function(id) {
-  moduleServer (
+  moduleServer(
     id,
     function(input, output, session) {
 
@@ -81,7 +81,7 @@ trendsServer <- function(id) {
         t.cols[i] <- rgb(x[1, ], x[2, ], x[3, ], alpha = 125, maxColorValue = 255)
       }
 
-      bagData <- reactive({
+      newestBAGFile <- reactive({
         bagFiles <- list.files("data/BAG",
                               pattern = "*FOPH_COVID19_data_extract.rds",
                               full.names = TRUE,
@@ -89,10 +89,19 @@ trendsServer <- function(id) {
         bagFileDates <- strptime(
             stringr::str_match(bagFiles, ".*\\/(\\d*-\\d*-\\d*_\\d*-\\d*-\\d*)")[, 2],
             format = "%Y-%m-%d_%H-%M-%S")
-        newestFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
+        newestBAGFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
+        return(newestBAGFile)
+      })
 
-        bagData <- readRDS(newestFile)
+      output$lastDataUpdate <- renderUI({
+        updateDate <- strptime(
+            stringr::str_match(newestBAGFile(), ".*\\/(\\d*-\\d*-\\d*)_\\d*-\\d*-\\d*")[, 2],
+            format = "%Y-%m-%d")
+        HTML(glue::glue("<b>Last Data Update:</b> {updateDate}"))
+      })
 
+      bagData <- reactive({
+        bagData <- readRDS(newestBAGFile())
         return(bagData)
       })
 
