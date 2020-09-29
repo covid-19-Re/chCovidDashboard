@@ -69,7 +69,7 @@ quarantineDurationUI <- function(id) {
         )
       ),
       tabsetPanel(type = "pills", id = "scenarioTabs",
-        tabPanel(h3("Scenario 1: Quarantining traced contacts"), value = "sc1",
+        tabPanel(p(class = "tab-title", "Scenario 1: Quarantining traced contacts"), value = "sc1",
         div(class = "panel panel-primary panel-tab", div(class = "panel-body",
           fluidRow(
             column(4,
@@ -164,7 +164,7 @@ quarantineDurationUI <- function(id) {
               )
             )
           ),
-          fluidRow(# PA: I'm tempted to remove this entire row, as it is a minor result in the MS
+          fluidRow(
             column(4,
               bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "parsSC1-3",
                 fluidRow(
@@ -186,7 +186,7 @@ quarantineDurationUI <- function(id) {
             )
           )
         ))),
-        tabPanel(h3("Scenario 2: Quarantining returning travellers"), value = "sc2",
+        tabPanel(p(class = "tab-title", "Scenario 2: Quarantining returning travellers"), value = "sc2",
         div(class = "panel panel-primary panel-tab", div(class = "panel-body",
           fluidRow(
             column(4,
@@ -296,7 +296,7 @@ quarantineDurationUI <- function(id) {
               )
             )
           ),
-          fluidRow(# PA: Again remove I think.
+          fluidRow(
             column(4,
               bootstrapPanel(heading = "Further considerations", class = "panel-default", id = "parsSC2-6",
                 "some text"
