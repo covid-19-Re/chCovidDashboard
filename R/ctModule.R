@@ -77,6 +77,11 @@ ctServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      
+      observe({
+        toExclude <- setdiff(names(input), "tab")
+        setBookmarkExclude(toExclude)
+      })
 
       params <- reactive({
         params <- list(

@@ -93,6 +93,11 @@ tsCasesServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      
+      observe({
+        toExclude <- setdiff(names(input), "tab")
+        setBookmarkExclude(toExclude)
+      })
 
       observeEvent(input$all_ages, {
         updatePickerInput(session,

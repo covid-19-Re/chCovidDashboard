@@ -69,6 +69,11 @@ trendsServer <- function(id) {
     id,
     function(input, output, session) {
 
+      observe({
+        toExclude <- setdiff(names(input), "tab")
+        setBookmarkExclude(toExclude)
+      })
+
       cols <- RColorBrewer::brewer.pal(3, "Set1")
       t.cols <- cols
       for(i in 1:length(cols)) {
