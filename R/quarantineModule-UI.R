@@ -69,7 +69,7 @@ quarantineDurationUI <- function(id) {
         )
       ),
       tabsetPanel(type = "pills", id = "scenarioTabs",
-        tabPanel(h3("Scenario 1: Quarantining traced contacts"), value = "sc1",
+        tabPanel(p(class = "tab-title", "Scenario 1: Quarantining traced contacts"), value = "sc1",
         div(class = "panel panel-primary panel-tab", div(class = "panel-body",
           fluidRow(
             column(4,
@@ -186,7 +186,7 @@ quarantineDurationUI <- function(id) {
             )
           )
         ))),
-        tabPanel(h3("Scenario 2: Quarantining returning travellers"), value = "sc2",
+        tabPanel(p(class = "tab-title", "Scenario 2: Quarantining returning travellers"), value = "sc2",
         div(class = "panel panel-primary panel-tab", div(class = "panel-body",
           fluidRow(
             column(4,

@@ -85,3 +85,8 @@
   border-left: 1px solid #008cba;
 }
 
+.tab-title {
+  font-size: 26px;
+  font-weight: 300;
+  margin: 8px 8px 8px 8px;
+}
