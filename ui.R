@@ -19,7 +19,7 @@ ui <- function(request) {
           # thumbnailPanel(
           #   title = "Time Series of Cases",
           #   authors = "Timothy Vaughan, Tanja Stadler",
-          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
+          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
           #   thumbnail = "tsCases-thumbnail.png",
           #   tabId = "selectTsCases"
           # ),

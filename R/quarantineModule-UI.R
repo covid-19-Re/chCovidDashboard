@@ -78,7 +78,7 @@ quarantineDurationUI <- function(id) {
                 sliderInput(
                   ns("quarantineDelay"),
                   extLabel("&Delta;<sub>Q</sub> (= t<sub>Q</sub> - t<sub>E</sub>)", "delay to quarantine"),
-                  min = 0, max = 10, value = 3,
+                  min = 0, max = 10, value = c(0, 4),
                   step = 1,
                   width = "100%"),
                 sliderInput(
@@ -110,6 +110,13 @@ quarantineDurationUI <- function(id) {
           fluidRow(
             column(4,
               bootstrapPanel(heading = "Test-and-release parameters", class = "panel-primary", id = "parsSC1-2",
+                selectizeInput(
+                  ns("deltaQfocal"),
+                  extLabel("&Delta;<sub>Q</sub>", "focal quarantine duration"),
+                  choices = as.character(0:4),
+                  selected = as.character(3),
+                  multiple = FALSE,
+                  options = list(delimiter = ", ")),
                 sliderInput(
                   ns("testDay"),
                   extLabel("t<sub>T</sub>", "day on which test is conducted",
@@ -169,11 +176,12 @@ quarantineDurationUI <- function(id) {
           fluidRow(
             column(4,
               bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "parsSC1-3",
-                             helpText(style = "font-size:15px",
-                                      HTML(glue(
-                                        "<strong>Adherence:</strong> Changing the duration of quarantine could affect how many people adhere to the guidelines. Here we show the change in adherence required to offset the change in quarantine efficacy if the duration is changed.<br>",
-                                        "<strong>Symptoms:</strong> Individuals who develop symptoms should isolate independent of quarantine. Here we deduct these cases once they develop symptoms from the transmission prevented by quarantine."
-                                      )))
+                helpText(style = "font-size:15px",
+                  HTML(glue(
+                    "<strong>Adherence:</strong> Changing the duration of quarantine could affect how many people adhere to the guidelines. Here we show the change in adherence required to offset the change in quarantine efficacy if the duration is changed.<br>",
+                    "<strong>Symptoms:</strong> Individuals who develop symptoms should isolate independent of quarantine. Here we deduct these cases once they develop symptoms from the transmission prevented by quarantine."
+                  ))
+                )
               )
             ),
             column(8,

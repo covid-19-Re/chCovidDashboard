@@ -123,8 +123,7 @@ quarantineDurationServer <- function(id) {
           fracPars <- list(
             tE = 0,
             nCompare = input$nCompare,
-            DeltaQ = input$quarantineDelay,
-            DeltaQ.vals = seq(max(0, input$quarantineDelay - 2), input$quarantineDelay + 2),
+            DeltaQ.vals = seq(input$quarantineDelay[1], input$quarantineDelay[2]),
             n.vals = seq(input$quarantineDuration[1], input$quarantineDuration[2]))
         })
 
@@ -221,6 +220,7 @@ quarantineDurationServer <- function(id) {
       # SC1: TESTING & RELEASING ----
         fracTestPars <- reactive({
           fracTestPars <- list(
+            DeltaQ = as.integer(input$deltaQfocal),
             DeltaT = input$testDuration,
             s = input$testSpecificity,
             r = input$transmissionReduction,
@@ -228,15 +228,21 @@ quarantineDurationServer <- function(id) {
           return(fracTestPars)
         })
 
+        observe({
+          isolate(deltaQselected <- input$deltaQfocal)
+          updateSelectizeInput(session, "deltaQfocal",
+            choices = as.character(fracPars()$DeltaQ.vals), selected = deltaQselected)
+        })
+
         # earliest test date is first day of quarantine
         observe({
           sliderValue <- input$testDay
           updateSliderInput(session, "testDay", min = 0, max = 10,
-            value = c(max(sliderValue[1], input$quarantineDelay), sliderValue[2]))
+            value = c(max(sliderValue[1], as.integer(input$deltaQfocal)), sliderValue[2]))
         })
 
         fracTest <- reactive({
-          DeltaQ <- fracPars()$DeltaQ
+          DeltaQ <- fracTestPars()$DeltaQ
           DeltaT <- fracTestPars()$DeltaT
           tE <- fracPars()$tE
           s <- fracTestPars()$s
@@ -316,7 +322,7 @@ quarantineDurationServer <- function(id) {
         # PLOTS ----
         output$fracTestPlot <- renderPlot({
           ggplot(fracTest()$frac, aes(x = n, y = fraction, colour = x)) +
-            geom_line(data = filter(fracNoTest()$frac, DeltaQ == input$quarantineDelay),
+            geom_line(data = filter(fracNoTest()$frac, DeltaQ == fracTestPars()$DeltaQ),
               colour = "black", linetype = "dashed", size = 1.2) +
             geom_line(data = fracTest()$reduced, linetype = "dotted", size = 1.2) +
             geom_line(size = 1.2) +
@@ -355,7 +361,7 @@ quarantineDurationServer <- function(id) {
         output$testCaption <- renderUI({
           nCompare <- fracPars()$nCompare
           tE <- fracPars()$tE
-          DeltaQ <- fracPars()$DeltaQ
+          DeltaQ <- fracTestPars()$DeltaQ
           DeltaT <- fracTestPars()$DeltaT
           s <- fracTestPars()$s
           r <- fracTestPars()$r
@@ -388,7 +394,7 @@ quarantineDurationServer <- function(id) {
         })
 
         fracAdherence <- reactive({
-          DeltaQ <- fracPars()$DeltaQ
+          DeltaQ <- fracTestPars()$DeltaQ
           DeltaQ.vals <- fracPars()$DeltaQ.vals
           tE <- fracPars()$tE
           tS <- fracAdherencePars()$tS
@@ -436,13 +442,14 @@ quarantineDurationServer <- function(id) {
             scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
             scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
             scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9, name = "fraction\nasymptomatic",
-                                   labels = labs, guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)) +
+              labels = labs, guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)) +
             labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
             plotTheme + theme(legend.position = "bottom")
         })
 
         output$relAdherencePlot <- renderPlot({
-          labs <- paste(levels(fracAdherence()$relAdherence$DeltaQ), ifelse(levels(fracAdherence()$relAdherence$DeltaQ) == 1, "day", "days"))
+          labs <- paste(levels(fracAdherence()$relAdherence$DeltaQ),
+            ifelse(levels(fracAdherence()$relAdherence$DeltaQ) == 1, "day", "days"))
           names(labs) <- levels(fracAdherence()$relAdherence$DeltaQ)
 
           ggplot(fracAdherence()$relAdherence, aes(x = n, y = relAdherence, colour = DeltaQ)) +
@@ -462,7 +469,7 @@ quarantineDurationServer <- function(id) {
         output$adherenceCaption <- renderUI({
           nCompare <- fracPars()$nCompare
           tE <- fracPars()$tE
-          DeltaQ <- fracPars()$DeltaQ
+          DeltaQ <- fracTestPars()$DeltaQ
           tS <- fracAdherencePars()$tS
 
           HTML(glue(
