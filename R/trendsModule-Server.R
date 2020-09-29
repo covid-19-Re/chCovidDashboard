@@ -77,7 +77,7 @@ trendsServer <- function(id) {
       }
 
       bagData <- reactive({
-        bagFiles <- list.files("data/bag",
+        bagFiles <- list.files("data/BAG",
                               pattern = "*FOPH_COVID19_data_extract.rds",
                               full.names = TRUE,
                               recursive = TRUE)
