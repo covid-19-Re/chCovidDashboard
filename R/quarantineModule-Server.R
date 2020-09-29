@@ -173,7 +173,7 @@ quarantineDurationServer <- function(id) {
             scale_colour_viridis_d(option = "inferno", end = 0.9,
               aesthetics = c("colour", "fill"), name = "delay to\nquarantine", labels = labs) +
             labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
-            plotTheme + theme(legend.position = "right", legend.background = element_blank())
+            plotTheme + theme(legend.position = "none", legend.background = element_blank())
         })
 
         output$fracNoTestRelUtilityPlot <- renderPlot({
@@ -187,7 +187,7 @@ quarantineDurationServer <- function(id) {
             scale_colour_viridis_d(option = "inferno", end = 0.9,
               aesthetics = c("colour", "fill"), name = "delay to\nquarantine") +
             labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
-            plotTheme + theme(legend.position = "None")
+            plotTheme + theme(legend.position = "none")
         })
 
         output$fracNoTestLegend <- renderPlot({
@@ -200,11 +200,11 @@ quarantineDurationServer <- function(id) {
             scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
             scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
             scale_colour_viridis_d(option = "inferno", end = 0.9, name = "delay to quarantine",
-                                   labels = labs)+#, guide = guide_legend(title.position = "left", nrow = 1)) +
+                                   labels = labs, guide = guide_legend(title.position = "left", nrow = 1)) +
             labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
             plotTheme + theme(legend.box.background = element_rect(colour = "black"))
           plotLegend <- get_legend(plot)
-          return(plotLegend)
+          return(grid::grid.draw(plotLegend))
         })
 
         output$noTestCaption <- renderUI({
