@@ -479,7 +479,8 @@ quarantineDurationServer <- function(id) {
             travellerFracNoTest <- lapply(y.vals, function(y) {
               tE.vals <- seq(-y, 0)
               frac <- lapply(n.vals, function(n) {
-                frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
+                frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams())/
+                               getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
                 data.frame(
                   y = factor(y, levels = y.vals),
                   n = n,
@@ -501,19 +502,35 @@ quarantineDurationServer <- function(id) {
             }) %>% bind_rows()
           }
 
-          travellerFracRelUtility <- lapply(y.vals, function(y) {
-            tE.vals <- seq(-y, 0)
-            relUtility <- lapply(n.vals[n.vals > 0], function(n) {
-              relUtility <- ( mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))/n )/
-                (mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()))/nCompare )
-              data.frame(
-                y = factor(y, levels = y.vals),
-                n = n,
-                relUtility = relUtility
-              )
+          if (normalisation) {
+            travellerFracRelUtility <- lapply(y.vals, function(y) {
+              tE.vals <- seq(-y, 0)
+              relUtility <- lapply(n.vals[n.vals > 0], function(n) {
+                relUtility <- ( mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams())/
+                                       getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))/n )/
+                  (mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())/
+                          getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))/nCompare )
+                data.frame(
+                  y = factor(y, levels = y.vals),
+                  n = n,
+                  relUtility = relUtility
+                )
+              }) %>% bind_rows()
             }) %>% bind_rows()
-          }) %>% bind_rows()
-
+          } else {
+            travellerFracRelUtility <- lapply(y.vals, function(y) {
+              tE.vals <- seq(-y, 0)
+              relUtility <- lapply(n.vals[n.vals > 0], function(n) {
+                relUtility <- ( mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))/n )/
+                  (mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()))/nCompare )
+                data.frame(
+                  y = factor(y, levels = y.vals),
+                  n = n,
+                  relUtility = relUtility
+                )
+              }) %>% bind_rows()
+            }) %>% bind_rows()
+          }
           return(list(frac = travellerFracNoTest, utility = travellerFracRelUtility))
         })
 
@@ -549,7 +566,7 @@ quarantineDurationServer <- function(id) {
 
           HTML(glue(
             "<span class='help-block' style='font-size:15px;'>",
-            "<i>(left)</i> The fraction of total onward transmission per quarantined ",
+            "<i>(left)</i> The fraction of onward transmission per quarantined ",
             "traveller that is prevented by quarantine. ",
             "<i>(right)</i> The relative utility of different quarantine strategies (x-axis) ",
             "compared to <strong>n = {nCompare}</strong> days. ",
@@ -585,73 +602,146 @@ quarantineDurationServer <- function(id) {
           n.vals <- travellerFracPars()$n.vals
           x.vals <- travellerTestPars()$x.vals
           DeltaT <- travellerTestPars()$DeltaT
-
           normalisation <- travellerFracPars()$normalisation
 
-          fracTest <- lapply(x.vals, function(x) {
-            frac <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              frac <- mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                (1 - falseNeg(x - tE.vals)) *
-                getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                fraction = frac
-              )
+          if (normalisation) {
+            fracTest <- lapply(x.vals, function(x) {
+              frac <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                frac <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                               (1 - falseNeg(x - tE.vals)) *
+                               getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))/
+                               getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  fraction = frac
+                )
+              }) %>% bind_rows()
             }) %>% bind_rows()
-          }) %>% bind_rows()
-
+          } else {
+            fracTest <- lapply(x.vals, function(x) {
+              frac <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                frac <- mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                               (1 - falseNeg(x - tE.vals)) *
+                               getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  fraction = frac
+                )
+              }) %>% bind_rows()
+            }) %>% bind_rows()
+          }
           #' Fraction prevented by test and release strategy with reduced post-quarantine transmission
-          fracTestReduced <- lapply(x.vals, function(x) {
-            fracReduced <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              frac <- mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-                getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                fraction = frac
-              )
+          if (normalisation) {
+            fracTestReduced <- lapply(x.vals, function(x) {
+              fracReduced <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                frac <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                                (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+                                getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))/
+                               getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  fraction = frac
+                )
+              }) %>% bind_rows()
             }) %>% bind_rows()
-          }) %>% bind_rows()
+          } else {
+            fracTestReduced <- lapply(x.vals, function(x) {
+              fracReduced <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                frac <- mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                                (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+                                getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  fraction = frac
+                )
+              }) %>% bind_rows()
+            }) %>% bind_rows()
+          }
 
-          relUtility <- lapply(x.vals, function(x) {
-            relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              relUtility <- (
+          if (normalisation) {
+            relUtility <- lapply(x.vals, function(x) {
+              relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                relUtility <- (
+                  mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                         (1 - falseNeg(x - tE.vals)) *
+                         getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))/
+                         getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))/
+                    mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
+                ) / (
+                  mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())/
+                         getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) / nCompare
+                )
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  relUtility = relUtility
+                )
+              }) %>% bind_rows()
+            }) %>% bind_rows()
+          } else {
+            relUtility <- lapply(x.vals, function(x) {
+              relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                relUtility <- (
                   mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                  (1 - falseNeg(x - tE.vals)) *
-                  getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                  mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
+                         (1 - falseNeg(x - tE.vals)) *
+                         getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
+                    mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
                 ) / (
                   mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())) / nCompare
                 )
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                relUtility = relUtility
-              )
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  relUtility = relUtility
+                )
+              }) %>% bind_rows()
             }) %>% bind_rows()
-          }) %>% bind_rows()
+          }
 
           #' Relative utility with reduced post-quarantine transmission
-          relUtilityReduced <- lapply(x.vals, function(x) {
-            relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              relUtility <- (
+          if (normalisation) {
+            relUtilityReduced <- lapply(x.vals, function(x) {
+              relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                relUtility <- (
+                  mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                          (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+                          getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))/
+                         getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) /
+                    mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
+                ) / (
+                  mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())/
+                         getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) / nCompare
+                )
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  relUtility = relUtility
+                )
+              }) %>% bind_rows()
+            }) %>% bind_rows()
+          } else {
+            relUtilityReduced <- lapply(x.vals, function(x) {
+              relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
+                relUtility <- (
                   mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                  (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-                  getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                  mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
+                         (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+                         getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
+                    mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
                 ) / (
                   mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())) / nCompare
                 )
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                relUtility = relUtility
-              )
+                data.frame(
+                  x = factor(x, levels = x.vals),
+                  n = n,
+                  relUtility = relUtility
+                )
+              }) %>% bind_rows()
             }) %>% bind_rows()
-          }) %>% bind_rows()
-
+          }
           return(list(
             frac = fracTest,
             fracReduced = fracTestReduced,
@@ -698,7 +788,7 @@ quarantineDurationServer <- function(id) {
           HTML(glue(
             "<span class='help-block' style='font-size:15px;'>",
             "<i>(left)</i> The impact of test-and-release for quarantined travellers, in terms of what fraction of ",
-            "total onward transmission per quarantined infected traveller is prevented by quarantine. ",
+            "onward transmission per quarantined infected traveller is prevented by quarantine. ",
             "The dashed line shows the result of standard quarantine without testing. ",
             "<i>(right)</i> The relative utility of different test-and-release quarantine durations compared to ",
             "standard quarantine with duration <strong>n = {nCompare}</strong> days. ",
@@ -718,37 +808,67 @@ quarantineDurationServer <- function(id) {
         y.vals <- travellerFracPars()$y.vals
         nCompare <- travellerFracPars()$nCompare
         n.vals <- travellerFracPars()$n.vals
-
         normalisation <- travellerFracPars()$normalisation
 
-        relAdherence <- lapply(y.vals, function(y) {
-          tE.vals <- seq(-y, 0)
-          relAdherence <- sapply(n.vals, function(n) {
-            mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())) /
-              mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
-          })
-          data.frame(
-            y = factor(y, levels = y.vals),
-            n = n.vals,
-            relAdherence = relAdherence
-          )
-        }) %>% bind_rows()
-
+        if (normalisation) {
+          relAdherence <- lapply(y.vals, function(y) {
+            tE.vals <- seq(-y, 0)
+            relAdherence <- sapply(n.vals, function(n) {
+              mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())/
+                     getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) /
+                mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams())/
+                       getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
+            })
+            data.frame(
+              y = factor(y, levels = y.vals),
+              n = n.vals,
+              relAdherence = relAdherence
+            )
+          }) %>% bind_rows()
+        } else {
+          relAdherence <- lapply(y.vals, function(y) {
+            tE.vals <- seq(-y, 0)
+            relAdherence <- sapply(n.vals, function(n) {
+              mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())) /
+                mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()))
+            })
+            data.frame(
+              y = factor(y, levels = y.vals),
+              n = n.vals,
+              relAdherence = relAdherence
+            )
+          }) %>% bind_rows()
+        }
         tE.vals <- travellerTestPars()$tE.vals
         tS.vals <- tE.vals + incParams()$mean
         a.vals <- fracAdherencePars()$a.vals
 
-        fracAdherence <- lapply(a.vals, function(a) {
-          frac <- sapply(n.vals, function(n) {
-            mean(a * getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) +
-            (1 - a) * getIntegral(upper = pmin(n, tS.vals), lower = 0, tE = tE.vals, params = genParams()))
-          })
-          data.frame(
-            a = factor(a, levels = a.vals),
-            n = n.vals,
-            fraction = frac
-          )
-        }) %>% bind_rows()
+        if (normalisation) {
+          fracAdherence <- lapply(a.vals, function(a) {
+            frac <- sapply(n.vals, function(n) {
+              mean((a * getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) +
+                     (1 - a) * getIntegral(upper = pmax(pmin(n, tS.vals),0), lower = 0, tE = tE.vals, params = genParams()))/
+                     getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
+            })
+            data.frame(
+              a = factor(a, levels = a.vals),
+              n = n.vals,
+              fraction = frac
+            )
+          }) %>% bind_rows()
+        } else {
+          fracAdherence <- lapply(a.vals, function(a) {
+            frac <- sapply(n.vals, function(n) {
+              mean(a * getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) +
+                     (1 - a) * getIntegral(upper = pmax(pmin(n, tS.vals),0), lower = 0, tE = tE.vals, params = genParams()))
+            })
+            data.frame(
+              a = factor(a, levels = a.vals),
+              n = n.vals,
+              fraction = frac
+            )
+          }) %>% bind_rows()
+        }
 
         return(list(
             frac = fracAdherence,
