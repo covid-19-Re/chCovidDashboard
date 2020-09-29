@@ -6,7 +6,7 @@ $('#tab > li:last-child').before('\
 ');
 $('.dropdown-menu').append('\
   <li>\
-    <a href="https://github.com/covid-19-Re/chCovidDashboard" target="_blank">\
+    <a href="https://github.com/covid-19-Re/chCovidDashboard/tree/public" target="_blank">\
       <i class="fa fa-github fa-fw"></i>\
       Source\
     </a>\
