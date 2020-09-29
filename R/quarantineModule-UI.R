@@ -102,6 +102,7 @@ quarantineDurationUI <- function(id) {
                   column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
                   column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
                 ),
+                plotOutput(ns("fracNoTestLegend"), height = "75px"),
                 uiOutput(ns("noTestCaption"))
               )
             )
@@ -126,8 +127,8 @@ quarantineDurationUI <- function(id) {
                   column(5,
                     numericInput(
                       ns("testSpecificity"),
-                      extLabel("s", "quarantine specificity",
-                        tooltip = "fraction of quarantined persons who are infected"),
+                      extLabel("s", "fraction infected",
+                        tooltip = "fraction of individuals in quarantine that are infected"),
                       value = 0.1,
                       step = 0.05)
                   )
@@ -160,6 +161,7 @@ quarantineDurationUI <- function(id) {
                   column(6, plotOutput(ns("fracTestPlot"), height = "450px") %>% withSpinner()),
                   column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px") %>% withSpinner())
                 ),
+                plotOutput(ns("fracTestLegend"), height = "75px"),
                 uiOutput(ns("testCaption"))
               )
             )
@@ -167,11 +169,11 @@ quarantineDurationUI <- function(id) {
           fluidRow(
             column(4,
               bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "parsSC1-3",
-                fluidRow(
-                  column(12,
-                   "some Text"
-                  ),
-                )
+                             helpText(style = "font-size:15px",
+                                      HTML(glue(
+                                        "<strong>Adherence:</strong> Changing the duration of quarantine could affect how many people adhere to the guidelines. Here we show the change in adherence required to offset the change in quarantine efficacy if the duration is changed.<br>",
+                                        "<strong>Symptoms:</strong> Individuals who develop symptoms should isolate independent of quarantine. Here we deduct these cases once they develop symptoms from the transmission prevented by quarantine."
+                                      )))
               )
             ),
             column(8,
@@ -227,6 +229,7 @@ quarantineDurationUI <- function(id) {
                   column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px") %>% withSpinner()),
                   column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
                 ),
+                plotOutput(ns("travellerFracNoTestLegend"), height = "75px"),
                 uiOutput(ns("travellerNoTestCaption"))
               )
             )
@@ -258,8 +261,8 @@ quarantineDurationUI <- function(id) {
                   column(5,
                     numericInput(
                       ns("testSpecificitySC2"),
-                      extLabel("s", "quarantine specificity",
-                        tooltip = "fraction of quarantined persons who are infected"),
+                      extLabel("s", "fraction infected",
+                        tooltip = "fraction of individuals in quarantine that are infected"),
                       value = 0.1,
                       step = 0.05)
                   )
@@ -292,14 +295,19 @@ quarantineDurationUI <- function(id) {
                   column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px") %>% withSpinner()),
                   column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
                 ),
+                plotOutput(ns("travellerFracTestLegend"), height = "75px"),
                 uiOutput(ns("travellerTestCaption"))
               )
             )
           ),
           fluidRow(
             column(4,
-              bootstrapPanel(heading = "Further considerations", class = "panel-default", id = "parsSC2-6",
-                "some text"
+              bootstrapPanel(heading = "Further considerations", class = "panel-primary", id = "parsSC2-6",
+                             helpText(style = "font-size:15px",
+                                      HTML(glue(
+                                        "<strong>Adherence:</strong> Changing the duration of quarantine could affect how many people adhere to the guidelines. Here we show the change in adherence required to offset the change in quarantine efficacy if the duration is changed.<br>",
+                                        "<strong>Symptoms:</strong> Individuals who develop symptoms should isolate independent of quarantine. Here we deduct these cases once they develop symptoms from the transmission prevented by quarantine."
+                                      )))
               )
             ),
             column(8,
