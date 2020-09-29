@@ -114,7 +114,7 @@ quarantineDurationServer <- function(id) {
             geom_line() +
             coord_cartesian(ylim = yLim) +
             labs(x = "generation time", y = "probability density") +
-            ggtitle("A: generation time dist.") +
+            ggtitle("A: generation time distribution") +
             plotTheme + theme(plot.title = element_text(size = plotTheme$text$size, face = "bold"))
         })
 
