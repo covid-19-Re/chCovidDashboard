@@ -2,6 +2,7 @@ library(shiny)
 library(tidyverse)
 library(shinycssloaders)
 library(glue)
+library(cowplot)
 
 getIntegral <- function(upper, lower, tE, params) {
   getGenDist(times = upper - tE, params = params, CDF = T) -
@@ -187,6 +188,23 @@ quarantineDurationServer <- function(id) {
               aesthetics = c("colour", "fill"), name = "delay to\nquarantine") +
             labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
             plotTheme + theme(legend.position = "None")
+        })
+
+        output$fracNoTestLegend <- renderPlot({
+          labs <- paste(levels(fracNoTest()$frac$DeltaQ), ifelse(levels(fracNoTest()$frac$DeltaQ) == 1, "day", "days"))
+          names(labs) <- levels(fracNoTest()$frac$DeltaQ)
+
+          plot <- ggplot(fracNoTest()$frac, aes(x = n, y = fraction, colour = DeltaQ)) +
+            geom_line(size = 1.2) +
+            geom_point(size = 3) +
+            scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
+            scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
+            scale_colour_viridis_d(option = "inferno", end = 0.9, name = "delay to quarantine",
+                                   labels = labs)+#, guide = guide_legend(title.position = "left", nrow = 1)) +
+            labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
+            plotTheme + theme(legend.box.background = element_rect(colour = "black"))
+          plotLegend <- get_legend(plot)
+          return(plotLegend)
         })
 
         output$noTestCaption <- renderUI({

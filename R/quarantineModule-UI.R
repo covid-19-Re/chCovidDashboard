@@ -102,6 +102,7 @@ quarantineDurationUI <- function(id) {
                   column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
                   column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
                 ),
+                plotOutput(ns("fracNoTestLegend"), height = "100px"),
                 uiOutput(ns("noTestCaption"))
               )
             )
