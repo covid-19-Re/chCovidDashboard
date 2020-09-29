@@ -41,6 +41,9 @@ dev-*
 .vscode
 *.csv
 
+# Data
+data/BAG
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
