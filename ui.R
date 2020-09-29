@@ -26,7 +26,7 @@ ui <- function(request) {
           thumbnailPanel(
             title = "Relative frequency of clinical events",
             authors = "Timothy Vaughan, Tanja Stadler",
-            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
+            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
             thumbnail = "tsProportions-thumbnail.png",
             tabId = "selectTsProportions"
           ),
