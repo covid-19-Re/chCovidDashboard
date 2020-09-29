@@ -25,8 +25,8 @@ ui <- function(request) {
           ),
           thumbnailPanel(
             title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
-            authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus ",
-            affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland",
+            authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus",
+            affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br><i>(preliminary)</i>",
             thumbnail = "trends-thumbnail.png",
             tabId = "selectTrends"
           ),
