@@ -26,6 +26,11 @@ server <- function(input, output, session) {
       selected = "tsCases"
     )
   })
+  observeEvent(input$selectTrends, {
+    updateTabsetPanel(session, "tab",
+      selected = "trends"
+    )
+  })
 
   onBookmarked(function(url) {
     updateQueryString(url)
@@ -45,7 +50,11 @@ server <- function(input, output, session) {
 # Cases time series
   tsCasesServer("tsCases")
 
+# trends
+  trendsServer("trends")
+
 # Proportions time series
   tsProportionsServer("tsProportions")
+
 
 }

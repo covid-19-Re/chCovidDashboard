@@ -24,6 +24,13 @@ ui <- function(request) {
             tabId = "selectTsCases"
           ),
           thumbnailPanel(
+            title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
+            authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus ",
+            affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland",
+            thumbnail = "trends-thumbnail.png",
+            tabId = "selectTrends"
+          ),
+          thumbnailPanel(
             title = "Relative frequency of clinical events",
             authors = "Timothy Vaughan, Tanja Stadler",
             affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
@@ -66,6 +73,9 @@ ui <- function(request) {
       ),
       tabPanel("Time series - cases", value = "tsCases",
         tsCasesUI("tsCases")
+      ),
+      tabPanel("Trends", value = "trends",
+        trendsUI("trends")
       ),
       tabPanel("Time series - proportions", value = "tsProportions",
         tsProportionsUI("tsProportions")
