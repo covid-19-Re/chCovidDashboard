@@ -28,7 +28,11 @@ trendsUI <- function(id) {
                 numericInput(ns("truncation"), "truncation (days)", value = 4)
               )
             ),
-            numericInput(ns("time_window"), "size (days) of time window", value = 28, step = 1)
+            fluidRow(
+              column(7,
+                numericInput(ns("time_window"), "size (days) of time window", value = 28, step = 1)
+              )
+            ),
           )
         )
       ),
