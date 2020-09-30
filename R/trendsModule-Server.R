@@ -35,9 +35,10 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
   return(counts)
 }
 
-plotPredictions <- function(predictions, doublingTimes, regionSelect, eventSelect, fillColor) {
+plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, eventSelect, fillColor) {
   plotData <- filter(predictions, region == regionSelect, event == eventSelect)
   doublingTimesData <- filter(doublingTimes, region == regionSelect, event == eventSelect)
+  ranking <- filter(ranking, region == regionSelect, event == eventSelect)
   
   title <- case_when(
     regionSelect != "CH" ~ regionSelect,
@@ -45,8 +46,14 @@ plotPredictions <- function(predictions, doublingTimes, regionSelect, eventSelec
     eventSelect == "hospitalizations" ~ "Hospitalizations",
     eventSelect == "deaths" ~ "Deaths",
   )
-  subtitle <- glue::glue_data(doublingTimesData,
-    "{round(estimate, 1)} d (95% CI: {round(lower,1)} - {round(upper,1)}d)")
+
+
+  # subtitle <- glue::glue_data(doublingTimesData,
+  #   "{round(estimate, 1)} d (95% CI: {round(lower,1)} to {round(upper,1)}d)")
+  subtitle <- glue::glue_data(ranking,
+    "Weekly growth:\n{round(estimate*100, 1)}% (95% CI: {round(lower*100,1)}% to {round(upper*100,1)}%)")
+
+  # subtitle <- str_c(subtitle1, "\n", subtitle2)
 
   plot <- ggplot(
       data = plotData) +
@@ -187,24 +194,23 @@ trendsServer <- function(id) {
         doublingTimes <- doublingTimes()
 
         ranking <- doublingTimes %>%
-          filter(event == "cases") %>%
           mutate(across(estimate:upper, ~exp(log(2) / .x * 7) - 1))
 
         return(ranking)
       })
 
       output$chPlotCases <- renderPlot({
-        plotPredictions(predictions(), doublingTimes(),
+        plotPredictions(predictions(), doublingTimes(), ranking(),
           regionSelect = "CH", eventSelect = "cases",
           fillColor = t.cols[2])
       })
       output$chPlotHospitalizations <- renderPlot({
-        plotPredictions(predictions(), doublingTimes(),
+        plotPredictions(predictions(), doublingTimes(), ranking(),
           regionSelect = "CH", eventSelect = "hospitalizations",
           fillColor = t.cols[3])
       })
       output$chPlotDeaths <- renderPlot({
-        plotPredictions(predictions(), doublingTimes(),
+        plotPredictions(predictions(), doublingTimes(), ranking(),
           regionSelect = "CH", eventSelect = "deaths",
           fillColor = t.cols[1])
       })
@@ -225,7 +231,7 @@ trendsServer <- function(id) {
 
         cantonPlotsList <- list()
         for (i in cantons) {
-          cantonPlotsList[[i]] <- plotPredictions(predictions, doublingTimes,
+          cantonPlotsList[[i]] <- plotPredictions(predictions, doublingTimes, ranking(),
             regionSelect = i, eventSelect = "cases",
             fillColor = t.cols[2]) +
             theme(text = element_text(size = 12)) +
@@ -236,7 +242,7 @@ trendsServer <- function(id) {
 
       output$rankingPlot <- renderPlot({
 
-        ranking <- ranking()
+        ranking <- ranking() %>% filter(event == "cases")
         ranking$region <- fct_reorder(ranking$region, ranking$estimate, min)
 
         colors <- rep("black", length(ranking$region))
