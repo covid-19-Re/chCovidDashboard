@@ -32,7 +32,6 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
     complete(region, date, event, fill = list(count = 0)) %>%
     mutate(weekend = ifelse(weekdays(date) == "Saturday" | weekdays(date) == "Sunday", 1, 0))
 
-  saveRDS(counts, "counts.rds")
   return(counts)
 }
 
@@ -138,7 +137,7 @@ trendsServer <- function(id) {
           filter(region == "CH")
 
         eventCounts <- bind_rows(eventCountsList)
-
+        saveRDS(eventCounts, "counts.rds")
         return(eventCounts)
       })
 
