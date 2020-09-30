@@ -51,7 +51,7 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
   # subtitle <- glue::glue_data(doublingTimesData,
   #   "{round(estimate, 1)} d (95% CI: {round(lower,1)} to {round(upper,1)}d)")
   subtitle <- glue::glue_data(ranking,
-    "Weekly growth:\n{round(estimate*100, 1)}% (95% CI: {round(lower*100,1)}% to {round(upper*100,1)}%)")
+    "Weekly change:\n{round(estimate*100, 1)}% (95% CI: {round(lower*100,1)}% to {round(upper*100,1)}%)")
 
   # subtitle <- str_c(subtitle1, "\n", subtitle2)
 
@@ -254,7 +254,7 @@ trendsServer <- function(id) {
             mapping = aes(x = estimate, y = region, xmin = lower, xmax = upper, color = region)) +
           geom_point() +
           geom_errorbar() +
-          scale_x_continuous(name = "Weekly growth", labels = scales::percent) +
+          scale_x_continuous(name = "Weekly change", labels = scales::percent) +
           coord_cartesian(xlim = c(-0.5, 1)) +
           scale_y_discrete(name = "") +
           scale_color_manual(values = colors, guide = "none") +
