@@ -7,7 +7,7 @@ library(cowplot)
 getEventCounts <- function(df, event_dt, event_name, pars) {
   # CH
   countsCH <- df %>%
-    select({{event_dt}}, ktn) %>%
+    dplyr::select({{event_dt}}, ktn) %>%
     filter({{event_dt}} >= pars$begin & {{event_dt}} <= pars$end) %>%
     group_by({{event_dt}}) %>%
     summarize(
@@ -18,7 +18,7 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
 
   # cantons
   countsRegions <- df %>%
-    select({{event_dt}}, ktn) %>%
+    dplyr::select({{event_dt}}, ktn) %>%
     filter({{event_dt}} >= pars$begin & {{event_dt}} <= pars$end) %>%
     group_by(ktn, {{event_dt}}) %>%
     summarize(
@@ -30,7 +30,7 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
   # all
   counts <- bind_rows(countsCH, countsRegions) %>%
     complete(region, date, event, fill = list(count = 0)) %>%
-    mutate(weekend = ifelse(weekdays(date) == "Saturday" | weekdays(date) == "Sunday", 1, 0))
+    mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
 
   return(counts)
 }
@@ -137,7 +137,7 @@ trendsServer <- function(id) {
           filter(region == "CH")
 
         eventCounts <- bind_rows(eventCountsList)
-        saveRDS(eventCounts, "counts.rds")
+
         return(eventCounts)
       })
 
