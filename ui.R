@@ -6,8 +6,10 @@ ui <- function(request) {
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
     ),
     useShinyjs(),
-    navbarPage("CH Covid-19 Dashboard", id = "tab", theme = "theme.min.css", collapsible = TRUE,
-      tabPanel("",  value = "home", icon = icon("home"),
+    navbarPage("CH Covid-19 Dashboard",
+      id = "tab", theme = "theme.min.css", collapsible = TRUE,
+      tabPanel("",
+        value = "home", icon = icon("home"),
         fluidRow(
           thumbnailPanel(
             title = "Quantifying the impact of quarantine duration on COVID-19 transmission",
@@ -71,26 +73,34 @@ ui <- function(request) {
           )
         ),
       ),
-      tabPanel("Time series - cases", value = "tsCases",
+      tabPanel("Time series - cases",
+        value = "tsCases",
         tsCasesUI("tsCases")
       ),
-      tabPanel("Trends", value = "trends",
+      tabPanel("Trends",
+        value = "trends",
         trendsUI("trends")
       ),
-      tabPanel("Time series - proportions", value = "tsProportions",
+      tabPanel("Time series - proportions",
+        value = "tsProportions",
         tsProportionsUI("tsProportions")
       ),
-      tabPanel("Contact tracing", value = "contactTracing",
+      tabPanel("Contact tracing",
+        value = "contactTracing",
         ctUI("contactTracing")
       ),
-      tabPanel("Quarantine duration", value = "quarantineDuration",
+      tabPanel("Quarantine duration",
+        value = "quarantineDuration",
         quarantineDurationUI("quarantineDuration")
       ),
-      navbarMenu("About",
-        tabPanel("About", icon = icon("question-circle"), value = "about",
+      navbarMenu(
+        "About",
+        tabPanel("About",
+          icon = icon("question-circle"), value = "about",
           includeMarkdown("README.md")
         )
       )
     ),
     tags$script(src = "navbarRight.js")
-)}
+  )
+}

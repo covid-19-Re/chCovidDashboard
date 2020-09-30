@@ -55,10 +55,14 @@ trendsUI <- function(id) {
             heading = "Cantonal trends",
             class = "panel-info",
             plotOutput(ns("cantonPlots"), height = "1200px") %>% withSpinner(),
-            selectInput(ns("cantonSort"), label = "sort order",
-              choices = c("alphabetical" = "alpha",
-                "weekly growth (ascending)" = "growthAsc", "weekly growth (descending)" = "growthDesc"),
-            selected = "growthDesc")
+            selectInput(ns("cantonSort"),
+              label = "sort order",
+              choices = c(
+                "alphabetical" = "alpha",
+                "weekly growth (ascending)" = "growthAsc", "weekly growth (descending)" = "growthDesc"
+              ),
+              selected = "growthDesc"
+            )
           )
         ),
         column(6,

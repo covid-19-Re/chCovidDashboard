@@ -1,11 +1,11 @@
 server <- function(input, output, session) {
-# global
+  # global
   observe({
     # Trigger this observer every time the tab changes
     input$tab
     session$doBookmark()
   })
-  
+
   observeEvent(input$selectQuarantine, {
     updateTabsetPanel(session, "tab",
       selected = "quarantineDuration"
@@ -41,20 +41,18 @@ server <- function(input, output, session) {
     setBookmarkExclude(toExclude)
   })
 
-# contact tracing
+  # contact tracing
   ctServer("contactTracing")
 
-# quarantine duration
+  # quarantine duration
   quarantineDurationServer("quarantineDuration")
 
-# Cases time series
+  # Cases time series
   tsCasesServer("tsCases")
 
-# trends
+  # trends
   trendsServer("trends")
 
-# Proportions time series
+  # Proportions time series
   tsProportionsServer("tsProportions")
-
-
 }
