@@ -53,7 +53,8 @@ plotPredictions <- function(predictions, doublingTimes, regionSelect, eventSelec
     geom_ribbon(mapping = aes(date, prediction, ymin = lower, ymax = upper), fill = fillColor) +
     geom_point(mapping = aes(date, count), shape = 21) +
     geom_line(mapping = aes(date, prediction)) +
-    scale_y_continuous(name = title, limits = c(0, 1.5 * max(plotData$count))) +
+    scale_y_continuous(name = title) +
+    coord_cartesian(ylim = c(0, 1.5 * max(plotData$count))) +
     scale_x_date(name = "", date_breaks = "1 week", date_labels = "%b-%d") +
     labs(
       title = title,
