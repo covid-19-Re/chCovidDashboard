@@ -35,7 +35,7 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
   return(counts)
 }
 
-plotPredictions <- function(predictions, doublingTimes, regionSelect, eventSelect, fillColor){
+plotPredictions <- function(predictions, doublingTimes, regionSelect, eventSelect, fillColor) {
   plotData <- filter(predictions, region == regionSelect, event == eventSelect)
   doublingTimesData <- filter(doublingTimes, region == regionSelect, event == eventSelect)
   
@@ -107,9 +107,9 @@ trendsServer <- function(id) {
       })
 
       pars <- reactive({
-        time_window <- 28
-        delete <- 4
-        lastday <- today()
+        time_window <- input$time_window
+        delete <- input$truncation
+        lastday <- input$lastday
         begin <- lastday - delete + 1 - time_window
         end <- lastday - delete
 
