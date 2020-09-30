@@ -252,8 +252,8 @@ trendsServer <- function(id) {
         plot <- ggplot(
             data = ranking,
             mapping = aes(x = estimate, y = region, xmin = lower, xmax = upper, color = region)) +
-          geom_point() +
-          geom_errorbar() +
+          geom_point(size = 2) +
+          geom_errorbar(width = 0.4, size = 0.75) +
           scale_x_continuous(name = "Weekly change", labels = scales::percent) +
           coord_cartesian(xlim = c(-0.5, 1)) +
           scale_y_discrete(name = "") +
