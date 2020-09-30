@@ -32,6 +32,7 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
     complete(region, date, event, fill = list(count = 0)) %>%
     mutate(weekend = ifelse(weekdays(date) == "Saturday" | weekdays(date) == "Sunday", 1, 0))
 
+  saveRDS(counts, "counts.rds")
   return(counts)
 }
 
@@ -76,7 +77,7 @@ trendsServer <- function(id) {
 
       cols <- RColorBrewer::brewer.pal(3, "Set1")
       t.cols <- cols
-      for(i in seq_along(cols)) {
+      for (i in seq_along(cols)) {
         x <- col2rgb(cols[i])
         t.cols[i] <- rgb(x[1, ], x[2, ], x[3, ], alpha = 125, maxColorValue = 255)
       }
@@ -101,7 +102,8 @@ trendsServer <- function(id) {
       })
 
       bagData <- reactive({
-        bagData <- readRDS(newestBAGFile())
+        newestBAGFile <- newestBAGFile()
+        bagData <- readRDS(newestBAGFile)
         return(bagData)
       })
 
