@@ -74,7 +74,7 @@ generate_timeseries_plot <- function(data, event, given, selectedAgeGroups, sele
   if ((event == "Test (any result)") || (displayProb && given == "Test (any result)")) {
     validate(
       need(
-        travelChoice == "All cases" && (is.na(compare) || compare != "Import status"),
+        travelChoice == "All cases" && (is.na(compare) || compare != "travelClass"),
         "Currently lacking information about travel status for negative test data."
       )
     )
