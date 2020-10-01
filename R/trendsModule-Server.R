@@ -1,4 +1,3 @@
-library(MASS)
 library(tidyverse)
 library(lubridate)
 library(cowplot)
@@ -156,7 +155,7 @@ trendsServer <- function(id) {
       })
 
       modelFunction <- function(df) {
-        glm.nb(count ~ date + weekend, data = df)
+        MASS::glm.nb(count ~ date + weekend, data = df)
       }
 
       models <- reactive({
