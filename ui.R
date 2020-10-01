@@ -6,8 +6,10 @@ ui <- function(request) {
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
     ),
     useShinyjs(),
-    navbarPage("CH Covid-19 Dashboard", id = "tab", theme = "theme.min.css", collapsible = TRUE,
-      tabPanel("",  value = "home", icon = icon("home"),
+    navbarPage("CH Covid-19 Dashboard",
+      id = "tab", theme = "theme.min.css", collapsible = TRUE,
+      tabPanel("",
+        value = "home", icon = icon("home"),
         fluidRow(
           thumbnailPanel(
             title = "Quantifying the impact of quarantine duration on COVID-19 transmission",
@@ -15,13 +17,20 @@ ui <- function(request) {
             affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland",
             thumbnail = "quarantineModule-thumbnail.png",
             tabId = "selectQuarantine"
-          )#,
+          ) #,
           # thumbnailPanel(
           #   title = "Time Series of Cases",
           #   authors = "Timothy Vaughan, Tanja Stadler",
           #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
           #   thumbnail = "tsCases-thumbnail.png",
           #   tabId = "selectTsCases"
+          # ),
+          # thumbnailPanel(
+          #   title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
+          #   authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus",
+          #   affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br><i>(preliminary)</i>",
+          #   thumbnail = "trends-thumbnail.png",
+          #   tabId = "selectTrends"
           # ),
           # thumbnailPanel(
           #   title = "Relative frequency of clinical events",
@@ -64,23 +73,34 @@ ui <- function(request) {
           )
         ),
       ),
-      # tabPanel("Time series - cases", value = "tsCases",
-      #   tsCasesUI("tsCases")
-      # ),
-      # tabPanel("Time series - proportions", value = "tsProportions",
-      #   tsProportionsUI("tsProportions")
-      # ),
-      # tabPanel("Contact tracing", value = "contactTracing",
-      #   ctUI("contactTracing")
-      # ),
-      tabPanel("Quarantine duration", value = "quarantineDuration",
+      tabPanel("Quarantine duration",
+        value = "quarantineDuration",
         quarantineDurationUI("quarantineDuration")
       ),
-      navbarMenu("About",
-        tabPanel("About", icon = icon("question-circle"), value = "about",
+      # tabPanel("Time series - cases",
+      #   value = "tsCases",
+      #   tsCasesUI("tsCases")
+      # ),
+      # tabPanel("Trends",
+      #   value = "trends",
+      #   trendsUI("trends")
+      # ),
+      # tabPanel("Time series - proportions",
+      #   value = "tsProportions",
+      #   tsProportionsUI("tsProportions")
+      # ),
+      # tabPanel("Contact tracing",
+      #   value = "contactTracing",
+      #   ctUI("contactTracing")
+      # ),
+      navbarMenu(
+        "About",
+        tabPanel("About",
+          icon = icon("question-circle"), value = "about",
           includeMarkdown("README.md")
         )
       )
     ),
     tags$script(src = "navbarRight.js")
-)}
+  )
+}

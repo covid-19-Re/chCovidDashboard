@@ -13,7 +13,8 @@ ctUI <- function(id) {
       # ),
       fluidRow(
         column(3,
-          bootstrapPanel(heading = "Parameter", class = "panel-primary",
+          bootstrapPanel(
+            heading = "Parameter", class = "panel-primary",
             fluidRow(
               column(9,
                 sliderInput(
@@ -21,7 +22,8 @@ ctUI <- function(id) {
                   extLabel("f", "fraction of index cases detected"),
                   min = 0, max = 1, value = c(0, 1),
                   step = 0.1, round = -2,
-                  width = "100%")
+                  width = "100%"
+                )
               ),
               column(3,
                 numericInput(ns("nfSteps"), "steps", min = 1, max = 10, value = 6)
@@ -32,40 +34,49 @@ ctUI <- function(id) {
               extLabel("𝚫<sub>1</sub>", "delay from symptom onset to isolation of index case [days]"),
               min = 0, max = 10, value = c(0, 4),
               step = 1,
-              width = "100%"),
+              width = "100%"
+            ),
             sliderInput(
               ns("tau"),
               extLabel("𝛕", "duration of lookback prior to symptom onset in the index case [days]"),
               min = 0, max = 10, value = 0,
               step = 1,
-              width = "100%"),
+              width = "100%"
+            ),
             sliderInput(
               ns("g"),
-              extLabel("g",
-                "probability to quarantine a secondary contact that was infected within the contact tracing window"),
+              extLabel(
+                "g",
+                "probability to quarantine a secondary contact that was infected within the contact tracing window"
+              ),
               min = 0, max = 1, value = 0,
               step = 0.1, round = -2,
-              width = "100%"),
+              width = "100%"
+            ),
             sliderInput(
               ns("delta2"),
-              extLabel("𝚫<sub>2</sub>",
-                "delay between isolating the index case and quarantining the secondary contacts [days]"),
+              extLabel(
+                "𝚫<sub>2</sub>",
+                "delay between isolating the index case and quarantining the secondary contacts [days]"
+              ),
               min = 0, max = 10, value = 0,
               step = 1,
-              width = "100%"),
+              width = "100%"
+            ),
             sliderInput(
               ns("re"),
               extLabel("R<sub>e</sub>", "effective reproductive number"),
               min = 0, max = 15, value = 1.2,
               step = 0.1, round = -2,
-              width = "100%")
+              width = "100%"
+            )
           )
         ),
         column(9,
           bootstrapPanel(
             heading = "Number of tertiary cases per index case as a function of the testing & isolating delay",
             class = "panel-primary",
-              plotOutput(ns("plot"), height = "600px") %>% withSpinner()
+            plotOutput(ns("plot"), height = "600px") %>% withSpinner()
           )
         )
       )
@@ -77,6 +88,10 @@ ctServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      observe({
+        toExclude <- setdiff(names(input), "tab")
+        setBookmarkExclude(toExclude)
+      })
 
       params <- reactive({
         params <- list(
