@@ -27,7 +27,7 @@ forecastUI <- function(id) {
           align = "right",
           tags$img(src = "forecastModule-logo_TPH.png", width = 97.8, height = 28.114),
           tags$img(
-            src = "forecastModule-logo_UniBas.jpg", width = 93.8, height = 30.8,
+            src = "forecastModule-logo_UniBas.png", width = 93.8, height = 30.8,
             style = "margin-left: 25px;"
           )
         ),
@@ -134,7 +134,7 @@ forecastUI <- function(id) {
           align = "right",
           tags$img(src = "forecastModule-logo_TPH.png", width = 97.8, height = 28.114),
           tags$img(
-            src = "forecastModule-logo_UniBas.jpg", width = 93.8, height = 30.8,
+            src = "forecastModule-logo_UniBas.png", width = 93.8, height = 30.8,
             style = "margin-left: 25px;"
           )
         ),
@@ -151,7 +151,7 @@ forecastUI <- function(id) {
           align = "right",
           tags$img(src = "forecastModule-logo_TPH.png", width = 97.8, height = 28.114),
           tags$img(
-            src = "forecastModule-logo_UniBas.jpg", width = 93.8, height = 30.8,
+            src = "forecastModule-logo_UniBas.png", width = 93.8, height = 30.8,
             style = "margin-left: 25px;"
           )
         ),
