@@ -73,28 +73,33 @@ ui <- function(request) {
           )
         ),
       ),
-      tabPanel("Quarantine duration",
-        value = "quarantineDuration",
-        quarantineDurationUI("quarantineDuration")
-      ),
-      # tabPanel("Time series - cases",
-      #   value = "tsCases",
-      #   tsCasesUI("tsCases")
+      # navbarMenu(
+      #   "Time Series",
+      #   menuName = "timeseries",
+      #   tabPanel("Cases",
+      #     value = "tsCases",
+      #     tsCasesUI("tsCases")
+      #   ),
+      #   tabPanel("Proportions",
+      #     value = "tsProportions",
+      #     tsProportionsUI("tsProportions")
+      #   )
       # ),
       # tabPanel("Trends",
       #   value = "trends",
       #   trendsUI("trends")
       # ),
-      # tabPanel("Time series - proportions",
-      #   value = "tsProportions",
-      #   tsProportionsUI("tsProportions")
-      # ),
       # tabPanel("Contact tracing",
       #   value = "contactTracing",
       #   ctUI("contactTracing")
       # ),
+      tabPanel("Quarantine duration",
+        value = "quarantineDuration",
+        quarantineDurationUI("quarantineDuration")
+      ),
       navbarMenu(
         "About",
+        menuName = "about",
         tabPanel("About",
           icon = icon("question-circle"), value = "about",
           includeMarkdown("README.md")
