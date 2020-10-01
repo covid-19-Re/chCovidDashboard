@@ -3,7 +3,6 @@
 #
 # monica.golumbeanu@unibas.ch
 ########################
-library(plyr)
 
 plot_simple_forecast = function(plot_df, data_df, plot_title, plot_y){
     colnames(data_df) = c("day_reported", "n")
@@ -109,7 +108,7 @@ render_plots_ts = function(arima_result_all, o_data_source, o_ts,
     }
     
     # Update the names in the data table
-    selected_data$variable = revalue(selected_data$variable, C_ts_vec_titles)
+    selected_data$variable = plyr::revalue(selected_data$variable, C_ts_vec_titles)
     
     # Define the model graphics 
     if(o_model == FALSE){

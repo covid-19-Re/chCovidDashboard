@@ -2,7 +2,6 @@ library(shiny)
 library(zoo)
 library(plotly)
 library(shinyjs)
-library(plyr)
 
 source("R/forecastModule-Files/scripts/plotting_scripts.R")
 source("R/forecastModule-Files/scripts/define_constants.R")

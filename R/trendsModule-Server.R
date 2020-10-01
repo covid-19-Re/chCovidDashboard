@@ -1,4 +1,3 @@
-library(MASS)
 library(tidyverse)
 library(lubridate)
 library(cowplot)
@@ -46,7 +45,6 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
     eventSelect == "hospitalizations" ~ "Hospitalizations",
     eventSelect == "deaths" ~ "Deaths",
   )
-
 
   # subtitle <- glue::glue_data(doublingTimesData,
   #   "{round(estimate, 1)} d (95% CI: {round(lower,1)} to {round(upper,1)}d)")
@@ -156,7 +154,7 @@ trendsServer <- function(id) {
       })
 
       modelFunction <- function(df) {
-        glm.nb(count ~ date + weekend, data = df)
+        MASS::glm.nb(count ~ date + weekend, data = df)
       }
 
       models <- reactive({
