@@ -31,6 +31,11 @@ server <- function(input, output, session) {
       selected = "trends"
     )
   })
+  observeEvent(input$selectForecast, {
+    updateTabsetPanel(session, "tab",
+      selected = "forecast"
+    )
+  })
 
   onBookmarked(function(url) {
     updateQueryString(url)
@@ -55,4 +60,7 @@ server <- function(input, output, session) {
 
   # Proportions time series
   tsProportionsServer("tsProportions")
+
+  # forecast
+  forecastServer("forecast")
 }

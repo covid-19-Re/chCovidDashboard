@@ -45,6 +45,13 @@ ui <- function(request) {
             affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
             thumbnail = "ct-thumbnail.png",
             tabId = "selectContactTracing"
+          ),
+          thumbnailPanel(
+            title = "Live time-series analysis to monitor and forecast the COVID-19 outbreak in Switzerland",
+            authors = "Monica Golumbeanu and Melissa Penny",
+            affiliation = "Swiss Tropical and Public Health Institute and University of Basel<br><i>(preliminary)</i>",
+            thumbnail = "forecastModule-thumbnail.png",
+            tabId = "selectForecast"
           )
         ),
         hr(),
@@ -92,6 +99,10 @@ ui <- function(request) {
       tabPanel("Quarantine duration",
         value = "quarantineDuration",
         quarantineDurationUI("quarantineDuration")
+      ),
+      tabPanel("Forecast",
+        value = "forecast",
+        forecastUI("forecast")
       ),
       navbarMenu(
         "About",
