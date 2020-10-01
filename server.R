@@ -6,6 +6,8 @@ server <- function(input, output, session) {
     session$doBookmark()
   })
 
+  observe_helpers(help_dir = "R/forecastModule-Files/helpfiles")
+
   observeEvent(input$selectQuarantine, {
     updateTabsetPanel(session, "tab",
       selected = "quarantineDuration"

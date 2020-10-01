@@ -74,9 +74,6 @@ forecastServer <- function(id) {
                 updateTabsetPanel(session, "main_menu", "About")
             })
 
-            observe_helpers(session = shiny::getDefaultReactiveDomain())
-                            # help_dir = "helpfiles", withMathJax = FALSE)
-
             # Download data tables
             output$save_ts <- downloadHandler(
                 filename = function() {paste("COVID-19_Dashboard_Data.csv")},
