@@ -22,7 +22,7 @@ quarantineDurationUI <- function(id) {
       ),
       # empirical distributions
       fluidRow(
-        column(8,
+        column(12,
           bootstrapPanel(
             heading = "Empirical distributions", class = "panel-info", id = "parsDistr",
             fluidRow(
@@ -122,30 +122,20 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release parameters", class = "panel-primary", id = "parsSC1-2",
                   selectizeInput(
                     ns("deltaQfocal"),
-                    extLabel("&Delta;<sub>Q</sub>", "focal quarantine duration"),
+                    extLabel("&Delta;<sub>Q</sub>", "focal delay to quarantine"),
                     choices = as.character(0:4),
                     selected = as.character(3),
                     multiple = FALSE,
                     options = list(delimiter = ", ")
                   ),
                   sliderInput(
-                    ns("testDay"),
-                    extLabel("t<sub>T</sub>", "day on which test is conducted",
-                      tooltip = "days after exposure (t<sub>E</sub>), !> &Delta;<sub>T</sub>"
-                    ),
-                    min = 0, max = 10, value = c(3, 8),
+                    ns("testResultDelay"),
+                    extLabel("&Delta;<sub>T</sub>", "test result delay"),
+                    min = 0, max = 5, value = c(0, 3),
                     width = "100%"
                   ),
                   fluidRow(
-                    column(5,
-                      numericInput(
-                        ns("testDuration"),
-                        extLabel("&Delta;<sub>T</sub>", "days until test result"),
-                        value = 2,
-                        step = 0.5
-                      )
-                    ),
-                    column(5,
+                    column(6,
                       numericInput(
                         ns("testSpecificity"),
                         extLabel("s", "fraction infected",
@@ -154,10 +144,8 @@ quarantineDurationUI <- function(id) {
                         value = 0.1,
                         step = 0.05
                       )
-                    )
-                  ),
-                  fluidRow(
-                    column(5,
+                    ),
+                    column(6,
                       numericInput(
                         ns("transmissionReduction"),
                         extLabel("r", "transmission reduction",
@@ -188,8 +176,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release", id = "plotsSC1-2",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("fracTestPlot"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("fracTestRelUtilityPlot"), height = "450px") %>% withSpinner())
+                    column(6, plotOutput(ns("fracTestPlotOut"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("fracTestRelUtilityPlotOut"), height = "450px") %>% withSpinner())
                   ),
                   plotOutput(ns("fracTestLegend"), height = "75px"),
                   uiOutput(ns("testCaption"))
@@ -293,23 +281,13 @@ quarantineDurationUI <- function(id) {
                     options = list(delimiter = ", ")
                   ),
                   sliderInput(
-                    ns("testDaySC2"),
-                    extLabel("t<sub>T</sub>", "day on which test is conducted",
-                      tooltip = "days after return (t<sub>E</sub>)"
-                    ),
-                    min = 0, max = 10, value = c(0, 5),
+                    ns("testResultDelaySC2"),
+                    extLabel("&Delta;<sub>T</sub>", "test result delay"),
+                    min = 0, max = 5, value = c(0, 3),
                     width = "100%"
                   ),
                   fluidRow(
-                    column(5,
-                      numericInput(
-                        ns("testDurationSC2"),
-                        extLabel("&Delta;<sub>T</sub>", "days until test result"),
-                        value = 2,
-                        step = 0.5
-                      )
-                    ),
-                    column(5,
+                    column(6,
                       numericInput(
                         ns("testSpecificitySC2"),
                         extLabel("s", "fraction infected",
@@ -318,10 +296,8 @@ quarantineDurationUI <- function(id) {
                         value = 0.1,
                         step = 0.05
                       )
-                    )
-                  ),
-                  fluidRow(
-                    column(5,
+                    ),
+                    column(6,
                       numericInput(
                         ns("transmissionReductionSC2"),
                         extLabel("r", "transmission reduction",
@@ -352,7 +328,7 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release", id = "plotsSC2-5",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("travellerFracTestPlot"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("travellerFracTestPlotOut"), height = "450px") %>% withSpinner()),
                     column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
                   ),
                   plotOutput(ns("travellerFracTestLegend"), height = "75px"),

@@ -233,10 +233,10 @@ quarantineDurationServer <- function(id) {
       fracTestPars <- reactive({
         fracTestPars <- list(
           DeltaQ = as.integer(input$deltaQfocal),
-          DeltaT = input$testDuration,
+          DeltaT.vals = seq(input$testResultDelay[1], input$testResultDelay[2]),
           s = input$testSpecificity,
           r = input$transmissionReduction,
-          x.vals = seq(input$testDay[1], input$testDay[2])
+          x.vals = seq(as.integer(input$deltaQfocal), input$nCompare)
         )
         return(fracTestPars)
       })
@@ -259,152 +259,187 @@ quarantineDurationServer <- function(id) {
 
       fracTest <- reactive({
         DeltaQ <- fracTestPars()$DeltaQ
-        DeltaT <- fracTestPars()$DeltaT
+        DeltaT.vals <- fracTestPars()$DeltaT.vals
         tE <- fracPars()$tE
         s <- fracTestPars()$s
         r <- fracTestPars()$r
-        nCompare <- fracPars()$nCompare
         n.vals <- fracPars()$n.vals
         x.vals <- fracTestPars()$x.vals
+        n <- fracPars()$nCompare
 
+        
 
+        #' Fraction based on test and release
         fracTest <- lapply(x.vals, function(x) {
-          nPrime <- n.vals[n.vals >= x + DeltaT]
-          frac <- getIntegral(upper = tE + x + DeltaT, lower = DeltaQ, tE = tE, params = genParams()) +
+          fraction <- getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
             (1 - falseNeg(x - tE)) *
-              getIntegral(upper = tE + nPrime, lower = tE + x + DeltaT, tE = tE, params = genParams())
+            getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams())
           data.frame(
-            x = factor(x, levels = x.vals),
-            n = nPrime,
-            fraction = frac
+            x = x,
+            DeltaT = factor(DeltaT.vals),
+            release = x + DeltaT.vals,
+            fraction = fraction
           )
         }) %>% bind_rows()
 
+        fracNoTest <- data.frame(
+          release = x.vals,
+          fraction = getIntegral(upper = tE + x.vals, lower = DeltaQ, tE = tE, params = genParams())
+        )
+
+        #' Maximum preventable fraction of transmission
+        maxPreventable <- getIntegral(upper = Inf, lower = DeltaQ, tE = tE, params = genParams())
+
+        #' Fraction with reduced post-quarantine transmission
         fracTestReduced <- lapply(x.vals, function(x) {
-          nPrime <- n.vals[n.vals >= x + DeltaT]
-          frac <- getIntegral(upper = tE + x + DeltaT, lower = DeltaQ, tE = tE, params = genParams()) +
+          fraction <- getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
             (1 - falseNeg(x - tE) + r * falseNeg(x - tE)) *
-              getIntegral(upper = tE + nPrime, lower = tE + x + DeltaT, tE = tE, params = genParams())
+            getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams())
           data.frame(
-            x = factor(x, levels = x.vals),
-            n = nPrime,
-            fraction = frac
+            x = x,
+            DeltaT = factor(DeltaT.vals),
+            release = x + DeltaT.vals,
+            fraction = fraction
           )
         }) %>% bind_rows()
 
-        fracTestRelUtility <- lapply(x.vals, function(x) {
-          nPrime <- n.vals[n.vals >= x + DeltaT]
-          relUtility <- (
-            (getIntegral(upper = tE + x + DeltaT, lower = DeltaQ, tE = tE, params = genParams()) +
-              (1 - falseNeg(x - tE)) *
-                getIntegral(upper = tE + nPrime, lower = tE + x + DeltaT, tE = tE, params = genParams())) /
-              (tE + x + DeltaT - DeltaQ + s * (1 - falseNeg(x - tE)) * (nPrime - x - DeltaT))
-          ) / (
-            getIntegral(upper = tE + nCompare, lower = DeltaQ, tE = tE, params = genParams()) /
-              (tE + nCompare - DeltaQ)
-          )
+        utilityNoTest <- getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams()) / (tE + n - DeltaQ)
+
+        relUtilityNoTest <- lapply(x.vals, function(x) {
+          utility <- getIntegral(upper = x, lower = DeltaQ, tE = tE, params = genParams()) /
+            (tE + x - DeltaQ)
+          relUtility <- utility / utilityNoTest
           data.frame(
-            x = factor(x, levels = x.vals),
-            n = nPrime,
+            release = x,
+            relUtility = relUtility
+          )
+        }) %>% bind_rows()
+        
+        #' Relative utility of test-and-release strategy compared to standard
+        relUtility <- lapply(x.vals, function(x) {
+          utility <- (getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
+            (1 - falseNeg(x - tE)) *
+            getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams())) /
+            (tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x - tE)) * (n - x - DeltaT.vals))
+          relUtility <- utility / utilityNoTest
+          data.frame(
+            x = x,
+            DeltaT = factor(DeltaT.vals),
+            release = x + DeltaT.vals,
             relUtility = relUtility
           )
         }) %>% bind_rows()
 
+        #' Relative utility of test and release with reduced post-quarantine transmission
         relUtilityReduced <- lapply(x.vals, function(x) {
-          nPrime <- n.vals[n.vals >= x + 2]
-          relUtility <- (
-            (getIntegral(upper = tE + x + DeltaT, lower = DeltaQ, tE = tE, params = genParams()) +
-              (1 - falseNeg(x - tE) + r * falseNeg(x - tE)) *
-                getIntegral(upper = tE + nPrime, lower = tE + x + DeltaT, tE = tE, params = genParams())) /
-              (tE + x + DeltaT - DeltaQ + s * (1 - falseNeg(x - tE)) * (nPrime - x - DeltaT))
-          ) / (
-            getIntegral(upper = tE + nCompare, lower = DeltaQ, tE = tE, params = genParams()) /
-              (tE + nCompare - DeltaQ)
-          )
+          utility <- (getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
+            (1 - falseNeg(x - tE) + r * falseNeg(x - tE)) *
+            getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()) )/
+            (tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x - tE)) * (n - x - DeltaT.vals))
+          relUtility <- utility / utilityNoTest
           data.frame(
-            x = factor(x, levels = x.vals),
-            n = nPrime,
+            x = x,
+            DeltaT = factor(DeltaT.vals),
+            release = x + DeltaT.vals,
             relUtility = relUtility
           )
-        }) %>% bind_rows()
+        })
+        relUtilityReduced <- do.call(rbind, relUtilityReduced)
 
         return(list(
           frac = fracTest,
+          fracNoTest = fracNoTest,
+          maxPreventable = maxPreventable,
           fracReduced = fracTestReduced,
-          utility = fracTestRelUtility,
-          utilityReduced = relUtilityReduced
+          relUtilityNoTest = relUtilityNoTest,
+          relUtility = relUtility,
+          relUtilityReduced = relUtilityReduced
         ))
       })
 
       # PLOTS ----
-      output$fracTestPlot <- renderPlot({
-        ggplot(fracTest()$frac, aes(x = n, y = fraction, colour = x)) +
-          geom_line(
-            data = filter(fracNoTest()$frac, DeltaQ == fracTestPars()$DeltaQ),
-            colour = "black", linetype = "dashed", size = 1.2
-          ) +
-          geom_line(data = fracTest()$reduced, linetype = "dotted", size = 1.2) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
-          coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
-          scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-          scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
-          plotTheme +
-          theme(legend.position = "none")
+      fracTestPlotColors <- reactive({
+        labs <- paste(fracTestPars()$DeltaT.vals,
+          ifelse(fracTestPars()$DeltaT.vals == 1, "day", "days"))
+        names(labs) <- fracTestPars()$DeltaT.vals
+
+        colours <- scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
+          name = expression("test result delay " ~ (Delta[T])),
+          labels = labs,
+          guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 1))
       })
 
-      output$fracTestRelUtilityPlot <- renderPlot({
-        ggplot(fracTest()$utility, aes(x = n, y = relUtility, colour = x)) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
-          geom_line(data = fracTest()$utilityReduced, linetype = "dotted", size = 1.2) +
+      fracTestPlot <- reactive({
+
+        colours <- fracTestPlotColors()
+
+        ggplot(fracTest()$frac, aes(x = release, y = fraction, colour = DeltaT)) +
+          geom_hline(yintercept = fracTest()$maxPreventable, colour = "darkgrey", size = 1.2) +
+          geom_line(data = fracTest()$fracNoTest, color = "darkgrey", size = 1.2) +
+          geom_line(data = fracTest()$fracReduced, linetype = "dashed") +
           geom_line(size = 1.2) +
           geom_point(size = 3) +
-          coord_cartesian(xlim = c(input$quarantineDuration[1], input$quarantineDuration[2]), ylim = c(0, 4)) +
-          # scale_y_continuous(limits = c(0,1), labels = scales::percent) +
-          scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9) +
-          labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
-          plotTheme +
-          theme(legend.position = "none")
+          scale_x_continuous(limits = c(0, input$nCompare), breaks = seq(0, input$nCompare, 2)) +
+          scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
+          colours +
+          labs(x = "day of release", y = "fraction of transmission\nprevented by quarantine") +
+          plotTheme
+
+      })
+
+      output$fracTestPlotOut <- renderPlot({
+        fracTestPlot() + theme(legend.position = "None")
+      })
+
+      fracTestRelUtilityPlot <- reactive({
+        colours <- fracTestPlotColors()
+
+        ggplot(fracTest()$relUtility, aes(x = release, y = relUtility, colour = DeltaT)) + 
+          geom_vline(xintercept = fracPars()$nCompare, color = "darkgrey", size = 1.2) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
+          geom_line(data = fracTest()$relUtilityNoTest, colour = "darkgrey", size = 1.1) +
+          geom_line(data = fracTest()$relUtilityReduced, linetype = "dashed") +
+          geom_line(size = 1.2) +
+          geom_point(size = 3) +
+          scale_x_continuous(limits = c(0, input$nCompare), breaks = seq(0, input$nCompare, 2)) +
+          coord_cartesian(ylim = c(0, 4)) +
+          colours +
+          labs(x = "day of release", y = "\nrelative utility of quarantine") +
+          plotTheme + theme(legend.position = "None")
+      })
+
+      output$fracTestRelUtilityPlotOut <- renderPlot({
+        fracTestRelUtilityPlot()
       })
 
       output$fracTestLegend <- renderPlot({
-        plot <- ggplot(fracTest()$frac, aes(x = n, y = fraction, colour = x)) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
-          scale_colour_viridis_d(
-            option = "viridis", direction = -1, end = 0.9, name = "day of test",
-            guide = guide_legend(title.position = "left", nrow = 1)
-          ) +
-          plotTheme
-        grid::grid.draw(get_legend(plot))
+        grid::grid.draw(get_legend(fracTestPlot()))
       })
 
       output$testCaption <- renderUI({
         nCompare <- fracPars()$nCompare
         tE <- fracPars()$tE
         DeltaQ <- fracTestPars()$DeltaQ
-        DeltaT <- fracTestPars()$DeltaT
         s <- fracTestPars()$s
         r <- fracTestPars()$r
 
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
           "<i>(left)</i> The impact of the test-and-release quarantine strategy, in terms of what fraction of total ",
-          "onward transmission per infected traced contact is prevented by quarantine. ",
-          "The dashed line shows the standard quarantine without testing. ",
-          "<i>(right)</i> Relative utility of different test-and-release quarantine strategies compared to standard ",
-          "quarantine with <strong>n = {nCompare}</strong> days. ",
-          "We use t<sub>E</sub> = 0, which from the infectivity profile is the mean infection time of contacts ",
-          "if the index case develops symptoms at t = 0, and <strong>&Delta;<sub>Q</sub> = {DeltaQ}</strong> ",
-          "as the delay until quarantine begins. ",
-          "Individuals are tested on day x after exposure (colour) and released on day x+&Delta;<sub>T</sub> if negative ",
-          "(we assume it takes <strong>&Delta;<sub>T</sub> = {DeltaT}</strong> days to receive a test result). ",
-          "We assume an infected fraction of <strong>s = {s}</strong> and that there are no false-positive tests. ",
-          "Dotted lines assume the released individuals have a reduced transmission ",
-          "(<strong>r = {r}</strong>) due to extra hygiene and social distancing measures imposed ",
-          "by reduced quarantine",
+          "onward transmission per infected traced contact is prevented by quarantine. The thick grey lines ",
+          "represent the upper and lower bounds for the fraction of transmission that can be prevented by quarantine ",
+          "without testing. ",
+          "<i>(right)</i> The relative utility of different test-and-release quarantine durations compared to ",
+          "standard quarantine with duration <strong>n = {nCompare}</strong> days. The thick grey curve is the ",
+          "relative utility of standard quarantine without testing. In both panels we use t<sub>E</sub> = {tE}, ",
+          "which from the infectivity profile is the mean infection time of contacts if the index case develops ",
+          "symptoms at t = 0, and <strong>&Delta;<sub>Q</sub> = {DeltaQ}</strong> as the delay until quarantine ",
+          "begins. Individuals are tested on day x after exposure and released on day x + &Delta;<sub>T</sub> (x-axis) ",
+          "if negative (colour corresponds to &Delta;<sub>T</sub>). Positive testing individuals are released at ",
+          "day <strong>n = {nCompare}</strong>. We assume that the fraction of individuals in quarantine that are ",
+          "infected is <strong>s = {s}</strong>, and that there are no false-positive test results. Dashed lines in ",
+          "both panels assume the released individuals have a reduced transmission (<strong>r = {r}</strong>) due ",
+          "to reinforced hygiene and social distancing measures.",
           "</span>"
         ))
       })
@@ -628,7 +663,8 @@ quarantineDurationServer <- function(id) {
       })
 
       output$travellerFracNoTestLegend <- renderPlot({
-        labs <- paste(levels(travellerFracNoTest()$frac$y), ifelse(levels(travellerFracNoTest()$frac$y) == 1, "day", "days"))
+        labs <- paste(levels(travellerFracNoTest()$frac$y),
+          ifelse(levels(travellerFracNoTest()$frac$y) == 1, "day", "days"))
         names(labs) <- levels(travellerFracNoTest()$frac$y)
 
         plot <- ggplot(travellerFracNoTest()$frac, aes(x = n, y = fraction, colour = y)) +
@@ -644,10 +680,11 @@ quarantineDurationServer <- function(id) {
 
       output$travellerNoTestCaption <- renderUI({
         nCompare <- travellerFracPars()$nCompare
+        normalisation <- if_else(input$normalisation, "local", "global")
 
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
-          "<i>(left)</i> The fraction of onward transmission per quarantined ",
+          "<i>(left)</i> The fraction of <strong>{normalisation}</strong> onward transmission per quarantined ",
           "traveller that is prevented by quarantine. ",
           "<i>(right)</i> The relative utility of different quarantine strategies (x-axis) ",
           "compared to <strong>n = {nCompare}</strong> days. ",
@@ -662,10 +699,10 @@ quarantineDurationServer <- function(id) {
         travellerTestPars <- list(
           y = as.integer(input$yFocus),
           tE.vals = seq(-as.integer(input$yFocus), 0),
-          DeltaT = input$testDurationSC2,
+          DeltaT.vals = seq(input$testResultDelaySC2[1], input$testResultDelaySC2[2]),
           s = input$testSpecificitySC2,
           r = input$transmissionReductionSC2,
-          x.vals = seq(input$testDaySC2[1], input$testDaySC2[2])
+          x.vals = seq(0, input$nCompareSC2)
         )
       })
 
@@ -681,225 +718,201 @@ quarantineDurationServer <- function(id) {
         tE.vals <- travellerTestPars()$tE.vals
         s <- travellerTestPars()$s
         r <- travellerTestPars()$r
-        nCompare <- travellerFracPars()$nCompare
-        n.vals <- travellerFracPars()$n.vals
+        n <- travellerFracPars()$nCompare
         x.vals <- travellerTestPars()$x.vals
-        DeltaT <- travellerTestPars()$DeltaT
+        DeltaT.vals <- travellerTestPars()$DeltaT.vals
         normalisation <- travellerFracPars()$normalisation
 
+        #' Maximum preventable fractions
+        maxPreventable <- getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())
         if (normalisation) {
-          fracTest <- lapply(x.vals, function(x) {
-            frac <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              frac <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                (1 - falseNeg(x - tE.vals)) *
-                  getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                fraction = frac
-              )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
+          maxPreventablePlot <- 1
         } else {
-          fracTest <- lapply(x.vals, function(x) {
-            frac <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              frac <- mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                (1 - falseNeg(x - tE.vals)) *
-                  getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                fraction = frac
-              )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
-        }
-        #' Fraction prevented by test and release strategy with reduced post-quarantine transmission
-        if (normalisation) {
-          fracTestReduced <- lapply(x.vals, function(x) {
-            fracReduced <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              frac <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-                  getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams()))
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                fraction = frac
-              )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
-        } else {
-          fracTestReduced <- lapply(x.vals, function(x) {
-            fracReduced <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              frac <- mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-                  getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams()))
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                fraction = frac
-              )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
+          maxPreventablePlot <- mean(maxPreventable)
+          maxPreventable <- 1
         }
 
-        if (normalisation) {
+        #' Fraction of infection prevented using normal strategy
+        fracNoTest <- data.frame(
+          release = x.vals,
+          fraction  = sapply(x.vals,
+            function(n) mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
+              maxPreventable))
+        )
+
+        #' Fraction prevented by test-and-release strategy
+        fracTest <- lapply(x.vals, function(x) {
+          fracTest <- lapply(DeltaT.vals, function(DeltaT) {
+            fraction <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+              (1 - falseNeg(x - tE.vals)) *
+              getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / maxPreventable)
+            data.frame(
+              x = x,
+              DeltaT = factor(DeltaT, levels = DeltaT.vals),
+              release = x + DeltaT,
+              fraction = fraction
+            )
+          }) %>% bind_rows()
+        }) %>% bind_rows()
+        
+        #' Fraction prevented by test and release strategy with reduced post-quarantine transmission
+        fracReduced <- lapply(x.vals, function(x) {
+          fracReduced <- lapply(DeltaT.vals, function(DeltaT) {
+            fraction <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+            (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+            getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / maxPreventable)
+            data.frame(
+              x = x,
+              DeltaT = factor(DeltaT, levels = DeltaT.vals),
+              release = x + DeltaT,
+              fraction = fraction
+            )
+          }) %>% bind_rows()
+        }) %>% bind_rows()
+
+        #' Utility without testing
+
+        utilityNoTest <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
+          maxPreventable) / n
+
+        relUtilityNoTest <- lapply(x.vals, function(x) {
+          utility <- mean(getIntegral(upper = x, lower = 0, tE = tE.vals, params = genParams()) / maxPreventable) / x
+          relUtility <- utility / utilityNoTest
+          data.frame(
+            release = x,
+            relUtility = relUtility
+          )
+        }) %>% bind_rows()
+
           relUtility <- lapply(x.vals, function(x) {
-            relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              relUtility <- (
-                mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                  (1 - falseNeg(x - tE.vals)) *
-                    getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                  getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) /
-                  mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
-              ) / (
-                mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()) /
-                  getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) / nCompare
-              )
+            relUtility <- lapply(DeltaT.vals, function(DeltaT) {
+              utility <- mean( (getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                (1 - falseNeg(x - tE.vals)) *
+                getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / maxPreventable) /
+                mean(x + DeltaT + s*(1 - falseNeg(x - tE.vals)) * (n - x - DeltaT) )
+              relUtility <- utility / utilityNoTest
               data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
+                x = x,
+                DeltaT = factor(DeltaT, levels = DeltaT.vals),
+                release = x + DeltaT,
                 relUtility = relUtility
               )
             }) %>% bind_rows()
           }) %>% bind_rows()
-        } else {
-          relUtility <- lapply(x.vals, function(x) {
-            relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              relUtility <- (
-                mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                  (1 - falseNeg(x - tE.vals)) *
-                    getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                  mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
-              ) / (
-                mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())) / nCompare
-              )
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                relUtility = relUtility
-              )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
-        }
+
 
         #' Relative utility with reduced post-quarantine transmission
-        if (normalisation) {
           relUtilityReduced <- lapply(x.vals, function(x) {
-            relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              relUtility <- (
-                mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                  (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-                    getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                  getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) /
-                  mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
-              ) / (
-                mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()) /
-                  getIntegral(upper = Inf, lower = 0, tE = tE.vals, params = genParams())) / nCompare
-              )
+            relUtility <- lapply(DeltaT.vals, function(DeltaT) {
+              utility <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+                getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / maxPreventable) /
+                mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
+              relUtility <- utility / utilityNoTest
               data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
+                x = x,
+                DeltaT = factor(DeltaT, levels = DeltaT.vals),
+                release = x + DeltaT,
                 relUtility = relUtility
               )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
-        } else {
-          relUtilityReduced <- lapply(x.vals, function(x) {
-            relUtility <- lapply(n.vals[n.vals >= x + DeltaT], function(n) {
-              relUtility <- (
-                mean(getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-                  (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-                    getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
-                  mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
-              ) / (
-                mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams())) / nCompare
-              )
-              data.frame(
-                x = factor(x, levels = x.vals),
-                n = n,
-                relUtility = relUtility
-              )
-            }) %>% bind_rows()
-          }) %>% bind_rows()
-        }
+            })
+            relUtility <- do.call(rbind, relUtility)
+          })
+          relUtilityReduced <- do.call(rbind, relUtilityReduced)
+
+
         return(list(
           frac = fracTest,
-          fracReduced = fracTestReduced,
-          utility = relUtility,
-          utilityReduced = relUtilityReduced
+          fracNoTest = fracNoTest,
+          fracReduced = fracReduced,
+          maxPreventable = mean(maxPreventable),
+          maxPreventablePlot = maxPreventablePlot,
+          relUtility = relUtility,
+          relUtilityNoTest = relUtilityNoTest,
+          relUtilityReduced = relUtilityReduced
         ))
       })
 
       # PLOTS ----
-      output$travellerFracTestPlot <- renderPlot({
-        ggplot(travellerFracTest()$frac, aes(x = n, y = fraction, colour = x)) +
-          geom_line(
-            data = filter(travellerFracNoTest()$frac, y == input$yFocus),
-            colour = "black", linetype = "dashed", size = 1.2
-          ) +
-          geom_line(data = travellerFracTest()$fracReduced, linetype = "dotted", size = 1.2) +
+      travellerFracTestPlotColors <- reactive({
+        labs <- paste(travellerTestPars()$DeltaT.vals,
+          ifelse(travellerTestPars()$DeltaT.vals == 1, "day", "days"))
+        names(labs) <- travellerTestPars()$DeltaT.vals
+
+        colours <- scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
+          name = expression("test result delay " ~ (Delta[T])),
+          labels = labs,
+          guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 1))
+      })
+
+      travellerFracTestPlot <- reactive({
+
+        colours <- travellerFracTestPlotColors()
+
+        fracPlot <- ggplot(travellerFracTest()$frac, aes(x = release, y = fraction, colour = DeltaT)) +
+          geom_hline(yintercept = travellerFracTest()$maxPreventablePlot, colour = "darkgrey", size = 1.2) +
+          geom_line(data = travellerFracTest()$fracNoTest, colour = "darkgrey", size = 1.2) +
+          geom_line(data = travellerFracTest()$fracReduced, linetype = "dashed") +
           geom_line(size = 1.2) +
           geom_point(size = 3) +
-          scale_x_continuous(limits = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2])) +
+          scale_x_continuous(limits = c(0, input$nCompareSC2), breaks = seq(0, input$nCompareSC2, 2)) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-          scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
-          plotTheme +
+          colours +
+          labs(x = "day of release", y = "fraction of local transmission\nprevented by quarantine") +
+          plotTheme
+      })
+
+      output$travellerFracTestPlotOut <- renderPlot({
+        travellerFracTestPlot() +
           theme(legend.position = "none")
       })
 
       output$travellerFracTestRelUtilityPlot <- renderPlot({
-        ggplot(travellerFracTest()$utility, aes(x = n, y = relUtility, colour = x)) +
+
+        colours <- travellerFracTestPlotColors()
+
+        ggplot(travellerFracTest()$relUtility, aes(x = release, y = relUtility, colour = DeltaT)) + 
           geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = travellerFracPars()$nCompare, color = "darkgrey", size = 1.2) +
-          geom_line(data = travellerFracTest()$utilityReduced, linetype = "dotted", size = 1.2) +
+          geom_vline(xintercept = input$nCompareSC2, color = "darkgrey", size = 1.2) +
+          geom_line(data = travellerFracTest()$relUtilityNoTest, colour = "darkgrey", size = 1.2) +
+          geom_line(data = travellerFracTest()$relUtilityReduced, linetype = "dashed") +
           geom_line(size = 1.2) +
           geom_point(size = 3) +
-          coord_cartesian(xlim = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2]), ylim = c(0, 4)) +
-          scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9) +
-          labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
-          plotTheme +
-          theme(legend.position = "none")
+          scale_x_continuous(limits = c(0, input$nCompareSC2), breaks = seq(0, input$nCompareSC2, 2)) +
+          coord_cartesian(ylim = c(0, 4)) +
+          colours +
+          labs(x = "day of release", y = "\nrelative utility of quarantine") +
+          plotTheme + theme(legend.position = "None")
+
       })
 
       output$travellerFracTestLegend <- renderPlot({
-        plot <- ggplot(travellerFracTest()$frac, aes(x = n, y = fraction, colour = x)) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
-          scale_colour_viridis_d(
-            option = "viridis", direction = -1, end = 0.9, name = "day of test",
-            guide = guide_legend(title.position = "left", nrow = 1)
-          ) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
-          plotTheme
-        grid::grid.draw(get_legend(plot))
+        grid::grid.draw(get_legend(travellerFracTestPlot()))
       })
 
       output$travellerTestCaption <- renderUI({
         nCompare <- travellerFracPars()$nCompare
-        DeltaT <- travellerTestPars()$DeltaT
         s <- travellerTestPars()$s
         r <- travellerTestPars()$r
         y <- travellerTestPars()$y
+        normalisation <- if_else(input$normalisation, "local", "global")
 
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
           "<i>(left)</i> The impact of test-and-release for quarantined travellers, in terms of what fraction of ",
-          "onward transmission per quarantined infected traveller is prevented by quarantine. ",
-          "The dashed line shows the result of standard quarantine without testing. ",
+          "<strong>{normalisation}</strong> onward transmission per quarantined infected traveller is prevented by quarantine. ",
+          "The thick grey lines represent the upper and lower bounds for the fraction of transmission that can be ",
+          "prevented by quarantine without testing. ",
           "<i>(right)</i> The relative utility of different test-and-release quarantine durations compared to ",
-          "standard quarantine with duration <strong>n = {nCompare}</strong> days. ",
-          "We consider a travel duration of <strong>y = {y}</strong> days and we assume infection can occur on any ",
-          "day -y &le; t<sub>E</sub> &le; 0 with uniform probability. Individuals are tested on day x (colour) ",
-          "after returning on day 0 and released on day x + &Delta; if negative ",
-          "(we assume it takes <strong>&Delta;<sub>T</sub> = {DeltaT}</strong> days to receive a test result). ",
-          "We assume am infected fraction of <strong>s = {s}</strong> and that there are no false-positive test results. ",
-          "Dotted lines in both panels assume the released travellers have ",
-          "a reduced transmission (<strong>r = {r}</strong>) due to extra hygiene and social distancing ",
-          "measures imposed by reduced quarantine.",
+          "standard quarantine with duration <strong>n = {nCompare}</strong> days. The thick grey curve is the ",
+          "relative utility of standard quarantine without testing. In both panels we consider a travel duration ",
+          "of <strong>y = {y}</strong> days and we assume infection can occur on any day -y &le; t<sub>E</sub> &le; 0 ",
+          "with uniform probability. Individuals are tested on day x (colour) after returning on day 0 and released ",
+          "on day x + &Delta; (x-axis) if negative (colour corresponds to &Delta;<sub>T</sub>). We assume that the ",
+          "fraction of individuals in quarantine that are infected is <strong>s = {s}</strong>, and that there are no ",
+          "false-positive test results. Dotted lines in both panels assume the released travellers have a reduced ",
+          "transmission (<strong>r = {r}</strong>) due to extra hygiene and social distancing measures imposed by ",
+          "reduced quarantine.",
           "</span>"
         ))
       })
@@ -1020,12 +1033,14 @@ quarantineDurationServer <- function(id) {
         nCompare <- travellerFracPars()$nCompare
         y <- travellerTestPars()$y
         meanInc <- round(incParams()$mean, 0)
+        normalisation <- if_else(input$normalisation, "local", "global")
 
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
           "<i>(left)</i> The change in adherence needed to maintain quarantine efficacy of the ",
           "<strong>n = {nCompare}</strong> day strategy if we change the quarantine duration to n' days (x-axis). ",
-          "<i>(right)</i> The impact of symptomatic cases on the fraction of total onward transmission per quarantined ",
+          "<i>(right)</i> The impact of symptomatic cases on the fraction of <strong>{normalisation}</strong> onward ",
+          "transmission per quarantined ",
           "traveller that is prevented by quarantine. We fix the travel duration to <strong>y = {y}</strong> days ",
           "and assume t<sub>E</sub> is uniformly distributed between -y and 0. We use the mean incubation time of ",
           "<strong>{meanInc}</strong> days, such that <strong>t<sub>S</sub> = t<sub>E</sub> + {meanInc}</strong>.",
