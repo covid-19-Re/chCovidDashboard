@@ -108,11 +108,11 @@ quarantineDurationUI <- function(id) {
                   heading = "Standard n-day quarantine", id = "plotsSC1-1",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("fracNoTestPlot"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("fracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner())
+                    column(6, plotOutput(ns("sc1"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc1_utility"), height = "450px") %>% withSpinner())
                   ),
-                  plotOutput(ns("fracNoTestLegend"), height = "75px"),
-                  uiOutput(ns("noTestCaption"))
+                  plotOutput(ns("sc1_legend"), height = "75px"),
+                  uiOutput(ns("sc1_caption"))
                 )
               )
             ),
@@ -176,11 +176,11 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release", id = "plotsSC1-2",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("fracTestPlotOut"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("fracTestRelUtilityPlotOut"), height = "450px") %>% withSpinner())
+                    column(6, plotOutput(ns("sc1_test"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc1_test_utility"), height = "450px") %>% withSpinner())
                   ),
-                  plotOutput(ns("fracTestLegend"), height = "75px"),
-                  uiOutput(ns("testCaption"))
+                  plotOutput(ns("sc1_test_legend"), height = "75px"),
+                  uiOutput(ns("sc1_test_caption"))
                 )
               )
             ),
@@ -206,10 +206,10 @@ quarantineDurationUI <- function(id) {
                   heading = "Adherence and symptoms", id = "plotsSC1-3",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("relAdherencePlot"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("fracAdherencePlot"), height = "450px") %>% withSpinner())
+                    column(6, plotOutput(ns("sc1_adherence"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc1_asymptomatic"), height = "450px") %>% withSpinner())
                   ),
-                  uiOutput(ns("adherenceCaption"))
+                  uiOutput(ns("sc1_adherence_caption"))
                 )
               )
             )
@@ -260,11 +260,11 @@ quarantineDurationUI <- function(id) {
                   heading = "Standard n-day quarantine", id = "plotsSC2-4",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("travellerFracNoTestPlot"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("travellerFracNoTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc2"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc2_utility"), height = "450px") %>% withSpinner()),
                   ),
-                  plotOutput(ns("travellerFracNoTestLegend"), height = "75px"),
-                  uiOutput(ns("travellerNoTestCaption"))
+                  plotOutput(ns("sc2_legend"), height = "75px"),
+                  uiOutput(ns("sc2_caption"))
                 )
               )
             ),
@@ -328,11 +328,11 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release", id = "plotsSC2-5",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("travellerFracTestPlotOut"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("travellerFracTestRelUtilityPlot"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc2_test"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc2_test_utility"), height = "450px") %>% withSpinner()),
                   ),
-                  plotOutput(ns("travellerFracTestLegend"), height = "75px"),
-                  uiOutput(ns("travellerTestCaption"))
+                  plotOutput(ns("sc2_test_legend"), height = "75px"),
+                  uiOutput(ns("sc2_test_caption"))
                 )
               )
             ),
@@ -358,10 +358,10 @@ quarantineDurationUI <- function(id) {
                   heading = "Adherence and symptoms", id = "plotsSC2-6",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("travellerFracAdherencePlot"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("travellerAsymptomaticPlot"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc2_adherence"), height = "450px") %>% withSpinner()),
+                    column(6, plotOutput(ns("sc2_asymptomatic"), height = "450px") %>% withSpinner()),
                   ),
-                  uiOutput(ns("travellerAdherenceCaption"))
+                  uiOutput(ns("sc2_adherence_caption"))
                 )
               )
             )
