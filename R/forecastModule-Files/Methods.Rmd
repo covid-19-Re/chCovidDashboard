@@ -1,0 +1,33 @@
+---
+# bibliography: references.bib
+output: 
+    html_document
+---
+
+
+## Description of the data
+We extract live time series data describing the COVID-19 outbreak in Switzerland from the following data sources:
+* [Swiss Federal Office of Public Health] (https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/situation-schweiz-und-international.html#-1199962081) (FOPH) situation reports
+    + Extracted data: daily new reported cases, new hospitalizations, new fatalities
+* [corona-data.ch](www.corona-data.ch) interactive dashboard displaying COVID-19 information for Switzerland. The data available here is aggregated from the data individually released by the Swiss cantons available on the platform of the Specialist Unit for Open Government Data Canton of Zurich, [OpenZH](https://github.com/openZH/covid_19) 
+    + Extracted data: daily new reported cases, current hospitalizations, new fatalities
+
+To reduce the noise levels and correct for data reporting or processing delays, before performing downstream analysis or fitting time series models, we applied a 7-day-window smoothing operation on all the time series. On the Monitoring and Forecasting panel, the user has the possibility to visualize the data in either mode: raw or smoothed numbers, respectively. 
+
+## Time series model
+An autoregressive integrated moving average (ARIMA) model [(1)] [references] was fitted to each smoothed time series. The fitted model was then used to make real-time forecasts of the evolution of the time series over the next 7 days. An ARIMA model is formally defined by three order variables $(p,d,q)$, where $p$ is the autoregressive order and $q$ is the moving average order. The differencing order $d$ represents the number of times the time series needs to be differenced in order to be stationary (mean, variance and covariance are constant). After differencing of order $d$, each differenced observed data point at time $t$ (denoted by $X_t^{d}$) was regressed on $p$ previously observed data points with an error depending on the errors at $q$ previous steps:
+$$X_t^{(d)} = \sum_{i=1}^{p}a_iX_{t-i}^{(d)} + e_t + \sum_{j=1}^{q}b_je_{t-j}$$
+with $e_t$ being the error at time $t$. For given values of $p$ and $q$, the coefficients $a_i$ and $b_j$ were inferred by maximizing the likelihood of the regression model assuming normally-distributed error terms.
+
+For each time series, ARIMA models were fitted for all the combinations of $p$ and $q$ ranging from 1 to 7 and the model with the best Akaike information criterion (AIC) was chosen. The tools available in the package *forecast* in R [(2)] [references] were used for implementing the model fitting and forecast.
+
+
+## References
+(1) Asteriou, Dimitros, and Stephen G. Hall. 2011. "ARIMA Models and the Box–Jenkins Methodology." Applied Econometrics 2 (2). Palgrave MacMillan Hampshire: 265–86.
+
+(2) Hyndman, Rob J. and Yeasmin Khandakar. 2008, "Automatic   time   series forecasting: The   forecast   package   for   R". Journal of Statistical Software, 26(3). 
+
+
+
+
+

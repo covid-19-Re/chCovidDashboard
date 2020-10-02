@@ -13,7 +13,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(
             heading = HTML(
               "<h1>Quantifying the impact of quarantine duration on COVID-19 transmission</h1><br>",
-              "<i>Peter Ashcroft, Sonja Lehtinen, Daniel Angst and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i>"
+              "Peter Ashcroft<sup>1</sup>, Sonja Lehtinen<sup>1</sup>, Daniel Angst<sup>1</sup>, Nicola Low<sup>2</sup> and Sebastian Bonhoeffer<sup>1</sup><br>",
+              "<i class='small'><sup>1</sup>Institute of Integrative Biology, ETH Zurich, Switzerland, <sup>2</sup>Institute of Social and Preventive Medicine, University of Bern, Bern, Switzerland</i>"
             ),
             class = "panel-primary",
             includeMarkdown("R/quarantineModuleFiles/abstract.md")
@@ -27,7 +28,7 @@ quarantineDurationUI <- function(id) {
             heading = "Empirical distributions", class = "panel-info", id = "parsDistr",
             fluidRow(
               column(4,
-                plotOutput(ns("genTimePlot"), height = "200px") %>% withSpinner(),
+                plotOutput(ns("genTimePlot"), height = "300px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("genShape"), "shape", step = 0.001, value = 3.2862)
@@ -39,7 +40,7 @@ quarantineDurationUI <- function(id) {
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516", doi = "10.1101/2020.09.04.20188516")
               ),
               column(4,
-                plotOutput(ns("infProfPlot"), height = "200px") %>% withSpinner(),
+                plotOutput(ns("infProfPlot"), height = "300px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("infShift"), "shift", step = 0.001, value = -0.0747)
@@ -54,7 +55,7 @@ quarantineDurationUI <- function(id) {
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516", doi = "10.1101/2020.09.04.20188516")
               ),
               column(4,
-                plotOutput(ns("incDistPlot"), height = "200px") %>% withSpinner(),
+                plotOutput(ns("incDistPlot"), height = "300px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("incMeanLog"), "log(mean)", step = 0.001, value = 1.42)

@@ -12,3 +12,5 @@ Covid-19 Dashboard for Switzerland. A collection of exploratory data bites.
 - Christian L. Althaus, Institute of Social and Preventive Medicine, Universität Bern
 - Sebastian Bonhoeffer, Theoretical Biology, D-USYS, ETH Zürich
 - Tanja Stadler, Computational Evolution, D-BSSE, ETH Zürich
+- Monica Golumbeanu, Swiss Tropical and Public Health Institute and University of Basel
+- Melissa Penny, Swiss Tropical and Public Health Institute and University of Basel

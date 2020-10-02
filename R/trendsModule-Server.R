@@ -46,7 +46,6 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
     eventSelect == "deaths" ~ "Deaths",
   )
 
-
   # subtitle <- glue::glue_data(doublingTimesData,
   #   "{round(estimate, 1)} d (95% CI: {round(lower,1)} to {round(upper,1)}d)")
   subtitle <- glue::glue_data(

@@ -78,11 +78,11 @@ $('*[data-value="sc2"]').on('shown.bs.tab', function() {
     to: '#parsSC2-4',
     'class': 'parsPlotConnection'  
   });
-  $('#plots5').connections({
+  $('#plotsSC2-5').connections({
     to: '#parsSC2-5',
     'class': 'parsPlotConnection'  
   });
-  $('#plots6').connections({
+  $('#plotsSC2-6').connections({
     to: '#parsSC2-6',
     'class': 'parsPlotConnection'  
   });
