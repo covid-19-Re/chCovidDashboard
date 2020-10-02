@@ -9,6 +9,16 @@ getIntegral <- function(upper, lower, tE, params) {
     getGenDist(times = lower - tE, params = params, CDF = T)
 }
 
+getUtility <- function(s = 1, efficacy, time) {
+  s * efficacy / time
+}
+
+dayLabels <- function(x) {
+  labs <- paste(x, ifelse(x == 1, "day", "days"))
+  names(labs) <- x
+  return(labs)
+}
+
 quarantineDurationServer <- function(id) {
   moduleServer(
     id,
@@ -132,31 +142,29 @@ quarantineDurationServer <- function(id) {
 
       sc1_data <- reactive({
         tE <- sc1_pars()$tE
-        n <- sc1_pars()$n
+        nCompare <- sc1_pars()$n
         DeltaQ.vals <- sc1_pars()$DeltaQ.vals
         n.vals <- sc1_pars()$n.vals
 
         frac <- lapply(DeltaQ.vals, function(DeltaQ) {
           n <- n.vals[n.vals > DeltaQ]
-          frac <- getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams())
           data.frame(
             DeltaQ = factor(DeltaQ, levels = DeltaQ),
             n = n,
-            fraction = frac
+            fraction = getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams())
           )
         }) %>% bind_rows()
 
         rel_utility <- lapply(DeltaQ.vals, function(DeltaQ) {
           nPrime <- n.vals[n.vals > DeltaQ]
-          relUtility <-
-            (getIntegral(upper = tE + nPrime, lower = DeltaQ, tE = tE, params = genParams()) /
-              (tE + nPrime - DeltaQ)) /
-              (getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams()) /
-                (tE + n - DeltaQ))
+          utility.nPrime <- getUtility(efficacy = getIntegral(upper = tE + nPrime, lower = DeltaQ, tE = tE, params = genParams()),
+                                       time = tE + nPrime - DeltaQ)
+          utility.nCompare <- getUtility(efficacy = getIntegral(upper = tE + nCompare, lower = DeltaQ, tE = tE, params = genParams()),
+                     time = tE + nCompare - DeltaQ)
           data.frame(
             DeltaQ = factor(DeltaQ, levels = DeltaQ),
             n = nPrime,
-            relUtility = relUtility
+            relUtility = utility.nPrime / utility.nCompare
           )
         }) %>% bind_rows()
 
@@ -165,17 +173,15 @@ quarantineDurationServer <- function(id) {
 
       # PLOTS ----
       sc1 <- reactive({
-        labs <- paste(levels(sc1_data()$frac$DeltaQ), ifelse(levels(sc1_data()$frac$DeltaQ) == 1, "day", "days"))
-        names(labs) <- levels(sc1_data()$frac$DeltaQ)
-
         ggplot(sc1_data()$frac, aes(x = n, y = fraction, colour = DeltaQ)) +
           geom_line(size = 1.2) +
           geom_point(size = 3) +
           scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           scale_colour_viridis_d(
-            option = "inferno", end = 0.9, name = "delay to quarantine",
-            labels = labs, guide = guide_legend(title.position = "left", nrow = 1)
+            option = "inferno", end = 0.9, name = expression("delay to quarantine" ~ (Delta[Q])),
+            labels = dayLabels(levels(sc1_data()$frac$DeltaQ)),
+            guide = guide_legend(title.position = "left", nrow = 1)
           ) +
           labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
           plotTheme
@@ -254,24 +260,25 @@ quarantineDurationServer <- function(id) {
         tE <- sc1_pars()$tE
         s <- sc1_test_pars()$s
         r <- sc1_test_pars()$r
-        n.vals <- sc1_pars()$n.vals
         x.vals <- sc1_test_pars()$x.vals
         n <- sc1_pars()$n
 
         #' Fraction based on test and release
         frac <- lapply(x.vals, function(x) {
           fraction <- getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
-            (1 - falseNeg(x - tE)) *
+            (1 - falseNeg(x)) *
             getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams())
           data.frame(
-            x = x,
             DeltaT = factor(DeltaT.vals),
+            x = x,
             release = x + DeltaT.vals,
             fraction = fraction
           )
         }) %>% bind_rows()
 
         frac_no_test <- data.frame(
+          DeltaT = NA,
+          x = NA,
           release = x.vals,
           fraction = getIntegral(upper = tE + x.vals, lower = DeltaQ, tE = tE, params = genParams())
         )
@@ -282,56 +289,59 @@ quarantineDurationServer <- function(id) {
         #' Fraction with reduced post-quarantine transmission
         frac_reduced <- lapply(x.vals, function(x) {
           fraction <- getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
-            (1 - falseNeg(x - tE) + r * falseNeg(x - tE)) *
+            (1 - falseNeg(x) + r * falseNeg(x)) *
             getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams())
           data.frame(
-            x = x,
             DeltaT = factor(DeltaT.vals),
+            x = x,
             release = x + DeltaT.vals,
             fraction = fraction
           )
         }) %>% bind_rows()
 
-        utility_no_test <- getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams()) /
-          (tE + n - DeltaQ)
+        utility_no_test <- getUtility(s = s,
+                                      efficacy = getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams()),
+                                      time = tE + n - DeltaQ)
 
         rel_utility_no_test <- lapply(x.vals, function(x) {
-          utility <- getIntegral(upper = x, lower = DeltaQ, tE = tE, params = genParams()) /
-            (tE + x - DeltaQ)
-          relUtility <- utility / utility_no_test
+          utility <- getUtility(s = s,
+                                efficacy = getIntegral(upper = tE + x, lower = DeltaQ, tE = tE, params = genParams()),
+                                time = tE + x - DeltaQ)
           data.frame(
+            DeltaT = NA,
+            x = NA,
             release = x,
-            relUtility = relUtility
+            relUtility = utility / utility_no_test
           )
         }) %>% bind_rows()
 
         #' Relative utility of test-and-release strategy compared to standard
         rel_utility <- lapply(x.vals, function(x) {
-          utility <- (getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
-            (1 - falseNeg(x - tE)) *
-            getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams())) /
-            (tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x - tE)) * (n - x - DeltaT.vals))
-          relUtility <- utility / utility_no_test
+          utility <- getUtility(s = s,
+                                efficacy = getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
+                                  (1 - falseNeg(x)) *
+                                  getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()),
+                                time = tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x)) * (n - x - DeltaT.vals))
           data.frame(
-            x = x,
             DeltaT = factor(DeltaT.vals),
+            x = x,
             release = x + DeltaT.vals,
-            relUtility = relUtility
+            relUtility = utility / utility_no_test
           )
         }) %>% bind_rows()
 
         #' Relative utility of test and release with reduced post-quarantine transmission
         rel_utility_reduced <- lapply(x.vals, function(x) {
-          utility <- (getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
-            (1 - falseNeg(x - tE) + r * falseNeg(x - tE)) *
-            getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()) )/
-            (tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x - tE)) * (n - x - DeltaT.vals))
-          relUtility <- utility / utility_no_test
+          utility <- getUtility(s = s,
+                                efficacy = getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
+                                  (1 - falseNeg(x) + r * falseNeg(x)) *
+                                  getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()),
+                                time = tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x)) * (n - x - DeltaT.vals))
           data.frame(
-            x = x,
             DeltaT = factor(DeltaT.vals),
+            x = x,
             release = x + DeltaT.vals,
-            relUtility = relUtility
+            relUtility = utility / utility_no_test
           )
         }) %>% bind_rows()
 
@@ -347,20 +357,14 @@ quarantineDurationServer <- function(id) {
       })
 
       # PLOTS ----
-      sc1_test_colors <- reactive({
-        labs <- paste(sc1_test_pars()$DeltaT.vals,
-          ifelse(sc1_test_pars()$DeltaT.vals == 1, "day", "days"))
-        names(labs) <- sc1_test_pars()$DeltaT.vals
-
-        colours <- scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
-          name = expression("test result delay " ~ (Delta[T])),
-          labels = labs,
-          guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 1))
+      sc1_test_colours <- reactive({
+        scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
+                               name = expression("test result delay " ~ (Delta[T])),
+                               labels = dayLabels(sc1_test_pars()$DeltaT.vals),
+                               guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 1))
       })
 
       sc1_test <- reactive({
-        colours <- sc1_test_colors()
-
         ggplot(sc1_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT)) +
           geom_hline(yintercept = sc1_test_data()$max_preventable, colour = "darkgrey", size = 1.2) +
           geom_line(data = sc1_test_data()$frac_no_test, color = "darkgrey", size = 1.2) +
@@ -369,7 +373,7 @@ quarantineDurationServer <- function(id) {
           geom_point(size = 3) +
           scale_x_continuous(limits = c(0, sc1_pars()$n), breaks = seq(0, sc1_pars()$n, 2)) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-          colours +
+          sc1_test_colours() +
           labs(x = "day of release", y = "fraction of transmission\nprevented by quarantine") +
           plotTheme
       })
@@ -383,9 +387,7 @@ quarantineDurationServer <- function(id) {
       })
 
       output$sc1_test_utility <- renderPlot({
-        colours <- sc1_test_colors()
-
-        ggplot(sc1_test_data()$rel_utility, aes(x = release, y = relUtility, colour = DeltaT)) + 
+        ggplot(sc1_test_data()$rel_utility, aes(x = release, y = relUtility, colour = DeltaT)) +
           geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = 1.2) +
           geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
           geom_line(data = sc1_test_data()$rel_utility_no_test, colour = "darkgrey", size = 1.1) +
@@ -394,7 +396,7 @@ quarantineDurationServer <- function(id) {
           geom_point(size = 3) +
           scale_x_continuous(limits = c(0, sc1_pars()$n), breaks = seq(0, sc1_pars()$n, 2)) +
           coord_cartesian(ylim = c(0, 4)) +
-          colours +
+          sc1_test_colours() +
           labs(x = "day of release", y = "\nrelative utility of quarantine") +
           plotTheme + theme(legend.position = "None")
       })
@@ -476,12 +478,6 @@ quarantineDurationServer <- function(id) {
 
       # PLOTS ----
       output$sc1_adherence <- renderPlot({
-        labs <- paste(
-          levels(sc1_adherence_data()$rel_adherence$DeltaQ),
-          ifelse(levels(sc1_adherence_data()$rel_adherence$DeltaQ) == 1, "day", "days")
-        )
-        names(labs) <- levels(sc1_adherence_data()$rel_adherence$DeltaQ)
-
         ggplot(sc1_adherence_data()$rel_adherence, aes(x = n, y = relAdherence, colour = DeltaQ)) +
           geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
           geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = 1.2) +
@@ -491,7 +487,8 @@ quarantineDurationServer <- function(id) {
           coord_cartesian(ylim = c(0, 4)) +
           scale_colour_viridis_d(
             option = "inferno", end = 0.9, name = "delay to\nquarantine",
-            labels = labs, guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
+            labels = dayLabels(sc1_adherence_data()$rel_adherence$DeltaQ),
+            guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
           ) +
           labs(
             x = "quarantine duration (days)",
@@ -573,7 +570,7 @@ quarantineDurationServer <- function(id) {
           tE.vals <- seq(-y, 0)
           frac <- lapply(n.vals, function(n) {
             frac <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
-            norm_fn(tE.vals, normalisation))
+                           norm_fn(tE.vals, normalisation))
             data.frame(
               y = factor(y, levels = y.vals),
               n = n,
@@ -584,15 +581,17 @@ quarantineDurationServer <- function(id) {
 
         rel_utility <- lapply(y.vals, function(y) {
           tE.vals <- seq(-y, 0)
+          utility.nCompare <- getUtility(efficacy = mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()) /
+                                                           norm_fn(tE.vals, normalisation)),
+                                         time = nCompare)
           relUtility <- lapply(n.vals[n.vals > 0], function(n) {
-            relUtility <- (mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
-              norm_fn(tE.vals, normalisation)) / n) /
-              (mean(getIntegral(upper = nCompare, lower = 0, tE = tE.vals, params = genParams()) /
-                norm_fn(tE.vals, normalisation)) / nCompare)
+            utility <- getUtility(efficacy = mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
+                                                    norm_fn(tE.vals, normalisation)),
+                                  time = n)
             data.frame(
               y = factor(y, levels = y.vals),
               n = n,
-              relUtility = relUtility
+              relUtility = utility / utility.nCompare
             )
           }) %>% bind_rows()
         }) %>% bind_rows()
@@ -602,10 +601,6 @@ quarantineDurationServer <- function(id) {
 
       # PLOTS ----
       sc2 <- reactive({
-        labs <- paste(levels(sc2_data()$frac$y),
-          ifelse(levels(sc2_data()$frac$y) == 1, "day", "days"))
-        names(labs) <- levels(sc2_data()$frac$y)
-
         ggplot(sc2_data()$frac, aes(x = n, y = fraction, colour = y)) +
           geom_line(size = 1.2) +
           geom_point(size = 3) +
@@ -613,7 +608,8 @@ quarantineDurationServer <- function(id) {
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           scale_colour_viridis_d(
             option = "inferno", end = 0.9, name = "duration of travel",
-            labels = labs, guide = guide_legend(title.position = "left", nrow = 1)
+            labels = dayLabels(levels(sc2_data()$frac$y)),
+            guide = guide_legend(title.position = "left", nrow = 1)
           ) +
           labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
           plotTheme
@@ -698,6 +694,8 @@ quarantineDurationServer <- function(id) {
 
         #' Fraction of infection prevented using normal strategy
         frac_no_test <- data.frame(
+          DeltaT = NA,
+          x = NA,
           release = x.vals,
           fraction  = sapply(x.vals,
             function(n) mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
@@ -711,8 +709,8 @@ quarantineDurationServer <- function(id) {
               (1 - falseNeg(x - tE.vals)) *
               getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / max_preventable)
             data.frame(
-              x = x,
               DeltaT = factor(DeltaT, levels = DeltaT.vals),
+              x = x,
               release = x + DeltaT,
               fraction = fraction
             )
@@ -726,8 +724,8 @@ quarantineDurationServer <- function(id) {
             (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
             getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / max_preventable)
             data.frame(
-              x = x,
               DeltaT = factor(DeltaT, levels = DeltaT.vals),
+              x = x,
               release = x + DeltaT,
               fraction = fraction
             )
@@ -735,31 +733,36 @@ quarantineDurationServer <- function(id) {
         }) %>% bind_rows()
 
         #' Utility without testing
+        utility_no_test <- getUtility(s = s,
+                                      efficacy = mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
+                                                        max_preventable),
+                                      time = n)
 
-        utility_no_test <- mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) /
-          max_preventable) / n
-
-        rel_utility_no_test <- lapply(x.vals, function(x) {
-          utility <- mean(getIntegral(upper = x, lower = 0, tE = tE.vals, params = genParams()) / max_preventable) / x
-          relUtility <- utility / utility_no_test
+        rel_utility_no_test <- lapply(x.vals, function(n) {
+          utility <- getUtility(s = s,
+                                efficacy = mean(getIntegral(upper = n, lower = 0, tE = tE.vals, params = genParams()) / max_preventable),
+                                time = n)
           data.frame(
-            release = x,
-            relUtility = relUtility
+            DeltaT = NA,
+            x = NA,
+            release = n,
+            relUtility = utility / utility_no_test
           )
         }) %>% bind_rows()
 
         rel_utility <- lapply(x.vals, function(x) {
           rel_utility <- lapply(DeltaT.vals, function(DeltaT) {
-            utility <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-              (1 - falseNeg(x - tE.vals)) *
-              getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / max_preventable) /
-              mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
-            relUtility <- utility / utility_no_test
+            utility <- getUtility(s = s,
+                                  efficacy = mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                                                     (1 - falseNeg(x - tE.vals)) *
+                                                     getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
+                                                    max_preventable),
+                                  time = mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT)))
             data.frame(
-              x = x,
               DeltaT = factor(DeltaT, levels = DeltaT.vals),
+              x = x,
               release = x + DeltaT,
-              relUtility = relUtility
+              relUtility = utility / utility_no_test
             )
           }) %>% bind_rows()
         }) %>% bind_rows()
@@ -767,16 +770,17 @@ quarantineDurationServer <- function(id) {
         #' Relative utility with reduced post-quarantine transmission
         rel_utility_reduced <- lapply(x.vals, function(x) {
           relUtility <- lapply(DeltaT.vals, function(DeltaT) {
-            utility <- mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
-              (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
-              getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) / max_preventable) /
-              mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT))
-            relUtility <- utility / utility_no_test
+            utility <- getUtility(s = s,
+                                  efficacy = mean((getIntegral(upper = x + DeltaT, lower = 0, tE = tE.vals, params = genParams()) +
+                                                     (1 - falseNeg(x - tE.vals) + r * falseNeg(x - tE.vals)) *
+                                                     getIntegral(upper = n, lower = x + DeltaT, tE = tE.vals, params = genParams())) /
+                                                    max_preventable),
+                                  time = mean(x + DeltaT + s * (1 - falseNeg(x - tE.vals)) * (n - x - DeltaT)))
             data.frame(
               x = x,
               DeltaT = factor(DeltaT, levels = DeltaT.vals),
               release = x + DeltaT,
-              relUtility = relUtility
+              relUtility = utility / utility_no_test
             )
           }) %>% bind_rows()
         }) %>% bind_rows()
@@ -794,21 +798,14 @@ quarantineDurationServer <- function(id) {
       })
 
       # PLOTS ----
-      sc2_test_colors <- reactive({
-        labs <- paste(sc2_test_pars()$DeltaT.vals,
-          ifelse(sc2_test_pars()$DeltaT.vals == 1, "day", "days"))
-        names(labs) <- sc2_test_pars()$DeltaT.vals
-
-        colours <- scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
-          name = expression("test result delay " ~ (Delta[T])),
-          labels = labs,
-          guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 1))
+      sc2_test_colours <- reactive({
+        scale_colour_viridis_d(option = "viridis", direction = -1, end = 0.9,
+                               name = expression("test result delay " ~ (Delta[T])),
+                               labels = dayLabels(sc2_test_pars()$DeltaT.vals),
+                               guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 1))
       })
 
       sc2_test <- reactive({
-
-        colours <- sc2_test_colors()
-
         fracPlot <- ggplot(sc2_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT)) +
           geom_hline(yintercept = sc2_test_data()$max_preventable_plot, colour = "darkgrey", size = 1.2) +
           geom_line(data = sc2_test_data()$frac_no_test, colour = "darkgrey", size = 1.2) +
@@ -817,7 +814,7 @@ quarantineDurationServer <- function(id) {
           geom_point(size = 3) +
           scale_x_continuous(limits = c(0, sc2_pars()$n), breaks = seq(0, sc2_pars()$n, 2)) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
-          colours +
+          sc2_test_colours() +
           labs(x = "day of release", y = "fraction of local transmission\nprevented by quarantine") +
           plotTheme
       })
@@ -828,10 +825,7 @@ quarantineDurationServer <- function(id) {
       })
 
       output$sc2_test_utility <- renderPlot({
-
-        colours <- sc2_test_colors()
-
-        ggplot(sc2_test_data()$rel_utility, aes(x = release, y = relUtility, colour = DeltaT)) + 
+        ggplot(sc2_test_data()$rel_utility, aes(x = release, y = relUtility, colour = DeltaT)) +
           geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
           geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = 1.2) +
           geom_line(data = sc2_test_data()$rel_utility_no_test, colour = "darkgrey", size = 1.2) +
@@ -840,10 +834,9 @@ quarantineDurationServer <- function(id) {
           geom_point(size = 3) +
           scale_x_continuous(limits = c(0, sc2_pars()$n), breaks = seq(0, sc2_pars()$n, 2)) +
           coord_cartesian(ylim = c(0, 4)) +
-          colours +
+          sc2_test_colours() +
           labs(x = "day of release", y = "\nrelative utility of quarantine") +
           plotTheme + theme(legend.position = "None")
-
       })
 
       output$sc2_test_legend <- renderPlot({
@@ -913,7 +906,7 @@ quarantineDurationServer <- function(id) {
             relAdherence = relAdherence
           )
         }) %>% bind_rows()
-        
+
 
         frac <- lapply(a.vals, function(a) {
           frac <- sapply(n.vals, function(n) {
@@ -941,12 +934,6 @@ quarantineDurationServer <- function(id) {
 
       # PLOTS ----
       output$sc2_adherence <- renderPlot({
-        labs <- paste(
-          levels(sc2_adherence_data()$rel_adherence$y),
-          ifelse(levels(sc2_adherence_data()$rel_adherence$y) == 1, "day", "days")
-        )
-        names(labs) <- levels(sc2_adherence_data()$rel_adherence$y)
-
         ggplot(
           data = filter(sc2_adherence_data()$rel_adherence, n > 0),
           mapping = aes(x = n, y = relAdherence, colour = y)) +
@@ -958,7 +945,8 @@ quarantineDurationServer <- function(id) {
           coord_cartesian(ylim = c(0, 4.4)) +
           scale_colour_viridis_d(
             option = "inferno", end = 0.9, name = "duration\nof travel",
-            labels = labs, guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
+            labels = dayLabels(sc2_adherence_data()$rel_adherence$y),
+            guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
           ) +
           labs(x = "quarantine duration (days)", y = "relative adherence required\nto maintain quarantine efficacy") +
           plotTheme +

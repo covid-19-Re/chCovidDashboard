@@ -82,7 +82,7 @@ quarantineDurationUI <- function(id) {
                   img(src = "quarantineModule/timeline.png", width = "100%"),
                   sliderInput(
                     ns("quarantineDelay"),
-                    extLabel("&Delta;<sub>Q</sub> (= t<sub>Q</sub> - t<sub>E</sub>)", "delay to quarantine"),
+                    extLabel("&Delta;<sub>Q</sub> (= t<sub>Q</sub>)", "delay to quarantine"),
                     min = 0, max = 10, value = c(0, 4),
                     step = 1,
                     width = "100%"
