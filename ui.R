@@ -13,8 +13,8 @@ ui <- function(request) {
         fluidRow(
           thumbnailPanel(
             title = "Quantifying the impact of quarantine duration on COVID-19 transmission",
-            authors = "Peter Ashcroft, Sonja Lehtinen, Daniel Angst and Sebastian Bonhoeffer",
-            affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland",
+            authors = "Peter Ashcroft, Sonja Lehtinen, Daniel Angst, Nicola Low and Sebastian Bonhoeffer",
+            affiliation = "ETH Zurich & ISPM Universität Bern",
             thumbnail = "quarantineModule-thumbnail.png",
             tabId = "selectQuarantine"
           ),

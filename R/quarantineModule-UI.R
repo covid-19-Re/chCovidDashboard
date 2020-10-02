@@ -13,7 +13,8 @@ quarantineDurationUI <- function(id) {
           bootstrapPanel(
             heading = HTML(
               "<h1>Quantifying the impact of quarantine duration on COVID-19 transmission</h1><br>",
-              "<i>Peter Ashcroft, Sonja Lehtinen, Daniel Angst and Sebastian Bonhoeffer (D-USYS, ETH Zürich)</i>"
+              "Peter Ashcroft<sup>1</sup>, Sonja Lehtinen<sup>1</sup>, Daniel Angst<sup>1</sup>, Nicola Low<sup>2</sup> and Sebastian Bonhoeffer<sup>1</sup><br>",
+              "<i class='small'><sup>1</sup>Institute of Integrative Biology, ETH Zurich, Switzerland, <sup>2</sup>Institute of Social and Preventive Medicine, University of Bern, Bern, Switzerland</i>"
             ),
             class = "panel-primary",
             includeMarkdown("R/quarantineModuleFiles/abstract.md")
