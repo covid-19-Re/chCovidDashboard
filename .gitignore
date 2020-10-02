@@ -16,6 +16,8 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
+.Rprofile
 
 # produced vignettes
 vignettes/*.html
@@ -86,3 +88,7 @@ data/forecastModule-Data.txt
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+# Packrat
+packrat/lib*/
+packrat/src/
