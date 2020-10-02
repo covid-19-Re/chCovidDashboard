@@ -1,8 +1,7 @@
 library(shiny)
 library(plotly)
 library(shinyhelper)
-
-
+library(shinycssloaders)
 
 forecastUI <- function(id) {
   ns <- NS(id)
@@ -122,7 +121,7 @@ forecastUI <- function(id) {
                     Furthermore, the user can select a rectangular area for obtaining a detailed visualization. 
                     After zooming in, double-click allows to return to the initial figure. 
                     The data beyond the dotted line is incomplete and not used in the analysis."),
-                plotlyOutput(outputId = ns("ARIMA_analysis"))
+                plotlyOutput(outputId = ns("ARIMA_analysis"), height = "600px") %>% withSpinner()
               )
             )
           )
