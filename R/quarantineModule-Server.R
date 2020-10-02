@@ -13,7 +13,10 @@ quarantineDurationServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-
+      observe({
+        toExclude <- setdiff(names(input), "tab")
+        setBookmarkExclude(toExclude)
+      })
       # False negative probabilities ----
       falseNeg <- approxfun(
         x = c(0, 1, 4, 5, 6, 7, 8, 9, 21),
