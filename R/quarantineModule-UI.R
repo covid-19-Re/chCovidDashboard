@@ -27,7 +27,7 @@ quarantineDurationUI <- function(id) {
             heading = "Empirical distributions", class = "panel-info", id = "parsDistr",
             fluidRow(
               column(4,
-                plotOutput(ns("genTimePlot"), height = "200px") %>% withSpinner(),
+                plotOutput(ns("genTimePlot"), height = "300px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("genShape"), "shape", step = 0.001, value = 3.2862)
@@ -39,7 +39,7 @@ quarantineDurationUI <- function(id) {
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516", doi = "10.1101/2020.09.04.20188516")
               ),
               column(4,
-                plotOutput(ns("infProfPlot"), height = "200px") %>% withSpinner(),
+                plotOutput(ns("infProfPlot"), height = "300px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("infShift"), "shift", step = 0.001, value = -0.0747)
@@ -54,7 +54,7 @@ quarantineDurationUI <- function(id) {
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516", doi = "10.1101/2020.09.04.20188516")
               ),
               column(4,
-                plotOutput(ns("incDistPlot"), height = "200px") %>% withSpinner(),
+                plotOutput(ns("incDistPlot"), height = "300px") %>% withSpinner(),
                 fluidRow(
                   column(4,
                     numericInput(ns("incMeanLog"), "log(mean)", step = 0.001, value = 1.42)
