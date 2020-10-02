@@ -14,7 +14,7 @@ forecastUI <- function(id) {
     tags$head(HTML("<title>COVID-19 Forecast</title>")),
     shinyjs::useShinyjs(),
     navbarPage(
-      id = "main_menu", title = div(
+      id = ns("main_menu"), title = div(
         img(
           src = "forecastModule-coronaLogo.png",
           height = 29, width = 34
@@ -37,8 +37,8 @@ forecastUI <- function(id) {
            using statistical models to interpret trends and forecast short-term development (up to 7 days forecast from last training date).
            The left-hand panel allows the user to change visualisation settings, including last date for training the forecast (allowing validation) and data (cases, hospitalizations or fatalities).
            To find out more about the functionalities of the dashboard, check the help icons associated to each panel. 
-           You can read more about the methods", actionLink("link_to_methods", "here"),
-          "and about the resource developers", actionLink("link_to_about", "here"), "."
+           You can read more about the methods", actionLink(ns("link_to_methods"), "here"),
+          "and about the resource developers", actionLink(ns("link_to_about"), "here"), "."
         ),
         tags$br(),
         # Sidebar layout with input and output definitions ----

@@ -67,10 +67,12 @@ forecastServer <- function(id) {
             })
 
             observeEvent(input$link_to_methods, {
+                print("link_to_methods")
                 updateTabsetPanel(session, "main_menu", "Methods")
             })
 
             observeEvent(input$link_to_about, {
+                print("link_to_abput")
                 updateTabsetPanel(session, "main_menu", "About")
             })
 
