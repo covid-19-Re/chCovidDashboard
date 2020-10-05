@@ -129,4 +129,4 @@ data_tab = rbind(data_tab_BAG, data_tab_CORONA)
 write.table(data_tab, here("data", "forecastModule-Data.txt"), sep = "\t", 
             col.names = TRUE, row.names = FALSE, quote = FALSE)
 
-cat("Data written to ", here("data", "forecastModule-Data.txt"), "\n")
+cat(as.character(now()), "Data written to", here("data", "forecastModule-Data.txt"), "\n")
