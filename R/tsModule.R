@@ -4,7 +4,7 @@ library(plotly)
 library(slider)
 
 
-tsCasesUI <- function(id) {
+tsUI <- function(id) {
   ns <- NS(id)
   tagList(
     useShinyjs(),
@@ -47,6 +47,7 @@ tsCasesUI <- function(id) {
               size = "xs"
             ),
             checkboxInput(inputId = ns("compare_ages"), label = "Compare ages"),
+            checkboxInput(inputId = ns("compare_ages_proportions"), label = "Show proportions"),
             pickerInput(
               inputId = ns("cantons"),
               label = "Cantons",
@@ -64,6 +65,10 @@ tsCasesUI <- function(id) {
               inputId = ns("compare_cantons"),
               label = "Compare cantons"
             ),
+            checkboxInput(
+              inputId = ns("compare_cantons_proportions"),
+              label = "Show proportions"
+            ),
             radioButtons(
               inputId = ns("travel"),
               label = "Import status",
@@ -74,7 +79,11 @@ tsCasesUI <- function(id) {
             checkboxInput(
               inputId = ns("compare_travel"),
               label = "Compare import statuses"
-            )
+            ),
+            checkboxInput(
+              inputId = ns("compare_travel_proportions"),
+              label = "Show proportions"
+            ),
           )
         ),
         column(9,
@@ -122,7 +131,7 @@ tsCasesUI <- function(id) {
   )
 }
 
-tsCasesServer <- function(id) {
+tsServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -163,11 +172,7 @@ tsCasesServer <- function(id) {
       })
 
       observeEvent(input$display_prob, {
-        if (input$display_prob) {
-          shinyjs::enable("given")
-        } else {
-          shinyjs::disable("given")
-        }
+        shinyjs::toggleState(id = "given", condition = input$display_prob)
       })
 
       observeEvent(input$compare_ages, {
@@ -175,6 +180,7 @@ tsCasesServer <- function(id) {
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
         }
+        shinyjs::toggleState(id = "compare_ages_proportions", condition = input$compare_ages)
       })
 
       observeEvent(input$compare_cantons, {
@@ -182,6 +188,7 @@ tsCasesServer <- function(id) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
         }
+        shinyjs::toggleState(id = "compare_cantons_proportions", condition = input$compare_cantons)
       })
 
       observeEvent(input$compare_travel, {
@@ -189,18 +196,7 @@ tsCasesServer <- function(id) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
         }
-      })
-      
-      # Control the display options
-      observe({
-        shinyjs::toggleState(id = "stack_histograms", condition = !input$display_prob && !input$log_scale
-                             && !is.na(compare()))
-        shinyjs::toggleState(id = "granularity", condition = !input$display_prob)
-        shinyjs::toggleState(id = "smoothing_window", condition = input$display_prob)
-        
-        if (input$log_scale && input$stack_histograms) {
-          updateCheckboxInput(session, "stack_histograms", value = FALSE)
-        }
+        shinyjs::toggleState(id = "compare_travel_proportions", condition = input$compare_travel)
       })
 
       
@@ -214,9 +210,9 @@ tsCasesServer <- function(id) {
         
         # Creates the "date" column
         if (input$display_prob) {
-          return (d %>% mutate(date = fall_dt))
+          d <- d %>% mutate(date = fall_dt)
         } else {
-          return (d %>% mutate(date = !!as.symbol(eventDateCols[[input$event]])))
+          d <- d %>% mutate(date = !!as.symbol(eventDateCols[[input$event]]))
         }
 
         return(d)
@@ -231,6 +227,22 @@ tsCasesServer <- function(id) {
           return("Import status")
         }
         return(NA)
+      })
+      
+      compare_proportions <- reactive({
+        return (
+          (input$compare_ages && input$compare_ages_proportions) ||
+          (input$compare_cantons && input$compare_cantons_proportions) ||
+          (input$compare_travel && input$compare_travel_proportions)
+        )
+      })
+      
+      plot_type <- reactive({
+        if (!input$display_prob && !compare_proportions()) {
+          return ("discrete")
+        } else {
+          return ("continuous")
+        }
       })
       
       # Validators
@@ -348,6 +360,19 @@ tsCasesServer <- function(id) {
       })
       
       
+      ### Control the display options ###
+      observe({
+        shinyjs::toggleState(id = "stack_histograms", condition = plot_type() == "discrete" && !input$log_scale
+                             && !is.na(compare()))
+        shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete")
+        shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous")
+        
+        if (input$log_scale && input$stack_histograms) {
+          updateCheckboxInput(session, "stack_histograms", value = FALSE)
+        }
+      })
+      
+      
       ### Putting everything together ###
       output$mainPlot <- renderPlotly({
         validators()
@@ -377,8 +402,8 @@ tsCasesServer <- function(id) {
           "14 days" = days(14),
           "28 days" = days(28)
         )
-        minDate <- min(dataProc$date)
-        maxDate <- max(dataProc$date)
+        minDate <- min((dataProc %>% drop_na(date))$date)
+        maxDate <- max((dataProc %>% drop_na(date))$date)
         
         # Case 1: showing the total frequencies 
         if (!input$display_prob && is.na(compare())) {
@@ -406,17 +431,37 @@ tsCasesServer <- function(id) {
               group_by(date) %>%
               summarize(count = sum(mult), .groups = "drop")
             d[, compare()] <- compare_val
+            
+            if (compare_proportions()) {
+              d <- d %>%
+                complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+                mutate(count = replace_na(count, 0)) %>%
+                drop_na(date)
+              d[, compare()] <- compare_val
+              d$smoothedCount <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
+            }
             plot_data <- bind_rows(plot_data, d)
           }
           
-          # Define the ggplot
-          p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare())))
-          if (input$stack_histograms) {
-            p <- p + geom_histogram(stat = "identity")
+          if (!compare_proportions()) {
+            p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare())))
+            if (input$stack_histograms) {
+              p <- p + geom_histogram(stat = "identity")
+            } else {
+              p <- p + geom_histogram(stat = "identity", position = "dodge")
+            }
+            p <- p + ylab("Total count")
+
           } else {
-            p <- p + geom_histogram(stat = "identity", position = "dodge")
+            plot_data <- plot_data %>%
+              group_by(date) %>%
+              mutate(proportion = smoothedCount / sum(smoothedCount))
+            p <- ggplot(plot_data, aes(x = date, y = proportion, col = !!as.symbol(compare()))) +
+              geom_line() +
+              scale_x_date(date_breaks = "months") +
+              xlab(paste("Date of", input$event)) +
+              ylab(paste0("Proportion of ", input$event, "s"))
           }
-          p <- p + ylab("Total count")
         }
         
         # Case 3: looking at the probabilities when a type of event is given
@@ -449,7 +494,6 @@ tsCasesServer <- function(id) {
           
           p <- ggplot(plotData, aes(x = date, y = prob)) +
             geom_line() +
-            ## geom_point() +
             ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
           
         }
@@ -490,11 +534,21 @@ tsCasesServer <- function(id) {
             d[, compare()] <- compare_val
             plot_data <- bind_rows(plot_data, d)
           }
-          
-          p <- ggplot(plot_data, aes(x = date, y = prob, col = !!as.symbol(compare()))) +
-            geom_line() +
-            ## geom_point() +
-            ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+
+          if (!compare_proportions()) {
+            p <- ggplot(plot_data, aes(x = date, y = prob, col = !!as.symbol(compare()))) +
+              geom_line() +
+              ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+          } else {
+            plot_data <- plot_data %>%
+              mutate(prob = replace_na(prob, 0)) %>%
+              group_by(date) %>%
+              mutate(proportions = prob / sum(prob))
+            
+            p <- ggplot(plot_data, aes(x = date, y = proportions, col = !!as.symbol(compare()))) +
+              geom_line() +
+              ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+          }
         }
         
         # Final plot configurations

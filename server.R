@@ -18,14 +18,9 @@ server <- function(input, output, session) {
       selected = "contactTracing"
     )
   })
-  observeEvent(input$selectTsProportions, {
+  observeEvent(input$selectTs, {
     updateTabsetPanel(session, "tab",
-      selected = "tsProportions"
-    )
-  })
-  observeEvent(input$selectTsCases, {
-    updateTabsetPanel(session, "tab",
-      selected = "tsCases"
+      selected = "ts"
     )
   })
   observeEvent(input$selectTrends, {
@@ -54,14 +49,11 @@ server <- function(input, output, session) {
   # quarantine duration
   quarantineDurationServer("quarantineDuration")
 
-  # Cases time series
-  tsCasesServer("tsCases")
+  # Time series
+  tsServer("ts")
 
   # trends
   trendsServer("trends")
-
-  # Proportions time series
-  tsProportionsServer("tsProportions")
 
   # forecast
   forecastServer("forecast")
