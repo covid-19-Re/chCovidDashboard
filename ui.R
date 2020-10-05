@@ -19,11 +19,11 @@ ui <- function(request) {
             tabId = "selectQuarantine"
           ),
           thumbnailPanel(
-            title = "Time Series of Cases",
+            title = "Time Series",
             authors = "Timothy Vaughan, Tanja Stadler",
             affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
-            thumbnail = "tsCases-thumbnail.png",
-            tabId = "selectTsCases"
+            thumbnail = "ts-thumbnail.png",
+            tabId = "selectTs"
           ),
           thumbnailPanel(
             title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
@@ -31,13 +31,6 @@ ui <- function(request) {
             affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br><i>(preliminary)</i>",
             thumbnail = "trends-thumbnail.png",
             tabId = "selectTrends"
-          ),
-          thumbnailPanel(
-            title = "Relative frequency of clinical events",
-            authors = "Timothy Vaughan, Tanja Stadler",
-            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-            thumbnail = "tsProportions-thumbnail.png",
-            tabId = "selectTsProportions"
           ),
           thumbnailPanel(
             title = "Effectiveness of Contact Tracing",
@@ -80,17 +73,9 @@ ui <- function(request) {
           )
         ),
       ),
-      navbarMenu(
-        "Time Series",
-        menuName = "timeseries",
-        tabPanel("Cases",
-          value = "tsCases",
-          tsCasesUI("tsCases")
-        ),
-        tabPanel("Proportions",
-          value = "tsProportions",
-          tsProportionsUI("tsProportions")
-        )
+      tabPanel("Time Series",
+        value = "ts",
+        tsUI("ts")
       ),
       tabPanel("Trends",
         value = "trends",
