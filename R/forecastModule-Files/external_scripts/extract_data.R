@@ -9,6 +9,7 @@ library(readxl)
 library(lubridate)
 library(tidyverse)
 library(reshape2)
+library(here)
 
 # Global URL variables
 BAG_URL = "https://www.bag.admin.ch/dam/bag/de/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/2019-nCoV/covid-19-datengrundlage-lagebericht.xlsx.download.xlsx/200325_Datengrundlage_Grafiken_COVID-19-Bericht.xlsx"
@@ -26,7 +27,7 @@ CORONA_URL = "https://github.com/daenuprobst/covid19-cases-switzerland/blob/mast
 get_BAG_online_table = function() {
     # Download the excel file in a temporary folder
     p1f = tempfile(fileext = ".xlsx")
-    download.file(BAG_URL, p1f, mode="wb")
+    download.file(BAG_URL, p1f, mode = "wb")
     
     # extract the sheet with cases, hospitalizations, deaths
     p1 = read_excel(path = p1f, sheet = "COVID19 Zahlen", skip = 6)
@@ -125,6 +126,7 @@ data_tab_BAG = get_BAG_online_table_long_format()
 data_tab_CORONA = get_CORONA_table_long_format()
 data_tab = rbind(data_tab_BAG, data_tab_CORONA)
 
-write.table(data_tab, here::here("www", "pulled_data.txt"), sep = "\t", 
+write.table(data_tab, here("data", "forecastModule-Data.txt"), sep = "\t", 
             col.names = TRUE, row.names = FALSE, quote = FALSE)
 
+cat(as.character(now()), "Data written to", here("data", "forecastModule-Data.txt"), "\n")

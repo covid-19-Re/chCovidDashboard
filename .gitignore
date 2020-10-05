@@ -42,6 +42,7 @@ rsconnect/
 dev-*
 .vscode
 *.csv
+*.Rout
 
 # Data
 data/BAG
