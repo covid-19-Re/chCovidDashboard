@@ -3,6 +3,7 @@ library(shinyjs)
 library(plotly)
 library(slider)
 
+
 tsCasesUI <- function(id) {
   ns <- NS(id)
   tagList(
@@ -125,6 +126,9 @@ tsCasesServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      
+      ### Basic UI Logic: Enabling/disabling/setting filters etc. ###
+      
       observe({
         toExclude <- setdiff(names(input), "tab")
         setBookmarkExclude(toExclude)
@@ -186,21 +190,36 @@ tsCasesServer <- function(id) {
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
         }
       })
-
-      observeEvent(input$log_scale, {
-        if (input$log_scale) {
-          shinyjs::disable("stack_histograms")
-
-          if (input$stack_histograms) {
-            updateCheckboxInput(session, "stack_histograms", value = FALSE)
-          }
-        } else {
-          shinyjs::enable("stack_histograms")
+      
+      # Control the display options
+      observe({
+        shinyjs::toggleState(id = "stack_histograms", condition = !input$display_prob && !input$log_scale
+                             && !is.na(compare()))
+        shinyjs::toggleState(id = "granularity", condition = !input$display_prob)
+        shinyjs::toggleState(id = "smoothing_window", condition = input$display_prob)
+        
+        if (input$log_scale && input$stack_histograms) {
+          updateCheckboxInput(session, "stack_histograms", value = FALSE)
         }
       })
 
+      
+      ### Loading, preparing and filtering Data ###
+      
       data <- reactive({
-        return(load_and_process_data())
+        d <- load_and_process_data()
+        
+        # Introduces an ID to make the rows unique and easier identifiable.
+        d <- cbind(id = as.integer(rownames(d)), d)
+        
+        # Creates the "date" column
+        if (input$display_prob) {
+          return (d %>% mutate(date = fall_dt))
+        } else {
+          return (d %>% mutate(date = !!as.symbol(eventDateCols[[input$event]])))
+        }
+
+        return(d)
       })
 
       compare <- reactive({
@@ -213,23 +232,280 @@ tsCasesServer <- function(id) {
         }
         return(NA)
       })
-
-      output$mainPlot <- renderPlotly({
-        ggplotly(
-          generate_timeseries_plot(
-            data(),
-            input$event,
-            input$given,
-            input$age_groups,
-            input$cantons,
-            input$travel,
-            input$granularity,
-            input$smoothing_window,
-            compare = compare(),
-            displayProb = input$display_prob,
-            logScale = input$log_scale,
-            stackHistograms = input$stack_histograms
+      
+      # Validators
+      
+      nonEmptyFiltersValidator <- reactive({
+        validate(
+          need(
+            !is.null(input$age_groups),
+            "Must specify at least one age group."
+          ),
+          need(
+            !is.null(input$cantons),
+            "Must specify at least one canton."
           )
+        )
+      })
+      
+      notFalselyUsingNegativeTestDataValidator <- reactive({
+        if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
+          validate(
+            need(
+              input$travel == "All cases" && (is.na(compare()) || compare() != "Import status"),
+              "Currently lacking information about travel status for negative test data."
+            )
+          )
+        }
+      })
+      
+      validators <- reactive({
+        notFalselyUsingNegativeTestDataValidator()
+        nonEmptyFiltersValidator()
+      })
+      
+      # Filters
+      
+      ageGroupFiltered <- reactive({
+        if (length(input$age_groups) < length(ageGroups)) {
+          return (data() %>% filter(ageGroup %in% input$age_groups))
+        }
+        return (data())
+      })
+      
+      cantonFiltered <- reactive({
+        if (length(input$cantons) < length(cantons)) {
+          return (data() %>% filter(canton %in% input$cantons))
+        }
+        return (data())
+      })
+      
+      travelClassFiltered <- reactive({
+        if (input$travel != "All cases") {
+          return (data() %>% filter(travelClass == input$travel))
+        } else {
+          return (data())
+        }
+      })
+      
+      clinicalEventFiltered <- reactive({
+        return (
+          switch(input$event,
+            "Test (any result)" = data(),  # Nothing to do
+            "Positive test" = data() %>% filter(positiveTest),
+            "Hospitalisation" = data() %>% filter(hospitalisation == 1),
+            "Death" = data() %>% filter(pttod == 1),
+            "ICU admission" = data() %>% filter(icu_aufenthalt == 1)
+          )
+        )
+      })
+      
+      givenClinicalEventFiltered <- reactive({
+        if (input$display_prob) {
+          return (
+            switch(input$given,
+              "Test (any result)" = data(),  # Nothing to do
+              "Positive test" = data() %>% filter(positiveTest),
+              "Hospitalisation" = data() %>% filter(hospitalisation == 1),
+              "Death" = data() %>% filter(pttod == 1),
+              "ICU admission" = data() %>% filter(icu_aufenthalt == 1)
+            )
+          )
+        } else {
+          return (data())
+        }
+      })
+      
+      # Exclude all data before start of stratified negative test records
+      stratifiedTestRecordFiltered <- reactive({
+        if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
+          if (!is.na(compare()) || length(input$age_groups) != length(ageGroups)
+              || length(input$cantons) != length(cantons)) {
+            stratifiedTestingStart <- min((data() %>% filter(positiveTest == FALSE, !is.na(canton)))$fall_dt)
+            return (data() %>% filter(fall_dt >= stratifiedTestingStart))
+          }
+        }
+        return (data())
+      })
+      
+      
+      ### Processors ###
+      # Processors are functions that manipulate data. They are defined as reactive expressions since they have direct
+      # access to the user input. However, they do not access the data but are defined as function factories: they
+      # return a function which takes the data and gives a modified version of the data back.
+      
+      # Rounds the date depending on the granularity
+      dateRoundingProcessor <- reactive({
+        function(data) {
+          return (
+            switch(input$granularity,
+              Days = data,
+              Weeks = data %>% mutate(date = round_date(date, unit = "week")),
+              Months = data %>% mutate(date = round_date(date, unit = "month"))
+            )
+          )
+        }
+      })
+      
+      
+      ### Putting everything together ###
+      output$mainPlot <- renderPlotly({
+        validators()
+
+        # Apply basic filters
+        dataProc <- multiIntersect(
+          data(),
+          ageGroupFiltered(),
+          cantonFiltered(),
+          travelClassFiltered(),
+          stratifiedTestRecordFiltered()
+        )
+        validate(need(
+          nrow(dataProc) > 0,
+          "No data matches the requested combination of filters."
+        ))
+        
+        # General transformations and calculations for later use
+        if (input$display_prob) {
+          xlabel <- "Date of Test"
+        } else {
+          xlabel <- paste("Date of", input$event)
+        }
+        smoothing_interval <- switch(input$smoothing_window,
+          None = days(0),
+          "7 days" = days(7),
+          "14 days" = days(14),
+          "28 days" = days(28)
+        )
+        minDate <- min(dataProc$date)
+        maxDate <- max(dataProc$date)
+        
+        # Case 1: showing the total frequencies 
+        if (!input$display_prob && is.na(compare())) {
+          dataProc <- intersect(dataProc, clinicalEventFiltered())
+          dataProc <- dateRoundingProcessor()(dataProc)
+          dataProc <- dataProc %>%
+            group_by(date) %>%
+            summarize(count = sum(mult), .groups = "drop")
+          
+          # Define the ggplot
+          p <- ggplot(dataProc) +
+            geom_histogram(aes(x = date, y = count), stat = "identity")
+          p <- p + ylab("Total count")
+        }
+        
+        # Case 2: comparing the frequencies
+        if (!input$display_prob && !is.na(compare())) {
+          dataProc <- intersect(dataProc, clinicalEventFiltered())
+          dataProc <- dateRoundingProcessor()(dataProc)
+          
+          plot_data <- NULL
+          for (compare_val in unique(dataProc[[categoryCols[[compare()]]]])) {
+            d <- dataProc %>% filter(!!as.symbol(categoryCols[[compare()]]) == compare_val)
+            d <- d %>%
+              group_by(date) %>%
+              summarize(count = sum(mult), .groups = "drop")
+            d[, compare()] <- compare_val
+            plot_data <- bind_rows(plot_data, d)
+          }
+          
+          # Define the ggplot
+          p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare())))
+          if (input$stack_histograms) {
+            p <- p + geom_histogram(stat = "identity")
+          } else {
+            p <- p + geom_histogram(stat = "identity", position = "dodge")
+          }
+          p <- p + ylab("Total count")
+        }
+        
+        # Case 3: looking at the probabilities when a type of event is given
+        if (input$display_prob && is.na(compare())) {
+          denominatorData <- intersect(dataProc, givenClinicalEventFiltered())
+          numeratorData <- intersect(denominatorData, clinicalEventFiltered())
+          
+          # TODO Remove code redundancy
+          denominatorData <- denominatorData %>%
+            group_by(date) %>%
+            summarize(
+              count = sum(mult),
+              .groups = "drop"
+            ) %>%
+            complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+            mutate(count = replace_na(count, 0))
+          numeratorData <- numeratorData %>%
+            group_by(date) %>%
+            summarize(
+              count = sum(mult),
+              .groups = "drop"
+            ) %>%
+            complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+            mutate(count = replace_na(count, 0))
+          
+          num <- slide_index_dbl(numeratorData$count, numeratorData$date, sum, .before = smoothing_interval)
+          denom <- slide_index_dbl(denominatorData$count, denominatorData$date, sum, .before = smoothing_interval)
+          
+          plotData <- tibble(date = denominatorData$date, prob = num / denom)
+          
+          p <- ggplot(plotData, aes(x = date, y = prob)) +
+            geom_line() +
+            ## geom_point() +
+            ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+          
+        }
+
+        # Case 4: comparing the probabilities
+        if (input$display_prob && !is.na(compare())) {
+          denominatorData <- intersect(dataProc, givenClinicalEventFiltered())
+          numeratorData <- intersect(denominatorData, clinicalEventFiltered())
+          
+          plot_data <- NULL
+          for (compare_val in unique(dataProc[[categoryCols[[compare()]]]])) {
+            d <- dataProc %>% filter(!!as.symbol(categoryCols[[compare()]]) == compare_val)
+            dDenom <- intersect(d, denominatorData)
+            dNum <- intersect(d, numeratorData)
+
+            # TODO Remove code redundancy
+            dDenom <- dDenom %>%
+              group_by(date) %>%
+              summarize(
+                count = sum(mult),
+                .groups = "drop"
+              ) %>%
+              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+              mutate(count = replace_na(count, 0))
+            dNum <- dNum %>%
+              group_by(date) %>%
+              summarize(
+                count = sum(mult),
+                .groups = "drop"
+              ) %>%
+              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+              mutate(count = replace_na(count, 0))
+            
+            denom <- slide_index_dbl(dDenom$count, dDenom$date, sum, .before = smoothing_interval)
+            num <- slide_index_dbl(dNum$count, dNum$date, sum, .before = smoothing_interval)
+            
+            d <- tibble(date = dDenom$date, prob = num / denom)
+            d[, compare()] <- compare_val
+            plot_data <- bind_rows(plot_data, d)
+          }
+          
+          p <- ggplot(plot_data, aes(x = date, y = prob, col = !!as.symbol(compare()))) +
+            geom_line() +
+            ## geom_point() +
+            ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+        }
+        
+        # Final plot configurations
+        p <- p + xlab(xlabel) + scale_x_date(date_breaks = "months")
+        if (input$log_scale) {
+          p <- p + scale_y_log10()
+        }
+        
+        # Draw the plot
+        ggplotly(
+          p
         ) %>%
           config(
             displaylogo = FALSE,

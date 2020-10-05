@@ -16,6 +16,8 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
+.Rprofile
 
 # produced vignettes
 vignettes/*.html
@@ -43,6 +45,7 @@ dev-*
 
 # Data
 data/BAG
+data/forecastModule-Data.txt
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -85,3 +88,7 @@ data/BAG
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+# Packrat
+packrat/lib*/
+packrat/src/

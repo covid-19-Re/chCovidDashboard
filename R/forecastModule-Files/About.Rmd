@@ -1,0 +1,17 @@
+---
+# bibliography: references.bib
+output: 
+    html_document
+---
+
+The aim of the COVID-19 Dashboard is to provide a tool for real-time monitoring and short-term forecasting of the COVID-19 outbreak in Switzerland based on daily updated time series of various output measurements. The Dashboard presents results from various data-driven statistical analyses modeling the outbreak development without imposing assumptions on the disease transmission dynamics. 
+
+This tool was developed by [Monica Golumbeanu] (https://www.swisstph.ch/en/staff/profile/people/monica-golumbeanu/) and [Melissa Penny] (https://www.swisstph.ch/fr/staff/profile/people/melissa-penny/) in the [Disease and Intervention Dynamics] (https://www.swisstph.ch/fr/about/eph/infectious-disease-modelling/disease-and-intervention-dynamics/) group of Prof. Melissa Penny at the Swiss Tropical and Public Health Institute and University of Basel.
+
+Hosting and computing services are offered by the [sciCORE](https://scicore.unibas.ch/) Center for Scientific Computing at the University of Basel.
+
+For questions, suggestions or comments contact [monica.golumbeanu@swisstph.ch](monica.golumbeanu@swisstph.ch) or [melissa.penny@unibas.ch](melissa.penny@unibas.ch).
+
+
+
+

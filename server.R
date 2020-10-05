@@ -6,6 +6,8 @@ server <- function(input, output, session) {
     session$doBookmark()
   })
 
+  observe_helpers(help_dir = "R/forecastModule-Files/helpfiles")
+
   observeEvent(input$selectQuarantine, {
     updateTabsetPanel(session, "tab",
       selected = "quarantineDuration"
@@ -31,6 +33,12 @@ server <- function(input, output, session) {
   #     selected = "trends"
   #   )
   # })
+  # observeEvent(input$selectForecast, {
+  #   updateTabsetPanel(session, "tab",
+  #     selected = "forecast"
+  #   )
+  # })
+
   onBookmarked(function(url) {
     updateQueryString(url)
   })
@@ -54,4 +62,8 @@ server <- function(input, output, session) {
 
   # # Proportions time series
   # tsProportionsServer("tsProportions")
+
+  # # forecast
+  # forecastServer("forecast")
+
 }
