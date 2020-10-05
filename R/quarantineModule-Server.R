@@ -186,8 +186,8 @@ quarantineDurationServer <- function(id) {
       sc1 <- reactive({
         ggplot(sc1_data()$frac, aes(x = n, y = fraction, colour = DeltaQ,
             text = str_c(
-              "Δ<sub>Q</sub> = ", DeltaQ, "<br>",
-              "prevented = ", round(fraction * 100, 2), "%"
+              "Δ<sub>Q</sub> = ", dayLabels(DeltaQ), "<br>",
+              "prevented = ", scales::percent(fraction, accuracy = 0.1, trim = F)
               ),
             group = DeltaQ
           )) +
@@ -214,8 +214,8 @@ quarantineDurationServer <- function(id) {
       output$sc1_utility <- renderPlotly({
         plot <- ggplot(sc1_data()$rel_utility, aes(x = n, y = relUtility, colour = DeltaQ,
           text = str_c(
-            "Δ<sub>Q</sub> = ", DeltaQ, "<br>",
-            "rel. utility = ", round(relUtility, 2)
+            "Δ<sub>Q</sub> = ", dayLabels(DeltaQ), "<br>",
+            "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
             ),
           group = DeltaQ
           )) +
@@ -403,8 +403,8 @@ quarantineDurationServer <- function(id) {
       sc1_test <- reactive({
         ggplot(sc1_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT,
             text = str_c(
-              "Δ<sub>T</sub> = ", DeltaT, "<br>",
-              "prevented = ", round(fraction * 100, 2), "%"
+              "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+              "prevented = ", scales::percent(fraction, accuracy = 0.1)
               ),
             group = DeltaT
           )) +
@@ -415,7 +415,7 @@ quarantineDurationServer <- function(id) {
               x = release, y = fraction, group = DeltaT,
               text = str_c(
                 "no testing<br>",
-                "prevented = ", round(fraction * 100, 2), "%"
+                "prevented = ", scales::percent(fraction, accuracy = 0.1)
               )
             ),
             data = sc1_test_data()$frac_no_test, color = "darkgrey", size = plot_line_size) +
@@ -425,8 +425,8 @@ quarantineDurationServer <- function(id) {
               x = release, y = fraction, colour = DeltaT, group = DeltaT,
               text = str_c(
                 "reduced transmission<br>",
-                "Δ<sub>T</sub> = ", DeltaT, "<br>",
-                "prevented = ", round(fraction * 100, 2), "%"
+                "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+                "prevented = ", scales::percent(fraction, accuracy = 0.1)
               )
             ),
             data = sc1_test_data()$frac_reduced, linetype = "dashed") +
@@ -453,8 +453,8 @@ quarantineDurationServer <- function(id) {
         plot <- ggplot(sc1_test_data()$rel_utility,
             aes(x = release, y = relUtility, colour = DeltaT,
             text = str_c(
-              "Δ<sub>T</sub> = ", DeltaT, "<br>",
-              "rel.utility = ", round(relUtility, 2)
+              "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+              "rel.utility = ", format(round(relUtility, 2), nsmall = 2)
               ),
             group = DeltaT
           )) +
@@ -466,7 +466,7 @@ quarantineDurationServer <- function(id) {
               x = release, y = relUtility, colour = DeltaT,
               text = str_c(
                 "no testing<br>",
-                "rel. utility = ", round(relUtility, 2)
+                "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
               ),
               group = DeltaT
             ),
@@ -477,8 +477,8 @@ quarantineDurationServer <- function(id) {
               x = release, y = relUtility, colour = DeltaT, group = DeltaT,
               text = str_c(
                 "reduced transmission<br>",
-                "Δ<sub>T</sub> = ", DeltaT, "<br>",
-                "rel. utility = ", round(relUtility, 2), "%"
+                "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+                "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
               )
             ),
             data = sc1_test_data()$rel_utility_reduced, linetype = "dashed") +
@@ -575,8 +575,8 @@ quarantineDurationServer <- function(id) {
         plot <- ggplot(sc1_adherence_data()$rel_adherence,
             aes(x = n, y = relAdherence, colour = DeltaQ,
               text = str_c(
-                "Δ<sub>Q</sub> = ", DeltaQ, "<br>",
-                "rel. adherence = ", round(relAdherence, 2)
+                "Δ<sub>Q</sub> = ", dayLabels(DeltaQ), "<br>",
+                "rel. adherence = ", format(round(relAdherence, 2), nsmall = 2)
               ),
               group = DeltaQ
             )) +
@@ -608,8 +608,8 @@ quarantineDurationServer <- function(id) {
         plot <- ggplot(sc1_adherence_data()$frac,
             aes(x = n, y = fraction, colour = a,
               text = str_c(
-                "fraction asymptomatic = ", a, "<br>",
-                "prevented = ", round(fraction * 100, 2), "%"
+                "fraction asymptomatic = ", scales::percent(as.numeric(levels(sc1_adherence_data()$frac$a))[a]), "<br>",
+                "prevented = ", scales::percent(fraction, accuracy = 0.1)
               ),
               group = a)) +
           geom_line(size = plot_line_size) +
@@ -716,8 +716,8 @@ quarantineDurationServer <- function(id) {
       sc2 <- reactive({
         ggplot(sc2_data()$frac, aes(x = n, y = fraction, colour = y,
             text = str_c(
-              "travel duration = ", y, "<br>",
-              "prevented = ", round(fraction * 100, 2), "%"
+              "travel duration = ", dayLabels(y), "<br>",
+              "prevented = ", scales::percent(fraction, accuracy = 0.1)
               ),
             group = y
           )) +
@@ -743,8 +743,8 @@ quarantineDurationServer <- function(id) {
       output$sc2_utility <- renderPlotly({
         plot <- ggplot(sc2_data()$rel_utility, aes(x = n, y = relUtility, colour = y,
             text = str_c(
-              "travel duration = ", y, "<br>",
-              "rel. utility = ", round(relUtility, 2), "%"
+              "travel duration = ", dayLabels(y), "<br>",
+              "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
               ),
             group = y
           )) +
@@ -939,8 +939,8 @@ quarantineDurationServer <- function(id) {
       sc2_test <- reactive({
         ggplot(sc2_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT,
             text = str_c(
-              "Δ<sub>T</sub> = ", DeltaT, "<br>",
-              "prevented = ", round(fraction * 100, 2), "%"
+              "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+              "prevented = ", scales::percent(fraction, accuracy = 0.1)
               ),
             group = DeltaT
           )) +
@@ -951,7 +951,7 @@ quarantineDurationServer <- function(id) {
               x = release, y = fraction, group = DeltaT,
               text = str_c(
                 "no testing<br>",
-                "prevented = ", round(fraction * 100, 2), "%"
+                "prevented = ", scales::percent(fraction, accuracy = 0.1)
               )
             ),
             data = sc2_test_data()$frac_no_test, colour = "darkgrey", size = plot_line_size) +
@@ -961,8 +961,8 @@ quarantineDurationServer <- function(id) {
               x = release, y = fraction, colour = DeltaT, group = DeltaT,
               text = str_c(
                 "reduced transmission<br>",
-                "Δ<sub>T</sub> = ", DeltaT, "<br>",
-                "prevented = ", round(fraction * 100, 2), "%"
+                "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+                "prevented = ", scales::percent(fraction, accuracy = 0.1)
               )
             ),
             data = sc2_test_data()$frac_reduced, linetype = "dashed") +
@@ -983,8 +983,8 @@ quarantineDurationServer <- function(id) {
         plot <- ggplot(sc2_test_data()$rel_utility,
             aes(x = release, y = relUtility, colour = DeltaT,
               text = str_c(
-                "Δ<sub>T</sub> = ", DeltaT, "<br>",
-                "rel. utility = ", round(relUtility, 2)
+                "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+                "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
                 ),
               group = DeltaT
           )) +
@@ -996,7 +996,7 @@ quarantineDurationServer <- function(id) {
               x = release, y = relUtility, colour = DeltaT,
               text = str_c(
                 "no testing<br>",
-                "rel. utility = ", round(relUtility, 2)
+                "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
               ),
               group = DeltaT
             ),
@@ -1007,8 +1007,8 @@ quarantineDurationServer <- function(id) {
               x = release, y = relUtility, colour = DeltaT, group = DeltaT,
               text = str_c(
                 "reduced transmission<br>",
-                "Δ<sub>T</sub> = ", DeltaT, "<br>",
-                "rel. utility = ", round(relUtility, 2), "%"
+                "Δ<sub>T</sub> = ", dayLabels(DeltaT), "<br>",
+                "rel. utility = ", format(round(relUtility, 2), nsmall = 2)
               )
             ),
             data = sc2_test_data()$rel_utility_reduced, linetype = "dashed") +
@@ -1124,8 +1124,8 @@ quarantineDurationServer <- function(id) {
           data = filter(sc2_adherence_data()$rel_adherence, n > 0),
           mapping = aes(x = n, y = relAdherence, colour = y,
               text = str_c(
-                "travel duration = ", y, "<br>",
-                "rel. adherence = ", round(relAdherence, 2)
+                "travel duration = ", dayLabels(y), "<br>",
+                "rel. adherence = ", format(round(relAdherence, 2), nsmall = 2)
               ),
               group = y
             )) +
@@ -1156,8 +1156,8 @@ quarantineDurationServer <- function(id) {
         plot <- ggplot(sc2_adherence_data()$frac,
             aes(x = n, y = fraction, colour = a,
               text = str_c(
-                "fraction asymptomatic = ", a, "<br>",
-                "prevented = ", round(fraction * 100, 2), "%"
+                "fraction asymptomatic = ", scales::percent(as.numeric(levels(sc2_adherence_data()$frac$a))[a]), "<br>",
+                "prevented = ", scales::percent(fraction, accuracy = 0.1)
               ),
               group = a)) +
           geom_line(size = plot_line_size) +
