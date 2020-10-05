@@ -190,16 +190,16 @@ tsCasesServer <- function(id) {
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
         }
       })
-
-      observeEvent(input$log_scale, {
-        if (input$log_scale) {
-          shinyjs::disable("stack_histograms")
-
-          if (input$stack_histograms) {
-            updateCheckboxInput(session, "stack_histograms", value = FALSE)
-          }
-        } else {
-          shinyjs::enable("stack_histograms")
+      
+      # Control the display options
+      observe({
+        shinyjs::toggleState(id = "stack_histograms", condition = !input$display_prob && !input$log_scale
+                             && !is.na(compare()))
+        shinyjs::toggleState(id = "granularity", condition = !input$display_prob)
+        shinyjs::toggleState(id = "smoothing_window", condition = input$display_prob)
+        
+        if (input$log_scale && input$stack_histograms) {
+          updateCheckboxInput(session, "stack_histograms", value = FALSE)
         }
       })
 
