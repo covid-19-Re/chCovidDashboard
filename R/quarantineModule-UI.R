@@ -109,8 +109,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Standard n-day quarantine", id = "plotsSC1-1",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("sc1"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("sc1_utility"), height = "450px") %>% withSpinner())
+                    column(6, plotlyOutput(ns("sc1"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc1_utility"), height = "450px") %>% withSpinner())
                   ),
                   plotOutput(ns("sc1_legend"), height = "75px"),
                   uiOutput(ns("sc1_caption"))
@@ -177,8 +177,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release", id = "plotsSC1-2",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("sc1_test"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("sc1_test_utility"), height = "450px") %>% withSpinner())
+                    column(6, plotlyOutput(ns("sc1_test"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc1_test_utility"), height = "450px") %>% withSpinner())
                   ),
                   plotOutput(ns("sc1_test_legend"), height = "75px"),
                   uiOutput(ns("sc1_test_caption"))
@@ -207,8 +207,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Adherence and symptoms", id = "plotsSC1-3",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("sc1_adherence"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("sc1_asymptomatic"), height = "450px") %>% withSpinner())
+                    column(6, plotlyOutput(ns("sc1_adherence"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc1_asymptomatic"), height = "450px") %>% withSpinner())
                   ),
                   uiOutput(ns("sc1_adherence_caption"))
                 )
@@ -261,8 +261,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Standard n-day quarantine", id = "plotsSC2-4",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("sc2"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("sc2_utility"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc2"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc2_utility"), height = "450px") %>% withSpinner()),
                   ),
                   plotOutput(ns("sc2_legend"), height = "75px"),
                   uiOutput(ns("sc2_caption"))
@@ -329,8 +329,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Test-and-release", id = "plotsSC2-5",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("sc2_test"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("sc2_test_utility"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc2_test"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc2_test_utility"), height = "450px") %>% withSpinner()),
                   ),
                   plotOutput(ns("sc2_test_legend"), height = "75px"),
                   uiOutput(ns("sc2_test_caption"))
@@ -359,8 +359,8 @@ quarantineDurationUI <- function(id) {
                   heading = "Adherence and symptoms", id = "plotsSC2-6",
                   class = "panel-info",
                   fluidRow(
-                    column(6, plotOutput(ns("sc2_adherence"), height = "450px") %>% withSpinner()),
-                    column(6, plotOutput(ns("sc2_asymptomatic"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc2_adherence"), height = "450px") %>% withSpinner()),
+                    column(6, plotlyOutput(ns("sc2_asymptomatic"), height = "450px") %>% withSpinner()),
                   ),
                   uiOutput(ns("sc2_adherence_caption"))
                 )

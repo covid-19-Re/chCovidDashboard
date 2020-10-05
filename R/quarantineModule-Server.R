@@ -27,6 +27,10 @@ quarantineDurationServer <- function(id) {
         toExclude <- setdiff(names(input), "tab")
         setBookmarkExclude(toExclude)
       })
+
+      plot_line_size <- 1
+      plot_point_size <- 1.5
+
       # False negative probabilities ----
       falseNeg <- approxfun(
         x = c(0, 1, 4, 5, 6, 7, 8, 9, 21),
@@ -160,10 +164,14 @@ quarantineDurationServer <- function(id) {
 
         rel_utility <- lapply(DeltaQ.vals, function(DeltaQ) {
           nPrime <- n.vals[n.vals > DeltaQ]
-          utility.nPrime <- getUtility(efficacy = getIntegral(upper = tE + nPrime, lower = DeltaQ, tE = tE, params = genParams()),
-                                       time = tE + nPrime - DeltaQ)
-          utility.nCompare <- getUtility(efficacy = getIntegral(upper = tE + nCompare, lower = DeltaQ, tE = tE, params = genParams()),
-                     time = tE + nCompare - DeltaQ)
+          utility.nPrime <- getUtility(
+            efficacy = getIntegral(upper = tE + nPrime, lower = DeltaQ, tE = tE, params = genParams()),
+            time = tE + nPrime - DeltaQ
+          )
+          utility.nCompare <- getUtility(
+            efficacy = getIntegral(upper = tE + nCompare, lower = DeltaQ, tE = tE, params = genParams()),
+            time = tE + nCompare - DeltaQ
+          )
           data.frame(
             DeltaQ = factor(DeltaQ, levels = DeltaQ),
             n = nPrime,
@@ -176,9 +184,15 @@ quarantineDurationServer <- function(id) {
 
       # PLOTS ----
       sc1 <- reactive({
-        ggplot(sc1_data()$frac, aes(x = n, y = fraction, colour = DeltaQ)) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+        ggplot(sc1_data()$frac, aes(x = n, y = fraction, colour = DeltaQ,
+            text = str_c(
+              "Δ<sub>Q</sub> = ", DeltaQ, "<br>",
+              "prevented = ", round(fraction * 100, 2), "%"
+              ),
+            group = DeltaQ
+          )) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           scale_colour_viridis_d(
@@ -186,26 +200,38 @@ quarantineDurationServer <- function(id) {
             labels = dayLabels(levels(sc1_data()$frac$DeltaQ)),
             guide = guide_legend(title.position = "left", nrow = 1)
           ) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
+          labs(
+            x = "&nbsp;\nquarantine duration (days)",
+            y = "fraction of transmission\nprevented by quarantine\n&nbsp;"
+          ) +
           plotTheme
       })
 
-      output$sc1 <- renderPlot({
-        sc1() + theme(legend.position = "none")
+      output$sc1 <- renderPlotly({
+        makePlotly(sc1())
       })
 
-      output$sc1_utility <- renderPlot({
-        ggplot(sc1_data()$rel_utility, aes(x = n, y = relUtility, colour = DeltaQ)) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = 1.2) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+      output$sc1_utility <- renderPlotly({
+        plot <- ggplot(sc1_data()$rel_utility, aes(x = n, y = relUtility, colour = DeltaQ,
+          text = str_c(
+            "Δ<sub>Q</sub> = ", DeltaQ, "<br>",
+            "rel. utility = ", round(relUtility, 2)
+            ),
+          group = DeltaQ
+          )) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = plot_line_size) +
+          geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = plot_line_size) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           coord_cartesian(
             xlim = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
           scale_colour_viridis_d(option = "inferno", end = 0.9) +
-          labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
-          plotTheme +
-          theme(legend.position = "none")
+          labs(
+            x = "&nbsp;\nquarantine duration (days)",
+            y = "relative utility of quarantine\n&nbsp;") +
+          plotTheme
+
+        makePlotly(plot)
       })
 
       output$sc1_legend <- renderPlot({
@@ -302,14 +328,18 @@ quarantineDurationServer <- function(id) {
           )
         }) %>% bind_rows()
 
-        utility_no_test <- getUtility(s = s,
-                                      efficacy = getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams()),
-                                      time = tE + n - DeltaQ)
+        utility_no_test <- getUtility(
+          s = s,
+          efficacy = getIntegral(upper = tE + n, lower = DeltaQ, tE = tE, params = genParams()),
+          time = tE + n - DeltaQ
+        )
 
         rel_utility_no_test <- lapply(x.vals, function(x) {
-          utility <- getUtility(s = s,
-                                efficacy = getIntegral(upper = tE + x, lower = DeltaQ, tE = tE, params = genParams()),
-                                time = tE + x - DeltaQ)
+          utility <- getUtility(
+            s = s,
+            efficacy = getIntegral(upper = tE + x, lower = DeltaQ, tE = tE, params = genParams()),
+            time = tE + x - DeltaQ
+          )
           data.frame(
             DeltaT = NA,
             x = NA,
@@ -320,11 +350,13 @@ quarantineDurationServer <- function(id) {
 
         #' Relative utility of test-and-release strategy compared to standard
         rel_utility <- lapply(x.vals, function(x) {
-          utility <- getUtility(s = s,
-                                efficacy = getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
-                                  (1 - falseNeg(x)) *
-                                  getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()),
-                                time = tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x)) * (n - x - DeltaT.vals))
+          utility <- getUtility(
+            s = s,
+            efficacy = getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
+              (1 - falseNeg(x)) *
+              getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()),
+            time = tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x)) * (n - x - DeltaT.vals)
+          )
           data.frame(
             DeltaT = factor(DeltaT.vals),
             x = x,
@@ -335,11 +367,12 @@ quarantineDurationServer <- function(id) {
 
         #' Relative utility of test and release with reduced post-quarantine transmission
         rel_utility_reduced <- lapply(x.vals, function(x) {
-          utility <- getUtility(s = s,
-                                efficacy = getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
-                                  (1 - falseNeg(x) + r * falseNeg(x)) *
-                                  getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()),
-                                time = tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x)) * (n - x - DeltaT.vals))
+          utility <- getUtility(
+            s = s,
+            efficacy = getIntegral(upper = tE + x + DeltaT.vals, lower = DeltaQ, tE = tE, params = genParams()) +
+              (1 - falseNeg(x) + r * falseNeg(x)) *
+              getIntegral(upper = tE + n, lower = tE + x + DeltaT.vals, tE = tE, params = genParams()),
+            time = tE + x + DeltaT.vals - DeltaQ + s * (1 - falseNeg(x)) * (n - x - DeltaT.vals))
           data.frame(
             DeltaT = factor(DeltaT.vals),
             x = x,
@@ -368,40 +401,98 @@ quarantineDurationServer <- function(id) {
       })
 
       sc1_test <- reactive({
-        ggplot(sc1_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT)) +
-          geom_hline(yintercept = sc1_test_data()$max_preventable, colour = "darkgrey", size = 1.2) +
-          geom_line(data = sc1_test_data()$frac_no_test, color = "darkgrey", size = 1.2) +
-          geom_line(data = sc1_test_data()$frac_reduced, linetype = "dashed") +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+        ggplot(sc1_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT,
+            text = str_c(
+              "Δ<sub>T</sub> = ", DeltaT, "<br>",
+              "prevented = ", round(fraction * 100, 2), "%"
+              ),
+            group = DeltaT
+          )) +
+          geom_hline(yintercept = sc1_test_data()$max_preventable, colour = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = fraction, group = DeltaT,
+              text = str_c(
+                "no testing<br>",
+                "prevented = ", round(fraction * 100, 2), "%"
+              )
+            ),
+            data = sc1_test_data()$frac_no_test, color = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = fraction, colour = DeltaT, group = DeltaT,
+              text = str_c(
+                "reduced transmission<br>",
+                "Δ<sub>T</sub> = ", DeltaT, "<br>",
+                "prevented = ", round(fraction * 100, 2), "%"
+              )
+            ),
+            data = sc1_test_data()$frac_reduced, linetype = "dashed") +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(0, sc1_pars()$n), breaks = seq(0, sc1_pars()$n, 2)) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           sc1_test_colours() +
-          labs(x = "day of release", y = "fraction of transmission\nprevented by quarantine") +
+          labs(
+            x = "&nbsp;\nday of release",
+            y = "fraction of transmission\nprevented by quarantine\n&nbsp;") +
           plotTheme
       })
 
-      output$sc1_test <- renderPlot({
-        sc1_test() + theme(legend.position = "None")
-      })
+      output$sc1_test <- renderPlotly(
+        makePlotly(sc1_test())
+      )
 
       output$sc1_test_legend <- renderPlot({
         grid::grid.draw(get_legend(sc1_test()))
       })
 
-      output$sc1_test_utility <- renderPlot({
-        ggplot(sc1_test_data()$rel_utility, aes(x = release, y = relUtility, colour = DeltaT)) +
-          geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = 1.2) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_line(data = sc1_test_data()$rel_utility_no_test, colour = "darkgrey", size = 1.1) +
-          geom_line(data = sc1_test_data()$rel_utility_reduced, linetype = "dashed") +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+      output$sc1_test_utility <- renderPlotly({
+        plot <- ggplot(sc1_test_data()$rel_utility,
+            aes(x = release, y = relUtility, colour = DeltaT,
+            text = str_c(
+              "Δ<sub>T</sub> = ", DeltaT, "<br>",
+              "rel.utility = ", round(relUtility, 2)
+              ),
+            group = DeltaT
+          )) +
+          geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = plot_line_size) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = relUtility, colour = DeltaT,
+              text = str_c(
+                "no testing<br>",
+                "rel. utility = ", round(relUtility, 2)
+              ),
+              group = DeltaT
+            ),
+            data = sc1_test_data()$rel_utility_no_test, colour = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = relUtility, colour = DeltaT, group = DeltaT,
+              text = str_c(
+                "reduced transmission<br>",
+                "Δ<sub>T</sub> = ", DeltaT, "<br>",
+                "rel. utility = ", round(relUtility, 2), "%"
+              )
+            ),
+            data = sc1_test_data()$rel_utility_reduced, linetype = "dashed") +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(0, sc1_pars()$n), breaks = seq(0, sc1_pars()$n, 2)) +
           coord_cartesian(ylim = c(0, 4)) +
           sc1_test_colours() +
-          labs(x = "day of release", y = "\nrelative utility of quarantine") +
-          plotTheme + theme(legend.position = "None")
+          labs(
+            x = "&nbsp;\nday of release",
+            y = "\nrelative utility of quarantine\n&nbsp;") +
+          plotTheme
+
+        makePlotly(plot)
       })
 
       output$sc1_test_caption <- renderUI({
@@ -480,12 +571,19 @@ quarantineDurationServer <- function(id) {
       })
 
       # PLOTS ----
-      output$sc1_adherence <- renderPlot({
-        ggplot(sc1_adherence_data()$rel_adherence, aes(x = n, y = relAdherence, colour = DeltaQ)) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = 1.2) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+      output$sc1_adherence <- renderPlotly({
+        plot <- ggplot(sc1_adherence_data()$rel_adherence,
+            aes(x = n, y = relAdherence, colour = DeltaQ,
+              text = str_c(
+                "Δ<sub>Q</sub> = ", DeltaQ, "<br>",
+                "rel. adherence = ", round(relAdherence, 2)
+              ),
+              group = DeltaQ
+            )) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = plot_line_size) +
+          geom_vline(xintercept = sc1_pars()$n, color = "darkgrey", size = plot_line_size) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
           coord_cartesian(ylim = c(0, 4)) +
           scale_colour_viridis_d(
@@ -495,28 +593,40 @@ quarantineDurationServer <- function(id) {
           ) +
           labs(
             x = "quarantine duration (days)",
-            y = "relative adherence required to\nmaintain quarantine efficacy"
+            y = "relative adherence required to\nmaintain quarantine efficacy\n&nbsp;"
           ) +
           plotTheme +
           theme(legend.position = "bottom")
+
+        makePlotly(plot, show_legend = TRUE, legend_title = "delay to\nquarantine")
       })
 
-      output$sc1_asymptomatic <- renderPlot({
+      output$sc1_asymptomatic <- renderPlotly({
         labs <- scales::percent(sc1_adherence_pars()$a.vals)
         names(labs) <- sc1_adherence_pars()$a.vals
 
-        ggplot(sc1_adherence_data()$frac, aes(x = n, y = fraction, colour = a)) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+        plot <- ggplot(sc1_adherence_data()$frac,
+            aes(x = n, y = fraction, colour = a,
+              text = str_c(
+                "fraction asymptomatic = ", a, "<br>",
+                "prevented = ", round(fraction * 100, 2), "%"
+              ),
+              group = a)) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(input$quarantineDuration[1], input$quarantineDuration[2])) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           scale_colour_viridis_d(
             option = "viridis", direction = -1, end = 0.9, name = "fraction\nasymptomatic",
             labels = labs, guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
           ) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
+          labs(
+            x = "quarantine duration (days)",
+            y = "fraction of transmission\nprevented by quarantine\n&nbsp;") +
           plotTheme +
           theme(legend.position = "bottom")
+
+          makePlotly(plot, show_legend = TRUE, legend_title = "fraction\nasymptomatic")
       })
 
       output$sc1_adherence_caption <- renderUI({
@@ -604,9 +714,15 @@ quarantineDurationServer <- function(id) {
 
       # PLOTS ----
       sc2 <- reactive({
-        ggplot(sc2_data()$frac, aes(x = n, y = fraction, colour = y)) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+        ggplot(sc2_data()$frac, aes(x = n, y = fraction, colour = y,
+            text = str_c(
+              "travel duration = ", y, "<br>",
+              "prevented = ", round(fraction * 100, 2), "%"
+              ),
+            group = y
+          )) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2])) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           scale_colour_viridis_d(
@@ -614,27 +730,39 @@ quarantineDurationServer <- function(id) {
             labels = dayLabels(levels(sc2_data()$frac$y)),
             guide = guide_legend(title.position = "left", nrow = 1)
           ) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
+          labs(
+            x = "&nbsp;\nquarantine duration (days)",
+            y = "fraction of transmission\nprevented by quarantine\n&nbsp;") +
           plotTheme
       })
 
-      output$sc2 <- renderPlot({
-        sc2() + theme(legend.position = "none")
+      output$sc2 <- renderPlotly({
+        makePlotly(sc2())
       })
 
-      output$sc2_utility <- renderPlot({
-        ggplot(sc2_data()$rel_utility, aes(x = n, y = relUtility, colour = y)) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = 1.2) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+      output$sc2_utility <- renderPlotly({
+        plot <- ggplot(sc2_data()$rel_utility, aes(x = n, y = relUtility, colour = y,
+            text = str_c(
+              "travel duration = ", y, "<br>",
+              "rel. utility = ", round(relUtility, 2), "%"
+              ),
+            group = y
+          )) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = plot_line_size) +
+          geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = plot_line_size) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           coord_cartesian(
             xlim = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2]),
             ylim = c(0, 2.5)) +
           scale_colour_viridis_d(option = "inferno", end = 0.9) +
-          labs(x = "quarantine duration (days)", y = "relative utility of quarantine") +
+          labs(
+            x = "&nbsp;\nquarantine duration (days)",
+            y = "relative utility of quarantine\n&nbsp;") +
           plotTheme +
           theme(legend.position = "none")
+
+        makePlotly(plot)
       })
 
       output$sc2_legend <- renderPlot({
@@ -809,37 +937,92 @@ quarantineDurationServer <- function(id) {
       })
 
       sc2_test <- reactive({
-        fracPlot <- ggplot(sc2_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT)) +
-          geom_hline(yintercept = sc2_test_data()$max_preventable_plot, colour = "darkgrey", size = 1.2) +
-          geom_line(data = sc2_test_data()$frac_no_test, colour = "darkgrey", size = 1.2) +
-          geom_line(data = sc2_test_data()$frac_reduced, linetype = "dashed") +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+        ggplot(sc2_test_data()$frac, aes(x = release, y = fraction, colour = DeltaT,
+            text = str_c(
+              "Δ<sub>T</sub> = ", DeltaT, "<br>",
+              "prevented = ", round(fraction * 100, 2), "%"
+              ),
+            group = DeltaT
+          )) +
+          geom_hline(yintercept = sc2_test_data()$max_preventable_plot, colour = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = fraction, group = DeltaT,
+              text = str_c(
+                "no testing<br>",
+                "prevented = ", round(fraction * 100, 2), "%"
+              )
+            ),
+            data = sc2_test_data()$frac_no_test, colour = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = fraction, colour = DeltaT, group = DeltaT,
+              text = str_c(
+                "reduced transmission<br>",
+                "Δ<sub>T</sub> = ", DeltaT, "<br>",
+                "prevented = ", round(fraction * 100, 2), "%"
+              )
+            ),
+            data = sc2_test_data()$frac_reduced, linetype = "dashed") +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(0, sc2_pars()$n), breaks = seq(0, sc2_pars()$n, 2)) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           sc2_test_colours() +
-          labs(x = "day of release", y = "fraction of local transmission\nprevented by quarantine") +
+          labs(x = "&nbsp;\nday of release", y = "fraction of local transmission\nprevented by quarantine\n&nbsp;") +
           plotTheme
       })
 
-      output$sc2_test <- renderPlot({
-        sc2_test() +
-          theme(legend.position = "none")
+      output$sc2_test <- renderPlotly({
+        makePlotly(sc2_test())
       })
 
-      output$sc2_test_utility <- renderPlot({
-        ggplot(sc2_test_data()$rel_utility, aes(x = release, y = relUtility, colour = DeltaT)) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = 1.2) +
-          geom_line(data = sc2_test_data()$rel_utility_no_test, colour = "darkgrey", size = 1.2) +
-          geom_line(data = sc2_test_data()$rel_utility_reduced, linetype = "dashed") +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+      output$sc2_test_utility <- renderPlotly({
+        plot <- ggplot(sc2_test_data()$rel_utility,
+            aes(x = release, y = relUtility, colour = DeltaT,
+              text = str_c(
+                "Δ<sub>T</sub> = ", DeltaT, "<br>",
+                "rel. utility = ", round(relUtility, 2)
+                ),
+              group = DeltaT
+          )) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = plot_line_size) +
+          geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = relUtility, colour = DeltaT,
+              text = str_c(
+                "no testing<br>",
+                "rel. utility = ", round(relUtility, 2)
+              ),
+              group = DeltaT
+            ),
+            data = sc2_test_data()$rel_utility_no_test, colour = "darkgrey", size = plot_line_size) +
+          geom_line(
+            inherit.aes = FALSE,
+            mapping = aes(
+              x = release, y = relUtility, colour = DeltaT, group = DeltaT,
+              text = str_c(
+                "reduced transmission<br>",
+                "Δ<sub>T</sub> = ", DeltaT, "<br>",
+                "rel. utility = ", round(relUtility, 2), "%"
+              )
+            ),
+            data = sc2_test_data()$rel_utility_reduced, linetype = "dashed") +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(0, sc2_pars()$n), breaks = seq(0, sc2_pars()$n, 2)) +
           coord_cartesian(ylim = c(0, 4)) +
           sc2_test_colours() +
-          labs(x = "day of release", y = "\nrelative utility of quarantine") +
-          plotTheme + theme(legend.position = "None")
+          labs(
+            x = "&nbsp;\nday of release",
+            y = "\nrelative utility of quarantine\n&nbsp;") +
+          plotTheme
+
+        makePlotly(plot)
       })
 
       output$sc2_test_legend <- renderPlot({
@@ -936,14 +1119,20 @@ quarantineDurationServer <- function(id) {
       })
 
       # PLOTS ----
-      output$sc2_adherence <- renderPlot({
-        ggplot(
+      output$sc2_adherence <- renderPlotly({
+        plot <- ggplot(
           data = filter(sc2_adherence_data()$rel_adherence, n > 0),
-          mapping = aes(x = n, y = relAdherence, colour = y)) +
-          geom_hline(yintercept = 1, color = "darkgrey", size = 1.2) +
-          geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = 1.2) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+          mapping = aes(x = n, y = relAdherence, colour = y,
+              text = str_c(
+                "travel duration = ", y, "<br>",
+                "rel. adherence = ", round(relAdherence, 2)
+              ),
+              group = y
+            )) +
+          geom_hline(yintercept = 1, color = "darkgrey", size = plot_line_size) +
+          geom_vline(xintercept = sc2_pars()$n, color = "darkgrey", size = plot_line_size) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2])) +
           coord_cartesian(ylim = c(0, 4.4)) +
           scale_colour_viridis_d(
@@ -951,27 +1140,41 @@ quarantineDurationServer <- function(id) {
             labels = dayLabels(sc2_adherence_data()$rel_adherence$y),
             guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
           ) +
-          labs(x = "quarantine duration (days)", y = "relative adherence required\nto maintain quarantine efficacy") +
+          labs(
+            x = "quarantine duration (days)",
+            y = "relative adherence required\nto maintain quarantine efficacy\n&nbsp;") +
           plotTheme +
           theme(legend.position = "bottom")
+
+        makePlotly(plot, show_legend = TRUE, legend_title = "delay to\nquarantine")
       })
 
-      output$sc2_asymptomatic <- renderPlot({
+      output$sc2_asymptomatic <- renderPlotly({
         labs <- scales::percent(sc1_adherence_pars()$a.vals)
         names(labs) <- sc1_adherence_pars()$a.vals
 
-        ggplot(sc2_adherence_data()$frac, aes(x = n, y = fraction, colour = a)) +
-          geom_line(size = 1.2) +
-          geom_point(size = 3) +
+        plot <- ggplot(sc2_adherence_data()$frac,
+            aes(x = n, y = fraction, colour = a,
+              text = str_c(
+                "fraction asymptomatic = ", a, "<br>",
+                "prevented = ", round(fraction * 100, 2), "%"
+              ),
+              group = a)) +
+          geom_line(size = plot_line_size) +
+          geom_point(size = plot_point_size) +
           scale_x_continuous(limits = c(input$quarantineDurationSC2[1], input$quarantineDurationSC2[2])) +
           scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
           scale_colour_viridis_d(
             option = "viridis", direction = -1, end = 0.9, name = "fraction\nasymptomatic",
             labels = labs, guide = guide_legend(title.position = "left", title.hjust = 0.5, nrow = 2, byrow = T)
           ) +
-          labs(x = "quarantine duration (days)", y = "fraction of transmission\nprevented by quarantine") +
+          labs(
+            x = "quarantine duration (days)",
+            y = "fraction of transmission\nprevented by quarantine\n&nbsp;") +
           plotTheme +
           theme(legend.position = "bottom")
+
+        makePlotly(plot, show_legend = TRUE, legend_title = "fraction\nasymptomatic")
       })
 
       output$sc2_adherence_caption <- renderUI({
