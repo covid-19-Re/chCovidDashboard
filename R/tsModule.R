@@ -407,9 +407,9 @@ tsServer <- function(id) {
         
         # Case 1: showing the total frequencies 
         if (!input$display_prob && is.na(compare())) {
-          dataProc <- intersect(dataProc, clinicalEventFiltered())
-          dataProc <- dateRoundingProcessor()(dataProc)
           dataProc <- dataProc %>%
+            intersect(clinicalEventFiltered()) %>%
+            dateRoundingProcessor()() %>%
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop")
           
@@ -421,25 +421,26 @@ tsServer <- function(id) {
         
         # Case 2: comparing the frequencies
         if (!input$display_prob && !is.na(compare())) {
-          dataProc <- intersect(dataProc, clinicalEventFiltered())
-          dataProc <- dateRoundingProcessor()(dataProc)
+          dataProc <- dataProc %>%
+            intersect(clinicalEventFiltered()) %>%
+            dateRoundingProcessor()()
           
           plot_data <- NULL
           for (compare_val in unique(dataProc[[categoryCols[[compare()]]]])) {
-            d <- dataProc %>% filter(!!as.symbol(categoryCols[[compare()]]) == compare_val)
-            d <- d %>%
+            d <- dataProc %>%
+              filter(!!as.symbol(categoryCols[[compare()]]) == compare_val) %>%
               group_by(date) %>%
               summarize(count = sum(mult), .groups = "drop")
-            d[, compare()] <- compare_val
             
             if (compare_proportions()) {
               d <- d %>%
                 complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
                 mutate(count = replace_na(count, 0)) %>%
                 drop_na(date)
-              d[, compare()] <- compare_val
               d$smoothedCount <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
             }
+            
+            d[, compare()] <- compare_val
             plot_data <- bind_rows(plot_data, d)
           }
           
@@ -468,34 +469,28 @@ tsServer <- function(id) {
         if (input$display_prob && is.na(compare())) {
           denominatorData <- intersect(dataProc, givenClinicalEventFiltered())
           numeratorData <- intersect(denominatorData, clinicalEventFiltered())
-          
-          # TODO Remove code redundancy
-          denominatorData <- denominatorData %>%
-            group_by(date) %>%
-            summarize(
-              count = sum(mult),
-              .groups = "drop"
-            ) %>%
-            complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-            mutate(count = replace_na(count, 0))
-          numeratorData <- numeratorData %>%
-            group_by(date) %>%
-            summarize(
-              count = sum(mult),
-              .groups = "drop"
-            ) %>%
-            complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-            mutate(count = replace_na(count, 0))
-          
+
+          processDataInternal <- function(d) {
+            d <- d %>%
+              group_by(date) %>%
+              summarize(
+                count = sum(mult),
+                .groups = "drop"
+              ) %>%
+              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+              mutate(count = replace_na(count, 0))
+            return (d)
+          }
+          denominatorData <- processDataInternal(denominatorData)
+          numeratorData <-  processDataInternal(numeratorData)
+
           num <- slide_index_dbl(numeratorData$count, numeratorData$date, sum, .before = smoothing_interval)
           denom <- slide_index_dbl(denominatorData$count, denominatorData$date, sum, .before = smoothing_interval)
           
           plotData <- tibble(date = denominatorData$date, prob = num / denom)
-          
           p <- ggplot(plotData, aes(x = date, y = prob)) +
             geom_line() +
             ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
-          
         }
 
         # Case 4: comparing the probabilities
@@ -503,30 +498,26 @@ tsServer <- function(id) {
           denominatorData <- intersect(dataProc, givenClinicalEventFiltered())
           numeratorData <- intersect(denominatorData, clinicalEventFiltered())
           
+          processDataInternal <- function(d) {
+            d <- d %>%
+              group_by(date) %>%
+              summarize(
+                count = sum(mult),
+                .groups = "drop"
+              ) %>%
+              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+              mutate(count = replace_na(count, 0))
+            return (d)
+          }
+          
           plot_data <- NULL
           for (compare_val in unique(dataProc[[categoryCols[[compare()]]]])) {
             d <- dataProc %>% filter(!!as.symbol(categoryCols[[compare()]]) == compare_val)
             dDenom <- intersect(d, denominatorData)
             dNum <- intersect(d, numeratorData)
 
-            # TODO Remove code redundancy
-            dDenom <- dDenom %>%
-              group_by(date) %>%
-              summarize(
-                count = sum(mult),
-                .groups = "drop"
-              ) %>%
-              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-              mutate(count = replace_na(count, 0))
-            dNum <- dNum %>%
-              group_by(date) %>%
-              summarize(
-                count = sum(mult),
-                .groups = "drop"
-              ) %>%
-              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-              mutate(count = replace_na(count, 0))
-            
+            dDenom <- processDataInternal(dDenom)
+            dNum <- processDataInternal(dNum)
             denom <- slide_index_dbl(dDenom$count, dDenom$date, sum, .before = smoothing_interval)
             num <- slide_index_dbl(dNum$count, dNum$date, sum, .before = smoothing_interval)
             
