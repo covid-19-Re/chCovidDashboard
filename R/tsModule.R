@@ -89,7 +89,8 @@ tsUI <- function(id) {
         column(9,
           bootstrapPanel(
             class = "panel-info", heading = "Basic time series",
-            plotlyOutput(ns("mainPlot"), height = "600px")
+            plotlyOutput(ns("mainPlot"), height = "600px"),
+            helpText("Data Source: Swiss Federal Office of Public Health", style = "text-align: right;")
           ),
           bootstrapPanel(
             class = "panel-primary",
