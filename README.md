@@ -11,9 +11,7 @@ Please see individual modules for specifics.
 
 # Code
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-Source Code for this site is available on [GitHub]
+Source Code for this site is available on [GitHub](https://github.com/covid-19-Re/chCovidDashboard) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Bug reports, issues or other reports and suggestions are always welcome on out [GitHub Issue Tracker](https://github.com/covid-19-Re/chCovidDashboard/issues)!
 
