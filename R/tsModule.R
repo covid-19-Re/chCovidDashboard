@@ -90,7 +90,11 @@ tsUI <- function(id) {
           bootstrapPanel(
             class = "panel-info", heading = "Basic time series",
             plotlyOutput(ns("mainPlot"), height = "600px"),
-            helpText("Data Source: Swiss Federal Office of Public Health", style = "text-align: right;")
+            tags$div(
+              HTML("<span style='width: 50px; height: 12px; display: inline-block; background-color: #e7e7e7;'></span>
+                  <small>The data from the recent 30 days might be incomplete and are subject to change.</small>")
+            ),
+            helpText("Data Source: Swiss Federal Office of Public Health", style = "text-align: right;"),
           ),
           bootstrapPanel(
             class = "panel-primary",
@@ -544,20 +548,35 @@ tsServer <- function(id) {
         }
         
         # Final plot configurations
-        p <- p + xlab(xlabel) + scale_x_date(date_breaks = "months")
+        p <- p +
+          xlab(xlabel) +
+          scale_x_date(date_breaks = "months", labels = date_format("%m-%Y")) +
+          theme_light()
         if (input$log_scale) {
           p <- p + scale_y_log10()
         }
         
         # Draw the plot
-        ggplotly(
-          p
-        ) %>%
+        plotlyPlot <- ggplotly(p) %>%
           config(
             displaylogo = FALSE,
-            modeBarButtons = list(list("toImage")),
+            modeBarButtons = list(list("toImage", "resetScale2d")),
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
+        
+        # Give the data from the recent 30 days a gray background to mark them as uncertain.
+        # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
+        # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
+        todayDaysSince1970 <- as.integer(as.POSIXct(Sys.Date())) / 60 / 60 / 24
+        plotlyPlot[['x']][['layout']][['shapes']] <- list(
+          list(type = "rect",
+               fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
+               # Inf and -Inf don't work here.
+               x0 = todayDaysSince1970 - 30, x1 = todayDaysSince1970 + 100, xref = "x",
+               y0 = -99999999, y1 = 99999999, yref = "y")
+        )
+        
+        plotlyPlot
       })
     }
   )
