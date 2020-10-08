@@ -30,10 +30,11 @@ load_and_process_data <- function() {
     mutate(positiveTest = TRUE, mult = 1) %>%
     mutate(travelClass = getTravelClass(exp_ort)) %>%
     mutate(canton = ktn) %>%
+    mutate(expContactPath = map(exp_kontakt_art, tsConstants$expContactPathsFromCode)) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, positiveTest, mult
+      travelClass, expContactPath, positiveTest, mult
     )
 
 
@@ -71,13 +72,14 @@ load_and_process_data <- function() {
       ## ageGroup = str_replace_all(Altersklasse, " ",""),
       ageGroup = "Unknown",
       travelClass = NA,
+      expContactPath = NA,
       positiveTest = FALSE,
       mult = `Negative Tests`
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, positiveTest, mult
+      travelClass, expContactPath, positiveTest, mult
     )
 
 
@@ -113,13 +115,14 @@ load_and_process_data <- function() {
       canton = ktn,
       ageGroup = str_replace_all(Altersklasse, " ", ""),
       travelClass = NA,
+      expContactPath = NA,
       positiveTest = FALSE,
       mult = Negative
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, positiveTest, mult
+      travelClass, expContactPath, positiveTest, mult
     )
 
   dataTS_spaceAge <- dataTS_spaceAge %>% mutate(ageGroup = replace_na(ageGroup, "Unknown"))

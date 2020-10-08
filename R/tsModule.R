@@ -69,6 +69,29 @@ tsUI <- function(id) {
               inputId = ns("compare_cantons_proportions"),
               label = "Show proportions"
             ),
+            
+            pickerInput(
+              inputId = ns("expContactPaths"),
+              label = "Possible Exposure Source",
+              choices = tsConstants$expContactPaths,
+              selected = tsConstants$expContactPaths,
+              multiple = TRUE,
+              options = list(size = 8)
+            ),
+            actionGroupButtons(
+              inputIds = c(ns("all_expContactPaths"), ns("clear_expContactPaths")),
+              labels = c("Select all", "Clear"),
+              size = "xs"
+            ),
+            checkboxInput(
+              inputId = ns("compare_expContactPaths"),
+              label = "Compare exposure sources"
+            ),
+            checkboxInput(
+              inputId = ns("compare_expContactPaths_proportions"),
+              label = "Show proportions"
+            ),
+            
             radioButtons(
               inputId = ns("travel"),
               label = "Import status",
@@ -175,6 +198,20 @@ tsServer <- function(id) {
           selected = character(0)
         )
       })
+      
+      observeEvent(input$all_expContactPaths, {
+        updatePickerInput(session,
+                          inputId = "expContactPaths",
+                          selected = tsConstants$expContactPaths
+        )
+      })
+      
+      observeEvent(input$clear_expContactPaths, {
+        updatePickerInput(session,
+                          inputId = "expContactPaths",
+                          selected = character(0)
+        )
+      })
 
       observeEvent(input$display_prob, {
         shinyjs::toggleState(id = "given", condition = input$display_prob)
@@ -184,6 +221,7 @@ tsServer <- function(id) {
         if (input$compare_ages) {
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
+          updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_ages_proportions", condition = input$compare_ages)
       })
@@ -192,6 +230,7 @@ tsServer <- function(id) {
         if (input$compare_cantons) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
+          updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_cantons_proportions", condition = input$compare_cantons)
       })
@@ -200,8 +239,18 @@ tsServer <- function(id) {
         if (input$compare_travel) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
+          updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_travel_proportions", condition = input$compare_travel)
+      })
+      
+      observeEvent(input$compare_expContactPaths, {
+        if (input$compare_expContactPaths) {
+          updateCheckboxInput(session, "compare_ages", value = FALSE)
+          updateCheckboxInput(session, "compare_cantons", value = FALSE)
+          updateCheckboxInput(session, "compare_travel", value = FALSE)
+        }
+        shinyjs::toggleState(id = "compare_expContactPaths_proportions", condition = input$compare_expContactPaths)
       })
 
       
@@ -228,6 +277,8 @@ tsServer <- function(id) {
           return("ageGroup")
         } else if (input$compare_cantons == TRUE) {
           return("canton")
+        } else if (input$compare_expContactPaths == TRUE) {
+          return("expContactPath")
         } else if (input$compare_travel == TRUE) {
           return("travelClass")
         }
@@ -238,6 +289,7 @@ tsServer <- function(id) {
         return (
           (input$compare_ages && input$compare_ages_proportions) ||
           (input$compare_cantons && input$compare_cantons_proportions) ||
+          (input$compare_expContactPaths && input$compare_expContactPaths_proportions) ||
           (input$compare_travel && input$compare_travel_proportions)
         )
       })
@@ -261,6 +313,10 @@ tsServer <- function(id) {
           need(
             !is.null(input$cantons),
             "Must specify at least one canton."
+          ),
+          need(
+            !is.null(input$expContactPaths),
+            "Must specify at least one possible exposure source."
           )
         )
       })
@@ -293,6 +349,13 @@ tsServer <- function(id) {
       cantonFiltered <- reactive({
         if (length(input$cantons) < length(tsConstants$cantons)) {
           return (data() %>% filter(canton %in% input$cantons))
+        }
+        return (data())
+      })
+      
+      expContactPathFiltered <- reactive({
+        if (length(input$expContactPaths) < length(tsConstants$expContactPaths)) {
+          return (data() %>% filter(expContactPath %in% input$expContactPaths))
         }
         return (data())
       })
@@ -387,6 +450,7 @@ tsServer <- function(id) {
           data(),
           ageGroupFiltered(),
           cantonFiltered(),
+          expContactPathFiltered(),
           travelClassFiltered(),
           stratifiedTestRecordFiltered()
         )
@@ -422,16 +486,16 @@ tsServer <- function(id) {
         # Case 2: comparing the frequencies
         if (!input$display_prob && !is.na(compare())) {
           dataProc <- dataProc %>%
-            intersect(clinicalEventFiltered()) %>%
-            dateRoundingProcessor()()
-          
+            intersect(clinicalEventFiltered())
+          if (!compare_proportions()) {
+            dataProc <- dataProc %>% dateRoundingProcessor()()
+          }
           plot_data <- NULL
           for (compare_val in unique(dataProc[[compare()]])) {
             d <- dataProc %>%
               filter(!!as.symbol(compare()) == compare_val) %>%
               group_by(date) %>%
               summarize(count = sum(mult), .groups = "drop")
-            
             if (compare_proportions()) {
               d <- d %>%
                 complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
@@ -439,11 +503,9 @@ tsServer <- function(id) {
                 drop_na(date)
               d$smoothedCount <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
             }
-            
             d[, compare()] <- compare_val
             plot_data <- bind_rows(plot_data, d)
           }
-          
           if (!compare_proportions()) {
             p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare()))) +
               geom_histogram(stat = "identity", position = (if (input$stack_histograms) "stack" else "dodge")) +

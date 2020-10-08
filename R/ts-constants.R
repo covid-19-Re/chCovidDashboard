@@ -11,6 +11,29 @@ tsConstants$cantons <- c(
   "UR", "VD", "VS", "ZG", "ZH"
 )
 
+tsConstants$expContactPaths <- c(
+  "Family member",
+  "as medical staff",
+  "other contacts",
+  "Unknown",
+  "School/child care etc",
+  "Work",
+  "private party",
+  "Disco/Club",
+  "Bar/Restaurant",
+  "Demonstration/Event",
+  "spontaneous crowd of people",
+  "not filled"
+)
+
+tsConstants$expContactPathsFromCode <- function(code) {
+  if (is.na(code)) {
+    return ("not filled")
+  } else {
+    return (tsConstants$expContactPaths[code]) # This works only because the code is a numerical value starting from 1
+  }
+}
+
 tsConstants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",
