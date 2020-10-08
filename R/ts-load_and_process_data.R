@@ -25,7 +25,7 @@ load_and_process_data <- function() {
 
   data <- read_csv2(file = newestFile) %>%
     group_by(altersjahr) %>%
-    mutate(ageGroup = ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
+    mutate(ageGroup = tsConstants$ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
     group_by(ageGroup) %>%
     mutate(positiveTest = TRUE, mult = 1) %>%
     mutate(travelClass = getTravelClass(exp_ort)) %>%

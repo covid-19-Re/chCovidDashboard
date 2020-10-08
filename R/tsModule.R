@@ -16,8 +16,8 @@ tsUI <- function(id) {
             radioButtons(
               inputId = ns("event"),
               label = "Clinical event",
-              choices = events,
-              selected = events[1], inline = TRUE
+              choices = tsConstants$events,
+              selected = tsConstants$events[1], inline = TRUE
             ),
             checkboxInput(
               inputId = ns("display_prob"),
@@ -26,8 +26,8 @@ tsUI <- function(id) {
             disabled(radioButtons(
               inputId = ns("given"),
               label = NULL,
-              choices = events,
-              selected = events[1], inline = TRUE
+              choices = tsConstants$events,
+              selected = tsConstants$events[1], inline = TRUE
             ))
           ),
           bootstrapPanel(
@@ -36,8 +36,8 @@ tsUI <- function(id) {
             pickerInput(
               inputId = ns("age_groups"),
               label = "Age groups",
-              choices = ageGroups,
-              selected = ageGroups,
+              choices = tsConstants$ageGroups,
+              selected = tsConstants$ageGroups,
               multiple = TRUE,
               options = list(size = 8)
             ),
@@ -51,8 +51,8 @@ tsUI <- function(id) {
             pickerInput(
               inputId = ns("cantons"),
               label = "Cantons",
-              choices = cantons,
-              selected = cantons,
+              choices = tsConstants$cantons,
+              selected = tsConstants$cantons,
               multiple = TRUE,
               options = list(size = 8)
             ),
@@ -72,8 +72,8 @@ tsUI <- function(id) {
             radioButtons(
               inputId = ns("travel"),
               label = "Import status",
-              choices = travelChoices,
-              selected = travelChoices[1],
+              choices = tsConstants$travelChoices,
+              selected = tsConstants$travelChoices[1],
               inline = TRUE
             ),
             checkboxInput(
@@ -114,8 +114,8 @@ tsUI <- function(id) {
                 radioButtons(
                   inputId = ns("granularity"),
                   label = "Histogram time granularity",
-                  choices = granularityChoices,
-                  selected = granularityChoices[1],
+                  choices = tsConstants$granularityChoices,
+                  selected = tsConstants$granularityChoices[1],
                   inline = TRUE
                 )
               ),
@@ -123,8 +123,8 @@ tsUI <- function(id) {
                 radioButtons(
                   inputId = ns("smoothing_window"),
                   label = "Sliding window average (probabilities only)",
-                  choices = slidingWindowChoices,
-                  selected = slidingWindowChoices[1],
+                  choices = tsConstants$slidingWindowChoices,
+                  selected = tsConstants$slidingWindowChoices[1],
                   inline = TRUE
                 )
               )
@@ -151,7 +151,7 @@ tsServer <- function(id) {
       observeEvent(input$all_ages, {
         updatePickerInput(session,
           inputId = "age_groups",
-          selected = ageGroups
+          selected = tsConstants$ageGroups
         )
       })
 
@@ -165,7 +165,7 @@ tsServer <- function(id) {
       observeEvent(input$all_cantons, {
         updatePickerInput(session,
           inputId = "cantons",
-          selected = cantons
+          selected = tsConstants$cantons
         )
       })
 
@@ -209,15 +209,15 @@ tsServer <- function(id) {
       
       data <- reactive({
         d <- load_and_process_data()
-        
+
         # Introduces an ID to make the rows unique and easier identifiable.
         d <- cbind(id = as.integer(rownames(d)), d)
-        
+
         # Creates the "date" column
         if (input$display_prob) {
           d <- d %>% mutate(date = fall_dt)
         } else {
-          d <- d %>% mutate(date = !!as.symbol(eventDateCols[[input$event]]))
+          d <- d %>% mutate(date = !!as.symbol(tsConstants$eventDateCols[[input$event]]))
         }
 
         return(d)
@@ -225,11 +225,11 @@ tsServer <- function(id) {
 
       compare <- reactive({
         if (input$compare_ages == TRUE) {
-          return("Age group")
+          return("ageGroup")
         } else if (input$compare_cantons == TRUE) {
-          return("Canton")
+          return("canton")
         } else if (input$compare_travel == TRUE) {
-          return("Import status")
+          return("travelClass")
         }
         return(NA)
       })
@@ -269,7 +269,7 @@ tsServer <- function(id) {
         if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
           validate(
             need(
-              input$travel == "All cases" && (is.na(compare()) || compare() != "Import status"),
+              input$travel == "All cases" && (is.na(compare()) || compare() != "travelClass"),
               "Currently lacking information about travel status for negative test data."
             )
           )
@@ -284,14 +284,14 @@ tsServer <- function(id) {
       # Filters
       
       ageGroupFiltered <- reactive({
-        if (length(input$age_groups) < length(ageGroups)) {
+        if (length(input$age_groups) < length(tsConstants$ageGroups)) {
           return (data() %>% filter(ageGroup %in% input$age_groups))
         }
         return (data())
       })
       
       cantonFiltered <- reactive({
-        if (length(input$cantons) < length(cantons)) {
+        if (length(input$cantons) < length(tsConstants$cantons)) {
           return (data() %>% filter(canton %in% input$cantons))
         }
         return (data())
@@ -336,8 +336,8 @@ tsServer <- function(id) {
       # Exclude all data before start of stratified negative test records
       stratifiedTestRecordFiltered <- reactive({
         if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
-          if (!is.na(compare()) || length(input$age_groups) != length(ageGroups)
-              || length(input$cantons) != length(cantons)) {
+          if (!is.na(compare()) || length(input$age_groups) != length(tsConstants$ageGroups)
+              || length(input$cantons) != length(tsConstants$cantons)) {
             stratifiedTestingStart <- min((data() %>% filter(positiveTest == FALSE, !is.na(canton)))$fall_dt)
             return (data() %>% filter(fall_dt >= stratifiedTestingStart))
           }
@@ -381,7 +381,7 @@ tsServer <- function(id) {
       ### Putting everything together ###
       output$mainPlot <- renderPlotly({
         validators()
-
+        
         # Apply basic filters
         dataProc <- multiIntersect(
           data(),
@@ -401,12 +401,7 @@ tsServer <- function(id) {
         } else {
           xlabel <- paste("Date of", input$event)
         }
-        smoothing_interval <- switch(input$smoothing_window,
-          None = days(0),
-          "7 days" = days(7),
-          "14 days" = days(14),
-          "28 days" = days(28)
-        )
+        smoothing_interval <- tsConstants$slidingWindowChoicesToIntervals[[input$smoothing_window]]
         minDate <- min((dataProc %>% drop_na(date))$date)
         maxDate <- max((dataProc %>% drop_na(date))$date)
         
@@ -420,8 +415,8 @@ tsServer <- function(id) {
           
           # Define the ggplot
           p <- ggplot(dataProc) +
-            geom_histogram(aes(x = date, y = count), stat = "identity")
-          p <- p + ylab("Total count")
+            geom_histogram(aes(x = date, y = count), stat = "identity") +
+            ylab("Total count")
         }
         
         # Case 2: comparing the frequencies
@@ -431,9 +426,9 @@ tsServer <- function(id) {
             dateRoundingProcessor()()
           
           plot_data <- NULL
-          for (compare_val in unique(dataProc[[categoryCols[[compare()]]]])) {
+          for (compare_val in unique(dataProc[[compare()]])) {
             d <- dataProc %>%
-              filter(!!as.symbol(categoryCols[[compare()]]) == compare_val) %>%
+              filter(!!as.symbol(compare()) == compare_val) %>%
               group_by(date) %>%
               summarize(count = sum(mult), .groups = "drop")
             
@@ -450,13 +445,9 @@ tsServer <- function(id) {
           }
           
           if (!compare_proportions()) {
-            p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare())))
-            if (input$stack_histograms) {
-              p <- p + geom_histogram(stat = "identity")
-            } else {
-              p <- p + geom_histogram(stat = "identity", position = "dodge")
-            }
-            p <- p + ylab("Total count")
+            p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare()))) +
+              geom_histogram(stat = "identity", position = (if (input$stack_histograms) "stack" else "dodge")) +
+              ylab("Total count")
 
           } else {
             plot_data <- plot_data %>%
@@ -516,8 +507,8 @@ tsServer <- function(id) {
           }
           
           plot_data <- NULL
-          for (compare_val in unique(dataProc[[categoryCols[[compare()]]]])) {
-            d <- dataProc %>% filter(!!as.symbol(categoryCols[[compare()]]) == compare_val)
+          for (compare_val in unique(dataProc[[compare()]])) {
+            d <- dataProc %>% filter(!!as.symbol(compare()) == compare_val)
             dDenom <- intersect(d, denominatorData)
             dNum <- intersect(d, numeratorData)
 
