@@ -49,6 +49,27 @@ tsConstants$quarantBeforePositiveTestFromCode <- function(code) {
   }
 }
 
+tsConstants$labReason <- c(
+  " Symptoms compatible with COVID-19",
+  " Outbreak investigation",
+  "Other",
+  " SwissCovid App",
+  "Not filled"
+)
+
+tsConstants$labReasonFromCode <- function(code) {
+  if (is.na(code)) {
+    return ("Not filled")
+  } else {
+    res <- tsConstants$labReason[code]
+    # There seems to be one case where the value is wrong.
+    if(is.na(res)) {
+      return ("Not filled")
+    }
+    return (res)
+  }
+}
+
 tsConstants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",

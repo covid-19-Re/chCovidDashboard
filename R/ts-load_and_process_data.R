@@ -31,10 +31,11 @@ load_and_process_data <- function() {
     mutate(canton = ktn) %>%
     mutate(expContactPath = unlist(map(exp_kontakt_art, tsConstants$expContactPathsFromCode))) %>%
     mutate(quarantBeforePositiveTest = unlist(map(quarant_vor_pos, tsConstants$quarantBeforePositiveTestFromCode))) %>%
+    mutate(labReason = unlist(map(lab_grund, tsConstants$labReasonFromCode))) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, expContactPath, quarantBeforePositiveTest, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
     )
 
 
@@ -74,13 +75,14 @@ load_and_process_data <- function() {
       travelClass = NA,
       expContactPath = " not filled",
       quarantBeforePositiveTest = "Not filled",
+      labReason = "Not filled",
       positiveTest = FALSE,
       mult = `Negative Tests`
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, expContactPath, quarantBeforePositiveTest, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
     )
 
 
@@ -118,13 +120,14 @@ load_and_process_data <- function() {
       travelClass = NA,
       expContactPath = " not filled",
       quarantBeforePositiveTest = "Not filled",
+      labReason = "Not filled",
       positiveTest = FALSE,
       mult = Negative
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, expContactPath, quarantBeforePositiveTest, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
     )
 
   dataTS_spaceAge <- dataTS_spaceAge %>% mutate(ageGroup = replace_na(ageGroup, "Unknown"))
