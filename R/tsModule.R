@@ -517,8 +517,9 @@ tsServer <- function(id) {
           return (
             switch(input$granularity,
               Days = data,
-              Weeks = data %>% mutate(date = round_date(date, unit = "week")),
-              Months = data %>% mutate(date = round_date(date, unit = "month"))
+              Weeks = data %>% mutate(date = floor_date(date, unit = "week",
+                                                        week_start = getOption("lubridate.week.start", 1))),
+              Months = data %>% mutate(date = floor_date(date, unit = "month"))
             )
           )
         }
