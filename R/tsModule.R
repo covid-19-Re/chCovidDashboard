@@ -140,7 +140,7 @@ tsUI <- function(id) {
               column(4,
                 radioButtons(
                   inputId = ns("granularity"),
-                  label = "Histogram time granularity",
+                  label = "Time granularity (histogram only)",
                   choices = tsConstants$granularityChoices,
                   selected = tsConstants$granularityChoices[1],
                   inline = TRUE
