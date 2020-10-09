@@ -34,6 +34,21 @@ tsConstants$expContactPathsFromCode <- function(code) {
   }
 }
 
+tsConstants$quarantBeforePositiveTest <- c(
+  "  Yes",
+  " No",
+  "Unknown",
+  "Not filled"
+)
+
+tsConstants$quarantBeforePositiveTestFromCode <- function(code) {
+  if (is.na(code)) {
+    return ("Not filled")
+  } else {
+    return (tsConstants$quarantBeforePositiveTest[code])
+  }
+}
+
 tsConstants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",

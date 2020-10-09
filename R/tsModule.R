@@ -92,6 +92,23 @@ tsUI <- function(id) {
               label = "Show proportions"
             ),
             
+            pickerInput(
+              inputId = ns("quarantBeforePositiveTest"),
+              label = "Was patient in quarantine before positive result?",
+              choices = tsConstants$quarantBeforePositiveTest,
+              selected = tsConstants$quarantBeforePositiveTest,
+              multiple = TRUE,
+              options = list(size = 8)
+            ),
+            checkboxInput(
+              inputId = ns("compare_quarantBeforePositiveTest"),
+              label = "Compare"
+            ),
+            checkboxInput(
+              inputId = ns("compare_quarantBeforePositiveTest_proportions"),
+              label = "Show proportions"
+            ),
+            
             radioButtons(
               inputId = ns("travel"),
               label = "Import status",
@@ -226,6 +243,7 @@ tsServer <- function(id) {
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
           updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
+          updateCheckboxInput(session, "compare_quarantBeforePositiveTest", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_ages_proportions", condition = input$compare_ages)
       })
@@ -235,6 +253,7 @@ tsServer <- function(id) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
           updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
+          updateCheckboxInput(session, "compare_quarantBeforePositiveTest", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_cantons_proportions", condition = input$compare_cantons)
       })
@@ -244,6 +263,7 @@ tsServer <- function(id) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
           updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
+          updateCheckboxInput(session, "compare_quarantBeforePositiveTest", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_travel_proportions", condition = input$compare_travel)
       })
@@ -253,8 +273,20 @@ tsServer <- function(id) {
           updateCheckboxInput(session, "compare_ages", value = FALSE)
           updateCheckboxInput(session, "compare_cantons", value = FALSE)
           updateCheckboxInput(session, "compare_travel", value = FALSE)
+          updateCheckboxInput(session, "compare_quarantBeforePositiveTest", value = FALSE)
         }
         shinyjs::toggleState(id = "compare_expContactPaths_proportions", condition = input$compare_expContactPaths)
+      })
+      
+      observeEvent(input$compare_quarantBeforePositiveTest, {
+        if (input$compare_quarantBeforePositiveTest) {
+          updateCheckboxInput(session, "compare_ages", value = FALSE)
+          updateCheckboxInput(session, "compare_cantons", value = FALSE)
+          updateCheckboxInput(session, "compare_travel", value = FALSE)
+          updateCheckboxInput(session, "compare_expContactPaths", value = FALSE)
+        }
+        shinyjs::toggleState(id = "compare_quarantBeforePositiveTest_proportions",
+                             condition = input$compare_quarantBeforePositiveTest)
       })
 
       
@@ -285,6 +317,8 @@ tsServer <- function(id) {
           return("expContactPath")
         } else if (input$compare_travel == TRUE) {
           return("travelClass")
+        } else if (input$compare_quarantBeforePositiveTest == TRUE) {
+          return("quarantBeforePositiveTest")
         }
         return(NA)
       })
@@ -294,6 +328,7 @@ tsServer <- function(id) {
           (input$compare_ages && input$compare_ages_proportions) ||
           (input$compare_cantons && input$compare_cantons_proportions) ||
           (input$compare_expContactPaths && input$compare_expContactPaths_proportions) ||
+          (input$compare_quarantBeforePositiveTest && input$compare_quarantBeforePositiveTest_proportions) ||
           (input$compare_travel && input$compare_travel_proportions)
         )
       })
@@ -321,6 +356,10 @@ tsServer <- function(id) {
           need(
             !is.null(input$expContactPaths),
             "Must specify at least one possible exposure source."
+          ),
+          need(
+            !is.null(input$quarantBeforePositiveTest),
+            "Must specify at least one entry in the 'quarantine before positive result' filter."
           )
         )
       })
@@ -360,6 +399,13 @@ tsServer <- function(id) {
       expContactPathFiltered <- reactive({
         if (length(input$expContactPaths) < length(tsConstants$expContactPaths)) {
           return (data() %>% filter(expContactPath %in% input$expContactPaths))
+        }
+        return (data())
+      })
+      
+      quarantBeforePositiveTestFiltered <- reactive({
+        if (length(input$quarantBeforePositiveTest) < length(tsConstants$quarantBeforePositiveTest)) {
+          return (data() %>% filter(quarantBeforePositiveTest %in% input$quarantBeforePositiveTest))
         }
         return (data())
       })
@@ -456,6 +502,7 @@ tsServer <- function(id) {
           ageGroupFiltered(),
           cantonFiltered(),
           expContactPathFiltered(),
+          quarantBeforePositiveTestFiltered(),
           travelClassFiltered(),
           stratifiedTestRecordFiltered()
         )
