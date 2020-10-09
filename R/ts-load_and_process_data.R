@@ -30,7 +30,7 @@ load_and_process_data <- function() {
     mutate(positiveTest = TRUE, mult = 1) %>%
     mutate(travelClass = getTravelClass(exp_ort)) %>%
     mutate(canton = ktn) %>%
-    mutate(expContactPath = map(exp_kontakt_art, tsConstants$expContactPathsFromCode)) %>%
+    mutate(expContactPath = unlist(map(exp_kontakt_art, tsConstants$expContactPathsFromCode))) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
@@ -72,7 +72,7 @@ load_and_process_data <- function() {
       ## ageGroup = str_replace_all(Altersklasse, " ",""),
       ageGroup = "Unknown",
       travelClass = NA,
-      expContactPath = NA,
+      expContactPath = " not filled",
       positiveTest = FALSE,
       mult = `Negative Tests`
     ) %>%
@@ -115,7 +115,7 @@ load_and_process_data <- function() {
       canton = ktn,
       ageGroup = str_replace_all(Altersklasse, " ", ""),
       travelClass = NA,
-      expContactPath = NA,
+      expContactPath = " not filled",
       positiveTest = FALSE,
       mult = Negative
     ) %>%

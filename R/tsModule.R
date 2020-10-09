@@ -73,7 +73,7 @@ tsUI <- function(id) {
             pickerInput(
               inputId = ns("expContactPaths"),
               label = "Possible Exposure Source",
-              choices = tsConstants$expContactPaths,
+              choices = sort(tsConstants$expContactPaths),
               selected = tsConstants$expContactPaths,
               multiple = TRUE,
               options = list(size = 8)
@@ -131,6 +131,10 @@ tsUI <- function(id) {
                 checkboxInput(
                   inputId = ns("stack_histograms"),
                   label = "Stack histograms", value = TRUE
+                ),
+                checkboxInput(
+                  inputId = ns("area_instead_of_line_plot"),
+                  label = "Use an area chart instead of a line chart", value = TRUE
                 )
               ),
               column(4,
@@ -434,6 +438,7 @@ tsServer <- function(id) {
                              && !is.na(compare()))
         shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete")
         shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous")
+        shinyjs::toggleState(id = "area_instead_of_line_plot", condition = compare_proportions())
         
         if (input$log_scale && input$stack_histograms) {
           updateCheckboxInput(session, "stack_histograms", value = FALSE)
@@ -515,8 +520,9 @@ tsServer <- function(id) {
             plot_data <- plot_data %>%
               group_by(date) %>%
               mutate(proportion = smoothedCount / sum(smoothedCount))
-            p <- ggplot(plot_data, aes(x = date, y = proportion, col = !!as.symbol(compare()))) +
-              geom_line() +
+            p <- ggplot(plot_data, aes(x = date, y = proportion, col = !!as.symbol(compare()),
+                                       fill = !!as.symbol(compare()))) +
+              (if (!input$area_instead_of_line_plot) geom_line() else geom_area()) +
               scale_x_date(date_breaks = "months") +
               xlab(paste("Date of", input$event)) +
               ylab(paste0("Proportion of ", input$event, "s"))
@@ -594,8 +600,9 @@ tsServer <- function(id) {
               group_by(date) %>%
               mutate(proportions = prob / sum(prob))
             
-            p <- ggplot(plot_data, aes(x = date, y = proportions, col = !!as.symbol(compare()))) +
-              geom_line() +
+            p <- ggplot(plot_data, aes(x = date, y = proportions, col = !!as.symbol(compare()),
+                                       fill = !!as.symbol(compare()))) +
+              (if (!input$area_instead_of_line_plot) geom_line() else geom_area()) +
               ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
           }
         }

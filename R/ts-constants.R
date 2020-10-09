@@ -15,7 +15,7 @@ tsConstants$expContactPaths <- c(
   "Family member",
   "as medical staff",
   "other contacts",
-  "Unknown",
+  " Unknown",
   "School/child care etc",
   "Work",
   "private party",
@@ -23,12 +23,12 @@ tsConstants$expContactPaths <- c(
   "Bar/Restaurant",
   "Demonstration/Event",
   "spontaneous crowd of people",
-  "not filled"
+  " not filled"
 )
 
 tsConstants$expContactPathsFromCode <- function(code) {
   if (is.na(code)) {
-    return ("not filled")
+    return (" not filled")
   } else {
     return (tsConstants$expContactPaths[code]) # This works only because the code is a numerical value starting from 1
   }
