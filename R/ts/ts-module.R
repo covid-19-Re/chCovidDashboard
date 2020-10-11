@@ -235,25 +235,6 @@ tsServer <- function(id) {
         }
       })
 
-      # Exclude all data before start of stratified negative test records
-      # TODO Describe the background of this step and maybe remove code reduandancy within the function.
-      stratifiedTestRecordFiltered <- reactive({
-        if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
-          if (!is.na(compare())) {
-            stratifiedTestingStart <- min((data() %>% filter(positiveTest == FALSE, !is.na(canton)))$fall_dt)
-            return (data() %>% filter(fall_dt >= stratifiedTestingStart))
-          }
-          for (fs in basicFilterServers) {
-            if (fs()$isFiltering) {
-              stratifiedTestingStart <- min((data() %>% filter(positiveTest == FALSE, !is.na(canton)))$fall_dt)
-              return (data() %>% filter(fall_dt >= stratifiedTestingStart))
-            }
-          }
-        }
-        return (data())
-      })
-
-
       ### Processors ###
       # Processors are functions that manipulate data. They are defined as reactive expressions since they have direct
       # access to the user input. However, they do not access the data but are defined as function factories: they
@@ -293,12 +274,27 @@ tsServer <- function(id) {
         validators()
 
         # Apply basic filters
-        dataProc <- multiIntersect(
-          data(),
-          stratifiedTestRecordFiltered()
-        )
+        dataProc <- data()
         for (fs in basicFilterServers) {
           dataProc <- fs()$filter(dataProc)
+        }
+
+        # Exclude all data before start of stratified negative test records
+        # TODO Describe the background of this step.
+        if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
+          doFilter <- FALSE
+          if (!is.na(compare())) {
+            doFilter <- TRUE
+          }
+          for (fs in basicFilterServers) {
+            if (fs()$isFiltering) {
+              doFilter <- TRUE
+            }
+          }
+          if (doFilter) {
+            stratifiedTestingStart <- min((dataProc %>% filter(positiveTest == FALSE, !is.na(canton)))$fall_dt)
+            dataProc <- dataProc %>% filter(fall_dt >= stratifiedTestingStart)
+          }
         }
 
         validate(need(
