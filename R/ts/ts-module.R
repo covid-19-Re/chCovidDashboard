@@ -2,11 +2,13 @@ library(shinyWidgets)
 library(shinyjs)
 library(plotly)
 library(slider)
+library(sf)
 
 source("R/utilities.R")
 source("R/ts/ts-constants.R")
 source("R/ts/ts-utils.R")
 source("R/ts/ts-load_and_process_data.R")
+source("R/ts/ts-plots.R")
 
 # Submodules
 source("R/ts/ts-basic-filter-module.R")
@@ -58,6 +60,23 @@ tsUI <- function(id) {
         column(9,
           bootstrapPanel(
             class = "panel-info", heading = "Basic time series",
+
+            # Plot types
+            radioButtons(
+              inputId = ns("plotType"), label = "Plot Type",
+              choices = list("Diagram" = "diagram", "Map" = "map"),
+              selected = "diagram",
+              inline = TRUE
+            ),
+            conditionalPanel(
+              condition = "input['ts-plotType'] === 'map'",
+              tags$div(
+                style = "padding-left: 25px; padding-right: 25px;",
+                sliderInput(inputId = ns("map_selected_day"), "Date:", min = as.Date("2020-03-01"), max = today(),
+                            value = today() %m-% days(7), width = "100%")
+              )
+            ),
+
             plotlyOutput(ns("mainPlot"), height = "600px"),
             tags$div(
               HTML("<span style='width: 50px; height: 12px; display: inline-block; background-color: #e7e7e7;'></span>
@@ -142,6 +161,29 @@ tsServer <- function(id) {
           })
         }
       )
+
+      # Date slider for the map
+      observe({
+        if (input$display_prob || input$granularity == "Days") {
+          updateSliderInput(
+            session, "map_selected_day",
+            min = as.Date("2020-03-01"), max = today(),
+            timeFormat = "%F"
+          )
+        } else if (input$granularity == "Weeks") {
+          updateSliderInput(
+            session, "map_selected_day",
+            min = as.Date("2020-03-01"), max = today(),
+            timeFormat = "%F (week %W)"
+          )
+        } else if (input$granularity == "Months") {
+          updateSliderInput(
+            session, "map_selected_day",
+            min = as.Date("2020-03-01"), max = today(),
+            timeFormat = "%b %Y"
+          )
+        }
+      })
 
 
       ### Loading, preparing and filtering Data ###
@@ -350,6 +392,23 @@ tsServer <- function(id) {
             plot_data <- bind_rows(plot_data, d)
           }
           if (!compare_proportions()) {
+            if (input$plotType == 'map') {
+              selectedDate <- switch(
+                input$granularity,
+                "Days" = input$map_selected_day,
+                "Weeks" = floor_date(input$map_selected_day, unit = "week",
+                                     week_start = getOption("lubridate.week.start", 1)),
+                "Months" = floor_date(input$map_selected_day, unit = "month")
+              )
+              plot_data <- plot_data %>%
+                filter(date == selectedDate) %>%
+                group_by(!!as.symbol(compare())) %>%
+                summarize(
+                  count = sum(count)
+                )
+              return (tsPlots$switzerlandMap(plot_data))
+            }
+
             p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare()))) +
               geom_histogram(stat = "identity", position = (if (input$stack_histograms) "stack" else "dodge")) +
               ylab("Total count")
@@ -429,6 +488,13 @@ tsServer <- function(id) {
           }
 
           if (!compare_proportions()) {
+            if (input$plotType == 'map') {
+              plot_data <- plot_data %>%
+                filter(date == input$map_selected_day) %>%
+                mutate(count = prob)
+              return (tsPlots$switzerlandMap(plot_data))
+            }
+
             p <- ggplot(plot_data, aes(x = date, y = prob, col = !!as.symbol(compare()))) +
               geom_line() +
               ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
