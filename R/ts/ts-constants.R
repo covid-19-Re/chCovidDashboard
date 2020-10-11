@@ -11,6 +11,8 @@ tsConstants$cantons <- c(
   "UR", "VD", "VS", "ZG", "ZH"
 )
 
+tsConstants$travelRelatedStatus <- c("Travel-related", "Non-travel-related")
+
 tsConstants$expContactPaths <- c(
   "Family member",
   "as medical staff",
@@ -79,8 +81,6 @@ tsConstants$eventDateCols <- list(
 )
 
 tsConstants$events <- names(tsConstants$eventDateCols)
-
-tsConstants$travelChoices <- c("All cases", "Travel-related", "Non-travel-related")
 
 tsConstants$granularityChoices <- c("Days", "Weeks", "Months")
 
