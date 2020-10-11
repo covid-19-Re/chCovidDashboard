@@ -64,8 +64,8 @@ tsUI <- function(id) {
             # Plot types
             radioButtons(
               inputId = ns("plotType"), label = "Plot Type",
-              choices = list("Diagram" = "diagram", "Map" = "map"),
-              selected = "diagram",
+              choices = list("Histogram" = "histogram", "Line Chart" = "line", "Area Chart" = "area", "Map" = "map"),
+              selected = "histogram",
               inline = TRUE
             ),
             conditionalPanel(
@@ -96,10 +96,6 @@ tsUI <- function(id) {
                 checkboxInput(
                   inputId = ns("stack_histograms"),
                   label = "Stack histograms", value = TRUE
-                ),
-                checkboxInput(
-                  inputId = ns("area_instead_of_line_plot"),
-                  label = "Use an area chart instead of a line chart", value = TRUE
                 )
               ),
               column(4,
@@ -230,6 +226,42 @@ tsServer <- function(id) {
         }
       })
 
+      availablePlotTypes <- reactive({
+        # Plot types: histogram, line chart, area chart, map
+        available <- NULL
+        if (!input$display_prob && !compare_proportions()) {
+          available <- append(available, "histogram")
+        } else {
+          available <- append(available, "line")
+        }
+        if (compare_proportions()) {
+          available <- append(available, "area")
+        }
+        if (replace_na(compare() == "canton", FALSE) && !compare_proportions()) {
+          available <- append(available, "map")
+        }
+        return (available)
+      })
+
+      currentPlotType <- reactive({
+        available <- availablePlotTypes()
+        if (input$plotType %in% available) {
+          return (input$plotType)
+        } else {
+          updateRadioButtons(session, "plotType", selected = available[1])
+          return (available[1])
+        }
+      })
+
+      observe({
+        available <- availablePlotTypes()
+        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='histogram']",
+                             condition = "histogram" %in% available)
+        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='line']", condition = "line" %in% available)
+        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='area']", condition = "area" %in% available)
+        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='map']", condition = "map" %in% available)
+      })
+
       # Validators
 
       notFalselyUsingNegativeTestDataValidator <- reactive({
@@ -303,7 +335,6 @@ tsServer <- function(id) {
                              && !is.na(compare()))
         shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete")
         shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous")
-        shinyjs::toggleState(id = "area_instead_of_line_plot", condition = compare_proportions())
 
         if (input$log_scale && input$stack_histograms) {
           updateCheckboxInput(session, "stack_histograms", value = FALSE)
@@ -392,7 +423,7 @@ tsServer <- function(id) {
             plot_data <- bind_rows(plot_data, d)
           }
           if (!compare_proportions()) {
-            if (input$plotType == 'map') {
+            if (currentPlotType() == 'map') {
               selectedDate <- switch(
                 input$granularity,
                 "Days" = input$map_selected_day,
@@ -419,7 +450,7 @@ tsServer <- function(id) {
               mutate(proportion = smoothedCount / sum(smoothedCount))
             p <- ggplot(plot_data, aes(x = date, y = proportion, col = !!as.symbol(compare()),
                                        fill = !!as.symbol(compare()))) +
-              (if (!input$area_instead_of_line_plot) geom_line() else geom_area()) +
+              (if (currentPlotType() == "line") geom_line() else geom_area()) +
               scale_x_date(date_breaks = "months") +
               xlab(paste("Date of", input$event)) +
               ylab(paste0("Proportion of ", input$event, "s"))
@@ -488,7 +519,7 @@ tsServer <- function(id) {
           }
 
           if (!compare_proportions()) {
-            if (input$plotType == 'map') {
+            if (currentPlotType() == 'map') {
               plot_data <- plot_data %>%
                 filter(date == input$map_selected_day) %>%
                 mutate(count = prob)
@@ -506,7 +537,7 @@ tsServer <- function(id) {
 
             p <- ggplot(plot_data, aes(x = date, y = proportions, col = !!as.symbol(compare()),
                                        fill = !!as.symbol(compare()))) +
-              (if (!input$area_instead_of_line_plot) geom_line() else geom_area()) +
+              (if (currentPlotType == "line") geom_line() else geom_area()) +
               ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
           }
         }
