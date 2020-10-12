@@ -145,6 +145,8 @@ tsServer <- function(id) {
         shinyjs::toggleCssClass("plotTypeLine", "ts-active-btn", condition = "line" == current)
         shinyjs::toggleCssClass("plotTypeArea", "ts-active-btn", condition = "area" == current)
         shinyjs::toggleCssClass("plotTypeMap", "ts-active-btn", condition = "map" == current)
+
+        shinyjs::toggleCssClass("map_slider", "ts-hidden", condition = "map" != current)
       })
 
       # Validators

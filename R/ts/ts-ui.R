@@ -41,13 +41,12 @@ tsUI <- function(id) {
                  actionButton(ns("plotTypeArea"), "Area Chart", icon = icon("chart-area")),
                  actionButton(ns("plotTypeMap"), "Map", icon = icon("map")),
 
-                 conditionalPanel(
-                   condition = "input['ts-plotType'] === 'map'",
-                   tags$div(
-                     style = "padding-left: 25px; padding-right: 25px;",
-                     sliderInput(inputId = ns("map_selected_day"), "Date:", min = as.Date("2020-03-01"), max = today(),
-                                 value = today() %m-% days(7), width = "100%")
-                   )
+                 tags$div(
+                   id = ns("map_slider"),
+                   class = "ts-hidden",
+                   style = "padding-left: 25px; padding-right: 25px;",
+                   sliderInput(inputId = ns("map_selected_day"), "Date:", min = as.Date("2020-03-01"), max = today(),
+                               value = today() %m-% days(7), width = "100%")
                  ),
 
                  plotlyOutput(ns("mainPlot"), height = "600px"),

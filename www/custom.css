@@ -101,3 +101,7 @@
 .ts-active-btn {
   border: 2px solid gray!important;
 }
+
+.ts-hidden {
+  display: none;
+}
