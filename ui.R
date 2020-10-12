@@ -65,7 +65,7 @@ ui <- function(request) {
           ),
           thumbnailPanelExt(
             title = "icumonitoring.ch",
-            authors = str_c("Nicola Criscuolo, Burcu Tepekule, Cheng Zhao, Monica Golumbeanu, Melissa Penny,
+            authors = str_c("Cheng Zhao, Nicola Criscuolo, Burcu Tepekule, Monica Golumbeanu, Melissa Penny,
               Peter Ashcroft, Thomas Van Boeckel"),
             affiliation = "ETH Zürich, Swiss TPH, Universitätsspital Zürich <br><br><i>(opens in a new window)</i>",
             thumbnail = "icumonitoring-thumbnail.png",
