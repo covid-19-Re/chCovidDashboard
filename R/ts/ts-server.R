@@ -117,23 +117,34 @@ tsServer <- function(id) {
         return (available)
       })
 
+      plotType <- reactiveValues(value = "histogram")
+      observeEvent(input$plotTypeHistogram, { plotType$value <- "histogram" })
+      observeEvent(input$plotTypeLine, { plotType$value <- "line" })
+      observeEvent(input$plotTypeArea, { plotType$value <- "area" })
+      observeEvent(input$plotTypeMap, { plotType$value <- "map" })
+
       currentPlotType <- reactive({
         available <- availablePlotTypes()
-        if (input$plotType %in% available) {
-          return (input$plotType)
+        if (plotType$value %in% available) {
+          return (plotType$value)
         } else {
-          updateRadioButtons(session, "plotType", selected = available[1])
+          plotType$value <- available[1]
           return (available[1])
         }
       })
 
       observe({
         available <- availablePlotTypes()
-        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='histogram']",
-                             condition = "histogram" %in% available)
-        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='line']", condition = "line" %in% available)
-        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='area']", condition = "area" %in% available)
-        shinyjs::toggleState(selector = "input[name='ts-plotType'][value='map']", condition = "map" %in% available)
+        shinyjs::toggleState("plotTypeHistogram", condition = "histogram" %in% available)
+        shinyjs::toggleState("plotTypeLine", condition = "line" %in% available)
+        shinyjs::toggleState("plotTypeArea", condition = "area" %in% available)
+        shinyjs::toggleState("plotTypeMap", condition = "map" %in% available)
+
+        current <- currentPlotType()
+        shinyjs::toggleCssClass("plotTypeHistogram", "ts-active-btn", condition = "histogram" == current)
+        shinyjs::toggleCssClass("plotTypeLine", "ts-active-btn", condition = "line" == current)
+        shinyjs::toggleCssClass("plotTypeArea", "ts-active-btn", condition = "area" == current)
+        shinyjs::toggleCssClass("plotTypeMap", "ts-active-btn", condition = "map" == current)
       })
 
       # Validators
@@ -411,7 +422,7 @@ tsServer <- function(id) {
 
             p <- ggplot(plot_data, aes(x = date, y = proportions, col = !!as.symbol(compare()),
                                        fill = !!as.symbol(compare()))) +
-              (if (currentPlotType == "line") geom_line() else geom_area()) +
+              (if (currentPlotType() == "line") geom_line() else geom_area()) +
               ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
           }
         }

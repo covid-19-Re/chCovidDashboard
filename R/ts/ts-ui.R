@@ -36,12 +36,11 @@ tsUI <- function(id) {
                  class = "panel-info", heading = "Basic time series",
 
                  # Plot types
-                 radioButtons(
-                   inputId = ns("plotType"), label = "Plot Type",
-                   choices = list("Histogram" = "histogram", "Line Chart" = "line", "Area Chart" = "area", "Map" = "map"),
-                   selected = "histogram",
-                   inline = TRUE
-                 ),
+                  actionButton(ns("plotTypeHistogram"), "Histogram", icon = icon("chart-bar")),
+                 actionButton(ns("plotTypeLine"), "Line Chart", icon = icon("chart-line")),
+                 actionButton(ns("plotTypeArea"), "Area Chart", icon = icon("chart-area")),
+                 actionButton(ns("plotTypeMap"), "Map", icon = icon("map")),
+
                  conditionalPanel(
                    condition = "input['ts-plotType'] === 'map'",
                    tags$div(
