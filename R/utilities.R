@@ -25,8 +25,8 @@ thumbnailPanel <- function(title, authors, affiliation, thumbnail, tabId) {
             id = tabId, href = "#", class = "action-button shiny-bound-input",
             HTML("<p class = 'thumbTitle'>", title, "</p>")
           ),
-          HTML("<p>", authors, "</p>"),
-          HTML("<p>", affiliation, "</p>")
+          HTML("<p style='font-size:15px'>", authors, "</p>"),
+          HTML("<p style='font-size:12px'>", affiliation, "</p>")
         )
       )
     )
@@ -47,8 +47,8 @@ thumbnailPanelExt <- function(title, authors, affiliation, thumbnail, href) {
             href = href, target = "_blank",
             HTML("<p class = 'thumbTitle'>", title, "</p>")
           ),
-          HTML("<p>", authors, "</p>"),
-          HTML("<p>", affiliation, "</p>")
+          HTML("<p style='font-size:15px'>", authors, "</p>"),
+          HTML("<p style='font-size:12px'>", affiliation, "</p>")
         )
       )
     )

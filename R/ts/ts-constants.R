@@ -87,8 +87,8 @@ tsConstants$granularityChoices <- c("Days", "Weeks", "Months")
 tsConstants$slidingWindowChoices <- c("None", "7 days", "14 days", "28 days")
 
 tsConstants$slidingWindowChoicesToIntervals <- list(
-  "None" = days(0),
-  "7 days" = days(7),
-  "14 days" = days(14),
-  "28 days" = days(28)
+  "None" = lubridate::days(0),
+  "7 days" = lubridate::days(7),
+  "14 days" = lubridate::days(14),
+  "28 days" = lubridate::days(28)
 )
