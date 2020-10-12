@@ -25,7 +25,9 @@ tsServer <- function(id) {
         for (fs in basicFilterServers) {
           # TODO Dangerous stuff since it reaches into a sub module. Can this be improved?
           shinyjs::toggleState(selector = paste0("#", fs()$session$ns("compare")), condition = !input$normalization)
-          updateCheckboxInput(fs()$session, "compare", value = FALSE)
+          if (input$normalization) {
+            updateCheckboxInput(fs()$session, "compare", value = FALSE)
+          }
         }
       })
 
