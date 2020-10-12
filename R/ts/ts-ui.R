@@ -89,6 +89,34 @@ tsUI <- function(id) {
                           )
                    )
                  )
+               ),
+               bootstrapPanel(
+                 heading = "Normalization", class = "panel-primary",
+                 checkboxInput(
+                   inputId = ns("normalization"),
+                   label = "Activate normalization"
+                 ),
+                 tags$div(
+                   HTML("The normalization calculates the positive case numbers if the hospitalisation rate is
+                   assumed to be constant. It aims to improve the comparability of the numbers between different
+                   months. <b>If this field is activated, the shown plot does not present the actual numbers.</b>")
+                 ),
+                 HTML("<div style='font-weight: bolder; font-size: 1.2em; color: #008cba; margin-right: 10px;
+                 margin-top: 20px; margin-bottom: 20px;'>Assumption:</div>"),
+                 tags$div(
+                   style = "line-height: 3;",
+                   "The hospitalization rate per age group is constant and equals the value in",
+                   tags$div(
+                     style = "display: inline-block; vertical-align:top; width: 250px;",
+                     pickerInput(
+                       inputId = ns("normalization_timerange"),
+                       choices = tsConstants$normalizationTimerangeOptions,
+                       selected = c(ymd('2020-03-01'), ymd('2020-04-01'), ymd('2020-05-01')),
+                       multiple = TRUE
+                     )
+                   ),
+                   "."
+                 )
                )
         )
       )

@@ -94,3 +94,8 @@ tsConstants$slidingWindowChoicesToIntervals <- list(
   "14 days" = lubridate::days(14),
   "28 days" = lubridate::days(28)
 )
+
+tsConstants$normalizationTimerangeOptions <- seq(ymd('2020-03-01'), today() %m-% months(2), by = '1 month')
+names(tsConstants$normalizationTimerangeOptions) <- as.character(tsConstants$normalizationTimerangeOptions,
+                                                                 format = "%b %Y")
+tsConstants$normalizationTimerangeOptions <- as.list(tsConstants$normalizationTimerangeOptions)

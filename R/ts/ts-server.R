@@ -2,6 +2,8 @@ tsServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      ns <- NS(id)
+
       # TODO Why is it not required to put the id of the sub module into a ns() function?
       basicFilterServers <- basicFilters %>% map2(names(.), function (f, n) { f$server(n) })
 
@@ -12,8 +14,16 @@ tsServer <- function(id) {
         setBookmarkExclude(toExclude)
       })
 
-      observeEvent(input$display_prob, {
-        shinyjs::toggleState(id = "given", condition = input$display_prob)
+      observe({
+        shinyjs::toggleState(id = "event", condition = !input$normalization)
+        shinyjs::toggleState(id = "display_prob", condition = !input$normalization)
+        shinyjs::toggleState(id = "given", condition = input$display_prob && !input$normalization)
+
+        for (fs in basicFilterServers) {
+          # TODO Dangerous stuff since it reaches into a sub module. Can this be improved?
+          shinyjs::toggleState(selector = paste0("#", fs()$session$ns("compare")), condition = !input$normalization)
+          updateCheckboxInput(fs()$session, "compare", value = FALSE)
+        }
       })
 
       # If one compare checkbox is checked, the others should be unchecked.
@@ -24,6 +34,7 @@ tsServer <- function(id) {
             if (fs()$compare) {
               for (fs2 in basicFilterServers) {
                 if (fs2()$attributeName != fs()$attributeName) {
+                  # TODO Dangerous stuff since it reaches into a sub module. Can this be improved?
                   updateCheckboxInput(fs2()$session, "compare", value = FALSE)
                 }
               }
@@ -52,6 +63,16 @@ tsServer <- function(id) {
             min = as.Date("2020-03-01"), max = today(),
             timeFormat = "%b %Y"
           )
+        }
+      })
+
+      observeEvent(input$normalization, {
+        disabledJs <- if (input$normalization) "false" else "true"
+        shinyjs::runjs(
+          paste0("jQuery(\"[data-id='", ns("normalization_timerange"), "'\").prop(\"disabled\", ", disabledJs, ")"))
+        if (input$normalization) {
+          updateRadioButtons(session, "event", selected = "Positive test")
+          updateCheckboxInput(session, "display_prob", value = FALSE)
         }
       })
 
@@ -147,6 +168,48 @@ tsServer <- function(id) {
         shinyjs::toggleCssClass("plotTypeMap", "ts-active-btn", condition = "map" == current)
 
         shinyjs::toggleCssClass("map_slider", "ts-hidden", condition = "map" != current)
+      })
+
+      # Returns a list of normalization constants (e.g., hospitalisation rate). Each category (age group or canton) has
+      # a corresponding value. The values are not affected by the filters.
+      normalizationConstants <- reactive({
+        if (!input$normalization) {
+          return (NULL)
+        }
+
+        validate(
+          need(
+            !is.null(input$normalization_timerange),
+            paste0("Must specify at least one month for normalization.")
+          )
+        )
+
+        startDates <- ymd(input$normalization_timerange)
+        selectedTimeIntervals <- as.list(interval(startDates, startDates %m+% months(1) %m-% days(1)))
+
+        results <- list()
+
+        dataProc <- data() %>%
+          filter(date %within% selectedTimeIntervals)
+        for (category in unique(dataProc$ageGroup)) {
+          if (is.na(category) || category == "Unknown") {
+            next
+          }
+
+          # All positive tests
+          dDenominator <- dataProc %>%
+            filter(ageGroup == category) %>%
+            filter(positiveTest)
+          dNumerator <- dDenominator %>% filter(hospitalisation == 1)
+          rate <- sum(dNumerator$mult) / sum(dDenominator$mult)
+          results[[category]] <- rate
+        }
+
+        resultsTibble <- tibble(names(results), unlist(results))
+        names(resultsTibble) <- c("ageGroup", "normalizationConstant")
+        # TODO Handling zeros. It should not happen so often currently since the smallest granularity is month
+        #     ... and unfortunately, we have enough cases.
+        return (resultsTibble)
       })
 
       # Validators
@@ -267,14 +330,31 @@ tsServer <- function(id) {
         minDate <- min((dataProc %>% drop_na(date))$date)
         maxDate <- max((dataProc %>% drop_na(date))$date)
 
-        # Case 1: showing the total frequencies
-        if (!input$display_prob && is.na(compare())) {
+        # Case 1a: showing the total frequencies (no normalization)
+        if (!input$normalization && !input$display_prob && is.na(compare())) {
           plotData <- dataProc %>%
             intersect(clinicalEventFiltered()) %>%
             dateRoundingProcessor()() %>%
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop")
 
+          plotDef <- list(
+            plotData, "date", "count",
+            ylab = "Total count"
+          )
+        }
+
+        # Case 1b: with normalization
+        if (input$normalization && !input$display_prob && is.na(compare())) {
+          plotData <- dataProc %>%
+            filter(hospitalisation == 1) %>%
+            group_by(ageGroup, date) %>%
+            summarize(count = sum(mult), .groups = "drop") %>%
+            inner_join(normalizationConstants(), by = "ageGroup") %>%
+            mutate(normalized = count / normalizationConstant) %>%
+            dateRoundingProcessor()() %>%
+            group_by(date) %>%
+            summarize(count = sum(normalized), .groups = "drop")
           plotDef <- list(
             plotData, "date", "count",
             ylab = "Total count"
