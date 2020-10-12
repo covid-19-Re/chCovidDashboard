@@ -257,11 +257,6 @@ tsServer <- function(id) {
           }
         }
 
-        validate(need(
-          nrow(dataProc) > 0,
-          "No data matches the requested combination of filters."
-        ))
-
         # General transformations and calculations for later use
         if (input$display_prob) {
           xlabel <- "Date of Test"
@@ -274,16 +269,16 @@ tsServer <- function(id) {
 
         # Case 1: showing the total frequencies
         if (!input$display_prob && is.na(compare())) {
-          dataProc <- dataProc %>%
+          plotData <- dataProc %>%
             intersect(clinicalEventFiltered()) %>%
             dateRoundingProcessor()() %>%
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop")
 
-          # Define the ggplot
-          p <- ggplot(dataProc) +
-            geom_histogram(aes(x = date, y = count), stat = "identity") +
-            ylab("Total count")
+          plotDef <- list(
+            plotData, "date", "count",
+            ylab = "Total count"
+          )
         }
 
         # Case 2: comparing the frequencies
@@ -293,7 +288,7 @@ tsServer <- function(id) {
           if (!compare_proportions()) {
             dataProc <- dataProc %>% dateRoundingProcessor()()
           }
-          plot_data <- NULL
+          plotData <- NULL
           for (compare_val in unique(dataProc[[compare()]])) {
             d <- dataProc %>%
               filter(!!as.symbol(compare()) == compare_val) %>%
@@ -307,40 +302,46 @@ tsServer <- function(id) {
               d$smoothedCount <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
             }
             d[, compare()] <- compare_val
-            plot_data <- bind_rows(plot_data, d)
+            plotData <- bind_rows(plotData, d)
           }
           if (!compare_proportions()) {
             if (currentPlotType() == 'map') {
-              selectedDate <- switch(
-                input$granularity,
-                "Days" = input$map_selected_day,
-                "Weeks" = floor_date(input$map_selected_day, unit = "week",
-                                     week_start = getOption("lubridate.week.start", 1)),
-                "Months" = floor_date(input$map_selected_day, unit = "month")
-              )
-              plot_data <- plot_data %>%
-                filter(date == selectedDate) %>%
-                group_by(!!as.symbol(compare())) %>%
-                summarize(
-                  count = sum(count)
+              if (!is.null(plotData)) {
+                selectedDate <- switch(
+                  input$granularity,
+                  "Days" = input$map_selected_day,
+                  "Weeks" = floor_date(input$map_selected_day, unit = "week",
+                                       week_start = getOption("lubridate.week.start", 1)),
+                  "Months" = floor_date(input$map_selected_day, unit = "month")
                 )
-              return (tsPlots$switzerlandMap(plot_data))
+                plotData <- plotData %>%
+                  filter(date == selectedDate) %>%
+                  group_by(!!as.symbol(compare())) %>%
+                  summarize(
+                    count = sum(count)
+                  )
+                plotDef <- list(
+                  plotData
+                )
+              }
+            } else {
+              plotDef <- list(
+                plotData, "date", "count",
+                groupingAttributeName = compare(),
+                stacked = input$stack_histograms,
+                ylab = "Total count"
+              )
             }
-
-            p <- ggplot(plot_data, aes(x = date, y = count, fill = !!as.symbol(compare()))) +
-              geom_histogram(stat = "identity", position = (if (input$stack_histograms) "stack" else "dodge")) +
-              ylab("Total count")
-
           } else {
-            plot_data <- plot_data %>%
+            plotData <- plotData %>%
               group_by(date) %>%
               mutate(proportion = smoothedCount / sum(smoothedCount))
-            p <- ggplot(plot_data, aes(x = date, y = proportion, col = !!as.symbol(compare()),
-                                       fill = !!as.symbol(compare()))) +
-              (if (currentPlotType() == "line") geom_line() else geom_area()) +
-              scale_x_date(date_breaks = "months") +
-              xlab(paste("Date of", input$event)) +
-              ylab(paste0("Proportion of ", input$event, "s"))
+
+            plotDef <- list(
+              plotData, "date", "proportion",
+              groupingAttributeName = compare(),
+              ylab = paste0("Proportion of ", input$event, "s")
+            )
           }
         }
 
@@ -367,9 +368,10 @@ tsServer <- function(id) {
           denom <- slide_index_dbl(denominatorData$count, denominatorData$date, sum, .before = smoothing_interval)
 
           plotData <- tibble(date = denominatorData$date, prob = num / denom)
-          p <- ggplot(plotData, aes(x = date, y = prob)) +
-            geom_line() +
-            ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+          plotDef <- list(
+            plotData, "date", "prob",
+            ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
+          )
         }
 
         # Case 4: comparing the probabilities
@@ -389,7 +391,7 @@ tsServer <- function(id) {
             return (d)
           }
 
-          plot_data <- NULL
+          plotData <- NULL
           for (compare_val in unique(dataProc[[compare()]])) {
             d <- dataProc %>% filter(!!as.symbol(compare()) == compare_val)
             dDenom <- intersect(d, denominatorData)
@@ -402,44 +404,54 @@ tsServer <- function(id) {
 
             d <- tibble(date = dDenom$date, prob = num / denom)
             d[, compare()] <- compare_val
-            plot_data <- bind_rows(plot_data, d)
+            plotData <- bind_rows(plotData, d)
           }
 
-          if (!compare_proportions()) {
-            if (currentPlotType() == 'map') {
-              plot_data <- plot_data %>%
+          if (!compare_proportions() && currentPlotType() == "map") {
+            if (!is.null(plotData)) {
+              plotData <- plotData %>%
                 filter(date == input$map_selected_day) %>%
                 mutate(count = prob)
-              return (tsPlots$switzerlandMap(plot_data))
+              plotDef <- list(
+                plotData
+              )
+            }
+          } else {
+            if (compare_proportions()) {
+              plotData <- plotData %>%
+                mutate(prob = replace_na(prob, 0)) %>%
+                group_by(date) %>%
+                mutate(prob = prob / sum(prob))
             }
 
-            p <- ggplot(plot_data, aes(x = date, y = prob, col = !!as.symbol(compare()))) +
-              geom_line() +
-              ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
-          } else {
-            plot_data <- plot_data %>%
-              mutate(prob = replace_na(prob, 0)) %>%
-              group_by(date) %>%
-              mutate(proportions = prob / sum(prob))
-
-            p <- ggplot(plot_data, aes(x = date, y = proportions, col = !!as.symbol(compare()),
-                                       fill = !!as.symbol(compare()))) +
-              (if (currentPlotType() == "line") geom_line() else geom_area()) +
-              ylab(paste0("Fraction of ", input$given, "s involving ", input$event))
+            plotDef <- list(
+              plotData, "date", "prob",
+              groupingAttributeName = compare(),
+              ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
+            )
           }
         }
 
-        # Final plot configurations
-        p <- p +
-          xlab(xlabel) +
-          scale_x_date(date_breaks = "months", labels = date_format("%m-%Y")) +
-          theme_light()
-        if (input$log_scale) {
-          p <- p + scale_y_log10()
+        validate(need(
+          nrow(plotData) > 0,
+          "No data matches the requested combination of filters."
+        ))
+
+        p <- eval_bare(expr(tsPlots[[currentPlotType()]]( !!!plotDef )))
+        if (currentPlotType() != "map") {
+          # Finalize ggplot and transform to plotly
+          p <- p +
+            xlab(xlabel) +
+            scale_x_date(date_breaks = "months", labels = date_format("%m-%Y")) +
+            theme_light()
+          if (input$log_scale) {
+            p <- p + scale_y_log10()
+          }
+          p <- ggplotly(p)
         }
 
         # Draw the plot
-        plotlyPlot <- ggplotly(p) %>%
+        plotlyPlot <- p %>%
           config(
             displaylogo = FALSE,
             modeBarButtons = list(list("toImage", "resetScale2d")),
@@ -449,14 +461,16 @@ tsServer <- function(id) {
         # Give the data from the recent 30 days a gray background to mark them as uncertain.
         # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
         # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
-        todayDaysSince1970 <- as.integer(as.POSIXct(Sys.Date())) / 60 / 60 / 24
-        plotlyPlot[['x']][['layout']][['shapes']] <- list(
-          list(type = "rect",
-               fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
-               # Inf and -Inf don't work here.
-               x0 = todayDaysSince1970 - 30, x1 = todayDaysSince1970 + 100, xref = "x",
-               y0 = -99999999, y1 = 99999999, yref = "y")
-        )
+        if (currentPlotType() != "map") {
+          todayDaysSince1970 <- as.integer(as.POSIXct(Sys.Date())) / 60 / 60 / 24
+          plotlyPlot[['x']][['layout']][['shapes']] <- list(
+            list(type = "rect",
+                 fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
+                 # Inf and -Inf don't work here.
+                 x0 = todayDaysSince1970 - 30, x1 = todayDaysSince1970 + 100, xref = "x",
+                 y0 = -99999999, y1 = 99999999, yref = "y")
+          )
+        }
 
         plotlyPlot
       })
