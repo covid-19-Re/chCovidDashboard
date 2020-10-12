@@ -22,18 +22,20 @@ load_and_process_data <- function() {
   )
 
   newestFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
-
   data <- read_csv2(file = newestFile) %>%
     group_by(altersjahr) %>%
-    mutate(ageGroup = ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
+    mutate(ageGroup = tsConstants$ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
     group_by(ageGroup) %>%
     mutate(positiveTest = TRUE, mult = 1) %>%
     mutate(travelClass = getTravelClass(exp_ort)) %>%
     mutate(canton = ktn) %>%
+    mutate(expContactPath = unlist(map(exp_kontakt_art, tsConstants$expContactPathsFromCode))) %>%
+    mutate(quarantBeforePositiveTest = unlist(map(quarant_vor_pos, tsConstants$quarantBeforePositiveTestFromCode))) %>%
+    mutate(labReason = unlist(map(lab_grund, tsConstants$labReasonFromCode))) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
     )
 
 
@@ -71,13 +73,16 @@ load_and_process_data <- function() {
       ## ageGroup = str_replace_all(Altersklasse, " ",""),
       ageGroup = "Unknown",
       travelClass = NA,
+      expContactPath = " not filled",
+      quarantBeforePositiveTest = "Not filled",
+      labReason = "Not filled",
       positiveTest = FALSE,
       mult = `Negative Tests`
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
     )
 
 
@@ -113,13 +118,16 @@ load_and_process_data <- function() {
       canton = ktn,
       ageGroup = str_replace_all(Altersklasse, " ", ""),
       travelClass = NA,
+      expContactPath = " not filled",
+      quarantBeforePositiveTest = "Not filled",
+      labReason = "Not filled",
       positiveTest = FALSE,
       mult = Negative
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
     )
 
   dataTS_spaceAge <- dataTS_spaceAge %>% mutate(ageGroup = replace_na(ageGroup, "Unknown"))

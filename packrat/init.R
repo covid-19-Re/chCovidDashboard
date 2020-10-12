@@ -174,7 +174,7 @@ local({
     fullCmd <- paste(
       surround(file.path(R.home("bin"), "R"), with = "\""),
       "--vanilla",
-      "--slave",
+      "-s",
       "-f",
       surround(installFile, with = "\"")
     )
@@ -186,7 +186,7 @@ local({
     ## an 'installed from source' version
 
     ## -- InstallAgent -- ##
-    installAgent <- "InstallAgent: packrat 0.5.0"
+    installAgent <- "InstallAgent: packrat 0.5.0-30"
 
     ## -- InstallSource -- ##
     installSource <- "InstallSource: source"

@@ -19,6 +19,9 @@
 *.Rproj
 .Rprofile
 
+# Other editors
+.idea/
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
