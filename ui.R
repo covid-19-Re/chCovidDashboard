@@ -20,7 +20,7 @@ ui <- function(request) {
           ),
           thumbnailPanel(
             title = "Time Series",
-            authors = "Timothy Vaughan, Tanja Stadler",
+            authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
             affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
             thumbnail = "ts-thumbnail.png",
             tabId = "selectTs"
