@@ -542,7 +542,7 @@ tsServer <- function(id) {
         plotlyPlot <- p %>%
           config(
             displaylogo = FALSE,
-            modeBarButtons = list(list("toImage", "resetScale2d", "pan2d")),
+            modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
 
