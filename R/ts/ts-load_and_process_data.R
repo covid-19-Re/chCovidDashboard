@@ -1,3 +1,7 @@
+library(rnaturalearth)
+library(rgeos)
+
+
 getTravelClass <- function(exp_ort) {
   res <- exp_ort
   res[res == 2 | res == 3] <- "Travel-related"
@@ -5,6 +9,26 @@ getTravelClass <- function(exp_ort) {
   res[is.na(res)] <- "Non-travel-related"
 
   return(res)
+}
+
+mapCountryCode <- function (exp_land) {
+  # The country name map is not complete and only contains the countries mentioned in the exp_land field until 14.10.2020.
+  # It is difficult to pre-define other countries because it is unclear how the name of a country would be spelled by the
+  # authors of the dataset.
+  countryNamesGerman <- read_csv2(file = "./data/country-names-german.csv")
+
+  d <- tibble(german_name = exp_land) %>%
+    left_join(countryNamesGerman, by = "german_name", na_matches = "never") %>%
+    mutate(iso3166_alpha3_code = replace_na(iso3166_alpha3_code, "Unknown"))
+  return (unlist(d$iso3166_alpha3_code))
+}
+
+mapCountryName <- function (expCountryCode) {
+  worldMapData <- ne_countries(returnclass = "sf")
+  d <- tibble(expCountryCode = expCountryCode) %>%
+    left_join(worldMapData, by = c("expCountryCode" = "iso_a3"), na_matches = "never") %>%
+    mutate(admin = replace_na(admin, "Unknown"))
+  return (unlist(d$admin))
 }
 
 load_and_process_data <- function() {
@@ -22,7 +46,7 @@ load_and_process_data <- function() {
   )
 
   newestFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
-  data <- read_csv2(file = newestFile) %>%
+  data <- read_csv2(file = newestFile, locale = readr::locale(encoding = "latin1")) %>%
     group_by(altersjahr) %>%
     mutate(ageGroup = tsConstants$ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
     group_by(ageGroup) %>%
@@ -32,12 +56,14 @@ load_and_process_data <- function() {
     mutate(expContactPath = unlist(map(exp_kontakt_art, tsConstants$expContactPathsFromCode))) %>%
     mutate(quarantBeforePositiveTest = unlist(map(quarant_vor_pos, tsConstants$quarantBeforePositiveTestFromCode))) %>%
     mutate(labReason = unlist(map(lab_grund, tsConstants$labReasonFromCode))) %>%
+    mutate(expCountryCode = mapCountryCode(exp_land)) %>%
+    mutate(expCountryName = mapCountryName(expCountryCode)) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryCode,
+      expCountryName
     )
-
 
   ## Include positive test results
 
@@ -77,12 +103,14 @@ load_and_process_data <- function() {
       quarantBeforePositiveTest = "Not filled",
       labReason = "Not filled",
       positiveTest = FALSE,
-      mult = `Negative Tests`
+      mult = `Negative Tests`,
+      expCountryName = "Unknown",
+      expCountryCode = "Unknown"
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName, expCountryCode
     )
 
 
@@ -122,12 +150,15 @@ load_and_process_data <- function() {
       quarantBeforePositiveTest = "Not filled",
       labReason = "Not filled",
       positiveTest = FALSE,
-      mult = Negative
+      mult = Negative,
+      expCountryName = "Unknown",
+      expCountryCode = "Unknown"
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup,
-      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName,
+      expCountryCode
     )
 
   dataTS_spaceAge <- dataTS_spaceAge %>% mutate(ageGroup = replace_na(ageGroup, "Unknown"))

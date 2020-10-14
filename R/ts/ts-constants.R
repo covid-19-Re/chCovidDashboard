@@ -1,4 +1,7 @@
 library(lubridate)
+library(rnaturalearth)
+library(rgeos)
+
 
 tsConstants <- list()
 
@@ -14,6 +17,12 @@ tsConstants$cantons <- c(
 )
 
 tsConstants$travelRelatedStatus <- c("Travel-related", "Non-travel-related")
+
+tsConstants$expCountryCode <- c(
+  "CHE",
+  sort(unlist((ne_countries(returnclass = "sf") %>% filter(iso_a3 != "CHE"))$iso_a3)),
+  "Unknown"
+)
 
 tsConstants$expContactPaths <- c(
   "Family member",

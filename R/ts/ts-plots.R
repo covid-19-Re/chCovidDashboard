@@ -1,5 +1,7 @@
 library(RColorBrewer)
 library(lubridate)
+library(rnaturalearth)
+library(rgeos)
 
 
 tsPlots <- list()
@@ -70,27 +72,46 @@ tsPlots$area <- function (
 # The file was downloaded from https://gist.github.com/mbostock/4207744.
 # Supposedly, it was created with interactivethings/swiss-maps (https://github.com/interactivethings/swiss-maps)
 # and uses data of the Federal Office of topography swisstopo as source.
-fileName <- "./switzerland-geo.json"
+fileName <- "./data/switzerland-geo.json"
 geojsonData <- readChar(fileName, file.info(fileName)$size)
 chMapData <- sf::st_read(geojsonData) %>%
   mutate(canton = id)
 
+
+# World Map
+worldMapData <- ne_countries(returnclass = "sf")
+
+
 #' Creates a map plot of Switzerland's cantons
 #'
-#' @param plotData (tibble) - plotData must contains these two columns: canton and count
+#' @param plotData (tibble)
+#' @param region (character, length=1) - the possible values are: "switzerland" and "world"
 #' @return (A plotly object)
 tsPlots$map <- function (
-  data
+  data, region
 ) {
+  if (region == "switzerland") {
+    mapData <- chMapData %>%
+      inner_join(data, by = "canton", na_matches = "never")
 
-  mapData <- chMapData %>%
-    inner_join(data, by = "canton")
-
-  return (
-    plot_ly(mapData, split = ~canton, color = ~count, showlegend = FALSE,
-            # It should not matter too much which number is chosen here.
-            colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
-            alpha = 1, span = I(1), stroke = I("black")
+    return (
+      plot_ly(mapData, split = ~canton, color = ~count, showlegend = FALSE,
+              # It should not matter too much which number is chosen here.
+              colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
+              alpha = 1, span = I(1), stroke = I("black")
+      )
     )
-  )
+  }
+
+  if (region == "world") {
+    mapData <- worldMapData %>%
+      left_join(data, by = c("iso_a3" = "expCountryCode"), na_matches = "never")
+    return (
+      plot_ly(mapData, split = ~admin, color = ~count, showlegend = FALSE,
+              # It should not matter too much which number is chosen here.
+              colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
+              alpha = 1, span = I(1), stroke = I("black")
+      )
+    )
+  }
 }

@@ -17,6 +17,7 @@ basicFilters <- list(
   "ageGroup" = createBasicFilter("Age group", tsConstants$ageGroups, "ageGroup"),
   "canton" = createBasicFilter("Canton", tsConstants$cantons, "canton"),
   "travelClass" = createBasicFilter("Travel related status", tsConstants$travelRelatedStatus, "travelClass"),
+  "expCountryCode" = createBasicFilter("Exposure country", tsConstants$expCountryCode, "expCountryCode"),
   "expContactPath" = createBasicFilter("Possible Exposure Source", sort(tsConstants$expContactPaths), "expContactPath"),
   "quarantBeforePositiveTest" = createBasicFilter("Was patient in quarantine before positive result?",
                                                   tsConstants$quarantBeforePositiveTest,"quarantBeforePositiveTest"),

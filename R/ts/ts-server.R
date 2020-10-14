@@ -137,7 +137,8 @@ tsServer <- function(id) {
         if (compare_proportions()) {
           available <- append(available, "area")
         }
-        if (replace_na(compare() == "canton", FALSE) && !compare_proportions()) {
+        if (replace_na(compare() == "canton" || compare() == "expCountryCode", FALSE)
+          && !compare_proportions()) {
           available <- append(available, "map")
         }
         return (available)
@@ -175,7 +176,7 @@ tsServer <- function(id) {
         shinyjs::toggleCssClass("map_slider", "ts-hidden", condition = "map" != current)
       })
 
-      # Returns a list of normalization constants (e.g., hospitalisation rate). Each category (age group or canton) has
+      # Returns a list of normalization constants (e.g., hospitalisation rate). Each age group has
       # a corresponding value. The values are not affected by the filters.
       normalizationConstants <- reactive({
         if (!input$normalization) {
@@ -338,7 +339,7 @@ tsServer <- function(id) {
         # Case 1a: showing the total frequencies (no normalization)
         if (!input$normalization && !input$display_prob && is.na(compare())) {
           plotData <- dataProc %>%
-            intersect(clinicalEventFiltered()) %>%
+            dplyr::intersect(clinicalEventFiltered()) %>%
             dateRoundingProcessor()() %>%
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop")
@@ -369,7 +370,7 @@ tsServer <- function(id) {
         # Case 2: comparing the frequencies
         if (!input$display_prob && !is.na(compare())) {
           dataProc <- dataProc %>%
-            intersect(clinicalEventFiltered())
+            dplyr::intersect(clinicalEventFiltered())
           if (!compare_proportions()) {
             dataProc <- dataProc %>% dateRoundingProcessor()()
           }
@@ -390,7 +391,7 @@ tsServer <- function(id) {
             plotData <- bind_rows(plotData, d)
           }
           if (!compare_proportions()) {
-            if (currentPlotType() == 'map') {
+            if (currentPlotType() == "map") {
               if (!is.null(plotData)) {
                 selectedDate <- switch(
                   input$granularity,
@@ -406,7 +407,8 @@ tsServer <- function(id) {
                     count = sum(count)
                   )
                 plotDef <- list(
-                  plotData
+                  plotData,
+                  region = if (compare() == "canton") "switzerland" else "world"
                 )
               }
             } else {
@@ -432,8 +434,8 @@ tsServer <- function(id) {
 
         # Case 3: looking at the probabilities when a type of event is given
         if (input$display_prob && is.na(compare())) {
-          denominatorData <- intersect(dataProc, givenClinicalEventFiltered())
-          numeratorData <- intersect(denominatorData, clinicalEventFiltered())
+          denominatorData <- dplyr::intersect(dataProc, givenClinicalEventFiltered())
+          numeratorData <- dplyr::intersect(denominatorData, clinicalEventFiltered())
 
           processDataInternal <- function(d) {
             d <- d %>%
@@ -461,8 +463,8 @@ tsServer <- function(id) {
 
         # Case 4: comparing the probabilities
         if (input$display_prob && !is.na(compare())) {
-          denominatorData <- intersect(dataProc, givenClinicalEventFiltered())
-          numeratorData <- intersect(denominatorData, clinicalEventFiltered())
+          denominatorData <- dplyr::intersect(dataProc, givenClinicalEventFiltered())
+          numeratorData <- dplyr::intersect(denominatorData, clinicalEventFiltered())
 
           processDataInternal <- function(d) {
             d <- d %>%
@@ -479,8 +481,8 @@ tsServer <- function(id) {
           plotData <- NULL
           for (compare_val in unique(dataProc[[compare()]])) {
             d <- dataProc %>% filter(!!as.symbol(compare()) == compare_val)
-            dDenom <- intersect(d, denominatorData)
-            dNum <- intersect(d, numeratorData)
+            dDenom <- dplyr::intersect(d, denominatorData)
+            dNum <- dplyr::intersect(d, numeratorData)
 
             dDenom <- processDataInternal(dDenom)
             dNum <- processDataInternal(dNum)
@@ -498,7 +500,8 @@ tsServer <- function(id) {
                 filter(date == input$map_selected_day) %>%
                 mutate(count = prob)
               plotDef <- list(
-                plotData
+                plotData,
+                region = if (compare() == "canton") "switzerland" else "world"
               )
             }
           } else {
@@ -522,7 +525,7 @@ tsServer <- function(id) {
           "No data matches the requested combination of filters."
         ))
 
-        p <- eval_bare(expr(tsPlots[[currentPlotType()]]( !!!plotDef )))
+        p <- do.call(tsPlots[[currentPlotType()]], plotDef)
         if (currentPlotType() != "map") {
           # Finalize ggplot and transform to plotly
           p <- p +
@@ -539,7 +542,7 @@ tsServer <- function(id) {
         plotlyPlot <- p %>%
           config(
             displaylogo = FALSE,
-            modeBarButtons = list(list("toImage", "resetScale2d")),
+            modeBarButtons = list(list("toImage", "resetScale2d", "pan2d")),
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
 
