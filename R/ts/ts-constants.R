@@ -10,6 +10,17 @@ tsConstants$ageGroups <- c(
   "70-79", "80+", "Unknown"
 )
 
+tsConstants$sex <- c("Male", "Female", "Unknown")
+
+tsConstants$sexFromGerman <- function(german) {
+  return (switch(
+    german,
+    "Männlich" = "Male",
+    "Weiblich" = "Female",
+    "Unbekannt" = "Unknown"
+  ))
+}
+
 tsConstants$cantons <- c(
   "AG", "AI", "AR", "BE", "BL", "BS", "FL", "FR", "GE", "GL", "GR",
   "JU", "LU", "NE", "NW", "OW", "SG", "SH", "SO", "SZ", "TG", "TI",

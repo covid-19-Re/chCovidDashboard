@@ -15,6 +15,7 @@ source("R/ts/ts-basic-filter-module.R")
 
 basicFilters <- list(
   "ageGroup" = createBasicFilter("Age group", tsConstants$ageGroups, "ageGroup"),
+  "sex" = createBasicFilter("Sex", tsConstants$sex, "sex"),
   "canton" = createBasicFilter("Canton", tsConstants$cantons, "canton"),
   "travelClass" = createBasicFilter("Travel related status", tsConstants$travelRelatedStatus, "travelClass"),
   "expCountryCode" = createBasicFilter("Exposure country", tsConstants$expCountryCode, "expCountryCode"),

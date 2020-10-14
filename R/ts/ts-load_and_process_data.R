@@ -50,6 +50,7 @@ load_and_process_data <- function() {
     group_by(altersjahr) %>%
     mutate(ageGroup = tsConstants$ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
     group_by(ageGroup) %>%
+    mutate(sex = unlist(map(sex, tsConstants$sexFromGerman))) %>%
     mutate(positiveTest = TRUE, mult = 1) %>%
     mutate(travelClass = getTravelClass(exp_ort)) %>%
     mutate(canton = ktn) %>%
@@ -60,7 +61,7 @@ load_and_process_data <- function() {
     mutate(expCountryName = mapCountryName(expCountryCode)) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
-      hospitalisation, pttod, icu_aufenthalt, ageGroup,
+      hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryCode,
       expCountryName
     )
@@ -98,6 +99,7 @@ load_and_process_data <- function() {
       canton = NA,
       ## ageGroup = str_replace_all(Altersklasse, " ",""),
       ageGroup = "Unknown",
+      sex = "Unknown",
       travelClass = NA,
       expContactPath = " not filled",
       quarantBeforePositiveTest = "Not filled",
@@ -109,7 +111,7 @@ load_and_process_data <- function() {
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
-      hospitalisation, pttod, icu_aufenthalt, ageGroup,
+      hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName, expCountryCode
     )
 
@@ -145,6 +147,7 @@ load_and_process_data <- function() {
       exp_ort = NA,
       canton = ktn,
       ageGroup = str_replace_all(Altersklasse, " ", ""),
+      sex = "Unknown",
       travelClass = NA,
       expContactPath = " not filled",
       quarantBeforePositiveTest = "Not filled",
@@ -156,7 +159,7 @@ load_and_process_data <- function() {
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
-      hospitalisation, pttod, icu_aufenthalt, ageGroup,
+      hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName,
       expCountryCode
     )
