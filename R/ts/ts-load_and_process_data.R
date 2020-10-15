@@ -63,7 +63,8 @@ load_and_process_data <- function() {
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryCode,
-      expCountryName
+      expCountryName, grunderkr_diabetes, grunderkr_cardio, grunderkr_hypertonie, grunderkr_resp_chron, grunderkr_krebs,
+      grunderkr_immunsup, grunderkr_andere, grunderkr_keine
     )
 
   ## Include positive test results
@@ -107,12 +108,22 @@ load_and_process_data <- function() {
       positiveTest = FALSE,
       mult = `Negative Tests`,
       expCountryName = "Unknown",
-      expCountryCode = "Unknown"
+      expCountryCode = "Unknown",
+      grunderkr_diabetes = NA,
+      grunderkr_cardio = NA,
+      grunderkr_hypertonie = NA,
+      grunderkr_resp_chron = NA,
+      grunderkr_krebs = NA,
+      grunderkr_immunsup = NA,
+      grunderkr_andere = NA,
+      grunderkr_keine = NA
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
-      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName, expCountryCode
+      travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName, expCountryCode,
+      grunderkr_diabetes, grunderkr_cardio, grunderkr_hypertonie, grunderkr_resp_chron, grunderkr_krebs,
+      grunderkr_immunsup, grunderkr_andere, grunderkr_keine
     )
 
 
@@ -155,13 +166,22 @@ load_and_process_data <- function() {
       positiveTest = FALSE,
       mult = Negative,
       expCountryName = "Unknown",
-      expCountryCode = "Unknown"
+      expCountryCode = "Unknown",
+      grunderkr_diabetes = NA,
+      grunderkr_cardio = NA,
+      grunderkr_hypertonie = NA,
+      grunderkr_resp_chron = NA,
+      grunderkr_krebs = NA,
+      grunderkr_immunsup = NA,
+      grunderkr_andere = NA,
+      grunderkr_keine = NA
     ) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName,
-      expCountryCode
+      expCountryCode, grunderkr_diabetes, grunderkr_cardio, grunderkr_hypertonie, grunderkr_resp_chron, grunderkr_krebs,
+      grunderkr_immunsup, grunderkr_andere, grunderkr_keine
     )
 
   dataTS_spaceAge <- dataTS_spaceAge %>% mutate(ageGroup = replace_na(ageGroup, "Unknown"))

@@ -71,6 +71,8 @@ tsServer <- function(id) {
         }
       })
 
+      # Normalization
+
       observeEvent(input$normalization, {
         disabledJs <- if (input$normalization) "false" else "true"
         shinyjs::runjs(
@@ -304,8 +306,12 @@ tsServer <- function(id) {
 
         # Apply basic filters
         dataProc <- data()
+        filterWithActiveComparison <- NULL
         for (fs in basicFilterServers) {
           dataProc <- fs()$filter(dataProc)
+          if (fs()$compare) {
+            filterWithActiveComparison <- fs()
+          }
         }
 
         # Exclude all data before start of stratified negative test records
@@ -387,9 +393,9 @@ tsServer <- function(id) {
             dataProc <- dataProc %>% dateRoundingProcessor()()
           }
           plotData <- NULL
-          for (compare_val in unique(dataProc[[compare()]])) {
+          for (compare_val in filterWithActiveComparison$getComparisonGroups(dataProc)) {
             d <- dataProc %>%
-              filter(!!as.symbol(compare()) == compare_val) %>%
+              filterWithActiveComparison$getEntriesOfGroup(compare_val) %>%
               group_by(date) %>%
               summarize(count = sum(mult), .groups = "drop")
             if (compare_proportions()) {
@@ -495,8 +501,9 @@ tsServer <- function(id) {
           }
 
           plotData <- NULL
-          for (compare_val in unique(dataProc[[compare()]])) {
-            d <- dataProc %>% filter(!!as.symbol(compare()) == compare_val)
+          for (compare_val in filterWithActiveComparison$getComparisonGroups(dataProc)) {
+            d <- dataProc %>%
+              filterWithActiveComparison$getEntriesOfGroup(compare_val)
             dDenom <- dplyr::intersect(d, denominatorData)
             dNum <- dplyr::intersect(d, numeratorData)
 

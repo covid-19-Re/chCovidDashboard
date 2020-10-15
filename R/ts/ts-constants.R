@@ -94,6 +94,18 @@ tsConstants$labReasonFromCode <- function(code) {
   }
 }
 
+tsConstants$underlyingDisease <- c(
+  " Diabetes",
+  " Cardio",
+  " Hypertension",
+  " Chronic respiratory disease",
+  " Cancer",
+  " Immunosuppression",
+  " Other",
+  "None",
+  "Unknown"
+)
+
 tsConstants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",

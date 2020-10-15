@@ -4,7 +4,13 @@
 #' @param choices (character)
 #' @param attributeName (character[length=1])
 #' @return (list: ui, server)
-createBasicFilter <- function (label, choices, attributeName) {
+createBasicFilter <- function (
+  label, choices, attributeName,
+  description = "",
+  customFilterFunctionBuilder = NULL,
+  customGetComparisonGroupsFunctionBuilder = NULL,
+  customGetEntriesOfGroupFunctionBuilder = NULL
+) {
 
   ui <- function (id) {
     ns <- NS(id)
@@ -22,6 +28,9 @@ createBasicFilter <- function (label, choices, attributeName) {
         inputIds = c(ns("all"), ns("clear")),
         labels = c("Select all", "Clear"),
         size = "xs"
+      ),
+      tags$div(
+        tags$small(description)
       ),
       checkboxInput(
         inputId = ns("compare"),
@@ -67,11 +76,31 @@ createBasicFilter <- function (label, choices, attributeName) {
             )
           )
 
-          result$filter <- function (data) {
-            if (length(input$picker) < length(choices)) {
-              return (data %>% filter(!!as.symbol(attributeName) %in% input$picker))
+          if (is.null(customFilterFunctionBuilder)) {
+            result$filter <- function (data) {
+              if (length(input$picker) < length(choices)) {
+                return (data %>% filter(!!as.symbol(attributeName) %in% input$picker))
+              }
+              return (data)
             }
-            return (data)
+          } else {
+            result$filter <- customFilterFunctionBuilder(input, output, session)
+          }
+
+          if (is.null(customGetComparisonGroupsFunctionBuilder)) {
+            result$getComparisonGroups <- function (data) {
+              return (unique(data[[attributeName]]))
+            }
+          } else {
+            result$getComparisonGroups <- customGetComparisonGroupsFunctionBuilder(input, output, session)
+          }
+
+          if (is.null(customGetEntriesOfGroupFunctionBuilder)) {
+            result$getEntriesOfGroup <- function(data, group) {
+              return (filter(data, !!as.symbol(attributeName) == group))
+            }
+          } else {
+            result$getEntriesOfGroup <- customGetEntriesOfGroupFunctionBuilder(input, output, session)
           }
 
           result$session <- session
