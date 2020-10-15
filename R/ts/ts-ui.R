@@ -111,7 +111,7 @@ tsUI <- function(id) {
                      pickerInput(
                        inputId = ns("normalization_timerange"),
                        choices = tsConstants$normalizationTimerangeOptions,
-                       selected = c(ymd('2020-03-01'), ymd('2020-04-01'), ymd('2020-05-01')),
+                       selected = ymd('2020-07-01'),
                        multiple = TRUE
                      )
                    ),
