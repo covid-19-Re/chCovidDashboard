@@ -118,19 +118,11 @@ tsServer <- function(id) {
         return (FALSE)
       })
 
-      plot_type <- reactive({
-        if (!input$display_prob && !compare_proportions()) {
-          return ("discrete")
-        } else {
-          return ("continuous")
-        }
-      })
-
       availablePlotTypes <- reactive({
         # Plot types: histogram, line chart, area chart, map
         available <- NULL
         if (!input$display_prob && !compare_proportions()) {
-          available <- append(available, "histogram")
+          available <- append(available, c("histogram", "line", "area"))
         } else {
           available <- append(available, "line")
         }
@@ -157,6 +149,14 @@ tsServer <- function(id) {
         } else {
           plotType$value <- available[1]
           return (available[1])
+        }
+      })
+
+      plot_type <- reactive({
+        if (currentPlotType() == "histogram" || currentPlotType() == "map") {
+          return ("discrete")
+        } else {
+          return ("continuous")
         }
       })
 
@@ -339,10 +339,16 @@ tsServer <- function(id) {
         # Case 1a: showing the total frequencies (no normalization)
         if (!input$normalization && !input$display_prob && is.na(compare())) {
           plotData <- dataProc %>%
-            dplyr::intersect(clinicalEventFiltered()) %>%
-            dateRoundingProcessor()() %>%
+            dplyr::intersect(clinicalEventFiltered())
+          if (plot_type() == "discrete") {
+              plotData <- dateRoundingProcessor()(plotData)
+            }
+          plotData <- plotData %>%
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop")
+          if (plot_type() == "continuous") {
+            plotData$count <- slide_index_dbl(plotData$count, plotData$date, sum, .before = smoothing_interval)
+          }
 
           plotDef <- list(
             plotData, "date", "count",
@@ -357,10 +363,16 @@ tsServer <- function(id) {
             group_by(ageGroup, date) %>%
             summarize(count = sum(mult), .groups = "drop") %>%
             inner_join(normalizationConstants(), by = "ageGroup") %>%
-            mutate(normalized = count / normalizationConstant) %>%
-            dateRoundingProcessor()() %>%
+            mutate(normalized = count / normalizationConstant)
+          if (plot_type() == "discrete") {
+            plotData <- dateRoundingProcessor()(plotData)
+          }
+          plotData <- plotData %>%
             group_by(date) %>%
             summarize(count = sum(normalized), .groups = "drop")
+          if (plot_type() == "continuous") {
+            plotData$count <- slide_index_dbl(plotData$count, plotData$date, sum, .before = smoothing_interval)
+          }
           plotDef <- list(
             plotData, "date", "count",
             ylab = "Total count"
@@ -371,7 +383,7 @@ tsServer <- function(id) {
         if (!input$display_prob && !is.na(compare())) {
           dataProc <- dataProc %>%
             dplyr::intersect(clinicalEventFiltered())
-          if (!compare_proportions()) {
+          if (plot_type() == "discrete") {
             dataProc <- dataProc %>% dateRoundingProcessor()()
           }
           plotData <- NULL
@@ -386,6 +398,8 @@ tsServer <- function(id) {
                 mutate(count = replace_na(count, 0)) %>%
                 drop_na(date)
               d$smoothedCount <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
+            } else if (plot_type() == "continuous") {
+              d$count <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
             }
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
@@ -415,9 +429,11 @@ tsServer <- function(id) {
               plotDef <- list(
                 plotData, "date", "count",
                 groupingAttributeName = compare(),
-                stacked = input$stack_histograms,
                 ylab = "Total count"
               )
+              if (plot_type() == "discrete") {
+                plotDef$stacked <- input$stack_histograms
+              }
             }
           } else {
             plotData <- plotData %>%
