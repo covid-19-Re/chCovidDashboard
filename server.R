@@ -23,6 +23,11 @@ server <- function(input, output, session) {
       selected = "ts"
     )
   })
+  observeEvent(input$selectTsDataQuality, {
+    updateTabsetPanel(session, "tab",
+      selected = "tsDataQuality"
+    )
+  })
   observeEvent(input$selectTrends, {
     updateTabsetPanel(session, "tab",
       selected = "trends"
@@ -51,6 +56,9 @@ server <- function(input, output, session) {
 
   # Time series
   tsServer("ts")
+
+  # Time series: Data Quality
+  tsDataQualityServer("tsDataQuality")
 
   # trends
   trendsServer("trends")

@@ -26,6 +26,13 @@ ui <- function(request) {
             tabId = "selectTs"
           ),
           thumbnailPanel(
+            title = "Time Series: Data Quality",
+            authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
+            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
+            thumbnail = "ts-thumbnail.png",
+            tabId = "selectTsDataQuality"
+          ),
+          thumbnailPanel(
             title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
             authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus",
             affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br><i>(preliminary)</i>",
@@ -73,9 +80,19 @@ ui <- function(request) {
           )
         ),
       ),
-      tabPanel("Time Series",
-        value = "ts",
-        tsUI("ts")
+      navbarMenu(
+        "Time Series",
+        menuName = "timeseries",
+        tabPanel(
+          "Time Series",
+          value = "ts",
+          tsUI("ts")
+        ),
+        tabPanel(
+          "Data Quality",
+          value = "tsDataQuality",
+          tsDataQualityUI("tsDataQuality")
+        )
       ),
       tabPanel("Trends",
         value = "trends",
