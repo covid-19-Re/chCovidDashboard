@@ -439,7 +439,7 @@ tsServer <- function(id) {
           } else {
             plotData <- plotData %>%
               group_by(date) %>%
-              mutate(proportion = smoothedCount / sum(smoothedCount))
+              mutate(proportion = count / sum(count))
 
             plotDef <- list(
               plotData, "date", "proportion",
