@@ -189,6 +189,5 @@ tsPlots$.smooth <- function(
         ))
     }
   }
-  View(data)
   return (data)
 }
