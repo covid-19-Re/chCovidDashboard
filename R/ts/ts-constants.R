@@ -121,10 +121,10 @@ tsConstants$granularityChoices <- c("Days", "Weeks", "Months")
 tsConstants$slidingWindowChoices <- c("None", "7 days", "14 days", "28 days")
 
 tsConstants$slidingWindowChoicesToIntervals <- list(
-  "None" = lubridate::days(0),
-  "7 days" = lubridate::days(7),
-  "14 days" = lubridate::days(14),
-  "28 days" = lubridate::days(28)
+  "None" = list(before = lubridate::days(0), after = lubridate::days(0)),
+  "7 days" = list(before = lubridate::days(3), after = lubridate::days(3)),
+  "14 days" = list(before = lubridate::days(7), after = lubridate::days(6)),
+  "28 days" = list(before = lubridate::days(14), after = lubridate::days(13))
 )
 
 tsConstants$normalizationTimerangeOptions <- seq(ymd('2020-03-01'), today() %m-% months(2), by = '1 month')

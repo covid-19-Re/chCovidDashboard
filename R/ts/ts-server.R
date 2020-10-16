@@ -353,7 +353,8 @@ tsServer <- function(id) {
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop")
           if (plot_type() == "continuous") {
-            plotData$count <- slide_index_dbl(plotData$count, plotData$date, sum, .before = smoothing_interval)
+            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
+                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
           }
 
           plotDef <- list(
@@ -377,7 +378,8 @@ tsServer <- function(id) {
             group_by(date) %>%
             summarize(count = sum(normalized), .groups = "drop")
           if (plot_type() == "continuous") {
-            plotData$count <- slide_index_dbl(plotData$count, plotData$date, sum, .before = smoothing_interval)
+            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
+                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
           }
           plotDef <- list(
             plotData, "date", "count",
@@ -403,9 +405,11 @@ tsServer <- function(id) {
                 complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
                 mutate(count = replace_na(count, 0)) %>%
                 drop_na(date)
-              d$smoothedCount <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
+              d$smoothedCount <- slide_index_dbl(d$count, d$date, mean,
+                                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
             } else if (plot_type() == "continuous") {
-              d$count <- slide_index_dbl(d$count, d$date, sum, .before = smoothing_interval)
+              d$count <- slide_index_dbl(d$count, d$date, mean,
+                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
             }
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
@@ -473,8 +477,10 @@ tsServer <- function(id) {
           denominatorData <- processDataInternal(denominatorData)
           numeratorData <-  processDataInternal(numeratorData)
 
-          num <- slide_index_dbl(numeratorData$count, numeratorData$date, sum, .before = smoothing_interval)
-          denom <- slide_index_dbl(denominatorData$count, denominatorData$date, sum, .before = smoothing_interval)
+          num <- slide_index_dbl(numeratorData$count, numeratorData$date, mean,
+                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
+          denom <- slide_index_dbl(denominatorData$count, denominatorData$date, mean,
+                                   .before = smoothing_interval$before, smoothing_interval$after)
 
           plotData <- tibble(date = denominatorData$date, prob = num / denom)
           plotDef <- list(
@@ -509,8 +515,10 @@ tsServer <- function(id) {
 
             dDenom <- processDataInternal(dDenom)
             dNum <- processDataInternal(dNum)
-            denom <- slide_index_dbl(dDenom$count, dDenom$date, sum, .before = smoothing_interval)
-            num <- slide_index_dbl(dNum$count, dNum$date, sum, .before = smoothing_interval)
+            denom <- slide_index_dbl(dDenom$count, dDenom$date, mean,
+                                     .before = smoothing_interval$before, smoothing_interval$after)
+            num <- slide_index_dbl(dNum$count, dNum$date, mean,
+                                   .before = smoothing_interval$before, smoothing_interval$after)
 
             d <- tibble(date = dDenom$date, prob = num / denom)
             d[, compare()] <- compare_val
