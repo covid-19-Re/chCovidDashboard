@@ -351,15 +351,13 @@ tsServer <- function(id) {
             }
           plotData <- plotData %>%
             group_by(date) %>%
-            summarize(count = sum(mult), .groups = "drop")
-          if (plot_type() == "continuous") {
-            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
-                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
-          }
+            summarize(count = sum(mult), .groups = "drop") %>%
+            drop_na(date)
 
           plotDef <- list(
             plotData, "date", "count",
-            ylab = "Total count"
+            ylab = "Total count",
+            smoothingInterval = smoothing_interval
           )
         }
 
@@ -377,13 +375,10 @@ tsServer <- function(id) {
           plotData <- plotData %>%
             group_by(date) %>%
             summarize(count = sum(normalized), .groups = "drop")
-          if (plot_type() == "continuous") {
-            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
-                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
-          }
           plotDef <- list(
             plotData, "date", "count",
-            ylab = "Total count"
+            ylab = "Total count",
+            smoothingInterval = smoothing_interval
           )
         }
 
@@ -405,11 +400,6 @@ tsServer <- function(id) {
                 complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
                 mutate(count = replace_na(count, 0)) %>%
                 drop_na(date)
-              d$smoothedCount <- slide_index_dbl(d$count, d$date, mean,
-                                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
-            } else if (plot_type() == "continuous") {
-              d$count <- slide_index_dbl(d$count, d$date, mean,
-                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
             }
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
@@ -439,7 +429,8 @@ tsServer <- function(id) {
               plotDef <- list(
                 plotData, "date", "count",
                 groupingAttributeName = compare(),
-                ylab = "Total count"
+                ylab = "Total count",
+                smoothingInterval = smoothing_interval
               )
               if (plot_type() == "discrete") {
                 plotDef$stacked <- input$stack_histograms
@@ -453,7 +444,8 @@ tsServer <- function(id) {
             plotDef <- list(
               plotData, "date", "proportion",
               groupingAttributeName = compare(),
-              ylab = paste0("Proportion of ", input$event, "s")
+              ylab = paste0("Proportion of ", input$event, "s"),
+              smoothingInterval = smoothing_interval
             )
           }
         }
@@ -477,15 +469,11 @@ tsServer <- function(id) {
           denominatorData <- processDataInternal(denominatorData)
           numeratorData <-  processDataInternal(numeratorData)
 
-          num <- slide_index_dbl(numeratorData$count, numeratorData$date, mean,
-                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
-          denom <- slide_index_dbl(denominatorData$count, denominatorData$date, mean,
-                                   .before = smoothing_interval$before, smoothing_interval$after)
-
-          plotData <- tibble(date = denominatorData$date, prob = num / denom)
+          plotData <- tibble(date = denominatorData$date, prob = numeratorData$count / denominatorData$count)
           plotDef <- list(
             plotData, "date", "prob",
-            ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
+            ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
+            smoothingInterval = smoothing_interval
           )
         }
 
@@ -515,12 +503,8 @@ tsServer <- function(id) {
 
             dDenom <- processDataInternal(dDenom)
             dNum <- processDataInternal(dNum)
-            denom <- slide_index_dbl(dDenom$count, dDenom$date, mean,
-                                     .before = smoothing_interval$before, smoothing_interval$after)
-            num <- slide_index_dbl(dNum$count, dNum$date, mean,
-                                   .before = smoothing_interval$before, smoothing_interval$after)
 
-            d <- tibble(date = dDenom$date, prob = num / denom)
+            d <- tibble(date = dDenom$date, prob = dNum$count / dDenom$count)
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
           }
@@ -546,7 +530,8 @@ tsServer <- function(id) {
             plotDef <- list(
               plotData, "date", "prob",
               groupingAttributeName = compare(),
-              ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
+              ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
+              smoothingInterval = smoothing_interval
             )
           }
         }
@@ -576,20 +561,6 @@ tsServer <- function(id) {
             modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
-
-        # Give the data from the recent 30 days a gray background to mark them as uncertain.
-        # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
-        # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
-        if (currentPlotType() != "map") {
-          todayDaysSince1970 <- as.integer(as.POSIXct(Sys.Date())) / 60 / 60 / 24
-          plotlyPlot[['x']][['layout']][['shapes']] <- list(
-            list(type = "rect",
-                 fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
-                 # Inf and -Inf don't work here.
-                 x0 = todayDaysSince1970 - 30, x1 = todayDaysSince1970 + 100, xref = "x",
-                 y0 = -99999999, y1 = 99999999, yref = "y")
-          )
-        }
 
         plotlyPlot
       })

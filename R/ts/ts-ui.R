@@ -51,8 +51,9 @@ tsUI <- function(id) {
 
                  plotlyOutput(ns("mainPlot"), height = "600px"),
                  tags$div(
-                   HTML("<span style='width: 50px; height: 12px; display: inline-block; background-color: #e7e7e7;'></span>
-                  <small>The data from the recent 30 days might be incomplete and are subject to change.</small>")
+                   HTML("<small>The number of positive tests from the recent 3 days and the number of hospitalization,
+                   ICU admissions and deaths from the recent 30 days might be incomplete and are subject to
+                   change.</small>")
                  ),
                  helpText("Data Source: Swiss Federal Office of Public Health", style = "text-align: right;"),
                ),

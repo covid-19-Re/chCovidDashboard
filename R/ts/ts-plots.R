@@ -11,7 +11,8 @@ tsPlots$histogram <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
   stacked = FALSE,
-  ylab = NULL
+  ylab = NULL,
+  ...  # To allow unused arguments
 ) {
   if (is.null(groupingAttributeName)) {
     plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
@@ -31,8 +32,19 @@ tsPlots$histogram <- function (
 tsPlots$line <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
-  ylab = NULL
+  smoothingInterval = NULL,
+  ylab = NULL,
+  ...  # To allow unused arguments
 ) {
+  # Only draw the confidence interval if there are no more than 3 lines.
+  addConfidenceInterval <- !is.null(smoothingInterval) &&
+    (is.null(groupingAttributeName) || n_distinct(data[[groupingAttributeName]]) <= 3)
+  if (!is.null(smoothingInterval)) {
+    data <- tsPlots$.smooth(data, xAttributeName, yAttributeName, smoothingInterval,
+                            groupingAttributeName = groupingAttributeName,
+                            addConfidenceInterval = addConfidenceInterval)
+  }
+
   if (is.null(groupingAttributeName)) {
     plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
   } else {
@@ -43,6 +55,9 @@ tsPlots$line <- function (
   plot <- plot +
     geom_line() +
     ylab(ylab)
+  if (addConfidenceInterval) {
+    plot <- plot + geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.15)
+  }
 
   return (plot)
 }
@@ -51,8 +66,15 @@ tsPlots$line <- function (
 tsPlots$area <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
-  ylab = NULL
+  smoothingInterval = NULL,
+  ylab = NULL,
+  ...  # To allow unused arguments
 ) {
+  if (!is.null(smoothingInterval)) {
+    data <- tsPlots$.smooth(data, xAttributeName, yAttributeName, smoothingInterval,
+                            groupingAttributeName = groupingAttributeName)
+  }
+
   if (is.null(groupingAttributeName)) {
     plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
   } else {
@@ -114,4 +136,59 @@ tsPlots$map <- function (
       )
     )
   }
+}
+
+# Internal functions
+
+# Currently, the confidence interval is 1.
+# TODO Both code style and efficiency need improvement.
+tsPlots$.smooth <- function(
+  data, xAttributeName, yAttributeName,
+  smoothingInterval,
+  groupingAttributeName = NULL,
+  addConfidenceInterval = TRUE
+) {
+  if (!is.null(groupingAttributeName)) {
+    data <- data %>%
+      group_by(!!as.symbol(groupingAttributeName)) %>%
+      group_modify(function(d, k) {
+        d <- d %>%
+          mutate(!!as.symbol(yAttributeName) := slide_index_dbl(
+            !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), mean,
+            .before = smoothingInterval$before, .after = smoothingInterval$after))
+        if (addConfidenceInterval) {
+          d<- d %>%
+            mutate(ymin = slide_index_dbl(
+              !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), ~ min(.x, na.rm = TRUE),
+              .before = smoothingInterval$before, .after = smoothingInterval$after
+            )) %>%
+              mutate(ymax = slide_index_dbl(
+                !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), ~ max(.x, na.rm = TRUE),
+                .before = smoothingInterval$before, .after = smoothingInterval$after
+              ))
+        }
+        return (d)
+      })
+    data <- data %>%
+      ungroup()
+  } else {
+    data <- data %>%
+      mutate(!!as.symbol(yAttributeName) := slide_index_dbl(
+        !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), mean,
+        .before = smoothingInterval$before, .after = smoothingInterval$after
+      ))
+    if (addConfidenceInterval) {
+      data <- data %>%
+        mutate(ymin = slide_index_dbl(
+          !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), ~ min(.x, na.rm = TRUE),
+          .before = smoothingInterval$before, .after = smoothingInterval$after
+        )) %>%
+        mutate(ymax = slide_index_dbl(
+          !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), ~ max(.x, na.rm = TRUE),
+          .before = smoothingInterval$before, .after = smoothingInterval$after
+        ))
+    }
+  }
+  View(data)
+  return (data)
 }
