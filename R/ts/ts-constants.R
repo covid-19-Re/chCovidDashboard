@@ -13,12 +13,13 @@ tsConstants$ageGroups <- c(
 tsConstants$sex <- c("Male", "Female", "Unknown")
 
 tsConstants$sexFromGerman <- function(german) {
-  return (switch(
-    german,
-    "Männlich" = "Male",
-    "Weiblich" = "Female",
-    "Unbekannt" = "Unknown"
-  ))
+  if (german == "Männlich") {
+    return ("Male")
+  } else if (german == "Weiblich") {
+    return ("Female")
+  } else {
+    return ("Unknown")
+  }
 }
 
 tsConstants$cantons <- c(
