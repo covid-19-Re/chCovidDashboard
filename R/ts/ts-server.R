@@ -99,6 +99,9 @@ tsServer <- function(id) {
           d <- d %>% mutate(date = !!as.symbol(tsConstants$eventDateCols[[input$event]]))
         }
 
+        # Removes data that are outside of the investigated time range
+        d <- d %>% filter(date >= ymd(20200219))
+
         return(d)
       })
 
