@@ -50,13 +50,13 @@ load_and_process_data <- function() {
     group_by(altersjahr) %>%
     mutate(ageGroup = tsConstants$ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
     group_by(ageGroup) %>%
-    mutate(sex = unlist(map(sex, tsConstants$sexFromGerman))) %>%
+    mutate(sex = map_chr(sex, tsConstants$sexFromGerman)) %>%
     mutate(positiveTest = TRUE, mult = 1) %>%
     mutate(travelClass = getTravelClass(exp_ort)) %>%
     mutate(canton = ktn) %>%
-    mutate(expContactPath = unlist(map(exp_kontakt_art, tsConstants$expContactPathsFromCode))) %>%
-    mutate(quarantBeforePositiveTest = unlist(map(quarant_vor_pos, tsConstants$quarantBeforePositiveTestFromCode))) %>%
-    mutate(labReason = unlist(map(lab_grund, tsConstants$labReasonFromCode))) %>%
+    mutate(expContactPath = map_chr(exp_kontakt_art, tsConstants$expContactPathsFromCode)) %>%
+    mutate(quarantBeforePositiveTest = map_chr(quarant_vor_pos, tsConstants$quarantBeforePositiveTestFromCode)) %>%
+    mutate(labReason = map_chr(lab_grund, tsConstants$labReasonFromCode)) %>%
     mutate(expCountryCode = mapCountryCode(exp_land)) %>%
     mutate(expCountryName = mapCountryName(expCountryCode)) %>%
     select(
