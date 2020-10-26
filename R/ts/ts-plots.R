@@ -154,7 +154,7 @@ tsPlots$.smooth <- function(
       group_modify(function(d, k) {
         d <- d %>%
           mutate(!!as.symbol(yAttributeName) := slide_index_dbl(
-            !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), mean,
+            !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), ~ mean(.x, na.rm = TRUE),
             .before = smoothingInterval$before, .after = smoothingInterval$after))
         if (addConfidenceInterval) {
           d<- d %>%
@@ -174,7 +174,7 @@ tsPlots$.smooth <- function(
   } else {
     data <- data %>%
       mutate(!!as.symbol(yAttributeName) := slide_index_dbl(
-        !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), mean,
+        !!as.symbol(yAttributeName), !!as.symbol(xAttributeName), ~ mean(.x, na.rm = TRUE),
         .before = smoothingInterval$before, .after = smoothingInterval$after
       ))
     if (addConfidenceInterval) {
