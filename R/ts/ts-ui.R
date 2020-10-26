@@ -55,6 +55,7 @@ tsUI <- function(id) {
                    ICU admissions and deaths from the recent 30 days might be incomplete and are subject to
                    change.</small>")
                  ),
+                 helpText(textOutput(ns("dataLastUpdatedAt")), style = "text-align: right;"),
                  helpText("Data Source: Swiss Federal Office of Public Health", style = "text-align: right;"),
                ),
                bootstrapPanel(

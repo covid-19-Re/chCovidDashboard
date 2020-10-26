@@ -567,6 +567,12 @@ tsServer <- function(id) {
 
         plotlyPlot
       })
+
+      output$dataLastUpdatedAt <- renderText({
+        data()
+        return (paste("Data last updated on", date_format("%d.%m.%Y")(dataCache$datasetUpdatedAt)))
+      })
+
     }
   )
 }
