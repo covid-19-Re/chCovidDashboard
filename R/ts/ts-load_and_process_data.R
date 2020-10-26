@@ -31,6 +31,15 @@ mapCountryName <- function (expCountryCode) {
   return (unlist(d$admin))
 }
 
+dataCache <- list(
+  datasetUpdatedAt = ymd_hm("190001010000"),  # The datetime of the latest dataset from BAG
+  lastLoadedAt = ymd_hm("190001010000"),  # The datetime when the dataset was loaded the last time
+  data = NULL
+)
+# The data must be re-loaded after this amount of time. This is just in case that the data in an existing folder
+# was changed.
+dataCacheMaxAge <- hours(1)
+
 load_and_process_data <- function() {
   BAGdataDir <- "data/BAG"
 
@@ -45,7 +54,14 @@ load_and_process_data <- function() {
     format = "%Y-%m-%d_%H-%M-%S"
   )
 
-  newestFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
+  latestUpdate <- max(bagFileDates)
+  if (latestUpdate == dataCache$datasetUpdatedAt && lubridate::now() < (dataCache$lastLoadedAt + dataCacheMaxAge)) {
+    return (dataCache$data)
+  }
+  dataCache$datasetUpdatedAt <<- latestUpdate
+  dataCache$lastLoadedAt <<- lubridate::now()
+
+  newestFile <- bagFiles[which(bagFileDates == latestUpdate)[1]]
   data <- read_csv2(file = newestFile, locale = readr::locale(encoding = "latin1")) %>%
     group_by(altersjahr) %>%
     mutate(ageGroup = tsConstants$ageGroups[min(trunc(altersjahr / 10), 8) + 1]) %>%
@@ -197,6 +213,8 @@ load_and_process_data <- function() {
     dataTS_spaceAge,
     dataTS %>% filter(fall_dt < minSpaceAgeDate)
   )
+
+  dataCache$data <<- data
 
   return(data)
 }
