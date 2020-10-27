@@ -242,32 +242,37 @@ tsServer <- function(id) {
 
       # Filters
 
-      clinicalEventFiltered <- reactive({
-        return (
-          switch(input$event,
-                 "Test (any result)" = data(),  # Nothing to do
-                 "Positive test" = data() %>% filter(positiveTest),
-                 "Hospitalisation" = data() %>% filter(hospitalisation == 1),
-                 "Death" = data() %>% filter(pttod == 1),
-                 "ICU admission" = data() %>% filter(icu_aufenthalt == 1)
-          )
-        )
-      })
-
-      givenClinicalEventFiltered <- reactive({
-        if (input$display_prob) {
+      clinicalEventFilter <- reactive({
+        return (function (data) {
           return (
-            switch(input$given,
-                   "Test (any result)" = data(),  # Nothing to do
-                   "Positive test" = data() %>% filter(positiveTest),
-                   "Hospitalisation" = data() %>% filter(hospitalisation == 1),
-                   "Death" = data() %>% filter(pttod == 1),
-                   "ICU admission" = data() %>% filter(icu_aufenthalt == 1)
+            switch(
+              input$event,
+              "Test (any result)" = data,  # Nothing to do
+              "Positive test" = data %>% filter(positiveTest),
+              "Hospitalisation" = data %>% filter(hospitalisation == 1),
+              "Death" = data %>% filter(pttod == 1),
+              "ICU admission" = data %>% filter(icu_aufenthalt == 1)
             )
           )
-        } else {
-          return (data())
-        }
+        })
+      })
+
+      givenClinicalEventFilter <- reactive({
+        return (function (data) {
+          if (input$display_prob) {
+            return (
+              switch(input$given,
+                     "Test (any result)" = data,  # Nothing to do
+                     "Positive test" = data %>% filter(positiveTest),
+                     "Hospitalisation" = data %>% filter(hospitalisation == 1),
+                     "Death" = data %>% filter(pttod == 1),
+                     "ICU admission" = data %>% filter(icu_aufenthalt == 1)
+              )
+            )
+          } else {
+            return (data)
+          }
+        })
       })
 
       ### Processors ###
@@ -348,7 +353,7 @@ tsServer <- function(id) {
         # Case 1a: showing the total frequencies (no normalization)
         if (!input$normalization && !input$display_prob && is.na(compare())) {
           plotData <- dataProc %>%
-            dplyr::intersect(clinicalEventFiltered())
+            clinicalEventFilter()()
           if (plot_type() == "discrete") {
               plotData <- dateRoundingProcessor()(plotData)
             }
@@ -388,7 +393,7 @@ tsServer <- function(id) {
         # Case 2: comparing the frequencies
         if (!input$display_prob && !is.na(compare())) {
           dataProc <- dataProc %>%
-            dplyr::intersect(clinicalEventFiltered())
+            clinicalEventFilter()()
           if (plot_type() == "discrete") {
             dataProc <- dataProc %>% dateRoundingProcessor()()
           }
@@ -455,8 +460,8 @@ tsServer <- function(id) {
 
         # Case 3: looking at the probabilities when a type of event is given
         if (input$display_prob && is.na(compare())) {
-          denominatorData <- dplyr::intersect(dataProc, givenClinicalEventFiltered())
-          numeratorData <- dplyr::intersect(denominatorData, clinicalEventFiltered())
+          denominatorData <- givenClinicalEventFilter()(dataProc)
+          numeratorData <- clinicalEventFilter()(denominatorData)
 
           processDataInternal <- function(d) {
             d <- d %>%
@@ -482,9 +487,6 @@ tsServer <- function(id) {
 
         # Case 4: comparing the probabilities
         if (input$display_prob && !is.na(compare())) {
-          denominatorData <- dplyr::intersect(dataProc, givenClinicalEventFiltered())
-          numeratorData <- dplyr::intersect(denominatorData, clinicalEventFiltered())
-
           processDataInternal <- function(d) {
             d <- d %>%
               group_by(date) %>%
@@ -497,12 +499,14 @@ tsServer <- function(id) {
             return (d)
           }
 
+
+
           plotData <- NULL
           for (compare_val in filterWithActiveComparison$getComparisonGroups(dataProc)) {
             d <- dataProc %>%
               filterWithActiveComparison$getEntriesOfGroup(compare_val)
-            dDenom <- dplyr::intersect(d, denominatorData)
-            dNum <- dplyr::intersect(d, numeratorData)
+            dDenom <- givenClinicalEventFilter()(d)
+            dNum <- clinicalEventFilter()(dDenom)
 
             dDenom <- processDataInternal(dDenom)
             dNum <- processDataInternal(dNum)
