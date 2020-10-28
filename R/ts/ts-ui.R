@@ -70,6 +70,10 @@ tsUI <- function(id) {
                           checkboxInput(
                             inputId = ns("stack_histograms"),
                             label = "Stack histograms", value = TRUE
+                          ),
+                          checkboxInput(
+                            inputId = ns("show_confidence_interval"),
+                            label = "Show confidence interval", value = TRUE
                           )
                    ),
                    column(4,

@@ -36,6 +36,14 @@ tsPlots$line <- function (
   addConfidenceInterval = FALSE,
   ...  # To allow unused arguments
 ) {
+  if (addConfidenceInterval) {
+    data <- data %>%
+      mutate(
+        ymin = replace_na(ymin, 0),
+        ymax = replace_na(ymax, 0)
+      )
+  }
+
   if (is.null(groupingAttributeName)) {
     plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
   } else {

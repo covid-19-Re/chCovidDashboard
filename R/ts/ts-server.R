@@ -1,4 +1,5 @@
 library(rlang)
+library(stats)
 
 
 tsServer <- function(id) {
@@ -299,6 +300,7 @@ tsServer <- function(id) {
       observe({
         shinyjs::toggleState(id = "stack_histograms", condition = plot_type() == "discrete" && !input$log_scale
           && !is.na(compare()))
+        shinyjs::toggleState(id = "show_confidence_interval", condition = input$display_prob && !compare_proportions())
         shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete")
         shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous")
 
@@ -485,11 +487,25 @@ tsServer <- function(id) {
           }
           denominatorData <- processDataInternal(denominatorData)
           numeratorData <-  processDataInternal(numeratorData)
+          prob <- numeratorData$count / denominatorData$count
 
-          plotData <- tibble(date = denominatorData$date, prob = numeratorData$count / denominatorData$count)
+          ciYMin <- NULL
+          ciYMax <- NULL
+          for (i in seq_along(numeratorData$count)) {
+            if (is.nan(prob[i])) {
+              ci <- c(NaN, NaN)
+            } else {
+              ci <- binom.test(numeratorData$count[i], denominatorData$count[i], p = prob[i])$conf.int
+            }
+            ciYMin <- rbind(ciYMin, ci[1])
+            ciYMax <- rbind(ciYMax, ci[2])
+          }
+
+          plotData <- tibble(date = denominatorData$date, prob = prob, ymin = ciYMin, ymax = ciYMax)
           plotDef <- list(
             plotData, "date", "prob",
-            ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
+            ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
+            addConfidenceInterval = input$show_confidence_interval
           )
         }
 
@@ -519,7 +535,21 @@ tsServer <- function(id) {
             dDenom <- processDataInternal(dDenom)
             dNum <- processDataInternal(dNum)
 
-            d <- tibble(date = dDenom$date, prob = dNum$count / dDenom$count)
+            prob <- dNum$count / dDenom$count
+
+            ciYMin <- NULL
+            ciYMax <- NULL
+            for (i in seq_along(dNum$count)) {
+              if (is.nan(prob[i])) {
+                ci <- c(NaN, NaN)
+              } else {
+                ci <- binom.test(dNum$count[i], dDenom$count[i], p = prob[i])$conf.int
+              }
+              ciYMin <- rbind(ciYMin, ci[1])
+              ciYMax <- rbind(ciYMax, ci[2])
+            }
+
+            d <- tibble(date = dDenom$date, prob = prob, ymin = ciYMin, ymax = ciYMax)
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
           }
@@ -545,7 +575,8 @@ tsServer <- function(id) {
             plotDef <- list(
               plotData, "date", "prob",
               groupingAttributeName = compare(),
-              ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
+              ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
+              addConfidenceInterval = input$show_confidence_interval && !compare_proportions()
             )
           }
         }
