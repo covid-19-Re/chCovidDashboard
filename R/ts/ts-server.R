@@ -361,11 +361,14 @@ tsServer <- function(id) {
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop") %>%
             drop_na(date)
+          if (plot_type() == "continuous") {
+            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
+                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
+          }
 
           plotDef <- list(
             plotData, "date", "count",
-            ylab = "Total count",
-            smoothingInterval = smoothing_interval
+            ylab = "Total count"
           )
         }
 
@@ -383,10 +386,13 @@ tsServer <- function(id) {
           plotData <- plotData %>%
             group_by(date) %>%
             summarize(count = sum(normalized), .groups = "drop")
+          if (plot_type() == "continuous") {
+            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
+                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
+          }
           plotDef <- list(
             plotData, "date", "count",
-            ylab = "Total count",
-            smoothingInterval = smoothing_interval
+            ylab = "Total count"
           )
         }
 
@@ -408,6 +414,11 @@ tsServer <- function(id) {
                 complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
                 mutate(count = replace_na(count, 0)) %>%
                 drop_na(date)
+              d$count <- slide_index_dbl(d$count, d$date, mean,
+                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
+            } else if (plot_type() == "continuous") {
+              d$count <- slide_index_dbl(d$count, d$date, mean,
+                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
             }
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
@@ -438,11 +449,8 @@ tsServer <- function(id) {
                 plotData, "date", "count",
                 groupingAttributeName = compare(),
                 ylab = "Total count",
-                smoothingInterval = smoothing_interval
+                stacked = input$stack_histograms
               )
-              if (plot_type() == "discrete") {
-                plotDef$stacked <- input$stack_histograms
-              }
             }
           } else {
             plotData <- plotData %>%
@@ -452,8 +460,7 @@ tsServer <- function(id) {
             plotDef <- list(
               plotData, "date", "proportion",
               groupingAttributeName = compare(),
-              ylab = paste0("Proportion of ", input$event, "s"),
-              smoothingInterval = smoothing_interval
+              ylab = paste0("Proportion of ", input$event, "s")
             )
           }
         }
@@ -472,6 +479,8 @@ tsServer <- function(id) {
               ) %>%
               complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
               mutate(count = replace_na(count, 0))
+            d$count <- slide_index_dbl(d$count, d$date, sum,
+                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
             return (d)
           }
           denominatorData <- processDataInternal(denominatorData)
@@ -480,8 +489,7 @@ tsServer <- function(id) {
           plotData <- tibble(date = denominatorData$date, prob = numeratorData$count / denominatorData$count)
           plotDef <- list(
             plotData, "date", "prob",
-            ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
-            smoothingInterval = smoothing_interval
+            ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
           )
         }
 
@@ -496,10 +504,10 @@ tsServer <- function(id) {
               ) %>%
               complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
               mutate(count = replace_na(count, 0))
+            d$count <- slide_index_dbl(d$count, d$date, sum,
+                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
             return (d)
           }
-
-
 
           plotData <- NULL
           for (compare_val in filterWithActiveComparison$getComparisonGroups(dataProc)) {
@@ -537,8 +545,7 @@ tsServer <- function(id) {
             plotDef <- list(
               plotData, "date", "prob",
               groupingAttributeName = compare(),
-              ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
-              smoothingInterval = smoothing_interval
+              ylab = paste0("Fraction of ", input$given, "s involving ", input$event)
             )
           }
         }
