@@ -40,11 +40,11 @@ ui <- function(request) {
             tabId = "selectTrends"
           ),
           thumbnailPanel(
-            title = "Effectiveness of Contact Tracing",
+            title = "Effectiveness of TTIQ",
             authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
             affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-            thumbnail = "ct-thumbnail.png",
-            tabId = "selectContactTracing"
+            thumbnail = "ttiqModule-thumbnail.png",
+            tabId = "selectTTIQ"
           ),
           thumbnailPanel(
             title = "Live time-series analysis to monitor and forecast the COVID-19 outbreak in Switzerland",
@@ -98,9 +98,9 @@ ui <- function(request) {
         value = "trends",
         trendsUI("trends")
       ),
-      tabPanel("Contact tracing",
-        value = "contactTracing",
-        ctUI("contactTracing")
+      tabPanel("TTIQ",
+        value = "ttiq",
+        ttiqUI("ttiq")
       ),
       tabPanel("Quarantine duration",
         value = "quarantineDuration",

@@ -26,3 +26,12 @@ makePlotly <- function(p, height = 450, show_legend = FALSE, legend_title = NULL
     ) %>%
     config(displaylogo = FALSE, modeBarButtons = list(list("toImage")))
 }
+
+dayLabels <- function(x) {
+  labs <- paste(x, ifelse(x == 1, "day", "days"))
+  names(labs) <- x
+  return(labs)
+}
+
+palette_OkabeIto <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
+                      "#0072B2", "#D55E00", "#CC79A7", "#999999")

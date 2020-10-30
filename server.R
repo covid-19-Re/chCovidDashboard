@@ -13,9 +13,9 @@ server <- function(input, output, session) {
       selected = "quarantineDuration"
     )
   })
-  observeEvent(input$selectContactTracing, {
+  observeEvent(input$selectTTIQ, {
     updateTabsetPanel(session, "tab",
-      selected = "contactTracing"
+      selected = "ttiq"
     )
   })
   observeEvent(input$selectTs, {
@@ -49,7 +49,7 @@ server <- function(input, output, session) {
   })
 
   # contact tracing
-  ctServer("contactTracing")
+  ttiqServer("ttiq")
 
   # quarantine duration
   quarantineDurationServer("quarantineDuration")
