@@ -326,7 +326,7 @@ ttiqUI <- function(id) {
         )
       )
     ),
-    tags$script(src = "ttiqModule/jquery.connections.js"),
+    tags$script(src = "jquery.connections.js"),
     tags$script(src = "ttiqModule/ttiqModule.js")
   )
 }
