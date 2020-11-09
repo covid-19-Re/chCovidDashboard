@@ -64,6 +64,13 @@ ui <- function(request) {
             href = "https://ibz-shiny.ethz.ch/covid-19-re/"
           ),
           thumbnailPanelExt(
+            title = "R<sub>e</sub> Estimation Test Server (CHE&nbsp;WEEKEND&nbsp;ONLY)",
+            authors = "Jérémie Scire, Jana S. Huisman et al.",
+            affiliation = "ETH Zürich, D-BSSE & D-USYS <br><br> <i>(opens in a new window)</i>",
+            thumbnail = "re-thumbnail.png",
+            href = "https://ibz-shiny.ethz.ch/covid-19-re-test/"
+          ),
+          thumbnailPanelExt(
             title = "nextstrain: Phylogenetic analysis of Swiss SARS-CoV-2 genomes in their international context",
             authors = "maintained by Emma Hodcroft, Richard Neher, Sarah Nadeau and Tanja Stadler.",
             affiliation = "<i>(opens in a new window)</i>",
