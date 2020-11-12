@@ -110,7 +110,7 @@ tsConstants$underlyingDisease <- c(
 tsConstants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",
-  "ICU admission" = "em_hospit_icu_in_dt",
+  "ICU admission (unreliable)" = "em_hospit_icu_in_dt",
   "Death" = "pttoddat",
   "Test (any result)" = "fall_dt"
 )
@@ -123,9 +123,9 @@ tsConstants$slidingWindowChoices <- c("None", "7 days", "14 days", "28 days")
 
 tsConstants$slidingWindowChoicesToIntervals <- list(
   "None" = list(before = lubridate::days(0), after = lubridate::days(0)),
-  "7 days" = list(before = lubridate::days(3), after = lubridate::days(3)),
-  "14 days" = list(before = lubridate::days(7), after = lubridate::days(6)),
-  "28 days" = list(before = lubridate::days(14), after = lubridate::days(13))
+  "7 days" = list(before = lubridate::days(6), after = lubridate::days(0)),
+  "14 days" = list(before = lubridate::days(13), after = lubridate::days(0)),
+  "28 days" = list(before = lubridate::days(27), after = lubridate::days(0))
 )
 
 tsConstants$normalizationTimerangeOptions <- seq(ymd('2020-03-01'), today() %m-% months(2), by = '1 month')

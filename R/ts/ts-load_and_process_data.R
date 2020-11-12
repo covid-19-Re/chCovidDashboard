@@ -2,7 +2,7 @@ library(rnaturalearth)
 library(rgeos)
 
 
-getTravelClass <- function(exp_ort) {
+.getTravelClass <- function(exp_ort) {
   res <- exp_ort
   res[res == 2 | res == 3] <- "Travel-related"
   res[res != "Travel-related"] <- "Non-travel-related"
@@ -11,7 +11,7 @@ getTravelClass <- function(exp_ort) {
   return(res)
 }
 
-mapCountryCode <- function (exp_land) {
+.mapCountryCode <- function (exp_land) {
   # The country name map is not complete and only contains the countries mentioned in the exp_land field until 14.10.2020.
   # It is difficult to pre-define other countries because it is unclear how the name of a country would be spelled by the
   # authors of the dataset.
@@ -23,7 +23,7 @@ mapCountryCode <- function (exp_land) {
   return (unlist(d$iso3166_alpha3_code))
 }
 
-mapCountryName <- function (expCountryCode) {
+.mapCountryName <- function (expCountryCode) {
   worldMapData <- ne_countries(returnclass = "sf")
   d <- tibble(expCountryCode = expCountryCode) %>%
     left_join(worldMapData, by = c("expCountryCode" = "iso_a3"), na_matches = "never") %>%
@@ -40,9 +40,7 @@ dataCache <- list(
 # was changed.
 dataCacheMaxAge <- hours(1)
 
-load_and_process_data <- function() {
-  BAGdataDir <- "data/BAG"
-
+load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
   bagFiles <- list.files(BAGdataDir,
     pattern = "*FOPH_COVID19_data_extract.csv",
     full.names = TRUE,
@@ -55,11 +53,14 @@ load_and_process_data <- function() {
   )
 
   latestUpdate <- max(bagFileDates)
-  if (latestUpdate == dataCache$datasetUpdatedAt && lubridate::now() < (dataCache$lastLoadedAt + dataCacheMaxAge)) {
-    return (dataCache$data)
+
+  if (useCache) {
+    if (latestUpdate == dataCache$datasetUpdatedAt && lubridate::now() < (dataCache$lastLoadedAt + dataCacheMaxAge)) {
+      return (dataCache$data)
+    }
+    dataCache$datasetUpdatedAt <<- latestUpdate
+    dataCache$lastLoadedAt <<- lubridate::now()
   }
-  dataCache$datasetUpdatedAt <<- latestUpdate
-  dataCache$lastLoadedAt <<- lubridate::now()
 
   newestFile <- bagFiles[which(bagFileDates == latestUpdate)[1]]
   data <- read_csv2(file = newestFile, locale = readr::locale(encoding = "latin1")) %>%
@@ -68,13 +69,13 @@ load_and_process_data <- function() {
     group_by(ageGroup) %>%
     mutate(sex = map_chr(sex, tsConstants$sexFromGerman)) %>%
     mutate(positiveTest = TRUE, mult = 1) %>%
-    mutate(travelClass = getTravelClass(exp_ort)) %>%
+    mutate(travelClass = .getTravelClass(exp_ort)) %>%
     mutate(canton = ktn) %>%
     mutate(expContactPath = map_chr(exp_kontakt_art, tsConstants$expContactPathsFromCode)) %>%
     mutate(quarantBeforePositiveTest = map_chr(quarant_vor_pos, tsConstants$quarantBeforePositiveTestFromCode)) %>%
     mutate(labReason = map_chr(lab_grund, tsConstants$labReasonFromCode)) %>%
-    mutate(expCountryCode = mapCountryCode(exp_land)) %>%
-    mutate(expCountryName = mapCountryName(expCountryCode)) %>%
+    mutate(expCountryCode = .mapCountryCode(exp_land)) %>%
+    mutate(expCountryName = .mapCountryName(expCountryCode)) %>%
     select(
       canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
@@ -95,10 +96,6 @@ load_and_process_data <- function() {
     stringr::str_match(bagFiles, ".*\\/(\\d*-\\d*-\\d*_\\d*-\\d*-\\d*)")[, 2],
     format = "%Y-%m-%d_%H-%M-%S"
   )
-
-  ageGroupConverter <- function(s) {
-    str_replace_all(s, " ", "")
-  }
 
 
   newestFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
@@ -156,10 +153,6 @@ load_and_process_data <- function() {
     format = "%Y-%m-%d_%H-%M-%S"
   )
 
-  ageGroupConverter <- function(s) {
-    str_replace_all(s, " ", "")
-  }
-
   newestFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
 
   dataTS_spaceAge <- read_csv2(file = newestFile) %>%
@@ -214,7 +207,9 @@ load_and_process_data <- function() {
     dataTS %>% filter(fall_dt < minSpaceAgeDate)
   )
 
-  dataCache$data <<- data
+  if (useCache) {
+    dataCache$data <<- data
+  }
 
   return(data)
 }
