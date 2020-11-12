@@ -49,7 +49,10 @@ dev-*
 
 # Data
 data/BAG
+data/ICU
+data/Re
 data/forecastModule-Data.txt
+www/pdf/*
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
