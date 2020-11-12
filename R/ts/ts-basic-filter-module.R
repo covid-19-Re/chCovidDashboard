@@ -103,6 +103,7 @@ createBasicFilter <- function (
             result$getEntriesOfGroup <- customGetEntriesOfGroupFunctionBuilder(input, output, session)
           }
 
+          result$label <- label
           result$session <- session
           result$attributeName <- attributeName
 

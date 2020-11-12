@@ -15,9 +15,9 @@ tsPlots$histogram <- function (
   ...  # To allow unused arguments
 ) {
   if (is.null(groupingAttributeName)) {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
+    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText))
   } else {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName),
+    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText,
                                   fill = !!as.symbol(groupingAttributeName)))
   }
 
@@ -45,10 +45,11 @@ tsPlots$line <- function (
   }
 
   if (is.null(groupingAttributeName)) {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
+    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText,
+                             group = 1))
   } else {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName),
-                             color = !!as.symbol(groupingAttributeName)))
+    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText,
+                                            group = 1, color = !!as.symbol(groupingAttributeName)))
   }
 
   plot <- plot +
@@ -69,9 +70,9 @@ tsPlots$area <- function (
   ...  # To allow unused arguments
 ) {
   if (is.null(groupingAttributeName)) {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName)))
+    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText, group = 1))
   } else {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName),
+    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText, group = 1,
                              fill = !!as.symbol(groupingAttributeName)))
   }
 
@@ -109,9 +110,8 @@ tsPlots$map <- function (
   if (region == "switzerland") {
     mapData <- chMapData %>%
       inner_join(data, by = "canton", na_matches = "never")
-
     return (
-      plot_ly(mapData, split = ~canton, color = ~count, showlegend = FALSE,
+      plot_ly(mapData, split = ~tooltipText, color = ~count, showlegend = FALSE,
               # It should not matter too much which number is chosen here.
               colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
               alpha = 1, span = I(1), stroke = I("black")
@@ -121,9 +121,10 @@ tsPlots$map <- function (
 
   if (region == "world") {
     mapData <- worldMapData %>%
-      left_join(data, by = c("iso_a3" = "expCountryCode"), na_matches = "never")
+      left_join(data, by = c("iso_a3" = "expCountryCode"), na_matches = "never") %>%
+      mutate(tooltipText = coalesce(tooltipText, iso_a3))
     return (
-      plot_ly(mapData, split = ~admin, color = ~count, showlegend = FALSE,
+      plot_ly(mapData, split = ~tooltipText, color = ~count, showlegend = FALSE,
               # It should not matter too much which number is chosen here.
               colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
               alpha = 1, span = I(1), stroke = I("black")

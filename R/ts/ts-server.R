@@ -301,8 +301,8 @@ tsServer <- function(id) {
         shinyjs::toggleState(id = "stack_histograms", condition = plot_type() == "discrete" && !input$log_scale
           && !is.na(compare()))
         shinyjs::toggleState(id = "show_confidence_interval", condition = input$display_prob && !compare_proportions())
-        shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete")
-        shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous")
+        shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete" && !input$display_prob)
+        shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous" || input$display_prob)
 
         if (input$log_scale && input$stack_histograms) {
           updateCheckboxInput(session, "stack_histograms", value = FALSE)
@@ -367,6 +367,8 @@ tsServer <- function(id) {
             plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
                                               .before = smoothing_interval$before, .after = smoothing_interval$after)
           }
+          plotData <- plotData %>%
+            mutate(tooltipText = paste0("Date: ", as.character(plotData$date), "\nCount: ", round(plotData$count)))
 
           plotDef <- list(
             plotData, "date", "count",
@@ -392,6 +394,8 @@ tsServer <- function(id) {
             plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
                                               .before = smoothing_interval$before, .after = smoothing_interval$after)
           }
+          plotData <- plotData %>%
+            mutate(tooltipText = paste0("Date: ", as.character(plotData$date), "\nCount: ", round(plotData$count)))
           plotDef <- list(
             plotData, "date", "count",
             ylab = "Total count"
@@ -441,12 +445,22 @@ tsServer <- function(id) {
                   summarize(
                     count = sum(count)
                   )
+                  if (compare() == "canton") {
+                    plotData <- plotData %>%
+                      mutate(tooltipText = paste0(canton, "\nCount: ", count))
+                  } else {
+                    plotData <- plotData %>%
+                      mutate(tooltipText = paste0(expCountryCode, "\nCount: ", count))
+                  }
                 plotDef <- list(
                   plotData,
                   region = if (compare() == "canton") "switzerland" else "world"
                 )
               }
             } else {
+              plotData <- plotData %>%
+                mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(plotData$date),
+                                            "\nCount: ", round(plotData$count)))
               plotDef <- list(
                 plotData, "date", "count",
                 groupingAttributeName = compare(),
@@ -457,7 +471,9 @@ tsServer <- function(id) {
           } else {
             plotData <- plotData %>%
               group_by(date) %>%
-              mutate(proportion = count / sum(count))
+              mutate(proportion = count / sum(count)) %>%
+              mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(date), "\nProportion: ",
+                                          round(proportion * 100, digits = 2), "%"))
 
             plotDef <- list(
               plotData, "date", "proportion",
@@ -501,7 +517,9 @@ tsServer <- function(id) {
             ciYMax <- rbind(ciYMax, ci[2])
           }
 
-          plotData <- tibble(date = denominatorData$date, prob = prob, ymin = ciYMin, ymax = ciYMax)
+          plotData <- tibble(date = denominatorData$date, prob = prob, ymin = ciYMin, ymax = ciYMax) %>%
+            mutate(tooltipText = paste0("Date: ", as.character(date), "\nProbability: ",
+                                        round(prob * 100, digits = 2), "%"))
           plotDef <- list(
             plotData, "date", "prob",
             ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
@@ -559,6 +577,13 @@ tsServer <- function(id) {
               plotData <- plotData %>%
                 filter(date == input$map_selected_day) %>%
                 mutate(count = prob)
+              if (compare() == "canton") {
+                plotData <- plotData %>%
+                  mutate(tooltipText = paste0(canton, "\nProb.: ", round(count * 100, digits = 2), "%"))
+              } else {
+                plotData <- plotData %>%
+                  mutate(tooltipText = paste0(expCountryCode, "\nProb.: ", round(count * 100, digits = 2), "%"))
+              }
               plotDef <- list(
                 plotData,
                 region = if (compare() == "canton") "switzerland" else "world"
@@ -571,7 +596,9 @@ tsServer <- function(id) {
                 group_by(date) %>%
                 mutate(prob = prob / sum(prob))
             }
-
+            plotData <- plotData %>%
+              mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(date), "\nProbability: ",
+                                          round(prob * 100, digits = 2), "%"))
             plotDef <- list(
               plotData, "date", "prob",
               groupingAttributeName = compare(),
@@ -596,7 +623,12 @@ tsServer <- function(id) {
           if (input$log_scale) {
             p <- p + scale_y_log10()
           }
-          p <- ggplotly(p)
+          if (!is.na(compare())) {
+            p <- p +
+              guides(fill = guide_legend(title = filterWithActiveComparison$label),
+                     color = guide_legend(title = filterWithActiveComparison$label))
+          }
+          p <- ggplotly(p, tooltip = "text")
         }
 
         # Draw the plot

@@ -19,7 +19,7 @@ basicFilters <- list(
   "canton" = createBasicFilter("Canton", tsConstants$cantons, "canton"),
   "travelClass" = createBasicFilter("Travel related status", tsConstants$travelRelatedStatus, "travelClass"),
   "expCountryCode" = createBasicFilter("Exposure country", tsConstants$expCountryCode, "expCountryCode"),
-  "expContactPath" = createBasicFilter("Possible Exposure Source", sort(tsConstants$expContactPaths), "expContactPath"),
+  "expContactPath" = createBasicFilter("Exposure contact path", sort(tsConstants$expContactPaths), "expContactPath"),
   "quarantBeforePositiveTest" = createBasicFilter("Was patient in quarantine before positive result?",
                                                   tsConstants$quarantBeforePositiveTest,"quarantBeforePositiveTest"),
   "labReason" = createBasicFilter("Reason for the test", tsConstants$labReason, "labReason"),
