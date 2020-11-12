@@ -68,7 +68,9 @@ tsServer <- function(id) {
           timeFormat = timeFormat, step = step,
           animate = animationOptions(
             interval = 3000, loop = TRUE,
-            playButton = HTML('<i class="glyphicon glyphicon-play"></i> Run animation')
+            playButton = HTML(
+              '<span style="color: black; font-weight: bold;"><i class="glyphicon glyphicon-play"></i> Run animation</span>'
+            )
           ),
         )
       })
