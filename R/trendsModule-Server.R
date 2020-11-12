@@ -2,7 +2,6 @@ library(tidyverse)
 library(lubridate)
 library(cowplot)
 
-
 getEventCounts <- function(df, event_dt, event_name, pars) {
   # CH
   countsCH <- df %>%
@@ -90,16 +89,26 @@ trendsServer <- function(id) {
       }
 
       newestBAGFile <- reactive({
-        bagFiles <- list.files("data/BAG",
-          pattern = "*FOPH_COVID19_data_extract.rds",
-          full.names = TRUE,
-          recursive = TRUE
+        bagFiles <- tibble(
+          path = list.files("data/BAG",
+            pattern = "*FOPH_COVID19_data_extract.rds",
+            full.names = TRUE,
+            recursive = TRUE)
+          ) %>%
+        mutate(
+          date = strptime(
+            stringr::str_match(path, ".*\\/(\\d*-\\d*-\\d*_\\d*-\\d*-\\d*)")[, 2],
+            format = "%Y-%m-%d_%H-%M-%S"),
+          weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0)
         )
-        bagFileDates <- strptime(
-          stringr::str_match(bagFiles, ".*\\/(\\d*-\\d*-\\d*_\\d*-\\d*-\\d*)")[, 2],
-          format = "%Y-%m-%d_%H-%M-%S"
-        )
-        newestBAGFile <- bagFiles[which(bagFileDates == max(bagFileDates))[1]]
+
+        if (!str_detect(getwd(), "testapp")) {
+          # don't use weekend data if not in testapp
+          bagFiles <- bagFiles %>%
+            filter(weekend != 1)
+        }
+
+        newestBAGFile <- bagFiles$path[which(bagFiles$date == max(bagFiles$date))[1]]
         return(newestBAGFile)
       })
 
