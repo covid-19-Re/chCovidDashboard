@@ -50,27 +50,29 @@ tsServer <- function(id) {
       )
 
       # Date slider for the map
-      observe({
+      output$map_selected_day_output <- renderUI({
+        print("creating slider")
         if (input$display_prob || input$granularity == "Days") {
-          updateSliderInput(
-            session, "map_selected_day",
-            min = as.Date("2020-03-01"), max = today(),
-            timeFormat = "%F"
-          )
+          timeFormat <- "%F"
+          step <- 1
         } else if (input$granularity == "Weeks") {
-          updateSliderInput(
-            session, "map_selected_day",
-            min = as.Date("2020-03-01"), max = today(),
-            timeFormat = "%F (week %W)"
-          )
+          timeFormat <- "%F (week %W)"
+          step <- 7
         } else if (input$granularity == "Months") {
-          updateSliderInput(
-            session, "map_selected_day",
-            min = as.Date("2020-03-01"), max = today(),
-            timeFormat = "%b %Y"
-          )
+          timeFormat <- "%b %Y"
+          step <- 30  # TODO 30 != month
         }
+        sliderInput(
+          inputId = ns("map_selected_day"), "Date:", min = as.Date("2020-03-01"), max = today(),
+          value = today() %m-% days(7), width = "100%",
+          timeFormat = timeFormat, step = step,
+          animate = animationOptions(
+            interval = 3000, loop = TRUE,
+            playButton = HTML('<i class="glyphicon glyphicon-play"></i> Run animation')
+          ),
+        )
       })
+      outputOptions(output, "map_selected_day_output", suspendWhenHidden = FALSE)
 
       # Normalization
 

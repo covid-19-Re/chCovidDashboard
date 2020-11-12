@@ -45,8 +45,7 @@ tsUI <- function(id) {
                    id = ns("map_slider"),
                    class = "ts-hidden",
                    style = "padding-left: 25px; padding-right: 25px;",
-                   sliderInput(inputId = ns("map_selected_day"), "Date:", min = as.Date("2020-03-01"), max = today(),
-                               value = today() %m-% days(7), width = "100%")
+                   uiOutput(ns("map_selected_day_output"))
                  ),
 
                  plotlyOutput(ns("mainPlot"), height = "600px"),
@@ -87,7 +86,7 @@ tsUI <- function(id) {
                    column(4,
                           radioButtons(
                             inputId = ns("smoothing_window"),
-                            label = "Sliding window average (probabilities only)",
+                            label = "Sliding window average",
                             choices = tsConstants$slidingWindowChoices,
                             selected = tsConstants$slidingWindowChoices[1],
                             inline = TRUE
