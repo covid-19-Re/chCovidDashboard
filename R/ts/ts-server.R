@@ -607,25 +607,27 @@ tsServer <- function(id) {
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
 
-        # The data from the most recent few days are subject to change due to reporting delays.
-        numberUncertainDays <- 2
-        if (input$event == "Hospitalisation" || input$event == "ICU admission (unreliable)" || input$event == "Death" ||
-          (input$display_prob && (input$given == "Hospitalisation" || input$given == "ICU admission (unreliable)" ||
-            input$given == "Death"))
-        ) {
-          numberUncertainDays <- 5
-        }
+        if (currentPlotType() != "map") {
+          # The data from the most recent few days are subject to change due to reporting delays.
+          numberUncertainDays <- 2
+          if (input$event == "Hospitalisation" || input$event == "ICU admission (unreliable)" || input$event == "Death" ||
+            (input$display_prob && (input$given == "Hospitalisation" || input$given == "ICU admission (unreliable)" ||
+              input$given == "Death"))
+          ) {
+            numberUncertainDays <- 5
+          }
 
-        # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
-        # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
-        todayDaysSince1970 <- as.integer(as_date(dataCache$datasetUpdatedAt))
-        plotlyPlot[['x']][['layout']][['shapes']] <- list(
-          list(type = "rect",
-               fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
-               # Inf and -Inf don't work here.
-               x0 = todayDaysSince1970 - (numberUncertainDays + 0.5), x1 = todayDaysSince1970 + 100, xref = "x",
-               y0 = -99999999, y1 = 99999999, yref = "y")
-        )
+          # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
+          # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
+          todayDaysSince1970 <- as.integer(as_date(dataCache$datasetUpdatedAt))
+          plotlyPlot[['x']][['layout']][['shapes']] <- list(
+            list(type = "rect",
+                 fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
+                 # Inf and -Inf don't work here.
+                 x0 = todayDaysSince1970 - (numberUncertainDays + 0.5), x1 = todayDaysSince1970 + 100, xref = "x",
+                 y0 = -99999999, y1 = 99999999, yref = "y")
+          )
+        }
 
         plotlyPlot
       })
