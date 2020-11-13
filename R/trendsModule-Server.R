@@ -526,7 +526,8 @@ trendsServer <- function(id) {
               region %in% input$filterRegion,
               age_class %in% input$filterAgeClass,
               event %in% input$filterEvent),
-          options = list(pageLength = 50))
+          options = list(pageLength = 50)) %>%
+          formatSignif(columns = 4:13, digits = 3)
       })
 
       output$downloadData <- downloadHandler(
