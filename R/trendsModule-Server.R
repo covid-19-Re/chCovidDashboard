@@ -520,13 +520,21 @@ trendsServer <- function(id) {
       })
 
       output$comparisonDataTable <- DT::renderDataTable({
-        DT::datatable(
+        table <- DT::datatable(
           comparisonData() %>%
             filter(
               region %in% input$filterRegion,
               age_class %in% input$filterAgeClass,
               event %in% input$filterEvent),
-          options = list(pageLength = 50))
+          options = list(pageLength = 50)) %>%
+          DT::formatSignif(
+            columns = c(
+              "dt_estimate", "dt_lower", "dt_upper",
+              "wc_estimate", "wc_lower", "wc_upper",
+              "Re_estimate", "Re_lower", "Re_upper"
+            ),
+            digits = 3)
+        return(table)
       })
 
       output$downloadData <- downloadHandler(
