@@ -527,7 +527,7 @@ trendsServer <- function(id) {
               age_class %in% input$filterAgeClass,
               event %in% input$filterEvent),
           options = list(pageLength = 50)) %>%
-          formatSignif(columns = 4:13, digits = 3)
+          DT::formatSignif(columns = 4:13, digits = 3)
       })
 
       output$downloadData <- downloadHandler(
