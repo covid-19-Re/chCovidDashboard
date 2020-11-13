@@ -513,9 +513,9 @@ trendsServer <- function(id) {
         ) %>%
         complete(region, age_class, event)
 
-        allData <- rEstimates %>%
-          full_join(doublingTimes, by = c("region", "age_class", "event")) %>%
-          full_join(ranking, by = c("region", "age_class", "event"))
+        allData <- doublingTimes %>%
+          full_join(ranking, by = c("region", "age_class", "event")) %>%
+          full_join(rEstimates, by = c("region", "age_class", "event"))
 
       })
 

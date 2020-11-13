@@ -143,6 +143,7 @@ trendsUI <- function(id) {
                 )
               )
             ),
+            p("Data Sources: Doubling Times (dt) & Weekly changes (wc): see above; Re: most recent estimate from https://ibz-shiny.ethz.ch/covid-19-re/"),
             DT::dataTableOutput(ns("comparisonDataTable")),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
