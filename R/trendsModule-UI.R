@@ -12,7 +12,9 @@ trendsUI <- function(id) {
               "<i>Nanina Anderegg, Julien Riou, Christian L. Althaus (ISPM, Universität Bern)</i>"
             ),
             class = "panel-primary",
-            "some text, maybe?",
+            p("National and cantonal trends in incidence data. Lines and ribbons show the fit of a negative
+              binomial model and the 95% confidence interval. The model uses case numbers as the response and date
+               and weekend (0: work day, 1: weekend) as predictors"),
             uiOutput(ns("lastDataUpdate"))
           )
         ),
@@ -118,8 +120,10 @@ trendsUI <- function(id) {
             fluidRow(
               column(4,
                 selectizeInput(ns("filterAgeClass"), label = "show age classes",
-                  choices = c("all", "[0,10)", "[10,20)", "[20,30)", "[30,40)", "[40,50)", "[50,60)", "[60,70)", "[70,80)", "[80,121)"),
-                  selected = c("all", "[0,10)", "[10,20)", "[20,30)", "[30,40)", "[40,50)", "[50,60)", "[60,70)", "[70,80)", "[80,121)"),
+                  choices = c("all", "[0,10)", "[10,20)", "[20,30)", "[30,40)", "[40,50)",
+                    "[50,60)", "[60,70)", "[70,80)", "[80,121)"),
+                  selected = c("all", "[0,10)", "[10,20)", "[20,30)", "[30,40)", "[40,50)",
+                    "[50,60)", "[60,70)", "[70,80)", "[80,121)"),
                   multiple = TRUE, options = list(plugins = list("remove_button"),
                     closeAfterSelect = TRUE, hideSelected = TRUE), width = "100%"
                 ),
@@ -134,7 +138,7 @@ trendsUI <- function(id) {
               ),
               column(4,
                 selectizeInput(ns("filterRegion"), label = "show region",
-                  choices = c("AG", "AI", "AR", "BE", "BL", "BS", "CH", "FR", "GE", "GL", "GR", "JU", "LU", "NE", "NW", 
+                  choices = c("AG", "AI", "AR", "BE", "BL", "BS", "CH", "FR", "GE", "GL", "GR", "JU", "LU", "NE", "NW",
                     "OW", "SG", "SH", "SO", "SZ", "TG", "TI", "UR", "VD", "VS", "ZG", "ZH", "FL"),
                   selected = c("AG", "AI", "AR", "BE", "BL", "BS", "CH", "FR", "GE", "GL", "GR", "JU", "LU", "NE", "NW",
                      "OW", "SG", "SH", "SO", "SZ", "TG", "TI", "UR", "VD", "VS", "ZG", "ZH", "FL"),
@@ -143,7 +147,10 @@ trendsUI <- function(id) {
                 )
               )
             ),
-            HTML("<p>Data Sources: Doubling Times (dt) & Weekly changes (wc): see above; Re: most recent estimate from <a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a></p>"),
+            HTML("<p>Data Sources: Doubling Times (dt) & Weekly changes (wc): see above; ",
+              "Re: most recent estimate from",
+              "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
+              "https://ibz-shiny.ethz.ch/covid-19-re/</a></p>"),
             DT::dataTableOutput(ns("comparisonDataTable")),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
