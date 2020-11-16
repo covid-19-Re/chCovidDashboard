@@ -520,20 +520,62 @@ trendsServer <- function(id) {
       })
 
       output$comparisonDataTable <- DT::renderDataTable({
+        sketch <- htmltools::withTags(table(
+          class = "display",
+          thead(
+            tr(
+              th(rowspan = 2, "Region"),
+              th(rowspan = 2, "Age class"),
+              th(rowspan = 2, "Event"),
+              th(colspan = 3, "Doubling time"),
+              th(colspan = 3, "Weekly change"),
+              th(colspan = 3, HTML("R<sub>e</sub><sup>1</sup>"))
+            ),
+            tr(
+              lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 3), th)
+            )
+          ),
+          tfoot(
+            tr(
+              td(colspan = 12, HTML("<sup>1</sup>most recent estimate from",
+                "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
+                "https://ibz-shiny.ethz.ch/covid-19-re/</a></p>"))
+            )
+          )
+        ))
+
+        tableData <- comparisonData() %>%
+          mutate(
+            region = factor(region, levels = c("CH", "AG", "AI", "AR", "BE", "BL", "BS", "FR",
+              "GE", "GL", "GR", "JU", "LU", "NE", "NW", "OW", "SG", "SH", "SO", "SZ", "TG", "TI",
+              "UR", "VD", "VS", "ZG", "ZH", "FL")),
+            age_class = factor(age_class),
+            event = factor(event)
+            ) %>%
+          arrange(event, region, age_class)
+
         table <- DT::datatable(
-          comparisonData() %>%
-            filter(
-              region %in% input$filterRegion,
-              age_class %in% input$filterAgeClass,
-              event %in% input$filterEvent),
-          options = list(pageLength = 50)) %>%
+          tableData,
+          rownames = FALSE,
+          container = sketch,
+          filter = "top",
+          options = list(
+            dom = 't',
+            pageLength = 125,
+            lengthMenu = c(25, 50, 100, 125))) %>%
           DT::formatSignif(
             columns = c(
               "dt_estimate", "dt_lower", "dt_upper",
               "wc_estimate", "wc_lower", "wc_upper",
               "Re_estimate", "Re_lower", "Re_upper"
             ),
-            digits = 3)
+            digits = 4) %>%
+          DT::formatStyle(
+            columns = c(
+              "dt_estimate", "dt_lower", "dt_upper",
+              "Re_estimate", "Re_lower", "Re_upper"),
+            backgroundColor = c("#f0f8ffab")
+            )
         return(table)
       })
 

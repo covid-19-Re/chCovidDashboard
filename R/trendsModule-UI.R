@@ -117,41 +117,12 @@ trendsUI <- function(id) {
         type = "pills", id = "summaryTabs",
         tabPanel(p(class = "tab-title", "Summary Table"), value = "summaryTable",
           div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
-            fluidRow(
-              column(4,
-                selectizeInput(ns("filterAgeClass"), label = "show age classes",
-                  choices = c("all", "[0,10)", "[10,20)", "[20,30)", "[30,40)", "[40,50)",
-                    "[50,60)", "[60,70)", "[70,80)", "[80,121)"),
-                  selected = c("all", "[0,10)", "[10,20)", "[20,30)", "[30,40)", "[40,50)",
-                    "[50,60)", "[60,70)", "[70,80)", "[80,121)"),
-                  multiple = TRUE, options = list(plugins = list("remove_button"),
-                    closeAfterSelect = TRUE, hideSelected = TRUE), width = "100%"
-                ),
-              ),
-              column(4,
-                selectizeInput(ns("filterEvent"), label = "show event",
-                  choices = c("cases", "deaths", "hospitalizations", "icu"),
-                  selected = c("cases", "deaths", "hospitalizations", "icu"),
-                  multiple = TRUE, options = list(plugins = list("remove_button"),
-                    closeAfterSelect = TRUE, hideSelected = TRUE), width = "100%"
-                )
-              ),
-              column(4,
-                selectizeInput(ns("filterRegion"), label = "show region",
-                  choices = c("AG", "AI", "AR", "BE", "BL", "BS", "CH", "FR", "GE", "GL", "GR", "JU", "LU", "NE", "NW",
-                    "OW", "SG", "SH", "SO", "SZ", "TG", "TI", "UR", "VD", "VS", "ZG", "ZH", "FL"),
-                  selected = c("AG", "AI", "AR", "BE", "BL", "BS", "CH", "FR", "GE", "GL", "GR", "JU", "LU", "NE", "NW",
-                     "OW", "SG", "SH", "SO", "SZ", "TG", "TI", "UR", "VD", "VS", "ZG", "ZH", "FL"),
-                  multiple = TRUE, options = list(plugins = list("remove_button"),
-                    closeAfterSelect = TRUE, hideSelected = TRUE), width = "100%"
-                )
-              )
-            ),
-            HTML("<p>Data Sources: Doubling Times (dt) & Weekly changes (wc): see above; ",
-              "Re: most recent estimate from",
-              "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
-              "https://ibz-shiny.ethz.ch/covid-19-re/</a></p>"),
-            DT::dataTableOutput(ns("comparisonDataTable")),
+            HTML("<p>Doubling time, weekly change in doubling time and most recent R<sub>e</sub>",
+            "values from <a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
+            "https://ibz-shiny.ethz.ch/covid-19-re/</a>.</p>",
+            "<p>Use filter fields to filter columns.",
+            "Click on column names to sort. Shift-Click to sort by multiple columns.</p>"),
+            DT::dataTableOutput(ns("comparisonDataTable")) %>% withSpinner(),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
         )
