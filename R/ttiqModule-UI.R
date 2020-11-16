@@ -137,6 +137,7 @@ ttiqUI <- function(id) {
                       step = 0.1, round = -2,
                       width = "100%"
                     ),
+                    h4("Focal TTIQ parameter set"),
                     sliderInput(
                       ns("f_terTTIQ"),
                       extLabel("f",
@@ -264,7 +265,8 @@ ttiqUI <- function(id) {
                       ),
                       column(
                         width = 6,
-                        plotlyOutput(ns("region_terTI"), height = "450px") %>% withSpinner()
+                        #plotlyOutput(ns("region_terTI"), height = "450px") %>% withSpinner()
+                        plotlyOutput(ns("density_terTI"), height = "450px") %>% withSpinner()
                       )
                     ),
                     #plotOutput(ns("casesSEC_legend"), height = "75px"),
@@ -337,7 +339,8 @@ ttiqUI <- function(id) {
                       ),
                       column(
                         width = 6,
-                        plotlyOutput(ns("region_secTI"), height = "450px") %>% withSpinner()
+                        #plotlyOutput(ns("region_secTI"), height = "450px") %>% withSpinner()
+                        plotlyOutput(ns("density_secTI"), height = "450px") %>% withSpinner()
                       )
                     ),
                     uiOutput(ns("caption_secTI"))

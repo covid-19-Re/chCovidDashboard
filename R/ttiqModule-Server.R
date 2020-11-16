@@ -302,7 +302,7 @@ ttiqServer <- function(id) {
           )
         })
         tertiarySummary <- do.call(rbind, tertiarySummary)
-        return(list(tertiaryCases = tertiaryCases, tertiarySummary = tertiarySummary))
+        return(list(tertiaryCases = tertiaryCases, tertiaryCases2 = c, tertiarySummary = tertiarySummary))
       })
 
       # PLOTS ----
@@ -338,29 +338,70 @@ ttiqServer <- function(id) {
         makePlotly(plot, show_legend = T, legend_title = "delay Δ<sub>1</sub> (days)")
       })
 
-      output$region_terTI <- renderPlotly({
-        df <- data_terTI()$tertiarySummary
+      # output$region_terTI <- renderPlotly({
+      #   df <- data_terTI()$tertiarySummary
+      #   df$f <- as.numeric(levels(df$f))[df$f]
+      #
+      #   plot <- ggplot(
+      #     data = df[df$Delta1 >= 0,],
+      #     mapping = aes(x = f, y = Delta1, fill = Re, group = Re,
+      #                   text = str_c(
+      #                     "f = ", scales::percent(f, accuracy = 0.1), "<br>",
+      #                     "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days", "<br>"
+      #                   )
+      #     )) +
+      #     geom_area(position = position_identity(), colour = "white") +
+      #     scale_x_continuous(limits = c(min(pars_terTI()$f),max(pars_terTI()$f)), labels = scales::percent) +
+      #     coord_cartesian(ylim = c(0, max(pars_terTI()$Delta1)), expand = F) +
+      #     scale_fill_viridis_d() +
+      #     labs(
+      #       x = "fraction of index cases\nfound and isolated (f)",
+      #       y = "delay Δ<sub>1</sub> (days)\n&nbsp;") +
+      #     plotTheme +
+      #     theme(legend.position = "none")
+      #
+      #   makePlotly(plot)
+      # })
+
+      output$density_terTI <- renderPlotly({
+        df <- data_terTI()$tertiaryCases2
         df$f <- as.numeric(levels(df$f))[df$f]
+        df$Delta1 <- as.numeric(levels(df$Delta1))[df$Delta1]
 
         plot <- ggplot(
-          data = df[df$Delta1 >= 0,],
-          mapping = aes(x = f, y = Delta1, fill = Re, group = Re,
-                        text = str_c(
-                          "f = ", scales::percent(f, accuracy = 0.1), "<br>",
-                          "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days", "<br>"
-                        )
-          )) +
-          geom_area(position = position_identity(), colour = "white") +
+          data = df,
+          mapping = aes(x = f, y = Delta1, group = Re)) +
+          geom_raster(aes(fill = tertiaryCases, text = str_c(
+            "f = ", scales::percent(f, accuracy = 0.1), "<br>",
+            "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days", "<br>",
+            "n<sub>3</sub> = ", format(round(tertiaryCases, 2), nsmall = 2)
+          )), interpolate = T) +
+          #geom_contour(aes(z = tertiaryCases), colour = "black", size = plot_line_size, breaks = 1) +
+          scale_fill_gradientn(colours = c("seagreen","white","white", "white","salmon"), name = "tertiary\ncases",
+                               values = scales::rescale(c(0,1-.Machine$double.eps,1,1+.Machine$double.eps,max(1.1,input$Re_terTI^2))),
+                               limits = c(0,max(1.1,input$Re_terTI^2)),
+                               guide = guide_colorbar(title.position = "left", direction = 1)) +
           scale_x_continuous(limits = c(min(pars_terTI()$f),max(pars_terTI()$f)), labels = scales::percent) +
           coord_cartesian(ylim = c(0, max(pars_terTI()$Delta1)), expand = F) +
-          scale_fill_viridis_d() +
           labs(
             x = "fraction of index cases\nfound and isolated (f)",
             y = "delay Δ<sub>1</sub> (days)\n&nbsp;") +
-          plotTheme +
-          theme(legend.position = "none")
+          plotTheme
 
-        makePlotly(plot)
+        #' Add n3 == 1 contour
+        df2 <- data_terTI()$tertiarySummary
+        df2 <- df2[df2$Delta1 >= 0,]
+        if (nrow(df2) > 0) {
+          df2$f <- as.numeric(levels(df2$f))[df2$f]
+
+          plot <- plot + geom_line(data = df2,
+                                   mapping = aes(x = f, y = Delta1, text = str_c(
+                                     "f = ", scales::percent(f, accuracy = 0.1), "<br>",
+                                     "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days"
+                                   )), size = plot_line_size, colour = "black")
+        }
+
+        makePlotly(plot, show_legend = T, legend_title = "tertiary\ncases")
       })
 
       output$caption_terTI <- renderUI({
@@ -369,10 +410,16 @@ ttiqServer <- function(id) {
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
           "<i>(left)</i> The number of tertiary cases per index case as a function ",
-          "of the testing & isolation coverage f (x-axis) and delay &Delta;<sub>1</sub> (colour). ",
-          "<i>(right)</i> Regions in which the expected number of tertiary cases ",
-          "is above one (uncoloured) or below one (coloured). ",
-          "Here we use <strong>R<sub>e</sub> = {Re}</strong>.",
+          "of the testing & isolation coverage f (x-axis) and delay &Delta;<sub>1</sub> (colour).<br>",
+          #"<i>(right)</i> Regions in which the expected number of tertiary cases ",
+          #"is above one (uncoloured) or below one (coloured). ",
+          "<i>(right)</i> The number of tertiary cases (colour) as a function ",
+          "of the testing & isolation coverage f (x-axis) and delay &Delta;<sub>1</sub> (y axis). ",
+          "Green regions have n<sub>3</sub> < 1, while red regions have n<sub>3</sub> > 1. ",
+          "The black line separates these regions (n<sub>3</sub> = 1).<br>",
+          "We use <strong>R<sub>e</sub> = {Re}</strong> for the average number ",
+          "of secondary infections in the absence of testing and isolating ",
+          "(i.e. <i>f</i>=0).",
           "</span>"
         ))
       })
@@ -410,7 +457,7 @@ ttiqServer <- function(id) {
           )
         })
         secondarySummary <- do.call(rbind, secondarySummary)
-        return(list(secondaryCases = secondaryCases, secondarySummary = secondarySummary))
+        return(list(secondaryCases = secondaryCases, secondaryCases2 = c, secondarySummary = secondarySummary))
       })
 
       # PLOTS ----
@@ -446,29 +493,70 @@ ttiqServer <- function(id) {
         makePlotly(plot, show_legend = T, legend_title = "delay Δ<sub>1</sub> (days)")
       })
 
-      output$region_secTI <- renderPlotly({
-        df <- data_secTI()$secondarySummary
+      # output$region_secTI <- renderPlotly({
+      #   df <- data_secTI()$secondarySummary
+      #   df$f <- as.numeric(levels(df$f))[df$f]
+      #
+      #   plot <- ggplot(
+      #     data = df[df$Delta1 >= 0,],
+      #     mapping = aes(x = f, y = Delta1, fill = Re, group = Re,
+      #                   text = str_c(
+      #                     "f = ", scales::percent(f, accuracy = 0.1), "<br>",
+      #                     "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days", "<br>"
+      #                   )
+      #     )) +
+      #     geom_area(position = position_identity(), colour = "white") +
+      #     scale_x_continuous(limits = c(min(pars_secTI()$f),max(pars_secTI()$f)), labels = scales::percent) +
+      #     coord_cartesian(ylim = c(0, max(pars_secTI()$Delta1)), expand = F) +
+      #     scale_fill_viridis_d() +
+      #     labs(
+      #       x = "fraction of index cases\nfound and isolated (f)",
+      #       y = "delay Δ<sub>1</sub> (days)\n&nbsp;") +
+      #     plotTheme +
+      #     theme(legend.position = "none")
+      #
+      #   makePlotly(plot)
+      # })
+
+      output$density_secTI <- renderPlotly({
+        df <- data_secTI()$secondaryCases2
         df$f <- as.numeric(levels(df$f))[df$f]
+        df$Delta1 <- as.numeric(levels(df$Delta1))[df$Delta1]
 
         plot <- ggplot(
-          data = df[df$Delta1 >= 0,],
-          mapping = aes(x = f, y = Delta1, fill = Re, group = Re,
-                        text = str_c(
-                          "f = ", scales::percent(f, accuracy = 0.1), "<br>",
-                          "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days", "<br>"
-                        )
-          )) +
-          geom_area(position = position_identity(), colour = "white") +
+          data = df,
+          mapping = aes(x = f, y = Delta1, group = Re)) +
+          geom_raster(aes(fill = secondaryCases, text = str_c(
+            "f = ", scales::percent(f, accuracy = 0.1), "<br>",
+            "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days", "<br>",
+            "n<sub>2</sub> = ", format(round(secondaryCases, 2), nsmall = 2)
+          )), interpolate = T) +
+          #geom_contour(aes(z = secondaryCases), colour = "black", size = plot_line_size, breaks = 1) +
+          scale_fill_gradientn(colours = c("seagreen","white","white", "white","salmon"), name = "secondary\ncases",
+                               values = scales::rescale(c(0,1-.Machine$double.eps,1,1+.Machine$double.eps,max(1.1,input$Re_secTI))),
+                               limits = c(0,max(1.1,input$Re_secTI)),
+                               guide = guide_colorbar(title.position = "left", direction = 1)) +
           scale_x_continuous(limits = c(min(pars_secTI()$f),max(pars_secTI()$f)), labels = scales::percent) +
           coord_cartesian(ylim = c(0, max(pars_secTI()$Delta1)), expand = F) +
-          scale_fill_viridis_d() +
           labs(
             x = "fraction of index cases\nfound and isolated (f)",
             y = "delay Δ<sub>1</sub> (days)\n&nbsp;") +
-          plotTheme +
-          theme(legend.position = "none")
+          plotTheme
 
-        makePlotly(plot)
+        #' Add n2 == 1 contour
+        df2 <- data_secTI()$secondarySummary
+        df2 <- df2[df2$Delta1 >= 0,]
+        if (nrow(df2) > 0) {
+          df2$f <- as.numeric(levels(df2$f))[df2$f]
+
+          plot <- plot + geom_line(data = df2,
+                                   mapping = aes(x = f, y = Delta1, text = str_c(
+                                     "f = ", scales::percent(f, accuracy = 0.1), "<br>",
+                                     "Δ<sub>1</sub> = ", format(round(Delta1, 2), nsmall = 2), " days"
+                                   )), size = plot_line_size, colour = "black")
+        }
+
+        makePlotly(plot, show_legend = T, legend_title = "secondary\ncases")
       })
 
       output$caption_secTI <- renderUI({
@@ -477,10 +565,16 @@ ttiqServer <- function(id) {
         HTML(glue(
           "<span class='help-block' style='font-size:15px;'>",
           "<i>(left)</i> The number of secondary cases per index case as a function ",
-          "of the testing & isolation coverage f (x-axis) and delay &Delta;<sub>1</sub> (colour). ",
-          "<i>(right)</i> Regions in which the expected number of secondary cases ",
-          "is above one (uncoloured) or below one (coloured). ",
-          "Here we use <strong>R<sub>e</sub> = {Re}</strong>.",
+          "of the testing & isolation coverage f (x-axis) and delay &Delta;<sub>1</sub> (colour).<br>",
+          #"<i>(right)</i> Regions in which the expected number of secondary cases ",
+          #"is above one (uncoloured) or below one (coloured). ",
+          "<i>(right)</i> The number of secondary cases (colour) as a function ",
+          "of the testing & isolation coverage f (x-axis) and delay &Delta;<sub>1</sub> (y axis). ",
+          "Green regions have n<sub>2</sub> < 1, while red regions have n<sub>2</sub> > 1. ",
+          "The black line separates these regions (n<sub>2</sub> = 1).<br>",
+          "We use <strong>R<sub>e</sub> = {Re}</strong> for the average number ",
+          "of secondary infections in the absence of testing and isolating ",
+          "(i.e. <i>f</i>=0).",
           "</span>"
         ))
       })
