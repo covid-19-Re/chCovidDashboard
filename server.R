@@ -1,10 +1,5 @@
 server <- function(input, output, session) {
   # global
-  observe({
-    # Trigger this observer every time the tab changes
-    input$tab
-    session$doBookmark()
-  })
 
   observe_helpers(help_dir = "R/forecastModule-Files/helpfiles")
 
@@ -37,15 +32,6 @@ server <- function(input, output, session) {
     updateTabsetPanel(session, "tab",
       selected = "forecast"
     )
-  })
-
-  onBookmarked(function(url) {
-    updateQueryString(url)
-  })
-
-  observe({
-    toExclude <- setdiff(names(input), "tab")
-    setBookmarkExclude(toExclude)
   })
 
   # contact tracing
