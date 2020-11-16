@@ -14,7 +14,7 @@ trendsUI <- function(id) {
             class = "panel-primary",
             p("National and cantonal trends in incidence data. Lines and ribbons show the fit of a negative
               binomial model and the 95% confidence interval. The model uses case numbers as the response and date
-               and weekend (0: work day, 1: weekend) as predictors"),
+               and weekend (0: work day, 1: weekend) as predictors."),
             uiOutput(ns("lastDataUpdate"))
           )
         ),

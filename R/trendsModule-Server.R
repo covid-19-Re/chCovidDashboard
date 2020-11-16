@@ -527,8 +527,8 @@ trendsServer <- function(id) {
               th(rowspan = 2, "Region"),
               th(rowspan = 2, "Age class"),
               th(rowspan = 2, "Event"),
-              th(colspan = 3, "Doubling time"),
-              th(colspan = 3, "Weekly change"),
+              th(colspan = 3, "Doubling time (d)"),
+              th(colspan = 3, "Weekly change (%)"),
               th(colspan = 3, HTML("R<sub>e</sub><sup>1</sup>"))
             ),
             tr(
@@ -560,7 +560,7 @@ trendsServer <- function(id) {
           container = sketch,
           filter = "top",
           options = list(
-            dom = 't',
+            dom = "t",
             pageLength = 125,
             lengthMenu = c(25, 50, 100, 125))) %>%
           DT::formatSignif(
