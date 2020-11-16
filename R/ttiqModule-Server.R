@@ -270,10 +270,13 @@ ttiqServer <- function(id) {
       pars_terTI <- reactive({
         list(
           Re = input$Re_terTI,
-          f = seq(input$f_terTI[1], input$f_terTI[2], 0.1),
-          Delta1 = seq(input$Delta1_terTI[1], input$Delta1_terTI[2], 1)
+          #f = seq(input$f_terTI[1], input$f_terTI[2], 0.1),
+          #Delta1 = seq(input$Delta1_terTI[1], input$Delta1_terTI[2], 1)
+          f = seq(0,1,0.05),
+          Delta1 = seq(0,4,1)
         )
       })
+
       # Tertiary cases and summary
       data_terTI <- reactive({
         #' Tertiary cases as a function of f and Delta_1
@@ -318,12 +321,12 @@ ttiqServer <- function(id) {
           )) +
           geom_hline(yintercept = 1, size = plot_line_size, colour = "darkgrey") +
           geom_line(size = plot_line_size) +
-          geom_point(size = plot_point_size) +
-          scale_x_continuous(limits = c(input$f_terTI[1], input$f_terTI[2]), labels = scales::percent) +
+          #geom_point(size = plot_point_size) +
+          scale_x_continuous(limits = c(min(pars_terTI()$f),max(pars_terTI()$f)), labels = scales::percent) +
           coord_cartesian(ylim = c(0, max(1, input$Re_terTI^2))) +
           scale_colour_viridis_d(
             option = "plasma", end = 0.9,
-            name = "delay (&Delta;<sub>1</sub>)",
+            name = "delay &Delta;<sub>1</sub> (days)",
             labels = dayLabels(levels(df$Delta1)),
             guide = guide_legend(title.position = "left", nrow = 1)
           ) +
@@ -332,7 +335,7 @@ ttiqServer <- function(id) {
             y = "tertiary cases (n<sub>3</sub>)\n&nbsp;") +
           plotTheme
 
-        makePlotly(plot, show_legend = T, legend_title = "delay (Δ<sub>1</sub>)")
+        makePlotly(plot, show_legend = T, legend_title = "delay Δ<sub>1</sub> (days)")
       })
 
       output$region_terTI <- renderPlotly({
@@ -348,13 +351,12 @@ ttiqServer <- function(id) {
                         )
           )) +
           geom_area(position = position_identity(), colour = "white") +
-          #geom_point(size = plot_point_size) +
-          scale_x_continuous(limits = c(input$f_terTI[1], input$f_terTI[2]), labels = scales::percent) +
-          coord_cartesian(ylim = c(0, input$Delta1_terTI[2]), expand = F) +
+          scale_x_continuous(limits = c(min(pars_terTI()$f),max(pars_terTI()$f)), labels = scales::percent) +
+          coord_cartesian(ylim = c(0, max(pars_terTI()$Delta1)), expand = F) +
           scale_fill_viridis_d() +
           labs(
             x = "fraction of index cases\nfound and isolated (f)",
-            y = "delay (Δ<sub>1</sub>)\n&nbsp;") +
+            y = "delay Δ<sub>1</sub> (days)\n&nbsp;") +
           plotTheme +
           theme(legend.position = "none")
 
@@ -379,8 +381,10 @@ ttiqServer <- function(id) {
       pars_secTI <- reactive({
         list(
           Re = input$Re_secTI,
-          f = seq(input$f_secTI[1], input$f_secTI[2], 0.1),
-          Delta1 = seq(input$Delta1_secTI[1], input$Delta1_secTI[2], 1)
+          #f = seq(input$f_secTI[1], input$f_secTI[2], 0.1),
+          #Delta1 = seq(input$Delta1_secTI[1], input$Delta1_secTI[2], 1)
+          f = seq(0,1,0.05),
+          Delta1 = seq(0,4,1)
         )
       })
 
@@ -425,12 +429,12 @@ ttiqServer <- function(id) {
           )) +
           geom_hline(yintercept = 1, size = plot_line_size, colour = "darkgrey") +
           geom_line(size = plot_line_size) +
-          geom_point(size = plot_point_size) +
-          scale_x_continuous(limits = c(input$f_secTI[1], input$f_secTI[2]), labels = scales::percent) +
+          #geom_point(size = plot_point_size) +
+          scale_x_continuous(limits = c(min(pars_secTI()$f),max(pars_secTI()$f)), labels = scales::percent) +
           coord_cartesian(ylim = c(0, max(1, input$Re_secTI))) +
           scale_colour_viridis_d(
             option = "plasma", end = 0.9,
-            name = "delay (&Delta;<sub>1</sub>)",
+            name = "delay &Delta;<sub>1</sub> (days)",
             labels = dayLabels(levels(df$Delta1)),
             guide = guide_legend(title.position = "left", nrow = 1)
           ) +
@@ -439,7 +443,7 @@ ttiqServer <- function(id) {
             y = "secondary cases (n<sub>2</sub>)\n&nbsp;") +
           plotTheme
 
-        makePlotly(plot, show_legend = T, legend_title = "delay (Δ<sub>1</sub>)")
+        makePlotly(plot, show_legend = T, legend_title = "delay Δ<sub>1</sub> (days)")
       })
 
       output$region_secTI <- renderPlotly({
@@ -455,13 +459,12 @@ ttiqServer <- function(id) {
                         )
           )) +
           geom_area(position = position_identity(), colour = "white") +
-          #geom_point(size = plot_point_size) +
-          scale_x_continuous(limits = c(input$f_secTI[1], input$f_secTI[2]), labels = scales::percent) +
-          coord_cartesian(ylim = c(0, input$Delta1_secTI[2]), expand = F) +
+          scale_x_continuous(limits = c(min(pars_secTI()$f),max(pars_secTI()$f)), labels = scales::percent) +
+          coord_cartesian(ylim = c(0, max(pars_secTI()$Delta1)), expand = F) +
           scale_fill_viridis_d() +
           labs(
             x = "fraction of index cases\nfound and isolated (f)",
-            y = "delay (Δ<sub>1</sub>)\n&nbsp;") +
+            y = "delay Δ<sub>1</sub> (days)\n&nbsp;") +
           plotTheme +
           theme(legend.position = "none")
 

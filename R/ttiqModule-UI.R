@@ -47,8 +47,12 @@ ttiqUI <- function(id) {
                     numericInput(ns("genScale"), "scale", step = 0.001, value = 6.1244)
                   )
                 ),
-                sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
-                           doi = "10.1101/2020.09.04.20188516")
+                helpText(
+                  style = "font-size:15px",
+                  HTML("Weibull distribution<br>"),
+                  sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
+                             doi = "10.1101/2020.09.04.20188516")
+                )
               ),
 
               # Infectivity profile
@@ -69,8 +73,12 @@ ttiqUI <- function(id) {
                     numericInput(ns("infDf"), "df", step = 0.001, value = 3.3454)
                   )
                 ),
-                sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
-                           doi = "10.1101/2020.09.04.20188516")
+                helpText(
+                  style = "font-size:15px",
+                  HTML("Shifted Student's <i>t</i> distribution<br>"),
+                  sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
+                             doi = "10.1101/2020.09.04.20188516")
+                )
               ),
 
               # Incubation period
@@ -87,8 +95,12 @@ ttiqUI <- function(id) {
                     numericInput(ns("sdLog"), "log(sd)", step = 0.001, value = 0.661)
                   )
                 ),
-                sourceLink("Li et al., NEJM 2020 382:1199-1207 ",
-                           doi = "10.1056/NEJMoa2001316")
+                helpText(
+                  style = "font-size:15px",
+                  HTML("Lognormal distribution<br>"),
+                  sourceLink("Li et al., NEJM 2020 382:1199-1207 ",
+                             doi = "10.1056/NEJMoa2001316")
+                )
               )
             )
           )
@@ -119,8 +131,9 @@ ttiqUI <- function(id) {
                     sliderInput(
                       ns("Re_terTTIQ"),
                       extLabel("R<sub>e</sub>",
-                               "effective reproductive number"),
-                      min = 0, max = 5, value = 1.2,
+                               paste("effective reproductive number without TTIQ",
+                                     "(i.e. <i>f</i>=<i>g</i>=0)")),
+                      min = 0, max = 2.5, value = 1.2,
                       step = 0.1, round = -2,
                       width = "100%"
                     ),
@@ -210,27 +223,32 @@ ttiqUI <- function(id) {
                     sliderInput(
                       ns("Re_terTI"),
                       extLabel("R<sub>e</sub>",
-                               "effective reproductive number"),
-                      min = 0, max = 5, value = 1.2,
+                               paste("effective reproductive number without TTIQ",
+                                     "(i.e. <i>f</i>=<i>g</i>=0)")),
+                      min = 0, max = 2.5, value = 1.2,
                       step = 0.1, round = -2,
                       width = "100%"
                     ),
-                    sliderInput(
-                      ns("f_terTI"),
-                      extLabel("f",
-                               "fraction of index cases detected"),
-                      min = 0, max = 1, value = c(0, 1),
-                      step = 0.1, round = -2,
-                      width = "100%"
-                    ),
-                    sliderInput(
-                      ns("Delta1_terTI"),
-                      extLabel("&Delta;<sub>1</sub>",
-                               "delay from symptom onset to isolation of index case [days]"),
-                      min = 0, max = 6, value = c(0, 4),
-                      step = 1,
-                      width = "100%"
+                    helpText(
+                      style = "font-size:15px",
+                      HTML("We set <i>g</i>=0 to eliminate contact tracing."),
                     )
+                    # sliderInput(
+                    #   ns("f_terTI"),
+                    #   extLabel("f",
+                    #            "fraction of index cases detected"),
+                    #   min = 0, max = 1, value = c(0, 1),
+                    #   step = 0.1, round = -2,
+                    #   width = "100%"
+                    # ),
+                    # sliderInput(
+                    #   ns("Delta1_terTI"),
+                    #   extLabel("&Delta;<sub>1</sub>",
+                    #            "delay from symptom onset to isolation of index case [days]"),
+                    #   min = 0, max = 6, value = c(0, 4),
+                    #   step = 1,
+                    #   width = "100%"
+                    # )
                   )
                 ),
                 column(
@@ -278,27 +296,32 @@ ttiqUI <- function(id) {
                     sliderInput(
                       ns("Re_secTI"),
                       extLabel("R<sub>e</sub>",
-                               "effective reproductive number"),
-                      min = 0, max = 5, value = 1.2,
+                               paste("effective reproductive number without TTIQ",
+                                     "(i.e. <i>f</i>=<i>g</i>=0)")),
+                      min = 0, max = 2.5, value = 1.2,
                       step = 0.1, round = -2,
                       width = "100%"
                     ),
-                    sliderInput(
-                      ns("f_secTI"),
-                      extLabel("f",
-                               "fraction of index cases detected"),
-                      min = 0, max = 1, value = c(0, 1),
-                      step = 0.1, round = -2,
-                      width = "100%"
-                    ),
-                    sliderInput(
-                      ns("Delta1_secTI"),
-                      extLabel("&Delta;<sub>1</sub>",
-                               "delay from symptom onset to isolation of index case [days]"),
-                      min = 0, max = 6, value = c(0, 4),
-                      step = 1,
-                      width = "100%"
+                    helpText(
+                      style = "font-size:15px",
+                      HTML("We set <i>g</i>=0 to eliminate contact tracing."),
                     )
+                    # sliderInput(
+                    #   ns("f_secTI"),
+                    #   extLabel("f",
+                    #            "fraction of index cases detected"),
+                    #   min = 0, max = 1, value = c(0, 1),
+                    #   step = 0.1, round = -2,
+                    #   width = "100%"
+                    # ),
+                    # sliderInput(
+                    #   ns("Delta1_secTI"),
+                    #   extLabel("&Delta;<sub>1</sub>",
+                    #            "delay from symptom onset to isolation of index case [days]"),
+                    #   min = 0, max = 6, value = c(0, 4),
+                    #   step = 1,
+                    #   width = "100%"
+                    # )
                   )
                 ),
                 column(
