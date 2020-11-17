@@ -51,7 +51,6 @@ tsServer <- function(id) {
 
       # Date slider for the map
       output$map_selected_day_output <- renderUI({
-        print("creating slider")
         if (input$display_prob || input$granularity == "Days") {
           timeFormat <- "%F"
           step <- 1
