@@ -34,11 +34,18 @@ createBasicFilter <- function (
       ),
       checkboxInput(
         inputId = ns("compare"),
-        label = "Compare"
+        label = tagList(
+          "Compare",
+          tooltip(glue::glue("If selected, the numbers for each {label} will be plotted."))
+        )
       ),
       checkboxInput(
         inputId = ns("compare_proportions"),
-        label = "Show proportions"
+        label = tagList(
+          "Show proportions",
+          tooltip(glue::glue("If selected, the plot shows the percentage for each {label}. It is only available if
+          Compare is selected."))
+        )
       )
     )
   }

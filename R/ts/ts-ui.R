@@ -17,7 +17,12 @@ tsUI <- function(id) {
             ),
             checkboxInput(
               inputId = ns("display_prob"),
-              label = tags$b("Clinical event probability given:")
+              label = tagList(
+                tags$b("Clinical event probability given:"),
+                tooltip("If selected, the plot shows the estimated probability of the above selected event
+                occuring given the below selected event. This can, for example, be used to calculate the
+                hospitalization rate (Hospitalization given Positive test).")
+              )
             ),
             disabled(radioButtons(
               inputId = ns("given"),
@@ -41,7 +46,8 @@ tsUI <- function(id) {
             actionButton(ns("plotTypeHistogram"), "Histogram", icon = icon("chart-bar")),
             actionButton(ns("plotTypeLine"), "Line Chart", icon = icon("chart-line")),
             actionButton(ns("plotTypeArea"), "Area Chart", icon = icon("chart-area")),
-            actionButton(ns("plotTypeMap"), "Map", icon = icon("map")),
+            actionButton(ns("plotTypeMap"), "Map", icon = icon("map"), NULL,
+                         tooltip('Select the "compare" option for canton or exposure country to use the map.')),
 
             tags$div(
               id = ns("map_slider"),
@@ -74,14 +80,22 @@ tsUI <- function(id) {
                 ),
                 checkboxInput(
                   inputId = ns("show_confidence_interval"),
-                  label = "Show confidence interval", value = TRUE
+                  label = tagList(
+                    "Show confidence interval",
+                    tooltip('This option is available for probabilities (i.e., "Clinical event probability given"
+                    is selected in the top-left panel). It shows the 95% confidence interval')
+                  ),
+                  value = TRUE
                 )
               ),
               column(
                 4,
                 radioButtons(
                   inputId = ns("granularity"),
-                  label = "Time granularity",
+                  label = tagList(
+                    "Time granularity",
+                    tooltip("This option is available for histograms and maps.")
+                  ),
                   choices = tsConstants$granularityChoices,
                   selected = tsConstants$granularityChoices[1],
                   inline = TRUE
@@ -91,7 +105,14 @@ tsUI <- function(id) {
                 4,
                 radioButtons(
                   inputId = ns("smoothing_window"),
-                  label = "Sliding window average",
+                  label = tagList(
+                    "Sliding window average",
+                    tooltip("This option is available for line and area plots. In case of absolute numbers, it
+                    calculates the average over the selected window of time. In case of probabilities, it shows the
+                    estimated probability for within the selected time window. The sliding window takes the data of
+                    the days before the selected date (i.e., a 7-days sliding window for today would show the data
+                    from the past 6 days and today).")
+                  ),
                   choices = tsConstants$slidingWindowChoices,
                   selected = tsConstants$slidingWindowChoices[1],
                   inline = TRUE
@@ -125,7 +146,18 @@ tsUI <- function(id) {
                 )
               ),
               "."
-            )
+            ),
+            HTML("<div style='font-weight: bolder; font-size: 1.2em; color: #008cba; margin-right: 10px;
+                 margin-top: 20px; margin-bottom: 20px;'>Method:</div>"),
+            tags$p(
+              "Due to changing testing capacities and regimes, it is difficult to compare the numbers of different
+              points in time. The normalization mode assumes that the true hospitalization rate per age group did not
+              change and calculates the normalized number of positive cases using the following formula:"
+            ),
+            tags$p(withMathJax(
+              "$$\\#PositiveCases = \\sum_{i\\in \\{AgeGroups\\}}\\#Hospitalizations_i \\times
+              \\frac{\\#HospitalizaionsInSelectedMonths_i}{\\#PositiveTestsInSelectedMonths_i} $$
+            "))
           )
         )
       )
