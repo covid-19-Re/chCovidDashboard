@@ -485,7 +485,18 @@ trendsServer <- function(id) {
             wc_lower = lower * 100,
             wc_upper = upper * 100)
         
-        rEstimates <- read_csv("data/Re/CHE-estimates.csv", col_types =
+        # load newer file of public and regular app
+        if (file.exists("../app/data/Re/CHE-estimates.csv")) {
+          rEstimatesPaths <- c("data/Re/CHE-estimates.csv",
+            "../app/data/Re/CHE-estimates.csv")
+          rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
+          rEstimatesPath <- rEstimatesPaths[which.max(rEstimatesPathmTime)]
+        } else {
+          rEstimatesPath <- "data/Re/CHE-estimates.csv"
+        }
+
+
+        rEstimates <- read_csv(rEstimatesPath, col_types =
           cols(
             date = col_date(format = ""),
             median_R_mean = col_double(),
