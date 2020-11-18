@@ -5,6 +5,11 @@ source("R/ts/ts-load_and_process_data.R")
 source("R/ts/ts-plots.R")
 
 
+tsDataQualityAnalyzedAttributes <- c(
+  "sex", "expContactPath", "quarantBeforePositiveTest", "labReason", "expCountryName"
+)
+
+
 tsDataQualityUI <- function(id) {
   ns <- NS(id)
 
@@ -22,9 +27,7 @@ tsDataQualityUI <- function(id) {
                  radioButtons(
                    inputId = ns("at"),
                    label = "Select an attribute",
-                   choices = c(
-                     "sex", "expContactPath", "quarantBeforePositiveTest", "labReason", "expCountryName"
-                   ),
+                   choices = tsDataQualityAnalyzedAttributes,
                    selected = "sex"
                  )
           ),
@@ -59,17 +62,13 @@ tsDataQualityServer <- function(id) {
         return(d)
       })
 
-      attrNames <- c(
-        "sex", "expContactPath", "quarantBeforePositiveTest", "labReason", "expCountryName"
-      )
-
       output$attrPlot <- renderPlotly({
         dataProc <- data()
         minDate <- min((dataProc %>% drop_na(date))$date)
         maxDate <- max((dataProc %>% drop_na(date))$date)
 
         plotData <- NULL
-        for (at in attrNames) {
+        for (at in tsDataQualityAnalyzedAttributes) {
           d <- dataProc %>%
             dplyr::mutate(missing = as.integer(
               are_na(!!as.symbol(at)) | replace_na(!!as.symbol(at) %in% c("Unknown", " not filled", "Not filled"), FALSE)
@@ -80,7 +79,11 @@ tsDataQualityServer <- function(id) {
 
 
           d$count <- slide_index_dbl(d$count, d$date, mean, .before = lubridate::days(14))
-          d <- d %>% mutate(proportion = count)
+          d <- d %>%
+            mutate(
+              proportion = count,
+              tooltipText = paste0(at, "\nProportion: ", proportion)
+            )
           d$attribute <- at
           plotData <- bind_rows(plotData, d)
         }
@@ -108,7 +111,8 @@ tsDataQualityServer <- function(id) {
             are_na(!!as.symbol(at)) | replace_na(!!as.symbol(at) %in% c("Unknown", " not filled", "Not filled"), FALSE)
           )) %>%
           dplyr::group_by(canton) %>%
-          dplyr::summarize(count = sum(missing) / n(), .groups = "drop")
+          dplyr::summarize(count = sum(missing) / n(), .groups = "drop") %>%
+          dplyr::mutate(tooltipText = paste0(canton, "\nCount: ", count))
 
         p <- tsPlots$map(plotData, "switzerland")
         plotlyPlot <- p %>%
