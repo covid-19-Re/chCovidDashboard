@@ -1,6 +1,7 @@
 library(tidyverse)
 library(lubridate)
 library(cowplot)
+library(DT)
 
 getEventCounts <- function(df, event_dt, event_name, pars) {
   # CH
@@ -45,6 +46,20 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
     mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
 
   return(counts)
+}
+
+# calculate doubling time from Re using a Gamma distributed generation time 
+getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
+  variance <- sigma * 2
+  rate <- mu / variance
+  shape <- mu^2 / variance
+
+  beta <- (re^(1 / shape) - 1) * rate
+
+  # Epidemic doubling times 
+  d <- log(2) / beta
+  d <- ifelse(d < 0, -d, d)
+  return(d)
 }
 
 plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, eventSelect,
@@ -477,24 +492,24 @@ trendsServer <- function(id) {
             dt_estimate = estimate,
             dt_lower = lower,
             dt_upper = upper)
-        
+
         ranking <- rankingRaw %>%
           transmute(
             region, age_class, event,
             wc_estimate = estimate * 100,
             wc_lower = lower * 100,
             wc_upper = upper * 100)
-        
-        # load newer file of public and regular app
-        if (file.exists("../app/data/Re/CHE-estimates.csv")) {
-          rEstimatesPaths <- c("data/Re/CHE-estimates.csv",
-            "../app/data/Re/CHE-estimates.csv")
-          rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
-          rEstimatesPath <- rEstimatesPaths[which.max(rEstimatesPathmTime)]
-        } else {
-          rEstimatesPath <- "data/Re/CHE-estimates.csv"
-        }
 
+        rEstimatesPath <- "data/Re/CHE-estimates.csv"
+        # load newer file of public and regular app if in test app
+        if (str_detect(getwd(), "testapp")) {
+          if (file.exists("../app/data/Re/CHE-estimates.csv")) {
+            rEstimatesPaths <- c("data/Re/CHE-estimates.csv",
+              "../app/data/Re/CHE-estimates.csv")
+            rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
+            rEstimatesPath <- rEstimatesPaths[which.max(rEstimatesPathmTime)]
+          }
+        }
 
         rEstimates <- read_csv(rEstimatesPath, col_types =
           cols(
@@ -522,7 +537,8 @@ trendsServer <- function(id) {
           Re_lower = median_R_lowHPD,
           Re_upper = median_R_highHPD
         ) %>%
-        complete(region, age_class, event)
+        mutate(across(.cols = tidyselect::starts_with("Re_"), getDoublingTimeRe, .names = "{.col}_dt"))
+
 
         allData <- doublingTimes %>%
           full_join(ranking, by = c("region", "age_class", "event")) %>%
@@ -530,7 +546,7 @@ trendsServer <- function(id) {
 
       })
 
-      output$comparisonDataTable <- DT::renderDataTable({
+      output$comparisonDataTable <- renderDataTable({
         sketch <- htmltools::withTags(table(
           class = "display",
           thead(
@@ -540,17 +556,24 @@ trendsServer <- function(id) {
               th(rowspan = 2, "Event"),
               th(colspan = 3, "Doubling time (d)"),
               th(colspan = 3, "Weekly change (%)"),
-              th(colspan = 3, HTML("R<sub>e</sub><sup>1</sup>"))
+              th(colspan = 3, HTML("R<sub>e</sub><sup>1</sup>")),
+              th(colspan = 3, HTML("<span style='color:red;'>Doubling time</span> / <span style='color:green;'>Half-life</span> (d) from R<sub>e</sub><sup>2</sup>"))
             ),
             tr(
-              lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 3), th)
+              lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 4), th),
             )
           ),
           tfoot(
             tr(
-              td(colspan = 12, HTML("<sup>1</sup>most recent estimate from",
-                "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
-                "https://ibz-shiny.ethz.ch/covid-19-re/</a></p>"))
+              td(colspan = 15,
+                HTML(
+                  "<sup>1</sup>most recent R<sub>e</sub> estimate from",
+                    "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
+                    "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
+                  "<sup>2</sup>Doubling time / half-life calculated from R<sub>e</sub> assuming",
+                    "a gamma distributed generation time with &mu; = 4.8 and &sigma; = 2.3"
+                )
+              )
             )
           )
         ))
@@ -565,7 +588,7 @@ trendsServer <- function(id) {
             ) %>%
           arrange(event, region, age_class)
 
-        table <- DT::datatable(
+        table <- datatable(
           tableData,
           rownames = FALSE,
           container = sketch,
@@ -574,19 +597,26 @@ trendsServer <- function(id) {
             dom = "t",
             pageLength = 125,
             lengthMenu = c(25, 50, 100, 125))) %>%
-          DT::formatSignif(
+          formatSignif(
             columns = c(
               "dt_estimate", "dt_lower", "dt_upper",
               "wc_estimate", "wc_lower", "wc_upper",
-              "Re_estimate", "Re_lower", "Re_upper"
+              "Re_estimate", "Re_lower", "Re_upper",
+              "Re_estimate_dt", "Re_lower_dt", "Re_upper_dt"
             ),
             digits = 4) %>%
-          DT::formatStyle(
+          formatStyle(
             columns = c(
               "dt_estimate", "dt_lower", "dt_upper",
               "Re_estimate", "Re_lower", "Re_upper"),
             backgroundColor = c("#f0f8ffab")
-            )
+            ) %>%
+          formatStyle(
+            columns = c("Re_estimate_dt", "Re_lower_dt", "Re_upper_dt"),
+            valueColumns = c("Re_estimate", "Re_lower", "Re_upper"),
+            target = "cell",
+            color = styleInterval(1, c("green", "red"))
+          )
         return(table)
       })
 
