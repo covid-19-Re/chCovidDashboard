@@ -35,14 +35,14 @@ ui <- function(request) {
           thumbnailPanel(
             title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
             authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus",
-            affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br><i>(preliminary)</i>",
+            affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br>",
             thumbnail = "trends-thumbnail.png",
             tabId = "selectTrends"
           ),
           thumbnailPanel(
             title = "Effectiveness of TTIQ",
             authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
-            affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
+            affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br>",
             thumbnail = "ttiqModule-thumbnail.png",
             tabId = "selectTTIQ"
           ),
