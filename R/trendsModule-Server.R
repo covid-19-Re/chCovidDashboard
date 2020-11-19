@@ -481,9 +481,53 @@ trendsServer <- function(id) {
         return(plot)
       })
 
+      rEstimates <- reactive({
+        rEstimatesPath <- "data/Re/CHE-estimates.csv"
+
+        # load newer file of public and regular app if in test app
+        if (str_detect(getwd(), "testapp")) {
+          if (file.exists("../app/data/Re/CHE-estimates.csv")) {
+            rEstimatesPaths <- c("data/Re/CHE-estimates.csv",
+              "../app/data/Re/CHE-estimates.csv")
+            rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
+            rEstimatesPath <- rEstimatesPaths[which.max(rEstimatesPathmTime)]
+          }
+        }
+
+        rEstimates <- read_csv(rEstimatesPath,
+          col_types =
+            cols(
+              date = col_date(format = ""),
+              median_R_mean = col_double(),
+              median_R_highHPD = col_double(),
+              median_R_lowHPD = col_double(),
+              .default = col_character())) %>%
+          filter(
+            !(str_detect(region, "grR")),
+            data_type != "Confirmed cases / tests",
+            estimate_type == "Cori_slidingWindow") %>%
+          select(region, data_type, date:median_R_lowHPD) %>%
+          group_by(region, data_type) %>%
+          top_n(1, date) %>%
+          ungroup() %>%
+          transmute(
+            region = recode(region, "CHE" = "CH"),
+            age_class = "all",
+            event = recode(data_type,
+              "Confirmed cases" = "cases",
+              "Hospitalized patients" = "hospitalizations",
+              "Deaths" = "deaths"),
+            Re_estimate = median_R_mean,
+            Re_lower = median_R_lowHPD,
+            Re_upper = median_R_highHPD
+          ) %>%
+          mutate(across(.cols = tidyselect::starts_with("Re_"), getDoublingTimeRe, .names = "{.col}_dt"))
+      })
+
       comparisonData <- reactive({
         doublingTimesRaw <- doublingTimes()
         rankingRaw <- ranking()
+        rEstimates <- rEstimates()
         time_window <- input$time_window
 
         doublingTimes <- doublingTimesRaw %>%
@@ -499,46 +543,6 @@ trendsServer <- function(id) {
             wc_estimate = estimate * 100,
             wc_lower = lower * 100,
             wc_upper = upper * 100)
-
-        rEstimatesPath <- "data/Re/CHE-estimates.csv"
-        # load newer file of public and regular app if in test app
-        if (str_detect(getwd(), "testapp")) {
-          if (file.exists("../app/data/Re/CHE-estimates.csv")) {
-            rEstimatesPaths <- c("data/Re/CHE-estimates.csv",
-              "../app/data/Re/CHE-estimates.csv")
-            rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
-            rEstimatesPath <- rEstimatesPaths[which.max(rEstimatesPathmTime)]
-          }
-        }
-
-        rEstimates <- read_csv(rEstimatesPath, col_types =
-          cols(
-            date = col_date(format = ""),
-            median_R_mean = col_double(),
-            median_R_highHPD = col_double(),
-            median_R_lowHPD = col_double(),
-            .default = col_character())) %>%
-        filter(
-          !(str_detect(region, "grR")),
-          data_type != "Confirmed cases / tests",
-          estimate_type == "Cori_slidingWindow") %>%
-        select(region, data_type, date:median_R_lowHPD) %>%
-        group_by(region, data_type) %>%
-        top_n(1, date) %>%
-        ungroup() %>%
-        transmute(
-          region = recode(region, "CHE" = "CH"),
-          age_class = "all",
-          event = recode(data_type,
-            "Confirmed cases" = "cases",
-            "Hospitalized patients" = "hospitalizations",
-            "Deaths" = "deaths"),
-          Re_estimate = median_R_mean,
-          Re_lower = median_R_lowHPD,
-          Re_upper = median_R_highHPD
-        ) %>%
-        mutate(across(.cols = tidyselect::starts_with("Re_"), getDoublingTimeRe, .names = "{.col}_dt"))
-
 
         allData <- doublingTimes %>%
           full_join(ranking, by = c("region", "age_class", "event")) %>%
@@ -571,7 +575,7 @@ trendsServer <- function(id) {
                     "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
                     "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
                   "<sup>2</sup>Doubling time / half-life calculated from R<sub>e</sub> assuming",
-                    "a gamma distributed generation time with &mu; = 4.8 and &sigma; = 2.3"
+                    "a gamma distributed generation time with &mu; = 4.8 days and &sigma; = 2.3 days"
                 )
               )
             )
