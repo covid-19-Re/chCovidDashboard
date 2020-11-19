@@ -9,7 +9,7 @@
 }
 
 .tooltip-inner {
-  width: 350px; 
+  width: 350px;
 }
 
 .distParsConnection {
@@ -96,4 +96,12 @@
   margin-left: -15px !important;
   margin-right: -15px !important;
   z-index: 0;
+}
+
+.ts-active-btn {
+  border: 2px solid gray!important;
+}
+
+.ts-hidden {
+  display: none;
 }

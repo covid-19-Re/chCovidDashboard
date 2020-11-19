@@ -370,7 +370,7 @@ quarantineDurationUI <- function(id) {
         )
       )
     ),
-    tags$script(src = "quarantineModule/jquery.connections.js"),
+    tags$script(src = "jquery.connections.js"),
     tags$script(src = "quarantineModule/quarantineModule.js")
   )
 }

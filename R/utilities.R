@@ -25,8 +25,8 @@ thumbnailPanel <- function(title, authors, affiliation, thumbnail, tabId) {
             id = tabId, href = "#", class = "action-button shiny-bound-input",
             HTML("<p class = 'thumbTitle'>", title, "</p>")
           ),
-          HTML("<p>", authors, "</p>"),
-          HTML("<p>", affiliation, "</p>")
+          HTML("<p style='font-size:15px'>", authors, "</p>"),
+          HTML("<p style='font-size:12px'>", affiliation, "</p>")
         )
       )
     )
@@ -47,8 +47,8 @@ thumbnailPanelExt <- function(title, authors, affiliation, thumbnail, href) {
             href = href, target = "_blank",
             HTML("<p class = 'thumbTitle'>", title, "</p>")
           ),
-          HTML("<p>", authors, "</p>"),
-          HTML("<p>", affiliation, "</p>")
+          HTML("<p style='font-size:15px'>", authors, "</p>"),
+          HTML("<p style='font-size:12px'>", affiliation, "</p>")
         )
       )
     )
@@ -63,10 +63,7 @@ extLabel <- function(name, helptext, tooltip = NULL, tooltipPlacement = "right")
   )
 
   if (!is.null(tooltip)) {
-    tooltip <- glue::glue(
-      "<i class='fa fa-question-circle fa-fw ttIndicator'",
-      "data-toggle='tooltip' data-html='true' data-placement='{tooltipPlacement}' title='{tooltip}'></i>"
-    )
+    tooltip <- tooltipHtmlString(tooltip, placement = tooltipPlacement)
   }
 
   return(HTML(str_c(extLabel, tooltip)))
@@ -81,6 +78,19 @@ sourceLink <- function(citation, doi) {
         {citation}
       </a></small>"
       )
+    )
+  )
+}
+
+tooltip <- function(text, placement = "right", symbol = "fa-question-circle") {
+  return(HTML(tooltipHtmlString(text, placement = placement, symbol = symbol)))
+}
+
+tooltipHtmlString <- function(text, placement = "right", symbol = "fa-question-circle") {
+  return(
+    glue::glue(
+      "<i class='fa {symbol} fa-fw ttIndicator'",
+      "data-toggle='tooltip' data-html='true' data-placement='{placement}' title='{text}'></i>"
     )
   )
 }

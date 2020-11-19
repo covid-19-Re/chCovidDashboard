@@ -12,44 +12,44 @@ ui <- function(request) {
         value = "home", icon = icon("home"),
         fluidRow(
           thumbnailPanel(
+            title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
+            authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus",
+            affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br>",
+            thumbnail = "trends-thumbnail.png",
+            tabId = "selectTrends"
+          ),
+          thumbnailPanel(
             title = "Quantifying the impact of quarantine duration on COVID-19 transmission",
             authors = "Peter Ashcroft, Sonja Lehtinen, Daniel Angst, Nicola Low and Sebastian Bonhoeffer",
             affiliation = "ETH Zurich & ISPM Universität Bern",
             thumbnail = "quarantineModule-thumbnail.png",
             tabId = "selectQuarantine"
+          ),
+          thumbnailPanel(
+            title = "Effectiveness of TTIQ",
+            authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
+            affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br>",
+            thumbnail = "ttiqModule-thumbnail.png",
+            tabId = "selectTTIQ"
           )
           # thumbnailPanel(
-          #   title = "Time Series of Cases",
-          #   authors = "Timothy Vaughan, Tanja Stadler",
+          #   title = "Time Series",
+          #   authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
           #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
-          #   thumbnail = "tsCases-thumbnail.png",
-          #   tabId = "selectTsCases"
+          #   thumbnail = "ts-thumbnail.png",
+          #   tabId = "selectTs"
           # ),
           # thumbnailPanel(
-          #   title = "Analyzing epidemic trends of SARS-CoV-2 in Switzerland",
-          #   authors = "Nanina Anderegg, Julien Riou, Christian L. Althaus",
-          #   affiliation = "Institute of Social and Preventive Medicine, Universität Bern, Switzerland<br><br><i>(preliminary)</i>",
-          #   thumbnail = "trends-thumbnail.png",
-          #   tabId = "selectTrends"
-          # ),
-          # thumbnailPanel(
-          #   title = "Relative frequency of clinical events",
-          #   authors = "Timothy Vaughan, Tanja Stadler",
-          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-          #   thumbnail = "tsProportions-thumbnail.png",
-          #   tabId = "selectTsProportions"
-          # ),
-          # thumbnailPanel(
-          #   title = "Effectiveness of Contact Tracing",
-          #   authors = "Peter Ashcroft, Sonja Lehtinen, and Sebastian Bonhoeffer",
-          #   affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br><i>(preliminary)</i>",
-          #   thumbnail = "ct-thumbnail.png",
-          #   tabId = "selectContactTracing"
+          #   title = "Time Series: Data Quality",
+          #   authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
+          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
+          #   thumbnail = "ts-thumbnail.png",
+          #   tabId = "selectTsDataQuality"
           # ),
           # thumbnailPanel(
           #   title = "Live time-series analysis to monitor and forecast the COVID-19 outbreak in Switzerland",
           #   authors = "Monica Golumbeanu and Melissa Penny",
-          #   affiliation = "Swiss Tropical and Public Health Institute and University of Basel<br><i>(preliminary)</i>",
+          #   affiliation = "Swiss Tropical and Public Health Institute and University of Basel<br>",
           #   thumbnail = "forecastModule-thumbnail.png",
           #   tabId = "selectForecast"
           # )
@@ -63,6 +63,13 @@ ui <- function(request) {
             thumbnail = "re-thumbnail.png",
             href = "https://ibz-shiny.ethz.ch/covid-19-re/"
           ),
+          # thumbnailPanelExt(
+          #   title = "R<sub>e</sub> Estimation Test Server (CHE&nbsp;WEEKEND&nbsp;ONLY)",
+          #   authors = "Jérémie Scire, Jana S. Huisman et al.",
+          #   affiliation = "ETH Zürich, D-BSSE & D-USYS <br><br> <i>(opens in a new window)</i>",
+          #   thumbnail = "re-thumbnail.png",
+          #   href = "https://ibz-shiny.ethz.ch/covid-19-re-test/"
+          # ),
           thumbnailPanelExt(
             title = "nextstrain: Phylogenetic analysis of Swiss SARS-CoV-2 genomes in their international context",
             authors = "maintained by Emma Hodcroft, Richard Neher, Sarah Nadeau and Tanja Stadler.",
@@ -72,9 +79,9 @@ ui <- function(request) {
           ),
           thumbnailPanelExt(
             title = "icumonitoring.ch",
-            authors = str_c("Nicola Criscuolo, Burcu Tepekule, Cheng Zhao, Monica Golumbeanu, Melissa Penny,
-              Peter Ashcroft, Thomas Van Boeckel"),
-            affiliation = "ETH Zürich, Swiss TPH, Universitätsspital Zürich <br><br><i>(opens in a new window)</i>",
+            authors = str_c("Cheng Zhao, Nicola Criscuolo, Burcu Tepekule, Monica Golumbeanu, Melissa Penny,
+              Peter Ashcroft, Matthias Hilty, Thierry Fumeaux, Thomas Van Boeckel"),
+            affiliation = "ETH Zürich, Swiss TPH, Universitätsspital Zürich, Swiss Society for Intensive Care Medicine<br><br><i>(opens in a new window)</i>",
             thumbnail = "icumonitoring-thumbnail.png",
             href = "https://icumonitoring.ch"
           )
@@ -83,26 +90,28 @@ ui <- function(request) {
       # navbarMenu(
       #   "Time Series",
       #   menuName = "timeseries",
-      #   tabPanel("Cases",
-      #     value = "tsCases",
-      #     tsCasesUI("tsCases")
+      #   tabPanel(
+      #     "Time Series",
+      #     value = "ts",
+      #     tsUI("ts")
       #   ),
-      #   tabPanel("Proportions",
-      #     value = "tsProportions",
-      #     tsProportionsUI("tsProportions")
+      #   tabPanel(
+      #     "Data Quality",
+      #     value = "tsDataQuality",
+      #     tsDataQualityUI("tsDataQuality")
       #   )
       # ),
-      # tabPanel("Trends",
-      #   value = "trends",
-      #   trendsUI("trends")
-      # ),
-      # tabPanel("Contact tracing",
-      #   value = "contactTracing",
-      #   ctUI("contactTracing")
-      # ),
+      tabPanel("Trends",
+        value = "trends",
+        trendsUI("trends")
+      ),
       tabPanel("Quarantine duration",
         value = "quarantineDuration",
         quarantineDurationUI("quarantineDuration")
+      ),
+      tabPanel("TTIQ",
+        value = "ttiq",
+        ttiqUI("ttiq")
       ),
       # tabPanel("Forecast",
       #   value = "forecast",

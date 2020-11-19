@@ -1,10 +1,5 @@
 server <- function(input, output, session) {
   # global
-  observe({
-    # Trigger this observer every time the tab changes
-    input$tab
-    session$doBookmark()
-  })
 
   observe_helpers(help_dir = "R/forecastModule-Files/helpfiles")
 
@@ -13,43 +8,34 @@ server <- function(input, output, session) {
       selected = "quarantineDuration"
     )
   })
-  # observeEvent(input$selectContactTracing, {
+  observeEvent(input$selectTTIQ, {
+    updateTabsetPanel(session, "tab",
+      selected = "ttiq"
+    )
+  })
+  # observeEvent(input$selectTs, {
   #   updateTabsetPanel(session, "tab",
-  #     selected = "contactTracing"
+  #     selected = "ts"
   #   )
   # })
-  # observeEvent(input$selectTsProportions, {
+  # observeEvent(input$selectTsDataQuality, {
   #   updateTabsetPanel(session, "tab",
-  #     selected = "tsProportions"
+  #     selected = "tsDataQuality"
   #   )
   # })
-  # observeEvent(input$selectTsCases, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "tsCases"
-  #   )
-  # })
-  # observeEvent(input$selectTrends, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "trends"
-  #   )
-  # })
+  observeEvent(input$selectTrends, {
+    updateTabsetPanel(session, "tab",
+      selected = "trends"
+    )
+  })
   # observeEvent(input$selectForecast, {
   #   updateTabsetPanel(session, "tab",
   #     selected = "forecast"
   #   )
   # })
 
-  onBookmarked(function(url) {
-    updateQueryString(url)
-  })
-
-  observe({
-    toExclude <- setdiff(names(input), "tab")
-    setBookmarkExclude(toExclude)
-  })
-
   # contact tracing
-  # ctServer("contactTracing")
+  ttiqServer("ttiq")
 
   # quarantine duration
   quarantineDurationServer("quarantineDuration")
@@ -57,13 +43,13 @@ server <- function(input, output, session) {
   # # Cases time series
   # tsCasesServer("tsCases")
 
-  # # trends
-  # trendsServer("trends")
-
   # # Proportions time series
   # tsProportionsServer("tsProportions")
 
-  # # forecast
-  # forecastServer("forecast")
+  # Time series: Data Quality
+  # tsDataQualityServer("tsDataQuality")
+
+  # trends
+  trendsServer("trends")
 
 }
