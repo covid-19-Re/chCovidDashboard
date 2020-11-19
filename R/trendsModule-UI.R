@@ -9,12 +9,17 @@ trendsUI <- function(id) {
           bootstrapPanel(
             heading = HTML(
               "<h1>Analyzing epidemic trends of SARS-CoV-2 in Switzerland</h1><br>",
-              "<i>Nanina Anderegg, Julien Riou, Christian L. Althaus (ISPM, Universität Bern)</i>"
+              "<i>Nanina Anderegg, Julien Riou, Christian L. Althaus (Institute of Social and Preventive Medicine, ",
+              "Universität Bern)</i>"
             ),
             class = "panel-primary",
-            p("National and cantonal trends in incidence data. Lines and ribbons show the fit of a negative
-              binomial model and the 95% confidence interval. The model uses case numbers as the response and date
-               and weekend (0: work day, 1: weekend) as predictors."),
+            p("This tool estimates national trends in daily confirmed cases, hospitalizations, ICU occupancy and ",
+              "deaths using a negative binomial generalized linear model. The model uses reported numbers as the ",
+              "response and date and weekend (0: work day, 1: weekend) as predictors. Confirmed cases and ",
+              "hospitalizations are further stratified by canton and age groups. Due to reporting delays, ",
+              "the last 3 and 5 days of confirmed cases and hospitalizations/deaths are removed, respectively. ",
+              "Lines and ribbons show the maximum likelihood estimate of the exponential increase/decrease and ",
+              "the 95% prediction intervals of the model fit, respectively."),
             uiOutput(ns("lastDataUpdate"))
           )
         ),
@@ -117,11 +122,12 @@ trendsUI <- function(id) {
         type = "pills", id = "summaryTabs",
         tabPanel(p(class = "tab-title", "Summary Table"), value = "summaryTable",
           div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
-            HTML("<p>Doubling time, weekly change in doubling time from a negative binomial model and most recent R<sub>e</sub>",
-            "values from <a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
-            "https://ibz-shiny.ethz.ch/covid-19-re/</a> and corresponding doubling times assuming a gamma distributed generation time with &mu; = 4.8 and &sigma; = 2.3.</p>",
-            "<p>Use filter fields to filter columns.",
-            "Click on column names to sort. Shift-Click to sort by multiple columns.</p>"),
+            HTML("<p>Doubling time, weekly change in doubling time from a negative binomial generalized linear model ",
+            "and most recent R<sub>e</sub> values from ",
+            "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a>",
+            "and corresponding doubling times assuming a gamma distributed generation time with &mu; = 4.8 days ",
+            "and &sigma; = 2.3 days.</p>",
+            "<p>Use filter fields to filter columns. Click on column names to sort. Shift-Click to sort by multiple columns.</p>"),
             DT::dataTableOutput(ns("comparisonDataTable")) %>% withSpinner(),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
