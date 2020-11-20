@@ -28,6 +28,11 @@ server <- function(input, output, session) {
       selected = "trends"
     )
   })
+  observeEvent(input$selectTables, {
+    updateTabsetPanel(session, "tab",
+      selected = "tables"
+    )
+  })
   # observeEvent(input$selectForecast, {
   #   updateTabsetPanel(session, "tab",
   #     selected = "forecast"
@@ -50,6 +55,9 @@ server <- function(input, output, session) {
   # tsDataQualityServer("tsDataQuality")
 
   # trends
-  trendsServer("trends")
+  trendsData <- trendsServer("trends")
+
+  tablesServer("tables", trendsData)
+
 
 }

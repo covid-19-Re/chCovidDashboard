@@ -19,6 +19,13 @@ ui <- function(request) {
             tabId = "selectTrends"
           ),
           thumbnailPanel(
+            title = "Data Tables",
+            authors = "",
+            affiliation = "",
+            thumbnail = "tables-thumbnail.png",
+            tabId = "selectTables"
+          ),
+          thumbnailPanel(
             title = "Quantifying the impact of quarantine duration on COVID-19 transmission",
             authors = "Peter Ashcroft, Sonja Lehtinen, Daniel Angst, Nicola Low and Sebastian Bonhoeffer",
             affiliation = "ETH Zurich & ISPM Universität Bern",
@@ -104,6 +111,10 @@ ui <- function(request) {
       tabPanel("Trends",
         value = "trends",
         trendsUI("trends")
+      ),
+      tabPanel("Tables",
+        value = "tables",
+        tablesUI("tables")
       ),
       tabPanel("Quarantine duration",
         value = "quarantineDuration",

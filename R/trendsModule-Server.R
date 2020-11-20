@@ -48,20 +48,6 @@ getEventCounts <- function(df, event_dt, event_name, pars) {
   return(counts)
 }
 
-# calculate doubling time from Re using a Gamma distributed generation time 
-getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
-  variance <- sigma * 2
-  rate <- mu / variance
-  shape <- mu^2 / variance
-
-  beta <- (re^(1 / shape) - 1) * rate
-
-  # Epidemic doubling times 
-  d <- log(2) / beta
-  d <- ifelse(d < 0, -d, d)
-  return(d)
-}
-
 plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, eventSelect,
   ageSelect = "all", fillColor, lang = "de", longLabel = TRUE) {
   plotData <- filter(predictions, region == regionSelect, event == eventSelect, age_class == ageSelect)
@@ -570,6 +556,8 @@ trendsServer <- function(id) {
           write.csv(comparisonData(), file, row.names = FALSE)
         }
       )
+
+      return(comparisonData)
     }
   )
 }
