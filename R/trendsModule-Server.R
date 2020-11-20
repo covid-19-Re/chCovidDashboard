@@ -413,7 +413,7 @@ trendsServer <- function(id) {
           ) + labs(caption = if_else(input$plot_language == "de", "Daten: BAG", "Data: FOPH"))
         )
         plot <- plot_grid(plotlist = countryPlotsList, ncol = 2)
-        ggsave("www/pdf/trends_CHE.pdf", plot, width = 16, height = 9)
+        # ggsave("www/pdf/trends_CHE.pdf", plot, width = 16, height = 9)
         return(plot)
       })
 
@@ -425,7 +425,7 @@ trendsServer <- function(id) {
         plot <- plotCantons(predictions, doublingTimes, ranking, eventSelect = "cases", color = t.cols[4],
           sorting = input$cantonSortCases, lang = input$plot_language)
 
-        ggsave("www/pdf/trends_CHE_regional_cases.pdf", plot, width = 16, height = 25)
+        # ggsave("www/pdf/trends_CHE_regional_cases.pdf", plot, width = 16, height = 25)
         return(plot)
       })
 
@@ -437,7 +437,7 @@ trendsServer <- function(id) {
         plot <- plotCantons(predictions, doublingTimes, ranking, eventSelect = "hospitalizations",color = t.cols[3],
           sorting = input$cantonSortHospitalizations, lang = input$plot_language)
 
-        ggsave("www/pdf/trends_CHE_regional_hospitalizations.pdf", plot, width = 16, height = 25)
+        # ggsave("www/pdf/trends_CHE_regional_hospitalizations.pdf", plot, width = 16, height = 25)
         return(plot)
       })
 
@@ -449,7 +449,7 @@ trendsServer <- function(id) {
         plot <- plotAgeClass(predictions, doublingTimes, ranking, eventSelect = "cases", color = t.cols[4],
           lang = input$plot_language)
 
-        ggsave("www/pdf/trends_CHE_age_hospitalizations.pdf", plot, width = 16, height = 25)
+        # ggsave("www/pdf/trends_CHE_age_hospitalizations.pdf", plot, width = 16, height = 25)
         return(plot)
       })
 
@@ -461,7 +461,7 @@ trendsServer <- function(id) {
         plot <- plotAgeClass(predictions, doublingTimes, ranking, eventSelect = "hospitalizations", color = t.cols[3],
           lang = input$plot_language)
 
-        ggsave("www/pdf/trends_CHE_age_hospitalizations.pdf", plot, width = 16, height = 25)
+        # ggsave("www/pdf/trends_CHE_age_hospitalizations.pdf", plot, width = 16, height = 25)
         return(plot)
       })
 
@@ -481,20 +481,25 @@ trendsServer <- function(id) {
         return(plot)
       })
 
-      rEstimates <- reactive({
-        rEstimatesPath <- "data/Re/CHE-estimates.csv"
-
+      rEstimatesPath <- reactive({
+        rEstimatesPaths <- "data/Re/CHE-estimates.csv"
         # load newer file of public and regular app if in test app
         if (str_detect(getwd(), "testapp")) {
           if (file.exists("../app/data/Re/CHE-estimates.csv")) {
             rEstimatesPaths <- c("data/Re/CHE-estimates.csv",
               "../app/data/Re/CHE-estimates.csv")
-            rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
-            rEstimatesPath <- rEstimatesPaths[which.max(rEstimatesPathmTime)]
           }
         }
+        rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
+        rEstimatesPath <- list(
+          path = rEstimatesPaths[which.max(rEstimatesPathmTime)],
+          mtime = rEstimatesPathmTime[which.max(rEstimatesPathmTime)])
+        return(rEstimatesPath)
+      })
 
-        rEstimates <- read_csv(rEstimatesPath,
+      rEstimates <- reactive({
+        rEstimatesPath <- rEstimatesPath()
+        rEstimates <- read_csv(rEstimatesPath$path,
           col_types =
             cols(
               date = col_date(format = ""),
@@ -551,6 +556,7 @@ trendsServer <- function(id) {
       })
 
       output$comparisonDataTable <- renderDataTable({
+        print(rEstimatesPath())
         sketch <- htmltools::withTags(table(
           class = "display",
           thead(
@@ -571,7 +577,8 @@ trendsServer <- function(id) {
             tr(
               td(colspan = 15,
                 HTML(
-                  "<sup>1</sup>most recent R<sub>e</sub> estimate from",
+                  str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (",
+                    as.character(rEstimatesPath()$mtime), ") from"),
                     "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
                     "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
                   "<sup>2</sup>Doubling time / half-life calculated from R<sub>e</sub> assuming",
