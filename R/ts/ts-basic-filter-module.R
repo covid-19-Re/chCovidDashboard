@@ -9,7 +9,8 @@ createBasicFilter <- function (
   description = "",
   customFilterFunctionBuilder = NULL,
   customGetComparisonGroupsFunctionBuilder = NULL,
-  customGetEntriesOfGroupFunctionBuilder = NULL
+  customGetEntriesOfGroupFunctionBuilder = NULL,
+  comparePer100kPeoplePossible = FALSE
 ) {
 
   ui <- function (id) {
@@ -38,6 +39,15 @@ createBasicFilter <- function (
           "Compare",
           tooltip(glue::glue("If selected, the numbers for each {label} will be plotted."))
         )
+      ),
+      tags$div(
+        checkboxInput(
+          inputId = ns("compare_per_100k_people"),
+          label = tagList(
+            "Compare number events per 100,000 people"
+          )
+        ),
+        style = if (!comparePer100kPeoplePossible) "display: none;" else ""
       ),
       checkboxInput(
         inputId = ns("compare_proportions"),
@@ -69,8 +79,9 @@ createBasicFilter <- function (
           )
         })
 
-        observeEvent(input$compare, {
-          shinyjs::toggleState(id = "compare_proportions", condition = input$compare)
+        observe({
+          shinyjs::toggleState(id = "compare_proportions", condition = input$compare && !input$compare_per_100k_people)
+          shinyjs::toggleState(id = "compare_per_100k_people", condition = input$compare && !input$compare_proportions)
         })
 
         return (reactive({
@@ -116,6 +127,7 @@ createBasicFilter <- function (
 
           result$isFiltering <- length(input$picker) < length(choices)
           result$compare <- input$compare
+          result$comparePer100kPeople <- input$compare && input$compare_per_100k_people
           result$compareProportions <- input$compare && input$compare_proportions
 
           return (result)

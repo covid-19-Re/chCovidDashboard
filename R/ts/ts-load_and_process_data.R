@@ -213,3 +213,70 @@ load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
 
   return(data)
 }
+
+
+populationDataCache <- NULL
+# Population data downloaded from https://www.bfs.admin.ch/bfs/en/home/statistics/population.assetdetail.14819631.html
+# FSO number: px-x-0102030000_101
+# Population on 31 December 2019
+load_population_data <- function () {
+  if (!is.null(populationDataCache)) {
+    return(populationDataCache)
+  }
+  data <- read_tsv("./data/population_canton_age.csv", locale = locale(encoding = "UTF-8"), col_types = cols(
+    `Demographic component` = col_character(),
+    Canton = col_character(),
+    `Citizenship (category)` = col_character(),
+    Sex = col_character(),
+    Age = col_character(),
+    `2019` = col_integer()
+  )) %>%
+    rename(
+      canton = Canton,
+      sex = Sex,
+      age = Age,
+      population = `2019`
+    ) %>%
+    select(canton, sex, age, population) %>%
+    filter(
+      canton != "Switzerland" & canton != "Unknown" &
+        sex != "Sex - Total" &
+        age != "Age - Total" & age != "No indication"
+    ) %>%
+    mutate(
+      ageGroup = tsConstants$ageGroups[
+        pmin(trunc(as.integer(str_replace(age, " .*", "")) / 10), 8) + 1],
+      sex = unlist(list(Man = "Male", Woman = "Female")[sex], use.names = FALSE),
+      canton = unlist(list(
+        "Aargau" = "AG",
+        "Appenzell Ausserrhoden" = "AR",
+        "Appenzell Innerrhoden" = "AI",
+        "Basel-Landschaft" = "BL",
+        "Basel-Stadt" = "BS",
+        "Bern / Berne" = "BE",
+        "Fribourg / Freiburg" = "FR",
+        "Geneve" = "GE",
+        "Glarus" = "GL",
+        "Graubunden" = "GR",
+        "Jura" = "JU",
+        "Luzern" = "LU",
+        "Neuchatel" = "NE",
+        "Nidwalden" = "NW",
+        "Obwalden" = "OW",
+        "Schaffhausen" = "SH",
+        "Schwyz" = "SZ",
+        "Solothurn" = "SO",
+        "St. Gallen" = "SG",
+        "Thurgau" = "TG",
+        "Ticino" = "TI",
+        "Uri" = "UR",
+        "Valais / Wallis" = "VS",
+        "Vaud" = "VD",
+        "Zug" = "ZG",
+        "Zurich" = "ZH"
+      )[canton], use.names = FALSE)
+    ) %>%
+    select(canton, sex, ageGroup, population)
+  populationDataCache <<- data
+  return(data)
+}
