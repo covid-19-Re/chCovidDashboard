@@ -486,7 +486,7 @@ trendsServer <- function(id) {
             wc_lower = lower * 100,
             wc_upper = upper * 100)
 
-        allData <- doublingTimes %>%b
+        allData <- doublingTimes %>%
           full_join(ranking, by = c("region", "age_class", "event"))
       })
 
