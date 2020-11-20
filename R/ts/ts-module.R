@@ -14,9 +14,11 @@ source("R/ts/ts-plots.R")
 source("R/ts/ts-basic-filter-module.R")
 
 basicFilters <- list(
-  "ageGroup" = createBasicFilter("Age group", tsConstants$ageGroups, "ageGroup"),
+  "ageGroup" = createBasicFilter("Age group", tsConstants$ageGroups, "ageGroup",
+                                 comparePer100kPeoplePossible = TRUE),
   "sex" = createBasicFilter("Sex", tsConstants$sex, "sex"),
-  "canton" = createBasicFilter("Canton", tsConstants$cantons, "canton"),
+  "canton" = createBasicFilter("Canton", tsConstants$cantons, "canton",
+                               comparePer100kPeoplePossible = TRUE),
   "travelClass" = createBasicFilter("Travel related status", tsConstants$travelRelatedStatus, "travelClass"),
   "expCountryCode" = createBasicFilter("Exposure country", tsConstants$expCountryCode, "expCountryCode"),
   "expContactPath" = createBasicFilter("Exposure contact path", sort(tsConstants$expContactPaths), "expContactPath"),
