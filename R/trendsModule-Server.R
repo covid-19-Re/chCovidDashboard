@@ -620,15 +620,28 @@ trendsServer <- function(id) {
             columns = c(
               "dt_estimate", "dt_lower", "dt_upper",
               "Re_estimate", "Re_lower", "Re_upper"),
-            backgroundColor = c("#f0f8ffab")
-            ) %>%
+            backgroundColor = c("#f0f8ffab")) %>%
           formatStyle(
             columns = c("Re_estimate_dt", "Re_lower_dt", "Re_upper_dt"),
             valueColumns = c("Re_estimate", "Re_lower", "Re_upper"),
             target = "cell",
             color = styleInterval(1, c("green", "red"))
+          ) %>%
+          formatStyle(
+            columns = c("dt_estimate", "dt_lower", "dt_upper"),
+            target = "cell",
+            color = styleInterval(0, c("green", "red"))
           )
         return(table)
+      })
+
+      output$tableCaption <- renderUI({
+        HTML("<p>Doubling time and weekly change in doubling time from a negative binomial generalized linear model. ",
+            "We also report her ", str_c("most recent R<sub>e</sub> values (", as.character(rEstimatesPath()$mtime), ") from "),
+            "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a>",
+            "and doubling times calculated from R<sub>e</sub> assuming a gamma distributed generation time with &mu; = 4.8 days ",
+            "and &sigma; = 2.3 days.</p>",
+            "<p>Use filter fields to filter columns. Click on column names to sort. Shift-Click to sort by multiple columns.</p>")
       })
 
       output$downloadData <- downloadHandler(
