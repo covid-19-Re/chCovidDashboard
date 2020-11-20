@@ -13,16 +13,16 @@ server <- function(input, output, session) {
       selected = "ttiq"
     )
   })
-  # observeEvent(input$selectTs, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "ts"
-  #   )
-  # })
-  # observeEvent(input$selectTsDataQuality, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "tsDataQuality"
-  #   )
-  # })
+  observeEvent(input$selectTs, {
+    updateTabsetPanel(session, "tab",
+      selected = "ts"
+    )
+  })
+  observeEvent(input$selectTsDataQuality, {
+    updateTabsetPanel(session, "tab",
+      selected = "tsDataQuality"
+    )
+  })
   observeEvent(input$selectTrends, {
     updateTabsetPanel(session, "tab",
       selected = "trends"
@@ -33,11 +33,11 @@ server <- function(input, output, session) {
       selected = "tables"
     )
   })
-  # observeEvent(input$selectForecast, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "forecast"
-  #   )
-  # })
+  observeEvent(input$selectForecast, {
+    updateTabsetPanel(session, "tab",
+      selected = "forecast"
+    )
+  })
 
   # contact tracing
   ttiqServer("ttiq")
@@ -45,14 +45,14 @@ server <- function(input, output, session) {
   # quarantine duration
   quarantineDurationServer("quarantineDuration")
 
-  # # Cases time series
-  # tsCasesServer("tsCases")
-
-  # # Proportions time series
-  # tsProportionsServer("tsProportions")
+  # Time series
+  tsServer("ts")
 
   # Time series: Data Quality
-  # tsDataQualityServer("tsDataQuality")
+  tsDataQualityServer("tsDataQuality")
+
+  # Time series: Data Quality
+  tsDataQualityServer("tsDataQuality")
 
   # trends
   trendsData <- trendsServer("trends")
