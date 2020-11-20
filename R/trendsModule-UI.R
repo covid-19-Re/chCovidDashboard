@@ -122,12 +122,7 @@ trendsUI <- function(id) {
         type = "pills", id = "summaryTabs",
         tabPanel(p(class = "tab-title", "Summary Table"), value = "summaryTable",
           div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
-            HTML("<p>Doubling time, weekly change in doubling time from a negative binomial generalized linear model ",
-            "and most recent R<sub>e</sub> values from ",
-            "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a>",
-            "and corresponding doubling times assuming a gamma distributed generation time with &mu; = 4.8 days ",
-            "and &sigma; = 2.3 days.</p>",
-            "<p>Use filter fields to filter columns. Click on column names to sort. Shift-Click to sort by multiple columns.</p>"),
+            uiOutput(ns("tableCaption")),
             DT::dataTableOutput(ns("comparisonDataTable")) %>% withSpinner(),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
