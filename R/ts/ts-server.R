@@ -374,6 +374,8 @@ tsServer <- function(id) {
           plotData <- plotData %>%
             group_by(date) %>%
             summarize(count = sum(mult), .groups = "drop") %>%
+            complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+            mutate(count = replace_na(count, 0)) %>%
             drop_na(date)
           if (plot_type() == "continuous") {
             plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
@@ -426,27 +428,21 @@ tsServer <- function(id) {
             d <- dataProc %>%
               filterWithActiveComparison$getEntriesOfGroup(compare_val) %>%
               group_by(date) %>%
-              summarize(count = sum(mult), .groups = "drop")
+              summarize(count = sum(mult), .groups = "drop") %>%
+              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
+              mutate(count = replace_na(count, 0)) %>%
+              drop_na(date)
             if (compare_per_100k_people()) {
               populationData <- load_population_data()
-              print(paste("Comparing", compare()))
-              if (compare() == "canton") {
-                populationData <- populationData %>%
-                  filter(canton == compare_val)
-                group_population <- sum(populationData$population)
-                d$count <- d$count * 100000 / group_population
-              } else if (compare() == "ageGroup") {
-                populationData <- populationData %>%
-                  filter(ageGroup == compare_val)
-                group_population <- sum(populationData$population)
-                d$count <- d$count * 100000 / group_population
+              populationData <- populationData %>%
+                filter(!!as.symbol(compare()) == compare_val)
+              for (fs in basicFilterServers) {
+                populationData <- fs()$filter(populationData)
               }
+              group_population <- sum(populationData$population)
+              d$count <- d$count * 100000 / group_population
             }
             if (compare_proportions()) {
-              d <- d %>%
-                complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-                mutate(count = replace_na(count, 0)) %>%
-                drop_na(date)
               d$count <- slide_index_dbl(d$count, d$date, mean,
                                          .before = smoothing_interval$before, .after = smoothing_interval$after)
             } else if (plot_type() == "continuous") {
@@ -455,6 +451,10 @@ tsServer <- function(id) {
             }
             d[, compare()] <- compare_val
             plotData <- bind_rows(plotData, d)
+          }
+          roundingDigits <- 0
+          if (compare_per_100k_people()) {
+            roundingDigits <- 2
           }
           if (!compare_proportions()) {
             if (currentPlotType() == "map") {
@@ -474,10 +474,10 @@ tsServer <- function(id) {
                   )
                   if (compare() == "canton") {
                     plotData <- plotData %>%
-                      mutate(tooltipText = paste0(canton, "\nCount: ", round(count)))
+                      mutate(tooltipText = paste0(canton, "\nCount: ", round(count, digits = roundingDigits)))
                   } else {
                     plotData <- plotData %>%
-                      mutate(tooltipText = paste0(expCountryCode, "\nCount: ", round(count)))
+                      mutate(tooltipText = paste0(expCountryCode, "\nCount: ", round(count, digits = roundingDigits)))
                   }
                 plotDef <- list(
                   plotData,
@@ -487,7 +487,7 @@ tsServer <- function(id) {
             } else {
               plotData <- plotData %>%
                 mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(plotData$date),
-                                            "\nCount: ", round(plotData$count)))
+                                            "\nCount: ", round(plotData$count, digits = roundingDigits)))
               plotDef <- list(
                 plotData, "date", "count",
                 groupingAttributeName = compare(),
