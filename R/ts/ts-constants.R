@@ -22,6 +22,17 @@ tsConstants$sexFromGerman <- function(german) {
   }
 }
 
+tsConstants$grossregion <- c(
+  "Lake Geneva region",
+  "Espace Mittelland",
+  "Grossregion Nordwestschweiz",
+  "Grossregion Zurich",
+  "Ostschweiz",
+  "Central Switzerland",
+  "Grossregion Tessin",
+  "Fürstentum Liechtenstein"
+)
+
 tsConstants$cantons <- c(
   "AG", "AI", "AR", "BE", "BL", "BS", "FL", "FR", "GE", "GL", "GR",
   "JU", "LU", "NE", "NW", "OW", "SG", "SH", "SO", "SZ", "TG", "TI",
