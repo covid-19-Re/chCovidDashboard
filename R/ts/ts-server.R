@@ -429,18 +429,13 @@ tsServer <- function(id) {
               summarize(count = sum(mult), .groups = "drop")
             if (compare_per_100k_people()) {
               populationData <- load_population_data()
-              print(paste("Comparing", compare()))
-              if (compare() == "canton") {
-                populationData <- populationData %>%
-                  filter(canton == compare_val)
-                group_population <- sum(populationData$population)
-                d$count <- d$count * 100000 / group_population
-              } else if (compare() == "ageGroup") {
-                populationData <- populationData %>%
-                  filter(ageGroup == compare_val)
-                group_population <- sum(populationData$population)
-                d$count <- d$count * 100000 / group_population
+              populationData <- populationData %>%
+                filter(!!as.symbol(compare()) == compare_val)
+              for (fs in basicFilterServers) {
+                populationData <- fs()$filter(populationData)
               }
+              group_population <- sum(populationData$population)
+              d$count <- d$count * 100000 / group_population
             }
             if (compare_proportions()) {
               d <- d %>%
