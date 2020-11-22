@@ -27,12 +27,12 @@ tablesServer <- function(id, trendsData) {
       })
 
       rEstimatesPath <- reactive({
-        rEstimatesPaths <- "data/Re/CHE-estimates.rds"
+        rEstimatesPaths <- "data/Re/CHE-Estimates.rds"
         # load newer file of public and regular app if in test app
         if (str_detect(getwd(), "testapp")) {
-          if (file.exists("../app/data/Re/CHE-estimates.rds")) {
-            rEstimatesPaths <- c("data/Re/CHE-estimates.rds",
-              "../app/data/Re/CHE-estimates.rds")
+          if (file.exists("../app/data/Re/CHE-Estimates.rds")) {
+            rEstimatesPaths <- c("data/Re/CHE-Estimates.rds",
+              "../app/data/Re/CHE-Estimates.rds")
           }
         }
         rEstimatesPathmTime <- file.mtime(rEstimatesPaths)
