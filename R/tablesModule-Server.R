@@ -69,7 +69,7 @@ tablesServer <- function(id, trendsData) {
 
       incidenceData <- reactive({
         rEstimatesPath <- rEstimatesPath()
-        incidencePath <- str_replace(rEstimatesPath$path, "estimates", "Data")
+        incidencePath <- str_replace(rEstimatesPath$path, "Estimates", "Data")
 
         incidenceData <- readRDS(incidencePath) %>%
           filter(
@@ -110,7 +110,7 @@ tablesServer <- function(id, trendsData) {
       })
 
       output$comparisonDataTable <- renderDataTable({
-        print(rEstimatesPath())
+
         sketch <- htmltools::withTags(table(
           class = "display",
           thead(
