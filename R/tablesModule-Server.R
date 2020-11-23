@@ -183,7 +183,7 @@ tablesServer <- function(id, trendsData) {
               "Re_estimate", "Re_lower", "Re_upper",
               "Re_estimate_dt", "Re_lower_dt", "Re_upper_dt"
             ),
-            digits = 4) %>%
+            digits = 2) %>%
           formatStyle(
             columns = c(
               "dt_estimate", "dt_lower", "dt_upper",
