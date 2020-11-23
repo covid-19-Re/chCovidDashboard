@@ -88,12 +88,6 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
 
   subtitle <- glue::glue_data(doublingTimesData,
     "{doublingLabel}{round(estimate, 1)} d (95% CI: {round(lower,1)} to {round(upper,1)}d)")
-  # subtitle <- glue::glue_data(
-  #   ranking,
-  #   "Weekly change:\n{round(estimate*100, 1)}% (95% CI: {round(lower*100,1)}% to {round(upper*100,1)}%)"
-  # )
-
-  # subtitle <- str_c(subtitle1, "\n", subtitle2)
 
   plot <- ggplot(
     data = plotData) +
