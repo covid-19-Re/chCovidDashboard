@@ -300,17 +300,11 @@ trendsServer <- function(id) {
         icuData <- icuData()
         pars <- pars()
 
-        eventCountsList <- list()
-        eventCountsList$cases <- bagData %>% getEventCounts(fall_dt, "cases", pars)
-        eventCountsList$hospitalizations <- bagData %>%
-          getEventCounts(hospdatin, "hospitalizations", pars)
-        eventCountsList$deaths <- bagData %>%
-          getEventCounts(pttoddat, "deaths", pars) %>%
-          filter(region == "CH", age_class == "all")
-        eventCountsList$icu <- icuData %>%
-          filter(region == "CH")
-
-        eventCounts <- bind_rows(eventCountsList)
+        eventCounts <- list()
+        eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases", pars)
+        eventCounts$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations", pars)
+        eventCounts$deaths <- bagData %>% getEventCounts(pttoddat, "deaths", pars)
+        eventCounts$icu <- icuData %>% filter(region == "CH")
 
         return(eventCounts)
       })
@@ -322,7 +316,11 @@ trendsServer <- function(id) {
       models <- reactive({
         eventCounts <- eventCounts()
 
+        eventCounts$deaths <- eventCounts$deaths %>%
+          filter(region == "CH", age_class == "all")
+
         models <- eventCounts %>%
+          bind_rows() %>%
           group_by(region, age_class, event) %>%
           nest() %>%
           mutate(model = map(data, modelFunction))
@@ -553,7 +551,7 @@ trendsServer <- function(id) {
 
       returnData <- reactive({
         returnData <- list(
-          counts = eventCounts(),
+          counts = bind_rows(eventCounts()),
           estimates = comparisonData()
         )
       })
