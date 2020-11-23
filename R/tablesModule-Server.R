@@ -149,7 +149,7 @@ tablesServer <- function(id, trendsData) {
             rownames = FALSE,
             container = sketch,
             filter = "top",
-            extensions = "FixedColumns",
+            # extensions = "FixedColumns",
             options = list(
               dom = "t",
               pageLength = 125,
