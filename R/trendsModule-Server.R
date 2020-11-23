@@ -557,7 +557,14 @@ trendsServer <- function(id) {
         }
       )
 
-      return(comparisonData)
+      returnData <- reactive({
+        returnData <- list(
+          counts = eventCounts(),
+          estimates = comparisonData()
+        )
+      })
+
+      return(returnData)
     }
   )
 }
