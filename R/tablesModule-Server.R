@@ -133,7 +133,7 @@ tablesServer <- function(id, trendsData) {
           ),
           tfoot(
             tr(
-              td(colspan = 15,
+              td(colspan = 19,
                 HTML(
                   str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (",
                     as.character(rEstimatesPath()$mtime), ") from"),
