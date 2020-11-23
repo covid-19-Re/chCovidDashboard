@@ -68,18 +68,24 @@ tablesServer <- function(id, trendsData) {
       })
 
       incidenceData <- reactive({
-        rEstimatesPath <- rEstimatesPath()
-        incidencePath <- str_replace(rEstimatesPath$path, "Estimates", "Data")
 
-        incidenceData <- readRDS(incidencePath) %>%
-          filter(
-            !(data_type %in% c("Stringency Index", "Confirmed cases / tests")),
-            date_type == "report_plotting", is.na(local_infection)) %>%
-          select(-local_infection, -date_type, -(positiveTests:country)) %>%
+        eventCounts <- trendsData()$counts
+
+        popSizes <- read_csv("data/popSizeAgeCHELIE.csv",
+          col_types = cols(
+            region = col_character(),
+            age_class = col_character(),
+            populationSize = col_double()
+          )
+        )
+
+        incidenceData <- eventCounts %>%
+          left_join(popSizes, by = c("region", "age_class")) %>%
           mutate(
-            value = replace_na(value, 0),
+            value = replace_na(count, 0),
             valueNorm = replace_na(value / populationSize * 100000, 0)) %>%
-          group_by(region, data_type) %>%
+          arrange(region, age_class, event, date) %>%
+          group_by(region, age_class, event) %>%
           mutate(
             value7day = slide_index_dbl(value, date, mean, .before = days(7)),
             valueNorm7day = slide_index_dbl(valueNorm, date, mean, .before = days(7)),
@@ -88,13 +94,8 @@ tablesServer <- function(id, trendsData) {
           ) %>%
           top_n(1, date) %>%
           ungroup() %>%
-          transmute(
-            region = recode(region, "CHE" = "CH"),
-            age_class = "all",
-            event = recode(data_type,
-              "Confirmed cases" = "cases",
-              "Hospitalized patients" = "hospitalizations",
-              "Deaths" = "deaths"),
+          select(
+            region, age_class, event,
             value7day = value7day,
             valueNorm7day = valueNorm7day,
             value14day = value14day,
@@ -105,7 +106,7 @@ tablesServer <- function(id, trendsData) {
         rEstimates <- rEstimates()
         incidenceData <- incidenceData()
         allData <- incidenceData %>%
-          full_join(trendsData(), by = c("region", "age_class", "event")) %>%
+          full_join(trendsData()$estimates, by = c("region", "age_class", "event")) %>%
           full_join(rEstimates, by = c("region", "age_class", "event"))
       })
 
@@ -129,20 +130,6 @@ tablesServer <- function(id, trendsData) {
               th("Event"),
               lapply(rep(c("raw", "/100'000"), 2), th),
               lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 4), th),
-            )
-          ),
-          tfoot(
-            tr(
-              td(colspan = 19,
-                HTML(
-                  str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (",
-                    as.character(rEstimatesPath()$mtime), ") from"),
-                    "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
-                    "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
-                  "<sup>2</sup>Doubling time / half-life calculated from R<sub>e</sub> assuming",
-                    "a gamma distributed generation time with &mu; = 4.8 days and &sigma; = 2.3 days"
-                )
-              )
             )
           )
         ))
@@ -210,6 +197,18 @@ tablesServer <- function(id, trendsData) {
             "and doubling times calculated from R<sub>e</sub> assuming a gamma distributed generation time with &mu; = 4.8 days ",
             "and &sigma; = 2.3 days.</p>",
             "<p>Use filter fields to filter columns. Click on column names to sort. Shift-Click to sort by multiple columns.</p>")
+      })
+
+      output$tableFooter <- renderUI({
+        HTML("<span class='help-block'>",
+          str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (",
+            as.character(rEstimatesPath()$mtime), ") from"),
+            "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
+            "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
+          "<sup>2</sup>Doubling time / half-life calculated from R<sub>e</sub> assuming",
+            "a gamma distributed generation time with &mu; = 4.8 days and &sigma; = 2.3 days",
+          "</span>"
+        )
       })
 
       output$downloadData <- downloadHandler(

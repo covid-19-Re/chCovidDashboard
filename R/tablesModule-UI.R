@@ -21,6 +21,7 @@ tablesUI <- function(id) {
           div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
             uiOutput(ns("tableCaption")),
             DT::dataTableOutput(ns("comparisonDataTable")) %>% withSpinner(),
+            uiOutput(ns("tableFooter")),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
         )
