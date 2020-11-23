@@ -44,7 +44,9 @@ tablesServer <- function(id, trendsData) {
 
       rEstimates <- reactive({
         rEstimatesPath <- rEstimatesPath()
+        rEstimatesPathLIE <- str_replace(rEstimatesPath$path, "CHE", "LIE")
         rEstimates <- readRDS(rEstimatesPath$path) %>%
+          bind_rows(readRDS(rEstimatesPathLIE)) %>%
           filter(
             !(str_detect(region, "grR")),
             data_type != "Confirmed cases / tests",
@@ -54,7 +56,7 @@ tablesServer <- function(id, trendsData) {
           top_n(1, date) %>%
           ungroup() %>%
           transmute(
-            region = recode(region, "CHE" = "CH"),
+            region = recode(region, "CHE" = "CH", "LIE" = "FL"),
             age_class = "all",
             event = recode(data_type,
               "Confirmed cases" = "cases",
@@ -65,6 +67,8 @@ tablesServer <- function(id, trendsData) {
             Re_upper = median_R_highHPD
           ) %>%
           mutate(across(.cols = tidyselect::starts_with("Re_"), getDoublingTimeRe, .names = "{.col}_dt"))
+
+        return(rEstimates)
       })
 
       incidenceData <- reactive({
