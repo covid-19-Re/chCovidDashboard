@@ -31,6 +31,32 @@ library(rgeos)
   return (unlist(d$admin))
 }
 
+.mapCantonToGrossregion <- function (canton) {
+  mapping <- tibble(
+    canton = c(
+      "GE", "VD", "VS",
+      "BE", "SO", "FR", "NE", "JU",
+      "BS", "BL", "AG",
+      "ZH",
+      "SG", "TG", "AI", "AR", "GL", "SH", "GR",
+      "UR", "SZ", "OW", "NW", "LU", "ZG",
+      "TI",
+      "FL"
+    ),
+    grossregion = c(
+      rep("Lake Geneva region", 3),
+      rep("Espace Mittelland", 5),
+      rep("Grossregion Nordwestschweiz", 3),
+      "Grossregion Zurich",
+      rep("Ostschweiz", 7),
+      rep("Central Switzerland", 6),
+      "Grossregion Tessin",
+      "Fürstentum Liechtenstein"
+    )
+  )
+  return((tibble(canton = canton) %>% left_join(mapping, by = "canton"))$grossregion)
+}
+
 dataCache <- list(
   datasetUpdatedAt = ymd_hm("190001010000"),  # The datetime of the latest dataset from BAG
   lastLoadedAt = ymd_hm("190001010000"),  # The datetime when the dataset was loaded the last time
@@ -76,8 +102,9 @@ load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
     mutate(labReason = map_chr(lab_grund, tsConstants$labReasonFromCode)) %>%
     mutate(expCountryCode = .mapCountryCode(exp_land)) %>%
     mutate(expCountryName = .mapCountryName(expCountryCode)) %>%
+    mutate(grossregion = .mapCantonToGrossregion(canton)) %>%
     select(
-      canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
+      grossregion, canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryCode,
       expCountryName, grunderkr_diabetes, grunderkr_cardio, grunderkr_hypertonie, grunderkr_resp_chron, grunderkr_krebs,
@@ -110,6 +137,7 @@ load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
       pttod = NA,
       icu_aufenthalt = NA,
       exp_ort = NA,
+      grossregion = NA,
       canton = NA,
       ## ageGroup = str_replace_all(Altersklasse, " ",""),
       ageGroup = "Unknown",
@@ -132,7 +160,7 @@ load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
       grunderkr_keine = NA
     ) %>%
     select(
-      canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
+      grossregion, canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName, expCountryCode,
       grunderkr_diabetes, grunderkr_cardio, grunderkr_hypertonie, grunderkr_resp_chron, grunderkr_krebs,
@@ -165,6 +193,7 @@ load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
       pttod = NA,
       icu_aufenthalt = NA,
       exp_ort = NA,
+      grossregion = .mapCantonToGrossregion(ktn),
       canton = ktn,
       ageGroup = str_replace_all(Altersklasse, " ", ""),
       sex = "Unknown",
@@ -186,7 +215,7 @@ load_and_process_data <- function(BAGdataDir = "data/BAG", useCache = TRUE) {
       grunderkr_keine = NA
     ) %>%
     select(
-      canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
+      grossregion, canton, fall_dt, hospdatin, pttoddat, em_hospit_icu_in_dt,
       hospitalisation, pttod, icu_aufenthalt, ageGroup, sex,
       travelClass, expContactPath, quarantBeforePositiveTest, labReason, positiveTest, mult, expCountryName,
       expCountryCode, grunderkr_diabetes, grunderkr_cardio, grunderkr_hypertonie, grunderkr_resp_chron, grunderkr_krebs,
@@ -274,9 +303,10 @@ load_population_data <- function () {
         "Vaud" = "VD",
         "Zug" = "ZG",
         "Zurich" = "ZH"
-      )[canton], use.names = FALSE)
+      )[canton], use.names = FALSE),
+      grossregion = .mapCantonToGrossregion(canton)
     ) %>%
-    select(canton, sex, ageGroup, population)
+    select(grossregion, canton, sex, ageGroup, population)
   populationDataCache <<- data
   return(data)
 }

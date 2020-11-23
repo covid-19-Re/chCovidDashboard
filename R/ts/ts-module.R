@@ -17,6 +17,8 @@ basicFilters <- list(
   "ageGroup" = createBasicFilter("Age group", tsConstants$ageGroups, "ageGroup",
                                  comparePer100kPeoplePossible = TRUE),
   "sex" = createBasicFilter("Sex", tsConstants$sex, "sex", comparePer100kPeoplePossible = TRUE),
+  "grossregion" = createBasicFilter("Grossregion", tsConstants$grossregion, "grossregion",
+                                    comparePer100kPeoplePossible = TRUE),
   "canton" = createBasicFilter("Canton", tsConstants$cantons, "canton",
                                comparePer100kPeoplePossible = TRUE),
   "travelClass" = createBasicFilter("Travel related status", tsConstants$travelRelatedStatus, "travelClass"),
