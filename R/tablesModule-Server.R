@@ -115,9 +115,7 @@ tablesServer <- function(id, trendsData) {
           class = "display",
           thead(
             tr(
-              th(rowspan = 2, "Region"),
-              th(rowspan = 2, "Age class"),
-              th(rowspan = 2, "Event"),
+              th(colspan = 3, "", style = "border-bottom:0px;"),
               th(colspan = 2, "7 day mean incidence"),
               th(colspan = 2, "14 day mean incidence"),
               th(colspan = 3, "Doubling time (d)"),
@@ -126,6 +124,9 @@ tablesServer <- function(id, trendsData) {
               th(colspan = 3, HTML("<span style='color:red;'>Doubling time</span> / <span style='color:green;'>Half-life</span> (d) from R<sub>e</sub><sup>2</sup>"))
             ),
             tr(
+              th("Region"),
+              th("Age class"),
+              th("Event"),
               lapply(rep(c("raw", "/100'000"), 2), th),
               lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 4), th),
             )
@@ -157,14 +158,18 @@ tablesServer <- function(id, trendsData) {
           arrange(event, region, age_class)
 
         table <- datatable(
-          tableData,
-          rownames = FALSE,
-          container = sketch,
-          filter = "top",
-          options = list(
-            dom = "t",
-            pageLength = 125,
-            lengthMenu = c(25, 50, 100, 125))) %>%
+            tableData,
+            rownames = FALSE,
+            container = sketch,
+            filter = "top",
+            extensions = "FixedColumns",
+            options = list(
+              dom = "t",
+              pageLength = 125,
+              lengthMenu = c(25, 50, 100, 125),
+              scrollX = TRUE,
+              fixedColumns = list(leftColumns = 3))
+          ) %>%
           formatRound(
             columns = c(
               "value7day", "valueNorm7day",
