@@ -88,12 +88,6 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
 
   subtitle <- glue::glue_data(doublingTimesData,
     "{doublingLabel}{round(estimate, 1)} d (95% CI: {round(lower,1)} to {round(upper,1)}d)")
-  # subtitle <- glue::glue_data(
-  #   ranking,
-  #   "Weekly change:\n{round(estimate*100, 1)}% (95% CI: {round(lower*100,1)}% to {round(upper*100,1)}%)"
-  # )
-
-  # subtitle <- str_c(subtitle1, "\n", subtitle2)
 
   plot <- ggplot(
     data = plotData) +
@@ -306,17 +300,11 @@ trendsServer <- function(id) {
         icuData <- icuData()
         pars <- pars()
 
-        eventCountsList <- list()
-        eventCountsList$cases <- bagData %>% getEventCounts(fall_dt, "cases", pars)
-        eventCountsList$hospitalizations <- bagData %>%
-          getEventCounts(hospdatin, "hospitalizations", pars)
-        eventCountsList$deaths <- bagData %>%
-          getEventCounts(pttoddat, "deaths", pars) %>%
-          filter(region == "CH", age_class == "all")
-        eventCountsList$icu <- icuData %>%
-          filter(region == "CH")
-
-        eventCounts <- bind_rows(eventCountsList)
+        eventCounts <- list()
+        eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases", pars)
+        eventCounts$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations", pars)
+        eventCounts$deaths <- bagData %>% getEventCounts(pttoddat, "deaths", pars)
+        eventCounts$icu <- icuData %>% filter(region == "CH")
 
         return(eventCounts)
       })
@@ -328,7 +316,11 @@ trendsServer <- function(id) {
       models <- reactive({
         eventCounts <- eventCounts()
 
+        eventCounts$deaths <- eventCounts$deaths %>%
+          filter(region == "CH", age_class == "all")
+
         models <- eventCounts %>%
+          bind_rows() %>%
           group_by(region, age_class, event) %>%
           nest() %>%
           mutate(model = map(data, modelFunction))
@@ -559,7 +551,7 @@ trendsServer <- function(id) {
 
       returnData <- reactive({
         returnData <- list(
-          counts = eventCounts(),
+          counts = bind_rows(eventCounts()),
           estimates = comparisonData()
         )
       })

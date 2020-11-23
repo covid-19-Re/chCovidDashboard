@@ -20,7 +20,7 @@ getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
 tablesServer <- function(id, trendsData) {
   moduleServer(
     id,
-    function (input, output, session) {
+    function(input, output, session) {
       observe({
         toExclude <- setdiff(names(input), "tab")
         setBookmarkExclude(toExclude)
