@@ -176,7 +176,7 @@ tablesServer <- function(id, trendsData) {
               "value14day", "valueNorm14day"
             ),
             digits = 2) %>%
-          formatSignif(
+          formatRound(
             columns = c(
               "dt_estimate", "dt_lower", "dt_upper",
               "wc_estimate", "wc_lower", "wc_upper",
