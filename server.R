@@ -51,9 +51,6 @@ server <- function(input, output, session) {
   # Time series: Data Quality
   tsDataQualityServer("tsDataQuality")
 
-  # Time series: Data Quality
-  tsDataQualityServer("tsDataQuality")
-
   # trends
   trendsData <- trendsServer("trends")
 
