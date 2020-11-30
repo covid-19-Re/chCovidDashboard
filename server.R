@@ -1,5 +1,4 @@
 server <- function(input, output, session) {
-  # global
 
   observe_helpers(help_dir = "R/forecastModule-Files/helpfiles")
 
@@ -13,16 +12,16 @@ server <- function(input, output, session) {
       selected = "ttiq"
     )
   })
-  # observeEvent(input$selectTs, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "ts"
-  #   )
-  # })
-  # observeEvent(input$selectTsDataQuality, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "tsDataQuality"
-  #   )
-  # })
+  observeEvent(input$selectTs, {
+    updateTabsetPanel(session, "tab",
+      selected = "ts"
+    )
+  })
+  observeEvent(input$selectTsDataQuality, {
+    updateTabsetPanel(session, "tab",
+      selected = "tsDataQuality"
+    )
+  })
   observeEvent(input$selectTrends, {
     updateTabsetPanel(session, "tab",
       selected = "trends"
@@ -33,28 +32,24 @@ server <- function(input, output, session) {
       selected = "tables"
     )
   })
-  # observeEvent(input$selectForecast, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "forecast"
-  #   )
-  # })
+  observeEvent(input$selectForecast, {
+    updateTabsetPanel(session, "tab",
+      selected = "forecast"
+    )
+  })
 
-  # contact tracing
   ttiqServer("ttiq")
 
-  # quarantine duration
   quarantineDurationServer("quarantineDuration")
 
-  # Time series
-  # tsServer("ts")
+  tsServer("ts")
 
-  # Time series: Data Quality
-  # tsDataQualityServer("tsDataQuality")
+  tsDataQualityServer("tsDataQuality")
 
-  # trends
   trendsServer("trends")
 
   tablesServer("tables")
 
+  forecastServer("forecast")
 
 }
