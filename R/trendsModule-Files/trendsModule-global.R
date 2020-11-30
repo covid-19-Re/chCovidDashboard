@@ -1,4 +1,4 @@
-source(here::here("R/trendsModule-files/trendsModule-fns.R"))
+source(here::here("R/trendsModule-Files/trendsModule-fns.R"))
 
 newestBAGfile <- getNewestBagFile(path = "data/BAG")
 bagData <- readRDS(newestBAGfile) %>% as_tibble()
