@@ -52,9 +52,9 @@ server <- function(input, output, session) {
   tsDataQualityServer("tsDataQuality")
 
   # trends
-  trendsData <- trendsServer("trends")
+  trendsServer("trends")
 
-  tablesServer("tables", trendsData)
+  tablesServer("tables")
 
 
 }

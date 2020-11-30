@@ -52,6 +52,7 @@ data/BAG
 data/ICU
 data/Re
 data/forecastModule-Data.txt
+data/*.qs
 www/pdf/*
 
 ## Core latex/pdflatex auxiliary files:
