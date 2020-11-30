@@ -17,7 +17,7 @@ getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
   return(d)
 }
 
-tablesServer <- function(id, trendsData) {
+tablesServer <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -71,46 +71,37 @@ tablesServer <- function(id, trendsData) {
         return(rEstimates)
       })
 
+      incidenceDataPath <- reactive({
+        incidenceDataPaths <- "data/trends-incidenceTable.qs"
+        # load newer file of public and regular app if in test app
+        if (str_detect(getwd(), "testapp")) {
+          if (file.exists("../app/data/trends-incidenceTable.qs")) {
+            incidenceDataPaths <- c("data/trends-incidenceTable.qs",
+              "../app/data/trends-incidenceDataTable.qs")
+          }
+        }
+        incidenceDataPathmTime <- file.mtime(incidenceDataPaths)
+        incidenceDataPath <- list(
+          path = incidenceDataPaths[which.max(incidenceDataPathmTime)],
+          mtime = incidenceDataPathmTime[which.max(incidenceDataPathmTime)])
+        return(incidenceDataPath)
+      })
+
       incidenceData <- reactive({
+        incidenceDataPath <- incidenceDataPath()
+        eventCounts <- qs::qread(incidenceDataPath$path)
+      })
 
-        eventCounts <- trendsData()$counts
-
-        popSizes <- read_csv("data/popSizeAgeCHELIE.csv",
-          col_types = cols(
-            region = col_character(),
-            age_class = col_character(),
-            populationSize = col_double()
-          )
-        )
-
-        incidenceData <- eventCounts %>%
-          left_join(popSizes, by = c("region", "age_class")) %>%
-          mutate(
-            value = replace_na(count, 0),
-            valueNorm = replace_na(value / populationSize * 100000, 0)) %>%
-          arrange(region, age_class, event, date) %>%
-          group_by(region, age_class, event) %>%
-          mutate(
-            value7day = slide_index_dbl(value, date, mean, .before = days(7)),
-            valueNorm7day = slide_index_dbl(valueNorm, date, mean, .before = days(7)),
-            value14day = slide_index_dbl(value, date, mean, .before = days(14)),
-            valueNorm14day = slide_index_dbl(valueNorm, date, mean, .before = days(14))
-          ) %>%
-          top_n(1, date) %>%
-          ungroup() %>%
-          select(
-            region, age_class, event,
-            value7day = value7day,
-            valueNorm7day = valueNorm7day,
-            value14day = value14day,
-            valueNorm14day = valueNorm14day)
+      trendsData <- reactive({
+        incidenceDataPath <- incidenceDataPath()
+        trendsData <- qs::qread(str_replace(incidenceDataPath$path, "incidenceTable", "predictionsTable"))
       })
 
       comparisonData <- reactive({
         rEstimates <- rEstimates()
         incidenceData <- incidenceData()
         allData <- incidenceData %>%
-          full_join(trendsData()$estimates, by = c("region", "age_class", "event")) %>%
+          full_join(trendsData(), by = c("region", "age_class", "event")) %>%
           full_join(rEstimates, by = c("region", "age_class", "event"))
       })
 
