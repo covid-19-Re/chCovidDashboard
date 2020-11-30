@@ -54,6 +54,7 @@ data/Re
 data/forecastModule-Data.txt
 data/*.qs
 www/pdf/*
+scripts/lastBAGdir.txt
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

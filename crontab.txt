@@ -1,0 +1,4 @@
+0 0-23 * * 1-5 /home/covidDashboard/testapp/R/forecastModule-Files/external_scripts/updateForecastModule.sh
+* 0-23 * * 2-5 /home/covidDashboard/app/scripts/updateScript.sh
+* 14-23 * * 1 /home/covidDashboard/app/scripts/updateScript.sh
+* 0-23 * * 0,6 /home/covidDashboard/testapp/scripts/updateScript.sh
