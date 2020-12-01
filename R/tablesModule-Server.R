@@ -89,8 +89,7 @@ tablesServer <- function(id) {
 
       incidenceData <- reactive({
         incidenceDataPath <- incidenceDataPath()
-        incidenceData <- qs::qread(incidenceDataPath$path)
-
+        eventCounts <- qs::qread(incidenceDataPath$path)
       })
 
       trendsData <- reactive({
@@ -113,7 +112,7 @@ tablesServer <- function(id) {
           thead(
             tr(
               th(colspan = 3, "", style = "border-bottom:0px;"),
-              th(colspan = 3, "7 day mean incidence"),
+              th(colspan = 2, "7 day mean incidence"),
               th(colspan = 2, "14 day mean incidence"),
               th(colspan = 3, "Doubling time (d)"),
               th(colspan = 3, "Weekly change (%)"),
@@ -124,8 +123,7 @@ tablesServer <- function(id) {
               th("Region"),
               th("Age class"),
               th("Event"),
-              lapply(rep(c("raw", "trend", "/100'000"), 1), th),
-              lapply(rep(c("raw", "/100'000"), 1), th),
+              lapply(rep(c("raw", "/100'000"), 2), th),
               lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 4), th),
             )
           )
@@ -144,17 +142,15 @@ tablesServer <- function(id) {
         table <- datatable(
             tableData,
             rownames = FALSE,
-            # container = sketch,
-            # filter = "top",
+            container = sketch,
+            filter = "top",
             # extensions = "FixedColumns",
-            escape = FALSE,
             options = list(
-              # dom = "t",
-              # pageLength = 125,
-              # lengthMenu = c(25, 50, 100, 125),
-              # scrollX = TRUE,
-              # fixedColumns = list(leftColumns = 3),
-              drawCallback = I("drawSparklines"))
+              dom = "t",
+              pageLength = 125,
+              lengthMenu = c(25, 50, 100, 125),
+              scrollX = TRUE,
+              fixedColumns = list(leftColumns = 3))
           ) %>%
           formatRound(
             columns = c(
