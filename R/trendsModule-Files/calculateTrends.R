@@ -2,8 +2,11 @@ library(tidyverse)
 library(lubridate)
 library(slider)
 library(here)
+library(highcharter)
+library(jsonlite)
 
 source(here("R/trendsModule-Files/trendsModule-global.R"))
+source(here("R/hcSparklines.R"))
 
 eventCounts <- list()
 eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases")
