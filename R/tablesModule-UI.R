@@ -1,4 +1,5 @@
 library(shinycssloaders)
+library(highcharter)
 
 tablesUI <- function(id) {
   ns <- NS(id)
@@ -20,12 +21,14 @@ tablesUI <- function(id) {
         tabPanel(p(class = "tab-title", "Summary Table"), value = "summaryTable",
           div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
             uiOutput(ns("tableCaption")),
-            DT::dataTableOutput(ns("comparisonDataTable")) %>% withSpinner(),
+            DT::dataTableOutput(ns("comparisonDataTable")),
             uiOutput(ns("tableFooter")),
             downloadButton(ns("downloadData"), "Download .csv")
           ))
         )
-      )
+      ),
+      highchartOutput("", height = 0), # Only used to load the Highcharts library
+      HTML("<span class='help-block'>Method to integrate highcharts.js sparklines into datatables from https://github.com/nuno-agostinho/Highcharter-in-DataTables</span>")
     )
   )
 }
