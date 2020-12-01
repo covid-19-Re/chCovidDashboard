@@ -38,28 +38,28 @@ ui <- function(request) {
             affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br>",
             thumbnail = "ttiqModule-thumbnail.png",
             tabId = "selectTTIQ"
+          ),
+          thumbnailPanel(
+            title = "Time Series",
+            authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
+            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
+            thumbnail = "ts-thumbnail.png",
+            tabId = "selectTs"
+          ),
+          thumbnailPanel(
+            title = "Time Series: Data Quality",
+            authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
+            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
+            thumbnail = "ts-thumbnail.png",
+            tabId = "selectTsDataQuality"
+          ),
+          thumbnailPanel(
+            title = "Live time-series analysis to monitor and forecast the COVID-19 outbreak in Switzerland",
+            authors = "Monica Golumbeanu and Melissa Penny",
+            affiliation = "Swiss Tropical and Public Health Institute and University of Basel<br>",
+            thumbnail = "forecastModule-thumbnail.png",
+            tabId = "selectForecast"
           )
-          # thumbnailPanel(
-          #   title = "Time Series",
-          #   authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
-          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
-          #   thumbnail = "ts-thumbnail.png",
-          #   tabId = "selectTs"
-          # ),
-          # thumbnailPanel(
-          #   title = "Time Series: Data Quality",
-          #   authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
-          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
-          #   thumbnail = "ts-thumbnail.png",
-          #   tabId = "selectTsDataQuality"
-          # ),
-          # thumbnailPanel(
-          #   title = "Live time-series analysis to monitor and forecast the COVID-19 outbreak in Switzerland",
-          #   authors = "Monica Golumbeanu and Melissa Penny",
-          #   affiliation = "Swiss Tropical and Public Health Institute and University of Basel<br>",
-          #   thumbnail = "forecastModule-thumbnail.png",
-          #   tabId = "selectForecast"
-          # )
         ),
         hr(),
         fluidRow(
@@ -70,13 +70,13 @@ ui <- function(request) {
             thumbnail = "re-thumbnail.png",
             href = "https://ibz-shiny.ethz.ch/covid-19-re/"
           ),
-          # thumbnailPanelExt(
-          #   title = "R<sub>e</sub> Estimation Test Server (CHE&nbsp;WEEKEND&nbsp;ONLY)",
-          #   authors = "Jérémie Scire, Jana S. Huisman et al.",
-          #   affiliation = "ETH Zürich, D-BSSE & D-USYS <br><br> <i>(opens in a new window)</i>",
-          #   thumbnail = "re-thumbnail.png",
-          #   href = "https://ibz-shiny.ethz.ch/covid-19-re-test/"
-          # ),
+          thumbnailPanelExt(
+            title = "R<sub>e</sub> Estimation Test Server (CHE&nbsp;WEEKEND&nbsp;ONLY)",
+            authors = "Jérémie Scire, Jana S. Huisman et al.",
+            affiliation = "ETH Zürich, D-BSSE & D-USYS <br><br> <i>(opens in a new window)</i>",
+            thumbnail = "re-thumbnail.png",
+            href = "https://ibz-shiny.ethz.ch/covid-19-re-test/"
+          ),
           thumbnailPanelExt(
             title = "nextstrain: Phylogenetic analysis of Swiss SARS-CoV-2 genomes in their international context",
             authors = "maintained by Emma Hodcroft, Richard Neher, Sarah Nadeau and Tanja Stadler.",
@@ -94,20 +94,20 @@ ui <- function(request) {
           )
         ),
       ),
-      # navbarMenu(
-      #   "Time Series",
-      #   menuName = "timeseries",
-      #   tabPanel(
-      #     "Time Series",
-      #     value = "ts",
-      #     tsUI("ts")
-      #   ),
-      #   tabPanel(
-      #     "Data Quality",
-      #     value = "tsDataQuality",
-      #     tsDataQualityUI("tsDataQuality")
-      #   )
-      # ),
+      navbarMenu(
+        "Time Series",
+        menuName = "timeseries",
+        tabPanel(
+          "Time Series",
+          value = "ts",
+          tsUI("ts")
+        ),
+        tabPanel(
+          "Data Quality",
+          value = "tsDataQuality",
+          tsDataQualityUI("tsDataQuality")
+        )
+      ),
       tabPanel("Trends",
         value = "trends",
         trendsUI("trends")
@@ -124,10 +124,10 @@ ui <- function(request) {
         value = "ttiq",
         ttiqUI("ttiq")
       ),
-      # tabPanel("Forecast",
-      #   value = "forecast",
-      #   forecastUI("forecast")
-      # ),
+      tabPanel("Forecast",
+        value = "forecast",
+        forecastUI("forecast")
+      ),
       navbarMenu(
         "About",
         menuName = "about",
