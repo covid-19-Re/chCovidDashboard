@@ -76,14 +76,10 @@ incidenceData <- eventCounts2wk %>%
 incidenceDataSparkline <- incidenceData %>%
   select(date, region, age_class, event, value7day) %>%
   group_by(region, age_class, event) %>%
-  nest() %>%
-  mutate(
-    sparkline7day = highchart() %>%
-      hc_add_series(name = "7 day average", data = data$value7day) %>%
-      hc_new_sparkline() %>%
-      hchart()
-  ) %>%
-  select(-data)
+  summarize(
+    sparkline7day = str_c(value7day, collapse = ","),
+    .groups = "drop"
+  )
 
 incidenceDataTable <- incidenceData %>%
   top_n(1, date) %>%
@@ -92,7 +88,7 @@ incidenceDataTable <- incidenceData %>%
   select(
     region, age_class, event,
     value7day = value7day,
-    Sparkline = sparkline7day,
+    sparkline7day = sparkline7day,
     valueNorm7day = valueNorm7day,
     value14day = value14day,
     valueNorm14day = valueNorm14day)

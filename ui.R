@@ -137,7 +137,6 @@ ui <- function(request) {
         )
       )
     ),
-    tags$script(src = "navbarRight.js"),
-    tags$script(src = "hcSparklines.js")
+    tags$script(src = "navbarRight.js")
   )
 }
