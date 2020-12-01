@@ -20,9 +20,9 @@ getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
 # sparkline
 sparklinePars <- "type: 'line', lineColor: 'black', highlightLineColor: 'orange', highlightSpotColor: 'orange', width: '100px'"
 
-sparklineCallback <- JS(paste0("function (oSettings, json) {\n  $('.sparkSamples:not(:has(canvas))').sparkline('html', { ", 
+sparklineCallback <- JS(paste0("function (oSettings, json) {\n  $('.sparkline:not(:has(canvas))').sparkline('html', { ", 
                 sparklinePars, " });\n}"), collapse = "")
-sparklineRenderJS <- JS("function(data, type, full) { return '<span class=sparkSamples>' + data + '</span>' }")
+sparklineRenderJS <- JS("function(data, type, full) { return '<span class=sparkline values=' + data + '>></span>' }")
 
 tablesServer <- function(id) {
   moduleServer(
