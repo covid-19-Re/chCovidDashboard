@@ -17,13 +17,6 @@ getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
   return(d)
 }
 
-# sparkline
-sparklinePars <- "type: 'line', lineColor: 'black', highlightLineColor: 'orange', highlightSpotColor: 'orange', width: '100px'"
-
-sparklineCallback <- JS(paste0("function (oSettings, json) {\n  $('.sparkSamples:not(:has(canvas))').sparkline('html', { ", 
-                sparklinePars, " });\n}"), collapse = "")
-sparklineRenderJS <- JS("function(data, type, full) { return '<span class=sparkSamples>' + data + '</span>' }")
-
 tablesServer <- function(id) {
   moduleServer(
     id,
@@ -131,7 +124,7 @@ tablesServer <- function(id) {
               th("Region"),
               th("Age class"),
               th("Event"),
-              lapply(rep(c("raw", "14d history", "/100'000"), 1), th),
+              lapply(rep(c("raw", "trend", "/100'000"), 1), th),
               lapply(rep(c("raw", "/100'000"), 1), th),
               lapply(rep(c("estimate", "lower 95% CI", "upper 95% CI"), 4), th),
             )
@@ -151,23 +144,17 @@ tablesServer <- function(id) {
         table <- datatable(
             tableData,
             rownames = FALSE,
-            container = sketch,
-            filter = "top",
-            extensions = "FixedColumns",
+            # container = sketch,
+            # filter = "top",
+            # extensions = "FixedColumns",
             escape = FALSE,
             options = list(
-              dom = "t",
-              pageLength = 125,
-              lengthMenu = c(25, 50, 100, 125),
-              scrollX = TRUE,
-              fixedColumns = list(leftColumns = 3),
-              columnDefs = list(
-                list(
-                  targets = 4,
-                  render = sparklineRenderJS
-                )
-              ),
-              drawCallback = sparklineCallback)
+              # dom = "t",
+              # pageLength = 125,
+              # lengthMenu = c(25, 50, 100, 125),
+              # scrollX = TRUE,
+              # fixedColumns = list(leftColumns = 3),
+              drawCallback = I("drawSparklines"))
           ) %>%
           formatRound(
             columns = c(
