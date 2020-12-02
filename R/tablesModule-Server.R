@@ -153,18 +153,17 @@ tablesServer <- function(id) {
             rownames = FALSE,
             container = sketch,
             filter = "top",
-            extensions = "FixedColumns",
             escape = FALSE,
             options = list(
               dom = "t",
               pageLength = 125,
               lengthMenu = c(25, 50, 100, 125),
               scrollX = TRUE,
-              fixedColumns = list(leftColumns = 3),
               columnDefs = list(
                 list(
                   targets = 4,
-                  render = sparklineRenderJS
+                  render = sparklineRenderJS,
+                  searchable = FALSE
                 )
               ),
               drawCallback = sparklineCallback)
