@@ -60,7 +60,7 @@ trendsServer <- function(id) {
           modelOutput <- list(
             predictions = qs::qread("data/trends-predictions.qs"),
             doublingTimes = qs::qread("data/trends-doublingTimes.qs"),
-            ranking = qs::qread("data/trends-doublingTimes.qs")
+            ranking = qs::qread("data/trends-ranking.qs")
           )
         } else {
           models <- calcTrendsModel(eventCounts())
