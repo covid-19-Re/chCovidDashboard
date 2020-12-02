@@ -160,6 +160,7 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
       title <- yLabel
     }
     subLabel <- if_else(longLabel, "Veränderung (7d): ", "")
+    to <- "bis"
   } else {
     yLabel <- case_when(
       eventSelect == "cases" ~ "Confirmed cases",
@@ -175,10 +176,11 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
       title <- yLabel
     }
     subLabel <- if_else(longLabel, "Change (7d): ", "")
+    to <- "to"
   }
 
   subtitle <- glue::glue_data(ranking,
-    "{subLabel}{round(estimate * 100, 1)}% ({round(lower * 100, 1)}% to {round(upper * 100, 1)}%)")
+    "{subLabel}{round(estimate * 100, 1)}% ({round(lower * 100, 1)}% {to} {round(upper * 100, 1)}%)")
 
   plot <- ggplot(
     data = plotData) +
