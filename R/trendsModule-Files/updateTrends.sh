@@ -4,8 +4,6 @@ parent_path=$(
   pwd -P
 )
 
-echo "$parent_path"
-
 runRScript () {
   echo "running" $1 $2 "..."
   Rscript --vanilla --verbose $1 $2 >>messages.Rout 2>>errors.Rout
