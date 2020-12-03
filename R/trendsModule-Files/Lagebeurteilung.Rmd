@@ -175,7 +175,7 @@ Die regionalen und kantonalen Unterschiede im Verlauf der SARS-CoV-2-Epidemie si
 Nach dem raschen Anstieg der SARS-CoV-2-Epidemie in der ganzen Schweiz im Verlauf vom Oktober 2020 zeigt sich auf nationaler Ebene ein Rückgang. Schweizweit liegt *R~e~* jedoch für 2 von 3 Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Es zeigen sich zudem starke regionale Unterschiede. Während einige Kantone/Grossregionen einen deutlichen Rückgang der Epidemie aufweisen, zeigen andere Kantone/Grossregionen einen stabilen oder sogar ansteigenden Verlauf. Aufgrund von Meldeverzögerungen, der hohen Testpositivität und einer variierenden Anzahl Tests müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden.[^11] Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor hoch.
 
 [^1]: https://ncs-tf.ch/de/lagebericht und https://ibz-shiny.ethz.ch/covid-19-re/
-[^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends
+[^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends, aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
 [^3]: https://icumonitoring.ch
 [^4]: https://www.covid19.admin.ch
 [^5]: https://www.covid19.admin.ch
