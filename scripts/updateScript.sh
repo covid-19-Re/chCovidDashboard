@@ -22,7 +22,7 @@ else
   lastDir="no latest dir found"
 fi
 
-LBupdate=$(ls -td ../R/trendsModule-Files/Lagebeurteilung.Rmd | head -1)
+LBupdate=$(stat -c ‘%y’ ../R/trendsModule-Files/Lagebeurteilung.Rmd)
 if [ -f lastLBupdate.txt ]; then
   lastLBupdate=$(<lastLBupdate.txt)
 else
