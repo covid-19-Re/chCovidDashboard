@@ -44,7 +44,6 @@ rsconnect/
 # Dani
 dev-*
 .vscode
-*.csv
 *.Rout
 
 # Data
