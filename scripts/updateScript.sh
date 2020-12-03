@@ -9,7 +9,11 @@ parent_path=$(
   cd "$(dirname "${BASH_SOURCE[0]}")"
   pwd -P
 )
+
 cd "$parent_path"
+
+git checkout master
+git pull
 
 latestDir=$(ls -td ../data/BAG/*/ | head -1)
 if [ -f lastBAGdir.txt ]; then
@@ -18,9 +22,22 @@ else
   lastDir="no latest dir found"
 fi
 
+LBupdate=$(ls -td ../R/trendsModule-Files/Lagebeurteilung.Rmd | head -1)
+if [ -f lastLBupdate.txt ]; then
+  lastLBupdate=$(<lastLBupdate.txt)
+else
+  lastLBupdate="no latest LB update found"
+fi
+
+# scripts to be run when new BAG data is available 
 if [ "$latestDir" != "$lastDir" ]; then
-  # scripts to be run when new BAG data is available 
   bash ../R/trendsModule-Files/updateTrends.sh
   echo "$latestDir">lastBAGdir.txt
+fi
+
+# scripts to be run when new lagebericht is available 
+if [ "$LBupdate" != "$lastLBupdate" ]; then
+  bash ../R/trendsModule-Files/updateTrends.sh
+  echo "$LBupdate">lastLBupdate.txt
 fi
 
