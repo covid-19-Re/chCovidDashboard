@@ -14,7 +14,7 @@ output:
 # 1. Change filenames in 'load'
 # 2. Check overall content (wording)
 # 3. Check all numbers in main text (including excess mortality)
-# 4. Check date in header 
+# 4. Check date in header
 ```
 
 ```{r libraries, echo = FALSE, message = FALSE}
@@ -25,8 +25,10 @@ library(here)
 
 ```{r load, echo = FALSE}
 eventCounts <- qs::qread(here("data", "trends-eventCounts.qs")) %>% bind_rows()
+incidenceTable <- qs::qread(here("data", "trends-incidenceTable.qs"))
 popSizes <- read_csv(here("data", "popSizes.csv"),
-  col_types = cols(.default = col_character(), year = col_double(), populationSize = col_double()))
+  col_types = cols(.default = col_character(), year = col_double(), populationSize = col_double())) %>%
+  mutate(region = recode(region, "LI" = "FL"))
 ```
 
 ```{r national, echo = FALSE}
@@ -76,25 +78,16 @@ deaths <- eventCounts %>%
   filter(date >= begin & date <= end)
 
 # cumulative Cases / 100'000
-deaths14d <- eventCounts %>%
-  filter(event == "cases", region != "FL", age_class == "all") %>%
-  filter(date >= today() - 15 & date <= today()) %>%
-  group_by(region, age_class, event) %>%
-  summarise(
-    cum14d = sum(count),
-    .groups = "keep"
-  ) %>%
-  left_join(select(popSizes, region, regionName, populationSize), by = "region") %>%
-  mutate(cum14dNorm = cum14d / populationSize * 100000)
+cases14d <- incidenceTable %>% filter(event == "cases", age_class == "all") %>%
+  left_join(select(popSizes, region, regionName), by = "region")
 
 # for printing:
-deaths14d_CH <- deaths14d %>%
+cases14d_CH <- cases14d %>%
   filter(region == "CH")
-deaths14d_max <- deaths14d %>%
-  filter(cum14dNorm == max(deaths14d$cum14dNorm))
-deaths14d_min <- deaths14d %>%
-  filter(cum14dNorm == min(deaths14d$cum14dNorm))
-
+cases14d_max <- cases14d %>%
+  filter(valueNorm14daySum == max(cases14d$valueNorm14daySum))
+cases14d_min <- cases14d %>%
+  filter(valueNorm14daySum == min(cases14d$valueNorm14daySum))
 
 ```
 
@@ -107,7 +100,7 @@ deaths14d_min <- deaths14d %>%
 
 * `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
 
-*R~e~* befindet sich also für alle drei Indikatoren unter der kritischen Schwelle von 1 und deutet damit auf einen Rückgang der Epidemie hin. Diese Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle und Hospitalisationen über die letzten 14 Tage.[^2] Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(deaths14d_CH$cum14dNorm, 0)` pro 100'000 Einwohner.
+*R~e~* befindet sich also für alle drei Indikatoren unter der kritischen Schwelle von 1 und deutet damit auf einen Rückgang der Epidemie hin. Diese Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle und Hospitalisationen über die letzten 14 Tage.[^2] Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
 
 ```{r mortality, echo = FALSE}
 # Death based on FOPH data
@@ -176,7 +169,7 @@ for(i in 1:dim(regional_above)[1]) {
 ```
 
 ## Regionale Unterschiede
-Die regionalen und kantonalen Unterschiede im Verlauf der SARS-CoV-2-Epidemie sind beträchtlich. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen 350 (Nidwalden) und 902 (Ticino). In nur `r dim(regional_below)[1]` (`r below`) von 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit unter dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt.[^9] Die anderen Grossregionen weisen Werte von *R~e~* auf, welche über dieser Grenze liegen: `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion beträchtliche Unterschiede aufweisen.[^10]
+Die regionalen und kantonalen Unterschiede im Verlauf der SARS-CoV-2-Epidemie sind beträchtlich. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In nur `r dim(regional_below)[1]` (`r below`) von 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit unter dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt.[^9] Die anderen Grossregionen weisen Werte von *R~e~* auf, welche über dieser Grenze liegen: `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion beträchtliche Unterschiede aufweisen.[^10]
 
 ## Beurteilung
 Nach dem raschen Anstieg der SARS-CoV-2-Epidemie in der ganzen Schweiz im Verlauf vom Oktober 2020 zeigt sich auf nationaler Ebene ein Rückgang. Schweizweit liegt *R~e~* jedoch für 2 von 3 Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Es zeigen sich zudem starke regionale Unterschiede. Während einige Kantone/Grossregionen einen deutlichen Rückgang der Epidemie aufweisen, zeigen andere Kantone/Grossregionen einen stabilen oder sogar ansteigenden Verlauf. Aufgrund von Meldeverzögerungen, der hohen Testpositivität und einer variierenden Anzahl Tests müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden.[^11] Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor hoch.

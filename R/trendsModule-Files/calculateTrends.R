@@ -63,25 +63,34 @@ incidenceData <- eventCounts2wk %>%
   arrange(region, age_class, event, date) %>%
   group_by(region, age_class, event) %>%
   mutate(
-    value7day = slide_index_dbl(value, date, mean, .before = days(7)),
-    valueNorm7day = slide_index_dbl(valueNorm, date, mean, .before = days(7)),
-    value14day = slide_index_dbl(value, date, mean, .before = days(14)),
-    valueNorm14day = slide_index_dbl(valueNorm, date, mean, .before = days(14))
+    value7daySum = slide_index_dbl(value, date, sum, .before = days(7 - 1)),
+    value7dayAve = slide_index_dbl(value, date, mean, .before = days(7 - 1)),
+    valueNorm7daySum = slide_index_dbl(valueNorm, date, sum, .before = days(7 - 1)),
+    valueNorm7dayAve = slide_index_dbl(valueNorm, date, mean, .before = days(7 - 1)),
+    value14daySum = slide_index_dbl(value, date, sum, .before = days(14 - 1)),
+    value14dayAve = slide_index_dbl(value, date, mean, .before = days(14 - 1)),
+    valueNorm14daySum = slide_index_dbl(valueNorm, date, sum, .before = days(14 - 1)),
+    valueNorm14dayAve = slide_index_dbl(valueNorm, date, mean, .before = days(14 - 1))
   ) %>%
   top_n(1, date) %>%
   ungroup() %>%
   select(
     region, age_class, event,
-    value7day = value7day,
-    valueNorm7day = valueNorm7day,
-    value14day = value14day,
-    valueNorm14day = valueNorm14day)
+    value7daySum:valueNorm14dayAve)
 
 qs::qsave(incidenceData, here("data/trends-incidenceTable.qs"))
 
 rmarkdown::render(
   here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
   output_format = "all",
+  output_dir = here("www/lagebeurteilung"),
+  encoding = "UTF-8",
+  quiet = TRUE)
+
+rmarkdown::render(
+  here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
+  output_file = "lagebeurteilung-shiny.html",
+  output_format = "html_fragment",
   output_dir = here("www/lagebeurteilung"),
   encoding = "UTF-8",
   quiet = TRUE)

@@ -99,7 +99,8 @@ tablesServer <- function(id) {
 
       comparisonData <- reactive({
         rEstimates <- rEstimates()
-        incidenceData <- incidenceData()
+        incidenceData <- incidenceData() %>%
+          select(-value7daySum, -valueNorm7daySum, -value14daySum, -valueNorm14daySum)
         allData <- incidenceData %>%
           full_join(trendsData(), by = c("region", "age_class", "event")) %>%
           full_join(rEstimates, by = c("region", "age_class", "event"))
@@ -144,7 +145,6 @@ tablesServer <- function(id) {
             rownames = FALSE,
             container = sketch,
             filter = "top",
-            # extensions = "FixedColumns",
             options = list(
               dom = "t",
               pageLength = 125,
@@ -154,8 +154,8 @@ tablesServer <- function(id) {
           ) %>%
           formatRound(
             columns = c(
-              "value7day", "valueNorm7day",
-              "value14day", "valueNorm14day"
+              "value7dayAve", "valueNorm7dayAve",
+              "value14dayAve", "valueNorm14dayAve"
             ),
             digits = 2) %>%
           formatRound(
