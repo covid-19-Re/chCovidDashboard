@@ -12,16 +12,16 @@ server <- function(input, output, session) {
       selected = "ttiq"
     )
   })
-  # observeEvent(input$selectTs, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "ts"
-  #   )
-  # })
-  # observeEvent(input$selectTsDataQuality, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "tsDataQuality"
-  #   )
-  # })
+  observeEvent(input$selectTs, {
+    updateTabsetPanel(session, "tab",
+      selected = "ts"
+    )
+  })
+  observeEvent(input$selectTsDataQuality, {
+    updateTabsetPanel(session, "tab",
+      selected = "tsDataQuality"
+    )
+  })
   observeEvent(input$selectTrends, {
     updateTabsetPanel(session, "tab",
       selected = "trends"
@@ -32,24 +32,24 @@ server <- function(input, output, session) {
       selected = "tables"
     )
   })
-  # observeEvent(input$selectForecast, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "forecast"
-  #   )
-  # })
+  observeEvent(input$selectForecast, {
+    updateTabsetPanel(session, "tab",
+      selected = "forecast"
+    )
+  })
 
   ttiqServer("ttiq")
 
   quarantineDurationServer("quarantineDuration")
 
-  # tsServer("ts")
+  tsServer("ts")
 
-  # tsDataQualityServer("tsDataQuality")
+  tsDataQualityServer("tsDataQuality")
 
   trendsServer("trends")
 
   tablesServer("tables")
 
-  # forecastServer("forecast")
+  forecastServer("forecast")
 
 }
