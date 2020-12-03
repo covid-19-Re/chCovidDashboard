@@ -105,7 +105,7 @@ cases14d_min <- cases14d %>%
 ```{r mortality, echo = FALSE}
 # Death based on FOPH data
 deaths_total <- eventCounts %>%
-  filter(event == "deaths", region == "CH", age_class == "all", date > "2020-10-01") %>%
+  filter(event == "deaths", region == "CH", age_class == "all", date >= "2020-10-01") %>%
   pull(count) %>%
   sum()
 
