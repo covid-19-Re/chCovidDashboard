@@ -26,8 +26,8 @@ library(here)
 ```{r load, echo = FALSE}
 eventCounts <- qs::qread(here("data", "trends-eventCounts.qs")) %>% bind_rows()
 incidenceTable <- qs::qread(here("data", "trends-incidenceTable.qs"))
-popSizes <- read_csv(here("data", "popSizeAgeCHELIE.csv"),
-  col_types = cols(.default = col_character(), populationSize = col_double())) %>%
+popSizes <- read_csv(here("data", "popSizes.csv"),
+  col_types = cols(.default = col_character(), year = col_double(), populationSize = col_double())) %>%
   mutate(region = recode(region, "LI" = "FL"))
 ```
 
