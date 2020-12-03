@@ -45,6 +45,7 @@ getNewestICUfile <- function(path = "data/ICU") {
 getEventCounts <- function(df, event_dt, event_name) {
   # CH
   countsCH <- df %>%
+    filter(ktn != "FL") %>%
     dplyr::select({{ event_dt }}, ktn) %>%
     group_by({{ event_dt }}) %>%
     summarize(
@@ -65,6 +66,7 @@ getEventCounts <- function(df, event_dt, event_name) {
 
   # age groups
   countsAgeClass <- df %>%
+    filter(ktn != "FL") %>%
     mutate(age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 121), right = FALSE)) %>%
     dplyr::select({{ event_dt }}, age_class) %>%
     group_by(age_class, {{ event_dt }}) %>%

@@ -1,0 +1,194 @@
+---
+title: "Epidemiologische Lagebeurteilung"
+author: "Swiss National COVID-19 Science Task Force"
+date: "`r format(Sys.time(), '%d.%m.%Y')`"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r todo, echo = FALSE}
+# TODO BEFORE UPDATE
+# 1. Change filenames in 'load'
+# 2. Check overall content (wording)
+# 3. Check all numbers in main text (including excess mortality)
+# 4. Check date in header 
+```
+
+```{r libraries, echo = FALSE, message = FALSE}
+library(tidyverse)
+library(lubridate)
+library(here)
+```
+
+```{r load, echo = FALSE}
+eventCounts <- qs::qread(here("data", "trends-eventCounts.qs")) %>% bind_rows()
+popSizes <- read_csv(here("data", "popSizes.csv"),
+  col_types = cols(.default = col_character(), year = col_double(), populationSize = col_double()))
+```
+
+```{r national, echo = FALSE}
+reproduction <- readRDS(here("data", "Re", "CHE-Estimates.rds"))
+
+r_cases <- subset(reproduction,
+                  region == "CHE"
+                  & data_type == "Confirmed cases"
+                  & estimate_type == "Cori_slidingWindow")
+r_cases <- r_cases[r_cases$date == max(r_cases$date), ]
+
+r_hosp <- subset(reproduction,
+                  region == "CHE"
+                  & data_type == "Hospitalized patients"
+                  & estimate_type == "Cori_slidingWindow")
+r_hosp <- r_hosp[r_hosp$date == max(r_hosp$date), ]
+  
+r_deaths <- subset(reproduction,
+                  region == "CHE"
+                  & data_type == "Deaths"
+                  & estimate_type == "Cori_slidingWindow")
+r_deaths <- r_deaths[r_deaths$date == max(r_deaths$date), ]
+```
+
+```{r numbers, echo = FALSE}
+# ICU numbers
+
+delete_icu <- 0
+delete <- delete_icu
+time_window <- 14
+lastday <- today()
+begin <- lastday - delete + 1 - time_window
+end <- lastday - delete
+
+icu <- eventCounts %>%
+  filter(event == "icu", region == "CH", age_class == "all") %>%
+  filter(date >= begin & date <= end)
+
+# Daily deaths
+delete_death <- 5
+delete <- delete_death
+begin <- lastday - delete + 1 - time_window
+end <- lastday - delete
+
+deaths <- eventCounts %>%
+  filter(event == "deaths", region == "CH", age_class == "all") %>%
+  filter(date >= begin & date <= end)
+
+# cumulative Cases / 100'000
+deaths14d <- eventCounts %>%
+  filter(event == "cases", region != "FL", age_class == "all") %>%
+  filter(date >= today() - 15 & date <= today()) %>%
+  group_by(region, age_class, event) %>%
+  summarise(
+    cum14d = sum(count),
+    .groups = "keep"
+  ) %>%
+  left_join(select(popSizes, region, regionName, populationSize), by = "region") %>%
+  mutate(cum14dNorm = cum14d / populationSize * 100000)
+
+# for printing:
+deaths14d_CH <- deaths14d %>%
+  filter(region == "CH")
+deaths14d_max <- deaths14d %>%
+  filter(cum14dNorm == max(deaths14d$cum14dNorm))
+deaths14d_min <- deaths14d %>%
+  filter(cum14dNorm == min(deaths14d$cum14dNorm))
+
+
+```
+
+## Allgemeine Situation
+Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen rückläufigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt:[^1]
+
+* `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`)
+
+* `r format(round(r_hosp$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Hospitalisationen (per `r day(r_hosp$date)`.`r month(r_hosp$date)`.`r year(r_hosp$date)`)
+
+* `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
+
+*R~e~* befindet sich also für alle drei Indikatoren unter der kritischen Schwelle von 1 und deutet damit auf einen Rückgang der Epidemie hin. Diese Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle und Hospitalisationen über die letzten 14 Tage.[^2] Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(deaths14d_CH$cum14dNorm, 0)` pro 100'000 Einwohner.
+
+```{r mortality, echo = FALSE}
+# Death based on FOPH data
+deaths_total <- eventCounts %>%
+  filter(event == "deaths", region == "CH", age_class == "all", date > "2020-10-01") %>%
+  pull(count) %>%
+  sum()
+
+# Cantonal deaths based on openZH
+corona_data <- read.csv("https://raw.githubusercontent.com/daenuprobst/covid19-cases-switzerland/master/covid19_fatalities_switzerland_openzh.csv")
+corona_data$Date <- ymd(corona_data$Date)
+corona_data_date <- tail(corona_data$Date, 1)
+corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date == ymd(20200930)]
+```
+
+Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus.[^5] Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle.[^6] Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 5 gemeldeten Wochen eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf.[^7] Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz.[^8]
+
+```{r regional, echo = FALSE}
+regional <- subset(reproduction,
+                    (grepl("grR", region))
+                    & data_type == "Confirmed cases"
+                    & estimate_type == "Cori_slidingWindow")
+
+regional <- regional[regional$date == max(regional$date), ]
+regional <- regional[order(regional$median_R_mean), ]
+
+regional$region[regional$region == "grR Central Switzerland"] <- "Zentralschweiz"
+regional$region[regional$region == "grR Eastern Switzerland"] <- "Ostschweiz"
+regional$region[regional$region == "grR Espace Mittelland"] <- "Espace Mittelland"
+regional$region[regional$region == "grR Lake Geneva Region"] <- "Région lémanique"
+regional$region[regional$region == "grR Northwestern Switzerland"] <- "Nordwestschweiz"
+regional$region[regional$region == "grR Ticino"] <- "Ticino"
+regional$region[regional$region == "grR Zurich"] <- "Zürich"
+
+threshold <- 0.8
+
+regional_below <- regional[regional$median_R_mean <= threshold, ]
+below <- ""
+for(i in 1:dim(regional_below)[1]) {
+  ifelse(i < dim(regional_below)[1], last <- ", ", last <- "")
+  below <- paste0(below,
+                  regional_below$region[i], 
+                  " mit ",
+                  format(round(regional_below$median_R_mean[i], 2), decimal.mark = ","),
+                  "; 95% UI: ",
+                  format(round(regional_below$median_R_lowHPD[i], 2), decimal.mark = ","),
+                  "-",
+                  format(round(regional_below$median_R_highHPD[i], 2), decimal.mark = ","),
+                  last)
+}
+
+regional_above <- regional[regional$median_R_mean > threshold, ]
+above <- ""
+for(i in 1:dim(regional_above)[1]) {
+  ifelse(i < dim(regional_above)[1], last <- "), ", last <- ")")
+  above <- paste0(above,
+                  regional_above$region[i], 
+                  " (",
+                  format(round(regional_above$median_R_mean[i], 2), decimal.mark = ","),
+                  "; 95% UI: ",
+                  format(round(regional_above$median_R_lowHPD[i], 2), decimal.mark = ","),
+                  "-",
+                  format(round(regional_above$median_R_highHPD[i], 2), decimal.mark = ","),
+                  last)
+}
+```
+
+## Regionale Unterschiede
+Die regionalen und kantonalen Unterschiede im Verlauf der SARS-CoV-2-Epidemie sind beträchtlich. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen 350 (Nidwalden) und 902 (Ticino). In nur `r dim(regional_below)[1]` (`r below`) von 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit unter dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt.[^9] Die anderen Grossregionen weisen Werte von *R~e~* auf, welche über dieser Grenze liegen: `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion beträchtliche Unterschiede aufweisen.[^10]
+
+## Beurteilung
+Nach dem raschen Anstieg der SARS-CoV-2-Epidemie in der ganzen Schweiz im Verlauf vom Oktober 2020 zeigt sich auf nationaler Ebene ein Rückgang. Schweizweit liegt *R~e~* jedoch für 2 von 3 Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Es zeigen sich zudem starke regionale Unterschiede. Während einige Kantone/Grossregionen einen deutlichen Rückgang der Epidemie aufweisen, zeigen andere Kantone/Grossregionen einen stabilen oder sogar ansteigenden Verlauf. Aufgrund von Meldeverzögerungen, der hohen Testpositivität und einer variierenden Anzahl Tests müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden.[^11] Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor hoch.
+
+[^1]: https://ncs-tf.ch/de/lagebericht und https://ibz-shiny.ethz.ch/covid-19-re/
+[^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends
+[^3]: https://icumonitoring.ch
+[^4]: https://www.covid19.admin.ch
+[^5]: https://www.covid19.admin.ch
+[^6]: https://github.com/openZH/covid_19 und https://github.com/daenuprobst/covid19-cases-switzerland
+[^7]: https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen.html
+[^8]: https://www.experimental.bfs.admin.ch/expstat/de/home/innovative-methoden/momo.html
+[^9]: https://ncs-tf.ch/de/policy-briefs/ueberblick-und-lagebericht-13-nov-20-de-2/download
+[^10]: https://ibz-shiny.ethz.ch/covidDashboard/tables
+[^11]: https://ncs-tf.ch/de/lagebericht und https://ibz-shiny.ethz.ch/covid-19-re/

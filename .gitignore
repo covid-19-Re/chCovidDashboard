@@ -55,6 +55,7 @@ data/forecastModule-Data.txt
 data/*.qs
 www/pdf/*
 scripts/lastBAGdir.txt
+www/lagebeurteilung/*
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

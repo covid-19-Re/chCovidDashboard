@@ -79,4 +79,10 @@ incidenceData <- eventCounts2wk %>%
 
 qs::qsave(incidenceData, here("data/trends-incidenceTable.qs"))
 
+rmarkdown::render(
+  here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
+  output_format = "all",
+  output_dir = here("www/lagebeurteilung"),
+  encoding = "UTF-8",
+  quiet = TRUE)
 

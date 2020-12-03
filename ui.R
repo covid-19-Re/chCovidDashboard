@@ -59,6 +59,13 @@ ui <- function(request) {
             affiliation = "Swiss Tropical and Public Health Institute and University of Basel<br>",
             thumbnail = "forecastModule-thumbnail.png",
             tabId = "selectForecast"
+          ),
+          thumbnailPanel(
+            title = "Lagebeurteilung",
+            authors = "Swiss Covid-19 Science Task Force",
+            affiliation = "",
+            thumbnail = "forecastModule-thumbnail.png",
+            tabId = "selectLagebeurteilung"
           )
         ),
         hr(),
@@ -127,6 +134,10 @@ ui <- function(request) {
       tabPanel("Forecast",
         value = "forecast",
         forecastUI("forecast")
+      ),
+      tabPanel("Lagebeurteilung",
+        value = "lagebeurteilung",
+        lagebeurteilungUI("lagebeurteilung")
       ),
       navbarMenu(
         "About",
