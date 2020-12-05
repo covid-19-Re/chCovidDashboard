@@ -28,3 +28,6 @@ in no particular order.
 - Tanja Stadler, Computational Evolution, D-BSSE, ETH Zürich
 - Monica Golumbeanu, Swiss Tropical and Public Health Institute and University of Basel
 - Melissa Penny, Swiss Tropical and Public Health Institute and University of Basel
+- Nanina Anderegg, Institute of Social and Preventive Medicine, University of Bern
+- Christian L. Althaus, Institute of Social and Preventive Medicine, University of Bern
+- Julien Riou, Institute of Social and Preventive Medicine, University of Bern
