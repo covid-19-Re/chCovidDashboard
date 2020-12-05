@@ -10,7 +10,7 @@ trendsUI <- function(id) {
             heading = HTML(
               "<h1>Analyzing epidemic trends of SARS-CoV-2 in Switzerland</h1><br>",
               "<i>Nanina Anderegg, Julien Riou, Christian L. Althaus (Institute of Social and Preventive Medicine, ",
-              "Universität Bern)</i>"
+              "University of Bern)</i>"
             ),
             class = "panel-primary",
             p("This tool estimates national trends in daily confirmed cases, hospitalizations, ICU occupancy and ",
