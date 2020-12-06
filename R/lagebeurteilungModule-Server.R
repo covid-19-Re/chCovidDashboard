@@ -5,15 +5,15 @@ lagebeurteilungServer <- function(id) {
       output$lagebericht <- renderUI({
         bootstrapPanel(
           heading = tagList(
-            h1("Lagebeurteilung"),
-            HTML("Swiss National Covid-19 Science Task Force<br>"),
+            h1("Epidemiologische Lagebeurteilung"),
+            HTML("Swiss National COVID-19 Science Task Force<br>"),
             fluidRow(
               column(6,
                 HTML(
                   "<i class='small'>Daten aktualisiert (täglich): ",
                     format(file.mtime("www/lagebeurteilung/lagebeurteilung-shiny.html"), "%d.%m.%Y %H:%M"),
                   "</i>&nbsp;|&nbsp;",
-                  "<i class='small'>Text aktualisiert (Montags): ",
+                  "<i class='small'>Text aktualisiert (finale Version jeweils am Montag Abend): ",
                     format(file.mtime("R/trendsModule-Files/Lagebeurteilung.Rmd"), "%a, %d.%m.%Y"),
                   "</i>"
                 )
