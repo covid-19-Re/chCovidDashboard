@@ -128,6 +128,10 @@ ui <- function(request) {
       #   value = "forecast",
       #   forecastUI("forecast")
       # ),
+      # tabPanel("Lagebeurteilung",
+      #   value = "lagebeurteilung",
+      #   lagebeurteilungUI("lagebeurteilung")
+      # ),
       navbarMenu(
         "About",
         menuName = "about",

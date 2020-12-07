@@ -99,7 +99,8 @@ tablesServer <- function(id) {
 
       comparisonData <- reactive({
         rEstimates <- rEstimates()
-        incidenceData <- incidenceData()
+        incidenceData <- incidenceData() %>%
+          select(-value7daySum, -valueNorm7daySum, -value14daySum, -valueNorm14daySum)
         allData <- incidenceData %>%
           full_join(trendsData(), by = c("region", "age_class", "event")) %>%
           full_join(rEstimates, by = c("region", "age_class", "event"))
@@ -144,7 +145,6 @@ tablesServer <- function(id) {
             rownames = FALSE,
             container = sketch,
             filter = "top",
-            # extensions = "FixedColumns",
             options = list(
               dom = "t",
               pageLength = 125,
@@ -154,8 +154,8 @@ tablesServer <- function(id) {
           ) %>%
           formatRound(
             columns = c(
-              "value7day", "valueNorm7day",
-              "value14day", "valueNorm14day"
+              "value7dayAve", "valueNorm7dayAve",
+              "value14dayAve", "valueNorm14dayAve"
             ),
             digits = 2) %>%
           formatRound(
@@ -187,7 +187,7 @@ tablesServer <- function(id) {
 
       output$tableCaption <- renderUI({
         HTML("<p>Doubling time and weekly change in doubling time from a negative binomial generalized linear model. ",
-            "We also report here ", str_c("most recent R<sub>e</sub> values (", as.character(rEstimatesPath()$mtime), ") from "),
+            "We also report here ", str_c("most recent R<sub>e</sub> values (calculated on ", as.character(rEstimatesPath()$mtime), ") from "),
             "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a>",
             "and doubling times calculated from R<sub>e</sub> assuming a gamma distributed generation time with &mu; = 4.8 days ",
             "and &sigma; = 2.3 days.</p>",
@@ -196,7 +196,7 @@ tablesServer <- function(id) {
 
       output$tableFooter <- renderUI({
         HTML("<span class='help-block'>",
-          str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (",
+          str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (calculated on ",
             as.character(rEstimatesPath()$mtime), ") from"),
             "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
             "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
@@ -214,6 +214,29 @@ tablesServer <- function(id) {
           write.csv(comparisonData(), file, row.names = FALSE)
         }
       )
+
+      output$dataDownloads <- renderUI({
+        if (str_detect(getwd(), "testapp")) {
+          ui <- tabsetPanel(
+            type = "pills", id = "summaryTabs",
+            tabPanel(p(class = "tab-title", "Data download"), value = "downloads",
+              div(class = "panel panel-primary panel-tab",
+                div(class = "panel-body", style = "background:white;",
+                  HTML(
+                    "<a id='tables-downloadEventCOunt' class='btn btn-default' href='eventCounts.csv' target='_blank' download=''>
+                        <i class='fa fa-download'></i>
+                        Download event counts .csv
+                    </a>"
+                  )
+                )
+              )
+            )
+          )
+        } else {
+          ui <- ""
+        }
+        return(ui)
+      })
     }
   )
 }

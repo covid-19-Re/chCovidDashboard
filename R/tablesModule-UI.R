@@ -25,7 +25,8 @@ tablesUI <- function(id) {
             downloadButton(ns("downloadData"), "Download .csv")
           ))
         )
-      )
+      ),
+      uiOutput(ns("dataDownloads"))
     )
   )
 }
