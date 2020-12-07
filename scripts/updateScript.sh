@@ -29,6 +29,13 @@ else
   lastLBupdate="no latest LB update found"
 fi
 
+ReUpdate=$(stat -c ‘%y’ ../data/Re/CHE-Estimates.rds)
+if [ -f lastReUpdate.txt ]; then
+  lastReUpdate=$(<lastReUpdate.txt)
+else
+  lastReUpdate="no latest Re update found"
+fi
+
 # scripts to be run when new BAG data is available 
 if [ "$latestDir" != "$lastDir" ]; then
   bash ../R/trendsModule-Files/updateTrends.sh
@@ -39,5 +46,11 @@ fi
 if [ "$LBupdate" != "$lastLBupdate" ]; then
   bash ../R/trendsModule-Files/updateTrends.sh
   echo "$LBupdate">lastLBupdate.txt
+fi
+
+# scripts to be run when new Re data is available 
+if [ "$ReUpdate" != "$lastReUpdate" ]; then
+  bash ../R/trendsModule-Files/updateTrends.sh
+  echo "$ReUpdate">lastReUpdate.txt
 fi
 
