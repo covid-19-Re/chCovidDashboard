@@ -55,6 +55,7 @@ data/*.qs
 www/pdf/*
 scripts/lastBAGdir.txt
 www/lagebeurteilung/*
+www/eventCounts.csv
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

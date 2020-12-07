@@ -13,6 +13,12 @@ eventCounts$icu <- icuDataRaw %>% filter(region == "CH")
 
 qs::qsave(eventCounts, here("data/trends-eventCounts.qs"))
 
+# save data if on testServer
+if (str_detect(getwd(), "testapp")) {
+  write_csv(eventCounts %>% bind_rows(), file = here("www/eventCounts.csv"))
+}
+
+
 eventCounts2wk <- lapply(eventCounts, function(df) {
   df2wk <- df %>%
     filter(date >= pars$begin[df$event[1]] & date <= pars$end[df$event[1]])

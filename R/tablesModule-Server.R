@@ -214,6 +214,29 @@ tablesServer <- function(id) {
           write.csv(comparisonData(), file, row.names = FALSE)
         }
       )
+
+      output$dataDownloads <- renderUI({
+        if (str_detect(getwd(), "testapp")) {
+          ui <- tabsetPanel(
+            type = "pills", id = "summaryTabs",
+            tabPanel(p(class = "tab-title", "Data download"), value = "downloads",
+              div(class = "panel panel-primary panel-tab",
+                div(class = "panel-body", style = "background:white;",
+                  HTML(
+                    "<a id='tables-downloadEventCOunt' class='btn btn-default' href='eventCounts.csv' target='_blank' download=''>
+                        <i class='fa fa-download'></i>
+                        Download event counts .csv
+                    </a>"
+                  )
+                )
+              )
+            )
+          )
+        } else {
+          ui <- ""
+        }
+        return(ui)
+      })
     }
   )
 }
