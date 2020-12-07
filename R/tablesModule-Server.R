@@ -187,7 +187,7 @@ tablesServer <- function(id) {
 
       output$tableCaption <- renderUI({
         HTML("<p>Doubling time and weekly change in doubling time from a negative binomial generalized linear model. ",
-            "We also report here ", str_c("most recent R<sub>e</sub> values (", as.character(rEstimatesPath()$mtime), ") from "),
+            "We also report here ", str_c("most recent R<sub>e</sub> values (calculated on ", as.character(rEstimatesPath()$mtime), ") from "),
             "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a>",
             "and doubling times calculated from R<sub>e</sub> assuming a gamma distributed generation time with &mu; = 4.8 days ",
             "and &sigma; = 2.3 days.</p>",
@@ -196,7 +196,7 @@ tablesServer <- function(id) {
 
       output$tableFooter <- renderUI({
         HTML("<span class='help-block'>",
-          str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (",
+          str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (calculated on ",
             as.character(rEstimatesPath()$mtime), ") from"),
             "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
             "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
