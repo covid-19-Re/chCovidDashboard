@@ -1,0 +1,22 @@
+install.packages(c(
+  "config",
+  "cowplot",
+  "DBI",
+  "forecast",
+  "here",
+  "plotly",
+  "RColorBrewer",
+  "rgeos",
+  "rnaturalearth",
+  "RPostgres",
+  "sf",
+  "shiny",
+  "shinycssloaders",
+  "shinyhelper",
+  "shinyjs",
+  "shinyWidgets",
+  "slider",
+  "tidyverse",
+  "tseries",
+  "zoo"
+))
