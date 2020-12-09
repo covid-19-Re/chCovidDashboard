@@ -121,7 +121,7 @@ tsPlots$map <- function (
 
   if (region == "world") {
     mapData <- worldMapData %>%
-      left_join(data, by = c("iso_a3" = "expCountryCode"), na_matches = "never") %>%
+      left_join(data, by = c("iso_a3" = "exp_land_code"), na_matches = "never") %>%
       mutate(tooltipText = coalesce(tooltipText, iso_a3))
     return (
       plot_ly(mapData, split = ~tooltipText, color = ~count, showlegend = FALSE,
@@ -132,3 +132,70 @@ tsPlots$map <- function (
     )
   }
 }
+
+
+
+
+finalize_plot <- function (plot_def, model) {
+  if (model$general$display_prob) {
+    xlabel <- "Date of Test"
+  } else {
+    xlabel <- paste("Date of", model$general$event)
+  }
+  comparison_info <- get_comparison_info(model)
+
+  p <- do.call(tsPlots[[model$plot_type]], plot_def)
+  if (model$plot_type != "map") {
+    # Finalize ggplot and transform to plotly
+    p <- p +
+      xlab(xlabel) +
+      scale_x_date(date_breaks = "months", labels = date_format("%m-%Y")) +
+      theme_light()
+    if (model$display$log_scale) {
+      p <- p + scale_y_log10()
+    }
+    if (comparison_info$is_comparing) {
+      p <- p +
+        guides(fill = guide_legend(title = comparison_info$compare_attribute),
+               color = guide_legend(title = comparison_info$compare_attribute))
+    }
+    p <- ggplotly(p, tooltip = "text")
+  }
+
+  # Draw the plot
+  plotlyPlot <- p %>%
+    config(
+      displaylogo = FALSE,
+      modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
+      toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
+    )
+
+  if (model$plot_type != "map") {
+    # The data from the most recent few days are subject to change due to reporting delays.
+    numberUncertainDays <- 2
+    if (model$general$event == "Hospitalisation"
+      || model$general$event == "ICU admission (unreliable)"
+      || model$general$event == "Death" ||
+      (model$general$display_prob && (
+        model$general$given == "Hospitalisation"
+          || model$general$given == "ICU admission (unreliable)"
+          || model$general$given == "Death"))
+    ) {
+      numberUncertainDays <- 5
+    }
+
+    # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
+    # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
+    todayDaysSince1970 <- as.integer(plot_def$max_date)
+    plotlyPlot[['x']][['layout']][['shapes']] <- list(
+      list(type = "rect",
+           fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
+           # Inf and -Inf don't work here.
+           x0 = todayDaysSince1970 - (numberUncertainDays + 0.5), x1 = todayDaysSince1970 + 100, xref = "x",
+           y0 = -99999999, y1 = 99999999, yref = "y")
+    )
+  }
+
+  return(plotlyPlot)
+}
+

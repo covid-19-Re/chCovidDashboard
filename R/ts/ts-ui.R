@@ -12,8 +12,8 @@ tsUI <- function(id) {
             radioButtons(
               inputId = ns("event"),
               label = "Clinical event",
-              choices = tsConstants$events,
-              selected = tsConstants$events[1], inline = TRUE
+              choices = ts_constants$events,
+              selected = ts_constants$events[1], inline = TRUE
             ),
             checkboxInput(
               inputId = ns("display_prob"),
@@ -27,13 +27,13 @@ tsUI <- function(id) {
             disabled(radioButtons(
               inputId = ns("given"),
               label = NULL,
-              choices = tsConstants$events,
-              selected = tsConstants$events[1], inline = TRUE
+              choices = ts_constants$events,
+              selected = ts_constants$events[1], inline = TRUE
             ))
           ),
           bootstrapPanel(
             class = "panel-primary",
-            heading = tagList(icon("filter"), "Filter/stratify time series"),
+            heading = tagList(icon("filter"), "Filter"),
             basicFilters %>% map2(names(.), function(f, n) { (f$ui(ns(n))) }),
           )
         ),
@@ -96,14 +96,14 @@ tsUI <- function(id) {
                     "Time granularity",
                     tooltip("This option is available for histograms and maps.")
                   ),
-                  choices = tsConstants$granularityChoices,
-                  selected = tsConstants$granularityChoices[1],
+                  choices = ts_constants$granularityChoices,
+                  selected = ts_constants$granularityChoices[1],
                   inline = TRUE
                 )
               ),
               column(
                 4,
-                radioButtons(
+                disabled(radioButtons(
                   inputId = ns("smoothing_window"),
                   label = tagList(
                     "Sliding window average",
@@ -113,10 +113,10 @@ tsUI <- function(id) {
                     the days before the selected date (i.e., a 7-days sliding window for today would show the data
                     from the past 6 days and today).")
                   ),
-                  choices = tsConstants$slidingWindowChoices,
-                  selected = tsConstants$slidingWindowChoices[1],
+                  choices = ts_constants$slidingWindowChoices,
+                  selected = ts_constants$slidingWindowChoices[1],
                   inline = TRUE
-                )
+                ))
               )
             )
           ),
@@ -127,7 +127,7 @@ tsUI <- function(id) {
               label = "Activate normalization"
             ),
             tags$div(
-              HTML("The normalization calculates the positive case numbers if the hospitalisation rate is
+              HTML("The normalization calculates the positive case numbers if the hospitalisation rate per age group is
                    assumed to be constant. It aims to improve the comparability of the numbers between different
                    months. <b>If this field is activated, the shown plot does not present the actual numbers.</b>")
             ),
@@ -140,7 +140,7 @@ tsUI <- function(id) {
                 style = "display: inline-block; vertical-align:top; width: 250px;",
                 pickerInput(
                   inputId = ns("normalization_timerange"),
-                  choices = tsConstants$normalizationTimerangeOptions,
+                  choices = ts_constants$normalizationTimerangeOptions,
                   selected = ymd('2020-07-01'),
                   multiple = TRUE
                 )

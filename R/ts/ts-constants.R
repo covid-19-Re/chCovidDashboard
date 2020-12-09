@@ -3,26 +3,16 @@ library(rnaturalearth)
 library(rgeos)
 
 
-tsConstants <- list()
+ts_constants <- list()
 
-tsConstants$ageGroups <- c(
+ts_constants$age_group <- c(
   "0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69",
   "70-79", "80+", "Unknown"
 )
 
-tsConstants$sex <- c("Male", "Female", "Unknown")
+ts_constants$sex <- c("Male", "Female", "Unknown")
 
-tsConstants$sexFromGerman <- function(german) {
-  if (german == "Männlich") {
-    return ("Male")
-  } else if (german == "Weiblich") {
-    return ("Female")
-  } else {
-    return ("Unknown")
-  }
-}
-
-tsConstants$grossregion <- c(
+ts_constants$grossregion <- c(
   "Lake Geneva region",
   "Espace Mittelland",
   "Grossregion Nordwestschweiz",
@@ -33,92 +23,61 @@ tsConstants$grossregion <- c(
   "Fürstentum Liechtenstein"
 )
 
-tsConstants$cantons <- c(
+ts_constants$cantons <- c(
   "AG", "AI", "AR", "BE", "BL", "BS", "FL", "FR", "GE", "GL", "GR",
   "JU", "LU", "NE", "NW", "OW", "SG", "SH", "SO", "SZ", "TG", "TI",
   "UR", "VD", "VS", "ZG", "ZH"
 )
 
-tsConstants$travelRelatedStatus <- c("Travel-related", "Non-travel-related")
+ts_constants$travel_class <- c("Travel-related", "Non-travel-related", "Unknown")
 
-tsConstants$expCountryCode <- c(
+ts_constants$exp_land_code <- c(
   "CHE",
   sort(unlist((ne_countries(returnclass = "sf") %>% filter(iso_a3 != "CHE"))$iso_a3)),
   "Unknown"
 )
 
-tsConstants$expContactPaths <- c(
+ts_constants$exp_kontakt_art <- c(
   "Family member",
   "as medical staff",
   "other contacts",
-  " Unknown",
+  "Unknown",
   "School/child care etc",
   "Work",
   "private party",
   "Disco/Club",
   "Bar/Restaurant",
   "Demonstration/Event",
-  "spontaneous crowd of people",
-  " not filled"
+  "spontaneous crowd of people"
 )
 
-tsConstants$expContactPathsFromCode <- function(code) {
-  if (is.na(code)) {
-    return (" not filled")
-  } else {
-    return (tsConstants$expContactPaths[code]) # This works only because the code is a numerical value starting from 1
-  }
-}
-
-tsConstants$quarantBeforePositiveTest <- c(
-  "  Yes",
-  " No",
-  "Unknown",
-  "Not filled"
+ts_constants$quarant_vor_pos <- c(
+  "Yes",
+  "No",
+  "Unknown"
 )
 
-tsConstants$quarantBeforePositiveTestFromCode <- function(code) {
-  if (is.na(code)) {
-    return ("Not filled")
-  } else {
-    return (tsConstants$quarantBeforePositiveTest[code])
-  }
-}
-
-tsConstants$labReason <- c(
-  " Symptoms compatible with COVID-19",
-  " Outbreak investigation",
+ts_constants$lab_grund <- c(
+  "Symptoms compatible with COVID-19",
+  "Outbreak investigation",
   "Other",
-  " SwissCovid App",
-  "Not filled"
+  "SwissCovid App",
+  "Unknown"
 )
 
-tsConstants$labReasonFromCode <- function(code) {
-  if (is.na(code)) {
-    return ("Not filled")
-  } else {
-    res <- tsConstants$labReason[code]
-    # There seems to be one case where the value is wrong.
-    if(is.na(res)) {
-      return ("Not filled")
-    }
-    return (res)
-  }
-}
-
-tsConstants$underlyingDisease <- c(
-  " Diabetes",
-  " Cardio",
-  " Hypertension",
-  " Chronic respiratory disease",
-  " Cancer",
-  " Immunosuppression",
-  " Other",
+ts_constants$underlyingDisease <- c(
+  "Diabetes",
+  "Cardio",
+  "Hypertension",
+  "Chronic respiratory disease",
+  "Cancer",
+  "Immunosuppression",
+  "Other",
   "None",
   "Unknown"
 )
 
-tsConstants$eventDateCols <- list(
+ts_constants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",
   "ICU admission (unreliable)" = "em_hospit_icu_in_dt",
@@ -126,20 +85,20 @@ tsConstants$eventDateCols <- list(
   "Test (any result)" = "fall_dt"
 )
 
-tsConstants$events <- names(tsConstants$eventDateCols)
+ts_constants$events <- names(ts_constants$eventDateCols)
 
-tsConstants$granularityChoices <- c("Days", "Weeks", "Months")
+ts_constants$granularityChoices <- c("Days", "Weeks", "Months")
 
-tsConstants$slidingWindowChoices <- c("None", "7 days", "14 days", "28 days")
+ts_constants$slidingWindowChoices <- c("None", "7 days", "14 days", "28 days")
 
-tsConstants$slidingWindowChoicesToIntervals <- list(
+ts_constants$slidingWindowChoicesToIntervals <- list(
   "None" = list(before = lubridate::days(0), after = lubridate::days(0)),
   "7 days" = list(before = lubridate::days(6), after = lubridate::days(0)),
   "14 days" = list(before = lubridate::days(13), after = lubridate::days(0)),
   "28 days" = list(before = lubridate::days(27), after = lubridate::days(0))
 )
 
-tsConstants$normalizationTimerangeOptions <- seq(ymd('2020-03-01'), today() %m-% months(2), by = '1 month')
-names(tsConstants$normalizationTimerangeOptions) <- as.character(tsConstants$normalizationTimerangeOptions,
+ts_constants$normalizationTimerangeOptions <- seq(ymd('2020-03-01'), today() %m-% months(2), by = '1 month')
+names(ts_constants$normalizationTimerangeOptions) <- as.character(ts_constants$normalizationTimerangeOptions,
                                                                  format = "%b %Y")
-tsConstants$normalizationTimerangeOptions <- as.list(tsConstants$normalizationTimerangeOptions)
+ts_constants$normalizationTimerangeOptions <- as.list(ts_constants$normalizationTimerangeOptions)

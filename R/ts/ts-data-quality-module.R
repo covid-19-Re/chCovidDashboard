@@ -1,7 +1,7 @@
 source("R/utilities.R")
 source("R/ts/ts-constants.R")
-source("R/ts/ts-utils.R")
-source("R/ts/ts-load_and_process_data.R")
+source("R/ts/ts-view_model.R")
+source("R/ts/ts-data_store.R")
 source("R/ts/ts-plots.R")
 
 

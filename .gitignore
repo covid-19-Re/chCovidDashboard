@@ -102,3 +102,6 @@ www/eventCounts.csv
 # Packrat
 packrat/lib*/
 packrat/src/
+
+# Config
+config.yml

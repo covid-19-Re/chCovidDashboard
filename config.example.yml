@@ -1,0 +1,7 @@
+default:
+  database:
+    host: localhost
+    port: 5432
+    user: postgres
+    password: postgres
+    dbname: sars_cov_2
