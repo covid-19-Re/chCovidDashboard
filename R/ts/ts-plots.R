@@ -90,7 +90,7 @@ tsPlots$area <- function (
 # and uses data of the Federal Office of topography swisstopo as source.
 fileName <- "./data/switzerland-geo.json"
 geojsonData <- readChar(fileName, file.info(fileName)$size)
-chMapData <- sf::st_read(geojsonData) %>%
+chMapData <- sf::st_read(geojsonData, quiet = TRUE) %>%
   mutate(canton = id)
 
 
