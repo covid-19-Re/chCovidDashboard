@@ -174,14 +174,14 @@ Die regionalen und kantonalen Unterschiede im Verlauf der SARS-CoV-2-Epidemie si
 ## Beurteilung
 Nach dem raschen Anstieg der SARS-CoV-2-Epidemie im Oktober 2020 und einem Rückgang im November 2020, zeigt sich nun auf nationaler Ebene ein stabiler bis ansteigender Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Es zeigen sich zudem starke regionale Unterschiede. Während insbesondere Kantone/Grossregionen mit zusätzlichen Massnahmen einen Rückgang der Epidemie aufweisen, zeigen andere Kantone/Grossregionen einen stabilen oder sogar ansteigenden Verlauf. Aufgrund von Meldeverzögerungen, der hohen Testpositivität und einer variierenden Anzahl Tests müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden.[^11] Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor hoch. Es ist davon auszugehen, dass die sinkenden Temperaturen und die durch den Wintersport und die Weihnachtsferien zu erwartende Mobilität und zunehmenden Kontakte zu vermehrten Ansteckungen führen werden.
 
-[^1]: https://ncs-tf.ch/de/lagebericht und https://ibz-shiny.ethz.ch/covid-19-re/
-[^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends, aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
+[^1]: https://sciencetaskforce.ch/aktuelle-lage und https://ibz-shiny.ethz.ch/covid-19-re/: Die einzelnen Schätzerte von *R~e~* unterliegen starken Schwankungen und müssen mit Vorsicht interpretiert werden. Aufgrund der verwendeten Methodik kann die tatsächliche Unsicherheit um die Schätzwerte nicht vollständig dargestellt werden.
+[^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends: Aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
 [^3]: https://icumonitoring.ch
 [^4]: https://www.covid19.admin.ch
 [^5]: https://www.covid19.admin.ch
 [^6]: https://github.com/openZH/covid_19 und https://github.com/daenuprobst/covid19-cases-switzerland
 [^7]: https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen.html
 [^8]: https://www.experimental.bfs.admin.ch/expstat/de/home/innovative-methoden/momo.html
-[^9]: https://ncs-tf.ch/de/policy-briefs/ueberblick-und-lagebericht-13-nov-20-de-2/download
+[^9]: https://sciencetaskforce.ch/beurteilung-der-lage-13-november-2020
 [^10]: https://ibz-shiny.ethz.ch/covidDashboard/tables
-[^11]: https://ncs-tf.ch/de/lagebericht und https://ibz-shiny.ethz.ch/covid-19-re/
+[^11]: https://sciencetaskforce.ch/aktuelle-lage/ und https://ibz-shiny.ethz.ch/covid-19-re/
