@@ -159,7 +159,7 @@ tsUI <- function(id) {
             ),
             tags$p(withMathJax(
               "$$\\#PositiveCases = \\sum_{i\\in \\{AgeGroups\\}}\\#Hospitalizations_i \\times
-              \\frac{\\#HospitalizaionsInSelectedMonths_i}{\\#PositiveTestsInSelectedMonths_i} $$
+              \\frac{\\#PositiveTestsInSelectedMonths_i}{\\#HospitalizaionsInSelectedMonths_i} $$
             "))
           )
         )
