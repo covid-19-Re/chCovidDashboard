@@ -27,8 +27,8 @@ tsDataQualityUI <- function(id) {
                  radioButtons(
                    inputId = ns("at"),
                    label = "Select an attribute",
-                   choices = tsDataQualityAnalyzedAttributes,
-                   selected = "sex"
+                   choices = names(basicFilters),
+                   selected = names(basicFilters)[1]
                  )
           ),
           column(
@@ -48,34 +48,26 @@ tsDataQualityServer <- function(id) {
     id,
     function(input, output, session) {
       ns <- NS(id)
+      data_store <- ts_data_store  # Provided in ts-server.R
 
-      data <- reactive({
-        d <- load_and_process_data()
-
-        # Introduces an ID to make the rows unique and easier identifiable.
-        d <- cbind(id = as.integer(rownames(d)), d)
-
-        d <- d %>%
-          mutate(date = fall_dt) %>%
-          filter(positiveTest)
-
-        return(d)
-      })
+      base_query <- data_store$load_main_data() %>%
+        mutate(date = fall_dt) %>%
+        filter(positive_test)
+      min_date <- ymd(20200219)
+      dashboard_state <- data_store$load_dashboard_state() %>% collect()
+      max_date <- dashboard_state$last_data_update
 
       output$attrPlot <- renderPlotly({
-        dataProc <- data()
-        minDate <- min((dataProc %>% drop_na(date))$date)
-        maxDate <- max((dataProc %>% drop_na(date))$date)
-
         plotData <- NULL
-        for (at in tsDataQualityAnalyzedAttributes) {
-          d <- dataProc %>%
-            dplyr::mutate(missing = as.integer(
-              are_na(!!as.symbol(at)) | replace_na(!!as.symbol(at) %in% c("Unknown", " not filled", "Not filled"), FALSE)
+        for (at in names(basicFilters)) {
+          d <- base_query %>%
+            mutate(missing = as.integer(
+              is.na(!!as.symbol(at)) | !!as.symbol(at) == 'Unknown'
             )) %>%
             dplyr::group_by(date) %>%
-            dplyr::summarize(count = sum(missing) / n(), .groups = "drop") %>%
-            tidyr::complete(date = seq.Date(minDate, maxDate, by = "day"), fill = list(count = 0))
+            dplyr::summarize(count = as.double(sum(missing)) / n()) %>%
+            collect() %>%
+            complete(date = seq.Date(min_date, max_date, by = "day"), fill = list(count = 0))
 
 
           d$count <- slide_index_dbl(d$count, d$date, mean, .before = lubridate::days(14))
@@ -88,10 +80,11 @@ tsDataQualityServer <- function(id) {
           plotData <- bind_rows(plotData, d)
         }
 
-        p <- tsPlots$line(plotData, "date", "proportion", groupingAttributeName = "attribute",
-                          ylab = "Proportion of missing data")
-        p <- p + theme_light()
-        plotlyPlot <- ggplotly(p) %>%
+        p <- tsPlots$line(plotData, "date", "proportion", groupingAttributeName = "attribute")
+        plotlyPlot <- p %>%
+          layout(
+            yaxis = list(title = "Proportion of missing data")
+          ) %>%
           config(
             displaylogo = FALSE,
             modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
@@ -102,17 +95,27 @@ tsDataQualityServer <- function(id) {
       })
 
       output$cantonPlot <- renderPlotly({
-        dataProc <- data()
+        query <- data()
+
+        data_store <- ts_data_store  # Provided in ts-server.R
+
+        query <- data_store$load_main_data() %>%
+          mutate(date = fall_dt) %>%
+          filter(positive_test)
+        min_date <- ymd(20200219)
+        dashboard_state <- data_store$load_dashboard_state() %>% collect()
+        max_date <- dashboard_state$last_data_update
 
         at <- input$at
 
-        plotData <- dataProc %>%
-          dplyr::mutate(missing = as.integer(
-            are_na(!!as.symbol(at)) | replace_na(!!as.symbol(at) %in% c("Unknown", " not filled", "Not filled"), FALSE)
+        plotData <- query %>%
+          mutate(missing = as.integer(
+            is.na(!!as.symbol(at)) | !!as.symbol(at) == 'Unknown'
           )) %>%
           dplyr::group_by(canton) %>%
-          dplyr::summarize(count = sum(missing) / n(), .groups = "drop") %>%
-          dplyr::mutate(tooltipText = paste0(canton, "\nCount: ", count))
+          dplyr::summarize(count = as.double(sum(missing)) / n()) %>%
+          dplyr::mutate(tooltipText = paste0(canton, "\nCount: ", round(count * 100, digits = 4), "%")) %>%
+          collect()
 
         p <- tsPlots$map(plotData, "switzerland")
         plotlyPlot <- p %>%
@@ -121,7 +124,7 @@ tsDataQualityServer <- function(id) {
             modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
-
+        
         return (plotlyPlot)
       })
 
