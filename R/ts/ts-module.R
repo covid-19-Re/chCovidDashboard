@@ -51,7 +51,7 @@ basicFilters <- list(
   ),
   "exp_kontakt_art" = create_basic_filter(
     "Exposure contact path",
-    sort(ts_constants$exp_kontakt_art),
+    ts_constants$exp_kontakt_art,
     "exp_kontakt_art"
   ),
   "quarant_vor_pos" = create_basic_filter(

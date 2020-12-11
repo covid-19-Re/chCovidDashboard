@@ -37,12 +37,43 @@ tsServer <- function(id) {
           show_confidence_interval = TRUE,
           granularity = "Days",
           smoothing_window = "None"
+        ),
+        normalization = list(
+          selected = FALSE,
+          timerange = '2020-07-01'
         )
       )
+      for (filter_name in names(basicFilters)) {
+        f <- basicFilters[[filter_name]]
+        initial_model$filter[[filter_name]] <- list(
+          selected = f$choices,
+          compare = FALSE,
+          compare_per_100k_people = FALSE,
+          compare_proportions = FALSE
+        )
+      }
       model_container <- reactiveValues(model = initial_model)
 
       # Initialize the filter sub modules
       basicFilterServers <- basicFilters %>% map2(names(.), function (f, n) { f$server(n) })
+
+      # Reset all
+      observeEvent(input$resetAll, {
+        model_container$model <- initial_model
+      })
+
+      observeEvent(model_container$model, {
+        current_model <- model_container$model
+
+        # Ignore the map_selected_day setting as it is often invisible and not relevant
+        current_model$map_selected_day <- NULL
+
+        if (!identical(initial_model, current_model)) {
+          shinyjs::show("resetAll")
+        } else {
+          shinyjs::hide("resetAll")
+        }
+      })
 
       # ---------- General parameter ----------
 

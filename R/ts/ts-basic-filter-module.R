@@ -177,6 +177,7 @@ create_basic_filter <- function (
     ui = ui,
     server = server,
     label = label,
+    choices = choices,
     filter = filter_data,
     is_filtering = is_filtering,
     get_comparison_groups = get_comparison_groups,

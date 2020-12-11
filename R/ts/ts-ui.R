@@ -49,6 +49,9 @@ tsUI <- function(id) {
             actionButton(ns("plotTypeMap"), "Map", icon = icon("map"), NULL,
                          tooltip('Select the "compare" option for canton or exposure country to use the map.')),
 
+            actionButton(ns("resetAll"), "Reset all filters",
+                         style = "background: none; border: none; outline: none; text-decoration: underline;"),
+
             tags$div(
               id = ns("map_slider"),
               class = "ts-hidden",
