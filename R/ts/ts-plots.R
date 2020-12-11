@@ -11,19 +11,27 @@ tsPlots$histogram <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
   stacked = FALSE,
-  ylab = NULL,
   ...  # To allow unused arguments
 ) {
   if (is.null(groupingAttributeName)) {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText))
+    plot <- plot_ly(x = data[[xAttributeName]], y = data[[yAttributeName]], type = "bar",
+                    text = data$tooltipText, hoverinfo = 'text')
   } else {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText,
-                                  fill = !!as.symbol(groupingAttributeName)))
+    plot <- plot_ly(type = "bar")
+    data %>%
+      group_by(!!as.symbol(groupingAttributeName)) %>%
+      group_walk(function (x, y) {
+        plot <<- plot %>%
+          add_trace(x = x[[xAttributeName]], y = x[[yAttributeName]], name = y[[groupingAttributeName]],
+                    text = x$tooltipText, hoverinfo = 'text')
+      })
   }
 
-  plot <- plot +
-    geom_histogram(stat = "identity", position = (if (stacked) "stack" else "dodge")) +
-    ylab(ylab)
+  plot <- plot %>%
+    layout(
+      barmode = ifelse(stacked, "stack", "group"),
+      bargap = 0.3
+    )
 
   return (plot)
 }
@@ -32,31 +40,55 @@ tsPlots$histogram <- function (
 tsPlots$line <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
-  ylab = NULL,
   addConfidenceInterval = FALSE,
   ...  # To allow unused arguments
 ) {
+  plot <- plot_ly()
+
   if (addConfidenceInterval) {
     data <- data %>%
       mutate(
         ymin = replace_na(ymin, 0),
         ymax = replace_na(ymax, 0)
       )
+    if (is.null(groupingAttributeName)) {
+      plot <- plot %>%
+        add_trace(
+          x = data[[xAttributeName]], y = data$ymax, hoverinfo = "none",
+          type = "scatter", mode = "lines", showlegend = FALSE,
+          line = list(color = 'transparent')) %>%
+        add_trace(
+          x = data[[xAttributeName]], y = data$ymin, hoverinfo = "none",
+          type = "scatter", mode = "lines", showlegend = FALSE,
+          line = list(color = 'transparent'), fillcolor = "#e1e1e1", fill = "tonexty")
+    } else {
+      data %>%
+        group_by(!!as.symbol(groupingAttributeName)) %>%
+        group_walk(function (x, y) {
+          plot <<- plot %>%
+            add_trace(
+              x = x[[xAttributeName]], y = x$ymax, hoverinfo = "none",
+              type = "scatter", mode = "lines", showlegend = FALSE,
+              line = list(color = 'transparent')) %>%
+            add_trace(
+              x = x[[xAttributeName]], y = x$ymin, hoverinfo = "none",
+              type = "scatter", mode = "lines", showlegend = FALSE,
+              line = list(color = 'transparent'), fillcolor = "#e1e1e1", fill = "tonexty")
+        })
+    }
   }
 
   if (is.null(groupingAttributeName)) {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText,
-                             group = 1))
+    plot <- add_trace(plot, x = data[[xAttributeName]], y = data[[yAttributeName]], type = "scatter", mode = "lines",
+                      text = data$tooltipText, hoverinfo = 'text')
   } else {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText,
-                                            group = 1, color = !!as.symbol(groupingAttributeName)))
-  }
-
-  plot <- plot +
-    geom_line() +
-    ylab(ylab)
-  if (addConfidenceInterval) {
-    plot <- plot + geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.15)
+    data %>%
+      group_by(!!as.symbol(groupingAttributeName)) %>%
+      group_walk(function (x, y) {
+        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]], name = y[[groupingAttributeName]],
+                           text = x$tooltipText, hoverinfo = 'text',
+                           type = "scatter", mode = "lines")
+      })
   }
 
   return (plot)
@@ -66,20 +98,20 @@ tsPlots$line <- function (
 tsPlots$area <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
-  ylab = NULL,
   ...  # To allow unused arguments
 ) {
+  plot <- plot_ly(type = 'scatter', mode = 'none', stackgroup = 'one')
   if (is.null(groupingAttributeName)) {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText, group = 1))
+    plot <- add_trace(plot, x = data[[xAttributeName]], y = data[[yAttributeName]],
+                      text = data$tooltipText, hoverinfo = 'text')
   } else {
-    plot <- ggplot(data, aes(x = !!as.symbol(xAttributeName), y = !!as.symbol(yAttributeName), text = tooltipText, group = 1,
-                             fill = !!as.symbol(groupingAttributeName)))
+    data %>%
+      group_by(!!as.symbol(groupingAttributeName)) %>%
+      group_walk(function (x, y) {
+        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]], name = y[[groupingAttributeName]],
+                           text = x$tooltipText, hoverinfo = 'text')
+      })
   }
-
-  plot <- plot +
-    geom_area() +
-    ylab(ylab)
-
   return (plot)
 }
 
@@ -134,8 +166,6 @@ tsPlots$map <- function (
 }
 
 
-
-
 finalize_plot <- function (plot_def, model) {
   if (model$general$display_prob) {
     xlabel <- "Date of Test"
@@ -144,26 +174,27 @@ finalize_plot <- function (plot_def, model) {
   }
   comparison_info <- get_comparison_info(model)
 
-  p <- do.call(tsPlots[[model$plot_type]], plot_def)
+  plotlyPlot <- do.call(tsPlots[[model$plot_type]], plot_def)
   if (model$plot_type != "map") {
-    # Finalize ggplot and transform to plotly
-    p <- p +
-      xlab(xlabel) +
-      scale_x_date(date_breaks = "months", labels = date_format("%m-%Y")) +
-      theme_light()
+    plotlyPlot <- plotlyPlot %>%
+      layout(
+        xaxis = list(title = xlabel),
+        yaxis = list(title = plot_def$ylab)
+      )
     if (model$display$log_scale) {
-      p <- p + scale_y_log10()
+      plotlyPlot <- plotlyPlot %>%
+        layout(
+          yaxis = list(type = "log")
+        )
     }
     if (comparison_info$is_comparing) {
-      p <- p +
-        guides(fill = guide_legend(title = comparison_info$compare_attribute),
-               color = guide_legend(title = comparison_info$compare_attribute))
+      plotlyPlot <- plotlyPlot %>%
+        layout(legend = list(title = list(
+          text = paste0("<b>", basicFilters[[comparison_info$compare_attribute]]$label, "</b>"))))
     }
-    p <- ggplotly(p, tooltip = "text")
   }
 
-  # Draw the plot
-  plotlyPlot <- p %>%
+  plotlyPlot <- plotlyPlot %>%
     config(
       displaylogo = FALSE,
       modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
@@ -184,16 +215,29 @@ finalize_plot <- function (plot_def, model) {
       numberUncertainDays <- 5
     }
 
-    # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
-    # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
-    todayDaysSince1970 <- as.integer(plot_def$max_date)
-    plotlyPlot[['x']][['layout']][['shapes']] <- list(
-      list(type = "rect",
-           fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
-           # Inf and -Inf don't work here.
-           x0 = todayDaysSince1970 - (numberUncertainDays + 0.5), x1 = todayDaysSince1970 + 100, xref = "x",
-           y0 = -99999999, y1 = 99999999, yref = "y")
-    )
+    # Find out the max. height
+    plot_data <- plot_def[[1]]
+    x_attribute <- plot_def[[2]]
+    y_attribute <- plot_def[[3]]
+    if (
+      comparison_info$is_comparing &&
+        (model$plot_type == "area" || (model$plot_type == "histogram" && model$display$stack_histograms))
+    ) {
+      tmp <- plot_data %>%
+        group_by(!!as.symbol(x_attribute)) %>%
+        summarize(height_sum = sum(!!as.symbol(y_attribute)), .groups = "drop")
+      max_y_value <- max(tmp$height_sum, na.rm = TRUE)
+    } else {
+      max_y_value <- max(plot_data[[y_attribute]], na.rm = TRUE)
+    }
+
+    plotlyPlot <- layout(
+      plotlyPlot,
+      shapes = list(
+        list(type = "rect",
+             fillcolor = "gray", line = list(color = "gray"), opacity = 0.3,
+             x0 = plot_def$max_date - numberUncertainDays, x1 = plot_def$max_date + 5, xref = "x",
+             y0 = 0, y1 = max_y_value, yref = "y")))
   }
 
   return(plotlyPlot)

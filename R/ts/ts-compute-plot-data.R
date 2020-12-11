@@ -291,7 +291,6 @@ compute_plot_data <- function (model, data_store) {
         summarize(
           count = sum(mult)
         )
-      q %>% show_query()
       d <- q %>%
         collect() %>%
         complete(date = seq.Date(min_date, max_date, by = "day")) %>%
@@ -312,8 +311,8 @@ compute_plot_data <- function (model, data_store) {
       } else {
         ci <- binom.test(numeratorData$count[i], denominatorData$count[i], p = prob[i])$conf.int
       }
-      ciYMin <- rbind(ciYMin, ci[1])
-      ciYMax <- rbind(ciYMax, ci[2])
+      ciYMin <- c(ciYMin, ci[1])
+      ciYMax <- c(ciYMax, ci[2])
     }
 
     plotData <- tibble(date = denominatorData$date, prob = prob, ymin = ciYMin, ymax = ciYMax) %>%
@@ -375,8 +374,8 @@ compute_plot_data <- function (model, data_store) {
         } else {
           ci <- binom.test(dNum$count[i], dDenom$count[i], p = prob[i])$conf.int
         }
-        ciYMin <- rbind(ciYMin, ci[1])
-        ciYMax <- rbind(ciYMax, ci[2])
+        ciYMin <- c(ciYMin, ci[1])
+        ciYMax <- c(ciYMax, ci[2])
       }
 
       d <- tibble(date = dDenom$date, prob = prob, ymin = ciYMin, ymax = ciYMax)
