@@ -1,7 +1,4 @@
-library(RColorBrewer)
 library(lubridate)
-library(rnaturalearth)
-library(rgeos)
 
 
 tsPlots <- list()
@@ -127,7 +124,7 @@ chMapData <- sf::st_read(geojsonData, quiet = TRUE) %>%
 
 
 # World Map
-worldMapData <- ne_countries(returnclass = "sf")
+worldMapData <- rnaturalearth::ne_countries(returnclass = "sf")
 
 
 #' Creates a map plot of Switzerland's cantons
@@ -158,7 +155,7 @@ tsPlots$map <- function (
     return (
       plot_ly(mapData, split = ~tooltipText, color = ~count, showlegend = FALSE,
               # It should not matter too much which number is chosen here.
-              colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
+              colors = rev(colorRampPalette(RColorBrewer::brewer.pal(10,"RdYlGn"))(10)),
               alpha = 1, span = I(1), stroke = I("black")
       )
     )

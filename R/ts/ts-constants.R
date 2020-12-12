@@ -1,6 +1,4 @@
 library(lubridate)
-library(rnaturalearth)
-library(rgeos)
 
 
 ts_constants <- list()
@@ -33,7 +31,7 @@ ts_constants$travel_class <- c("Travel-related", "Non-travel-related", "Unknown"
 
 ts_constants$exp_land_code <- c(
   "CHE",
-  sort(unlist((ne_countries(returnclass = "sf") %>% filter(iso_a3 != "CHE"))$iso_a3)),
+  sort(unlist((rnaturalearth::ne_countries(returnclass = "sf") %>% filter(iso_a3 != "CHE"))$iso_a3)),
   "Unknown"
 )
 
