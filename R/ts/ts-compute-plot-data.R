@@ -309,6 +309,8 @@ compute_plot_data <- function (model, data_store) {
       if (is.nan(prob[i])) {
         ci <- c(NaN, NaN)
       } else {
+        # binom.test uses the Clopper–Pearson method to calculate the confidence interval
+        # See: https://stat.ethz.ch/R-manual/R-devel/library/stats/html/binom.test.html
         ci <- binom.test(numeratorData$count[i], denominatorData$count[i], p = prob[i])$conf.int
       }
       ciYMin <- c(ciYMin, ci[1])
