@@ -64,8 +64,8 @@ tsUI <- function(id) {
               HTML("<small>
               <span style='width: 10px;background: lightgray;height: 10px;display: inline-block;
               margin-right: 5px;'></span>
-              The number of positive tests from the recent 2 days and the number of hospitalisation,
-              ICU admissions and deaths from the recent 5 days might be incomplete due to reporting delays.
+              The number of positive tests from the recent 2 days and the number of hospitalisation and deaths from the
+              recent 5 days might be incomplete due to reporting delays.
               </small>")
             ),
             helpText(textOutput(ns("dataLastUpdatedAt")), style = "text-align: right;"),

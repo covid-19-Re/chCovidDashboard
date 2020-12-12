@@ -80,7 +80,7 @@ ts_constants$underlyingDisease <- c(
 ts_constants$eventDateCols <- list(
   "Positive test" = "fall_dt",
   "Hospitalisation" = "hospdatin",
-  "ICU admission (unreliable)" = "em_hospit_icu_in_dt",
+  # "ICU admission (unreliable)" = "em_hospit_icu_in_dt",
   "Death" = "pttoddat",
   "Test (any result)" = "fall_dt"
 )
