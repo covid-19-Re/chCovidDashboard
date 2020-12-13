@@ -191,6 +191,9 @@ finalize_plot <- function (plot_def, model, language) {
       plotlyPlot <- plotlyPlot %>%
         layout(legend = list(title = list(
           text = paste0("<b>", i18n$t(paste0("ts.constant.", comparison_info$compare_attribute, ".label")), "</b>"))))
+    } else {
+      plotlyPlot <- plotlyPlot %>%
+        layout(showlegend = FALSE)
     }
   }
 
