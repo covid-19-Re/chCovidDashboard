@@ -50,14 +50,14 @@ tsDataQualityServer <- function(id) {
       ns <- NS(id)
       data_store <- ts_data_store  # Provided in ts-server.R
 
-      base_query <- data_store$load_main_data() %>%
-        mutate(date = fall_dt) %>%
-        filter(positive_test)
-      min_date <- ymd(20200219)
-      dashboard_state <- data_store$load_dashboard_state() %>% collect()
-      max_date <- dashboard_state$last_data_update
-
       output$attrPlot <- renderPlotly({
+        base_query <- data_store$load_main_data() %>%
+          mutate(date = fall_dt) %>%
+          filter(positive_test)
+        min_date <- ymd(20200219)
+        dashboard_state <- data_store$load_dashboard_state() %>% collect()
+        max_date <- dashboard_state$last_data_update
+
         plotData <- NULL
         for (at in names(basicFilters)) {
           d <- base_query %>%
@@ -95,16 +95,11 @@ tsDataQualityServer <- function(id) {
       })
 
       output$cantonPlot <- renderPlotly({
-        query <- data()
-
         data_store <- ts_data_store  # Provided in ts-server.R
 
         query <- data_store$load_main_data() %>%
           mutate(date = fall_dt) %>%
           filter(positive_test)
-        min_date <- ymd(20200219)
-        dashboard_state <- data_store$load_dashboard_state() %>% collect()
-        max_date <- dashboard_state$last_data_update
 
         at <- input$at
 
@@ -124,7 +119,7 @@ tsDataQualityServer <- function(id) {
             modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
             toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
           )
-        
+
         return (plotlyPlot)
       })
 
