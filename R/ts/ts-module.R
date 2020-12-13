@@ -7,6 +7,7 @@ library(sf)
 
 source("R/utilities.R")
 source("R/ts/ts-constants.R")
+source("R/ts/ts-cache.R")
 source("R/ts/ts-view_model.R")
 source("R/ts/ts-data_store.R")
 source("R/ts/ts-compute-plot-data.R")

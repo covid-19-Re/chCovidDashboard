@@ -2,6 +2,7 @@ install.packages(c(
   "config",
   "cowplot",
   "DBI",
+  "digest",
   "forecast",
   "here",
   "markdown",

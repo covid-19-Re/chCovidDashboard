@@ -3,12 +3,19 @@ library(stats)
 
 
 db_config <- config::get("database")
+ts_config <- config::get("ts")
+
 ts_data_store <- get_postgresql_datastore(
   host = db_config$host,
   port = db_config$port,
   username = db_config$username,
   password = db_config$password,
   dbname = db_config$dbname
+)
+ts_cache <- ts_create_cache(ts_config$cache_size)
+ts_statistics <- list(
+  total_requests = 0,
+  cache_hits = 0
 )
 tsServer <- function(id, global_session) {
   moduleServer(
@@ -387,7 +394,7 @@ tsServer <- function(id, global_session) {
 
 
       # ---------- Output ----------
-      output$mainPlot <- renderPlotly({
+      plotly_render_function <- renderPlotly({
         model <- model_container$model
         plot_def <- compute_plot_data(model, ts_language, ts_data_store)
 
@@ -401,6 +408,24 @@ tsServer <- function(id, global_session) {
         plotlyPlot <- finalize_plot(plot_def, model, ts_language)
         return(plotlyPlot)
       })
+
+      output$mainPlot <- function (...) {
+        dashboard_state <- ts_data_store$load_dashboard_state() %>% collect()
+        last_data_update <- dashboard_state$last_data_update
+        cache_key <- list(
+          model = model_container$model,
+          language = ts_language
+        )
+        hash <- digest::digest(cache_key)
+
+        result <- ts_cache$get(hash, last_data_update)
+        if (is.null(result)) {
+          result <- plotly_render_function()
+          ts_cache$add(hash, last_data_update, result)
+        }
+
+        return(result)
+      }
 
       output$dataLastUpdatedAt <- renderText({
         dashboard_state <- ts_data_store$load_dashboard_state() %>% collect()

@@ -5,3 +5,5 @@ default:
     user: postgres
     password: postgres
     dbname: sars_cov_2
+  ts:
+    cache_size: 500
