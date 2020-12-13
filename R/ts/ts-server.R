@@ -10,7 +10,7 @@ ts_data_store <- get_postgresql_datastore(
   password = db_config$password,
   dbname = db_config$dbname
 )
-tsServer <- function(id) {
+tsServer <- function(id, global_session) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -372,17 +372,24 @@ tsServer <- function(id) {
         set_normalzation_view_model(view_model$normalization)
       }
 
-      observeEvent(model_container$model, {
+      observeEvent({
+        model_container$model
+        TRUE
+      }, {
         model <- model_container$model
-        view_model <- get_view_model_from_model(model_container$model)
+        view_model <- get_view_model_from_model(model_container$model, ts_language)
         set_view_model(view_model)
+
+        # TODO Right now, update_lang() needs the global session object to work. This will hopefully be fixed soon.
+        # See: https://github.com/Appsilon/shiny.i18n/issues/48
+        update_lang(global_session, ts_language)
       })
 
 
       # ---------- Output ----------
       output$mainPlot <- renderPlotly({
         model <- model_container$model
-        plot_def <- compute_plot_data(model, ts_data_store)
+        plot_def <- compute_plot_data(model, ts_language, ts_data_store)
 
         validate(
           need(
@@ -391,13 +398,13 @@ tsServer <- function(id) {
           )
         )
 
-        plotlyPlot <- finalize_plot(plot_def, model)
+        plotlyPlot <- finalize_plot(plot_def, model, ts_language)
         return(plotlyPlot)
       })
 
       output$dataLastUpdatedAt <- renderText({
         dashboard_state <- ts_data_store$load_dashboard_state() %>% collect()
-        return (paste("Data last updated on", date_format("%d.%m.%Y")(dashboard_state$last_data_update)))
+        return(date_format("%d.%m.%Y")(dashboard_state$last_data_update))
       })
     }
   )

@@ -1,4 +1,7 @@
-compute_plot_data <- function (model, data_store) {
+compute_plot_data <- function (model, language, data_store) {
+  i18n <- Translator$new(translation_json_path = "data/ts-translations/ts-translations.json")
+  i18n$set_translation_language(language)
+
   query <- data_store$load_main_data()
 
   # Creates the "date" column
@@ -115,7 +118,7 @@ compute_plot_data <- function (model, data_store) {
     }
     plotDef <- list(
       plotData, "date", "count",
-      ylab = "Total count"
+      ylab = i18n$t("ts.plot.total_count")
     )
   }
 
@@ -176,7 +179,7 @@ compute_plot_data <- function (model, data_store) {
       mutate(tooltipText = paste0("Date: ", as.character(plotData$date), "\nCount: ", round(plotData$count)))
     plotDef <- list(
       plotData, "date", "count",
-      ylab = "Total count"
+      ylab = i18n$t("ts.plot.total_count")
     )
   }
 
@@ -237,10 +240,12 @@ compute_plot_data <- function (model, data_store) {
             )
           if (comparison_info$compare_attribute == "canton") {
             plotData <- plotData %>%
-              mutate(tooltipText = paste0(canton, "\nCount: ", round(count, digits = roundingDigits)))
+              mutate(tooltipText = paste0(i18n$t(paste0("ts.constant.canton.", canton)),
+                                          "\nCount: ", round(count, digits = roundingDigits)))
           } else {
             plotData <- plotData %>%
-              mutate(tooltipText = paste0(exp_land_code, "\nCount: ", round(count, digits = roundingDigits)))
+              mutate(tooltipText = paste0(i18n$t(paste0("ts.constant.exp_land_code.", exp_land_code)),
+                                          "\nCount: ", round(count, digits = roundingDigits)))
           }
           plotDef <- list(
             plotData,
@@ -249,13 +254,14 @@ compute_plot_data <- function (model, data_store) {
         }
       } else {
         plotData <- plotData %>%
-          mutate(tooltipText = paste0(!!as.symbol(comparison_info$compare_attribute), "\nDate: ",
-                                      as.character(plotData$date),
-                                      "\nCount: ", round(plotData$count, digits = roundingDigits)))
+          mutate(tooltipText = paste0(
+            i18n$t(paste0("ts.constant.", comparison_info$compare_attribute, ".", !!as.symbol(comparison_info$compare_attribute))),
+            "\nDate: ", as.character(plotData$date), "\nCount: ", round(plotData$count, digits = roundingDigits)
+          ))
         plotDef <- list(
           plotData, "date", "count",
           groupingAttributeName = comparison_info$compare_attribute,
-          ylab = "Total count",
+          ylab = i18n$t("ts.plot.total_count"),
           stacked = model$display$stack_histograms
         )
       }
@@ -264,15 +270,15 @@ compute_plot_data <- function (model, data_store) {
         plotData <- plotData %>%
           group_by(date) %>%
           mutate(proportion = count / sum(count)) %>%
-          mutate(tooltipText = paste0(!!as.symbol(comparison_info$compare_attribute), "\nDate: ",
-                                      as.character(date), "\nProportion: ",
-                                      round(proportion * 100, digits = 2), "%"))
+          mutate(tooltipText = paste0(
+            i18n$t(paste0("ts.constant.", comparison_info$compare_attribute, ".", !!as.symbol(comparison_info$compare_attribute))),
+            "\nDate: ", as.character(date), "\nProportion: ", round(proportion * 100, digits = 2), "%"))
       }
 
       plotDef <- list(
         plotData, "date", "proportion",
         groupingAttributeName = comparison_info$compare_attribute,
-        ylab = paste0("Proportion of ", model$general$event, "s")
+        ylab = paste0("Proportion of ", i18n$t(paste0("ts.constant.event.", model$general$event)) , "s")
       )
     }
   }
@@ -322,7 +328,8 @@ compute_plot_data <- function (model, data_store) {
                                   round(prob * 100, digits = 2), "%"))
     plotDef <- list(
       plotData, "date", "prob",
-      ylab = paste0("Fraction of ", model$general$given, "s involving ", model$general$event),
+      ylab = paste0("Fraction of ", i18n$t(paste0("ts.constant.event.", model$general$given)),
+                    "s involving ", i18n$t(paste0("ts.constant.event.", model$general$event))),
       addConfidenceInterval = model$display$show_confidence_interval
     )
   }
@@ -416,7 +423,8 @@ compute_plot_data <- function (model, data_store) {
       plotDef <- list(
         plotData, "date", "prob",
         groupingAttributeName = comparison_info$compare_attribute,
-        ylab = paste0("Fraction of ", model$general$given, "s involving ", model$general$event),
+        ylab = paste0("Fraction of ", i18n$t(paste0("ts.constant.event.", model$general$given)),
+                      "s involving ", i18n$t(paste0("ts.constant.event.", model$general$event))),
         addConfidenceInterval = model$display$show_confidence_interval &&
           !comparison_info$is_comparing_proportions
       )

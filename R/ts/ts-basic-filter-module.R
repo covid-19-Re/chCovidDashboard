@@ -27,7 +27,7 @@ create_basic_filter <- function (
     tagList(
       pickerInput(
         inputId = ns("picker"),
-        label = label,
+        label = ts_i18n$t(paste0("ts.constant.", attributeName, ".label")),
         choices = choices,
         selected = choices,
         multiple = TRUE,
@@ -35,7 +35,7 @@ create_basic_filter <- function (
       ),
       actionGroupButtons(
         inputIds = c(ns("all"), ns("clear")),
-        labels = c("Select all", "Clear"),
+        labels = list(ts_i18n$t("ts.basic_filter.all"), ts_i18n$t("ts.basic_filter.clear")),
         size = "xs"
       ),
       tags$div(
@@ -44,15 +44,14 @@ create_basic_filter <- function (
       checkboxInput(
         inputId = ns("compare"),
         label = tagList(
-          "Compare",
-          tooltip(glue::glue("If selected, the numbers for each {label} will be plotted."))
+          ts_i18n$t("ts.basic_filter.compare")
         )
       ),
       tags$div(
         checkboxInput(
           inputId = ns("compare_per_100k_people"),
           label = tagList(
-            "Compare number events per 100,000 people"
+            ts_i18n$t("ts.basic_filter.compare_per_100k_people")
           )
         ),
         style = if (!comparePer100kPeoplePossible) "display: none;" else ""
@@ -60,9 +59,7 @@ create_basic_filter <- function (
       checkboxInput(
         inputId = ns("compare_proportions"),
         label = tagList(
-          "Show proportions",
-          tooltip(glue::glue("If selected, the plot shows the percentage for each {label}. It is only available if
-          Compare is selected."))
+          ts_i18n$t("ts.basic_filter.compare_proportions")
         )
       )
     )

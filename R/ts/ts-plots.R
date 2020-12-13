@@ -8,6 +8,7 @@ tsPlots$histogram <- function (
   data, xAttributeName, yAttributeName,
   groupingAttributeName = NULL,
   stacked = FALSE,
+  i18n = NULL,
   ...  # To allow unused arguments
 ) {
   if (is.null(groupingAttributeName)) {
@@ -19,7 +20,8 @@ tsPlots$histogram <- function (
       group_by(!!as.symbol(groupingAttributeName)) %>%
       group_walk(function (x, y) {
         plot <<- plot %>%
-          add_trace(x = x[[xAttributeName]], y = x[[yAttributeName]], name = y[[groupingAttributeName]],
+          add_trace(x = x[[xAttributeName]], y = x[[yAttributeName]],
+                    name = i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
                     text = x$tooltipText, hoverinfo = 'text')
       })
   }
@@ -82,7 +84,8 @@ tsPlots$line <- function (
     data %>%
       group_by(!!as.symbol(groupingAttributeName)) %>%
       group_walk(function (x, y) {
-        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]], name = y[[groupingAttributeName]],
+        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
+                           name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
                            text = x$tooltipText, hoverinfo = 'text',
                            type = "scatter", mode = "lines")
       })
@@ -105,7 +108,8 @@ tsPlots$area <- function (
     data %>%
       group_by(!!as.symbol(groupingAttributeName)) %>%
       group_walk(function (x, y) {
-        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]], name = y[[groupingAttributeName]],
+        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
+                           name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
                            text = x$tooltipText, hoverinfo = 'text')
       })
   }
@@ -142,7 +146,7 @@ tsPlots$map <- function (
     return (
       plot_ly(mapData, split = ~tooltipText, color = ~count, showlegend = FALSE,
               # It should not matter too much which number is chosen here.
-              colors = rev(colorRampPalette(brewer.pal(10,"RdYlGn"))(10)),
+              colors = rev(colorRampPalette(RColorBrewer::brewer.pal(10,"RdYlGn"))(10)),
               alpha = 1, span = I(1), stroke = I("black")
       )
     )
@@ -163,19 +167,18 @@ tsPlots$map <- function (
 }
 
 
-finalize_plot <- function (plot_def, model) {
-  if (model$general$display_prob) {
-    xlabel <- "Date of Test"
-  } else {
-    xlabel <- paste("Date of", model$general$event)
-  }
+finalize_plot <- function (plot_def, model, language) {
+  i18n <- Translator$new(translation_json_path = "data/ts-translations/ts-translations.json")
+  i18n$set_translation_language(language)
+  plot_def$i18n <- i18n
+
   comparison_info <- get_comparison_info(model)
 
   plotlyPlot <- do.call(tsPlots[[model$plot_type]], plot_def)
   if (model$plot_type != "map") {
     plotlyPlot <- plotlyPlot %>%
       layout(
-        xaxis = list(title = xlabel),
+        xaxis = list(title = i18n$t("ts.plot.date")),
         yaxis = list(title = plot_def$ylab)
       )
     if (model$display$log_scale) {
@@ -187,7 +190,7 @@ finalize_plot <- function (plot_def, model) {
     if (comparison_info$is_comparing) {
       plotlyPlot <- plotlyPlot %>%
         layout(legend = list(title = list(
-          text = paste0("<b>", basicFilters[[comparison_info$compare_attribute]]$label, "</b>"))))
+          text = paste0("<b>", i18n$t(paste0("ts.constant.", comparison_info$compare_attribute, ".label")), "</b>"))))
     }
   }
 

@@ -1,9 +1,12 @@
-get_view_model_from_model <- function (model) {
+get_view_model_from_model <- function (model, language) {
+  i18n <- Translator$new(translation_json_path = "data/ts-translations/ts-translations.json")
+  i18n$set_translation_language(language)
+
   view_model <- list(
     general = list(
       event = list(
         selected = model$general$event,
-        choices = ts_constants$events,
+        choices = setNames(ts_constants$events, i18n$t(paste0("ts.constant.event.", ts_constants$events))),
         enabled = !model$normalization$selected
       ),
       display_prob = list(
@@ -12,7 +15,7 @@ get_view_model_from_model <- function (model) {
       ),
       given = list(
         selected = model$general$given,
-        choices = ts_constants$events,
+        choices = setNames(ts_constants$events, i18n$t(paste0("ts.constant.event.", ts_constants$events))),
         enabled = !model$normalization$selected && model$general$display_prob
       )
     ),
@@ -33,12 +36,14 @@ get_view_model_from_model <- function (model) {
       ),
       granularity = list(
         selected = model$display$granularity,
-        choices = ts_constants$granularityChoices,
+        choices = setNames(ts_constants$granularityChoices,
+                           i18n$t(paste0("ts.constant.granularity.", ts_constants$granularityChoices))),
         enabled = model$plot_type == "histogram" || model$plot_type == "map"
       ),
       smoothing_window = list(
         selected = model$display$smoothing_window,
-        choices = ts_constants$slidingWindowChoices,
+        choices = setNames(ts_constants$slidingWindowChoices,
+                           i18n$t(paste0("ts.constant.sliding_window.", ts_constants$slidingWindowChoices))),
         enabled = model$plot_type == "line" || model$plot_type == "area"
       )
     ),
@@ -59,7 +64,8 @@ get_view_model_from_model <- function (model) {
     view_model$filter[[filter_name]] <- list(
       picker = list(
         selected = filter_model$selected,
-        choices = ts_constants[[filter_name]],
+        choices = setNames(ts_constants[[filter_name]],
+                           i18n$t(paste0("ts.constant.", filter_name, ".", ts_constants[[filter_name]]))),
         enabled = TRUE
       ),
       compare = list(
@@ -169,15 +175,14 @@ set_radio_view_model <- function (session, id, view_model, old_view_model = NULL
   old <- old_view_model
 
   if (!identical(new$choices, old$choices) || !identical(new$selected, old$selected)) {
-    # TODO updateRadioButtons enables the radio buttons.
     shiny::updateRadioButtons(session, inputId = id, choices = new$choices, selected = new$selected, inline = TRUE)
   }
-  if (!identical(new$enabled, old$enabled)) {
-    # Because updateRadioButtons would enable the radio buttons again, the delay is aimed to achieve that the
-    # toggleState command is performed after updateRadioButtons. It seems to work but it is unclear if it will always
-    # work.
-    shinyjs::delay(100, shinyjs::toggleState(id = session$ns(id), condition = new$enabled, asis = TRUE))
-  }
+
+  # Because updateRadioButtons would enable the radio buttons again, the delay is aimed to achieve that the
+  # toggleState command is performed after updateRadioButtons. It seems to work but it is unclear if it will always
+  # work.
+  shinyjs::delay(100, shinyjs::toggleState(id = session$ns(id), condition = new$enabled, asis = TRUE))
+
 }
 
 

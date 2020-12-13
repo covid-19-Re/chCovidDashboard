@@ -1,5 +1,6 @@
 library(shinyWidgets)
 library(shinyjs)
+library(shiny.i18n)
 library(plotly)
 library(slider)
 library(sf)
@@ -13,6 +14,11 @@ source("R/ts/ts-plots.R")
 
 # Submodules
 source("R/ts/ts-basic-filter-module.R")
+
+# This i18n object will be passed to the UI and only be used there.
+ts_language <- "en"
+ts_i18n <- Translator$new(translation_json_path = "data/ts-translations/ts-translations.json")
+ts_i18n$set_translation_language(ts_language)
 
 basicFilters <- list(
   "age_group" = create_basic_filter(

@@ -27,6 +27,8 @@ ts_constants$cantons <- c(
   "UR", "VD", "VS", "ZG", "ZH"
 )
 
+ts_constants$canton <- ts_constants$cantons # TODO
+
 ts_constants$travel_class <- c("Travel-related", "Non-travel-related", "Unknown")
 
 ts_constants$exp_land_code <- c(
