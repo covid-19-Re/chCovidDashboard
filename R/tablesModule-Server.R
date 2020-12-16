@@ -188,7 +188,7 @@ tablesServer <- function(id) {
       output$tableCaption <- renderUI({
         HTML("<p>Doubling time and weekly change in doubling time from a negative binomial generalized linear model. ",
             "We also report here ", str_c("most recent R<sub>e</sub> values (calculated on ", as.character(rEstimatesPath()$mtime), ") from "),
-            "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re/</a>",
+            "<a href='https://ibz-shiny.ethz.ch/covid-19-re-international/' target='blank'>https://ibz-shiny.ethz.ch/covid-19-re-international/</a>",
             "and doubling times calculated from R<sub>e</sub> assuming a gamma distributed generation time with &mu; = 4.8 days ",
             "and &sigma; = 2.3 days.</p>",
             "<p>Use filter fields to filter columns. Click on column names to sort. Shift-Click to sort by multiple columns.</p>")
@@ -198,8 +198,8 @@ tablesServer <- function(id) {
         HTML("<span class='help-block'>",
           str_c("<sup>1</sup>most recent R<sub>e</sub> estimate (calculated on ",
             as.character(rEstimatesPath()$mtime), ") from"),
-            "<a href='https://ibz-shiny.ethz.ch/covid-19-re/' target='blank'>",
-            "https://ibz-shiny.ethz.ch/covid-19-re/</a><br>",
+            "<a href='https://ibz-shiny.ethz.ch/covid-19-re-international/' target='blank'>",
+            "https://ibz-shiny.ethz.ch/covid-19-re-international/</a><br>",
           "<sup>2</sup>Doubling time / half-life calculated from R<sub>e</sub> assuming",
             "a gamma distributed generation time with &mu; = 4.8 days and &sigma; = 2.3 days",
           "</span>"
