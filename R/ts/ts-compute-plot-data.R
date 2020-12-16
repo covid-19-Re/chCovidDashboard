@@ -40,21 +40,21 @@ compute_plot_data <- function (model, language, data_store) {
   query_involves_negative_tests <- model$general$event == "Test (any result)" ||
     (model$general$display_prob && model$general$given == "Test (any result)")
 
-  # We only have the canton and age group information for negative tests since 2020-05-23 and do not have any other
+  # We only have the canton, grossregion and age group information for negative tests since 2020-05-23 and do not have any other
   # information. This means:
   #   (1) no filters/comparisons -> whole time range possible
-  #   (2) age group/canton filter/comparison -> only show data after 2020-05-23
+  #   (2) age group/canton/grossregion filter/comparison -> only show data after 2020-05-23
   #   (3) other filters/comparisons -> not possible
   if (query_involves_negative_tests) {
     if (is.null(active_filter_names) && !comparison_info$is_comparing) {
       # (1)
-    } else if (all(active_filter_names %in% c("age_group", "canton")) &&
-      (!comparison_info$is_comparing || comparison_info$compare_attribute %in% c("age_group", "canton"))) {
+    } else if (all(active_filter_names %in% c("age_group", "canton", "grossregion")) &&
+      (!comparison_info$is_comparing || comparison_info$compare_attribute %in% c("age_group", "canton", "grossregion"))) {
       # (2)
       query <- query %>% filter(date >= as.Date("2020-05-23")) # TODO read the date from the dataset
     } else {
       return(list(error = list(
-        message = "This operation is not possible because negative test data can only be stratified by age group and canton."
+        message = "This operation is not possible because negative test data can only be stratified by age group, canton, and grossregion."
       )))
     }
   }
