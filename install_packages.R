@@ -19,6 +19,7 @@ install.packages(c(
   "shinyWidgets",
   "shiny.i18n",
   "slider",
+  "testthat",
   "tidyverse",
   "tseries",
   "zoo"

@@ -17,6 +17,40 @@ ts_statistics <- list(
   total_requests = 0,
   cache_hits = 0
 )
+
+ts_create_initial_model <- function () {
+  initial_model <- list(
+    general = list(
+      event = "Positive test",
+      display_prob = FALSE,
+      given = "Positive test"
+    ),
+    filter = list(),
+    plot_type = "histogram",
+    display = list(
+      log_scale = FALSE,
+      stack_histograms = TRUE,
+      show_confidence_interval = TRUE,
+      granularity = "Days",
+      smoothing_window = "None"
+    ),
+    normalization = list(
+      selected = FALSE,
+      timerange = '2020-07-01'
+    )
+  )
+  for (filter_name in names(basicFilters)) {
+    f <- basicFilters[[filter_name]]
+    initial_model$filter[[filter_name]] <- list(
+      selected = f$choices,
+      compare = FALSE,
+      compare_per_100k_people = FALSE,
+      compare_proportions = FALSE
+    )
+  }
+  return(initial_model)
+}
+
 tsServer <- function(id, global_session) {
   moduleServer(
     id,
@@ -30,35 +64,7 @@ tsServer <- function(id, global_session) {
         setBookmarkExclude(toExclude)
       })
 
-      initial_model <- list(
-        general = list(
-          event = "Positive test",
-          display_prob = FALSE,
-          given = "Positive test"
-        ),
-        filter = list(),
-        plot_type = "histogram",
-        display = list(
-          log_scale = FALSE,
-          stack_histograms = TRUE,
-          show_confidence_interval = TRUE,
-          granularity = "Days",
-          smoothing_window = "None"
-        ),
-        normalization = list(
-          selected = FALSE,
-          timerange = '2020-07-01'
-        )
-      )
-      for (filter_name in names(basicFilters)) {
-        f <- basicFilters[[filter_name]]
-        initial_model$filter[[filter_name]] <- list(
-          selected = f$choices,
-          compare = FALSE,
-          compare_per_100k_people = FALSE,
-          compare_proportions = FALSE
-        )
-      }
+      initial_model <- ts_create_initial_model()
       model_container <- reactiveValues(model = initial_model)
 
       # Initialize the filter sub modules
