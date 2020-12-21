@@ -116,7 +116,7 @@ corona_data_date <- tail(corona_data$Date, 1)
 corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date == ymd(20200930)]
 ```
 
-Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus.[^5] Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle.[^6] Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 7 gemeldeten Wochen eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf.[^7] Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion.[^8]
+Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus.[^5] Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle.[^6] Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 7 gemeldeten Wochen eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf.[^7] Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Région lémanique.[^8]
 
 ```{r regional, echo = FALSE}
 regional <- subset(reproduction,
