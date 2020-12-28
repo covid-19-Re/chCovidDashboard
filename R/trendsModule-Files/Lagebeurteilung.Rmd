@@ -32,7 +32,10 @@ popSizes <- read_csv(here("data", "popSizes.csv"),
 ```
 
 ```{r national, echo = FALSE}
-reproduction <- readRDS(here("data", "Re", "CHE-Estimates.rds"))
+reFiles <- c(here("data", "Re", "CHE-Estimates.rds"), here("data", "RePublic", "CHE-Estimates.rds"))
+mostRecentReFile <- reFiles[which.max(file.mtime(reFiles))]
+
+reproduction <- readRDS(mostRecentReFile)
 
 r_cases <- subset(reproduction,
                   region == "CHE"
