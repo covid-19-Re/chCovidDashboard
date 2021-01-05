@@ -9,14 +9,6 @@ output:
   pdf_document: default
 ---
 
-```{r todo, echo = FALSE}
-# TODO BEFORE UPDATE
-# 1. Change filenames in 'load'
-# 2. Check overall content (wording)
-# 3. Check all numbers in main text (including excess mortality)
-# 4. Check date in header
-```
-
 ```{r libraries, echo = FALSE, message = FALSE}
 library(tidyverse)
 library(lubridate)
