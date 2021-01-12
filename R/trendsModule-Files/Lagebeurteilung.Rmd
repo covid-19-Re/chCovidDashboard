@@ -87,15 +87,23 @@ cases14d_min <- cases14d %>%
 ```
 
 ## Allgemeine Situation
-Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen stabilen bis leicht rückgängigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt:[^1]
+Momentan ist die Einschaetzung der Lage sehr schwierig. Über die Feiertage sind die Fallzahlen leicht gesunken wobei dies durch einen Rueckgang der durchgefuehrten Tests erklaert werden koennte. Darauf deutet auch der Anstieg der Positivitaet von 11% auf ueber 16% im Wochenmittel.
 
-* `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`)
+<!--- Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen stabilen bis leicht rückgängigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt: --->
+Am aussagekraeftigsten sind momentan die R-Werte basierend auf Hospitalisierungen und Todesfällen[^1]:
+
+<!--- * `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`) --->
 
 * `r format(round(r_hosp$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Hospitalisationen (per `r day(r_hosp$date)`.`r month(r_hosp$date)`.`r year(r_hosp$date)`)
 
 * `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
 
-Aufgrund von Meldeverzögerungen, der hohen Testpositivität, einer variierenden Anzahl Tests und der Feiertage müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden. Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle und Hospitalisationen über die letzten 14 Tage.[^2] Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
+Aufgrund von Meldeverzögerungen müssen jedoch auch diese Schaetzwerte mit Vorsicht interpretiert werden und könnten möglicherweise nach oben korrigiert werden.
+Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends in den Hospitalisierungen und Todesfaellen konstant bis rückläufig sind.
+
+<!--- , der hohen Testpositivität, einer variierenden Anzahl Tests und der Feiertage müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden. ---> 
+Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle und Hospitalisationen über die letzten 14 Tage.[^2] 
+Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
 
 ```{r mortality, echo = FALSE}
 # Death based on FOPH data
@@ -163,13 +171,13 @@ for(i in 1:dim(regional_above)[1]) {
 }
 ```
 
-## Regionale Unterschiede
-Es bestehen regionale und kantonale Unterschiede im Verlauf der SARS-CoV-2-Epidemie. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In allen 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit über dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt:[^9] `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion grössere Unterschiede aufweisen.[^10]
+<!--- ## Regionale Unterschiede
+Es bestehen regionale und kantonale Unterschiede im Verlauf der SARS-CoV-2-Epidemie. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In allen 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit über dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt:[^9] `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion grössere Unterschiede aufweisen.[^10] --->
 
-## Beurteilung
-Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen relativ stabilen Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Durch die Einführung von national einheitlichen Massnahmen hat sich der Verlauf der Epidemie in den unterschiedlichen Regionen angeglichen. [^11]
+<!--- ## Beurteilung
+Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen relativ stabilen Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Durch die Einführung von national einheitlichen Massnahmen hat sich der Verlauf der Epidemie in den unterschiedlichen Regionen angeglichen. [^11] --->
 
-Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor sehr hoch. Falls der Wintersport und die Festtage zu vermehrten Ansteckungen geführt haben, wird sich dies in einem Anstieg der bestätigten Fälle im Verlauf vom Januar niederschlagen. Zudem besteht das Risiko, dass eine Ausbreitung der bereits in der Schweiz nachgewiesenen neuen Variante von SARS-CoV-2 mit einer wahrscheinlich erhöhten Übertragung innerhalb der nächsten Wochen zu einem Anstieg der Epidemie und einer noch stärkeren Belastung des Gesundheitssystems führen wird.[^12]
+<!--- Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor sehr hoch. Falls der Wintersport und die Festtage zu vermehrten Ansteckungen geführt haben, wird sich dies in einem Anstieg der bestätigten Fälle im Verlauf vom Januar niederschlagen. Zudem besteht das Risiko, dass eine Ausbreitung der bereits in der Schweiz nachgewiesenen neuen Variante von SARS-CoV-2 mit einer wahrscheinlich erhöhten Übertragung innerhalb der nächsten Wochen zu einem Anstieg der Epidemie und einer noch stärkeren Belastung des Gesundheitssystems führen wird.[^12] --->
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf. Aufgrund der verwendeten Methodik kann die tatsächliche Unsicherheit um die Schätzwerte nicht immer vollständig dargestellt werden.
 [^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends: Aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
