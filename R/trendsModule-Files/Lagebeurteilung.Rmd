@@ -88,6 +88,7 @@ cases14d_min <- cases14d %>%
 
 ## Allgemeine Situation
 Momentan ist die Einschaetzung der Lage sehr schwierig. Über die Feiertage sind die Fallzahlen leicht gesunken wobei dies durch einen Rueckgang der durchgefuehrten Tests erklaert werden koennte. Darauf deutet auch der Anstieg der Positivitaet von 11% auf ueber 16% im Wochenmittel.
+Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
 
 <!--- Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen stabilen bis leicht rückgängigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt: --->
 Am aussagekraeftigsten sind momentan die R-Werte basierend auf Hospitalisierungen und Todesfällen[^1]:
@@ -98,12 +99,15 @@ Am aussagekraeftigsten sind momentan die R-Werte basierend auf Hospitalisierunge
 
 * `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
 
-Aufgrund von Meldeverzögerungen müssen jedoch auch diese Schaetzwerte mit Vorsicht interpretiert werden und könnten möglicherweise nach oben korrigiert werden.
+Aufgrund von Meldeverzögerungen müssen jedoch auch diese Schätzwerte mit Vorsicht interpretiert werden und könnten möglicherweise nach oben korrigiert werden.
 Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends in den Hospitalisierungen und Todesfaellen konstant bis rückläufig sind.
 
 <!--- , der hohen Testpositivität, einer variierenden Anzahl Tests und der Feiertage müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden. ---> 
-Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle und Hospitalisationen über die letzten 14 Tage.[^2] 
-Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
+Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- bestätigten Fälle und---> 
+Hospitalisationen und Todesfälle über die letzten 14 Tage.[^2] 
+Die Anzahl der COVID-19-Patienten auf Intensivstationen (`r range(icu$count)[1]`-`r range(icu$count)[2]`)[^3] <!---und der täglichen Todesfälle (`r range(deaths$count)[1]`-`r range(deaths$count)[2]`)[^4] --->
+bleiben über die letzten 14 Tage auf hohem Niveau relativ stabil. 
+
 
 ```{r mortality, echo = FALSE}
 # Death based on FOPH data
