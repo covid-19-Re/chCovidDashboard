@@ -86,7 +86,7 @@ getEventCounts <- function(df, event_dt, event_name) {
 }
 
 trendsModelFunction <- function(df) {
-    MASS::glm.nb(count ~ date + weekend, data = df)
+    try(MASS::glm.nb(count ~ date + weekend, data = df))
 }
 
 calcTrendsModel <- function(eventCounts) {
@@ -95,9 +95,9 @@ calcTrendsModel <- function(eventCounts) {
   
   eventCountsDf <- eventCounts %>%
     bind_rows() %>%
-    # remove cantons with no events
-    group_by(region, age_class, event) %>%
-    filter(sum(count) > 0)
+    # # remove cantons with no events
+    # group_by(region, age_class, event) %>%
+    # filter(sum(count) > 0)
 
   models <- eventCountsDf %>%
     group_by(region, age_class, event) %>%
@@ -107,14 +107,31 @@ calcTrendsModel <- function(eventCounts) {
   return(models)
 }
 
+predictFun <- function(model) {
+  prediction <- try(exp(predict(model)))
+  if (class(prediction) == "try-error") {
+    prediction <- NA
+  }
+  return(prediction)
+}
+
+predictCIfun <- function(model, q) {
+  predictCI <- try(qnbinom(q, mu = exp(predict(model)), size = model$theta))
+  if (class(predictCI) == "try-error") {
+    predictCI <- NA
+  }
+  return(predictCI)
+}
+
+
 calcPredictions <- function(models) {
   predictions <- models %>%
     mutate(
-      prediction = map(model, ~ exp(predict(.x))),
-      lower = map(model, ~ qnbinom(0.025, mu = exp(predict(.x)), size = .x$theta)),
-      upper = map(model, ~ qnbinom(0.975, mu = exp(predict(.x)), size = .x$theta))
+      prediction = map(model, predictFun),
+      lower = map(model, predictCIfun, q = 0.025),
+      upper = map(model, predictCIfun, q = 0.975)
     ) %>%
-    select(-model) %>%
+    select(-model) %>% 
     unnest(cols = c(data, prediction, upper, lower))
   return(predictions)
 }
@@ -125,9 +142,9 @@ calcDoublingTimes <- function(models) {
       fit.ci = map(model, ~ tryCatch(confint(profile(.x)), error = function(e) {
         matrix(NA, 2, 2)
       })),
-      estimate = map_dbl(model, ~ log(2) / coef(.x)[2]),
-      lower = map_dbl(fit.ci, ~ log(2) / .x[2, 2]),
-      upper = map_dbl(fit.ci, ~ log(2) / .x[2, 1])
+      estimate = map_dbl(model, ~ tryCatch(log(2) / coef(.x)[2], error = function(e) {NA})),
+      lower = map_dbl(fit.ci, ~ tryCatch(log(2) / .x[2, 2], error = function(e) {NA})),
+      upper = map_dbl(fit.ci, ~ tryCatch(log(2) / .x[2, 1], error = function(e) {NA}))
     ) %>%
     select(-data, -model, -fit.ci)
 
@@ -187,6 +204,8 @@ plotPredictions <- function(predictions, doublingTimes, ranking, regionSelect, e
   subtitle <- glue::glue_data(ranking,
     "{subLabel}{round(estimate * 100, 1)}% ({round(lower * 100, 1)}% {to} {round(upper * 100, 1)}%)")
 
+  subtitle[which(is.na(ranking$estimate) | is.na(ranking$lower) | is.na(ranking$upper))] <- ""
+
   plot <- ggplot(
     data = plotData) +
     geom_ribbon(mapping = aes(date, prediction, ymin = lower, ymax = upper), fill = fillColor) +
@@ -210,8 +229,8 @@ plotRanking <- function(ranking, cols, lang = "de") {
   colors["CH"] <- cols[1]
 
   changeRange <- c(
-    min(-0.5, floor(min(c(ranking$lower, ranking$upper)) * 10) / 10),
-    max(min(4, ceiling(max(c(ranking$lower, ranking$upper)) * 10) / 10), 1)
+    min(-0.5, floor(min(c(ranking$lower, ranking$upper), na.rm = TRUE) * 10) / 10),
+    max(min(4, ceiling(max(c(ranking$lower, ranking$upper), na.rm = TRUE) * 10) / 10), 1)
   )
 
   plot <- ggplot(
