@@ -1,0 +1,1264 @@
+{
+  "languages": [
+    "code",
+    "en"
+  ],
+  "translation": [
+    {
+      "code": "ts.basic_filter.all",
+      "en": "Select all"
+    },
+    {
+      "code": "ts.basic_filter.clear",
+      "en": "Clear"
+    },
+    {
+      "code": "ts.basic_filter.compare",
+      "en": "Compare"
+    },
+    {
+      "code": "ts.basic_filter.compare_per_100k_people",
+      "en": "Compare number events per 100,000 people"
+    },
+    {
+      "code": "ts.basic_filter.compare_proportions",
+      "en": "Show proportions"
+    },
+    {
+      "code": "ts.constant.age_group.0-9",
+      "en": "0-9"
+    },
+    {
+      "code": "ts.constant.age_group.10-19",
+      "en": "10-19"
+    },
+    {
+      "code": "ts.constant.age_group.20-29",
+      "en": "20-29"
+    },
+    {
+      "code": "ts.constant.age_group.30-39",
+      "en": "30-39"
+    },
+    {
+      "code": "ts.constant.age_group.40-49",
+      "en": "40-49"
+    },
+    {
+      "code": "ts.constant.age_group.50-59",
+      "en": "50-59"
+    },
+    {
+      "code": "ts.constant.age_group.60-69",
+      "en": "60-69"
+    },
+    {
+      "code": "ts.constant.age_group.70-79",
+      "en": "70-79"
+    },
+    {
+      "code": "ts.constant.age_group.80+",
+      "en": "80+"
+    },
+    {
+      "code": "ts.constant.age_group.label",
+      "en": "Age group"
+    },
+    {
+      "code": "ts.constant.age_group.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.constant.canton.AG",
+      "en": "AG"
+    },
+    {
+      "code": "ts.constant.canton.AI",
+      "en": "AI"
+    },
+    {
+      "code": "ts.constant.canton.AR",
+      "en": "AR"
+    },
+    {
+      "code": "ts.constant.canton.BE",
+      "en": "BE"
+    },
+    {
+      "code": "ts.constant.canton.BL",
+      "en": "BL"
+    },
+    {
+      "code": "ts.constant.canton.BS",
+      "en": "BS"
+    },
+    {
+      "code": "ts.constant.canton.FL",
+      "en": "FL"
+    },
+    {
+      "code": "ts.constant.canton.FR",
+      "en": "FR"
+    },
+    {
+      "code": "ts.constant.canton.GE",
+      "en": "GE"
+    },
+    {
+      "code": "ts.constant.canton.GL",
+      "en": "GL"
+    },
+    {
+      "code": "ts.constant.canton.GR",
+      "en": "GR"
+    },
+    {
+      "code": "ts.constant.canton.JU",
+      "en": "JU"
+    },
+    {
+      "code": "ts.constant.canton.label",
+      "en": "Canton"
+    },
+    {
+      "code": "ts.constant.canton.LU",
+      "en": "LU"
+    },
+    {
+      "code": "ts.constant.canton.NE",
+      "en": "NE"
+    },
+    {
+      "code": "ts.constant.canton.NW",
+      "en": "NW"
+    },
+    {
+      "code": "ts.constant.canton.OW",
+      "en": "OW"
+    },
+    {
+      "code": "ts.constant.canton.SG",
+      "en": "SG"
+    },
+    {
+      "code": "ts.constant.canton.SH",
+      "en": "SH"
+    },
+    {
+      "code": "ts.constant.canton.SO",
+      "en": "SO"
+    },
+    {
+      "code": "ts.constant.canton.SZ",
+      "en": "SZ"
+    },
+    {
+      "code": "ts.constant.canton.TG",
+      "en": "TG"
+    },
+    {
+      "code": "ts.constant.canton.TI",
+      "en": "TI"
+    },
+    {
+      "code": "ts.constant.canton.UR",
+      "en": "UR"
+    },
+    {
+      "code": "ts.constant.canton.VD",
+      "en": "VD"
+    },
+    {
+      "code": "ts.constant.canton.VS",
+      "en": "VS"
+    },
+    {
+      "code": "ts.constant.canton.ZG",
+      "en": "ZG"
+    },
+    {
+      "code": "ts.constant.canton.ZH",
+      "en": "ZH"
+    },
+    {
+      "code": "ts.constant.event.Death",
+      "en": "Death"
+    },
+    {
+      "code": "ts.constant.event.Hospitalisation",
+      "en": "Hospitalisation"
+    },
+    {
+      "code": "ts.constant.event.Positive test",
+      "en": "Positive test"
+    },
+    {
+      "code": "ts.constant.event.Test (any result)",
+      "en": "Test (any result)"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.as medical staff",
+      "en": "as medical staff"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.Bar/Restaurant",
+      "en": "Bar/Restaurant"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.Demonstration/Event",
+      "en": "Demonstration/Event"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.Disco/Club",
+      "en": "Disco/Club"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.Family member",
+      "en": "Family member"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.label",
+      "en": "Exposure contact path"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.other contacts",
+      "en": "other contacts"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.private party",
+      "en": "private party"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.School/child care etc",
+      "en": "School/child care etc"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.spontaneous crowd of people",
+      "en": "spontaneous crowd of people"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.constant.exp_kontakt_art.Work",
+      "en": "Work"
+    },
+    {
+      "code": "ts.constant.exp_land_code.AFG",
+      "en": "AFG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.AGO",
+      "en": "AGO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ALB",
+      "en": "ALB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ARE",
+      "en": "ARE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ARG",
+      "en": "ARG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ARM",
+      "en": "ARM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ATA",
+      "en": "ATA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ATF",
+      "en": "ATF"
+    },
+    {
+      "code": "ts.constant.exp_land_code.AUS",
+      "en": "AUS"
+    },
+    {
+      "code": "ts.constant.exp_land_code.AUT",
+      "en": "AUT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.AZE",
+      "en": "AZE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BDI",
+      "en": "BDI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BEL",
+      "en": "BEL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BEN",
+      "en": "BEN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BFA",
+      "en": "BFA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BGD",
+      "en": "BGD"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BGR",
+      "en": "BGR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BHS",
+      "en": "BHS"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BIH",
+      "en": "BIH"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BLR",
+      "en": "BLR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BLZ",
+      "en": "BLZ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BOL",
+      "en": "BOL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BRA",
+      "en": "BRA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BRN",
+      "en": "BRN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BTN",
+      "en": "BTN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.BWA",
+      "en": "BWA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CAF",
+      "en": "CAF"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CAN",
+      "en": "CAN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CHE",
+      "en": "CHE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CHL",
+      "en": "CHL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CHN",
+      "en": "CHN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CIV",
+      "en": "CIV"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CMR",
+      "en": "CMR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.COD",
+      "en": "COD"
+    },
+    {
+      "code": "ts.constant.exp_land_code.COG",
+      "en": "COG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.COL",
+      "en": "COL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CPV",
+      "en": "CPV"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CRI",
+      "en": "CRI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CUB",
+      "en": "CUB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CYP",
+      "en": "CYP"
+    },
+    {
+      "code": "ts.constant.exp_land_code.CZE",
+      "en": "CZE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.DEU",
+      "en": "DEU"
+    },
+    {
+      "code": "ts.constant.exp_land_code.DJI",
+      "en": "DJI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.DNK",
+      "en": "DNK"
+    },
+    {
+      "code": "ts.constant.exp_land_code.DOM",
+      "en": "DOM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.DZA",
+      "en": "DZA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ECU",
+      "en": "ECU"
+    },
+    {
+      "code": "ts.constant.exp_land_code.EGY",
+      "en": "EGY"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ERI",
+      "en": "ERI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ESH",
+      "en": "ESH"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ESP",
+      "en": "ESP"
+    },
+    {
+      "code": "ts.constant.exp_land_code.EST",
+      "en": "EST"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ETH",
+      "en": "ETH"
+    },
+    {
+      "code": "ts.constant.exp_land_code.FIN",
+      "en": "FIN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.FJI",
+      "en": "FJI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.FLK",
+      "en": "FLK"
+    },
+    {
+      "code": "ts.constant.exp_land_code.FRA",
+      "en": "FRA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GAB",
+      "en": "GAB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GBR",
+      "en": "GBR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GEO",
+      "en": "GEO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GHA",
+      "en": "GHA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GIN",
+      "en": "GIN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GMB",
+      "en": "GMB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GNB",
+      "en": "GNB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GNQ",
+      "en": "GNQ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GRC",
+      "en": "GRC"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GRL",
+      "en": "GRL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GTM",
+      "en": "GTM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.GUY",
+      "en": "GUY"
+    },
+    {
+      "code": "ts.constant.exp_land_code.HKG",
+      "en": "HKG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.HND",
+      "en": "HND"
+    },
+    {
+      "code": "ts.constant.exp_land_code.HRV",
+      "en": "HRV"
+    },
+    {
+      "code": "ts.constant.exp_land_code.HTI",
+      "en": "HTI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.HUN",
+      "en": "HUN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.IDN",
+      "en": "IDN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.IND",
+      "en": "IND"
+    },
+    {
+      "code": "ts.constant.exp_land_code.IRL",
+      "en": "IRL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.IRN",
+      "en": "IRN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.IRQ",
+      "en": "IRQ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ISL",
+      "en": "ISL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ISR",
+      "en": "ISR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ITA",
+      "en": "ITA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.JAM",
+      "en": "JAM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.JOR",
+      "en": "JOR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.JPN",
+      "en": "JPN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.KAZ",
+      "en": "KAZ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.KEN",
+      "en": "KEN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.KGZ",
+      "en": "KGZ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.KHM",
+      "en": "KHM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.KOR",
+      "en": "KOR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.KWT",
+      "en": "KWT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.label",
+      "en": "Exposure country"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LAO",
+      "en": "LAO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LBN",
+      "en": "LBN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LBR",
+      "en": "LBR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LBY",
+      "en": "LBY"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LIE",
+      "en": "LIE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LKA",
+      "en": "LKA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LSO",
+      "en": "LSO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LTU",
+      "en": "LTU"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LUX",
+      "en": "LUX"
+    },
+    {
+      "code": "ts.constant.exp_land_code.LVA",
+      "en": "LVA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MAR",
+      "en": "MAR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MCO",
+      "en": "MCO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MDA",
+      "en": "MDA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MDG",
+      "en": "MDG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MDV",
+      "en": "MDV"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MEX",
+      "en": "MEX"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MKD",
+      "en": "MKD"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MLI",
+      "en": "MLI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MLT",
+      "en": "MLT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MMR",
+      "en": "MMR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MNE",
+      "en": "MNE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MNG",
+      "en": "MNG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MOZ",
+      "en": "MOZ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MRT",
+      "en": "MRT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MWI",
+      "en": "MWI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.MYS",
+      "en": "MYS"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NAM",
+      "en": "NAM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NCL",
+      "en": "NCL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NER",
+      "en": "NER"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NGA",
+      "en": "NGA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NIC",
+      "en": "NIC"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NLD",
+      "en": "NLD"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NOR",
+      "en": "NOR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NPL",
+      "en": "NPL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.NZL",
+      "en": "NZL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.OMN",
+      "en": "OMN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PAK",
+      "en": "PAK"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PAN",
+      "en": "PAN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PER",
+      "en": "PER"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PHL",
+      "en": "PHL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PNG",
+      "en": "PNG"
+    },
+    {
+      "code": "ts.constant.exp_land_code.POL",
+      "en": "POL"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PRI",
+      "en": "PRI"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PRK",
+      "en": "PRK"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PRT",
+      "en": "PRT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PRY",
+      "en": "PRY"
+    },
+    {
+      "code": "ts.constant.exp_land_code.PSE",
+      "en": "PSE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.QAT",
+      "en": "QAT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ROU",
+      "en": "ROU"
+    },
+    {
+      "code": "ts.constant.exp_land_code.RUS",
+      "en": "RUS"
+    },
+    {
+      "code": "ts.constant.exp_land_code.RWA",
+      "en": "RWA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SAU",
+      "en": "SAU"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SDN",
+      "en": "SDN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SEN",
+      "en": "SEN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SGP",
+      "en": "SGP"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SLB",
+      "en": "SLB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SLE",
+      "en": "SLE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SLV",
+      "en": "SLV"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SOM",
+      "en": "SOM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SRB",
+      "en": "SRB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SSD",
+      "en": "SSD"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SUR",
+      "en": "SUR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SVK",
+      "en": "SVK"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SVN",
+      "en": "SVN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SWE",
+      "en": "SWE"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SWZ",
+      "en": "SWZ"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SYC",
+      "en": "SYC"
+    },
+    {
+      "code": "ts.constant.exp_land_code.SYR",
+      "en": "SYR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TCD",
+      "en": "TCD"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TGO",
+      "en": "TGO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.THA",
+      "en": "THA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TJK",
+      "en": "TJK"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TKM",
+      "en": "TKM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TLS",
+      "en": "TLS"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TTO",
+      "en": "TTO"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TUN",
+      "en": "TUN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TUR",
+      "en": "TUR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TWN",
+      "en": "TWN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.TZA",
+      "en": "TZA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.UGA",
+      "en": "UGA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.UKR",
+      "en": "UKR"
+    },
+    {
+      "code": "ts.constant.exp_land_code.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.constant.exp_land_code.URY",
+      "en": "URY"
+    },
+    {
+      "code": "ts.constant.exp_land_code.USA",
+      "en": "USA"
+    },
+    {
+      "code": "ts.constant.exp_land_code.UZB",
+      "en": "UZB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.VEN",
+      "en": "VEN"
+    },
+    {
+      "code": "ts.constant.exp_land_code.VNM",
+      "en": "VNM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.VUT",
+      "en": "VUT"
+    },
+    {
+      "code": "ts.constant.exp_land_code.XKX",
+      "en": "XKX"
+    },
+    {
+      "code": "ts.constant.exp_land_code.YEM",
+      "en": "YEM"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ZAF",
+      "en": "ZAF"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ZMB",
+      "en": "ZMB"
+    },
+    {
+      "code": "ts.constant.exp_land_code.ZWE",
+      "en": "ZWE"
+    },
+    {
+      "code": "ts.constant.granularity.Days",
+      "en": "Days"
+    },
+    {
+      "code": "ts.constant.granularity.Months",
+      "en": "Months"
+    },
+    {
+      "code": "ts.constant.granularity.Weeks",
+      "en": "Weeks"
+    },
+    {
+      "code": "ts.constant.grossregion.Central Switzerland",
+      "en": "Central Switzerland"
+    },
+    {
+      "code": "ts.constant.grossregion.Espace Mittelland",
+      "en": "Espace Mittelland"
+    },
+    {
+      "code": "ts.constant.grossregion.Fürstentum Liechtenstein",
+      "en": "Fürstentum Liechtenstein"
+    },
+    {
+      "code": "ts.constant.grossregion.Grossregion Nordwestschweiz",
+      "en": "Grossregion Nordwestschweiz"
+    },
+    {
+      "code": "ts.constant.grossregion.Grossregion Tessin",
+      "en": "Grossregion Tessin"
+    },
+    {
+      "code": "ts.constant.grossregion.Grossregion Zurich",
+      "en": "Grossregion Zurich"
+    },
+    {
+      "code": "ts.constant.grossregion.label",
+      "en": "Grossregion"
+    },
+    {
+      "code": "ts.constant.grossregion.Lake Geneva region",
+      "en": "Lake Geneva region"
+    },
+    {
+      "code": "ts.constant.grossregion.Ostschweiz",
+      "en": "Ostschweiz"
+    },
+    {
+      "code": "ts.constant.lab_grund.label",
+      "en": "Reason for the test"
+    },
+    {
+      "code": "ts.constant.lab_grund.Other",
+      "en": "Other"
+    },
+    {
+      "code": "ts.constant.lab_grund.Outbreak investigation",
+      "en": "Outbreak investigation"
+    },
+    {
+      "code": "ts.constant.lab_grund.SwissCovid App",
+      "en": "SwissCovid App"
+    },
+    {
+      "code": "ts.constant.lab_grund.Symptoms compatible with COVID-19",
+      "en": "Symptoms compatible with COVID-19"
+    },
+    {
+      "code": "ts.constant.lab_grund.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.constant.quarant_vor_pos.label",
+      "en": "Was patient in quarantine before positive result?"
+    },
+    {
+      "code": "ts.constant.quarant_vor_pos.No",
+      "en": "No"
+    },
+    {
+      "code": "ts.constant.quarant_vor_pos.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.constant.quarant_vor_pos.Yes",
+      "en": "Yes"
+    },
+    {
+      "code": "ts.constant.sex.Female",
+      "en": "Female"
+    },
+    {
+      "code": "ts.constant.sex.label",
+      "en": "Sex"
+    },
+    {
+      "code": "ts.constant.sex.Male",
+      "en": "Male"
+    },
+    {
+      "code": "ts.constant.sex.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.constant.sliding_window.14 days",
+      "en": "14 days"
+    },
+    {
+      "code": "ts.constant.sliding_window.28 days",
+      "en": "28 days"
+    },
+    {
+      "code": "ts.constant.sliding_window.7 days",
+      "en": "7 days"
+    },
+    {
+      "code": "ts.constant.sliding_window.None",
+      "en": "None"
+    },
+    {
+      "code": "ts.constant.travel_class.label",
+      "en": "Travel related status"
+    },
+    {
+      "code": "ts.constant.travel_class.Non-travel-related",
+      "en": "Non-travel-related"
+    },
+    {
+      "code": "ts.constant.travel_class.Travel-related",
+      "en": "Travel-related"
+    },
+    {
+      "code": "ts.constant.travel_class.Unknown",
+      "en": "Unknown"
+    },
+    {
+      "code": "ts.display.confidence_interval",
+      "en": "Show confidence interval"
+    },
+    {
+      "code": "ts.display.confidence_interval.tooltip",
+      "en": "This option is available for probabilities (i.e., \"Clinical event probability given\" is selected in the top-left panel). It shows the 95% confidence interval."
+    },
+    {
+      "code": "ts.display.granularity",
+      "en": "Time granularity"
+    },
+    {
+      "code": "ts.display.granularity.tooltip",
+      "en": "This option is available for histograms and maps."
+    },
+    {
+      "code": "ts.display.header",
+      "en": "Display options"
+    },
+    {
+      "code": "ts.display.log_scale",
+      "en": "Use log scale"
+    },
+    {
+      "code": "ts.display.smoothing_window",
+      "en": "Sliding window average"
+    },
+    {
+      "code": "ts.display.smoothing_window.tooltip",
+      "en": "This option is available for line and area plots. In case of absolute numbers, it calculates the average over the selected window of time. In case of probabilities, it shows the estimated probability for within the selected time window. The sliding window takes the data of the days before the selected date (i.e., a 7-days sliding window for today would show the data from the past 6 days and today)."
+    },
+    {
+      "code": "ts.display.stack_histograms",
+      "en": "Stack histograms"
+    },
+    {
+      "code": "ts.faq.header",
+      "en": "Frequently Asked Questions (FAQ)"
+    },
+    {
+      "code": "ts.filter.header",
+      "en": "Filter"
+    },
+    {
+      "code": "ts.general.clinical_event",
+      "en": "Clinical event"
+    },
+    {
+      "code": "ts.general.given",
+      "en": "Clinical event probability given"
+    },
+    {
+      "code": "ts.general.given.tooltip",
+      "en": "If selected, the plot shows the estimated probability of the above selected event occuring given the below selected event. This can, for example, be used to calculate the hospitalisation rate (Hospitalisation given Positive test)."
+    },
+    {
+      "code": "ts.general.header",
+      "en": "Parameter"
+    },
+    {
+      "code": "ts.normalization.activate",
+      "en": "Activate normalisation"
+    },
+    {
+      "code": "ts.normalization.assumption",
+      "en": "Assumption"
+    },
+    {
+      "code": "ts.normalization.assumption_text_part",
+      "en": "The hospitalisation rate per age group is constant and equals the value in"
+    },
+    {
+      "code": "ts.normalization.general_description1",
+      "en": "The normalisation calculates the positive case numbers if the hospitalisation rate per age group is assumed to be constant. It aims to improve the comparability of the numbers between different months."
+    },
+    {
+      "code": "ts.normalization.general_description2",
+      "en": "If this field is activated, the shown plot does not present the actual numbers."
+    },
+    {
+      "code": "ts.normalization.header",
+      "en": "Normalisation"
+    },
+    {
+      "code": "ts.normalization.method",
+      "en": "Method"
+    },
+    {
+      "code": "ts.normalization.method_text",
+      "en": "Due to changing testing capacities and regimes, it is difficult to compare the numbers of different points in time. The normalisation mode assumes that the true hospitalisation rate per age group did not change and calculates the normalized number of positive cases using the following formula:"
+    },
+    {
+      "code": "ts.plot.area",
+      "en": "Area Chart"
+    },
+    {
+      "code": "ts.plot.data_last_update_note",
+      "en": "Data last updated on"
+    },
+    {
+      "code": "ts.plot.data_source",
+      "en": "Data Source: Swiss Federal Office of Public Health"
+    },
+    {
+      "code": "ts.plot.date",
+      "en": "Date"
+    },
+    {
+      "code": "ts.plot.header",
+      "en": "Time series"
+    },
+    {
+      "code": "ts.plot.histogram",
+      "en": "Histogram"
+    },
+    {
+      "code": "ts.plot.line",
+      "en": "Line Chart"
+    },
+    {
+      "code": "ts.plot.map",
+      "en": "Map"
+    },
+    {
+      "code": "ts.plot.map.tooltip",
+      "en": "Select the \"compare\" option for canton or exposure country to use the map."
+    },
+    {
+      "code": "ts.plot.reset_all",
+      "en": "Reset all settings"
+    },
+    {
+      "code": "ts.plot.total_count",
+      "en": "Total count"
+    },
+    {
+      "code": "ts.plot.uncertain_recent_data_node",
+      "en": "The number of positive tests from the recent 2 days and the number of hospitalisation and deaths from the recent 5 days might be incomplete due to reporting delays."
+    }
+  ]
+}

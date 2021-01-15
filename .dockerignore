@@ -1,3 +1,10 @@
+.idea/
+.Rproj.user/
+packrat/
+scripts/
+.git/
+.Rprofile
+
 # History files
 .Rhistory
 .Rapp.history
@@ -99,9 +106,4 @@ www/eventCounts.csv
 *.synctex.gz(busy)
 *.pdfsync
 
-# Packrat
-packrat/lib*/
-packrat/src/
-
-# Config
 config.yml

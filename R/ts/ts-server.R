@@ -2,62 +2,216 @@ library(rlang)
 library(stats)
 
 
-tsServer <- function(id) {
+db_config <- config::get("database")
+ts_config <- config::get("ts")
+
+ts_data_store <- get_postgresql_datastore(
+  host = db_config$host,
+  port = db_config$port,
+  username = db_config$username,
+  password = db_config$password,
+  dbname = db_config$dbname
+)
+ts_cache <- ts_create_cache(ts_config$cache_size)
+ts_statistics <- list(
+  total_requests = 0,
+  cache_hits = 0
+)
+
+ts_create_initial_model <- function () {
+  initial_model <- list(
+    general = list(
+      event = "Positive test",
+      display_prob = FALSE,
+      given = "Positive test"
+    ),
+    filter = list(),
+    plot_type = "histogram",
+    display = list(
+      log_scale = FALSE,
+      stack_histograms = TRUE,
+      show_confidence_interval = TRUE,
+      granularity = "Days",
+      smoothing_window = "None"
+    ),
+    normalization = list(
+      selected = FALSE,
+      timerange = '2020-07-01'
+    )
+  )
+  for (filter_name in names(basicFilters)) {
+    f <- basicFilters[[filter_name]]
+    initial_model$filter[[filter_name]] <- list(
+      selected = f$choices,
+      compare = FALSE,
+      compare_per_100k_people = FALSE,
+      compare_proportions = FALSE
+    )
+  }
+  return(initial_model)
+}
+
+tsServer <- function(id, global_session) {
   moduleServer(
     id,
     function(input, output, session) {
       ns <- NS(id)
 
-      # TODO Why is it not required to put the id of the sub module into a ns() function?
-      basicFilterServers <- basicFilters %>% map2(names(.), function (f, n) { f$server(n) })
-
-      ### Basic UI Logic: Enabling/disabling/setting filters etc. ###
+      ### ---------- Basic Initializations ----------
 
       observe({
         toExclude <- setdiff(names(input), "tab")
         setBookmarkExclude(toExclude)
       })
 
-      observe({
-        shinyjs::toggleState(id = "event", condition = !input$normalization)
-        shinyjs::toggleState(id = "display_prob", condition = !input$normalization)
-        shinyjs::toggleState(id = "given", condition = input$display_prob && !input$normalization)
+      initial_model <- ts_create_initial_model()
+      model_container <- reactiveValues(model = initial_model)
 
-        for (fs in basicFilterServers) {
-          # TODO Dangerous stuff since it reaches into a sub module. Can this be improved?
-          shinyjs::toggleState(selector = paste0("#", fs()$session$ns("compare")), condition = !input$normalization)
-          if (input$normalization) {
-            updateCheckboxInput(fs()$session, "compare", value = FALSE)
-          }
+      # Initialize the filter sub modules
+      basicFilterServers <- basicFilters %>% map2(names(.), function (f, n) { f$server(n) })
+
+      # Reset all
+      observeEvent(input$resetAll, {
+        model_container$model <- initial_model
+      })
+
+      observeEvent(model_container$model, {
+        current_model <- model_container$model
+
+        # Ignore the map_selected_day setting as it is often invisible and not relevant
+        current_model$map_selected_day <- NULL
+
+        if (!identical(initial_model, current_model)) {
+          shinyjs::show("resetAll")
+        } else {
+          shinyjs::hide("resetAll")
         }
       })
 
-      # If one compare checkbox is checked, the others should be unchecked.
-      lapply(  # TODO Why does a for-loop not work? What's the difference to lapply()?
+      # ---------- General parameter ----------
+
+      get_parameter_value <- function () {
+        return(list(
+          event = input$event,
+          display_prob = input$display_prob,
+          given = input$given
+        ))
+      }
+
+      general_view_model <- NULL
+
+      set_general_view_model <- function (view_model) {
+        # The first time this function is called is during the initialization. The default view defined in ui.R is
+        # propagated back and there is no need for any updates.
+        if (is.null(general_view_model)) {
+          general_view_model <<- view_model
+          return()
+        }
+
+        new <- view_model
+        old <- general_view_model
+
+        set_radio_view_model(session, "event", new$event, old$event)
+        set_checkbox_view_model(session, "display_prob", new$display_prob, old$display_prob)
+        set_radio_view_model(session, "given", new$given, old$given)
+
+        general_view_model <<- new
+      }
+
+      observeEvent({
+        input$event
+        input$display_prob
+        input$given
+        TRUE
+      }, {
+        # Update view model
+        general_view_model$event$selected <<- input$event
+        general_view_model$display_prob$selected <<- input$display_prob
+        general_view_model$given$selected <<- input$given
+
+        # Update model
+        previous_value <- model_container$model$general
+        new_value <- get_parameter_value()
+        if (identical(previous_value, new_value)) {
+          return()
+        }
+        new_model <- model_container$model
+        new_model$general <- new_value
+
+        # Set an allowed plot type if the current plot type does not fit.
+        available_plot_types <- get_available_plot_types(new_model)
+        if (!(new_model$plot_type %in% available_plot_types)) {
+          new_model$plot_type <- available_plot_types[[1]]
+        }
+
+        model_container$model <<- new_model
+      })
+
+
+      # ---------- Filter ----------
+      lapply(
         X = basicFilterServers,
         FUN = function(fs){
-          observeEvent(fs()$compare, {
-            if (fs()$compare) {
-              for (fs2 in basicFilterServers) {
-                if (fs2()$attributeName != fs()$attributeName) {
-                  # TODO Dangerous stuff since it reaches into a sub module. Can this be improved?
-                  updateCheckboxInput(fs2()$session, "compare", value = FALSE)
+          observeEvent(fs()$value, {
+            fs_result <- fs()
+            fs_name <- fs_result$attributeName
+            previous_value <- model_container$model$filter[[fs_name]]
+            new_value <- fs_result$value
+            new_model <- model_container$model
+            if (identical(previous_value, new_value)) {
+              return()
+            }
+            new_model$filter[[fs_name]] <- new_value
+
+            # If one compare checkbox is checked, the others should be unchecked.
+            if (fs_result$value$compare) {
+              for (fs2_name in names(new_model$filter)) {
+                if (fs2_name != fs_name) {
+                  new_model$filter[[fs2_name]]$compare <- FALSE
                 }
               }
             }
+
+            # Set an allowed plot type if the current plot type does not fit.
+            available_plot_types <- get_available_plot_types(new_model)
+            if (!(new_model$plot_type %in% available_plot_types)) {
+              new_model$plot_type <- available_plot_types[[1]]
+            }
+
+            model_container$model <<- new_model
           })
         }
       )
 
       # Date slider for the map
+      map_selected_day_model <- reactiveValues(model = list(
+        display_prob = FALSE,
+        granularity = "Days"
+      ))
+      observeEvent(model_container$model, {
+        map_model <- map_selected_day_model$model
+        global_model <- model_container$model
+
+        shinyjs::toggleCssClass("map_slider", "ts-hidden", condition = "map" != global_model$plot_type)
+        if (global_model$general$display_prob != map_model$display_prob ||
+          global_model$display$granularity != map_model$granularity) {
+          map_model <- list(
+            display_prob = global_model$general$display_prob,
+            granularity = global_model$display$granularity
+          )
+          map_selected_day_model$model <<- map_model
+        }
+      })
       output$map_selected_day_output <- renderUI({
-        if (input$display_prob || input$granularity == "Days") {
+        display_prob <- map_selected_day_model$model$display_prob
+        granularity <- map_selected_day_model$model$granularity
+        if (display_prob || granularity == "Days") {
           timeFormat <- "%F"
           step <- 1
-        } else if (input$granularity == "Weeks") {
+        } else if (granularity == "Weeks") {
           timeFormat <- "%F (week %W)"
           step <- 7
-        } else if (input$granularity == "Months") {
+        } else if (granularity == "Months") {
           timeFormat <- "%b %Y"
           step <- 30  # TODO 30 != month
         }
@@ -75,627 +229,214 @@ tsServer <- function(id) {
       })
       outputOptions(output, "map_selected_day_output", suspendWhenHidden = FALSE)
 
-      # Normalization
-
-      observeEvent(input$normalization, {
-        disabledJs <- if (input$normalization) "false" else "true"
-        shinyjs::runjs(
-          paste0("jQuery(\"[data-id='", ns("normalization_timerange"), "'\").prop(\"disabled\", ", disabledJs, ")"))
-        if (input$normalization) {
-          updateRadioButtons(session, "event", selected = "Positive test")
-          updateCheckboxInput(session, "display_prob", value = FALSE)
-        }
+      observeEvent(input$map_selected_day, {
+        model_container$model$map_selected_day <<- input$map_selected_day
       })
 
 
-      ### Loading, preparing and filtering Data ###
+      # ---------- Plot type ----------
+      observeEvent(input$plotTypeHistogram, { model_container$model$plot_type <- "histogram" })
+      observeEvent(input$plotTypeLine, { model_container$model$plot_type <- "line" })
+      observeEvent(input$plotTypeArea, { model_container$model$plot_type <- "area" })
+      observeEvent(input$plotTypeMap, { model_container$model$plot_type <- "map" })
 
-      data <- reactive({
-        d <- load_and_process_data()
+      available_plot_types_view_model <- NULL
 
-        # Introduces an ID to make the rows unique and easier identifiable.
-        d <- cbind(id = as.integer(rownames(d)), d)
+      set_available_plot_types_view_model <- function (view_model) {
+        new <- view_model
+        old <- available_plot_types_view_model
 
-        # Creates the "date" column
-        if (input$display_prob) {
-          d <- d %>% mutate(date = fall_dt)
-        } else {
-          d <- d %>% mutate(date = !!as.symbol(tsConstants$eventDateCols[[input$event]]))
+        set_action_btn_view_model(session, "plotTypeHistogram", new$histogram, old$histogram)
+        set_action_btn_view_model(session, "plotTypeLine", new$line, old$line)
+        set_action_btn_view_model(session, "plotTypeArea", new$area, old$area)
+        set_action_btn_view_model(session, "plotTypeMap", new$map, old$map)
+
+        available_plot_types_view_model <<- new
+      }
+
+
+      # ---------- Display options ----------
+      get_display_value <- function () {
+        return(list(
+          log_scale = input$log_scale,
+          stack_histograms = input$stack_histograms,
+          show_confidence_interval = input$show_confidence_interval,
+          granularity = input$granularity,
+          smoothing_window = input$smoothing_window
+        ))
+      }
+
+      display_view_model <- NULL
+      set_display_view_model <- function (view_model) {
+        # The first time this function is called is during the initialization. The default view defined in ui.R is
+        # propagated back and there is no need for any updates.
+        if (is.null(display_view_model)) {
+          display_view_model <<- view_model
+          return()
         }
 
-        # Removes data that are outside of the investigated time range
-        d <- d %>% filter(date >= ymd(20200219))
+        new <- view_model
+        old <- display_view_model
 
-        return(d)
+        set_checkbox_view_model(session, "log_scale", new$log_scale, old$log_scale)
+        set_checkbox_view_model(session, "stack_histograms", new$stack_histograms, old$stack_histograms)
+        set_checkbox_view_model(session, "show_confidence_interval", new$show_confidence_interval,
+                                old$show_confidence_interval)
+        set_radio_view_model(session, "granularity", new$granularity, old$granularity)
+        set_radio_view_model(session, "smoothing_window", new$smoothing_window, old$smoothing_window)
+
+        display_view_model <<- new
+      }
+
+      observeEvent({
+        input$log_scale
+        input$stack_histograms
+        input$show_confidence_interval
+        input$granularity
+        input$smoothing_window
+        TRUE
+      }, {
+        # Update view model
+        display_view_model$log_scale$selected <<- input$log_scale
+        display_view_model$stack_histograms$selected <<- input$stack_histograms
+        display_view_model$show_confidence_interval$selected <<- input$show_confidence_interval
+        display_view_model$granularity$selected <<- input$granularity
+        display_view_model$smoothing_window$selected <<- input$smoothing_window
+
+        # Update model
+        previous_value <- model_container$model$display
+        new_value <- get_display_value()
+        new_model <- model_container$model
+        if (identical(previous_value, new_value)) {
+          return()
+        }
+        new_model$display <- new_value
+        model_container$model <<- new_model
       })
 
-      compare <- reactive({
-        for (fs in basicFilterServers) {
-          if (fs()$compare) {
-            return (fs()$attributeName)
+      # ---------- Normalization ----------
+      get_normalization_value <- function () {
+        return(list(
+          selected = input$normalization,
+          timerange = input$normalization_timerange
+        ))
+      }
+
+      normalization_view_model <- NULL
+      set_normalzation_view_model <- function (view_model) {
+        # The first time this function is called is during the initialization. The default view defined in ui.R is
+        # propagated back and there is no need for any updates.
+        if (is.null(normalization_view_model)) {
+          normalization_view_model <<- view_model
+          return()
+        }
+
+        new <- view_model
+        old <- normalization_view_model
+
+        set_checkbox_view_model(session, "normalization", new$selected, old$selected)
+        set_picker_view_model(session, "normalization_timerange", new$timerange, old$timerange)
+
+        normalization_view_model <<- new
+      }
+
+      observeEvent({
+        input$normalization
+        input$normalization_timerange
+        TRUE
+      }, {
+        # Update view model
+        normalization_view_model$selected$selected <<- input$normalization
+        normalization_view_model$timerange$selected <<- input$normalization_timerange
+
+        # Update model
+        previous_value <- model_container$model$normalization
+        new_value <- get_normalization_value()
+        if (identical(previous_value, new_value)) {
+          return()
+        }
+
+        new_model <- model_container$model
+        new_model$normalization <- new_value
+
+        # If the normalization is activated, nothing can be compared and only positive tests should be shown.
+        if (new_value$selected) {
+          new_model$general$event <- "Positive test"
+          new_model$general$display_prob <- FALSE
+          for (filter_name in names(new_model$filter)) {
+            new_model$filter[[filter_name]]$compare <- FALSE
           }
         }
-        return(NA)
+
+        model_container$model <<- new_model
       })
 
-      compare_per_100k_people <- reactive({
+
+      # ---------- Apply model back to the view model ----------
+      set_view_model <- function (view_model) {
+        set_general_view_model(view_model$general)
         for (fs in basicFilterServers) {
-          if (fs()$comparePer100kPeople) {
-            return (TRUE)
-          }
+          fs_result <- fs()
+          fs_name <- fs_result$attributeName
+          fs_result$set_view_model(view_model$filter[[fs_name]])
         }
-        return (FALSE)
+        set_available_plot_types_view_model(view_model$available_plot_types)
+        set_display_view_model(view_model$display)
+        set_normalzation_view_model(view_model$normalization)
+      }
+
+      observeEvent({
+        model_container$model
+        TRUE
+      }, {
+        model <- model_container$model
+        view_model <- get_view_model_from_model(model_container$model, ts_language)
+        set_view_model(view_model)
+
+        # TODO Right now, update_lang() needs the global session object to work. This will hopefully be fixed soon.
+        # See: https://github.com/Appsilon/shiny.i18n/issues/48
+        update_lang(global_session, ts_language)
       })
 
-      compare_proportions <- reactive({
-        for (fs in basicFilterServers) {
-          if (fs()$compareProportions) {
-            return (TRUE)
-          }
-        }
-        return (FALSE)
-      })
 
-      availablePlotTypes <- reactive({
-        # Plot types: histogram, line chart, area chart, map
-        available <- NULL
-        if (!input$display_prob && !compare_proportions()) {
-          available <- append(available, c("histogram", "line", "area"))
-        } else {
-          available <- append(available, "line")
-        }
-        if (compare_proportions()) {
-          available <- append(available, "area")
-        }
-        if (replace_na(compare() == "canton" || compare() == "expCountryCode", FALSE)
-          && !compare_proportions()) {
-          available <- append(available, "map")
-        }
-        return (available)
-      })
-
-      plotType <- reactiveValues(value = "histogram")
-      observeEvent(input$plotTypeHistogram, { plotType$value <- "histogram" })
-      observeEvent(input$plotTypeLine, { plotType$value <- "line" })
-      observeEvent(input$plotTypeArea, { plotType$value <- "area" })
-      observeEvent(input$plotTypeMap, { plotType$value <- "map" })
-
-      currentPlotType <- reactive({
-        available <- availablePlotTypes()
-        if (plotType$value %in% available) {
-          return (plotType$value)
-        } else {
-          plotType$value <- available[1]
-          return (available[1])
-        }
-      })
-
-      plot_type <- reactive({
-        if (currentPlotType() == "histogram" || currentPlotType() == "map") {
-          return ("discrete")
-        } else {
-          return ("continuous")
-        }
-      })
-
-      observe({
-        available <- availablePlotTypes()
-        shinyjs::toggleState("plotTypeHistogram", condition = "histogram" %in% available)
-        shinyjs::toggleState("plotTypeLine", condition = "line" %in% available)
-        shinyjs::toggleState("plotTypeArea", condition = "area" %in% available)
-        shinyjs::toggleState("plotTypeMap", condition = "map" %in% available)
-
-        current <- currentPlotType()
-        shinyjs::toggleCssClass("plotTypeHistogram", "ts-active-btn", condition = "histogram" == current)
-        shinyjs::toggleCssClass("plotTypeLine", "ts-active-btn", condition = "line" == current)
-        shinyjs::toggleCssClass("plotTypeArea", "ts-active-btn", condition = "area" == current)
-        shinyjs::toggleCssClass("plotTypeMap", "ts-active-btn", condition = "map" == current)
-
-        shinyjs::toggleCssClass("map_slider", "ts-hidden", condition = "map" != current)
-      })
-
-      # Returns a list of normalization constants (e.g., hospitalisation rate). Each age group has
-      # a corresponding value. The values are not affected by the filters.
-      normalizationConstants <- reactive({
-        if (!input$normalization) {
-          return (NULL)
-        }
+      # ---------- Output ----------
+      plotly_render_function <- renderPlotly({
+        model <- model_container$model
+        plot_def <- compute_plot_data(model, ts_language, ts_data_store)
 
         validate(
           need(
-            !is.null(input$normalization_timerange),
-            paste0("Must specify at least one month for normalization.")
+            is.null(plot_def$error),
+            plot_def$error$message
           )
         )
 
-        startDates <- ymd(input$normalization_timerange)
-        selectedTimeIntervals <- as.list(interval(startDates, startDates %m+% months(1) %m-% days(1)))
-
-        results <- list()
-
-        dataProc <- data() %>%
-          filter(date %within% selectedTimeIntervals)
-        for (category in unique(dataProc$ageGroup)) {
-          if (is.na(category) || category == "Unknown") {
-            next
-          }
-
-          # All positive tests
-          dDenominator <- dataProc %>%
-            filter(ageGroup == category) %>%
-            filter(positiveTest)
-          dNumerator <- dDenominator %>% filter(hospitalisation == 1)
-          rate <- sum(dNumerator$mult) / sum(dDenominator$mult)
-          results[[category]] <- rate
-        }
-
-        resultsTibble <- tibble(names(results), unlist(results))
-        names(resultsTibble) <- c("ageGroup", "normalizationConstant")
-        # TODO Handling zeros. It should not happen so often currently since the smallest granularity is month
-        #     ... and unfortunately, we have enough cases.
-        return (resultsTibble)
+        plotlyPlot <- finalize_plot(plot_def, model, ts_language)
+        return(plotlyPlot)
       })
 
-      # Validators
+      output$mainPlot <- function (...) {
+        dashboard_state <- ts_data_store$load_dashboard_state() %>% collect()
+        last_data_update <- dashboard_state$last_data_update
+        cache_key <- list(
+          model = model_container$model,
+          language = ts_language
+        )
+        hash <- digest::digest(cache_key)
 
-      notFalselyUsingNegativeTestDataValidator <- reactive({
-        if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
-          validate(
-            need(
-              !basicFilterServers[['travelClass']]()$isFiltering && !basicFilterServers[['travelClass']]()$compare,
-              "Currently lacking information about travel status for negative test data."
-            )
-          )
-        }
-      })
-
-      validators <- reactive({
-        notFalselyUsingNegativeTestDataValidator()
-      })
-
-      # Filters
-
-      clinicalEventFilter <- reactive({
-        return (function (data) {
-          return (
-            switch(
-              input$event,
-              "Test (any result)" = data,  # Nothing to do
-              "Positive test" = data %>% filter(positiveTest),
-              "Hospitalisation" = data %>% filter(hospitalisation == 1),
-              "Death" = data %>% filter(pttod == 1),
-              "ICU admission (unreliable)" = data %>% filter(icu_aufenthalt == 1)
-            )
-          )
-        })
-      })
-
-      givenClinicalEventFilter <- reactive({
-        return (function (data) {
-          if (input$display_prob) {
-            return (
-              switch(input$given,
-                     "Test (any result)" = data,  # Nothing to do
-                     "Positive test" = data %>% filter(positiveTest),
-                     "Hospitalisation" = data %>% filter(hospitalisation == 1),
-                     "Death" = data %>% filter(pttod == 1),
-                     "ICU admission (unreliable)" = data %>% filter(icu_aufenthalt == 1)
-              )
-            )
-          } else {
-            return (data)
-          }
-        })
-      })
-
-      ### Processors ###
-      # Processors are functions that manipulate data. They are defined as reactive expressions since they have direct
-      # access to the user input. However, they do not access the data but are defined as function factories: they
-      # return a function which takes the data and gives a modified version of the data back.
-
-      # Rounds the date depending on the granularity
-      dateRoundingProcessor <- reactive({
-        function(data) {
-          return (
-            switch(input$granularity,
-                   Days = data,
-                   Weeks = data %>% mutate(date = floor_date(date, unit = "week",
-                                                             week_start = getOption("lubridate.week.start", 1))),
-                   Months = data %>% mutate(date = floor_date(date, unit = "month"))
-            )
-          )
-        }
-      })
-
-
-      ### Control the display options ###
-      observe({
-        shinyjs::toggleState(id = "stack_histograms", condition = plot_type() == "discrete" && !input$log_scale
-          && !is.na(compare()))
-        shinyjs::toggleState(id = "show_confidence_interval", condition = input$display_prob && !compare_proportions())
-        shinyjs::toggleState(id = "granularity", condition = plot_type() == "discrete" && !input$display_prob)
-        shinyjs::toggleState(id = "smoothing_window", condition = plot_type() == "continuous" || input$display_prob)
-
-        if (input$log_scale && input$stack_histograms) {
-          updateCheckboxInput(session, "stack_histograms", value = FALSE)
-        }
-      })
-
-
-      ### Putting everything together ###
-      output$mainPlot <- renderPlotly({
-        validators()
-
-        # Apply basic filters
-        dataProc <- data()
-        filterWithActiveComparison <- NULL
-        for (fs in basicFilterServers) {
-          dataProc <- fs()$filter(dataProc)
-          if (fs()$compare) {
-            filterWithActiveComparison <- fs()
-          }
+        result <- ts_cache$get(hash, last_data_update)
+        if (is.null(result)) {
+          result <- plotly_render_function()
+          ts_cache$add(hash, last_data_update, result)
         }
 
-        # Exclude all data before start of stratified negative test records
-        # TODO Describe the background of this step.
-        if ((input$event == "Test (any result)") || (input$display_prob && input$given == "Test (any result)")) {
-          doFilter <- FALSE
-          if (!is.na(compare())) {
-            doFilter <- TRUE
-          }
-          for (fs in basicFilterServers) {
-            if (fs()$isFiltering) {
-              doFilter <- TRUE
-            }
-          }
-          if (doFilter) {
-            stratifiedTestingStart <- min((dataProc %>% filter(positiveTest == FALSE, !is.na(canton)))$fall_dt)
-            dataProc <- dataProc %>% filter(fall_dt >= stratifiedTestingStart)
-          }
-        }
-
-        # General transformations and calculations for later use
-        if (input$display_prob) {
-          xlabel <- "Date of Test"
-        } else {
-          xlabel <- paste("Date of", input$event)
-        }
-        smoothing_interval <- tsConstants$slidingWindowChoicesToIntervals[[input$smoothing_window]]
-        minDate <- min((dataProc %>% drop_na(date))$date)
-        maxDate <- max((dataProc %>% drop_na(date))$date)
-
-        # Case 1a: showing the total frequencies (no normalization)
-        if (!input$normalization && !input$display_prob && is.na(compare())) {
-          plotData <- dataProc %>%
-            clinicalEventFilter()()
-          if (plot_type() == "discrete") {
-              plotData <- dateRoundingProcessor()(plotData)
-            }
-          plotData <- plotData %>%
-            group_by(date) %>%
-            summarize(count = sum(mult), .groups = "drop") %>%
-            complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-            mutate(count = replace_na(count, 0)) %>%
-            drop_na(date)
-          if (plot_type() == "continuous") {
-            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
-                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
-          }
-          plotData <- plotData %>%
-            mutate(tooltipText = paste0("Date: ", as.character(plotData$date), "\nCount: ", round(plotData$count)))
-
-          plotDef <- list(
-            plotData, "date", "count",
-            ylab = "Total count"
-          )
-        }
-
-        # Case 1b: with normalization
-        if (input$normalization && !input$display_prob && is.na(compare())) {
-          plotData <- dataProc %>%
-            filter(hospitalisation == 1) %>%
-            group_by(ageGroup, date) %>%
-            summarize(count = sum(mult), .groups = "drop") %>%
-            inner_join(normalizationConstants(), by = "ageGroup") %>%
-            mutate(normalized = count / normalizationConstant)
-          if (plot_type() == "discrete") {
-            plotData <- dateRoundingProcessor()(plotData)
-          }
-          plotData <- plotData %>%
-            group_by(date) %>%
-            summarize(count = sum(normalized), .groups = "drop")
-          if (plot_type() == "continuous") {
-            plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
-                                              .before = smoothing_interval$before, .after = smoothing_interval$after)
-          }
-          plotData <- plotData %>%
-            mutate(tooltipText = paste0("Date: ", as.character(plotData$date), "\nCount: ", round(plotData$count)))
-          plotDef <- list(
-            plotData, "date", "count",
-            ylab = "Total count"
-          )
-        }
-
-        # Case 2: comparing the frequencies
-        if (!input$display_prob && !is.na(compare())) {
-          dataProc <- dataProc %>%
-            clinicalEventFilter()()
-          if (plot_type() == "discrete") {
-            dataProc <- dataProc %>% dateRoundingProcessor()()
-          }
-          plotData <- NULL
-          for (compare_val in filterWithActiveComparison$getComparisonGroups(dataProc)) {
-            d <- dataProc %>%
-              filterWithActiveComparison$getEntriesOfGroup(compare_val) %>%
-              group_by(date) %>%
-              summarize(count = sum(mult), .groups = "drop") %>%
-              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-              mutate(count = replace_na(count, 0)) %>%
-              drop_na(date)
-            if (compare_per_100k_people()) {
-              populationData <- load_population_data()
-              populationData <- populationData %>%
-                filter(!!as.symbol(compare()) == compare_val)
-              for (fs in basicFilterServers) {
-                populationData <- fs()$filter(populationData)
-              }
-              group_population <- sum(populationData$population)
-              d$count <- d$count * 100000 / group_population
-            }
-            if (compare_proportions()) {
-              d$count <- slide_index_dbl(d$count, d$date, mean,
-                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
-            } else if (plot_type() == "continuous") {
-              d$count <- slide_index_dbl(d$count, d$date, mean,
-                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
-            }
-            d[, compare()] <- compare_val
-            plotData <- bind_rows(plotData, d)
-          }
-          roundingDigits <- 0
-          if (compare_per_100k_people()) {
-            roundingDigits <- 2
-          }
-          if (!compare_proportions()) {
-            if (currentPlotType() == "map") {
-              if (!is.null(plotData)) {
-                selectedDate <- switch(
-                  input$granularity,
-                  "Days" = input$map_selected_day,
-                  "Weeks" = floor_date(input$map_selected_day, unit = "week",
-                                       week_start = getOption("lubridate.week.start", 1)),
-                  "Months" = floor_date(input$map_selected_day, unit = "month")
-                )
-                plotData <- plotData %>%
-                  filter(date == selectedDate) %>%
-                  group_by(!!as.symbol(compare())) %>%
-                  summarize(
-                    count = sum(count)
-                  )
-                  if (compare() == "canton") {
-                    plotData <- plotData %>%
-                      mutate(tooltipText = paste0(canton, "\nCount: ", round(count, digits = roundingDigits)))
-                  } else {
-                    plotData <- plotData %>%
-                      mutate(tooltipText = paste0(expCountryCode, "\nCount: ", round(count, digits = roundingDigits)))
-                  }
-                plotDef <- list(
-                  plotData,
-                  region = if (compare() == "canton") "switzerland" else "world"
-                )
-              }
-            } else {
-              plotData <- plotData %>%
-                mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(plotData$date),
-                                            "\nCount: ", round(plotData$count, digits = roundingDigits)))
-              plotDef <- list(
-                plotData, "date", "count",
-                groupingAttributeName = compare(),
-                ylab = "Total count",
-                stacked = input$stack_histograms
-              )
-            }
-          } else {
-            plotData <- plotData %>%
-              group_by(date) %>%
-              mutate(proportion = count / sum(count)) %>%
-              mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(date), "\nProportion: ",
-                                          round(proportion * 100, digits = 2), "%"))
-
-            plotDef <- list(
-              plotData, "date", "proportion",
-              groupingAttributeName = compare(),
-              ylab = paste0("Proportion of ", input$event, "s")
-            )
-          }
-        }
-
-        # Case 3: looking at the probabilities when a type of event is given
-        if (input$display_prob && is.na(compare())) {
-          denominatorData <- givenClinicalEventFilter()(dataProc)
-          numeratorData <- clinicalEventFilter()(denominatorData)
-
-          processDataInternal <- function(d) {
-            d <- d %>%
-              group_by(date) %>%
-              summarize(
-                count = sum(mult),
-                .groups = "drop"
-              ) %>%
-              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-              mutate(count = replace_na(count, 0))
-            d$count <- slide_index_dbl(d$count, d$date, sum,
-                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
-            return (d)
-          }
-          denominatorData <- processDataInternal(denominatorData)
-          numeratorData <-  processDataInternal(numeratorData)
-          prob <- numeratorData$count / denominatorData$count
-
-          ciYMin <- NULL
-          ciYMax <- NULL
-          for (i in seq_along(numeratorData$count)) {
-            if (is.nan(prob[i])) {
-              ci <- c(NaN, NaN)
-            } else {
-              ci <- binom.test(numeratorData$count[i], denominatorData$count[i], p = prob[i])$conf.int
-            }
-            ciYMin <- rbind(ciYMin, ci[1])
-            ciYMax <- rbind(ciYMax, ci[2])
-          }
-
-          plotData <- tibble(date = denominatorData$date, prob = prob, ymin = ciYMin, ymax = ciYMax) %>%
-            mutate(tooltipText = paste0("Date: ", as.character(date), "\nProbability: ",
-                                        round(prob * 100, digits = 2), "%"))
-          plotDef <- list(
-            plotData, "date", "prob",
-            ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
-            addConfidenceInterval = input$show_confidence_interval
-          )
-        }
-
-        # Case 4: comparing the probabilities
-        if (input$display_prob && !is.na(compare())) {
-          processDataInternal <- function(d) {
-            d <- d %>%
-              group_by(date) %>%
-              summarize(
-                count = sum(mult),
-                .groups = "drop"
-              ) %>%
-              complete(date = seq.Date(minDate, maxDate, by = "day")) %>%
-              mutate(count = replace_na(count, 0))
-            d$count <- slide_index_dbl(d$count, d$date, sum,
-                                 .before = smoothing_interval$before, .after = smoothing_interval$after)
-            return (d)
-          }
-
-          plotData <- NULL
-          for (compare_val in filterWithActiveComparison$getComparisonGroups(dataProc)) {
-            d <- dataProc %>%
-              filterWithActiveComparison$getEntriesOfGroup(compare_val)
-            dDenom <- givenClinicalEventFilter()(d)
-            dNum <- clinicalEventFilter()(dDenom)
-
-            dDenom <- processDataInternal(dDenom)
-            dNum <- processDataInternal(dNum)
-
-            prob <- dNum$count / dDenom$count
-
-            ciYMin <- NULL
-            ciYMax <- NULL
-            for (i in seq_along(dNum$count)) {
-              if (is.nan(prob[i])) {
-                ci <- c(NaN, NaN)
-              } else {
-                ci <- binom.test(dNum$count[i], dDenom$count[i], p = prob[i])$conf.int
-              }
-              ciYMin <- rbind(ciYMin, ci[1])
-              ciYMax <- rbind(ciYMax, ci[2])
-            }
-
-            d <- tibble(date = dDenom$date, prob = prob, ymin = ciYMin, ymax = ciYMax)
-            d[, compare()] <- compare_val
-            plotData <- bind_rows(plotData, d)
-          }
-
-          if (!compare_proportions() && currentPlotType() == "map") {
-            if (!is.null(plotData)) {
-              plotData <- plotData %>%
-                filter(date == input$map_selected_day) %>%
-                mutate(count = prob)
-              if (compare() == "canton") {
-                plotData <- plotData %>%
-                  mutate(tooltipText = paste0(canton, "\nProb.: ", round(count * 100, digits = 2), "%"))
-              } else {
-                plotData <- plotData %>%
-                  mutate(tooltipText = paste0(expCountryCode, "\nProb.: ", round(count * 100, digits = 2), "%"))
-              }
-              plotDef <- list(
-                plotData,
-                region = if (compare() == "canton") "switzerland" else "world"
-              )
-            }
-          } else {
-            if (compare_proportions()) {
-              plotData <- plotData %>%
-                mutate(prob = replace_na(prob, 0)) %>%
-                group_by(date) %>%
-                mutate(prob = prob / sum(prob))
-            }
-            plotData <- plotData %>%
-              mutate(tooltipText = paste0(!!as.symbol(compare()), "\nDate: ", as.character(date), "\nProbability: ",
-                                          round(prob * 100, digits = 2), "%"))
-            plotDef <- list(
-              plotData, "date", "prob",
-              groupingAttributeName = compare(),
-              ylab = paste0("Fraction of ", input$given, "s involving ", input$event),
-              addConfidenceInterval = input$show_confidence_interval && !compare_proportions()
-            )
-          }
-        }
-
-        validate(need(
-          nrow(plotData) > 0,
-          "No data matches the requested combination of filters."
-        ))
-
-        p <- do.call(tsPlots[[currentPlotType()]], plotDef)
-        if (currentPlotType() != "map") {
-          # Finalize ggplot and transform to plotly
-          p <- p +
-            xlab(xlabel) +
-            scale_x_date(date_breaks = "months", labels = date_format("%m-%Y")) +
-            theme_light()
-          if (input$log_scale) {
-            p <- p + scale_y_log10()
-          }
-          if (!is.na(compare())) {
-            p <- p +
-              guides(fill = guide_legend(title = filterWithActiveComparison$label),
-                     color = guide_legend(title = filterWithActiveComparison$label))
-          }
-          p <- ggplotly(p, tooltip = "text")
-        }
-
-        # Draw the plot
-        plotlyPlot <- p %>%
-          config(
-            displaylogo = FALSE,
-            modeBarButtons = list(list("zoom2d", "toImage", "resetScale2d", "pan2d")),
-            toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1)
-          )
-
-        if (currentPlotType() != "map") {
-          # The data from the most recent few days are subject to change due to reporting delays.
-          numberUncertainDays <- 2
-          if (input$event == "Hospitalisation" || input$event == "ICU admission (unreliable)" || input$event == "Death" ||
-            (input$display_prob && (input$given == "Hospitalisation" || input$given == "ICU admission (unreliable)" ||
-              input$given == "Death"))
-          ) {
-            numberUncertainDays <- 5
-          }
-
-          # Annotating in ggplot2 did not work as it was not transferred. Calling the layout() of plotly also failed
-          # (see https://stackoverflow.com/a/50361382). Therefore, this solution:
-          todayDaysSince1970 <- as.integer(as_date(dataCache$datasetUpdatedAt))
-          plotlyPlot[['x']][['layout']][['shapes']] <- list(
-            list(type = "rect",
-                 fillcolor = "grey", line = list(color = "gray"), opacity = 0.2,
-                 # Inf and -Inf don't work here.
-                 x0 = todayDaysSince1970 - (numberUncertainDays + 0.5), x1 = todayDaysSince1970 + 100, xref = "x",
-                 y0 = -99999999, y1 = 99999999, yref = "y")
-          )
-        }
-
-        plotlyPlot
-      })
+        return(result)
+      }
 
       output$dataLastUpdatedAt <- renderText({
-        data()
-        return (paste("Data last updated on", date_format("%d.%m.%Y")(dataCache$datasetUpdatedAt)))
+        dashboard_state <- ts_data_store$load_dashboard_state() %>% collect()
+        return(date_format("%d.%m.%Y")(dashboard_state$last_data_update))
       })
-
     }
   )
 }

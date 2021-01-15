@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  dashboard:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./config.yml:/app/config.yml
+    ports:
+      - 127.0.0.1:5000:5000

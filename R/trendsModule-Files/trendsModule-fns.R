@@ -92,9 +92,14 @@ trendsModelFunction <- function(df) {
 calcTrendsModel <- function(eventCounts) {
   eventCounts$deaths <- eventCounts$deaths %>%
     filter(region == "CH", age_class == "all")
-
-  models <- eventCounts %>%
+  
+  eventCountsDf <- eventCounts %>%
     bind_rows() %>%
+    # remove cantons with no events
+    group_by(region, age_class, event) %>%
+    filter(sum(count) > 0)
+
+  models <- eventCountsDf %>%
     group_by(region, age_class, event) %>%
     nest() %>%
     mutate(model = map(data, trendsModelFunction))
