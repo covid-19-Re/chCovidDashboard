@@ -94,10 +94,7 @@ calcTrendsModel <- function(eventCounts) {
     filter(region == "CH", age_class == "all")
   
   eventCountsDf <- eventCounts %>%
-    bind_rows() %>%
-    # # remove cantons with no events
-    # group_by(region, age_class, event) %>%
-    # filter(sum(count) > 0)
+    bind_rows()
 
   models <- eventCountsDf %>%
     group_by(region, age_class, event) %>%
