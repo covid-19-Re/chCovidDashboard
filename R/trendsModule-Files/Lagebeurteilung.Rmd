@@ -87,11 +87,8 @@ cases14d_min <- cases14d %>%
 ```
 
 ## Allgemeine Situation
-Momentan ist die Einschaetzung der Lage sehr schwierig. Über die Feiertage sind die Fallzahlen leicht gesunken wobei dies durch einen Rueckgang der durchgefuehrten Tests erklaert werden koennte. Darauf deutet auch der Anstieg der Positivitaet von 11% auf ueber 16% im Wochenmittel.
-Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
 
-<!--- Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen stabilen bis leicht rückgängigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt: --->
-Am aussagekraeftigsten sind momentan die R-Werte basierend auf Hospitalisierungen und Todesfällen[^1]:
+Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen leicht rückgängigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt[^1]:
 
 <!--- * `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`) --->
 
@@ -99,8 +96,10 @@ Am aussagekraeftigsten sind momentan die R-Werte basierend auf Hospitalisierunge
 
 * `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
 
-Aufgrund von Meldeverzögerungen müssen jedoch auch diese Schätzwerte mit Vorsicht interpretiert werden und könnten möglicherweise nach oben korrigiert werden.
-Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends in den Hospitalisierungen und Todesfaellen konstant bis rückläufig sind.
+Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
+
+Aufgrund von Meldeverzögerungen und Fluktuationen müssen die Schätzwerte jedoch mit Vorsicht interpretiert werden und könnten möglicherweise nachkorrigiert werden.
+Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends in den Hospitalisierungen rückläufig und Todesfällen konstant bis rückläufig sind.
 
 <!--- , der hohen Testpositivität, einer variierenden Anzahl Tests und der Feiertage müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden. ---> 
 Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- bestätigten Fälle und---> 
