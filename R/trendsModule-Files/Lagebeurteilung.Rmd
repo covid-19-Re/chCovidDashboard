@@ -33,6 +33,8 @@ r_cases <- subset(reproduction,
                   region == "CHE"
                   & data_type == "Confirmed cases"
                   & estimate_type == "Cori_slidingWindow")
+r_cases_timeDeath <- r_cases
+r_cases_timeHosp <- r_cases
 r_cases <- r_cases[r_cases$date == max(r_cases$date), ]
 
 r_hosp <- subset(reproduction,
@@ -40,7 +42,9 @@ r_hosp <- subset(reproduction,
                   & data_type == "Hospitalized patients"
                   & estimate_type == "Cori_slidingWindow")
 r_hosp_timeDeath <- r_hosp
+r_hosp2<-r_hosp
 r_hosp <- r_hosp[r_hosp$date == max(r_hosp$date), ]
+r_cases_timeHosp <- r_cases_timeHosp[r_hosp2$date == max(r_hosp2$date),]
   
 r_deaths <- subset(reproduction,
                   region == "CHE"
@@ -49,6 +53,7 @@ r_deaths <- subset(reproduction,
 r_death2 <- r_death
 r_deaths <- r_deaths[r_deaths$date == max(r_deaths$date), ]
 r_hosp_timeDeath <- r_hosp_timeDeath[r_deaths2$date == max(r_deaths2$date),]
+r_cases_timeDeath <- r_cases_timeDeath[r_deaths2$date == max(r_deaths2$date),]
 ```
 
 ```{r numbers, echo = FALSE}
@@ -93,7 +98,8 @@ cases14d_min <- cases14d %>%
 
 Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen leicht rückgängigen Verlauf. Die effektive Reproduktionszahl *R~e~* beträgt[^1]:
 
-<!--- * `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`) --->
+<!--- * `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`) --->    
+<!--- TODO add r_cases_timeHosp, r_cases_timeDeath --->
 
 * `r format(round(r_hosp$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Hospitalisationen (per `r day(r_hosp$date)`.`r month(r_hosp$date)`.`r year(r_hosp$date)`)
 
