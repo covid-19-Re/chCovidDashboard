@@ -39,13 +39,16 @@ r_hosp <- subset(reproduction,
                   region == "CHE"
                   & data_type == "Hospitalized patients"
                   & estimate_type == "Cori_slidingWindow")
+r_hosp_timeDeath <- r_hosp
 r_hosp <- r_hosp[r_hosp$date == max(r_hosp$date), ]
   
 r_deaths <- subset(reproduction,
                   region == "CHE"
                   & data_type == "Deaths"
                   & estimate_type == "Cori_slidingWindow")
+r_death2 <- r_death
 r_deaths <- r_deaths[r_deaths$date == max(r_deaths$date), ]
+r_hosp_timeDeath <- r_hosp_timeDeath[r_deaths2$date == max(r_deaths2$date),]
 ```
 
 ```{r numbers, echo = FALSE}
@@ -94,7 +97,7 @@ cases14d_min <- cases14d %>%
 
 * `r format(round(r_hosp$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Hospitalisationen (per `r day(r_hosp$date)`.`r month(r_hosp$date)`.`r year(r_hosp$date)`)
 
-* `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
+* `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle und `r format(round(r_hosp_timeDeath$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp_timeDeath$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp_timeDeath$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Hospitalisationen (per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`)
 
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner.
 
