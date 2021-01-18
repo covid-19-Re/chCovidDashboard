@@ -106,7 +106,7 @@ cases14d_min <- cases14d %>%
 
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. Für die Fallzahlen sind Vergleiche zu den Vorwochen momentan schwierig da über die Feiertage eher weniger getestet wurde. Dies drückte sich um Weihnachten in einer erhöhten Positivität aus.
 
-Aufgrund von Meldeverzögerungen und Fluktuationen in den Daten müssen die Schätzwerte jedoch mit Vorsicht interpretiert werden und könnten möglicherweise nachkorrigiert werden.
+Aufgrund von Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
 Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends in den Hospitalisierungen rückläufig und Todesfällen konstant bis rückläufig sind.
 
 <!--- , der hohen Testpositivität, einer variierenden Anzahl Tests und der Feiertage müssen die einzelnen Schätzwerte von *R~e~* mit Vorsicht interpretiert werden. ---> 
