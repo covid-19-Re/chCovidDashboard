@@ -42,18 +42,18 @@ r_hosp <- subset(reproduction,
                   & data_type == "Hospitalized patients"
                   & estimate_type == "Cori_slidingWindow")
 r_hosp_timeDeath <- r_hosp
-r_hosp2<-r_hosp
+r_hosp2 <- r_hosp
 r_hosp <- r_hosp[r_hosp$date == max(r_hosp$date), ]
-r_cases_timeHosp <- r_cases_timeHosp[r_hosp2$date == max(r_hosp2$date),]
+r_cases_timeHosp <- r_cases_timeHosp[r_cases_timeHosp$date == max(r_cases_timeHosp$date), ]
   
 r_deaths <- subset(reproduction,
                   region == "CHE"
                   & data_type == "Deaths"
                   & estimate_type == "Cori_slidingWindow")
-r_death2 <- r_death
+r_deaths2 <- r_deaths
 r_deaths <- r_deaths[r_deaths$date == max(r_deaths$date), ]
-r_hosp_timeDeath <- r_hosp_timeDeath[r_deaths2$date == max(r_deaths2$date),]
-r_cases_timeDeath <- r_cases_timeDeath[r_deaths2$date == max(r_deaths2$date),]
+r_hosp_timeDeath <- r_hosp_timeDeath[r_hosp_timeDeath$date == max(r_hosp_timeDeath$date),]
+r_cases_timeDeath <- r_cases_timeDeath[r_cases_timeDeath$date == max(r_cases_timeDeath$date),]
 ```
 
 ```{r numbers, echo = FALSE}
