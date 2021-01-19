@@ -125,7 +125,7 @@ Aufgrund von Meldeverzögerungen und Fluktuationen in den Daten könnten die Sch
 Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends rückläufig sind. <!--- CHECK ---->
 
 Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- CHECK---> 
-bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage.[^2] 
+bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage.[^2] Die bestätigten Falle änderten sich um -32.5% (UI: xxx-xx) pro Woche, die Hospitalisierungen um xxx (UI: xxx-xx) und die Todesfaelle um xxx (UI: xxx-xx).  <!---- TODO Dani - insert numbers automatically? --->
 Auch diese Werte spiegeln das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen wider.
 
 ### Absolute Zahlen
@@ -134,8 +134,8 @@ Die Positivitat liegt bei xxx (Stand DATUM, Tendenz abnehmend <!--- CHECK --->;
 *R~e~* basierend auf Positivitaet fuer DATUM(most recent estimate) ist xxx, 95% UI: yyy). <!---- TODO Dani - insert numbers / dates in this sentence automatically?  ---->
 
 Die Anzahl der COVID-19-Patienten auf Intensivstationen 
-blieb über die letzten 14 Tage auf hohem Niveau relativ stabil <!--- CHECK --->
-im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen.
+lag über die letzten 14 Tage
+im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen (die Aenderung war -10.7% (UI: xxx-xx) pro Woche). <!---- TODO Dani - insert numbers in this sentence automatically?  ---->
 
 Die Zahl der täglichen täglichen Todesfälle ueber die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`.[^4]
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus.[^5] Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle.[^6] Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 11 gemeldeten Wochen <!--- CHECK --->
