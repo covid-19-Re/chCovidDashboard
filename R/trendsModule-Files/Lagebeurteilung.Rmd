@@ -104,7 +104,7 @@ cases14d_min <- cases14d %>%
 
 * `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle, per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`. Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf  `r format(round(r_hosp_timeDeath$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp_timeDeath$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp_timeDeath$median_R_highHPD, 2), decimal.mark = ",")`) geschätzt. 
 
-* Wegen möglicherweise verändertem Testverhalten über den Jahreswechsel beurteilen wir die Schätzungen von Re aufgrund der bestätigten Fälle im Moment als nicht zuverlässig. Auf möglicherweise verändertes Testverhalten deutet auch die erhöhte Positivitätsrate über die Feiertage hin.
+* Wegen möglicherweise verändertem Testverhalten über den Jahreswechsel beurteilen wir die Schätzungen von *R~e~* aufgrund der bestätigten Fälle im Moment als nicht zuverlässig. Auf möglicherweise verändertes Testverhalten deutet auch die erhöhte Positivitätsrate über die Feiertage hin.
 
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
 
