@@ -45,6 +45,7 @@ rsconnect/
 dev-*
 .vscode
 *.Rout
+*.code-workspace
 
 # Data
 data/BAG
@@ -55,6 +56,7 @@ data/*.qs
 www/pdf/*
 scripts/lastBAGdir.txt
 www/lagebeurteilung/*
+www/variant-plot/*
 www/eventCounts.csv
 
 ## Core latex/pdflatex auxiliary files:
