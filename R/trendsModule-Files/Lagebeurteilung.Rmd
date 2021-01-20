@@ -234,7 +234,7 @@ mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dies
 seit dem ersten Nachweis kontinuierlich zu.
 In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(b117weekStart, "%d.%m.%Y")`)
 wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, 2), decimal.mark = ',')`% geschätzt
-(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, 2), decimal.mark = ',')`%-`r format(round(mostRecentb117$p_upper, 2), decimal.mark = ',')`%;
+(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, 2), decimal.mark = ',')`% bis `r format(round(mostRecentb117$p_upper, 2), decimal.mark = ',')`%;
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
 
 
