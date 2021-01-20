@@ -12,11 +12,13 @@ output:
 ```{r libraries, echo = FALSE, message = FALSE}
 library(tidyverse)
 library(lubridate)
+library(glue)
 library(here)
 ```
 
 ```{r load, echo = FALSE}
 eventCounts <- qs::qread(here("data", "trends-eventCounts.qs")) %>% bind_rows()
+ranking <- qs::qread(here("data", "trends-ranking.qs"))
 incidenceTable <- qs::qread(here("data", "trends-incidenceTable.qs"))
 popSizes <- read_csv(here("data", "popSizes.csv"),
   col_types = cols(.default = col_character(), year = col_double(), populationSize = col_double())) %>%
@@ -53,6 +55,12 @@ r_deaths <- subset(reproduction,
 r_deaths <- r_deaths[r_deaths$date == max(r_deaths$date), ]
 r_hosp_timeDeath <- r_hosp_timeDeath[r_hosp_timeDeath$date == max(r_deaths$date), ]
 r_cases_timeDeath <- r_cases_timeDeath[r_cases_timeDeath$date == max(r_deaths$date), ]
+
+r_tests <- subset(reproduction,
+                  region == "CHE"
+                  & data_type == "Confirmed cases / tests"
+                  & estimate_type == "Cori_slidingWindow")
+r_tests <- r_tests[r_tests$date == max(r_tests$date), ]
 ```
 
 ```{r numbers, echo = FALSE}
@@ -93,6 +101,28 @@ cases14d_min <- cases14d %>%
 
 ```
 
+```{r tests, echo = FALSE}
+testsFiles <- c(here("data", "Re", "CHE-Tests.rds"), here("data", "RePublic", "CHE-Tests.rds"))
+mostRecentTestsFile <- testsFiles[which.max(file.mtime(testsFiles))]
+
+tests <- readRDS(mostRecentTestsFile) %>%
+  mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+mostRecentTests <- filter(tests, date > max(date) - 14)
+mostRecentTestPositivity <- filter(tests, date == max(date))
+positivityLm <- lm(testPositivity ~ date + weekend, data = mostRecentTests)
+positivityTrend <- if_else(coef(positivityLm)[2] >= 0, "zunehmend", "abnehmend")
+```
+
+```{r percentChange, echo = FALSE}
+rankingCHE <- ranking %>%
+  filter(region == "CH", age_class == "all")
+
+rankingCHEcases <- filter(rankingCHE, event == "cases")
+rankingCHEhospitalizations <- filter(rankingCHE, event == "hospitalizations")
+rankingCHEdeaths <- filter(rankingCHE, event == "deaths")
+rankingCHEicu <- filter(rankingCHE, event == "icu")
+```
+
 ```{r mortality, echo = FALSE}
 # Death based on FOPH data
 deaths_total <- eventCounts %>%
@@ -107,6 +137,37 @@ corona_data_date <- tail(corona_data$Date, 1)
 corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date == ymd(20200930)]
 ```
 
+```{r variants, echo = FALSE, warning = FALSE, message = FALSE}
+
+variants <- read_csv(here("www/variant-plot/variantPlot_data.csv"))
+
+mostRecentVariant <- variants %>%
+  filter(
+    lab == "Total",
+    year == max(year)) %>%
+  filter(week == max(week))
+
+startOfVariantWeek <- parse_date_time(str_c(mostRecentVariant$year_week,"-1"), "Y-W-w")
+
+```
+
+```{r printFuns, echo = FALSE}
+valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "") {
+  glue(
+    "{format(round(value, 2), decimal.mark = ',')}{unit} ",
+    "({uiText}: {format(round(lower, 2), decimal.mark = ',')}{unit}",
+    "{uiSep}",
+    "{format(round(upper, 2), decimal.mark = ',')}{unit})"
+  )
+}
+
+valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "") {
+  valueUI(df$median_R_mean, df$median_R_lowHPD, df$median_R_highHPD, uiText = uiText, uiSep = uiSep, unit = unit)
+}
+valueUIchange <- function(df, uiText = "UI", uiSep = " - ", unit = "%") {
+  valueUI(df$estimate * 100, df$lower * 100, df$upper * 100, uiText = uiText, uiSep = uiSep, unit = unit)
+}
+```
 
 
 ## Allgemeine Situation
@@ -115,38 +176,56 @@ corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date 
 Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen rückgängigen <!--- CHECK ---->
 Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
 
-* `r format(round(r_cases$median_R_mean, 2), decimal.mark = ",")` (95% Unsicherheitsintervall, UI: `r format(round(r_cases$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der bestätigten Fälle (per `r day(r_cases$date)`.`r month(r_cases$date)`.`r year(r_cases$date)`).
+* `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle (per `r format(r_cases$date, "%d.%m.%Y")`).
 
-* `r format(round(r_hosp$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Hospitalisationen, per `r day(r_hosp$date)`.`r month(r_hosp$date)`.`r year(r_hosp$date)`. Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf  `r format(round(r_cases_timeHosp$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_cases_timeHosp$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases_timeHosp$median_R_highHPD, 2), decimal.mark = ",")`) geschätzt. 
+* `r valueUIr(r_hosp)` aufgrund der Hospitalisationen, per `r format(r_hosp$date, "%d.%m.%Y")`.
+Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeHosp)` geschätzt. 
 
-* `r format(round(r_deaths$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_deaths$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_deaths$median_R_highHPD, 2), decimal.mark = ",")`) aufgrund der Todesfälle, per `r day(r_deaths$date)`.`r month(r_deaths$date)`.`r year(r_deaths$date)`. Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf  `r format(round(r_hosp_timeDeath$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_hosp_timeDeath$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_hosp_timeDeath$median_R_highHPD, 2), decimal.mark = ",")`) geschätzt. Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf  `r format(round(r_cases_timeDeath$median_R_mean, 2), decimal.mark = ",")` (95% UI: `r format(round(r_cases_timeDeath$median_R_lowHPD, 2), decimal.mark = ",")`-`r format(round(r_cases_timeDeath$median_R_highHPD, 2), decimal.mark = ",")`) geschätzt. 
+* `r valueUIr(r_deaths)` aufgrund der Todesfälle, per `r format(r_deaths$date, "%d.%m.%Y")`.
+Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf `r valueUIr(r_hosp_timeDeath)` geschätzt. 
+Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
-Aufgrund von Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden. Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen widerspiegelt aufgrund der Verzoegerung von Infektion und Eintreten eines Ereignis (Fallbestätigung, Hospitalisationen, Todesfall).
+Aufgrund von Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
+Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen widerspiegelt
+aufgrund der Verzoegerung von Infektion und Eintreten eines Ereignis (Fallbestätigung, Hospitalisationen, Todesfall).
 Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends rückläufig sind. <!--- CHECK ---->
 
 Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- CHECK---> 
-bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage.[^2] Die bestätigten Falle änderten sich um -32.5% (UI: xxx-xx) pro Woche, die Hospitalisierungen um xxx (UI: xxx-xx) und die Todesfaelle um xxx (UI: xxx-xx).  <!---- TODO Dani - insert numbers automatically? --->
+bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
+Die bestätigten Falle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
+die Hospitalisierungen um `r valueUIchange(rankingCHEhospitalizations)`
+und die Todesfaelle um `r valueUIchange(rankingCHEdeaths)`.
 Auch diese Werte spiegeln das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen wider.
 
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
-Die Positivitat liegt bei xxx (Stand DATUM, Tendenz abnehmend <!--- CHECK --->; 
-*R~e~* basierend auf Positivitaet fuer DATUM(most recent estimate) ist xxx, 95% UI: yyy). <!---- TODO Dani - insert numbers / dates in this sentence automatically?  ---->
+Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, 2), decimal.mark = ',')`
+(Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, Tendenz `r positivityTrend`;<!--- CHECK ---> 
+*R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 
-Die Anzahl der COVID-19-Patienten auf Intensivstationen 
-lag über die letzten 14 Tage
-im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen (die Aenderung war -10.7% (UI: xxx-xx) pro Woche). <!---- TODO Dani - insert numbers in this sentence automatically?  ---->
+Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14 Tage
+im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
+(die Änderung war `r valueUIchange(rankingCHEicu)`).
 
-Die Zahl der täglichen täglichen Todesfälle ueber die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`.[^4]
-Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus.[^5] Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle.[^6] Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 11 gemeldeten Wochen <!--- CHECK --->
-eine deutliche Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf.[^7] 
-Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion.[^8] <!--- CHECK --->
-
-
+Die Zahl der täglichen täglichen Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`[^4].
+Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
+Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
+Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 11 gemeldeten Wochen <!--- CHECK --->
+eine deutliche Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf[^7].
+Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion[^8]. <!--- CHECK --->
 
 ## Neue Varianten
-In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und 501.V2 erstmals in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Epidemiologische Analysen und Daten aus der Kontaktverfolgung weisen darauf hin, dass diese Varianten eine höhere Übertragungsrate haben als die bislang bekannten Stämme von SARS-CoV-2 [^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt, die Häufigkeit von Infektionen mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm seit dem ersten Nachweis kontinuierlich zu. 
-In Kalenderwoche 2, 2020 (ab dem 11.1.2021) wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa 4.0% geschätzt (95%-Unsicherheitsinterval 2.5-6.2%; das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]) <!---- TODO Zahlen in diesem Satz automatisch holen von https://ibz-shiny.ethz.ch/covidDashboard/variant-plot/index.html (most recent total estimate)! ---->
+In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und 501.V2 erstmals
+in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Epidemiologische Analysen und Daten aus der Kontaktverfolgung
+weisen darauf hin, dass diese Varianten eine höhere Übertragungsrate haben als die bislang bekannten Stämme von SARS-CoV-2[^13].
+Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors sowie die
+systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt, die Häufigkeit von Infektionen
+mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm
+seit dem ersten Nachweis kontinuierlich zu.
+In Kalenderwoche `r mostRecentVariant$week`, `r mostRecentVariant$year` (ab dem `r format(startOfVariantWeek, "%d.%m.%Y")`)
+wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentVariant$p, 2), decimal.mark = ',')`% geschätzt
+(95%-Unsicherheitsinterval `r format(round(mostRecentVariant$p_lower, 2), decimal.mark = ',')`%-`r format(round(mostRecentVariant$p_upper, 2), decimal.mark = ',')`%;
+das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]) <!---- TODO Zahlen in diesem Satz automatisch holen von https://ibz-shiny.ethz.ch/covidDashboard/variant-plot/index.html (most recent total estimate)! ---->
 
 
 
