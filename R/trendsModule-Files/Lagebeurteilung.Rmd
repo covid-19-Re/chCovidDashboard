@@ -185,7 +185,7 @@ Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag a
 Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf `r valueUIr(r_hosp_timeDeath)` geschätzt. 
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
-Aufgrund von Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
+Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
 Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen widerspiegelt
 aufgrund der Verzoegerung von Infektion und Eintreten eines Ereignis (Fallbestätigung, Hospitalisationen, Todesfall).
 Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends rückläufig sind. <!--- CHECK ---->
