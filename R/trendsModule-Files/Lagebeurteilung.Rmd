@@ -141,13 +141,23 @@ corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date 
 
 variants <- read_csv(here("www/variant-plot/variantPlot_data.csv"))
 
-mostRecentVariant <- variants %>%
+mostRecentb117 <- variants %>%
   filter(
     lab == "Total",
+    variant == "b117",
     year == max(year)) %>%
   filter(week == max(week))
 
-startOfVariantWeek <- parse_date_time(str_c(mostRecentVariant$year_week,"-1"), "Y-W-w")
+b117weekStart <- parse_date_time(str_c(mostRecentb117$year_week,"-1"), "Y-W-w")
+
+mostRecents501yv2 <- variants %>%
+  filter(
+    lab == "Total",
+    variant == "s501yv2",
+    year == max(year)) %>%
+  filter(week == max(week))
+
+s501yv2weekStart <- parse_date_time(str_c(mostRecents501yv2$year_week,"-1"), "Y-W-w")
 
 ```
 
@@ -222,10 +232,10 @@ Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten M
 systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt, die Häufigkeit von Infektionen
 mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm
 seit dem ersten Nachweis kontinuierlich zu.
-In Kalenderwoche `r mostRecentVariant$week`, `r mostRecentVariant$year` (ab dem `r format(startOfVariantWeek, "%d.%m.%Y")`)
-wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentVariant$p, 2), decimal.mark = ',')`% geschätzt
-(95%-Unsicherheitsinterval `r format(round(mostRecentVariant$p_lower, 2), decimal.mark = ',')`%-`r format(round(mostRecentVariant$p_upper, 2), decimal.mark = ',')`%;
-das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]) <!---- TODO Zahlen in diesem Satz automatisch holen von https://ibz-shiny.ethz.ch/covidDashboard/variant-plot/index.html (most recent total estimate)! ---->
+In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(b117weekStart, "%d.%m.%Y")`)
+wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, 2), decimal.mark = ',')`% geschätzt
+(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, 2), decimal.mark = ',')`%-`r format(round(mostRecentb117$p_upper, 2), decimal.mark = ',')`%;
+das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]) 
 
 
 
