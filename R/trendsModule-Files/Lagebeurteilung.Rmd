@@ -225,7 +225,7 @@ seit dem ersten Nachweis kontinuierlich zu.
 In Kalenderwoche `r mostRecentVariant$week`, `r mostRecentVariant$year` (ab dem `r format(startOfVariantWeek, "%d.%m.%Y")`)
 wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentVariant$p, 2), decimal.mark = ',')`% geschätzt
 (95%-Unsicherheitsinterval `r format(round(mostRecentVariant$p_lower, 2), decimal.mark = ',')`%-`r format(round(mostRecentVariant$p_upper, 2), decimal.mark = ',')`%;
-das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]) <!---- TODO Zahlen in diesem Satz automatisch holen von https://ibz-shiny.ethz.ch/covidDashboard/variant-plot/index.html (most recent total estimate)! ---->
+das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
 
 
 
