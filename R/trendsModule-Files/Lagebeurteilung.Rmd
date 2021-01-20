@@ -139,7 +139,14 @@ corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date 
 
 ```{r variants, echo = FALSE, warning = FALSE, message = FALSE}
 
-variants <- read_csv(here("www/variant-plot/variantPlot_data.csv"))
+variants <- read_csv(here("www/variant-plot/variantPlot_data.csv")) %>%
+  mutate(
+    weekStartDate = parse_date_time(str_c(year, week - 1, 1, sep = "-"), "Y-W-w")
+  ) %>%
+  # discard current week
+  filter(
+    year_week != str_c(year(today()), "-", week(today()))
+  )
 
 mostRecentb117 <- variants %>%
   filter(
@@ -148,16 +155,12 @@ mostRecentb117 <- variants %>%
     year == max(year)) %>%
   filter(week == max(week))
 
-b117weekStart <- parse_date_time(str_c(mostRecentb117$year_week,"-1"), "Y-W-w")
-
 mostRecents501yv2 <- variants %>%
   filter(
     lab == "Total",
     variant == "s501yv2",
     year == max(year)) %>%
   filter(week == max(week))
-
-s501yv2weekStart <- parse_date_time(str_c(mostRecents501yv2$year_week,"-1"), "Y-W-w")
 
 ```
 
@@ -232,7 +235,7 @@ Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten M
 systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt, die Häufigkeit von Infektionen
 mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm
 seit dem ersten Nachweis kontinuierlich zu.
-In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(b117weekStart, "%d.%m.%Y")`)
+In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(mostRecentb117$weekStartDate, "%d.%m.%Y")`)
 wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, 2), decimal.mark = ',')`% geschätzt
 (95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, 2), decimal.mark = ',')`% bis `r format(round(mostRecentb117$p_upper, 2), decimal.mark = ',')`%;
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
