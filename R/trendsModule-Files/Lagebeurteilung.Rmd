@@ -161,7 +161,7 @@ valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "") 
   )
 }
 
-valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "") {
+valueUIr <- function(df, uiText = "95% UI", uiSep = " bis ", unit = "") {
   valueUI(df$median_R_mean, df$median_R_lowHPD, df$median_R_highHPD, uiText = uiText, uiSep = uiSep, unit = unit)
 }
 valueUIchange <- function(df, uiText = "UI", uiSep = " - ", unit = "%") {
