@@ -128,7 +128,7 @@ rankingCHEicu <- filter(rankingCHE, event == "icu")
 deaths_total <- eventCounts %>%
   filter(event == "deaths", region == "CH", age_class == "all", date >= "2020-10-01") %>%
   pull(count) %>%
-  sum()
+  sum() 
 
 # Cantonal deaths based on openZH
 corona_data <- read.csv("https://raw.githubusercontent.com/daenuprobst/covid19-cases-switzerland/master/covid19_fatalities_switzerland_openzh.csv")
