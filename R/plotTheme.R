@@ -1,3 +1,5 @@
+library(ggplot2)
+
 plotTheme <- theme_minimal() +
   theme(
     legend.position = "right",
