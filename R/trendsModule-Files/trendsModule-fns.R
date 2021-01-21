@@ -65,7 +65,7 @@ getEventCounts <- function(df, event_dt, event_name) {
 
   # age groups
   countsAgeClass <- df %>%
-    mutate(age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 121), right = FALSE)) %>%
+    mutate(age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 200), right = FALSE)) %>%
     dplyr::select({{ event_dt }}, age_class) %>%
     group_by(age_class, {{ event_dt }}) %>%
     summarize(
@@ -74,6 +74,8 @@ getEventCounts <- function(df, event_dt, event_name) {
     ) %>%
     transmute(region = "CH", age_class = age_class, date = {{ event_dt }}, event = event_name, count = count) %>%
     complete(region, age_class, date, event, fill = list(count = 0))
+
+  levels(countsAgeClass$age_class)[levels(countsAgeClass$age_class) == "[80,200)"] <- "[80,∞)"
 
   # all
   counts <- bind_rows(countsCH, countsRegions) %>%
