@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 341 123" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g transform="matrix(1,0,0,1,-6.53867,0)">
+        <g id="traced" transform="matrix(1.02428,0,0,1.09915,6.53867,0)">
+            <rect x="0" y="0" width="332.602" height="111.216" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect x="0" y="0" width="332.602" height="111.216"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(-0.00232476,0.307469,-0.328807,-0.0021739,163.041,66.4229)">
+                    <path d="M-24.133,24.304L24.477,24.304" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-dasharray:2,2;"/>
+                </g>
+                <g transform="matrix(-0.00232476,0.307469,-0.328807,-0.0021739,185.776,66.3367)">
+                    <path d="M-24.133,24.304L24.477,24.304" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-dasharray:2,2;"/>
+                </g>
+                <g transform="matrix(0,0.307477,-0.328815,0,167.875,41.2454)">
+                    <path d="M-38.768,38.768L38.768,38.768" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-dasharray:2,2;"/>
+                </g>
+                <g transform="matrix(-0.00232476,0.307469,-0.328807,-0.0021739,112.98,66.3715)">
+                    <path d="M-24.133,24.304L24.477,24.304" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-dasharray:2,2;"/>
+                </g>
+                <g transform="matrix(0,0.307477,-0.328815,0,117.786,41.2197)">
+                    <path d="M-38.684,38.684L38.684,38.684" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-dasharray:2,2;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-329.038)">
+                    <path d="M707.512,422.533L484.442,422.513C518.537,421.309 551.056,417.205 578.205,410.208C586.793,407.994 595.511,405.431 606.573,405.868C616.18,406.246 623.534,408.621 630.79,410.785C652.104,417.143 679.023,421.148 707.512,422.533Z" style="fill:rgb(255,158,27);fill-rule:nonzero;stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-328.69)">
+                    <path d="M602.535,405.459C593.338,405.688 585.716,407.884 578.201,409.821C565.849,413.004 552.351,415.567 538.133,417.552L538.133,422.135L707.512,422.156C679.022,420.771 652.109,416.76 630.795,410.402C623.539,408.237 616.184,405.87 606.577,405.491C605.194,405.436 603.849,405.426 602.535,405.459Z" style="fill:rgb(27,124,255);fill-rule:nonzero;stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-287.48)">
+                    <path d="M707.673,399.694L484.603,399.673C518.698,398.47 551.217,394.366 578.365,387.369C586.953,385.155 595.671,382.592 606.734,383.028C616.341,383.407 623.695,385.782 630.95,387.946C652.264,394.304 679.183,398.309 707.673,399.694Z" style="fill:rgb(255,158,27);fill-rule:nonzero;stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-287.152)">
+                    <path d="M602.693,382.636C593.496,382.865 585.884,385.072 578.37,387.008C566.021,390.191 552.516,392.744 538.301,394.729L538.301,399.312L610.639,399.323L610.639,382.942C609.376,382.817 608.08,382.721 606.735,382.668C605.352,382.613 604.007,382.603 602.693,382.636Z" style="fill:rgb(27,124,255);fill-rule:nonzero;stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-387.853)">
+                    <path d="M707.673,454.857L484.603,454.836C518.698,453.633 551.217,449.528 578.365,442.531C586.953,440.318 595.671,437.755 606.734,438.191C616.341,438.57 623.695,440.945 630.95,443.109C652.264,449.467 679.183,453.471 707.673,454.857Z" style="fill:rgb(255,158,27);fill-rule:nonzero;stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-387.524)">
+                    <path d="M602.693,437.798C593.496,438.027 585.884,440.234 578.37,442.17C566.069,445.34 552.622,447.888 538.469,449.87L538.469,454.474L646.919,454.485L646.919,446.838C641.326,445.605 635.976,444.25 630.953,442.751C623.697,440.587 616.342,438.208 606.735,437.83C605.352,437.775 604.007,437.765 602.693,437.798Z" style="fill:rgb(27,124,255);fill-rule:nonzero;stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.328815,0,0,-0.307477,95.4039,26.4326)">
+                    <path d="M0,0L661.541,0" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:2px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-371.375)">
+                    <path d="M700.007,438.872L703.24,437.25L700.007,435.628L700.007,438.872Z" style="fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,743.474,57.6947)">
+                    <ellipse cx="487.434" cy="437.25" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,828.994,90.6254)">
+                    <ellipse cx="538.71" cy="437.25" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,1009,159.655)">
+                    <ellipse cx="646.577" cy="437.407" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.328815,0,0,-0.307477,95.6198,56.0059)">
+                    <path d="M0,0L660.885,0" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:2px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-312.228)">
+                    <path d="M700.007,406.367L703.24,404.744L700.007,403.122L700.007,406.367Z" style="fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(-0.691536,-0.642208,-0.689147,0.644434,806.555,141.227)">
+                    <ellipse cx="538.71" cy="404.688" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.69152,-0.642223,-0.689164,0.644419,845.457,156.05)">
+                    <ellipse cx="561.998" cy="404.783" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,721.072,108.215)">
+                    <ellipse cx="487.434" cy="404.744" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.328815,0,0,-0.307477,95.463,76.7362)">
+                    <path d="M0,0L661.362,0" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:2px;"/>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-370.811,-270.768)">
+                    <path d="M700.007,383.581L703.24,381.959L700.007,380.336L700.007,383.581Z" style="fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(-0.69152,-0.642223,-0.689164,0.644419,790.582,176.552)">
+                    <ellipse cx="538.55" cy="381.902" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,829.488,191.353)">
+                    <ellipse cx="561.837" cy="381.997" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,705.102,143.526)">
+                    <ellipse cx="487.273" cy="381.959" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(-0.691528,-0.642216,-0.689156,0.644426,910.859,222.826)">
+                    <ellipse cx="610.658" cy="381.92" rx="3.004" ry="3.01" style="fill:rgb(0,158,115);stroke:white;stroke-width:0.34px;"/>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.820596,-0.699753)">
+                    <text x="325.881px" y="32.406px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">time</text>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.041527,-0.699753)">
+                    <text x="93.989px" y="8.201px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">exposur<tspan x="118.275px " y="8.201px ">e</tspan></text>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <clipPath id="_clip2">
+                        <rect x="97.57" y="11.291" width="19.257" height="7.566" clip-rule="nonzero"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip2)">
+                        <g>
+                            <g transform="matrix(0.996559,0,0,1,0.334695,0)">
+                                <text x="97.261px" y="16.811px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:8.165px;">t</text>
+                            </g>
+                            <g transform="matrix(0.996559,0,0,1,0.341498,0)">
+                                <text x="99.238px" y="18.852px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:5.797px;">E</text>
+                            </g>
+                            <g transform="matrix(0.996559,0,0,1,0.353644,0)">
+                                <text x="105.035px" y="16.811px" style="font-family:'STIXGeneral-Regular', 'STIXGeneral';font-size:8.165px;"><tspan x="105.035px 110.628px 112.896px " y="16.811px 16.811px 16.811px ">= 0</tspan></text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.169984,-0.699753)">
+                    <text x="132.225px" y="7.984px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">quarantine begins</text>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <clipPath id="_clip3">
+                        <rect x="156.411" y="12.136" width="5.711" height="7.56" clip-rule="nonzero"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip3)">
+                        <g>
+                            <g transform="matrix(0.996559,0,0,1,0.537179,0)">
+                                <text x="156.102px" y="16.594px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:8.165px;">t</text>
+                            </g>
+                            <g transform="matrix(0.996559,0,0,1,0.543979,0)">
+                                <text x="158.078px" y="18.635px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:5.797px;">Q</text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.503874,-0.699753)">
+                    <text x="231.608px" y="8.201px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">r<tspan x="233.737px 237.367px " y="8.201px 8.201px ">el</tspan>ease fr<tspan x="259.145px 263.025px " y="8.201px 8.201px ">om</tspan> quarantine</text>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <clipPath id="_clip4">
+                        <rect x="264.599" y="12.353" width="5.07" height="6.505" clip-rule="nonzero"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip4)">
+                        <g>
+                            <g transform="matrix(0.996559,0,0,1,0.909475,0)">
+                                <text x="264.29px" y="16.811px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:8.165px;">t</text>
+                            </g>
+                            <g transform="matrix(0.996559,0,0,1,0.916275,0)">
+                                <text x="266.266px" y="18.852px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:5.797px;">R</text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,-0.273297,-0.699753)">
+                    <text x="0.281px" y="75.309px" style="font-family:'HelveticaNeue-Bold', 'Helvetica Neue';font-weight:700;font-size:6.759px;">test-and-r<tspan x="32.577px 36.456px " y="75.309px 75.309px ">el</tspan>ease</text>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,-0.273297,-0.699753)">
+                    <text x="0.281px" y="32.483px" style="font-family:'HelveticaNeue-Bold', 'Helvetica Neue';font-weight:700;font-size:6.759px;">standar<tspan x="24.695px 28.825px " y="32.483px 32.483px ">d </tspan>quarantine</text>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.820596,-0.699753)">
+                    <text x="325.881px" y="64.911px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">time</text>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.00154579,0)">
+                        <text x="0.449px" y="8.008px" style="font-family:'HelveticaNeue-Bold', 'Helvetica Neue';font-weight:700;font-size:10.139px;">A</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.0350292,0)">
+                        <text x="10.179px" y="8.008px" style="font-family:'HelveticaNeue-BoldItalic', 'Helvetica Neue';font-weight:700;font-style:italic;font-size:6.759px;">traced contacts</text>
+                    </g>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.595781,0)">
+                        <text x="173.131px" y="104.823px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">test in</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.57238,0)">
+                        <text x="166.331px" y="112.933px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">quarantine</text>
+                    </g>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <clipPath id="_clip5">
+                        <rect x="180.018" y="91.533" width="5.33" height="6.505" clip-rule="nonzero"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip5)">
+                        <g>
+                            <g transform="matrix(0.996559,0,0,1,0.618413,0)">
+                                <text x="179.708px" y="95.991px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:8.165px;">t</text>
+                            </g>
+                            <g transform="matrix(0.996559,0,0,1,0.625214,0)">
+                                <text x="181.685px" y="98.032px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:5.797px;">T</text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.731586,0)">
+                        <text x="212.596px" y="104.485px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">r<tspan x="214.725px 218.355px " y="104.485px 104.485px ">el</tspan>ease fr<tspan x="240.133px 244.013px " y="104.485px 104.485px ">om</tspan></text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.713772,0)">
+                        <text x="207.419px" y="112.595px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">quarantine after</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.691241,0)">
+                        <text x="200.872px" y="120.704px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">false-negative r<tspan x="247.186px 250.816px " y="120.704px 120.704px ">es</tspan>ult</text>
+                    </g>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <clipPath id="_clip6">
+                        <rect x="228.679" y="91.195" width="5.07" height="6.505" clip-rule="nonzero"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip6)">
+                        <g>
+                            <g transform="matrix(0.996559,0,0,1,0.785869,0)">
+                                <text x="228.37px" y="95.653px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:8.165px;">t</text>
+                            </g>
+                            <g transform="matrix(0.996559,0,0,1,0.792669,0)">
+                                <text x="230.346px" y="97.694px" style="font-family:'STIXGeneral-Italic', 'STIXGeneral';font-style:italic;font-size:5.797px;">R</text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.820056,-0.699753)">
+                    <text x="325.72px" y="87.697px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">time</text>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.377754,-0.699753)">
+                    <text x="194.068px" y="24.617px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:white;">prevented transmission</text>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.377754,-0.699753)">
+                    <text x="194.068px" y="57.28px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:white;">prevented transmission</text>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.701315,0)">
+                        <text x="203.799px" y="75.477px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:white;">prevented</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.679341,0)">
+                        <text x="197.414px" y="81.564px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:white;">transmission</text>
+                    </g>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.384563,0)">
+                        <text x="111.753px" y="91.451px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:rgb(255,158,27);">transmission prior</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.40396,0)">
+                        <text x="117.389px" y="97.539px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:rgb(255,158,27);">to quarantine</text>
+                    </g>
+                </g>
+                <g transform="matrix(0.972932,0,0,0.909794,0.56273,-0.699753)">
+                    <text x="249.126px" y="91.748px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;fill:rgb(255,158,27);">transmission post quarantine</text>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.846811,0)">
+                        <text x="246.08px" y="45.911px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;">positive-testing individuals are isolated</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.893505,0)">
+                        <text x="259.649px" y="51.998px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:5.407px;">until they are no longer infectious</text>
+                    </g>
+                </g>
+                <g transform="matrix(0.976292,0,0,0.909794,-0.27424,-0.699753)">
+                    <g transform="matrix(0.996559,0,0,1,0.255194,0)">
+                        <text x="74.158px" y="60.533px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">positive</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.233706,0)">
+                        <text x="67.914px" y="68.642px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">test r<tspan x="83.19px 86.82px " y="68.642px 68.642px ">es</tspan>ult</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.190383,0)">
+                        <text x="55.324px" y="83.481px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">false-negative</text>
+                    </g>
+                    <g transform="matrix(0.996559,0,0,1,0.233706,0)">
+                        <text x="67.914px" y="91.591px" style="font-family:'HelveticaNeue', 'Helvetica Neue';font-size:6.759px;">test r<tspan x="83.19px 86.82px " y="91.591px 91.591px ">es</tspan>ult</text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

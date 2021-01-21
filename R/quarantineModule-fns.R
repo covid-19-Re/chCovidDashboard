@@ -1,10 +1,11 @@
-# functions
-dgammaShift <- function(x, shape, rate = 1, shift, ...) {
-  dgamma(x = x + shift, shape = shape, rate = rate, ...)
-}
-
-pgammaShift <- function(x, shape, rate = 1, shift, ...) {
-  pgamma(q = x + shift, shape = shape, rate = rate, ...)
+# Working functions
+# Functions for generating probability distributions
+getGenDist <- function(times, params, CDF = FALSE) {
+  if (CDF) {
+    return(pweibull(q = times, shape = params$shape, scale = params$scale))
+  } else {
+    dweibull(x = times, shape = params$shape, scale = params$scale)
+  }
 }
 
 getInfectivityProfile <- function(times, params, CDF = FALSE) {
@@ -15,102 +16,56 @@ getInfectivityProfile <- function(times, params, CDF = FALSE) {
   }
 }
 
-# Function to systematically generate infectivity profiles
-getInfectivityProfile2 <- function(times, params, CDF = FALSE) {
-  if (CDF) {
-    return(pgammaShift(x = times, shape = params$shape, rate = params$rate, shift = params$shift))
-  } else {
-    return(dgammaShift(x = times, shape = params$shape, rate = params$rate, shift = params$shift))
-  }
-}
+# Incubation period distribution is averaged across 7 reported distributions:
+incParamsDefault <- rbind(
+  data.frame(study = "Bi", n = 183, meanlog = 1.570, sdlog = 0.650), # Reported
+  data.frame(study = "Lauer", n = 181, meanlog = 1.621, sdlog = 0.418), # Reported
+  data.frame(study = "Li", n = 10, meanlog = 1.434, sdlog = 0.661), # From source code of He et al.
+  data.frame(study = "Linton", n = 158, meanlog = 1.611, sdlog = 0.472), # with(list(mu = 5.6, sigma = 2.8), c(mean = log(mu^2 / sqrt(mu^2 + sigma^2)), sd = sqrt(log(1 + sigma^2 / mu^2))))
+  data.frame(study = "Ma", n = 587, meanlog = 1.857, sdlog = 0.547), # with(list(mu = 7.44, sigma = 4.39), c(mean = log(mu^2 / sqrt(mu^2 + sigma^2)), sd = sqrt(log(1 + sigma^2 / mu^2))))
+  data.frame(study = "Zhang", n = 49, meanlog = 1.540, sdlog = 0.470), # Reported
+  data.frame(study = "Jiang", n = 2015, meanlog = 1.530, sdlog = 0.464) # Unknown...
+)
+incParamsDefault$study <- factor(incParamsDefault$study)
+#' Mean and SD of this incubation time
+incParamsDefault$mean <- mean(exp(incParamsDefault$meanlog + (incParamsDefault$sdlog^2)/2))
 
-# Function to systematically generate incubation period distribution
 getIncubationPeriod <- function(times, params, CDF = FALSE) {
-  if (CDF) {
-    return(plnorm(q = times, meanlog = params$meanlog, sdlog = params$sdlog))
-  } else {
-    return(dlnorm(x = times, meanlog = params$meanlog, sdlog = params$sdlog))
-  }
-}
-
-getGenDist <- function(times, params, CDF = FALSE) {
-  if (CDF) {
-    return(pweibull(q = times, shape = params$shape, scale = params$scale))
-  } else {
-    dweibull(x = times, shape = params$shape, scale = params$scale)
-  }
-}
-
-computeCasesInf <- function(paramList) {
-  load("data/quantities.RData")
-  #' Compute the number of tertiary cases
-  paramDF <- expand.grid(Re = paramList$Re, f = paramList$f, g = paramList$g, KEEP.OUT.ATTRS = F)
-  #' We want to vectorise everything in terms of Delta1
-  indexDelta1 <- sapply(paramList$Delta1, function(Delta1) which.min(abs(quantitiesMLE$t - Delta1)), USE.NAMES = F)
-  #' Loop over the different Re Values
-  tertiaryCasesMLE <- lapply(paramList$tau, function(tau) {
-    #' Define values that are purely functions of tau and Delta1
-    Iinfty <- quantitiesMLE[[iMax, "integral"]]
-    PDelta1 <- quantitiesMLE[indexDelta1, "infProfileCDF"] # vector
-    indexMinusTau <- which.min(abs(quantitiesMLE$t - (-tau)))
-    Ptau <- quantitiesMLE[[indexMinusTau, "infProfileCDF"]]
-    Itau <- quantitiesMLE[[indexMinusTau, "integral"]]
-    Gtau <- incDist[[which.min(abs(incDist$t - tau)), "CDF"]]
-
-    casesDetectedPart2 <- (PDelta1 - (1 - Gtau) * Ptau - Itau) * Iinfty # * f * g * k1 * k2
-    casesUndetected <- (PDelta1 - (1 - Gtau) * Ptau - Itau) # * f * k1 * (1 - g) * n2
-    casesOutsideDetection <- ((1 - Gtau) * Ptau - Iinfty + Itau) # * f * k1 * n2
-
-    #' Loop over contact isolation time Delta2
-    cases <- lapply(paramList$Delta2, function(Delta2) {
-      indexDelta2 <- which.min(abs(quantitiesMLE$t - Delta2))
-      #' Perform the integral part for the vector of Delta1's
-      casesDetectedPart1 <- unlist(lapply(indexDelta1, function(iDelta1) {
-        (1 - Gtau) * sum(
-          sapply(seq(indexMinusTau, iDelta1), function(k) {
-            quantitiesMLE[k, "infProfile"] * sum(incDist[seq(i0, iMax), "pdf"] * quantitiesMLE[(iDelta1 + indexDelta2 - k) - (seq(i0, iMax) - i0), "infProfileCDF"])
-          })
-        ) * stepSize^2 + sum(
-          sapply(seq(indexMinusTau + 1, i0), function(j) {
-            incDist[i0 + (i0 - j), "pdf"] * sum(
-              sapply(seq(j, iDelta1), function(k) {
-                quantitiesMLE[k, "infProfile"] * sum(incDist[seq(i0, iMax), "pdf"] * quantitiesMLE[(iDelta1 + indexDelta2 - k) - (seq(i0, iMax) - i0), "infProfileCDF"])
-              })
-            )
-          })
-        ) * stepSize^3
-      })) # * f * g * k1 * k2
-
-      #' Finally loop over the values of f,g,Re and sum up all the cases per parameter set
-      cases <- lapply(seq_len(nrow(paramDF)), function(i) {
-        Re <- paramDF[[i, "Re"]]
-        f <- paramDF[[i, "f"]]
-        g <- paramDF[[i, "g"]]
-
-        k1 <- Re / (1 - Iinfty)
-        k2 <- k1
-        n2 <- k2 * ((1 - f) + f * PDelta1 - Iinfty)
-        casesIndexUndetected <- (1 - f) * k1 * (1 - Iinfty) * n2
-
-        c <- f * g * k1 * k2 * (casesDetectedPart1 - casesDetectedPart2) +
-          f * k1 * (1 - g) * casesUndetected * n2 +
-          f * k1 * casesOutsideDetection * n2 +
-          casesIndexUndetected
-
-        data.frame(
-          Re = factor(Re, levels = paramList$Re),
-          f = factor(f, levels = paramList$f),
-          Delta1 = factor(paramList$Delta1, levels = paramList$Delta1),
-          tau = factor(tau, levels = paramList$tau),
-          g = factor(g, levels = paramList$g),
-          Delta2 = factor(Delta2, levels = paramList$Delta2),
-          cases = c
-        )
-      })
-      do.call(rbind, cases)
-    })
-    do.call(rbind, cases)
+  y <- sapply(levels(params$study), function(study) {
+    if (CDF) { # Cumulative density function
+      return(plnorm(q = times,
+                    meanlog = params[params$study == study, "meanlog"],
+                    sdlog = params[params$study == study, "sdlog"]))
+    } else { # Probability density function
+      return(dlnorm(x = times,
+                    meanlog = params[params$study == study, "meanlog"],
+                    sdlog = params[params$study == study, "sdlog"]))
+    }
   })
-  tertiaryCasesMLE <- do.call(rbind, tertiaryCasesMLE)
-  return(tertiaryCasesMLE)
+
+  #' Average over the studies
+  if (length(times) == 1) return(mean(y))
+  else return(apply(y, 1, mean))
 }
+
+
+getIntegral <- function(upper, lower, tE, params) {
+  getGenDist(times = upper - tE, params = params, CDF = T) -
+    getGenDist(times = lower - tE, params = params, CDF = T)
+}
+
+getUtility <- function(s = 1, efficacy, time) {
+  s * efficacy / time
+}
+
+dayLabels <- function(x) {
+  labs <- paste(x, ifelse(x == 1, "day", "days"))
+  names(labs) <- x
+  return(labs)
+}
+
+# False negative probabilities
+falseNeg <- approxfun(
+  x = c(0, 1, 4, 5, 6, 7, 8, 9, 21),
+  y = c(1, 1, 0.67, 0.38, 0.25, 0.21, 0.20, 0.21, 0.66)
+)
