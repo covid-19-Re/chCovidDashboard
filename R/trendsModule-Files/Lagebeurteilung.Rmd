@@ -218,7 +218,7 @@ Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivi
 
 Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
-(die Änderung war `r valueUIchange(rankingCHEicu)`).
+(die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
 Die Zahl der täglichen Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`[^4].
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
