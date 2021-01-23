@@ -141,11 +141,11 @@ corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date 
 
 variants <- read_csv(here("www/variant-plot/variantPlot_data.csv")) %>%
   mutate(
-    weekStartDate = parse_date_time(str_c(year, week - 1, 1, sep = "-"), "Y-W-w")
+    weekStartDate = parse_date_time(str_c(year, if_else(year == 2020, week-1, week), 1, sep = "-"), "Y-U-w")
   ) %>%
   # discard current week
   filter(
-    year_week != str_c(year(today()), "-", week(today()))
+    year_week != str_c(year(today()), "-", isoweek(today()))
   )
 
 mostRecentb117 <- variants %>%
