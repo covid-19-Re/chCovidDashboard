@@ -225,7 +225,7 @@ Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_to
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
 Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 11 gemeldeten Wochen <!--- CHECK --->
 eine deutliche Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf[^7].
-Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion[^8]. <!--- CHECK --->
+Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion[^8]. <!--- CHECK ---> 
 
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und 501.V2 erstmals
