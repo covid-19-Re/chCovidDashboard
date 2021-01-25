@@ -189,7 +189,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%") {
 Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie für Anfang Januar einen rückgängigen und für Mitte Januar einen stabilen bis leicht rückgängingen <!--- CHECK ---->
 Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
 
-* `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle (per `r format(r_cases$date, "%d.%m.%Y")`).
+* `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
 
 * `r valueUIr(r_hosp)` aufgrund der Hospitalisationen, per `r format(r_hosp$date, "%d.%m.%Y")`.
 Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeHosp)` geschätzt. 
