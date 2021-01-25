@@ -212,7 +212,7 @@ Auch diese Werte spiegeln das Infektionsgeschehen vor 10 Tagen bis mehreren Woch
 
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
-Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, 2), decimal.mark = ',')`
+Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, 2), decimal.mark = ',')` 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, Tendenz `r positivityTrend`;<!--- CHECK ---> 
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 
