@@ -241,8 +241,8 @@ wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRe
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
 
 
-
-<!--- ## Beurteilung
+<!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
+<!--- ## Beurteilung 
 Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen relativ stabilen Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Durch die Einführung von national einheitlichen Massnahmen hat sich der Verlauf der Epidemie in den unterschiedlichen Regionen angeglichen. [^11] --->
 
 <!--- Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor sehr hoch. Falls der Wintersport und die Festtage zu vermehrten Ansteckungen geführt haben, wird sich dies in einem Anstieg der bestätigten Fälle im Verlauf vom Januar niederschlagen. Zudem besteht das Risiko, dass eine Ausbreitung der bereits in der Schweiz nachgewiesenen neuen Variante von SARS-CoV-2 mit einer wahrscheinlich erhöhten Übertragung innerhalb der nächsten Wochen zu einem Anstieg der Epidemie und einer noch stärkeren Belastung des Gesundheitssystems führen wird.[^12] --->
