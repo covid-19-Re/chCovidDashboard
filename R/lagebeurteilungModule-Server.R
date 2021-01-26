@@ -14,7 +14,7 @@ lagebeurteilungServer <- function(id) {
                     format(file.mtime("www/lagebeurteilung/lagebeurteilung-shiny.html"), "%d.%m.%Y %H:%M"),
                   "</i>&nbsp;|&nbsp;",
                   "<i class='small'>Text aktualisiert (finale Version jeweils am Montag Abend): ",
-                    format(file.mtime("R/trendsModule-Files/Lagebeurteilung.Rmd"), "%a, %d.%m.%Y"),
+                    format(file.mtime("R/trendsModule-Files/Lagebeurteilung.Rmd"), "%a, %d.%m.%Y %H:%M"),
                   "</i>"
                 )
               ),
