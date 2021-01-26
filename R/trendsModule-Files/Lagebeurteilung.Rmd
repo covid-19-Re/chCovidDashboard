@@ -175,14 +175,15 @@ valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "", 
   )
 }
 
-reRoundDigits <- 2
-percentRoundDigits <- 0
+reDigits <- 2
+percentDigits <- 0
+positivityDigits <- 2 
 
-valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "", digits = reRoundDigits) {
+valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "", digits = reDigits) {
   valueUI(df$median_R_mean, df$median_R_lowHPD, df$median_R_highHPD,
     uiText = uiText, uiSep = uiSep, unit = unit, digits = digits)
 }
-valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits = percentRoundDigits) {
+valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits = percentDigits) {
   valueUI(df$estimate * 100, df$lower * 100, df$upper * 100,
     uiText = uiText, uiSep = uiSep, unit = unit, digits = digits)
 }
@@ -218,7 +219,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
-Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, 2), decimal.mark = ',')` 
+Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, positivityDigits), decimal.mark = ',')` 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, Tendenz `r positivityTrend`;<!--- CHECK ---> 
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 
@@ -242,9 +243,9 @@ systematische genetische Charakterisierung von Proben im Referenzlabor in Genf e
 mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm
 seit dem ersten Nachweis kontinuierlich zu.
 In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(mostRecentb117$weekStartDate, "%d.%m.%Y")`)
-wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, percentRoundDigits), decimal.mark = ',')`% geschätzt
-(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentRoundDigits), decimal.mark = ',')`% bis
-`r format(round(mostRecentb117$p_upper, percentRoundDigits), decimal.mark = ',')`%;
+wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, percentDigits), decimal.mark = ',')`% geschätzt
+(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentDigits), decimal.mark = ',')`% bis
+`r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
 
 
