@@ -192,7 +192,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-### Dynamik
+### Dynamik 
 Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie für Anfang Januar einen rückgängigen und für Mitte Januar einen stabilen bis leicht rückgängingen <!--- CHECK ---->
 Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
 
