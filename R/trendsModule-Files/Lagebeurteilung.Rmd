@@ -106,7 +106,9 @@ testsFiles <- c(here("data", "Re", "CHE-Tests.rds"), here("data", "RePublic", "C
 mostRecentTestsFile <- testsFiles[which.max(file.mtime(testsFiles))]
 
 tests <- readRDS(mostRecentTestsFile) %>%
-  mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+  mutate(
+    testPositivityP = testPositivity * 100,
+    weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
 mostRecentTests <- filter(tests, date > max(date) - 14)
 mostRecentTestPositivity <- filter(tests, date == max(date))
 positivityLm <- lm(testPositivity ~ date + weekend, data = mostRecentTests)
@@ -177,7 +179,7 @@ valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "", 
 
 reDigits <- 2
 percentDigits <- 0
-positivityDigits <- 2 
+positivityDigits <- 1
 
 valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "", digits = reDigits) {
   valueUI(df$median_R_mean, df$median_R_lowHPD, df$median_R_highHPD,
@@ -219,7 +221,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
-Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, positivityDigits), decimal.mark = ',')` 
+Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')` 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, Tendenz `r positivityTrend`;<!--- CHECK ---> 
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 
