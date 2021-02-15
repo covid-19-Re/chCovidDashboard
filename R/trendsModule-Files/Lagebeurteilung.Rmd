@@ -194,8 +194,8 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-### Dynamik 
-Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie für Anfang Januar einen rückgängigen und für Mitte Januar einen stabilen bis leicht rückgängingen <!--- CHECK ---->
+### Dynamik  
+Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie in der ersten Januarhälfte einen rückläufigen und in der zweiten Monatshälfte einen stabilen bis leicht rückläufigen <!--- CHECK ---->
 Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
 
 * `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
@@ -234,12 +234,14 @@ Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_to
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
 Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist seit Kalenderwoche 43 in 2020 <!--- CHECK --->
 eine deutliche Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf[^7].
-Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion[^8]. <!--- CHECK ---> 
+Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen der Schweiz immer noch sichtbar: Ostschweiz, Zürich und Zentralschweiz[^8]. <!--- CHECK ---> 
 
 ## Neue Varianten
-In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und 501.V2 erstmals
-in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Epidemiologische Analysen und Daten aus der Kontaktverfolgung
-weisen darauf hin, dass diese Varianten eine höhere Übertragungsrate haben als die bislang bekannten Stämme von SARS-CoV-2[^13].
+In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
+in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
+in Kalenderwoche 6 des Jahres 2021 in einer Probe identifiziert, die in der letzten Januarwoche gesammelt wurde. 
+Epidemiologische Analysen und Daten aus der Kontaktverfolgung weisen darauf hin, dass diese Varianten eine höhere Übertragungsrate 
+haben als die bislang bekannten Stämme von SARS-CoV-2[^13].
 Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors sowie die
 systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt, die Häufigkeit von Infektionen
 mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm
