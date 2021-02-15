@@ -5,7 +5,7 @@ library(slider)
 
 # calculate doubling time from Re using a Gamma distributed generation time 
 getDoublingTimeRe <- function(re, mu = 4.8, sigma = 2.3) {
-  variance <- sigma * 2
+  variance <- sigma^2
   rate <- mu / variance
   shape <- mu^2 / variance
 
