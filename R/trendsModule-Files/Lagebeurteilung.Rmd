@@ -252,7 +252,7 @@ wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRe
 `r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
 
-Insbesondere steigt die absolute Anzahl der B.1.1.7 Varianten. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13]. <!--- CHECK --->
+Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13]. <!--- CHECK --->
 
 
 <!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
