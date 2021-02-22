@@ -195,7 +195,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 ### Dynamik  
-Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie in der ersten Januarhälfte einen leicht rückläufigen <!--- CHECK ---->
+Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie in den letzten Wochen einen leicht rückläufigen <!--- CHECK ---->
 Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
 
 * `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
@@ -232,8 +232,8 @@ im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 Die Zahl der täglichen Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`[^4].
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
-Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist seit Kalenderwoche 43 in 2020 <!--- CHECK --->
-eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf[^7].
+Die Sterblichkeitsstatistik vom Bundesamt für Statistik zeigt zwischen Kalenderwoche 43 im Jahr 2020 und Kalenderwoche 3 im Jahr 2021 <!--- CHECK --->
+eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. In der letzten Januarwoche wird keine Übersterblichkeit mehr beobachtet.
 <!--- Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen der Schweiz immer noch sichtbar: Ostschweiz, Zürich und Zentralschweiz[^8].  CHECK ---> 
 
 ## Neue Varianten
