@@ -208,13 +208,12 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen widerspiegelt
-aufgrund der Verzögerung von Infektion und Eintreten eines Ereignis (Fallbestätigung, Hospitalisationen, Todesfall).
+Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor mind. 10 Tagen (für Fallzahlen) bis 23 Tage (für Todesfaelle) widerspiegelt aufgrund der Verzögerung von Infektion und Eintreten eines Ereignisses.
 Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass dort die Trends stabil bis rückläufig sind. <!--- CHECK ---->
 
 Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- CHECK---> 
 bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
-Die bestätigten Falle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
+Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
 die Hospitalisierungen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
@@ -229,17 +228,17 @@ Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
-Die Zahl der täglichen Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`[^4].
+Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
 Die Sterblichkeitsstatistik vom Bundesamt für Statistik zeigt zwischen Kalenderwoche 43 im Jahr 2020 und Kalenderwoche 3 im Jahr 2021 <!--- CHECK --->
-eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. In der letzten Januarwoche wird keine Übersterblichkeit mehr beobachtet.
+eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. Insgesamt sind rund 8’400 zusätzliche Todesfälle in diesem Zeitraum im Vergleich zu Vorjahren verzeichnet. In der letzten Januarwoche wurde keine Übersterblichkeit mehr beobachtet.
 <!--- Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen der Schweiz immer noch sichtbar: Ostschweiz, Zürich und Zentralschweiz[^8].  CHECK ---> 
 
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 identifiziert. 
+in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. 
 Epidemiologische Analysen und Daten aus der Kontaktverfolgung weisen darauf hin, dass diese Varianten eine höhere Übertragungsrate 
 haben als die bislang bekannten Stämme von SARS-CoV-2[^13].
 Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors sowie die
