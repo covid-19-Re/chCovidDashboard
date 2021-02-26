@@ -194,6 +194,8 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen und Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. 
+
 ### Dynamik  
 Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie in den letzten Wochen einen leicht rückläufigen  <!--- CHECK ---->
 Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
@@ -214,15 +216,19 @@ Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass dort die Trend
 Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- CHECK---> 
 bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
-die Hospitalisierungen um `r valueUIchange(rankingCHEhospitalizations)`
+die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
 Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
-(Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, Tendenz `r positivityTrend`;<!--- CHECK ---> 
+<!--- [TODO Dani subtract two days ie on Feb 26 we report positivity for Feb 23!] --->
+(Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
+<!---
+Tendenz `r positivityTrend`;  CHECK  
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
+--->
 
 Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
