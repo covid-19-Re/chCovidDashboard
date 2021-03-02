@@ -200,7 +200,10 @@ In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen 
 Über die ganze Schweiz zeigte die SARS-CoV-2-Epidemie in den letzten Wochen einen leicht rückläufigen  <!--- CHECK ---->
 Verlauf der in den letzten Tagen gestoppt wurde. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.06 (0.94-1.17); dies reflektiert das Infektionsgeschen vom 13.-19.02.2021.
 
-Für Anfang Februar war die Reproduktionszahl basierend auf den bestätigten Fällen schweizweit und in den meisten Grossregionen signifikant unter 1. In den neuesten Schätzungen der Reproduktionszahl – welche das Infektionsgeschehen vom 19.2. widerspiegeln – schliesst das Unsicherheitsinterval für die Schweiz und alle Grossregionen die 1 ein. Nur in Zuerich ist der Punktschätzer für den neuesten Wert von *R~e~* unter 1.  <!--- CHECK ---->
+Für Anfang Februar war die Reproduktionszahl basierend auf den bestätigten Fällen schweizweit und in den meisten Grossregionen signifikant unter 1. In den neuesten Schätzungen der Reproduktionszahl – welche das Infektionsgeschehen vom 19.2. widerspiegeln – schliesst das Unsicherheitsinterval für die Schweiz und alle Grossregionen die 1 ein. Nur in Zuerich ist der Punktschätzer für den neuesten Wert von *R~e~* unter 1.  <!--- CHECK 
+TODO: insert comment that hosp and death data will not reflect actual tranmission dynamics in a phase were the group most at risk is continuously being vaccinated.
+Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
+---->
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
 
@@ -229,7 +232,8 @@ Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt be
 Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
 <!--- [TODO Dani subtract two days ie on Feb 26 we report positivity for Feb 23!] --->
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
-<!---
+
+<!--- commented out as this is NOT Re based on positivity!
 Tendenz `r positivityTrend`;  CHECK  
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
