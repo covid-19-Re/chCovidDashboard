@@ -231,7 +231,6 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
 Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
-<!--- [TODO Dani subtract two days ie on Feb 26 we report positivity for Feb 23!] --->
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
 
 <!--- commented out as this is NOT Re based on positivity!
