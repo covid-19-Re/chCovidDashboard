@@ -198,7 +198,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen und Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. 
 
 ### Dynamik  
-Über die ganze Schweiz zeigte die SARS-CoV-2-Epidemie in den letzten Wochen einen leicht rückläufigen  <!--- CHECK ---->
+Über die ganze Schweiz zeigte die SARS-CoV-2-Epidemie in den letzten Wochen einen leicht rückläufigen  <!--- CHECK  ---->
 Verlauf der in den letzten Tagen gestoppt wurde. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.06 (0.94-1.17); dies reflektiert das Infektionsgeschen vom 13.-19.02.2021.
 
 Für Anfang Februar war die Reproduktionszahl basierend auf den bestätigten Fällen schweizweit und in den meisten Grossregionen signifikant unter 1. In den neuesten Schätzungen der Reproduktionszahl – welche das Infektionsgeschehen vom 19.2. widerspiegeln – schliesst das Unsicherheitsinterval für die Schweiz und alle Grossregionen die 1 ein. Nur in Zuerich ist der Punktschätzer für den neuesten Wert von *R~e~* unter 1.  <!--- CHECK 
