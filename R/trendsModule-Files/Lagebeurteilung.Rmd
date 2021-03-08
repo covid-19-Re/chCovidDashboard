@@ -1,5 +1,5 @@
 ---
-title: "Epidemiologische Lagebeurteilung"
+title: "Epidemiologische Lagebeurteilung" 
 author: "Swiss National COVID-19 Science Task Force"
 date: "`r format(Sys.time(), '%d.%m.%Y')`"
 output:
@@ -106,9 +106,12 @@ testsFiles <- c(here("data", "Re", "CHE-Tests.rds"), here("data", "RePublic", "C
 mostRecentTestsFile <- testsFiles[which.max(file.mtime(testsFiles))]
 
 tests <- readRDS(mostRecentTestsFile) %>%
-  mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+  mutate(
+    testPositivityP = testPositivity * 100,
+    weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
 mostRecentTests <- filter(tests, date > max(date) - 14)
-mostRecentTestPositivity <- filter(tests, date == max(date))
+testReportingOffset <- 3 # number of days in the past to report n Tests.
+mostRecentTestPositivity <- filter(tests, date == max(date) - 3)
 positivityLm <- lm(testPositivity ~ date + weekend, data = mostRecentTests)
 positivityTrend <- if_else(coef(positivityLm)[2] >= 0, "zunehmend", "abnehmend")
 ```
@@ -128,7 +131,7 @@ rankingCHEicu <- filter(rankingCHE, event == "icu")
 deaths_total <- eventCounts %>%
   filter(event == "deaths", region == "CH", age_class == "all", date >= "2020-10-01") %>%
   pull(count) %>%
-  sum()
+  sum() 
 
 # Cantonal deaths based on openZH
 corona_data <- read.csv("https://raw.githubusercontent.com/daenuprobst/covid19-cases-switzerland/master/covid19_fatalities_switzerland_openzh.csv")
@@ -141,11 +144,11 @@ corona_data_deaths <- tail(corona_data$CH, 1) - corona_data$CH[corona_data$Date 
 
 variants <- read_csv(here("www/variant-plot/variantPlot_data.csv")) %>%
   mutate(
-    weekStartDate = parse_date_time(str_c(year, week - 1, 1, sep = "-"), "Y-W-w")
+    weekStartDate = parse_date_time(str_c(year, if_else(year == 2020, week-1, week), 1, sep = "-"), "Y-U-w")
   ) %>%
   # discard current week
   filter(
-    year_week != str_c(year(today()), "-", week(today()))
+    year_week != str_c(year(today()), "-", isoweek(today()))
   )
 
 mostRecentb117 <- variants %>%
@@ -165,31 +168,47 @@ mostRecents501yv2 <- variants %>%
 ```
 
 ```{r printFuns, echo = FALSE}
-valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "") {
+
+valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "", digits = 2) {
   glue(
-    "{format(round(value, 2), decimal.mark = ',')}{unit} ",
-    "({uiText}: {format(round(lower, 2), decimal.mark = ',')}{unit}",
+    "{format(round(value, digits), decimal.mark = ',')}{unit} ",
+    "({uiText}: {format(round(lower, digits), decimal.mark = ',')}{unit}",
     "{uiSep}",
-    "{format(round(upper, 2), decimal.mark = ',')}{unit})"
+    "{format(round(upper, digits), decimal.mark = ',')}{unit})"
   )
 }
 
-valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "") {
-  valueUI(df$median_R_mean, df$median_R_lowHPD, df$median_R_highHPD, uiText = uiText, uiSep = uiSep, unit = unit)
+reDigits <- 2
+percentDigits <- 0
+positivityDigits <- 1
+
+valueUIr <- function(df, uiText = "95% UI", uiSep = "-", unit = "", digits = reDigits) {
+  valueUI(df$median_R_mean, df$median_R_lowHPD, df$median_R_highHPD,
+    uiText = uiText, uiSep = uiSep, unit = unit, digits = digits)
 }
-valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%") {
-  valueUI(df$estimate * 100, df$lower * 100, df$upper * 100, uiText = uiText, uiSep = uiSep, unit = unit)
+valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits = percentDigits) {
+  valueUI(df$estimate * 100, df$lower * 100, df$upper * 100,
+    uiText = uiText, uiSep = uiSep, unit = unit, digits = digits)
 }
 ```
 
 
 ## Allgemeine Situation
 
-### Dynamik
-Über die ganze Schweiz zeigt die SARS-CoV-2-Epidemie einen rückgängigen <!--- CHECK ---->
-Verlauf. Die Schätzungen der effektiven Reproduktionszahl *R~e~* betragen[^1]:
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen und Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. 
 
-* `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle (per `r format(r_cases$date, "%d.%m.%Y")`).
+### Dynamik  
+Über die ganze Schweiz zeigte die SARS-CoV-2-Epidemie in den letzten Wochen einen leicht rückläufigen  <!--- CHECK  ---->
+Verlauf der in den letzten Tagen gestoppt wurde. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.06 (0.94-1.17); dies reflektiert das Infektionsgeschen vom 13.-19.02.2021.
+
+Für Anfang Februar war die Reproduktionszahl basierend auf den bestätigten Fällen schweizweit und in den meisten Grossregionen signifikant unter 1. In den neuesten Schätzungen der Reproduktionszahl – welche das Infektionsgeschehen vom 19.2. widerspiegeln – schliesst das Unsicherheitsinterval für die Schweiz und alle Grossregionen die 1 ein. Nur in Zuerich ist der Punktschätzer für den neuesten Wert von *R~e~* unter 1.  <!--- CHECK 
+TODO: insert comment that hosp and death data will not reflect actual tranmission dynamics in a phase were the group most at risk is continuously being vaccinated.
+Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
+---->
+
+Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
+
+* `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
 
 * `r valueUIr(r_hosp)` aufgrund der Hospitalisationen, per `r format(r_hosp$date, "%d.%m.%Y")`.
 Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeHosp)` geschätzt. 
@@ -199,55 +218,63 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen widerspiegelt
-aufgrund der Verzögerung von Infektion und Eintreten eines Ereignis (Fallbestätigung, Hospitalisationen, Todesfall).
-Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass auch dort die Trends rückläufig sind. <!--- CHECK ---->
+Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor mind. 10 Tagen (für Fallzahlen) bis 23 Tage (für Todesfaelle) widerspiegelt aufgrund der Verzögerung von Infektion und Eintreten eines Ereignisses.
+<!--- Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass dort die Trends stabil bis rückläufig sind. CHECK ---->
 
 Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- CHECK---> 
 bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
-Die bestätigten Falle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
-die Hospitalisierungen um `r valueUIchange(rankingCHEhospitalizations)`
+Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
+die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
-Auch diese Werte spiegeln das Infektionsgeschehen vor 10 Tagen bis mehreren Wochen wider.
+Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 ### Absolute Zahlen
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
-Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivity, 2), decimal.mark = ',')`
-(Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, Tendenz `r positivityTrend`;<!--- CHECK ---> 
+Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
+(Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
+
+<!--- commented out as this is NOT Re based on positivity!
+Tendenz `r positivityTrend`;  CHECK  
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
+--->
 
 Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
-(die Änderung war `r valueUIchange(rankingCHEicu)`).
+(die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
-Die Zahl der täglichen Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]`-`r range(deaths$count)[2]`[^4].
+Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
-Die Sterblichkeitsstatistik vom Bundesamt für Statistik weist über die letzten 11 gemeldeten Wochen <!--- CHECK --->
-eine deutliche Übersterblichkeit in der Altersgruppe 65 Jahre und älter auf[^7].
-Diese Übersterblichkeit zeigt sich in allen Grossregionen der Schweiz mit Ausnahme der Genferseeregion[^8]. <!--- CHECK --->
+Die Sterblichkeitsstatistik vom Bundesamt für Statistik zeigt zwischen Kalenderwoche 43 im Jahr 2020 und Kalenderwoche 3 im Jahr 2021 <!--- CHECK --->
+eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. Insgesamt sind rund 8’400 zusätzliche Todesfälle in diesem Zeitraum im Vergleich zu Vorjahren verzeichnet. Seitdem wurde keine Übersterblichkeit mehr beobachtet.
+<!--- Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen der Schweiz immer noch sichtbar: Ostschweiz, Zürich und Zentralschweiz[^8].  CHECK ---> 
 
 ## Neue Varianten
-In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und 501.V2 erstmals
-in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Epidemiologische Analysen und Daten aus der Kontaktverfolgung
-weisen darauf hin, dass diese Varianten eine höhere Übertragungsrate haben als die bislang bekannten Stämme von SARS-CoV-2[^13].
+In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
+in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
+in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. 
+Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Neueste Analysen basierend auf schweizer Daten bestätigen diese höhere Rate[^15],[^16].
+
 Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors sowie die
-systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt, die Häufigkeit von Infektionen
-mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil dieser Varianten an allen Infektionen nahm
-seit dem ersten Nachweis kontinuierlich zu.
+systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt weiter, die Häufigkeit von Infektionen
+mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil von B.1.1.7 an allen Infektionen nahm
+seit dem ersten Nachweis kontinuierlich zu. 
 In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(mostRecentb117$weekStartDate, "%d.%m.%Y")`)
-wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, 2), decimal.mark = ',')`% geschätzt
-(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, 2), decimal.mark = ',')`% bis `r format(round(mostRecentb117$p_upper, 2), decimal.mark = ',')`%;
-das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]).
+wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, percentDigits), decimal.mark = ',')`% geschätzt
+(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentDigits), decimal.mark = ',')`% bis
+`r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
+das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]). Die Genfersee-Region ist in der Dynamik ca. 1-2 Wochen gegenüber der Gesamtscheiz voraus[^15],[^16].
+
+<!--- Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
 
 
-
-<!--- ## Beurteilung
+<!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
+<!--- ## Beurteilung 
 Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen relativ stabilen Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Durch die Einführung von national einheitlichen Massnahmen hat sich der Verlauf der Epidemie in den unterschiedlichen Regionen angeglichen. [^11] --->
 
 <!--- Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor sehr hoch. Falls der Wintersport und die Festtage zu vermehrten Ansteckungen geführt haben, wird sich dies in einem Anstieg der bestätigten Fälle im Verlauf vom Januar niederschlagen. Zudem besteht das Risiko, dass eine Ausbreitung der bereits in der Schweiz nachgewiesenen neuen Variante von SARS-CoV-2 mit einer wahrscheinlich erhöhten Übertragung innerhalb der nächsten Wochen zu einem Anstieg der Epidemie und einer noch stärkeren Belastung des Gesundheitssystems führen wird.[^12] --->
 
-[^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf. Aufgrund der verwendeten Methodik kann die tatsächliche Unsicherheit um die Schätzwerte nicht immer vollständig dargestellt werden.
+[^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
 [^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends: Aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
 [^3]: https://icumonitoring.ch
 [^4]: https://www.covid19.admin.ch
@@ -259,8 +286,10 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^10]: https://ibz-shiny.ethz.ch/covidDashboard/tables
 [^11]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/
 [^12]: https://www.ecdc.europa.eu/en/publications-data/threat-assessment-brief-rapid-increase-sars-cov-2-variant-united-kingdom
-[^13]: https://sciencetaskforce.ch/wp-content/uploads/2021/01/Wissenschaftliches_Update14Jan21-DE-1.pdf
+[^13]: https://sciencetaskforce.ch/wissenschaftliches-update-09-februar-2021/
 [^14]: https://sciencetaskforce.ch/nextstrain-phylogentische-analysen/
+[^15]: https://cevo-public.github.io/Quantification-of-the-spread-of-a-SARS-CoV-2-variant/
+[^16]: https://ispmbern.github.io/covid-19/variants/
 
 
 

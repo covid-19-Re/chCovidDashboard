@@ -11,10 +11,10 @@ lagebeurteilungServer <- function(id) {
               column(6,
                 HTML(
                   "<i class='small'>Daten aktualisiert (täglich): ",
-                    format(file.mtime("www/lagebeurteilung/lagebeurteilung-shiny.html"), "%d.%m.%Y %H:%M"),
+                    format(file.mtime("data/Re/CHE-Estimates.rds"), "%d.%m.%Y %H:%M"),
                   "</i>&nbsp;|&nbsp;",
                   "<i class='small'>Text aktualisiert (finale Version jeweils am Montag Abend): ",
-                    format(file.mtime("R/trendsModule-Files/Lagebeurteilung.Rmd"), "%a, %d.%m.%Y"),
+                    format(file.mtime("R/trendsModule-Files/Lagebeurteilung.Rmd"), "%a, %d.%m.%Y %H:%M"),
                   "</i>"
                 )
               ),
