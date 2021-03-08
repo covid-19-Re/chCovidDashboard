@@ -11,8 +11,8 @@ The dashboard presents three types of information:
 
 Let's take the hospitalisation probability ("Hospitalisation given Positive test") as an example.
 
-If the "Clinical event probability given" option is selected, the shown numbers can be interpreted as probabilities. This means that we get the estimated probability of a person being hospitalised when the person was tested positively on a specific day. The certainly of the estimation depends on the sample size: when many people had a positive test on a day, the certainty is higher.
+If the "Clinical event probability given" option is selected, the shown numbers can be interpreted as probabilities. This means that we get the estimated probability of a person being hospitalised when the person was tested positively on a specific day. The certainty of the estimation depends on the sample size: when many people had a positive test on a day, the certainty is higher.
 
-The <a href="https://en.wikipedia.org/wiki/Binomial_distribution#Confidence_intervals" target="_blank">binomial distribution</a> is used as the underlying model. We set the "number of trials" n = number of positive cases, "the number of successes" k = number of hospitalisations, and the probability p = k/n . The confidence interval is then calculated with the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper%E2%80%93Pearson_interval" target="_blank">Clopper-Pearson method</a>.
+The <a href="https://en.wikipedia.org/wiki/Binomial_distribution#Confidence_intervals" target="_blank">binomial distribution</a> is used as the underlying model. We set the "number of trials" n = number of positive cases, "the number of successes" k = number of hospitalisations. The maximum likelihood estimate of the probability is p = k/n . The confidence interval is calculated with the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper%E2%80%93Pearson_interval" target="_blank">Clopper-Pearson method</a>.
 
 When a sliding window is selected, all hospitalisations and positive tests in the chosen time window are taken into account (the values are summed up in the chosen time window).
