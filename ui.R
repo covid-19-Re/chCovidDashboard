@@ -38,14 +38,14 @@ ui <- function(request) {
             affiliation = "Institute of Integrative Biology, ETH Zurich, Switzerland<br><br>",
             thumbnail = "ttiqModule-thumbnail.png",
             tabId = "selectTTIQ"
+          ),
+          thumbnailPanel(
+            title = "Time Series",
+            authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
+            affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
+            thumbnail = "ts-thumbnail.png",
+            tabId = "selectTs"
           )
-          # thumbnailPanel(
-          #   title = "Time Series",
-          #   authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
-          #   affiliation = "Computational Evolution Group, D-BSSE, ETH Zurich, Switzerland",
-          #   thumbnail = "ts-thumbnail.png",
-          #   tabId = "selectTs"
-          # ),
           # thumbnailPanel(
           #   title = "Time Series: Data Quality",
           #   authors = "Chaoran Chen, Timothy Vaughan, Tanja Stadler",
@@ -94,20 +94,20 @@ ui <- function(request) {
           )
         ),
       ),
-      # navbarMenu(
-      #   "Time Series",
-      #   menuName = "timeseries",
-      #   tabPanel(
-      #     "Time Series",
-      #     value = "ts",
-      #     tsUI("ts")
-      #   ),
-      #   tabPanel(
-      #     "Data Quality",
-      #     value = "tsDataQuality",
-      #     tsDataQualityUI("tsDataQuality")
-      #   )
-      # ),
+      navbarMenu(
+        "Time Series",
+        menuName = "timeseries",
+        tabPanel(
+          "Time Series",
+          value = "ts",
+          tsUI("ts")
+        )
+        # tabPanel(
+        #   "Data Quality",
+        #   value = "tsDataQuality",
+        #   tsDataQualityUI("tsDataQuality")
+        # )
+      ),
       tabPanel("Trends",
         value = "trends",
         trendsUI("trends")

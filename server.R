@@ -12,11 +12,11 @@ server <- function(input, output, session) {
       selected = "ttiq"
     )
   })
-  # observeEvent(input$selectTs, {
-  #   updateTabsetPanel(session, "tab",
-  #     selected = "ts"
-  #   )
-  # })
+  observeEvent(input$selectTs, {
+    updateTabsetPanel(session, "tab",
+      selected = "ts"
+    )
+  })
   # observeEvent(input$selectTsDataQuality, {
   #   updateTabsetPanel(session, "tab",
   #     selected = "tsDataQuality"
@@ -47,7 +47,7 @@ server <- function(input, output, session) {
 
   quarantineDurationServer("quarantineDuration")
 
-  # tsServer("ts")
+  tsServer("ts")
 
   # tsDataQualityServer("tsDataQuality")
 
