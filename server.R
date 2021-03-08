@@ -47,7 +47,7 @@ server <- function(input, output, session) {
 
   quarantineDurationServer("quarantineDuration")
 
-  tsServer("ts")
+  tsServer("ts", global_session = session)
 
   # tsDataQualityServer("tsDataQuality")
 
