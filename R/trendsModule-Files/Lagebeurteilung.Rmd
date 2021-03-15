@@ -199,10 +199,8 @@ In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen 
 
 ### Dynamik  
 <!--- CHECK  ---->
-Seit Mitte Februar deuten die Daten auf einen leicht steigenden Trend der SARS-CoV-2 Epidemie hin. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.08 (0.94 - 1.23); dies reflektiert das Infektionsgeschen vom 20.-26.02.2021.
-
-Diese Dynamik kann in allen Grossregionen der Schweiz beobachtet werden. In den neuesten Schätzungen der Reproduktionszahl – welche das Infektionsgeschehen vom 26.2. widerspiegeln – schliesst das Unsicherheitsinterval für alle Grossregionen die 1 ein und der Punktschätzer von  *R~e~* liegt in allen Regionen über 1.  <!--- CHECK 
-TODO: insert comment that hosp and death data will not reflect actual tranmission dynamics in a phase were the group most at risk is continuously being vaccinated.
+Seit Mitte Februar deuten die Daten auf einen steigenden Trend der SARS-CoV-2 Epidemie hin. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.12 (0.99 - 1.25); dies reflektiert das Infektionsgeschen vom 27.02.-05.03.2021.
+Diese Dynamik kann in 5/7 Grossregionen der Schweiz beobachtet werden. Lediglich die Genferseeregion un das Mittelland rapportieren nach wie vor stabile Fallzahlen.  <!--- CHECK 
 Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
 ---->
 
@@ -220,11 +218,9 @@ Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
 Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor mind. 10 Tagen (für Fallzahlen) bis 23 Tage (für Todesfälle) widerspiegelt aufgrund der Verzögerung von Infektion und Eintreten eines Ereignisses.
 
-Durch fortschreitende Impfungen der Risikogruppen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik nicht mehr zuverlaessig widergeben wird. Eine zukünftige Veränderung dieser Zahlen stratifiziert nach Alter kann auf unserem neuen Dashboard verfolgt werden [^17].
-<!--- Eine Betrachtung der sieben Grossregionen der Schweiz zeigt, dass dort die Trends stabil bis rückläufig sind. CHECK ---->
+Durch fortschreitende Impfungen der Risikogruppen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik nicht mehr zuverlaessig widergeben wird. Eine Veränderung dieser Zahlen stratifiziert nach Alter kann auf unserem neuen Dashboard verfolgt werden [^17]. Seit Wochen sehen wir eine verlangsamte Dynamik in der Altersgruppe über 80 bei den Fallzahlen und erkennen seit einigen Tagen auch einen ersten Trend bei den Hospitalisierungen.
 
-Die Analyse wird gestützt durch die beobachteten Verdopplungs- bzw. Halbwertszeiten der <!--- CHECK---> 
-bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
+Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
@@ -256,19 +252,19 @@ eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. Insgesamt s
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
 in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. 
-Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Neueste Analysen basierend auf schweizer Daten bestätigen diese höhere Rate[^15],[^16].
+Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16].
 
-Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors sowie die
-systematische genetische Charakterisierung von Proben im Referenzlabor in Genf erlaubt weiter, die Häufigkeit von Infektionen
-mit diesen Varianten in der Schweiz über die Zeit zu verfolgen. Der Anteil von B.1.1.7 an allen Infektionen nahm
-seit dem ersten Nachweis kontinuierlich zu. 
+Der Anteil von B.1.1.7 an allen Infektionen nahm seit dem ersten Nachweis kontinuierlich zu. Wir erwarten, dass mind. 9 von 10 Infektionen, welche heute erfolgen, durch B117 verursacht sind ([^15],[^16]; auf diesen Websites wird die Dynamik der bestätigten Fälle abgebildet; neue Infektionen vom 16.3. werden Ende März bestätigt zu welchem Zeitpunkt die Kurven bei über 90% liegen). Die Genfersee-Region ist in der Dynamik ca. 1-2 Wochen gegenüber der Gesamtschweiz voraus. Basierend auf den Daten aus der genetischen Charakterisierung können wir weiter die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Inzwischen ist B.1.1.7 dominant und die Gesamtzahlen steigen wieder.
+
+
+
+<!--- 
 In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(mostRecentb117$weekStartDate, "%d.%m.%Y")`)
 wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, percentDigits), decimal.mark = ',')`% geschätzt
 (95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentDigits), decimal.mark = ',')`% bis
 `r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]). Die Genfersee-Region ist in der Dynamik ca. 1-2 Wochen gegenüber der Gesamtscheiz voraus[^15],[^16].
-
-<!--- Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
+Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
 
 
 <!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
@@ -294,6 +290,7 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^15]: https://cevo-public.github.io/Quantification-of-the-spread-of-a-SARS-CoV-2-variant/
 [^16]: https://ispmbern.github.io/covid-19/variants/
 [^17]: https://ibz-shiny.ethz.ch/covidDashboard/ , Dashboard Time Series
+[^18]: https://www.medrxiv.org/content/10.1101/2021.03.05.21252520v1?rss=1
 
 
 
