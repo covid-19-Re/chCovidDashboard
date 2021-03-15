@@ -199,7 +199,7 @@ In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen 
 
 ### Dynamik  
 <!--- CHECK  ---->
-Seit Mitte Februar deuten die Daten auf einen steigenden Trend der SARS-CoV-2 Epidemie hin. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.12 (0.99 - 1.25); dies reflektiert das Infektionsgeschen vom 27.02.-05.03.2021.
+Basierend auf den aktuellen Daten schätzen wir ein exponentielles Wachstum der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.12 (0.99 - 1.25); dies reflektiert das Infektionsgeschen vom 27.02.-05.03.2021.
 Diese Dynamik kann in 5/7 Grossregionen der Schweiz beobachtet werden. Lediglich die Genferseeregion un das Mittelland rapportieren nach wie vor stabile Fallzahlen[^1].  <!--- CHECK 
 Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
 ---->
