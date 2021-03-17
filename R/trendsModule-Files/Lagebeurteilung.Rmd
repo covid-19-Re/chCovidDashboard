@@ -111,7 +111,7 @@ tests <- readRDS(mostRecentTestsFile) %>%
     weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
 mostRecentTests <- filter(tests, date > max(date) - 14)
 testReportingOffset <- 3 # number of days in the past to report n Tests.
-mostRecentTestPositivity <- filter(tests, date == max(date) - 3)
+mostRecentTestPositivity <- filter(tests, date == max(date) - testReportingOffset)
 positivityLm <- lm(testPositivity ~ date + weekend, data = mostRecentTests)
 positivityTrend <- if_else(coef(positivityLm)[2] >= 0, "zunehmend", "abnehmend")
 ```
