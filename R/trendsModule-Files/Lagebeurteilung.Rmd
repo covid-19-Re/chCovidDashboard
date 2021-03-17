@@ -110,7 +110,7 @@ tests <- readRDS(mostRecentTestsFile) %>%
     testPositivityP = testPositivity * 100,
     weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
 mostRecentTests <- filter(tests, date > max(date) - 14)
-testReportingOffset <- 3 # number of days in the past to report n Tests.
+testReportingOffset <- 2 # number of days in the past to report n Tests.
 mostRecentTestPositivity <- filter(tests, date == max(date) - testReportingOffset)
 positivityLm <- lm(testPositivity ~ date + weekend, data = mostRecentTests)
 positivityTrend <- if_else(coef(positivityLm)[2] >= 0, "zunehmend", "abnehmend")
@@ -231,7 +231,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
 Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
-<!---- schieben wir hier 1 Tag zu viel? fuer heute 8.3. haette ich positivitaet fuer 5.3 erwartet. aber es wird 4.3. rapprotiert. TODO dani?---->
+<!---- check if indeed 3 days ago. ie on Jan 10, we want to see positivity for Jan 7; to change in line 13---->
 
 <!--- commented out as this is NOT Re based on positivity!
 Tendenz `r positivityTrend`;  CHECK  
