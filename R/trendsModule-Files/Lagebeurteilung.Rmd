@@ -195,7 +195,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen und Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. 
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine Trendwende hin, und dass die Epidemie erneut zunimmt.
 
 ### Dynamik  
 <!--- CHECK  ---->
@@ -253,9 +253,12 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
 in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. 
-Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (49-65% basierend auf [^18] und 42-60% basierend auf [16]). <!--- check ---->
 
-Der Anteil von B.1.1.7 an allen Infektionen nahm seit dem ersten Nachweis kontinuierlich zu. Wir erwarten, dass rund 95 von 100 Infektionen, welche heute erfolgen, durch B117 verursacht sind ([^15],[^16]; auf diesen Websites wird die Dynamik der bestätigten Fälle abgebildet; neue Infektionen vom 24.3. werden Anfang April bestätigt zu welchem Zeitpunkt die Kurven bei rund 95% liegen). Basierend auf den Daten aus der genetischen Charakterisierung können wir weiter die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[^15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Inzwischen ist B.1.1.7 dominant und die Gesamtzahlen steigen wieder. Alle unsere Modellierungen deuten darauf hin, dass die momentane Anzahl von Personen mit Immunität aufgrund von Impfung oder durchgemachter Infektion über die nächsten Wochen noch deutlich zu tief sein wird um diesen steigenden Trend zu bremsen. Man erwartet zudem, dass jegliche Zunahme von Kontakten oder Mobilität zu einer weiteren Zunahme der Ansteckungen führen würde.
+B.1.1.7 hat eine erhöhte Übertragungsrate. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (49-65% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
+
+Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 ist erhöht. Eine neue Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist. Die Todesfall-Zahlen aufgrund von B.1.1.7 sind zu klein als dass wir für die Schweiz eine Aussage treffen könnten.
+
+B.1.1.7 ist die dominante Variante in der Schweiz. Der Anteil von B.1.1.7 an allen Infektionen nahm seit dem ersten Nachweis kontinuierlich zu. Wir erwarten, dass rund 95 von 100 Infektionen, welche heute erfolgen, durch B117 verursacht sind ([^15],[^16]; auf diesen Websites wird die Dynamik der bestätigten Fälle abgebildet; neue Infektionen vom 24.3. werden Anfang April bestätigt zu welchem Zeitpunkt die Kurven bei rund 95% liegen). Basierend auf den Daten aus der genetischen Charakterisierung können wir weiter die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[^15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Inzwischen ist B.1.1.7 dominant und die Gesamtzahlen steigen wieder. Alle unsere Modellierungen deuten darauf hin, dass die momentane Anzahl von Personen mit Immunität aufgrund von Impfung oder durchgemachter Infektion über die nächsten Wochen noch deutlich zu tief sein wird um diesen steigenden Trend zu bremsen. Man erwartet zudem, dass jegliche Zunahme von Kontakten oder Mobilität zu einer weiteren Zunahme der Ansteckungen führen würde.
 
 
 
@@ -292,9 +295,10 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^16]: https://ispmbern.github.io/covid-19/variants/
 [^17]: https://ibz-shiny.ethz.ch/covidDashboard/ , Dashboard Time Series
 [^18]: https://www.medrxiv.org/content/10.1101/2021.03.05.21252520v1?rss=1
-
-
-
+[^19]: https://www.nature.com/articles/s41586-021-03426-1
+[^20]: https://www.bmj.com/content/bmj/372/bmj.n579.full.pdf
+[^21]: https://www.medrxiv.org/content/10.1101/2021.03.04.21252528v2.full.pdf
+[^22]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3792894
 
 
 
