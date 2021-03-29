@@ -355,5 +355,5 @@ for(i in 1:dim(regional_above)[1]) {
 }
 ```
 
-<!--- ## Regionale Unterschiede
+<!---- ## Regionale Unterschiede
 Es bestehen regionale und kantonale Unterschiede im Verlauf der SARS-CoV-2-Epidemie. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In allen 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit über dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt:[^9] `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion grössere Unterschiede aufweisen.[^10] --->
