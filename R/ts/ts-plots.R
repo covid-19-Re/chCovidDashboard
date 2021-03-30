@@ -1,5 +1,24 @@
 library(lubridate)
 
+tsPlotsAgeGroupColors <- tibble(
+  ageGroup = c(
+    "0-6", "07-12", "13-17", "18-24", "25-34", "35-44", "45-54",
+    "55-64", "65-74", "75+", "Unknown"
+  ),
+  color = c(
+    "#a6cee3",
+    "#1f78b4",
+    "#b2df8a",
+    "#33a02c",
+    "#fb9a99",
+    "#e31a1c",
+    "#fdbf6f",
+    "#ff7f00",
+    "#cab2d6",
+    "#6a3d9a",
+    "#ffff99"
+  )
+)
 
 tsPlots <- list()
 
@@ -19,10 +38,19 @@ tsPlots$histogram <- function (
     data %>%
       group_by(!!as.symbol(groupingAttributeName)) %>%
       group_walk(function (x, y) {
-        plot <<- plot %>%
-          add_trace(x = x[[xAttributeName]], y = x[[yAttributeName]],
-                    name = i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
-                    text = x$tooltipText, hoverinfo = 'text')
+        if (groupingAttributeName == "age_group") {
+          # For age groups, we define the colors ourselves to make sure that they are consistent
+          plot <<- plot %>%
+            add_trace(x = x[[xAttributeName]], y = x[[yAttributeName]],
+                      name = i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
+                      text = x$tooltipText, hoverinfo = 'text',
+                      marker = list(color = tsPlotsAgeGroupColors$color[match(y[[groupingAttributeName]], tsPlotsAgeGroupColors$ageGroup)]))
+        } else {
+          plot <<- plot %>%
+            add_trace(x = x[[xAttributeName]], y = x[[yAttributeName]],
+                      name = i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
+                      text = x$tooltipText, hoverinfo = 'text')
+        }
       })
   }
 
@@ -84,10 +112,21 @@ tsPlots$line <- function (
     data %>%
       group_by(!!as.symbol(groupingAttributeName)) %>%
       group_walk(function (x, y) {
-        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
-                           name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
-                           text = x$tooltipText, hoverinfo = 'text',
-                           type = "scatter", mode = "lines")
+        if (groupingAttributeName == "age_group") {
+          # For age groups, we define the colors ourselves to make sure that they are consistent
+          plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
+                             name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
+                             text = x$tooltipText, hoverinfo = 'text',
+                             type = "scatter", mode = "lines",
+                             line = list(color = tsPlotsAgeGroupColors$color[match(y[[groupingAttributeName]], tsPlotsAgeGroupColors$ageGroup)])
+          )
+        } else {
+          plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
+                             name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
+                             text = x$tooltipText, hoverinfo = 'text',
+                             type = "scatter", mode = "lines"
+          )
+        }
       })
   }
 
@@ -108,9 +147,18 @@ tsPlots$area <- function (
     data %>%
       group_by(!!as.symbol(groupingAttributeName)) %>%
       group_walk(function (x, y) {
-        plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
-                           name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
-                           text = x$tooltipText, hoverinfo = 'text')
+        if (groupingAttributeName == "age_group") {
+          # For age groups, we define the colors ourselves to make sure that they are consistent
+          plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
+                             name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
+                             text = x$tooltipText, hoverinfo = 'text',
+                             fillcolor  = tsPlotsAgeGroupColors$color[match(y[[groupingAttributeName]], tsPlotsAgeGroupColors$ageGroup)]
+          )
+        } else {
+          plot <<- add_trace(plot, x = x[[xAttributeName]], y = x[[yAttributeName]],
+                             name = ts_i18n$t(paste0("ts.constant.", groupingAttributeName, ".", y[[groupingAttributeName]])),
+                             text = x$tooltipText, hoverinfo = 'text')
+        }
       })
   }
   return (plot)
