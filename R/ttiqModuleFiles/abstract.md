@@ -1,11 +1,16 @@
 We present a mathematical model that leverages empirically determined distributions of incubation period, infectivity, and generation time to quantify how test-trace-isolate-quarantine (TTIQ) strategies can reduce the transmission of SARS-CoV-2.
 The TTIQ strategy is determined by five independent parameters:
 
-1.	f : the fraction of infected individuals who test positive and are isolated from the community;
-2.	Δ<sub>1</sub> : the delay between symptom onset of an infected individual and the time they are isolated from the community;
-3.	τ : the duration of time for which close contacts are traced prior to symptom onset;
-4.	g : the fraction of close contacts per index case that are successfully traced and quarantined;
-5.	Δ<sub>2</sub> : the delay between isolating the index case and quarantining the secondary cases.
+1.	f : Probability that a symptomatic individual is isolated from the population;
+2.	Δ<sub>1</sub> : Time delay between symptom onset and isolation;
+3.	τ : Duration prior to symptom onset in which contacts are identifiable;
+4.	g : Fraction of identifiable contacts that are successfully traced and quarantined per isolated index case;
+5.	Δ<sub>2</sub> : Time delay between isolation of the index case and the start of quarantine for the secondary contacts.
+
+We have two further parameters describing the epidemic situation *without* TTIQ measures:
+
+1.  R : the expected number of infections caused by a single infected;
+2.  α : the fraction of transmission that is attributable to asymptomatic cases.
 
 **This is work in progress. This has not yet been peer-reviewed.**
-<!--**Read the full preprint on [medRxiv](https://www.medrxiv.org/content/10.1101/2020.09.24.20201061v2).**-->
+**Read the full preprint on [medRxiv](https://doi.org/10.1101/2020.12.04.20244004).**

@@ -37,70 +37,58 @@ ttiqUI <- function(id) {
               column(
                 width = 4,
                 plotOutput(ns("genDistPlot"), height = "300px") %>% withSpinner(),
+                HTML("<br><span class='help-block' style='font-size:15px;'>",
+                     "Weibull distribution.",
+                     "</span>"),
                 fluidRow(
                   column(
                     width = 4,
-                    numericInput(ns("genShape"), "shape", step = 0.001, value = 3.2862)
+                    numericInput(ns("genShape"), "shape", step = 0.001, value = 3.277)
                   ),
                   column(
                     width = 4,
-                    numericInput(ns("genScale"), "scale", step = 0.001, value = 6.1244)
+                    numericInput(ns("genScale"), "scale", step = 0.001, value = 6.127)
                   )
                 ),
-                helpText(
-                  style = "font-size:15px",
-                  HTML("Weibull distribution<br>"),
-                  sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
-                             doi = "10.1101/2020.09.04.20188516")
-                )
+                sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
+                           doi = "10.1101/2020.09.04.20188516")
               ),
 
               # Infectivity profile
               column(
                 width = 4,
                 plotOutput(ns("infProfPlot"), height = "300px") %>% withSpinner(),
+                HTML("<br><span class='help-block' style='font-size:15px;'>",
+                     "Shifted Student's t-distribution.",
+                     "</span>"),
                 fluidRow(
                   column(
                     width = 4,
-                    numericInput(ns("infShift"), "shift", step = 0.001, value = -0.0747)
+                    numericInput(ns("infShift"), "shift", step = 0.001, value = -0.0776)
                   ),
                   column(
                     width = 4,
-                    numericInput(ns("infScale"), "scale", step = 0.001, value = 1.8567)
+                    numericInput(ns("infScale"), "scale", step = 0.001, value = 1.857)
                   ),
                   column(
                     width = 4,
-                    numericInput(ns("infDf"), "df", step = 0.001, value = 3.3454)
+                    numericInput(ns("infDf"), "df", step = 0.001, value = 3.345)
                   )
                 ),
-                helpText(
-                  style = "font-size:15px",
-                  HTML("Shifted Student's <i>t</i> distribution<br>"),
-                  sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
-                             doi = "10.1101/2020.09.04.20188516")
-                )
+                sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
+                           doi = "10.1101/2020.09.04.20188516")
               ),
 
               # Incubation period
               column(
                 width = 4,
                 plotOutput(ns("incDistPlot"), height = "300px") %>% withSpinner(),
-                fluidRow(
-                  column(
-                    width = 4,
-                    numericInput(ns("incMeanLog"), "log(mean)", step = 0.001, value = 1.42)
-                  ),
-                  column(
-                    width = 4,
-                    numericInput(ns("sdLog"), "log(sd)", step = 0.001, value = 0.661)
-                  )
-                ),
-                helpText(
-                  style = "font-size:15px",
-                  HTML("Lognormal distribution<br>"),
-                  sourceLink("Li et al., NEJM 2020 382:1199-1207 ",
-                             doi = "10.1056/NEJMoa2001316")
-                )
+                HTML("<br><span class='help-block' style='font-size:15px;'>",
+                     "The distribution of incubation times follows a meta-distribution constructed from the average ",
+                     "of seven reported log-normal distributions.",
+                     "</span>"),
+                sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
+                           doi = "10.1101/2020.09.04.20188516")
               )
             )
           )
@@ -110,36 +98,44 @@ ttiqUI <- function(id) {
       tabsetPanel(
         type = "pills", id = "casesTabs",
 
-        # TERTIARY CASES UNDER TTIQ ----
+        # REPRODUCTIVE NUMBER UNDER TTIQ ----
         tabPanel(
-          title = p(class = "tab-title", "Tertiary cases under TTIQ"),
-          value = "terTTIQ",
-          div(
-            class = "panel panel-primary panel-tab",
-            div(
-              class = "panel-body",
+          title = p(class = "tab-title", "TTIQ"),
+          value = "RTTIQ",
+          div(class = "panel panel-primary panel-tab",
+            div(class = "panel-body",
               fluidRow(
                 column(
                   width = 4,
                   bootstrapPanel(
                     heading = "TTIQ parameters",
                     class = "panel-primary",
-                    id = "parsTerTTIQ",
+                    id = "parsTTIQ",
 
                     img(src = "ttiqModule/tracingAndQuarantine.png", width = "100%"),
 
+                    h4("Epidemic parameters"),
                     sliderInput(
-                      ns("Re_terTTIQ"),
-                      extLabel("R<sub>e</sub>",
+                      ns("R_TTIQ"),
+                      extLabel("R",
                                paste("effective reproductive number without TTIQ",
                                      "(i.e. <i>f</i>=<i>g</i>=0)")),
-                      min = 0, max = 2.5, value = 1.2,
+                      min = 0, max = 2.5, value = 1.1,
                       step = 0.1, round = -2,
+                      width = "100%"
+                    ),
+                    sliderInput(
+                      ns("alpha_TTIQ"),
+                      extLabel("&alpha;",
+                               paste("fraction of transmission from asymptomatics without TTIQ",
+                                     "(i.e. <i>f</i>=<i>g</i>=0)")),
+                      min = 0, max = 1, value = 0.2,
+                      step = 0.05, round = -2,
                       width = "100%"
                     ),
                     h4("Focal TTIQ parameter set"),
                     sliderInput(
-                      ns("f_terTTIQ"),
+                      ns("f_TTIQ"),
                       extLabel("f",
                                "fraction of index cases detected"),
                       min = 0, max = 1, value = 0.5,
@@ -147,23 +143,7 @@ ttiqUI <- function(id) {
                       width = "100%"
                     ),
                     sliderInput(
-                      ns("Delta1_terTTIQ"),
-                      extLabel("&Delta;<sub>1</sub>",
-                               "delay from symptom onset to isolation of index case [days]"),
-                      min = 0, max = 6, value = 2,
-                      step = 1,
-                      width = "100%"
-                    ),
-                    sliderInput(
-                      ns("tau_terTTIQ"),
-                      extLabel("&tau;",
-                               "duration of lookback [days]"),
-                      min = 0, max = 6, value = 2,
-                      step = 1, round = -2,
-                      width = "100%"
-                    ),
-                    sliderInput(
-                      ns("g_terTTIQ"),
+                      ns("g_TTIQ"),
                       extLabel("g",
                                "fraction of contacts detected and isolated"),
                       min = 0, max = 1, value = 0.5,
@@ -171,32 +151,48 @@ ttiqUI <- function(id) {
                       width = "100%"
                     ),
                     sliderInput(
-                      ns("Delta2_terTTIQ"),
+                      ns("Delta1_TTIQ"),
+                      extLabel("&Delta;<sub>1</sub>",
+                               "delay from symptom onset to isolation of index case [days]"),
+                      min = 0, max = 6, value = 2,
+                      step = 1,
+                      width = "100%"
+                    ),
+                    sliderInput(
+                      ns("Delta2_TTIQ"),
                       extLabel("&Delta;<sub>2</sub>",
                                "delay from isolating index case to quarantine of contacts [days]"),
                       min = 0, max = 6, value = 2,
                       step = 1,
                       width = "100%"
+                    ),
+                    sliderInput(
+                      ns("tau_TTIQ"),
+                      extLabel("&tau;",
+                               "duration of lookback [days]"),
+                      min = 0, max = 6, value = 2,
+                      step = 1, round = -2,
+                      width = "100%"
                     )
                   )
                 ),
                 column(
                   width = 8,
                   bootstrapPanel(
-                    heading = "Tertiary cases under TTIQ",
+                    heading = "Reproductive number under TTIQ",
                     class = "panel-info",
-                    id = "plotsTerTTIQ",
+                    id = "plotsTTIQ",
                     fluidRow(
                       column(
                         width = 6,
-                        plotlyOutput(ns("prob_terTTIQ"), height = "450px") %>% withSpinner()
+                        plotlyOutput(ns("prob_TTIQ"), height = "450px") %>% withSpinner()
                       ),
                       column(
                         width = 6,
-                        plotlyOutput(ns("time_terTTIQ"), height = "450px") %>% withSpinner()
+                        plotlyOutput(ns("time_TTIQ"), height = "450px") %>% withSpinner()
                       )
                     ),
-                    uiOutput(ns("caption_terTTIQ"))
+                    uiOutput(ns("caption_TTIQ"))
                   )
                 )
               )
@@ -204,10 +200,10 @@ ttiqUI <- function(id) {
           )
         ),
 
-        # TERTIARY CASES UNDER TESTING AND ISOLATION ----
+        # REPRODUCTIVE NUMBER UNDER TESTING AND ISOLATION ----
         tabPanel(
-          title = p(class = "tab-title", "Tertiary cases under TI"),
-          value = "terTI",
+          title = p(class = "tab-title", "Testing & isolation only"),
+          value = "RTI",
           div(
             class = "panel panel-primary panel-tab",
             div(
@@ -216,134 +212,52 @@ ttiqUI <- function(id) {
                 column(
                   width = 4,
                   bootstrapPanel(
-                    heading = "Testing and isolation parameters",
+                    heading = "Testing & isolation parameters",
                     class = "panel-primary",
-                    id = "parsTerTI",
+                    id = "parsTI",
                     img(src = "ttiqModule/testAndIsolate.png", width = "100%"),
 
                     sliderInput(
-                      ns("Re_terTI"),
-                      extLabel("R<sub>e</sub>",
+                      ns("R_TI"),
+                      extLabel("R",
                                paste("effective reproductive number without TTIQ",
                                      "(i.e. <i>f</i>=<i>g</i>=0)")),
-                      min = 0, max = 2.5, value = 1.2,
+                      min = 0, max = 2.5, value = 1.1,
                       step = 0.1, round = -2,
+                      width = "100%"
+                    ),
+                    sliderInput(
+                      ns("alpha_TI"),
+                      extLabel("&alpha;",
+                               paste("fraction of transmission from asymptomatics without TTIQ",
+                                     "(i.e. <i>f</i>=<i>g</i>=0)")),
+                      min = 0, max = 1, value = 0.2,
+                      step = 0.05, round = -2,
                       width = "100%"
                     ),
                     helpText(
                       style = "font-size:15px",
                       HTML("We set <i>g</i>=0 to eliminate contact tracing."),
                     )
-                    # sliderInput(
-                    #   ns("f_terTI"),
-                    #   extLabel("f",
-                    #            "fraction of index cases detected"),
-                    #   min = 0, max = 1, value = c(0, 1),
-                    #   step = 0.1, round = -2,
-                    #   width = "100%"
-                    # ),
-                    # sliderInput(
-                    #   ns("Delta1_terTI"),
-                    #   extLabel("&Delta;<sub>1</sub>",
-                    #            "delay from symptom onset to isolation of index case [days]"),
-                    #   min = 0, max = 6, value = c(0, 4),
-                    #   step = 1,
-                    #   width = "100%"
-                    # )
                   )
                 ),
                 column(
                   width = 8,
                   bootstrapPanel(
-                    heading = "Tertiary cases under testing and isolation",
+                    heading = "Reproductive number under testing & isolation only",
                     class = "panel-info",
-                    id = "plotsTerTI",
+                    id = "plotsTI",
                     fluidRow(
                       column(
                         width = 6,
-                        plotlyOutput(ns("cases_terTI"), height = "450px") %>% withSpinner()
+                        plotlyOutput(ns("lines_TI"), height = "450px") %>% withSpinner()
                       ),
                       column(
                         width = 6,
-                        #plotlyOutput(ns("region_terTI"), height = "450px") %>% withSpinner()
-                        plotlyOutput(ns("density_terTI"), height = "450px") %>% withSpinner()
+                        plotlyOutput(ns("density_TI"), height = "450px") %>% withSpinner()
                       )
                     ),
-                    #plotOutput(ns("casesSEC_legend"), height = "75px"),
-                    uiOutput(ns("caption_terTI"))
-                  )
-                )
-              )
-            )
-          )
-        ),
-
-        # SECONDARY CASES UNDER TESTING AND ISOLATION ----
-        tabPanel(
-          title = p(class = "tab-title", "Secondary cases under TI"),
-          value = "secTI",
-          div(
-            class = "panel panel-primary panel-tab",
-            div(
-              class = "panel-body",
-              fluidRow(
-                column(
-                  width = 4,
-                  bootstrapPanel(
-                    heading = "Testing and isolation parameters",
-                    class = "panel-primary",
-                    id = "parsSecTI",
-                    img(src = "ttiqModule/testAndIsolate.png", width = "100%"),
-
-                    sliderInput(
-                      ns("Re_secTI"),
-                      extLabel("R<sub>e</sub>",
-                               paste("effective reproductive number without TTIQ",
-                                     "(i.e. <i>f</i>=<i>g</i>=0)")),
-                      min = 0, max = 2.5, value = 1.2,
-                      step = 0.1, round = -2,
-                      width = "100%"
-                    ),
-                    helpText(
-                      style = "font-size:15px",
-                      HTML("We set <i>g</i>=0 to eliminate contact tracing."),
-                    )
-                    # sliderInput(
-                    #   ns("f_secTI"),
-                    #   extLabel("f",
-                    #            "fraction of index cases detected"),
-                    #   min = 0, max = 1, value = c(0, 1),
-                    #   step = 0.1, round = -2,
-                    #   width = "100%"
-                    # ),
-                    # sliderInput(
-                    #   ns("Delta1_secTI"),
-                    #   extLabel("&Delta;<sub>1</sub>",
-                    #            "delay from symptom onset to isolation of index case [days]"),
-                    #   min = 0, max = 6, value = c(0, 4),
-                    #   step = 1,
-                    #   width = "100%"
-                    # )
-                  )
-                ),
-                column(
-                  width = 8,
-                  bootstrapPanel(
-                    heading = "Secondary cases under testing and isolation",
-                    class = "panel-info",
-                    id = "plotsSecTI",
-                    fluidRow(
-                      column(
-                        width = 6,
-                        plotlyOutput(ns("cases_secTI"), height = "450px") %>% withSpinner()
-                      ),
-                      column(
-                        width = 6,
-                        #plotlyOutput(ns("region_secTI"), height = "450px") %>% withSpinner()
-                        plotlyOutput(ns("density_secTI"), height = "450px") %>% withSpinner()
-                      )
-                    ),
-                    uiOutput(ns("caption_secTI"))
+                    uiOutput(ns("caption_TI"))
                   )
                 )
               )
