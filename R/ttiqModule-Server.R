@@ -151,12 +151,12 @@ ttiqServer <- function(id) {
       # Reproductive number across parameter values
       data_TTIQ <- reactive({
         focalParams <- pars_TTIQ()
-        print(focalParams)
+        # print(focalParams)
         #' Number of cases under focal parameters
         focal <- getTertiaryCases(paramList = focalParams, infProf = infProf(),
                                   integral = integral(), genDist = genDist(),
                                   stepSize = stepSize)
-        print(focal)
+        # print(focal)
         #' Perturb parameters and compute cases
         df <- bind_rows(
           perturbParam(paramList = focalParams, param = "f", values = seq(0,1,0.1),
