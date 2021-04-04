@@ -87,6 +87,52 @@ getEventCounts <- function(df, event_dt, event_name) {
   return(counts)
 }
 
+getEventCounts2 <- function(df, event_dt, event_name) {
+  # CH
+  countsCH <- df %>%
+    dplyr::select({{ event_dt }}, ktn) %>%
+    group_by({{ event_dt }}) %>%
+    summarize(
+      count = n(),
+      .groups = "drop"
+    ) %>%
+    transmute(region = "CH", age_class = "all", date = {{ event_dt }}, event = event_name, count = count)
+
+  # cantons
+  countsRegions <- df %>%
+    dplyr::select({{ event_dt }}, ktn) %>%
+    group_by(ktn, {{ event_dt }}) %>%
+    summarize(
+      count = n(),
+      .groups = "drop"
+    ) %>%
+    transmute(region = ktn, age_class = "all", date = {{ event_dt }}, event = event_name, count = count)
+
+  # age groups
+  countsAgeClass <- df %>%
+    mutate(age_class = cut(altersjahr, breaks = c(0, 7, 16, 25, 35, 45, 55, 65, 75, 200), right = FALSE)) %>%
+    dplyr::select({{ event_dt }}, age_class) %>%
+    group_by(age_class, {{ event_dt }}) %>%
+    summarize(
+      count = n(),
+      .groups = "drop"
+    ) %>%
+    transmute(region = "CH", age_class = age_class, date = {{ event_dt }}, event = event_name, count = count) %>%
+    complete(region, age_class, date, event, fill = list(count = 0))
+
+  levels(countsAgeClass$age_class)[levels(countsAgeClass$age_class) == "[75,200)"] <- "[75,∞)"
+
+  # all
+  counts <- bind_rows(countsCH, countsRegions) %>%
+    complete(region, age_class, date, event, fill = list(count = 0)) %>%
+    bind_rows(countsAgeClass) %>%
+    filter(!is.na(date)) %>%
+    mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+
+  return(counts)
+}
+
+
 trendsModelFunction <- function(df) {
     try(MASS::glm.nb(count ~ date + weekend, data = df))
 }
