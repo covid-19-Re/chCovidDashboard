@@ -224,7 +224,7 @@ Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwer
 Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor mind. 10 Tagen (für Fallzahlen) bis 23 Tage (für Todesfälle) widerspiegelt aufgrund der Verzögerung von Infektion und Eintreten eines Ereignisses.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Wir sehen - wie durch den Effekt der Impfungen erwartet - eine verlangsamte Dynamik in der Altersgruppe über 75 bei den Fallzahlen, Hospitalisierungen und Todesfällen im Vergleich zu den jüngeren Altersgruppen. Durch fortschreitende Impfungen der Risikogruppen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt. 
- <!--- CHECK --->
+ <!--- CHECK ---->
 
 Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
