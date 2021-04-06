@@ -238,7 +238,7 @@ Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivi
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
 <!---- check if indeed 3 days ago. ie on Jan 10, we want to see positivity for Jan 7; to change in line 13---->
 
-<!--- commented out as this is NOT Re based on positivity!
+<!---- commented out as this is NOT Re based on positivity!
 Tendenz `r positivityTrend`;  CHECK  
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
