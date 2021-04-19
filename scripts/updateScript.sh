@@ -37,7 +37,7 @@ fi
 
 RePrivateUpdate=$(stat -c ‘%y’ ../data/Re/CHE-Estimates.rds)
 RePublicUpdate=$(stat -c ‘%y’ ../data/RePublic/CHE-Estimates.rds)
-if [$RePrivateUpdate -gt $RePublicUpdate]; then
+if ["$RePrivateUpdate" -gt "$RePublicUpdate"]; then
   ReUpdate=RePrivateUpdate
 else
   ReUpdate=RePublicUpdate
