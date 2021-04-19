@@ -199,12 +199,12 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf einen Anstieg der Epidemie in den letzten Wochen hin. Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten über Ostern und der fortschreitenden Impfungen v.a. in der Altersgruppe 75+.  Eine steigende Epidemie wird bei teils strengeren Massnahmen im benachbarten Ausland beobachtet.
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf einen Anstieg der Epidemie in den letzten Wochen hin. Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und der fortschreitenden Impfungen v.a. in der Altersgruppe 75+.  Eine steigende Epidemie wird bei teils strengeren Massnahmen im benachbarten Ausland beobachtet.
 
 
 ### Dynamik  
 <!----- CHECK  -------->
-Basierend auf den aktuellen Daten schätzen wir ein exponentielles Wachstum der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.11 (0.95 - 1.26); dies reflektiert das Infektionsgeschehen vom 27.03.-02.04.2021.
+Basierend auf den aktuellen Daten schätzen wir ein exponentielles Wachstum der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.10 (0.94 - 1.26); dies reflektiert das Infektionsgeschehen vom 03.04.-09.04.2021.
 Ein Trend zu dieser Dynamik kann in allen Grossregionen der Schweiz mit Ausnahme des Tessins beobachtet werden[^1].  <!--- CHECK 
 Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
 ---->
@@ -224,7 +224,7 @@ Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwer
 Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen vor mind. 10 Tagen (für Fallzahlen) bis 23 Tage (für Todesfälle) widerspiegelt aufgrund der Verzögerung von Infektion und Eintreten eines Ereignisses.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Wir sehen - wie durch den Effekt der Impfungen erwartet - eine verlangsamte Dynamik in der Altersgruppe über 75 bei den Fallzahlen, Hospitalisierungen und Todesfällen im Vergleich zu den jüngeren Altersgruppen. Während die Altersgruppe 75+ in der 2. Welle rund 50% der Hospitalisierungen ausgemacht hat, sind es inzwischen noch rund 25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle auf nun über 50% gestiegen.
-Seit Anfang März steigen die Spital-Eintritte bei den unter 75-jährigen an. Bei den über 75-jährigen ist ein Wiederanstieg Ende März zu beobachten.
+Seit Anfang März steigen die Spital-Eintritte bei den unter 75-jährigen an. Bei den über 75-jährigen gingen die Zahl der Spital-Eintritte bis in die zweite Märzhälfte zurück; der Rückgang ist nun gestoppt.
 Durch fortschreitende Impfungen der Risikogruppen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt. 
  <!--- CHECK ---->
 
@@ -258,11 +258,12 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten mit weniger als 1% auf. <!--- check ---->
+in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten mit weniger als 2% auf. <!--- check ---->
 
 B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
 
-Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 ist erhöht. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. 
+Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 wird in mehreren Studien beobachtet. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. Eine neue Studie sieht keine erhöhte Sterblichkeit, untersucht jedoch nur hospitalisierte Personen[^24]. In einer weiteren Studie bei der Daten einer «COVID symptom study App» ausgewertet wurden, wurde mit Ausbreitung von B.1.1.7 keine Verschiebung zu schwereren Verläufen beobachtet[^25].
+
 In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist. 
 Dementsprechend sind mit Ausbreitung von B.1.1.7 die Wahrscheinlichkeiten einer Hospitalisierung bei positivem Testergebnis gestiegen. Eine 55-64 jährige positiv getestete Person hatte beispielsweise zum 31.12.2020 (als B.1.1.7 noch wenig verbreitet war) ein Risiko von 4.3% (28-Tages Mittel) eines Spitaleintritts. Zum 31.3.2021 (als B.1.1.7 dominant war), war das Risiko bei 6.75%[^17]. Die anderen Altersgruppen über 35 entwickelten sich ähnlich (in den jüngeren Altersklassen sind die absoluten Zahlen zu klein für belastbare Aussagen).
 Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein als dass wir für die Schweiz eine Aussage treffen könnten.
@@ -311,6 +312,8 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^21]: https://www.medrxiv.org/content/10.1101/2021.03.04.21252528v2.full.pdf
 [^22]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3792894
 [^23]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
+[^24]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00170-5/fulltext
+[^25]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
 
 
 <!---- deleted stuff! ---->
