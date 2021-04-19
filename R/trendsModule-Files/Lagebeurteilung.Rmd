@@ -199,7 +199,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf einen Anstieg der Epidemie in den letzten Wochen hin. Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und der fortschreitenden Impfungen v.a. in der Altersgruppe 75+.  Eine steigende Epidemie wird bei teils strengeren Massnahmen im benachbarten Ausland beobachtet.
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf einen Anstieg der Epidemie in den letzten Wochen hin. Die priorisiert geimpfte Altersklasse 75+ bildet mit rückgängigen Fallzahlen eine Ausnahme.  Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und der fortschreitenden Impfungen v.a. in der Altersgruppe 75+.  Eine steigende Epidemie wird bei teils strengeren Massnahmen im benachbarten Ausland beobachtet.
 
 
 ### Dynamik  
