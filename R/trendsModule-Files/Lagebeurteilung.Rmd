@@ -112,7 +112,7 @@ tests <- readRDS(mostRecentTestsFile) %>%
 mostRecentTestsCHE <- filter(tests,
   region == "CHE",
   date > max(date) - 14)
-testReportingOffset <- 2 # number of days in the past to report n Tests.
+testReportingOffset <- 3 # number of days in the past to report n Tests.
 mostRecentTestPositivity <- filter(tests,
   region == "CHE",
   date == max(date) - testReportingOffset)
