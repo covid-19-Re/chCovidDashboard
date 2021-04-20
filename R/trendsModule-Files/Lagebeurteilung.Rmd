@@ -254,6 +254,7 @@ im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
 Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
+<!--- 
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
 Die Sterblichkeitsstatistik vom Bundesamt für Statistik zeigt zwischen Kalenderwoche 43 im Jahr 2020 und Kalenderwoche 3 im Jahr 2021 eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. Insgesamt sind rund 8’400 zusätzliche Todesfälle in diesem Zeitraum im Vergleich zu Vorjahren verzeichnet. <!--- Seitdem wurde keine Übersterblichkeit mehr beobachtet.  CHECK 
