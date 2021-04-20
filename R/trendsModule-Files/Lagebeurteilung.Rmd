@@ -199,7 +199,11 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf einen Anstieg der Epidemie in den letzten Wochen hin. Die priorisiert geimpfte Altersklasse 75+ bildet mit rückgängigen Fallzahlen eine Ausnahme.  Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und der fortschreitenden Impfungen v.a. in der Altersgruppe 75+.  Eine steigende Epidemie wird bei teils strengeren Massnahmen im benachbarten Ausland beobachtet.
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf einen Anstieg der Epidemie in den letzten Wochen hin. Die priorisiert geimpfte Altersklasse 75+ bildet mit rückgängigen Fallzahlen eine Ausnahme. 
+
+Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen v.a. in der Altersgruppe 75+. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen aus Zürich[^26] und Lausanne[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends. Generell wäre eine flächendeckende Abwasserüberwachung ein für die Epidemie-Beurteilung wichtiger Indikator. 
+
+Eine steigende Epidemie wird auch bei teils strengeren Massnahmen im benachbarten Ausland beobachtet.
 
 
 ### Dynamik  
@@ -314,6 +318,8 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^23]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
 [^24]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00170-5/fulltext
 [^25]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
+[^26]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
+[^27]: https://sensors-eawag.ch/sarscov2/STEP_Vidy_ddPCR.html
 
 
 <!---- deleted stuff! ---->
