@@ -199,14 +199,14 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine relativ stabile Epidemie in den letzten Wochen hin. Die priorisiert geimpfte Altersklasse 75+ bildet mit rückgängigen Fallzahlen eine Ausnahme. 
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine stabile oder leicht steigende Epidemie in den letzten Wochen hin. Die priorisiert geimpfte Altersklasse 75+ bildet mit rückgängigen Fallzahlen eine Ausnahme. 
 
-Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen v.a. in der Altersgruppe 75+. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen aus Zürich[^26] und Lausanne[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends, d.h. einen stabilen Trend im April, nach einem Anstieg im Februar und März.
+Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen aus Zürich[^26] und Lausanne[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends, d.h. einen stabilen Trend im April, nach einem Anstieg im Februar und März.
 
 
 ### Dynamik  
 <!----- CHECK  -------->
-Basierend auf den aktuellen Daten schätzen wir ein sehr langsam aber exponentielles Wachstum der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.03 (0.92 - 1.14); dies reflektiert das Infektionsgeschehen vom 10.04.-16.04.2021[^1].  <!--- CHECK 
+Basierend auf den aktuellen Daten schätzen wir ein moderates Wachstum der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.03 (0.92 - 1.14); dies reflektiert das Infektionsgeschehen vom 10.04.-16.04.2021[^1].  <!--- CHECK 
 Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
 ---->
 
