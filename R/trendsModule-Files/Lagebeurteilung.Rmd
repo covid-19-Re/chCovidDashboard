@@ -205,7 +205,7 @@ Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testver
 
 
 ### Dynamik  
-<!----- CHECK  -------->
+<!------ CHECK  -------->
 Basierend auf den aktuellen Daten schätzen wir ein moderates Wachstum der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 1.03 (0.92 - 1.14); dies reflektiert das Infektionsgeschehen vom 10.04.-16.04.2021[^1].  <!--- CHECK 
 Further: We also calculate the Re based on the number of newly confirmed cases normalized by the total number of tests[^1]. This estimate is hard to interpret while mass testing and screening is introduced.
 ---->
