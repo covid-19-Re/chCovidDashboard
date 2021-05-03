@@ -108,3 +108,7 @@ packrat/src/
 # Config
 config.yml
 TIMESERIES_PRIVATE_MODE
+
+#RRR added these weird files that seemed to have disappeared:
+.dockerignore
+.lintr
