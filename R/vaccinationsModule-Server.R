@@ -43,7 +43,9 @@ vaccServer <- function(id) {
         vaccinationAxisTitle <- vaccinationAxisTitle()
 
         plotData <- vaccinationData %>%
-          filter(name == input$dataType)
+          filter(
+            name == input$dataType,
+            geoRegion != "CH")
 
         if (input$normalisation) {
           yDataFormula <- ~valueP100
@@ -51,9 +53,21 @@ vaccServer <- function(id) {
           yDataFormula <- ~value
         }
 
-        timelinePlot <- plot_ly(data = plotData) %>%
+        timelinePlot <- plot_ly() %>%
           add_trace(
+            data = filter(plotData, geoRegion != "CHFL"),
             x = ~date, y = yDataFormula, color = ~geoRegion,
+            type = "scatter", mode = "lines",
+            legendgroup = ~geoRegion, showlegend = TRUE,
+            text = ~str_c("<i>", format(date, "%Y-%m-%d"),
+              "</i> ", geoRegion, " <br>",
+              round(valueP100, 2), " / 100<br>",
+              "Total: ", round(value, 2),
+             "<extra></extra>"),
+            hovertemplate = "%{text}") %>%
+          add_trace(
+            data = filter(plotData, geoRegion == "CHFL"),
+            x = ~date, y = yDataFormula, color = ~geoRegion, line = list(width = 4,  color = "black"),
             type = "scatter", mode = "lines",
             legendgroup = ~geoRegion, showlegend = TRUE,
             text = ~str_c("<i>", format(date, "%Y-%m-%d"),
