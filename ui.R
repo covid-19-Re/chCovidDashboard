@@ -66,6 +66,13 @@ ui <- function(request) {
             affiliation = "",
             thumbnail = "lagebericht-thumbnail.jpg",
             tabId = "selectLagebeurteilung"
+          ),
+          thumbnailPanel(
+            title = "Vaccinations",
+            authors = "",
+            affiliation = "",
+            thumbnail = "vaccination-thumbnail.png",
+            tabId = "selectVaccinations"
           )
         ),
         hr(),
@@ -138,6 +145,10 @@ ui <- function(request) {
       tabPanel("Lagebeurteilung",
         value = "lagebeurteilung",
         lagebeurteilungUI("lagebeurteilung")
+      ),
+      tabPanel("Vaccinations",
+        value = "vaccinations",
+        vaccUI("vaccinations")
       ),
       navbarMenu(
         "About",

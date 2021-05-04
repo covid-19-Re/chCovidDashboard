@@ -42,6 +42,11 @@ server <- function(input, output, session) {
       selected = "lagebeurteilung"
     )
   })
+  observeEvent(input$selectVaccinations, {
+    updateTabsetPanel(session, "tab",
+      selected = "vaccinations"
+    )
+  })
 
   ttiqServer("ttiq")
 
@@ -58,5 +63,7 @@ server <- function(input, output, session) {
   forecastServer("forecast")
 
   lagebeurteilungServer("lagebeurteilung")
+
+  vaccServer("vaccinations")
 
 }
