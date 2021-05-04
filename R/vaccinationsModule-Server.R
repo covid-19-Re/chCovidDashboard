@@ -135,7 +135,7 @@ vaccServer <- function(id) {
         }
 
         ggplotly(plot, tooltip = "text") %>%
-          layout(showlegend = FALSE) %>%
+          layout(showlegend = FALSE, margin = list(b = 75)) %>%
           config(doubleClick = "reset", displaylogo = FALSE, modeBarButtons = list(list("toImage")),
               toImageButtonOptions = list(format = "png", width = 1200, height = 800, scale = 1,
                 filename = "vaccinations"),
