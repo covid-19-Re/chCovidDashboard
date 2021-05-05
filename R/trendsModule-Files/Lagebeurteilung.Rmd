@@ -232,7 +232,7 @@ Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifizi
 Momentan beobachten wir stabile Hospitalisierungszahlen. Bei genauerer Betrachtung fällt auf, dass die Hospitalisierungen in der Altersgruppe <55 zunehmen, während sie in der Altersgruppe >55 abnehmen. Generell bedeuten stabile Zahlen bei fortschreitender Durchimpfung dass die Krankheitslast in der noch nicht geimpften Bevölkerung zunimmt und in dem immer größeren Anteil der geimpften Bevölkerung abnimmt.
 
 Durch fortschreitende Impfungen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt. 
- <!--- CHECK ---->
+ <!---- CHECK ---->
 
 Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
