@@ -270,7 +270,7 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten momentan mit weniger als 1% auf[^28]. Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert. <!--- check ---->
+in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten momentan mit weniger als 1% auf[^28],[^29]. Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert. <!--- check ---->
 
 B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
 
@@ -328,7 +328,10 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^25]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
 [^26]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
 [^27]: https://sensors-eawag.ch/sarscov2/STEP_Vidy_ddPCR.html
-[^28]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.351%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D
+[^28]: 'https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.351%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D'
+[^29]: 'https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22P.1%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D'
+
+
 
 <!---- deleted stuff! ---->
 
