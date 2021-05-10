@@ -226,7 +226,6 @@ eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem e
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
 für Todesfälle bis 23 Tage.
 
-BIS HIER!
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es während der 3.Welle im April noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) während der 3. Welle im April auf nun über 60% gestiegen.
 <!------ UPDATE -------->
 
