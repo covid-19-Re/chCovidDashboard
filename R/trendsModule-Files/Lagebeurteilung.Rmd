@@ -199,9 +199,11 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine stabile oder leicht steigende Epidemie in den letzten Wochen hin. Die priorisiert geimpfte Altersklasse 75+ bildet mit rückgängigen Fallzahlen eine Ausnahme. 
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf
+eine stabile und inzwischen möglicherweise leicht rückläufige Epidemie hin.
 
 Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen aus Zürich[^26] und Lausanne[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends, d.h. einen stabilen Trend im April, nach einem Anstieg im Februar und März.
+Abwasseranalysen von sechs Standorten bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.
 
 
 ### Dynamik  
@@ -227,12 +229,13 @@ eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem e
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
 für Todesfälle bis 23 Tage.
 
-Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle rund 50% der Hospitalisierungen ausgemacht hat, sind es inzwischen noch rund 25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle auf nun über 50% gestiegen.
+Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle rund 50% der Hospitalisierungen ausgemacht hat, sind es inzwischen noch rund 20%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle auf nun über 60% gestiegen.
 
 Momentan beobachten wir stabile Hospitalisierungszahlen. Bei genauerer Betrachtung fällt auf, dass die Hospitalisierungen in der Altersgruppe <55 zunehmen, während sie in der Altersgruppe >55 abnehmen. Generell bedeuten stabile Zahlen bei fortschreitender Durchimpfung dass die Krankheitslast in der noch nicht geimpften Bevölkerung zunimmt und in dem immer größeren Anteil der geimpften Bevölkerung abnimmt.
 
-Durch fortschreitende Impfungen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt. 
- <!--- CHECK ---->
+Durch fortschreitende Impfungen erwarten wir dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt. Generell bedeuten stabile Zahlen bei fortschreitender Durchimpfung dass die Krankheitslast in der noch nicht geimpften Bevölkerung zunimmt und
+in dem immer grösseren Anteil der geimpften Bevölkerung abnimmt.
+<!--- CHECK ---->
 
 Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
@@ -267,7 +270,7 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten momentan mit weniger als 1% auf. Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert. <!--- check ---->
+in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten momentan mit weniger als 1% auf[^28]. Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert. <!--- check ---->
 
 B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
 
@@ -325,6 +328,8 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^25]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
 [^26]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
 [^27]: https://sensors-eawag.ch/sarscov2/STEP_Vidy_ddPCR.html
+[^28]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/
+
 
 
 <!---- deleted stuff! ---->
