@@ -35,7 +35,14 @@ else
   lastLBupdate="no latest LB update found"
 fi
 
-ReUpdate=$(stat -c ‘%y’ ../data/Re/CHE-Estimates.rds)
+RePrivateUpdate=$(stat -c ‘%y’ ../data/Re/CHE-Estimates.rds)
+RePublicUpdate=$(stat -c ‘%y’ ../data/RePublic/CHE-Estimates.rds)
+if [[ $RePrivateUpdate -nt $RePublicUpdate ]]; then
+  ReUpdate=$RePrivateUpdate
+else
+  ReUpdate=$RePublicUpdate
+fi
+
 if [ -f lastReUpdate.txt ]; then
   lastReUpdate=$(<lastReUpdate.txt)
 else

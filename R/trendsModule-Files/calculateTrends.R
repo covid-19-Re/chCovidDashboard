@@ -85,6 +85,104 @@ incidenceData <- eventCounts2wk %>%
 
 qs::qsave(incidenceData, here("data/trends-incidenceTable.qs"))
 
+# update Vaccination Data
+urlfile <- jsonlite::fromJSON("https://www.covid19.admin.ch/api/data/context")
+
+# downloadData
+vaccDosesAdministered <- read_csv(
+    urlfile$sources$individual$csv$vaccDosesAdministered,
+    col_types = cols_only(
+      date = col_date(format = ""),
+      geoRegion = col_character(),
+      entries = col_double(),
+      pop = col_double(),
+      sumTotal = col_double()
+    )
+  ) %>%
+  rename(
+    nDosesAdmin = entries,
+    nDosesAdminTotal = sumTotal
+  ) %>%
+  relocate(date, geoRegion, pop)
+
+fullyVaccPersons <- read_csv(
+    urlfile$sources$individual$csv$fullyVaccPersons,
+    col_types = cols_only(
+      date = col_date(format = ""),
+      geoRegion = col_character(),
+      entries = col_double(),
+      pop = col_double(),
+      sumTotal = col_double()
+    )
+  ) %>%
+  rename(
+    nFullyVacc = entries,
+    nFullyVaccTotal = sumTotal
+  ) %>%
+  relocate(date, geoRegion, pop)
+
+# total vaccination
+vaccinationData <- fullyVaccPersons %>%
+  left_join(vaccDosesAdministered, by = c("date", "geoRegion", "pop")) %>%
+  mutate(
+    nPartiallyVaccTotal = nDosesAdminTotal - nFullyVaccTotal * 2,
+    nPartiallyOrFullyVacTotal = nFullyVaccTotal + nPartiallyVaccTotal
+  ) %>%
+  pivot_longer(!c(date, geoRegion, pop)) %>%
+  mutate(
+    valueP100 = value / pop * 100
+  )
+
+vaccDosesAdministeredByAge <- read_csv(
+    urlfile$sources$individual$csv$weeklyVacc$byAge$vaccDosesAdministered,
+    col_types = cols_only(
+      date = col_double(),
+      geoRegion = col_character(),
+      altersklasse_covid19 = col_character(),
+      entries = col_double(),
+      pop = col_double(),
+      sumTotal = col_double()
+    )
+  ) %>%
+  rename(
+    ageClass = altersklasse_covid19,
+    nDosesAdmin = entries,
+    nDosesAdminTotal = sumTotal
+  ) %>%
+  relocate(date, geoRegion, ageClass, pop)
+
+fullyVaccinatedByAge <- read_csv(
+    urlfile$sources$individual$csv$weeklyVacc$byAge$fullyVaccPersons,
+    col_types = cols_only(
+      date = col_double(),
+      geoRegion = col_character(),
+      altersklasse_covid19 = col_character(),
+      entries = col_double(),
+      pop = col_double(),
+      sumTotal = col_double()
+    )
+  ) %>%
+  rename(
+    ageClass = altersklasse_covid19,
+    nFullyVacc = entries,
+    nFullyVaccTotal = sumTotal
+  ) %>%
+  relocate(date, geoRegion, ageClass, pop)
+
+vaccinationDataByAge <- fullyVaccinatedByAge %>%
+  left_join(vaccDosesAdministeredByAge, by = c("ageClass", "date", "geoRegion", "pop")) %>%
+    mutate(
+      nPartiallyVaccTotal = nDosesAdminTotal - nFullyVaccTotal * 2,
+      nPartiallyOrFullyVacTotal = nFullyVaccTotal + nPartiallyVaccTotal
+    ) %>%
+    pivot_longer(!c(date, geoRegion, ageClass, pop)) %>%
+    mutate(
+      valueP100 = value / pop * 100
+    )
+
+qs::qsave(vaccinationData, here("data/vaccinationData.qs"))
+qs::qsave(vaccinationDataByAge, here("data/vaccinationDataByAge.qs"))
+
 rmarkdown::render(
   here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
   output_format = "all",

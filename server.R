@@ -42,7 +42,6 @@ server <- function(input, output, session) {
   #     selected = "lagebeurteilung"
   #   )
   # })
-
   ttiqServer("ttiq")
 
   quarantineDurationServer("quarantineDuration")
@@ -58,5 +57,7 @@ server <- function(input, output, session) {
   # forecastServer("forecast")
 
   # lagebeurteilungServer("lagebeurteilung")
+
+  vaccServer("vaccinations")
 
 }

@@ -40,14 +40,14 @@ trendsServer <- function(id) {
         reactPars <- reactPars()
 
         eventCountsAll <- list()
-        eventCountsAll$cases <- bagData %>% getEventCounts(fall_dt, "cases", reactPars)
-        eventCountsAll$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations", reactPars)
-        eventCountsAll$deaths <- bagData %>% getEventCounts(pttoddat, "deaths", reactPars)
+        eventCountsAll$cases <- bagData %>% getEventCounts(fall_dt, "cases")
+        eventCountsAll$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations")
+        eventCountsAll$deaths <- bagData %>% getEventCounts(pttoddat, "deaths")
         eventCountsAll$icu <- icuDataRaw %>% filter(region == "CH")
 
         eventCounts <- lapply(eventCountsAll, function(df) {
           df2wk <- df %>%
-            filter(date >= pars$begin[df$event[1]] & date <= pars$end[df$event[1]])
+            filter(date >= reactPars$begin[df$event[1]] & date <= reactPars$end[df$event[1]])
           return(df2wk)
         })
 
