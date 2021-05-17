@@ -39,6 +39,14 @@ r_cases_timeDeath <- r_cases
 r_cases_timeHosp <- r_cases
 r_cases <- r_cases[r_cases$date == max(r_cases$date), ]
 
+r_mean7d <- reproduction %>%
+  filter(region == "CHE",
+    data_type == "Confirmed cases",
+    estimate_type == "Cori_step") %>%
+  filter(date == max(date))
+
+r_mean7d_dateRange_str <- str_c(format(r_mean7d$date - 6, "%d.%m."), " - ", format(r_mean7d$date, "%d.%m.%Y"))
+
 r_hosp <- subset(reproduction,
                   region == "CHE"
                   & data_type == "Hospitalized patients"
@@ -174,9 +182,14 @@ mostRecents501yv2 <- variants %>%
 ```{r printFuns, echo = FALSE}
 
 valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "", digits = 2) {
+  if (uiText == "") {
+    uiTextPrint <- ""
+  } else {
+    uiTextPrint <- str_c(uiText, ": ")
+  }
   glue(
     "{format(round(value, digits), decimal.mark = ',')}{unit} ",
-    "({uiText}: {format(round(lower, digits), decimal.mark = ',')}{unit}",
+    "({uiTextPrint}{format(round(lower, digits), decimal.mark = ',')}{unit}",
     "{uiSep}",
     "{format(round(upper, digits), decimal.mark = ',')}{unit})"
   )
@@ -206,7 +219,9 @@ Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testver
 
 ### Dynamik  
 <!------ UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 0.85 (0.72 - 0.98); dies reflektiert das Infektionsgeschehen vom 01.05.-07.05.2021[^1].
+
+Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
