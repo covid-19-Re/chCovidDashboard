@@ -286,7 +286,7 @@ in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inz
 B.1.351 und P.1 treten momentan mit jeweils weniger als 2% auf[^29].
 <!--- UPDATE cov-spectrum.ethz.ch->"Surveillance" ---->
 <!--- RRR - THIS IS MISLEADING AS THE EARLIEST SAMPLE ON cov-spectrum.ethz.ch IS FROM WEEK 11: Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert[^29]. ---->
-Die ursprünglich in Indien beschriebene B.1.617 Variante ist seit Kalenderwoche 11 des Jahres 2021 in der Schweiz nachgewiesen[^29].
+Die ursprünglich in Indien beschriebene B.1.617 Variante ist seit der 16. Kalenderwoche des Jahres 2021 in der Schweiz in einer auf die 11. Kalenderwoche datierten Probe nachgewiesen[^29].
 Bisher wurden weniger als 50 Fälle dieser Variante in der Schweiz nachgewiesen. Etwa 70% davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
 <!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
 
