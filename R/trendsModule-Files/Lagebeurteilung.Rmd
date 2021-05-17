@@ -206,7 +206,7 @@ Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testver
 
 ### Dynamik  
 <!------ UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 0.89 (0.78 - 1.01); dies reflektiert das Infektionsgeschehen vom 24.04.-30.04.2021[^1].
+Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 0.85 (0.72 - 0.98); dies reflektiert das Infektionsgeschehen vom 01.05.-07.05.2021[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
@@ -236,7 +236,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
 <!------ UPDATE -------->
 Wir beobachten sinkende Hospitalisierungszahlen in allen Altersklassen.
-Für die Gruppe der 55 bis 64-Jährigen ist diese Reduktion statistisch signifikant.
+Für die Gruppen der 55 bis 64-Jährigen, 65 bis 74-Jährigen, und über 75-Jährigen ist diese Reduktion statistisch signifikant.
 <!------ UPDATE -------->
 
 
