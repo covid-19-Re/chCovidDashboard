@@ -221,7 +221,7 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
+Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
 für Todesfälle bis 23 Tage.
@@ -269,15 +269,15 @@ In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschrie
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
 in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten momentan mit weniger als 1% auf[^29]. Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert[^29]. Bisher wurden weniger als 25 Fälle dieser Variante in der Schweiz nachgewiesen. 50% davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat. <!--- UPDATE ---->
 
-B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
+B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt, dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
 
 Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 wird in mehreren Studien beobachtet. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. Eine neue Studie sieht keine erhöhte Sterblichkeit, untersucht jedoch nur hospitalisierte Personen[^24]. In einer weiteren Studie bei der Daten einer «COVID symptom study App» ausgewertet wurden, wurde mit Ausbreitung von B.1.1.7 keine Verschiebung zu schwereren Verläufen beobachtet[^25].
 
 In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist[^29]. 
 Dementsprechend sind mit Ausbreitung von B.1.1.7 die Wahrscheinlichkeiten einer Hospitalisierung bei positivem Testergebnis gestiegen. Eine 55-64 jährige positiv getestete Person hatte beispielsweise zum 31.12.2020 (als B.1.1.7 noch wenig verbreitet war) ein Risiko von 4.3% (28-Tages Mittel) eines Spitaleintritts. Zum 31.3.2021 (als B.1.1.7 dominant war), war das Risiko bei 7.2%[^17]. Die anderen Altersgruppen über 35 entwickelten sich ähnlich (in den jüngeren Altersklassen sind die absoluten Zahlen zu klein für belastbare Aussagen).
-Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein als dass wir für die Schweiz eine Aussage treffen könnten.
+Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
 
-Es wird erwartet dass die in der Schweiz momentan verwendeten mRNA-Impfstoffe auch gegen die neuen Varianten wirken [^23].
+Es wird erwartet, dass die in der Schweiz momentan verwendeten mRNA-Impfstoffe auch gegen die neuen Varianten wirken [^23].
 
 Basierend auf den Daten aus der genetischen Charakterisierung können wir die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar bis Mitte April ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[^15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Seit März ist B.1.1.7 dominant und die Gesamtzahlen sind bis Mitte April gestiegen. Seitdem nehmen die Zahlen wieder ab. Diese Abnahme wird auch in unseren Nachbarstaaten beobachtet.
 
@@ -289,7 +289,7 @@ wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRe
 (95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentDigits), decimal.mark = ',')`% bis
 `r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
 das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]). Die Genfersee-Region ist in der Dynamik ca. 1-2 Wochen gegenüber der Gesamtscheiz voraus[^15],[^16].
-Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
+Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet, dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
 
 
 <!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
