@@ -212,9 +212,11 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine rückläufige Epidemie hin. <!------ UPDATE  -------->
+In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden.
+Insgesamt deuten all diese Indikatoren auf eine rückläufige Epidemie hin.
+<!------ UPDATE  -------->
+Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.
 
-Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends, d.h. einen stabilen und neuerdings fallenden Trend im April, nach einem Anstieg im Februar und März.
 
 
 ### Dynamik  
@@ -248,11 +250,13 @@ die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
-Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
-<!------ UPDATE -------->
+Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Wir beobachten sinkende Hospitalisierungszahlen in allen Altersklassen.
 Für die Gruppen der 55 bis 64-Jährigen, 65 bis 74-Jährigen, und über 75-Jährigen ist diese Reduktion statistisch signifikant.
 <!------ UPDATE -------->
+Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
+<!------ UPDATE -------->
+
 
 
 ### Absolute Zahlen
@@ -285,8 +289,7 @@ in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in B
 in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16].
 B.1.351 und P.1 treten momentan mit jeweils weniger als 2% auf[^29].
 <!--- UPDATE cov-spectrum.ethz.ch->"Surveillance" ---->
-<!--- RRR - THIS IS MISLEADING AS THE EARLIEST SAMPLE ON cov-spectrum.ethz.ch IS FROM WEEK 11: Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert[^29]. ---->
-Die ursprünglich in Indien beschriebene B.1.617 Variante ist seit der 16. Kalenderwoche des Jahres 2021 in der Schweiz in einer auf die 11. Kalenderwoche datierten Probe nachgewiesen[^29].
+Die ursprünglich in Indien beschriebene B.1.617 Variante ist seit der 16. Kalenderwoche des Jahres 2021 in der Schweiz nachgewiesen. Die erste Probe mit dieser Variante ist auf die 11. Kalenderwoche datiert (wurde aber erst später in die Datenbank aufgenommen)[^29].
 Bisher wurden weniger als 50 Fälle dieser Variante in der Schweiz nachgewiesen. Etwa 70% davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
 <!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
 
@@ -295,7 +298,10 @@ B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt, dass B.1.1.
 Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 wird in mehreren Studien beobachtet. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. Eine neue Studie sieht keine erhöhte Sterblichkeit, untersucht jedoch nur hospitalisierte Personen[^24]. In einer weiteren Studie bei der Daten einer «COVID symptom study App» ausgewertet wurden, wurde mit Ausbreitung von B.1.1.7 keine Verschiebung zu schwereren Verläufen beobachtet[^25].
 
 In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist[^29]. 
-Dementsprechend sind mit Ausbreitung von B.1.1.7 die Wahrscheinlichkeiten einer Hospitalisierung bei positivem Testergebnis gestiegen. Eine 55-64 jährige positiv getestete Person hatte beispielsweise zum 31.12.2020 (als B.1.1.7 noch wenig verbreitet war) ein Risiko von 4.3% (28-Tages Mittel) eines Spitaleintritts. Zum 31.3.2021 (als B.1.1.7 dominant war), war das Risiko bei 7.2%[^17]. Die anderen Altersgruppen über 35 entwickelten sich ähnlich (in den jüngeren Altersklassen sind die absoluten Zahlen zu klein für belastbare Aussagen).
+Dementsprechend sind mit Ausbreitung von B.1.1.7 die Wahrscheinlichkeiten einer Hospitalisierung bei positivem Testergebnis gestiegen.
+Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 5.0% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko fast dreimal niedriger bei 1.7%[^29].
+<!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
+Die anderen Altersgruppen über 35 entwickelten sich ähnlich (in den jüngeren Altersklassen sind die absoluten Zahlen zu klein für belastbare Aussagen).
 Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
 
 Es wird erwartet, dass die in der Schweiz momentan verwendeten mRNA-Impfstoffe auch gegen die neuen Varianten wirken [^23].
