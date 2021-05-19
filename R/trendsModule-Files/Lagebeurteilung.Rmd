@@ -220,7 +220,7 @@ Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wich
 
 
 ### Dynamik  
-<!------ UPDATE -------->
+<!------- UPDATE -------->
 
 Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
