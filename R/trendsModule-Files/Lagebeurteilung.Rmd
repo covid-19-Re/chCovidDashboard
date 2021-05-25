@@ -286,7 +286,7 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
 in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16].
+in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist seit März die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16].
 B.1.351 und P.1 treten momentan mit jeweils weniger als 2% auf[^29].
 <!--- UPDATE cov-spectrum.ethz.ch->"Surveillance" ---->
 Die ursprünglich in Indien beschriebene B.1.617 Variante ist seit der 16. Kalenderwoche des Jahres 2021 in der Schweiz nachgewiesen. Die erste Probe mit dieser Variante ist auf die 11. Kalenderwoche datiert (wurde aber erst später in die Datenbank aufgenommen)[^29].
@@ -307,8 +307,9 @@ Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als da
 
 Es wird erwartet, dass die in der Schweiz momentan verwendeten mRNA-Impfstoffe auch gegen die neuen Varianten wirken [^23].
 
+<!---
 Basierend auf den Daten aus der genetischen Charakterisierung können wir die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar bis Mitte April ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[^15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Seit März ist B.1.1.7 dominant und die Gesamtzahlen sind bis Mitte April gestiegen. Seitdem nehmen die Zahlen wieder ab. Diese Abnahme wird auch in unseren Nachbarstaaten beobachtet.
-
+ --->
 
 
 <!--- 
