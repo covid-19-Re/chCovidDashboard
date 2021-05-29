@@ -254,12 +254,13 @@ Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifizi
 Wir beobachten sinkende Hospitalisierungszahlen in allen Altersklassen.
 Für die Gruppe der 65 bis 74-Jährigen ist diese Reduktion statistisch signifikant.
 <!------ UPDATE -------->
+<!------ TOO DETAILLED:
 Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
-<!------ WEEKLY UPDATE NOT NEEDED ANYMORE SINCE WE ANCORED THE NUMBERS IN TIME -------->
-
+-------->
 
 
 ### Absolute Zahlen
+
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
 Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
@@ -284,48 +285,37 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 
 ## Neue Varianten
-In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
-in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist seit März 2021 die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16].
-B.1.351 und P.1 treten momentan mit jeweils weniger als 2% auf[^29].
-<!--- UPDATE cov-spectrum.ethz.ch->"Surveillance" ---->
-Die ursprünglich in Indien beschriebene B.1.617 Variante ist seit der 16. Kalenderwoche des Jahres 2021 in der Schweiz nachgewiesen. Die erste Probe mit dieser Variante ist auf die 11. Kalenderwoche datiert (wurde aber erst später in die Datenbank aufgenommen)[^29].
-Bisher wurden 52 Fälle von Infektionen mit dieser Variante in der Schweiz nachgewiesen.
-Etwa 80% davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
-<!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
 
-B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt, dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
-
-Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 wird in mehreren Studien beobachtet. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. Eine neue Studie sieht keine erhöhte Sterblichkeit, untersucht jedoch nur hospitalisierte Personen[^24]. In einer weiteren Studie bei der Daten einer «COVID symptom study App» ausgewertet wurden, wurde mit Ausbreitung von B.1.1.7 keine Verschiebung zu schwereren Verläufen beobachtet[^25].
-
-In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist[^29]. 
+Seit März 2021 ist B.1.1.7 die dominante Virusvariante in der Schweiz[^15],[^16].
+Im Vergleich zum Wildtyp ist die Übertragungsrate von B.1.1.7 höher [^13],[^18],[^16].
+<!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
+Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
+In den schweizer Daten sehen wir eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung in manchen Altersgruppen. 
+Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4.5% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko fast dreimal niedriger bei 1.6%[^29].
+<!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
+Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
+<!--- OLD TEXT:
+Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 wird in mehreren Studien beobachtet. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. Eine neue Studie sieht keine erhöhte Sterblichkeit, untersucht jedoch nur hospitalisierte Personen[^24]. In einer weiteren Studie bei der Daten einer «COVID symptom study App» ausgewertet wurden, wurde mit Ausbreitung von B.1.1.7 keine Verschiebung zu schwereren Verläufen beobachtet[^25]. 
+In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist[^29].
 Dementsprechend sind mit Ausbreitung von B.1.1.7 die Wahrscheinlichkeiten einer Hospitalisierung bei positivem Testergebnis gestiegen.
 Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4.5% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko fast dreimal niedriger bei 1.6%[^29].
 <!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
 Die anderen Altersgruppen über 35 entwickelten sich ähnlich (in den jüngeren Altersklassen sind die absoluten Zahlen zu klein für belastbare Aussagen).
-Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
+Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten. ---->
+Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen B.1.1.7 hoch wirksam [^32],[^33],[^34].
 
-Es wird erwartet, dass die in der Schweiz momentan verwendeten mRNA-Impfstoffe auch gegen die neuen Varianten wirken [^23].
-
-<!---
-Basierend auf den Daten aus der genetischen Charakterisierung können wir die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar bis Mitte April ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[^15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Seit März ist B.1.1.7 dominant und die Gesamtzahlen sind bis Mitte April gestiegen. Seitdem nehmen die Zahlen wieder ab. Diese Abnahme wird auch in unseren Nachbarstaaten beobachtet.
- --->
-
-
-<!--- 
-In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(mostRecentb117$weekStartDate, "%d.%m.%Y")`)
-wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, percentDigits), decimal.mark = ',')`% geschätzt
-(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentDigits), decimal.mark = ',')`% bis
-`r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
-das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]). Die Genfersee-Region ist in der Dynamik ca. 1-2 Wochen gegenüber der Gesamtscheiz voraus[^15],[^16].
-Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet, dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
+Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten B.1.351, P.1 und B.1.617 treten momentan mit jeweils weniger als 2% auf[^29].
+<!--- UPDATE cov-spectrum.ethz.ch->"Surveillance" ---->
+Die ursprünglich in Indien beschriebene B.1.617 Variante wurde bisher in 52 Fällen in der Schweiz nachgewiesen.
+Die grosse Mehrheit davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
+<!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
+B.1.617.2 verdrängt B.1.1.7 in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich aber noch nicht beziffern laesst[^31].
+Einer neuen preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen B.1.617.2 reduziert:
+nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen B.1.617 nur 33.5% (statt 51.1% gegen B.1.1.7),
+nach der zweiten Dosis 87.9% (statt 93.4% gegen B.1.1.7). 
+<!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2.Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
 
 
-<!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
-<!--- ## Beurteilung 
-Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen relativ stabilen Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Durch die Einführung von national einheitlichen Massnahmen hat sich der Verlauf der Epidemie in den unterschiedlichen Regionen angeglichen. [^11] --->
-
-<!--- Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor sehr hoch. Falls der Wintersport und die Festtage zu vermehrten Ansteckungen geführt haben, wird sich dies in einem Anstieg der bestätigten Fälle im Verlauf vom Januar niederschlagen. Zudem besteht das Risiko, dass eine Ausbreitung der bereits in der Schweiz nachgewiesenen neuen Variante von SARS-CoV-2 mit einer wahrscheinlich erhöhten Übertragung innerhalb der nächsten Wochen zu einem Anstieg der Epidemie und einer noch stärkeren Belastung des Gesundheitssystems führen wird.[^12] ---->
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
 [^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends: Aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
@@ -356,59 +346,8 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^27]: https://sensors-eawag.ch/sars/overview.html
 [^28]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/
 [^29]: https://cov-spectrum.ethz.ch/
-
-
-<!---- deleted stuff! ---->
-
-```{r regional, echo = FALSE}
-regional <- subset(reproduction,
-                    (grepl("grR", region))
-                    & data_type == "Confirmed cases"
-                    & estimate_type == "Cori_slidingWindow")
-
-regional <- regional[regional$date == max(regional$date), ]
-regional <- regional[order(regional$median_R_mean), ]
-
-regional$region[regional$region == "grR Central Switzerland"] <- "Zentralschweiz"
-regional$region[regional$region == "grR Eastern Switzerland"] <- "Ostschweiz"
-regional$region[regional$region == "grR Espace Mittelland"] <- "Espace Mittelland"
-regional$region[regional$region == "grR Lake Geneva Region"] <- "Région lémanique"
-regional$region[regional$region == "grR Northwestern Switzerland"] <- "Nordwestschweiz"
-regional$region[regional$region == "grR Ticino"] <- "Ticino"
-regional$region[regional$region == "grR Zurich"] <- "Zürich"
-
-threshold <- 0.8
-
-regional_below <- regional[regional$median_R_mean <= threshold, ]
-below <- ""
-for(i in 1:dim(regional_below)[1]) {
-  ifelse(i < dim(regional_below)[1], last <- ", ", last <- "")
-  below <- paste0(below,
-                  regional_below$region[i], 
-                  " mit ",
-                  format(round(regional_below$median_R_mean[i], 2), decimal.mark = ","),
-                  "; 95% UI: ",
-                  format(round(regional_below$median_R_lowHPD[i], 2), decimal.mark = ","),
-                  "-",
-                  format(round(regional_below$median_R_highHPD[i], 2), decimal.mark = ","),
-                  last)
-}
-
-regional_above <- regional[regional$median_R_mean > threshold, ]
-above <- ""
-for(i in 1:dim(regional_above)[1]) {
-  ifelse(i < dim(regional_above)[1], last <- "), ", last <- ")")
-  above <- paste0(above,
-                  regional_above$region[i], 
-                  " (",
-                  format(round(regional_above$median_R_mean[i], 2), decimal.mark = ","),
-                  "; 95% UI: ",
-                  format(round(regional_above$median_R_lowHPD[i], 2), decimal.mark = ","),
-                  "-",
-                  format(round(regional_above$median_R_highHPD[i], 2), decimal.mark = ","),
-                  last)
-}
-```
-
-<!---- ## Regionale Unterschiede
-Es bestehen regionale und kantonale Unterschiede im Verlauf der SARS-CoV-2-Epidemie. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In allen 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit über dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt:[^9] `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion grössere Unterschiede aufweisen.[^10] --->
+[^30]: https://khub.net/documents/135939561/430986542/Effectiveness+of+COVID-19+vaccines+against+the+B.1.617.2+variant.pdf/204c11a4-e02e-11f2-db19-b3664107ac42
+[^31]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/990101/27_May_2021_Risk_assessment_for_SARS-CoV-2_variant_VOC-21APR-02__B.1.617.2_.pdf
+[^32]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
+[^33]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)00947-8/fulltext
+[^34]: https://www.nejm.org/doi/pdf/10.1056/NEJMc2102179?articleTools=true
