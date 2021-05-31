@@ -242,7 +242,6 @@ Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzög
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
 für Todesfälle bis 23 Tage.
-Durch fortschreitende Impfungen erwarten wir, dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt.
 
 Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
@@ -251,7 +250,7 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten statistisch signifikant sinkende Zahlen von Fällen, Hospitalisierungen und Patienten auf Intensivstationen.
+Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen und statistisch signifikant sinkende Hospitalisierungszahlen in der Gruppe der 45 bis 54 und der 55 bis 64-Jährigen.
 <!------ UPDATE -------->
 <!------ TOO DETAILLED:
 Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
