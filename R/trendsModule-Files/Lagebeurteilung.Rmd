@@ -288,7 +288,7 @@ Seit März 2021 ist B.1.1.7 die dominante Virusvariante in der Schweiz[^15],[^16
 Im Vergleich zum Wildtyp ist die Übertragungsrate von B.1.1.7 etwa 50% höher [^13],[^18],[^16].
 <!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
 Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
-In den schweizer Daten sehen wir tendetiell eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung. 
+In den schweizer Daten sehen wir tendenziell eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung. 
 Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4.1% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 1.7%[^29].
 <!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
 Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
