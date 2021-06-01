@@ -222,7 +222,7 @@ Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wich
 ### Dynamik
 
 <!------- UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir, dass eine kontinuierliche Abnahme der SARS-CoV-2 Epidemie in den letzten Wochen. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie in den letzten Wochen kontinuierlich abnimmt. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 
@@ -299,10 +299,10 @@ Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Var
 Die ursprünglich in Indien beschriebene B.1.617 Variante wurde bisher in 69 Fällen in der Schweiz nachgewiesen.
 Die grosse Mehrheit davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
 <!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
-B.1.617.2 verdrängt B.1.1.7 in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern laesst[^31].
-Eines neuen preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen B.1.617.2 reduziert:
-nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen B.1.617 nur 33.5% (statt 51.1% gegen B.1.1.7),
-nach der zweiten Dosis 87.9% (statt 93.4% gegen B.1.1.7). 
+B.1.617.2 verdrängt B.1.1.7 in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern lässt[^31].
+Eines neuen Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen B.1.617.2 reduziert:
+nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen B.1.617 nur 34% (statt 51% gegen B.1.1.7),
+nach der zweiten Dosis 88% (statt 93% gegen B.1.1.7). 
 <!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2.Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
 
 
