@@ -213,7 +213,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden.
-Insgesamt deuten all diese Indikatoren auf eine rückläufige Epidemie hin.
+Insgesamt deuten all diese Indikatoren auf eine kontinuierlich rückläufige Epidemie hin.
 <!------ UPDATE  -------->
 Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.
 
@@ -250,7 +250,7 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen und statistisch signifikant sinkende Hospitalisierungszahlen in der Gruppe der 45 bis 54 und der 55 bis 64-Jährigen.
+Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen (ausser in den Gruppen der unter 7 und ber 75 Jährigen, in denen es weniger als 30 Fälle pro Tag gibt) und statistisch signifikant sinkende Hospitalisierungszahlen in der Gruppe der 55 bis 64 und der 65 bis 74-Jährigen.
 <!------ UPDATE -------->
 <!------ TOO DETAILLED:
 Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
@@ -289,17 +289,19 @@ Im Vergleich zum Wildtyp ist die Übertragungsrate von B.1.1.7 etwa 50% höher [
 <!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
 Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
 In den schweizer Daten sehen wir tendenziell eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung. 
-Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4.1% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 1.7%[^29].
+Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4.0% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 1.8%[^29].
 <!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
 Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
 Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen B.1.1.7 hoch wirksam [^32],[^33],[^34].
 
 Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten B.1.351, P.1 und B.1.617 treten momentan mit jeweils weniger als 2% auf[^29].
 <!--- UPDATE cov-spectrum.ethz.ch->"Surveillance" ---->
-Die ursprünglich in Indien beschriebene B.1.617 Variante wurde bisher in 69 Fällen in der Schweiz nachgewiesen.
+Die ursprünglich in Indien beschriebene B.1.617 Variante wurde bisher in 88 Fällen in der Schweiz nachgewiesen.
 Die grosse Mehrheit davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
 <!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
-B.1.617.2 verdrängt B.1.1.7 in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern lässt[^31].
+B.1.617.2 verdrängt B.1.1.7 in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern lässt[^35].
+Die Epidemie, die in Grossbritannien von B.1.617.2 dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1.33 (1.21-1.44), gemessen vom 17.-23. Mai 2021[^1]).
+<!--- UPDATE  ---->
 Eines neuen Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen B.1.617.2 reduziert:
 nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen B.1.617 nur 34% (statt 51% gegen B.1.1.7),
 nach der zweiten Dosis 88% (statt 93% gegen B.1.1.7). 
@@ -341,3 +343,4 @@ nach der zweiten Dosis 88% (statt 93% gegen B.1.1.7).
 [^32]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
 [^33]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)00947-8/fulltext
 [^34]: https://www.nejm.org/doi/pdf/10.1056/NEJMc2102179?articleTools=true
+[^35]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/991135/3_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
