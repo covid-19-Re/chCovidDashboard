@@ -250,7 +250,7 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen (ausser in den Gruppen der unter 7 und ber 75 Jährigen, in denen es weniger als 30 Fälle pro Tag gibt) und statistisch signifikant sinkende Hospitalisierungszahlen in der Gruppe der 55 bis 64 und der 65 bis 74-Jährigen.
+Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen (ausser in den Gruppen der unter 7 und über 75 Jährigen, in denen es weniger als 30 Fälle pro Tag gibt) und statistisch signifikant sinkende Hospitalisierungszahlen in der Gruppe der 55 bis 64 und der 65 bis 74-Jährigen.
 <!------ UPDATE -------->
 <!------ TOO DETAILLED:
 Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
@@ -305,7 +305,7 @@ Die Epidemie, die in Grossbritannien von B.1.617.2 dominiert ist, steigt signifi
 Eines neuen Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen B.1.617.2 reduziert:
 nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen B.1.617 nur 34% (statt 51% gegen B.1.1.7),
 nach der zweiten Dosis 88% (statt 93% gegen B.1.1.7). 
-<!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2.Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
+<!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2. Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
 
 
 
