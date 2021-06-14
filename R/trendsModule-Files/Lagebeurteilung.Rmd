@@ -284,27 +284,26 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 ## Neue Varianten
 
-Seit März 2021 ist B.1.1.7 die dominante Virusvariante in der Schweiz[^15],[^16].
-Im Vergleich zum Wildtyp ist die Übertragungsrate von B.1.1.7 etwa 50% höher [^13],[^18],[^16].
+Seit März 2021 ist Alpha (B.1.1.7) die dominante Virusvariante in der Schweiz[^15],[^16].
+Im Vergleich zum Wildtyp ist die Übertragungsrate von Alpha etwa 50% höher [^13],[^18],[^16].
 <!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
 Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
 In den schweizer Daten sehen wir tendenziell eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung. 
-Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4,2% eines Spitaleintritts in 2021, wenn sie mit der Variante B.1.1.7 infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 2,1%[^29].
+Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4,2% eines Spitaleintritts in 2021, wenn sie mit der Variante Alpha infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 2,1%[^29].
 <!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
-Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
-Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen B.1.1.7 hoch wirksam [^32],[^33],[^34].
+Die Todesfall-Zahlen aufgrund von Alpha für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
+Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen Alpha hoch wirksam [^32],[^33],[^34].
 
-Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten B.1.351, P.1 und B.1.617 treten momentan mit jeweils weniger als 1% auf[^29].
+Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten Beta (B.1.351), Gamma (P.1) und Delta (B.1.617.2) haben momentan die Häufigkeit 0.6%, 1.0% und 1.7% auf[^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> Click on B.1.315 or P.1 ---->
-Die ursprünglich in Indien beschriebene B.1.617 Variante wurde bisher in 106 Fällen in der Schweiz nachgewiesen.
+Die ursprünglich in Indien beschriebene Variante Delta, die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in weniger als 100 Fällen in der Schweiz nachgewiesen.
 <!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
-Die grosse Mehrheit davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat.
-B.1.617.2 verdrängt B.1.1.7 in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern lässt[^35].
-Die Epidemie, die in Grossbritannien von B.1.617.2 dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1,37 (1,23 - 1,51), gemessen vom 24.-30. Mai 2021[^1]).
+Delta verdrängt Alpha in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern lässt[^35].
+Die Epidemie, die in Grossbritannien von Delta dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1,37 (1,23 - 1,51), gemessen vom 24.-30. Mai 2021[^1]).
 <!--- UPDATE  ---->
-Eines neuen Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen B.1.617.2 reduziert:
-nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen B.1.617 nur 34% (statt 51% gegen B.1.1.7),
-nach der zweiten Dosis 88% (statt 93% gegen B.1.1.7). 
+Eines neuen Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen Delta reduziert:
+nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen Delta nur 34% (statt 51% gegen Alpha),
+nach der zweiten Dosis 88% (statt 93% gegen Alpha). 
 <!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2. Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
 
 
