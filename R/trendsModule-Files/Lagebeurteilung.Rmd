@@ -303,7 +303,7 @@ Die ursprünglich in Indien beschriebene Variante Delta (B.1.617.2), die Public 
 
 Delta verdrängt Alpha in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate[^36].
 Der Übertragungsvorteil von Delta gegenüber Alpha wurde im Rahmen einer Studie der University of Warwick auf 56% (95% Konfidenzintervall: 34%-81%) geschätzt, die in einem Preprint[^37] beschrieben ist.
-<---- In diesem Transmissionvorteil sind die Vorteile, die Delta hat, weil es der Immunantwort entkommt, noch nicht enthalten. ----> 
+<!--- In diesem Transmissionvorteil sind die Vorteile, die Delta hat, weil es der Immunantwort entkommt, noch nicht enthalten. ----> 
 Eines Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen Delta reduziert:
 nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen Delta nur 34% (statt 51% gegen Alpha),
 nach der zweiten Dosis 88% (statt 93% gegen Alpha). 
