@@ -106,15 +106,18 @@ vaccDosesAdministered <- read_csv(
   relocate(date, geoRegion, pop)
 
 fullyVaccPersons <- read_csv(
-    urlfile$sources$individual$csv$fullyVaccPersons,
+    urlfile$sources$individual$csv$vaccPersons,
     col_types = cols_only(
       date = col_date(format = ""),
       geoRegion = col_character(),
       entries = col_double(),
       pop = col_double(),
-      sumTotal = col_double()
+      sumTotal = col_double(),
+      type = col_character()
     )
   ) %>%
+  filter(type == "COVID19FullyVaccPersons") %>%
+  select(-type) %>%
   rename(
     nFullyVacc = entries,
     nFullyVaccTotal = sumTotal
@@ -152,16 +155,19 @@ vaccDosesAdministeredByAge <- read_csv(
   relocate(date, geoRegion, ageClass, pop)
 
 fullyVaccinatedByAge <- read_csv(
-    urlfile$sources$individual$csv$weeklyVacc$byAge$fullyVaccPersons,
+    urlfile$sources$individual$csv$weeklyVacc$byAge$vaccPersons,
     col_types = cols_only(
       date = col_double(),
       geoRegion = col_character(),
       altersklasse_covid19 = col_character(),
       entries = col_double(),
       pop = col_double(),
-      sumTotal = col_double()
+      sumTotal = col_double(),
+      type = col_character()
     )
   ) %>%
+  filter(type == "COVID19FullyVaccPersons") %>%
+  select(-type) %>%
   rename(
     ageClass = altersklasse_covid19,
     nFullyVacc = entries,
