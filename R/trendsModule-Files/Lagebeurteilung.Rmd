@@ -250,7 +250,8 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen (ausser in den Gruppen der unter 7 und über 75 Jährigen, in denen es in der letzten Woche weniger als 20 Fälle pro Tag gab) und statistisch signifikant sinkende Hospitalisierungszahlen in der Gruppe der 65 bis 74 und der über 75-Jährigen. In allen Altersgruppen gibt es unter 10 Hospitalisierungen pro Tag, was die Schätzung eines zeitlichen trends erschwert.
+Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen.
+Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen trends erschwert. In den Gruppen der 45-54 Jährigen und 55-64 Jährigen ist die Abnahme der Hospitalisierungszahlen signifikant.
 <!------ UPDATE -------->
 <!------ TOO DETAILLED:
 Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
@@ -289,19 +290,23 @@ Im Vergleich zum Wildtyp ist die Übertragungsrate von Alpha etwa 50% höher [^1
 <!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
 Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
 In den schweizer Daten sehen wir tendenziell eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung. 
-Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4,2% eines Spitaleintritts in 2021, wenn sie mit der Variante Alpha infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 2,1%[^29].
+Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4,3% eines Spitaleintritts in 2021, wenn sie mit der Variante Alpha infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 2,1%[^29].
 <!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
 Die Todesfall-Zahlen aufgrund von Alpha für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
 Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen Alpha hoch wirksam [^32],[^33],[^34].
 
-Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten Beta (B.1.351), Gamma (P.1) und Delta (B.1.617.2) haben momentan die Häufigkeit 0.6%, 1.0% und 1.7% auf[^29].
+Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten Beta (B.1.351) und Gamma (P.1)
+und Delta (B.1.617.2) haben momentan die Häufigkeit von respektive 0.5% und 1.6% [^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> Click on B.1.315 or P.1 ---->
-Die ursprünglich in Indien beschriebene Variante Delta, die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in weniger als 100 Fällen in der Schweiz nachgewiesen.
+
+Die ursprünglich in Indien beschriebene Variante Delta, die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in 177 Fällen in der Schweiz nachgewiesen und hatte in der Kalenderwoche 22 eine Häufigkeit von 5,5% und in der Kalenderwoche 23 eine Häufigkeit von 20,4% [^29].
 <!--- UPDATE cov-spectrum.ethz.ch->"All samples" ---->
-Delta verdrängt Alpha in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate, die sich jedoch noch nicht beziffern lässt[^35].
-Die Epidemie, die in Grossbritannien von Delta dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1,37 (1,23 - 1,51), gemessen vom 24.-30. Mai 2021[^1]).
+Delta verdrängt Alpha in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate[^36].
+Der Transmissionsvorteil von Delta gegenüber Alpha wurde im Rahmen einer Studie der University of Warwick zu 56% (95% Konfidenzintervall: 34%-81%) geschätzt, die in einem Preprint[^37] beschrieben ist.
+In diesem Transmissionvorteil sind die Vorteile, die Delta hat, weil es der Immunantwort entkommt, noch nicht enthalten. 
+Die Epidemie, die in Grossbritannien von Delta dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1,25 (1,14 - 1,35), gemessen vom 31. Mai - 6. Juni 2021[^1]).
 <!--- UPDATE  ---->
-Eines neuen Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen Delta reduziert:
+Eines Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen Delta reduziert:
 nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen Delta nur 34% (statt 51% gegen Alpha),
 nach der zweiten Dosis 88% (statt 93% gegen Alpha). 
 <!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2. Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
@@ -343,3 +348,4 @@ nach der zweiten Dosis 88% (statt 93% gegen Alpha).
 [^33]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)00947-8/fulltext
 [^34]: https://www.nejm.org/doi/pdf/10.1056/NEJMc2102179?articleTools=true
 [^35]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/991135/3_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
+[^36]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/994761/18_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
