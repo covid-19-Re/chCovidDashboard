@@ -243,7 +243,7 @@ eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem e
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
 für Todesfälle bis 23 Tage.
 
-Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
+Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
@@ -285,31 +285,31 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 ## Neue Varianten
 
-Seit März 2021 ist Alpha die dominante Virusvariante in der Schweiz[^15],[^16].
-Im Vergleich zum Wildtyp ist die Übertragungsrate von Alpha etwa 50% höher [^13],[^18],[^16].
+Seit März 2021 ist Alpha die dominante Virusvariante in der Schweiz[^15],[^16], deren Übertragungsrate um etwa 50% höher als die des Wildtyps ist [^13],[^18],[^16].
 <!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
-Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
+<!--- Zudem führt B.1.1.7 zu schwereren Krankheitsverläufen[^19],[^20],[^21],[^22].
 In den schweizer Daten sehen wir tendenziell eine erhöhte Wahrscheinlichkeiten einer Hospitalisierung. 
-Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4,3% eines Spitaleintritts in 2021, wenn sie mit der Variante Alpha infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 2,1%[^29].
-<!--- UPDATE https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
-Die Todesfall-Zahlen aufgrund von Alpha für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten.
+Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4,3% eines Spitaleintritts in 2021, wenn sie mit der Variante Alpha infiziert ist. Für eine Person, die mit einer anderen Variante infiziert ist, liegt dieses Risiko bei nur 2,1%[^29]. ---->
+<!--- die Hospitalisierung raten sind hier: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/Y2021/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.1.7%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/hospitalization-death ---->
+<!--- Die Todesfall-Zahlen aufgrund von Alpha für die Schweiz sind zu klein, als dass wir für die Schweiz eine Aussage treffen könnten. ---->
 Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen Alpha hoch wirksam [^32],[^33],[^34].
 
 Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten Beta (B.1.351) und Gamma (P.1)
 hatten über die letzten 14 Tage gemittelt eine Häufigkeit von respektive 0.5% und 1.6% [^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> see percentage of B.1.315 or P.1 on the left, which is the average over the past 14 days ---->
 
-Die ursprünglich in Indien beschriebene Variante Delta (B.1.617.2), die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in 177 Fällen in der Schweiz nachgewiesen und hatte in der Kalenderwoche 22 eine Häufigkeit von 5,5% und in der Kalenderwoche 23 eine Häufigkeit von 20,4% unter den sequenzierten Fällen [^29].
+Die ursprünglich in Indien beschriebene Variante Delta (B.1.617.2), die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in 132 Fällen in der Schweiz nachgewiesen und hatte in der Kalenderwoche 22 eine Häufigkeit von 4,5% und in der Kalenderwoche 23 eine Häufigkeit von 16,5% unter den sequenzierten Fällen [^29]. Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 23, noch ändern.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
+
 Delta verdrängt Alpha in vielen britischen Städten und hat wahrscheinlich eine höhere Übertragungsrate[^36].
-Der Transmissionsvorteil von Delta gegenüber Alpha wurde im Rahmen einer Studie der University of Warwick zu 56% (95% Konfidenzintervall: 34%-81%) geschätzt, die in einem Preprint[^37] beschrieben ist.
-In diesem Transmissionvorteil sind die Vorteile, die Delta hat, weil es der Immunantwort entkommt, noch nicht enthalten. 
-Die Epidemie, die in Grossbritannien von Delta dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1,25 (1,14 - 1,35), gemessen vom 31. Mai - 6. Juni 2021[^1]).
-<!--- UPDATE  from re-international ---->
+Der Übertragungsvorteil von Delta gegenüber Alpha wurde im Rahmen einer Studie der University of Warwick auf 56% (95% Konfidenzintervall: 34%-81%) geschätzt, die in einem Preprint[^37] beschrieben ist.
+<---- In diesem Transmissionvorteil sind die Vorteile, die Delta hat, weil es der Immunantwort entkommt, noch nicht enthalten. ----> 
 Eines Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen Delta reduziert:
 nach der ersten Dosis BNT162b2 ist die Wirksamkeit gegen Delta nur 34% (statt 51% gegen Alpha),
 nach der zweiten Dosis 88% (statt 93% gegen Alpha). 
 <!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2. Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
+Die Epidemie, die in Grossbritannien von Delta dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist 1,25 (1,14 - 1,35), gemessen vom 31. Mai - 6. Juni 2021[^1]).
+<!--- UPDATE  from re-international ---->
 
 
 
