@@ -213,7 +213,8 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen Alpha (B.1.1.7) dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden.
-Insgesamt deuten all diese Indikatoren auf eine kontinuierlich rückläufige Epidemie hin.
+In den letzten Wochen deuteten all diese Indikatoren auf eine kontinuierlich rückläufige Epidemie hin.
+Seit dieser Wochegibt es Anzeichen für einen Anstieg.
 <!------ UPDATE  -------->
 Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.
 
@@ -222,7 +223,7 @@ Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wich
 ### Dynamik
 
 <!------- UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie in den letzten Wochen kontinuierlich abnimmt. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie in den letzten Wochen, nach einer Phase der Abnahme, wieder ansteigt. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 
@@ -250,7 +251,7 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten statistisch signifikant sinkende Fallzahlen in allen Altersgruppen mit mehr als 10 Fällen pro Tag.
+Wir beobachten statistisch signifikant sinkende Fallzahlen in der Altergruppe der 7-15 Jährigen aber steigende Fallzahlen in der Altergruppe der 16-25 Jährigen.
 Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen Trends erschwert.
 <!------ UPDATE -------->
 <!------ TOO DETAILLED:
@@ -295,16 +296,17 @@ Eine 50-59 jährige positiv getestete Person hat beispielsweise ein Risiko von 4
 Die in der Schweiz verwendeten mRNA-Impfstoffe sind gegen Alpha hoch wirksam [^32],[^33],[^34].
 
 Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Varianten Beta (B.1.351) und Gamma (P.1)
-hatten über die letzten 14 Tage gemittelt eine Häufigkeit von respektive 0.8% und 1.9% [^29].
+hatten über die letzten 14 Tage gemittelt eine Häufigkeit von respektive 1.7% und 2.7% [^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> see percentage of B.1.315 or P.1 on the left, which is the average over the past 14 days ---->
 
-Die ursprünglich in Indien beschriebene Variante Delta (B.1.617.2), die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in 214 Fällen in der Schweiz nachgewiesen.
+Die ursprünglich in Indien beschriebene Variante Delta (B.1.617.2), die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in 290 Fällen in der Schweiz nachgewiesen.
 Delta hatte
-in der Kalenderwoche 22 eine Häufigkeit von 4,6%
-in der Kalenderwoche 23 eine Häufigkeit von 14,7% und 
-in der Kalenderwoche 24 eine Häufigkeit von 23,1%
+in der Kalenderwoche 22 eine Häufigkeit von 6,0%
+in der Kalenderwoche 23 eine Häufigkeit von 15,6% 
+in der Kalenderwoche 24 eine Häufigkeit von 24,5% und
+in der Kalenderwoche 25 eine Häufigkeit von 20,0%
 unter den sequenzierten Fällen [^29].
-Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 24, noch ändern.
+Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 25, noch ändern.
 Extrapoliert auf die gesamte Epidemie ergeben sich täglich Dutzende Infektionen mit der Delta-Variante.
 Ob die absolute Zahl der täglichen Infektionen mit der Delta-Variante ansteigt, lässt sich noch nicht mit Sicherheit abschätzen.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
@@ -316,8 +318,7 @@ Eines Preprints von Public Health England[^30] zufolge ist der Schutz der Impfun
 nach der ersten Dosis BNT162b2 (dem Impfstoff von BioNTech/Pfizer) ist die Wirksamkeit gegen Delta nur 34% (statt 51% gegen Alpha),
 nach der zweiten Dosis 88% (statt 93% gegen Alpha). 
 <!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2. Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
-Die Epidemie in Grossbritannien, die von Delta dominiert ist, steigt signifikant an (7-Tageschnitt der Reproduktionszahl ist
-1,34 (1,22 - 1,46), gemessen vom 7.-13. Juni 2021[^1]).
+Die Epidemien in Grossbritannien und Portugal, die von Delta dominiert sind, steigen signifikant an (7-Tageschnitt der Reproduktionszahlen sind 1,45 (1,34 - 1,55) und 1,23 (1,09 - 1,37), gemessen vom 14.-20. Juni 2021[^1]).
 <!--- UPDATE  from re-international ---->
 
 
