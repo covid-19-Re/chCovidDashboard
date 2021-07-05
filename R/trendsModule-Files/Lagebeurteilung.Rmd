@@ -216,8 +216,7 @@ In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen Alp
 In den letzten Wochen deuteten all diese Indikatoren auf eine kontinuierlich rückläufige Epidemie hin.
 Seit dieser Wochegibt es Anzeichen für einen Anstieg.
 <!------ UPDATE  -------->
-Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.
-
+<!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
 
 ### Dynamik
