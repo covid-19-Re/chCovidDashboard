@@ -214,7 +214,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen Alpha (B.1.1.7) dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden.
 In den letzten Wochen deuteten all diese Indikatoren auf eine kontinuierlich rückläufige Epidemie hin.
-Seit dieser Wochegibt es Anzeichen für einen Anstieg.
+Seit dieser Woche gibt es Anzeichen für einen Anstieg.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
