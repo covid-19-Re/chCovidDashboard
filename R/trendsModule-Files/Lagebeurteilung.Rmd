@@ -289,7 +289,7 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 ## Neue Varianten
 
-Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz mit einer vorläufig geschätzten Häufigkeit von 65%).
+Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz mit einer vorläufig geschätzten Häufigkeit von 65%.
 
 Im März 2021 war Alpha die dominante Virusvariante in der Schweiz geworden[^15],[^16], deren Übertragungsrate um etwa 50% höher als die des Wildtyps ist [^13],[^18],[^16].
 <!--- (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). ---->
@@ -316,7 +316,7 @@ Extrapoliert auf die gesamte Epidemie ergeben sich täglich Dutzende Infektionen
 Da die absolute Zahl der täglichen Infektionen klar ansteigt und Delta dominiert, ist die Wahrscheinlichkeit einer epidemischen Welle in den nächsten Wochen hoch.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Delta dominiert auch die Epidemie in Grossbritannien[^36], den Vereinigten Staaten von Amerika, Deutschland, Italien und Portugal[^29].
+Delta dominiert mittlerweile die Epidemie in vielen Ländern, darunter Grossbritannien[^36], den Vereinigten Staaten von Amerika, Deutschland, Italien und Portugal[^29].
 Der Übertragungsvorteil von Delta gegenüber Alpha wurde im Rahmen einer Studie der University of Warwick auf 56% (95% Konfidenzintervall: 34%-81%) geschätzt, die in einem Preprint[^37] beschrieben ist.
 <!--- In diesem Transmissionvorteil sind die Vorteile, die Delta hat, weil es der Immunantwort entkommt, noch nicht enthalten. ----> 
 Eines Preprints von Public Health England[^30] zufolge ist der Schutz der Impfung gegen Delta reduziert:
