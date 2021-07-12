@@ -214,7 +214,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2, unter welchen seit kurzem Delta (B.1.617.2) dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden.
 Bis Ende Juni 2021 deuteten all diese Indikatoren auf eine kontinuierlich rückläufige Epidemie hin.
-Seit Juli 2021 gibt es klare Anzeichen für einen Anstieg.
+Seit Juli 2021 gibt es klare Anzeichen für einen Anstieg mit einer momentan wöchentliche Verdopplung.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -304,16 +304,14 @@ Die im ersten Quartal des Jahres 2021 erstmals in der Schweiz nachgewiesenen Var
 hatten über die letzten 14 Tage gemittelt eine Häufigkeit von respektive 2.8% und 2.8% [^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> see percentage of B.1.315 or P.1 on the left, which is the average over the past 14 days ---->
 
-Die ursprünglich in Indien beschriebene Variante Delta, die Public Health England als "variant of concern (VOC)" klassifiziert hat, wurde bisher in mehreren Hundert Fällen in der Schweiz nachgewiesen.
+Die ursprünglich in Indien beschriebene Variante Delta, die Public Health England als "variant of concern (VOC)" klassifiziert hat, ist inzwischen die dominante Variante in der Schweiz.
 Delta hatte
-in der Kalenderwoche 24 eine Häufigkeit von 26% 
+in der Kalenderwoche 24 eine Häufigkeit von 26%, 
 in der Kalenderwoche 25 eine Häufigkeit von 34% und
 in der Kalenderwoche 26 eine Häufigkeit von 65%
 unter den sequenzierten Fällen [^29].
 Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 26, noch ändern.
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil con ungefähr 50% berechnen.
-Extrapoliert auf die gesamte Epidemie ergeben sich täglich Dutzende Infektionen mit der Delta-Variante.
-Da die absolute Zahl der täglichen Infektionen klar ansteigt und Delta dominiert, ist die Wahrscheinlichkeit einer epidemischen Welle in den nächsten Wochen hoch.
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil von 42-55% berechnen[^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
 Delta dominiert mittlerweile die Epidemie in vielen Ländern, darunter Grossbritannien[^36], den Vereinigten Staaten von Amerika, Deutschland, Italien und Portugal[^29].
@@ -324,8 +322,12 @@ nach der ersten Dosis BNT162b2 (dem Impfstoff von BioNTech/Pfizer) ist die Wirks
 nach der zweiten Dosis 88% (statt 93% gegen Alpha). 
 <!--- With ChAdOx12 doseeffectiveness reduced from 66.1% (95% CI: 54.0 to 75.0) with B.1.1.7 to 59.8% (95%CI: 28.9 to 77.3) with B.1.617.2. Sequenced cases detected after 1 or 2 doses of vaccination had higher odds of infection with B.1.617.2 compared to unvaccinated cases (OR 1.40; 95%CI: 1.13-1.75). ---->
 <!--- Auch die Epidemien in Grossbritannien und Portugal, die von Delta dominiert sind, steigen signifikant an (7-Tageschnitt der Reproduktionszahlen sind 1,45 (1,34 - 1,55) und 1,23 (1,09 - 1,37), gemessen vom 14.-20. Juni 2021[^1]). ---->
-<!--- UPDATE  from re-international ---->
-
+<!--- from re-international ---->
+Die Fallzahlen in Grossbritannien steigen seit Wochen wieder an.
+Zeitverzögert steigen dort nun seit einigen Tagen auch die Zahl der Spitaleintritte wieder an[^38].
+Im benachbarten Ausland wie auch in der Schweiz fand die Trendwende hin zu steigenden Fallzahlen in der zweiten Junihäflte statt.
+Die Dominanz der Delta Variante zusammen mit einer Zunahme der Kontakte birgt die Gefahr eines weiteren deutlichen Anstiegs der Fallzahlen über die nächsten Wochen in der Schweiz.
+Wir rechnen auch mit einem baldigem Anstieg von Hospitalisierungen, der wegen der geringeren Impfdeckung in der Schweiz verglichen mit Grossbritannien[^39] voraussichtlich einen grosseren Anteil der Infizierten betreffen wird.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
@@ -365,3 +367,5 @@ nach der zweiten Dosis 88% (statt 93% gegen Alpha).
 [^35]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/991135/3_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
 [^36]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/994761/18_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
 [^37]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/993358/s1288_Warwick_RoadMap_Step_4.pdf
+[^38]: https://coronavirus.data.gov.uk/details/healthcare
+[^39]: https://sciencetaskforce.ch/en/scientific-update-of-6-july-2021/
