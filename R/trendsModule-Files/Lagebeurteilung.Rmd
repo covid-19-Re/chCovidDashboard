@@ -311,7 +311,7 @@ in der Kalenderwoche 25 eine Häufigkeit von 34% und
 in der Kalenderwoche 26 eine Häufigkeit von 65%
 unter den sequenzierten Fällen [^29].
 Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 26, noch ändern.
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil von 42-55% berechnen[^29].
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 42-55% berechnen[^29].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
 Delta dominiert mittlerweile die Epidemie in vielen Ländern, darunter Grossbritannien[^36], den Vereinigten Staaten von Amerika, Deutschland, Italien und Portugal[^29].
@@ -327,7 +327,7 @@ Die Fallzahlen in Grossbritannien steigen seit Wochen wieder an.
 Zeitverzögert steigen dort nun seit einigen Tagen auch die Zahl der Spitaleintritte wieder an[^38].
 Im benachbarten Ausland wie auch in der Schweiz fand die Trendwende hin zu steigenden Fallzahlen in der zweiten Junihäflte statt.
 Die Dominanz der Delta Variante zusammen mit einer Zunahme der Kontakte birgt die Gefahr eines weiteren deutlichen Anstiegs der Fallzahlen über die nächsten Wochen in der Schweiz.
-Wir rechnen auch mit einem baldigem Anstieg von Hospitalisierungen, der wegen der geringeren Impfdeckung in der Schweiz verglichen mit Grossbritannien[^39] voraussichtlich einen grosseren Anteil der Infizierten betreffen wird.
+Wir rechnen auch mit einem baldigen Anstieg von Hospitalisierungen, der wegen der geringeren Impfdeckung in der Schweiz verglichen mit Grossbritannien[^39] voraussichtlich einen grosseren Anteil der Infizierten betreffen wird.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
