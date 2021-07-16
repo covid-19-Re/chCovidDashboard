@@ -108,14 +108,17 @@ compute_plot_data <- function (model, language, data_store) {
       collect() %>%
       complete(date = complete_date_sequence) %>%
       mutate(
-        count = replace_na(count, 0),
-        tooltipText = paste0("Date: ", as.character(date), "\nCount: ", round(count))
+        count = replace_na(count, 0)
       ) %>%
       drop_na(date)
     if (model$plot_type == "line" || model$plot_type == 'area') {
       plotData$count <- slide_index_dbl(plotData$count, plotData$date, mean,
                                         .before = smoothing_interval$before, .after = smoothing_interval$after)
     }
+    plotData <- plotData %>%
+      mutate(
+        tooltipText = paste0("Date: ", as.character(date), "\nCount: ", round(count))
+      )
     plotDef <- list(
       plotData, "date", "count",
       ylab = i18n$t("ts.plot.total_count")
