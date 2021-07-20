@@ -450,7 +450,7 @@ compute_plot_data <- function (model, language, data_store) {
       "Test (any result)" = data,
       "Positive test" = data %>% filter(positive_test),
       "Hospitalisation" = data %>% filter(hospitalisation == 1),
-      "Death" = data %>% filter(pttod),
+      "Death" = data %>% filter(case_death),
       "ICU admission (unreliable)" = data %>% filter(icu_aufenthalt == 1)
     )
   )
@@ -463,7 +463,7 @@ compute_plot_data <- function (model, language, data_store) {
       "Test (any result)" = data,
       "Positive test" = data %>% filter(positive_test),
       "Hospitalisation" = data %>% filter(hospitalisation == 1),
-      "Death" = data %>% filter(pttod),
+      "Death" = data %>% filter(case_death),
       "ICU admission (unreliable)" = data %>% filter(icu_aufenthalt == 1)
     )
   )
