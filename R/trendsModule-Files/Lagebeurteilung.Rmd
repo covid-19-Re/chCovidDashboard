@@ -244,9 +244,12 @@ Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mind
 für Todesfälle bis 23 Tage.
 
 Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
-Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
-die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
+Die bestätigten Fälle stiegen
+<!---- UPDATE fielen/stiegen ---->
+um `r valueUIchange(rankingCHEcases)` pro Woche,
+die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`.
+Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends nicht zu.
+<!---- und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`. ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
