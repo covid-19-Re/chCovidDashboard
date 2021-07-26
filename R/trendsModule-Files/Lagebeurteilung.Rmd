@@ -253,7 +253,7 @@ Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen 
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten statistisch signifikant steigende Fallzahlen allen Altergruppen.
+Wir beobachten statistisch signifikant steigende Fallzahlen in allen Altersgruppen.
 Der Anstieg in den 65-74 Jährigen ist mit 153% (290%-66%) pro Woche momentan am stärksten.
 Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen Trends erschwert.
 <!------ UPDATE -------->
