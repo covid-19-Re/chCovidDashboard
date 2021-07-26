@@ -249,7 +249,7 @@ Die bestätigten Fälle stiegen
 um `r valueUIchange(rankingCHEcases)` pro Woche,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`.
 Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends nicht zu.
-<!---- und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`. ---->
+<!---- UPDATE  und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`. ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
@@ -278,7 +278,8 @@ Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
-Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
+In den letzten 14 Tagen gab es höchstens einen laborbestätigten Todesfall pro Tag.
+<!---- UPDATE Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4]. ---->
 <!--- 
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
@@ -329,7 +330,7 @@ Die Fallzahlen in Grossbritannien steigen seit Wochen wieder an.
 Zeitverzögert steigen dort nun auch die Zahl der Spitaleintritte wieder an[^38].
 Im benachbarten Ausland wie auch in der Schweiz fand die Trendwende hin zu steigenden Fallzahlen in der zweiten Junihäflte statt.
 Die Dominanz der Delta Variante zusammen mit einer Zunahme der Kontakte birgt die Gefahr eines weiteren deutlichen Anstiegs der Fallzahlen über die nächsten Wochen in der Schweiz.
-Wir rechnen auch mit einem baldigen Anstieg von Hospitalisierungen, der wegen der geringeren Impfdeckung in der Schweiz verglichen mit Grossbritannien[^39] voraussichtlich einen grösseren Anteil der Infizierten betreffen wird.
+Wir rechnen auch mit einem weiteren Anstieg von Hospitalisierungen, der wegen der geringeren Impfdeckung in der Schweiz verglichen mit Grossbritannien[^39] voraussichtlich einen grösseren Anteil der Infizierten betreffen wird.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
