@@ -341,7 +341,7 @@ Wir rechnen auch mit einem weiteren Anstieg von Hospitalisierungen, der wegen de
 [^31]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/991135/3_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
 [^32]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/994761/18_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
 [^33]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/993358/s1288_Warwick_RoadMap_Step_4.pdf
-[^34]: https://sciencetaskforce.ch/en/scientific-update-of-6-july-2021/
+[^34]: https://sciencetaskforce.ch/en/scientific-update-of-20-july-2021/
 [^35]: https://depositonce.tu-berlin.de/handle/11303/13423
 [^36]: https://doi.org/10.1101/2021.07.05.21260050
 [^37]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)01358-1/fulltext
