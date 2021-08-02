@@ -221,8 +221,7 @@ Bis Ende Juni 2021 war bei all diesen Indikatoren ein kontinuierlicher Rückgang
 ### Dynamik
 
 <!------- UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie seit einigen Wochen kontinuierlich ansteigt. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
-
+Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie seit rund sechs Wochen kontinuierlich ansteigt. Seit Anfang Juli verlangsamt sich dieser Anstieg; der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
