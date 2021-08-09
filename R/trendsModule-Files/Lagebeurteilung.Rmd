@@ -239,14 +239,14 @@ Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwer
 Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
-für Todesfälle bis 23 Tage.
+für Todesfälle bis zu 23 Tagen.
 
 Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle stiegen
 <!---- UPDATE fielen/stiegen ---->
 um `r valueUIchange(rankingCHEcases)` pro Woche,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`.
-Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (aber siehe *R~e~* auf Basis der Todesfälle oben).
+Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich).
 <!---- UPDATE  und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`. ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
@@ -270,7 +270,7 @@ Tendenz `r positivityTrend`;  CHECK
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
 
-Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14 Tage
+Die Anzahl der COVID-19-Patientinnen und -Patienten auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
@@ -288,23 +288,23 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
-in der Kalenderwoche 29 eine Häufigkeit von 98%
+in der Kalenderwoche 30 eine Häufigkeit von 98%
 unter den sequenzierten Fällen[^25].
-Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 29, noch ändern.
+Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 30, noch ändern.
 Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 67-75% berechnen[^25].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Im März 2021 war Alpha (B.1.1.7) die dominante Virusvariante in der Schweiz geworden[^15],[^16], deren Übertragungsrate um etwa 50% höher als die des Wildtyps ist [^13],[^18],[^16]. Die Häufigkeit dieser Variante beträgt derzeit weniger als 2%.
-Die Beta (B.1.351) und Gamma Varianten (P.1), die seit dem ersten Quartal 2021 in der Schweiz nachgewiesen wurden, sind derzeit sehr selten, mit einer durchschnittlichen Häufigkeit von 0% bzw. 0,3% in den letzten 14 Tagen [^25].
+Die früher in der Schweiz beobachteten SARS-CoV-2-Varianten, darunter die von März bis Juni 2021 dominierende Alpha-Vaiante, aber auch die Beta- und Gamma-Varianten, die immer selten waren, haben eine Gesamthäufigkeit von <2% in den letzten Wochen[25].
 <!--- UPDATE cov-spectrum.ethz.ch-> see percentages on the left, which is the average over the past 14 days ---->
 
-Delta dominiert mittlerweile die Epidemie in vielen Ländern, darunter Grossbritannien[^32], den Vereinigten Staaten von Amerika, Frankreich, Deutschland, Italien und Portugal[^25].
+Delta dominiert mittlerweile die Epidemie in vielen Ländern, darunter Grossbritannien, den Vereinigten Staaten von Amerika, Frankreich, Deutschland, Italien und Portugal.
 Der Übertragungsvorteil von Delta gegenüber Alpha wurde auf 56% (95% Konfidenzintervall: 34%-81%) geschätzt [^33].
-Neuere Daten deuten darauf hin, dass die Hospitalisierungsrate nach einer Infektion mit der Delta-Variante im Vergleich zur Alpha-Variante um 74% bis 85% erhöht ist[^36],[^37].
-Andererseits ist der Schutz durch die Impfung gegen Delta leicht reduziert [^26]: Nach der ersten Dosis von BNT162b2 (dem Impfstoff von BioNTech/Pfizer) beträgt die Wirksamkeit gegen Delta nur 34 % (statt 51 % gegen Alpha), nach der zweiten Dosis 88 % (statt 93 % gegen Alpha).
-<!--- from re-international ---->
-Die Dominanz der Delta Variante zusammen mit einer Zunahme der Kontakte birgt die Gefahr eines weiteren deutlichen Anstiegs der Fallzahlen über die nächsten Wochen in der Schweiz.
-Wir rechnen auch mit einem weiteren Anstieg von Hospitalisierungen, der wegen der geringeren Impfdeckung in der Schweiz verglichen mit Grossbritannien[^34] voraussichtlich einen grösseren Anteil der Infizierten betreffen wird.
+
+Delta scheint schwerere Verläufe zu verursachen als die zuvor in der Schweiz dominierenden Stämme. Die Daten aus Schottland[^37] deuten darauf hin, dass eine Infektion mit Delta rund doppelt so häufig zur Hospitalisierung führt wie eine Infektion mit Alpha (hazard ratio 1,39-2,47). Daten aus Kanada zeigen einen Anstieg des Hospitalisierungsrisikos um 120% (93-153%) gegenüber den in 2020 zirkulierenden Stämmen[^36].
+
+Der Impfschutz gegen Infektion und symptomatischer Erkrankung scheint bei Delta reduziert zu sein. Ein neuer Bericht des CDC zeigt auf, dass Delta vollständig geimpfte Menschen mit relevanter Häufigkeit infizieren kann[^38]. Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion quantifizieren sind am Laufen. Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% [9-59%] [^39]; und laut Daten aus Schottland bei 79% [75-82%] [^37]. Die Daten aus Israel deuten zudem darauf hin, dass die Wirksamkeit von Impfungen gegen symptomatische Infektionen bei 40.5% [8.7-61,2%] [^39] liegen. Daten aus England deuten auf 79% [78-80%] [^41] (siehe auch [^42], [^36]; Pfizer/BioNtech) und Daten aus Kanada auf 85% [78-89%] [^43] (Pfizer/BioNtech und Moderna). Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen. Wichtig ist jedoch, dass eine Wirksamkeit von 40% gegen Infektion immer noch bedeutet dass 4 in 10 Infektionen verhindert werden können und dass die Impfung damit auch die Übertragungsdynamik verlangsamt.
+
+Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^41],[^44] und 88% [78,9-93,2%] basierend auf Daten aus Israel [^39]. Das bedeutet, dass etwa 9 von 10 Hospitalisationen verhindert werden können durch Impfung.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
@@ -344,3 +344,9 @@ Wir rechnen auch mit einem weiteren Anstieg von Hospitalisierungen, der wegen de
 [^35]: https://depositonce.tu-berlin.de/handle/11303/13423
 [^36]: https://doi.org/10.1101/2021.07.05.21260050
 [^37]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)01358-1/fulltext
+[^38]: https://www.cdc.gov/mmwr/volumes/70/wr/mm7031e2.htm?s_cid=mm7031e2_w
+[^39]: https://www.gov.il/BlobFolder/reports/vaccine-efficacy-safety-follow-up-committee/he/files_publications_corona_two-dose-vaccination-data.pdf
+[^41]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1007376/Vaccine_surveillance_report_-_week_30.pdf
+[^42]: https://www.nejm.org/doi/full/10.1056/NEJMoa2108891
+[^43]: https://www.alberta.ca/stats/covid-19-alberta-statistics.htm#vaccine-outcomes
+[^44]: https://khub.net/web/phe-national/public-library/-/document_library/v2WsRK3ZlEig/view_file/479607329?_com_liferay_document_library_web_portlet_DLPortlet_INSTANCE_v2WsRK3ZlEig_redirect=https%3A%2F%2Fkhub.net%3A443%2Fweb%2Fphe-national%2Fpublic-library%2F-%2Fdocument_library%2Fv2WsRK3ZlEig%2Fview%2F479607266
