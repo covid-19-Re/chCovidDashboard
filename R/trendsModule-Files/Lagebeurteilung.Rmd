@@ -244,18 +244,18 @@ für Todesfälle bis zu 23 Tagen.
 Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle stiegen
 <!---- UPDATE fielen/stiegen ---->
-um `r valueUIchange(rankingCHEcases)` pro Woche,
+um `r valueUIchange(rankingCHEcases)` pro Woche und
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`.
-Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich).
-<!---- UPDATE  und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`. ---->
+Todesfälle sanken um `r valueUIchange(rankingCHEdeaths)`.
+<!---- UPDATE ---->
+<!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten einen Anstieg der Zahl der Fälle in allen Altersgruppen, ausser bei den über 65-Jährigen, bei denen die Durchimpfung besser ist. Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen Trends erschwert.
+Wir beobachten einen Anstieg der Zahl der Fälle in allen Altersgruppen, der in allen Gruppen ausser bei den 65 bis 74-Jährigen signifikant ist.
+Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen Trends erschwert.
+Dennoch stiegen Hospitalisierungen in den Altergruppen der 35 bis 44-Jährigenund 55 bis 64-Jährigen von 23. Juli bis 5. August 2021 signifikant an.
 <!------ UPDATE -------->
-<!------ TOO DETAILLED:
-Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
--------->
 
 
 ### Absolute Zahlen
@@ -288,10 +288,10 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
-in der Kalenderwoche 30 eine Häufigkeit von 98%
+in der Kalenderwoche 30 eine Häufigkeit von 97%
 unter den sequenzierten Fällen[^25].
 Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 30, noch ändern.
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 67-75% berechnen[^25].
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 75-83% berechnen[^25].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
 Die früher in der Schweiz beobachteten SARS-CoV-2-Varianten, darunter die von März bis Juni 2021 dominierende Alpha-Vaiante, aber auch die Beta- und Gamma-Varianten, die immer selten waren, haben eine Gesamthäufigkeit von <2% in den letzten Wochen[25].
@@ -302,7 +302,20 @@ Der Übertragungsvorteil von Delta gegenüber Alpha wurde auf 56% (95% Konfidenz
 
 Delta scheint schwerere Verläufe zu verursachen als die zuvor in der Schweiz dominierenden Stämme. Die Daten aus Schottland[^37] deuten darauf hin, dass eine Infektion mit Delta rund doppelt so häufig zur Hospitalisierung führt wie eine Infektion mit Alpha (hazard ratio 1,39-2,47). Daten aus Kanada zeigen einen Anstieg des Hospitalisierungsrisikos um 120% (93-153%) gegenüber den in 2020 zirkulierenden Stämmen[^36].
 
-Der Impfschutz gegen Infektion und symptomatischer Erkrankung scheint bei Delta reduziert zu sein. Ein neuer Bericht des CDC zeigt auf, dass Delta vollständig geimpfte Menschen mit relevanter Häufigkeit infizieren kann[^38]. Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion quantifizieren sind am Laufen. Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% [9-59%] [^39]; und laut Daten aus Schottland bei 79% [75-82%] [^37]. Die Daten aus Israel deuten zudem darauf hin, dass die Wirksamkeit von Impfungen gegen symptomatische Infektionen bei 40.5% [8.7-61,2%] [^39] liegen. Daten aus England deuten auf 79% [78-80%] [^41] (siehe auch [^42], [^36]; Pfizer/BioNtech) und Daten aus Kanada auf 85% [78-89%] [^43] (Pfizer/BioNtech und Moderna). Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen. Wichtig ist jedoch, dass eine Wirksamkeit von 40% gegen Infektion immer noch bedeutet dass 4 in 10 Infektionen verhindert werden können und dass die Impfung damit auch die Übertragungsdynamik verlangsamt.
+Der Impfschutz gegen symptomatische Infektionen mit Delta ist, gemäss eines Berichtes von Public Health England[^41], reduziert: 79% (78-80%) (Wirksamkeit gegen Alpha: 89% [87-90%]).
+Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion (einschliesslich asymtopmatischer) quantifizieren sind am Laufen.
+Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% [9-59%] [^39];
+und laut Daten aus Schottland bei 79% [75-82%] [^37].
+In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% [22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
+Die Daten aus Israel deuten zudem darauf hin, dass die Wirksamkeit von Impfungen gegen symptomatische Infektionen bei 40.5% [8.7-61,2%] [^39] liegen.
+Daten aus England deuten auf 79% [78-80%] [^41] (siehe auch [^42], [^36]; Pfizer/BioNtech) und Daten aus Kanada auf 85% [78-89%] [^43] (Pfizer/BioNtech und Moderna).
+Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen.
+Wichtig ist jedoch, dass eine Wirksamkeit von 40% gegen Infektion immer noch bedeutet dass 4 in 10 Infektionen verhindert werden können und dass die Impfung damit auch die Übertragungsdynamik verlangsamt.
+
+Inwieweit die Impfung gegen Transmission schützt, ist noch nicht abschliessend geklärt.
+Während ein neuer Bericht des CDC[^38] zeigt, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in ungeimpften, zeigen die Daten der REACT-Studie aus England[^45], dass Geimpfte niedrigere Viruslasten haben.
+Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten diese Daten in 
+jedem Fall darauf hin, dass Geimpfte, die mit Delta infiziert sind, das Virus übertragen zu können.
 
 Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^41],[^44] und 88% [78,9-93,2%] basierend auf Daten aus Israel [^39]. Das bedeutet, dass etwa 9 von 10 Hospitalisationen verhindert werden können durch Impfung.
 
@@ -350,3 +363,4 @@ Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit l
 [^42]: https://www.nejm.org/doi/full/10.1056/NEJMoa2108891
 [^43]: https://www.alberta.ca/stats/covid-19-alberta-statistics.htm#vaccine-outcomes
 [^44]: https://khub.net/web/phe-national/public-library/-/document_library/v2WsRK3ZlEig/view_file/479607329?_com_liferay_document_library_web_portlet_DLPortlet_INSTANCE_v2WsRK3ZlEig_redirect=https%3A%2F%2Fkhub.net%3A443%2Fweb%2Fphe-national%2Fpublic-library%2F-%2Fdocument_library%2Fv2WsRK3ZlEig%2Fview%2F479607266
+[^45]: https://spiral.imperial.ac.uk/bitstream/10044/1/90800/2/react1_r13_final_preprint_final.pdf
