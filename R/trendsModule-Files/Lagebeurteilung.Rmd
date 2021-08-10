@@ -212,7 +212,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In den letzten Monaten sind in der Schweiz verschiedene Stämme von SARS-CoV-2 im Umlauf. Die Delta-Variante (B.1.617.2) dominiert inzwischen bei weitem (>95 % der Fälle in den letzten 3 Wochen). Die allgemeinen epidemiologischen Parameter - Zahl der Fälle, Krankenhausaufenthalte, Belegung von Intensivstationen, Todesfälle - geben einen Überblick, ohne dass zwischen den verschiedenen Stämmen unterschieden wird.
+In den letzten Monaten waren in der Schweiz verschiedene Stämme von SARS-CoV-2 im Umlauf. Die Delta-Variante (B.1.617.2) dominiert inzwischen bei weitem (>95 % der Fälle in den letzten 3 Wochen). Die allgemeinen epidemiologischen Parameter - Zahl der Fälle, Krankenhausaufenthalte, Belegung von Intensivstationen, Todesfälle - geben einen Überblick, ohne dass zwischen den verschiedenen Stämmen unterschieden wird.
 Bis Ende Juni 2021 war bei all diesen Indikatoren ein kontinuierlicher Rückgang der Epidemie zu verzeichnen. Seit Juli 2021 ist ein stetiger Anstieg zu verzeichnen.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
@@ -254,7 +254,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Wir beobachten einen Anstieg der Zahl der Fälle in allen Altersgruppen, der in allen Gruppen ausser bei den 65 bis 74-Jährigen signifikant ist.
 Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen Trends erschwert.
-Dennoch stiegen Hospitalisierungen in den Altergruppen der 35 bis 44-Jährigenund 55 bis 64-Jährigen von 23. Juli bis 5. August 2021 signifikant an.
+Dennoch stiegen Hospitalisierungen in den Altergruppen der 35 bis 44-Jährigen und 55 bis 64-Jährigen von 23. Juli bis 5. August 2021 signifikant an.
 <!------ UPDATE -------->
 
 
@@ -302,13 +302,15 @@ Der Übertragungsvorteil von Delta gegenüber Alpha wurde auf 56% (95% Konfidenz
 
 Delta scheint schwerere Verläufe zu verursachen als die zuvor in der Schweiz dominierenden Stämme. Die Daten aus Schottland[^37] deuten darauf hin, dass eine Infektion mit Delta rund doppelt so häufig zur Hospitalisierung führt wie eine Infektion mit Alpha (hazard ratio 1,39-2,47). Daten aus Kanada zeigen einen Anstieg des Hospitalisierungsrisikos um 120% (93-153%) gegenüber den in 2020 zirkulierenden Stämmen[^36].
 
-Der Impfschutz gegen symptomatische Infektionen mit Delta ist, gemäss eines Berichtes von Public Health England[^41], reduziert: 79% (78-80%) (Wirksamkeit gegen Alpha: 89% [87-90%]).
-Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion (einschliesslich asymtopmatischer) quantifizieren sind am Laufen.
+Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion (einschliesslich asymptopmatischer) quantifizieren sind am Laufen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% [9-59%] [^39];
 und laut Daten aus Schottland bei 79% [75-82%] [^37].
 In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% [22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
-Die Daten aus Israel deuten zudem darauf hin, dass die Wirksamkeit von Impfungen gegen symptomatische Infektionen bei 40.5% [8.7-61,2%] [^39] liegen.
-Daten aus England deuten auf 79% [78-80%] [^41] (siehe auch [^42], [^36]; Pfizer/BioNtech) und Daten aus Kanada auf 85% [78-89%] [^43] (Pfizer/BioNtech und Moderna).
+
+Der Impfschutz gegen symptomatische Infektionen mit Delta ist reduziert.
+Gemäss eines Berichtes von Public Health England[^41] ist die Wirksamkeit von 89% [87-90%] gegen Alpha auf 79% [78-80%] gegen Delta gesunken (siehe auch [^42], [^36]; Pfizer/BioNtech).
+Aus kanadischen Daten ergibt eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% [78-89%] [^43] (Pfizer/BioNtech und Moderna).
+Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40.5% [8.7-61,2%].
 Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen.
 Wichtig ist jedoch, dass eine Wirksamkeit von 40% gegen Infektion immer noch bedeutet dass 4 in 10 Infektionen verhindert werden können und dass die Impfung damit auch die Übertragungsdynamik verlangsamt.
 
