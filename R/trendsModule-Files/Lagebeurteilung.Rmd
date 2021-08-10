@@ -305,7 +305,7 @@ Delta scheint schwerere Verläufe zu verursachen als die zuvor in der Schweiz do
 Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion (einschliesslich asymptomatischer) quantifizieren sind am Laufen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (9-59%) [^39];
 und laut Daten aus Schottland bei 79% (75-82%) [^37].
-In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% [22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
+In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
 
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist reduziert.
 Gemäss einem Bericht von Public Health England[^41] ist die Wirksamkeit von 89% (87-90%) gegen Alpha auf 79% (78-80%) gegen Delta gesunken (siehe auch [^42], [^36]; Pfizer/BioNtech).
