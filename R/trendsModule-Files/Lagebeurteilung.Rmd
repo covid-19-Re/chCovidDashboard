@@ -213,7 +213,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 In den letzten Monaten waren in der Schweiz verschiedene Stämme von SARS-CoV-2 im Umlauf. Die Delta-Variante (B.1.617.2) dominiert inzwischen bei weitem (>90 % der Fälle seit Mitte Juli 2021). Die allgemeinen epidemiologischen Parameter - Zahl der Fälle, Krankenhausaufenthalte, Belegung von Intensivstationen, Todesfälle - geben einen Überblick, ohne dass zwischen den verschiedenen Stämmen unterschieden wird.
-Bis Ende Juni 2021 war bei all diesen Indikatoren ein kontinuierlicher Rückgang der Epidemie zu verzeichnen. Seit Juli 2021 ist ein stetiger Anstieg zu verzeichnen.
+Seit Juli 2021 ist ein stetiger Anstieg der Epidemie zu verzeichnen.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -303,7 +303,7 @@ Der Übertragungsvorteil von Delta gegenüber Alpha wurde auf 56% (95% Konfidenz
 
 Delta scheint schwerere Verläufe zu verursachen als die zuvor in der Schweiz dominierenden Stämme. Die Daten aus Schottland[^37] deuten darauf hin, dass eine Infektion mit Delta rund doppelt so häufig zur Hospitalisierung führt wie eine Infektion mit Alpha (hazard ratio 1,39-2,47). Daten aus Kanada zeigen einen Anstieg des Hospitalisierungsrisikos um 108% (80-138%) gegenüber den im Jahr 2020 zirkulierenden Stämmen[^36].
 
-Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion (einschliesslich asymptomatischer) quantifizieren sind am Laufen.
+Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion mit Delta (einschliesslich asymptomatischer) quantifizieren sind am Laufen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (9-59%) [^39];
 und laut Daten aus Schottland bei 79% (75-82%) [^37].
 In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
@@ -316,12 +316,12 @@ Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in
 Wichtig ist jedoch, dass eine Wirksamkeit von 40% gegen Infektion immer noch bedeutet, dass 4 in 10 Infektionen verhindert werden können und dass die Impfung damit auch die Übertragungsdynamik verlangsamt.
 
 Inwieweit die Impfung gegen Transmission schützt, ist noch nicht abschliessend geklärt.
-Während ein neuer Bericht des CDC[^38] zeigt, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in ungeimpften, zeigen die Daten der REACT-Studie aus England[^45], dass Geimpfte niedrigere Viruslasten haben.
+Während ein neuer Bericht des CDC[^38] zeigt, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in Ungeimpften, zeigen die Daten der REACT-Studie aus England[^45], dass Geimpfte niedrigere Viruslasten haben.
 Zeitlich aufgelöste Daten aus Singapur[^46] legen nahe, dass die Viruslast bei Geimpften auf einem ähnlich hohen Level beginnt wie bei Ungeimpften aber dann schneller abfällt.
 Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten diese Daten in 
 jedem Fall darauf hin, dass Geimpfte, die mit Delta infiziert sind, das Virus übertragen können.
 
-Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (78,9-93,2%) basierend auf Daten aus Israel [^39]. Das bedeutet, dass mindestens 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
+Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (78,9-93,2%) basierend auf Daten aus Israel [^39]. Das bedeutet, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
