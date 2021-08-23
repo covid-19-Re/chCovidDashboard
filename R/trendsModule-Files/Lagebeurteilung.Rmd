@@ -252,9 +252,8 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Wir beobachten einen statistisch signifikanten, relativ gleichmässigen Anstieg der Zahl der Fälle in allen Altersgruppen.
-Hospitalisierungszahlen sind in allen Altersgruppen im einstelligen Bereich, was die Schätzung eines zeitlichen Trends erschwert.
-Dennoch stiegen Hospitalisierungen in den Altersgruppen der unter 8-Jährigen, der 25 bis 34-Jährigen und der 45 bis 54-Jährigen von 29. Juli bis 11. August 2021 signifikant an.
+Wir beobachten einen statistisch signifikanten Anstieg der Zahl der Fälle in allen Altersgruppen, ausser in den Gruppen der 16 bis 14-Jährigen und über 75-Jährigen.
+Hospitalisierungen stiegen in allen Altersgruppen über 25 Jahren vom 5. bis 17. August 2021 signifikant an.
 <!------ UPDATE -------->
 
 
@@ -289,13 +288,13 @@ Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz.
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24%,
 in der Kalenderwoche 30 eine Häufigkeit von 97% und
-in der Kalenderwoche 31 eine Häufigkeit von 91%
+in der Kalenderwoche 32 eine Häufigkeit von 99%
 unter den sequenzierten Fällen[^25].
-Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 31, noch ändern.
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 72-80% berechnen[^25].
+Wegen Verzögerungen, mit denen die Sequenzen erfasst werden, können sich diese Häufigkeit, vor allem in Kalenderwoche 32, noch ändern.
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 68-75% berechnen[^25].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Die früher in der Schweiz beobachteten SARS-CoV-2-Varianten, darunter die von März bis Juni 2021 dominierende Alpha-Variante, aber auch die Beta- und Gamma-Varianten, die immer selten waren, haben jeweils eine Häufigkeit von <1% in den letzten Wochen[25].
+Die früher in der Schweiz beobachteten SARS-CoV-2-Varianten, darunter die von März bis Juni 2021 dominierende Alpha-Variante, aber auch die Beta- und Gamma-Varianten, die immer selten waren, haben zusammengenommen eine Häufigkeit von <2%[25].
 <!--- UPDATE cov-spectrum.ethz.ch-> see percentages on the left, which is the average over the past 14 days ---->
 
 Delta dominiert mittlerweile die Epidemie in vielen Ländern, darunter Grossbritannien, den Vereinigten Staaten von Amerika, Frankreich, Deutschland, Italien und Portugal.
