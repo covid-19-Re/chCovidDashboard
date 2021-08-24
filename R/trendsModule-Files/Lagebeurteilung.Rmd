@@ -213,7 +213,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 In den letzten Monaten waren in der Schweiz verschiedene Stämme von SARS-CoV-2 im Umlauf. Die Delta-Variante (B.1.617.2) dominiert inzwischen bei weitem (>90 % der Fälle seit Mitte Juli 2021). Die allgemeinen epidemiologischen Parameter - Zahl der Fälle, Krankenhausaufenthalte, Belegung von Intensivstationen, Todesfälle - geben einen Überblick, ohne dass zwischen den verschiedenen Stämmen unterschieden wird.
-Seit Juli 2021 ist ein stetiger Anstieg der Epidemie zu verzeichnen.
+Seit Anfang Juli 2021 ist ein stetiger Anstieg der Epidemie zu verzeichnen.
 In den letzten Tagen hat sich der Anstieg verlangsamt.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
@@ -222,7 +222,7 @@ In den letzten Tagen hat sich der Anstieg verlangsamt.
 ### Dynamik
 
 <!------- UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie seit Ende Juni 2021 kontinuierlich ansteigt. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Basierend auf den aktuellen Daten schätzen wir, dass die SARS-CoV-2 Epidemie seit Anfang Juli 2021 kontinuierlich ansteigt. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
@@ -310,7 +310,7 @@ In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektion
 
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist reduziert.
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (87-90%) gegen Alpha auf 79% (78-80%) gegen Delta gesunken (siehe auch [^42], [^36]; Pfizer/BioNtech).
-Aus kanadischen Daten ergibt eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (78-89%) [^43] (Pfizer/BioNtech und Moderna).
+Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (78-89%) [^43] (Pfizer/BioNtech und Moderna).
 Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40,5% (8,7-61,2%).
 Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen.
 Wichtig ist jedoch, dass eine Wirksamkeit von 40% gegen Infektion immer noch bedeutet, dass 4 in 10 Infektionen verhindert werden können und dass die Impfung damit auch die Übertragungsdynamik verlangsamt.
