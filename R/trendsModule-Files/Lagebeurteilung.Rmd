@@ -223,7 +223,7 @@ Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Varian
 Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Seitdem hat sich die Zahl der neuen Infektionen auf hohem Niveau stabilisiert: in den letzten zwei Wochen wurden durchschnittlich rund 2500 neue Fälle pro Tag diagnostiziert. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
-Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
+Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen:
 
 * `r valueUIr(r_cases, uiText = "95% UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
 
@@ -280,14 +280,14 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 
 
-## Neue Varianten
+### Neue Varianten
 
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
 in der Kalenderwoche 32 eine Häufigkeit von 99%
 unter den sequenzierten Fällen[^25].
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 68-75% berechnen[^25].
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 68-75% berechnen.
 Delta dominiert jetzt die weltweite Epidemie. Im Durchschnitt wurde der Übertragungsvorteil von Delta gegenüber Alpha auf 56% (95% UI: 34%-81%) geschätzt [^33].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
@@ -295,7 +295,7 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 
 
 
-## Delta und Impfstoff Wirksamkeit
+### Delta und Impfstoff Wirksamkeit
 
 Infektion: 
 Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion mit Delta (einschliesslich asymptomatischer) quantifizieren sind am Laufen.
