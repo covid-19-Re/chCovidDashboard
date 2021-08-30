@@ -288,7 +288,7 @@ in der Kalenderwoche 24 eine Häufigkeit von 24% und
 in der Kalenderwoche 32 eine Häufigkeit von 99%
 unter den sequenzierten Fällen[^25].
 Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 68-75% berechnen.
-Delta dominiert jetzt die weltweite Epidemie. Im Durchschnitt wurde der Übertragungsvorteil von Delta gegenüber Alpha auf 56% (95% UI: 34%-81%) geschätzt [^33].
+Delta dominiert jetzt die weltweite Epidemie. Im Durchschnitt wurde der Übertragungsvorteil von Delta gegenüber Alpha auf 56% (95% UI: 34%-81%) geschätzt[^33].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
 Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patienten mit Delta im Vergleich zu Patienten mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
@@ -299,19 +299,19 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 
 Infektion: 
 Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion mit Delta (einschliesslich asymptomatischer) quantifizieren sind am Laufen.
-Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%) [^39];
-und laut Daten aus Schottland bei 79% (95% UI: 75-82%) [^37].
+Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
+und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
 In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
 
 Symptomatische Infektion:
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist auch reduziert.
-Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch [^42], [^36]; Pfizer/BioNtech).
-Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%) [^43] (Pfizer/BioNtech und Moderna).
+Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
+Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
 Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40,5% (95% UI: 8,7-61,2%).
 Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen.
 
 Schwere Erkrankung / Hospitalisierung: 
-Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel [^39].
+Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
 (Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
 Das bedeutet, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
