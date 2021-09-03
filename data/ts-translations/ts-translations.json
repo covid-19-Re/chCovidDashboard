@@ -25,44 +25,40 @@
       "en": "Show proportions"
     },
     {
-      "code": "ts.constant.age_group.0-6",
-      "en": "0-6"
+      "code": "ts.constant.age_group.0-9",
+      "en": "0-9"
     },
     {
-      "code": "ts.constant.age_group.07-12",
-      "en": "7-12"
+      "code": "ts.constant.age_group.10-19",
+      "en": "10-19"
     },
     {
-      "code": "ts.constant.age_group.13-17",
-      "en": "13-17"
+      "code": "ts.constant.age_group.20-29",
+      "en": "20-29"
     },
     {
-      "code": "ts.constant.age_group.18-24",
-      "en": "18-24"
+      "code": "ts.constant.age_group.30-39",
+      "en": "30-39"
     },
     {
-      "code": "ts.constant.age_group.25-34",
-      "en": "25-34"
+      "code": "ts.constant.age_group.40-49",
+      "en": "40-49"
     },
     {
-      "code": "ts.constant.age_group.35-44",
-      "en": "35-44"
+      "code": "ts.constant.age_group.50-59",
+      "en": "50-59"
     },
     {
-      "code": "ts.constant.age_group.45-54",
-      "en": "45-54"
+      "code": "ts.constant.age_group.60-69",
+      "en": "60-69"
     },
     {
-      "code": "ts.constant.age_group.55-64",
-      "en": "55-64"
+      "code": "ts.constant.age_group.70-79",
+      "en": "70-79"
     },
     {
-      "code": "ts.constant.age_group.65-74",
-      "en": "65-74"
-    },
-    {
-      "code": "ts.constant.age_group.75+",
-      "en": "75+"
+      "code": "ts.constant.age_group.80+",
+      "en": "80+"
     },
     {
       "code": "ts.constant.age_group.label",
