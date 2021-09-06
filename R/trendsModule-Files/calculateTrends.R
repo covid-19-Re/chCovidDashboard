@@ -6,9 +6,9 @@ library(here)
 source(here("R/trendsModule-Files/trendsModule-global.R"))
 
 eventCounts <- list()
-eventCounts$cases <- bagData %>% getEventCounts2(fall_dt, "cases")
-eventCounts$hospitalizations <- bagData %>% getEventCounts2(hospdatin, "hospitalizations")
-eventCounts$deaths <- bagData %>% getEventCounts2(pttoddat, "deaths")
+eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases")
+eventCounts$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations")
+eventCounts$deaths <- bagData %>% getEventCounts(pttoddat, "deaths")
 eventCounts$icu <- icuDataRaw %>% filter(region == "CH")
 
 qs::qsave(eventCounts, here("data/trends-eventCounts.qs"))
@@ -106,15 +106,18 @@ vaccDosesAdministered <- read_csv(
   relocate(date, geoRegion, pop)
 
 fullyVaccPersons <- read_csv(
-    urlfile$sources$individual$csv$fullyVaccPersons,
+    urlfile$sources$individual$csv$vaccPersons,
     col_types = cols_only(
       date = col_date(format = ""),
       geoRegion = col_character(),
       entries = col_double(),
       pop = col_double(),
-      sumTotal = col_double()
+      sumTotal = col_double(),
+      type = col_character()
     )
   ) %>%
+  filter(type == "COVID19FullyVaccPersons") %>%
+  select(-type) %>%
   rename(
     nFullyVacc = entries,
     nFullyVaccTotal = sumTotal
@@ -152,16 +155,19 @@ vaccDosesAdministeredByAge <- read_csv(
   relocate(date, geoRegion, ageClass, pop)
 
 fullyVaccinatedByAge <- read_csv(
-    urlfile$sources$individual$csv$weeklyVacc$byAge$fullyVaccPersons,
+    urlfile$sources$individual$csv$weeklyVacc$byAge$vaccPersons,
     col_types = cols_only(
       date = col_double(),
       geoRegion = col_character(),
       altersklasse_covid19 = col_character(),
       entries = col_double(),
       pop = col_double(),
-      sumTotal = col_double()
+      sumTotal = col_double(),
+      type = col_character()
     )
   ) %>%
+  filter(type == "COVID19FullyVaccPersons") %>%
+  select(-type) %>%
   rename(
     ageClass = altersklasse_covid19,
     nFullyVacc = entries,

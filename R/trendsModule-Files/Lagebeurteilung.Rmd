@@ -39,6 +39,14 @@ r_cases_timeDeath <- r_cases
 r_cases_timeHosp <- r_cases
 r_cases <- r_cases[r_cases$date == max(r_cases$date), ]
 
+r_mean7d <- reproduction %>%
+  filter(region == "CHE",
+    data_type == "Confirmed cases",
+    estimate_type == "Cori_step") %>%
+  filter(date == max(date))
+
+r_mean7d_dateRange_str <- str_c(format(r_mean7d$date - 6, "%d.%m."), " - ", format(r_mean7d$date, "%d.%m.%Y"))
+
 r_hosp <- subset(reproduction,
                   region == "CHE"
                   & data_type == "Hospitalized patients"
@@ -174,9 +182,14 @@ mostRecents501yv2 <- variants %>%
 ```{r printFuns, echo = FALSE}
 
 valueUI <- function(value, lower, upper, uiText = "UI", uiSep = "-", unit = "", digits = 2) {
+  if (uiText == "") {
+    uiTextPrint <- ""
+  } else {
+    uiTextPrint <- str_c(uiText, ": ")
+  }
   glue(
     "{format(round(value, digits), decimal.mark = ',')}{unit} ",
-    "({uiText}: {format(round(lower, digits), decimal.mark = ',')}{unit}",
+    "({uiTextPrint}{format(round(lower, digits), decimal.mark = ',')}{unit}",
     "{uiSep}",
     "{format(round(upper, digits), decimal.mark = ',')}{unit})"
   )
@@ -199,19 +212,20 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine rückläufige Epidemie hin. <!------ UPDATE  -------->
-
-Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends, d.h. einen stabilen und neuerdings fallenden Trend im April, nach einem Anstieg im Februar und März.
-
-
-### Dynamik  
-<!------ UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 0.89 (0.78 - 1.01); dies reflektiert das Infektionsgeschehen vom 24.04.-30.04.2021[^1].
+Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die in den letzten zwei Monaten die anderen in der Schweiz zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August deutlich an und stabilisierte sich dann auf hohem Niveau.
+<!------ UPDATE  -------->
+<!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
 
-Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
+### Dynamik
 
-* `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
+<!------- UPDATE -------->
+Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Seitdem hat sich die Zahl der neuen Infektionen auf hohem Niveau stabilisiert: in den letzten zwei Wochen wurden durchschnittlich rund 2500 neue Fälle pro Tag diagnostiziert. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+
+
+Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen:
+
+* `r valueUIr(r_cases, uiText = "95% UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
 
 * `r valueUIr(r_hosp)` aufgrund der Hospitalisationen, per `r format(r_hosp$date, "%d.%m.%Y")`.
 Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeHosp)` geschätzt. 
@@ -221,26 +235,30 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
+Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
-für Todesfälle bis 23 Tage.
-Durch fortschreitende Impfungen erwarten wir, dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt.
+für Todesfälle bis zu 23 Tagen.
 
-Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
-Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
+Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
+Die bestätigten Fälle gingen
+<!---- UPDATE fielen/stiegen ---->
+um `r valueUIchange(rankingCHEcases)` pro Woche zurück,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
+und die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)`.
+<!---- UPDATE ---->
+<!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
-Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
-<!------ UPDATE -------->
-Wir beobachten sinkende Hospitalisierungszahlen in allen Altersklassen.
-Für die Gruppe der 55 bis 64-Jährigen ist diese Reduktion statistisch signifikant.
+Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
+Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, außer bei Kindern unter 10 Jahren und bei Personen zwischen 70 und 80 Jahren, bei denen ein signifikanter Anstieg zu beobachten ist.
+Hospitalisierungen sind in den meisten Altersgruppen stabil.
+In den Gruppen der 20 bis 30-Jährigen, 40 bis 50-Jährigen und 50 bis 60-Jährigen fielen die Hospitalisierungen über die letzten zwei erfassten Wochen signifikant.
 <!------ UPDATE -------->
 
 
 ### Absolute Zahlen
+
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner. 
 Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
@@ -251,7 +269,7 @@ Tendenz `r positivityTrend`;  CHECK
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
 
-Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14 Tage
+Die Anzahl der COVID-19-Patientinnen und -Patienten auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
@@ -264,39 +282,50 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 
 
-## Neue Varianten
-In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
-in Kalenderwoche 51 des Jahres 2020 identifiziert worden. Die ursprünglich in Brasilien beschriebene P.1 Variante wurde erstmals 
-in Kalenderwoche 6 des Jahres 2021 in der Schweiz identifiziert. B.1.1.7 ist inzwischen die dominante Virusvariante und die Epidemie in der Schweiz ist eine B.1.1.7 Epidemie[^15],[^16]. B.1.351 und P.1 treten momentan mit weniger als 1% auf[^29]. Die ursprünglich in Indien beschriebene B.1.617 Variante wurde erstmals in Kalenderwoche 16 des Jahres 2021 in der Schweiz identifiziert[^29]. Bisher wurden weniger als 25 Fälle dieser Variante in der Schweiz nachgewiesen. 50% davon sind die Untervariante B.1.617.2, die Public Health England als "variant of concern (VOC)" klassifiziert hat. <!--- UPDATE ---->
+### Neue Varianten
 
-B.1.1.7 hat eine erhöhte Übertragungsrate. Dies hat dazu geführt dass B.1.1.7 nun dominiert. Untersuchungen in Grossbritannien wiesen Ende 2020 darauf hin, dass B.1.1.7 eine deutlich höhere Übertragungsrate hat als die bislang bekannten Stämme von SARS-CoV-2[^13]. Die genetische Charakterisierung von Zufallsstichproben aus positiv getesteten Menschen von Testlabors der Schweiz, sowie die systematische genetische Charakterisierung von Proben im Referenzlabor in Genf, erlaubt diese erhöhte Übertragungsrate auch basierend auf schweizer Daten zu bestätigen[^18],[^16] (43-52% basierend auf [^18] und 42-60% basierend auf [^16]). <!--- check ---->
+Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
+in der Kalenderwoche 19 eine Häufigkeit von 1%,
+in der Kalenderwoche 24 eine Häufigkeit von 24% und
+in der Kalenderwoche 34 eine Häufigkeit von 99%
+unter den sequenzierten Fällen[^25].
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 62-70% berechnen.
+Delta dominiert jetzt die weltweite Epidemie. Im Durchschnitt wurde der Übertragungsvorteil von Delta gegenüber Alpha auf 56% (95% UI: 34%-81%) geschätzt[^33].
+<!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Das Risiko eines schweren Verlaufs aufgrund von Infektion mit B.1.1.7 wird in mehreren Studien beobachtet. Eine  Studie[^19] aus Grossbritannien deutet darauf hin, dass die Sterblichkeit bei einer Infektion mit B.1.1.7 um 50% erhöht ist über alle Altersklassen hinweg. Diese erhöhte Gefährlichkeit von B.1.1.7 wird gestützt durch weitere Studien aus Grossbritannien[^20],[^21]. Ergebnisse einer Studie[^22] aus Dänemark deuten darauf hin, dass das Risiko einer Hospitalisierung bei Infektion mit B.1.1.7 erhöht ist. Eine neue Studie sieht keine erhöhte Sterblichkeit, untersucht jedoch nur hospitalisierte Personen[^24]. In einer weiteren Studie bei der Daten einer «COVID symptom study App» ausgewertet wurden, wurde mit Ausbreitung von B.1.1.7 keine Verschiebung zu schwereren Verläufen beobachtet[^25].
-
-In den schweizer Daten sehen wir einen Trend hin zu einem erhöhten Risiko einer Hospitalisierung wenn ein Patient mit B.1.1.7 infiziert ist[^29]. 
-Dementsprechend sind mit Ausbreitung von B.1.1.7 die Wahrscheinlichkeiten einer Hospitalisierung bei positivem Testergebnis gestiegen. Eine 55-64 jährige positiv getestete Person hatte beispielsweise zum 31.12.2020 (als B.1.1.7 noch wenig verbreitet war) ein Risiko von 4.3% (28-Tages Mittel) eines Spitaleintritts. Zum 31.3.2021 (als B.1.1.7 dominant war), war das Risiko bei 7.2%[^17]. Die anderen Altersgruppen über 35 entwickelten sich ähnlich (in den jüngeren Altersklassen sind die absoluten Zahlen zu klein für belastbare Aussagen).
-Die Todesfall-Zahlen aufgrund von B.1.1.7 für die Schweiz sind zu klein als dass wir für die Schweiz eine Aussage treffen könnten.
-
-Es wird erwartet dass die in der Schweiz momentan verwendeten mRNA-Impfstoffe auch gegen die neuen Varianten wirken [^23].
-
-Basierend auf den Daten aus der genetischen Charakterisierung können wir die Veränderung der absoluten Fallzahlen, welche von B.1.1.7 verursacht werden, abschätzen.  Seit Anfang Januar bis Mitte April ist diese absolute Zahl kontinuierlich gestiegen während die anderen Varianten abgenommen haben[^15]. Die Gesamtzahlen haben bis Mitte Februar abgenommen. Seit März ist B.1.1.7 dominant und die Gesamtzahlen sind bis Mitte April gestiegen. Seitdem nehmen die Zahlen wieder ab. Diese Abnahme wird auch in unseren Nachbarstaaten beobachtet.
+Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patienten mit Delta im Vergleich zu Patienten mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
 
 
 
-<!--- 
-In Kalenderwoche `r mostRecentb117$week`, `r mostRecentb117$year` (ab dem `r format(mostRecentb117$weekStartDate, "%d.%m.%Y")`)
-wurde die Häufigkeit von B.1.1.7 in der Schweiz auf etwa `r format(round(mostRecentb117$p, percentDigits), decimal.mark = ',')`% geschätzt
-(95%-Unsicherheitsinterval `r format(round(mostRecentb117$p_lower, percentDigits), decimal.mark = ',')`% bis
-`r format(round(mostRecentb117$p_upper, percentDigits), decimal.mark = ',')`%;
-das reflektiert das Infektionsgeschehen etwa 10 Tage früher[^14]). Die Genfersee-Region ist in der Dynamik ca. 1-2 Wochen gegenüber der Gesamtscheiz voraus[^15],[^16].
-Insbesondere steigt die absolute Anzahl der B.1.1.7 Infektionen. Diese Variante breitet sich momentan exponentiell mit einer Verdoppelung von ca. allen 2 Wochen aus[^14]. Dies bedeutet dass die momentanen Massnahmen und deren Umsetzung  nicht ausreichen um die Ausbreitung von B.1.1.7 zu stoppen[^13].  CHECK --->
+### Delta und Impfstoff Wirksamkeit
 
+Infektion: 
+Studien welche die Wirksamkeit von mRNA Impfstoffen gegen eine Infektion mit Delta (einschliesslich asymptomatischer) quantifizieren sind am Laufen.
+Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
+und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
+In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
 
-<!--- CHECK insert some summary in the weeks when we don't have a scientific update? the below might have to be updated! --->
-<!--- ## Beurteilung 
-Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen relativ stabilen Verlauf. Schweizweit liegt *R~e~* für all drei Indikatoren oberhalb des von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwerts von 0,8. Durch die Einführung von national einheitlichen Massnahmen hat sich der Verlauf der Epidemie in den unterschiedlichen Regionen angeglichen. [^11] --->
+Symptomatische Infektion:
+Der Impfschutz gegen symptomatische Infektionen mit Delta ist reduziert.
+Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
+Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
+Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
+Ein wichtiger Faktor für die niedrige Wirksamkeit der Impfung gegen Delta in Israel, ist dass dort schon mehr Zei als in anderen Ländern seit der Impfung vergangen ist[^51].
 
-<!--- Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage liegt in allen Kantonen deutlich über der Schwelle von 60 pro 100'000 Einwohner. Die Testpositivität ist deutlich über dem von der Weltgesundheitsorganisation empfohlenen Schwellenwert von 5%. Die aktuelle Belastung für das Gesundheitssystem und die Zahl der täglichen Todesfälle ist in vielen Kantonen nach wie vor sehr hoch. Falls der Wintersport und die Festtage zu vermehrten Ansteckungen geführt haben, wird sich dies in einem Anstieg der bestätigten Fälle im Verlauf vom Januar niederschlagen. Zudem besteht das Risiko, dass eine Ausbreitung der bereits in der Schweiz nachgewiesenen neuen Variante von SARS-CoV-2 mit einer wahrscheinlich erhöhten Übertragung innerhalb der nächsten Wochen zu einem Anstieg der Epidemie und einer noch stärkeren Belastung des Gesundheitssystems führen wird.[^12] ---->
+Schwere Erkrankung / Hospitalisierung: 
+Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39][^51].
+(Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
+Das bedeutet, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
+
+Transmission:
+Wie oben beschrieben, verhindert die Impfung zu mindestens 40%, dass sich eine geimpfte Person eine Infektion zuzieht.
+Die Impfung scheint auch die Transmission, die von einer infizierten geimpften Person ausgeht, zu reduzieren (aufgrund von kürzerer infektiöser Phase[^46][^49], und milderer Symptomatik[^49]).
+Das genaue Ausmass der Reduktion kann noch nicht genau beziffert werden.
+Während ein neuer Bericht des CDC[^38] zeigt, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in Ungeimpften, zeigen die Daten der REACT-Studie aus England[^45], dass Geimpfte niedrigere Viruslasten haben.
+Zeitlich aufgelöste Daten aus Singapur[^46] legen nahe, dass die Viruslast bei Geimpften auf einem ähnlich hohen Level beginnt wie bei Ungeimpften aber dann schneller abfällt.
+Daten aus den Niederlanden zeigen, dass Geimpfte, trotz ähnlicher Viruslasten, eine niedrigere Wahrscheinlichkeit haben infektiöse Viren  in sich zu tragen[^48].
+Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten diese Daten in jedem Fall darauf hin, dass Geimpfte, die mit Delta infiziert sind, das Virus übertragen können, wenn auch weniger häufig.
+
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
 [^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends: Aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
@@ -316,70 +345,35 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^16]: https://ispmbern.github.io/covid-19/variants/
 [^17]: https://ibz-shiny.ethz.ch/covidDashboard/, Dashboard Time Series
 [^18]: https://www.medrxiv.org/content/10.1101/2021.03.05.21252520v2
-[^19]: https://www.nature.com/articles/s41586-021-03426-1
-[^20]: https://www.bmj.com/content/bmj/372/bmj.n579.full.pdf
-[^21]: https://www.medrxiv.org/content/10.1101/2021.03.04.21252528v2.full.pdf
-[^22]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3792894
-[^23]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
-[^24]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00170-5/fulltext
-[^25]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
-[^26]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
-[^27]: https://sensors-eawag.ch/sars/overview.html
-[^28]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/
-[^29]: https://cov-spectrum.ethz.ch/
-
-
-<!---- deleted stuff! ---->
-
-```{r regional, echo = FALSE}
-regional <- subset(reproduction,
-                    (grepl("grR", region))
-                    & data_type == "Confirmed cases"
-                    & estimate_type == "Cori_slidingWindow")
-
-regional <- regional[regional$date == max(regional$date), ]
-regional <- regional[order(regional$median_R_mean), ]
-
-regional$region[regional$region == "grR Central Switzerland"] <- "Zentralschweiz"
-regional$region[regional$region == "grR Eastern Switzerland"] <- "Ostschweiz"
-regional$region[regional$region == "grR Espace Mittelland"] <- "Espace Mittelland"
-regional$region[regional$region == "grR Lake Geneva Region"] <- "Région lémanique"
-regional$region[regional$region == "grR Northwestern Switzerland"] <- "Nordwestschweiz"
-regional$region[regional$region == "grR Ticino"] <- "Ticino"
-regional$region[regional$region == "grR Zurich"] <- "Zürich"
-
-threshold <- 0.8
-
-regional_below <- regional[regional$median_R_mean <= threshold, ]
-below <- ""
-for(i in 1:dim(regional_below)[1]) {
-  ifelse(i < dim(regional_below)[1], last <- ", ", last <- "")
-  below <- paste0(below,
-                  regional_below$region[i], 
-                  " mit ",
-                  format(round(regional_below$median_R_mean[i], 2), decimal.mark = ","),
-                  "; 95% UI: ",
-                  format(round(regional_below$median_R_lowHPD[i], 2), decimal.mark = ","),
-                  "-",
-                  format(round(regional_below$median_R_highHPD[i], 2), decimal.mark = ","),
-                  last)
-}
-
-regional_above <- regional[regional$median_R_mean > threshold, ]
-above <- ""
-for(i in 1:dim(regional_above)[1]) {
-  ifelse(i < dim(regional_above)[1], last <- "), ", last <- ")")
-  above <- paste0(above,
-                  regional_above$region[i], 
-                  " (",
-                  format(round(regional_above$median_R_mean[i], 2), decimal.mark = ","),
-                  "; 95% UI: ",
-                  format(round(regional_above$median_R_lowHPD[i], 2), decimal.mark = ","),
-                  "-",
-                  format(round(regional_above$median_R_highHPD[i], 2), decimal.mark = ","),
-                  last)
-}
-```
-
-<!---- ## Regionale Unterschiede
-Es bestehen regionale und kantonale Unterschiede im Verlauf der SARS-CoV-2-Epidemie. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In allen 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit über dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt:[^9] `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion grössere Unterschiede aufweisen.[^10] --->
+[^19]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
+[^20]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00170-5/fulltext
+[^21]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
+[^22]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
+[^23]: https://sensors-eawag.ch/sars/overview.html
+[^24]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/
+[^25]: https://cov-spectrum.ethz.ch/
+[^26]: https://khub.net/documents/135939561/430986542/Effectiveness+of+COVID-19+vaccines+against+the+B.1.617.2+variant.pdf/204c11a4-e02e-11f2-db19-b3664107ac42
+[^27]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/990101/27_May_2021_Risk_assessment_for_SARS-CoV-2_variant_VOC-21APR-02__B.1.617.2_.pdf
+[^28]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
+[^29]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)00947-8/fulltext
+[^30]: https://www.nejm.org/doi/pdf/10.1056/NEJMc2102179?articleTools=true
+[^31]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/991135/3_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
+[^32]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/994761/18_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
+[^33]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/993358/s1288_Warwick_RoadMap_Step_4.pdf
+[^34]: https://sciencetaskforce.ch/en/scientific-update-of-20-july-2021/
+[^35]: https://depositonce.tu-berlin.de/handle/11303/13423
+[^36]: https://doi.org/10.1101/2021.07.05.21260050
+[^37]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)01358-1/fulltext
+[^38]: https://www.cdc.gov/mmwr/volumes/70/wr/mm7031e2.htm?s_cid=mm7031e2_w
+[^39]: https://www.gov.il/BlobFolder/reports/vaccine-efficacy-safety-follow-up-committee/he/files_publications_corona_two-dose-vaccination-data.pdf
+[^41]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1007376/Vaccine_surveillance_report_-_week_30.pdf
+[^42]: https://www.nejm.org/doi/full/10.1056/NEJMoa2108891
+[^43]: https://www.alberta.ca/stats/covid-19-alberta-statistics.htm#vaccine-outcomes
+[^44]: https://khub.net/web/phe-national/public-library/-/document_library/v2WsRK3ZlEig/view_file/479607329?_com_liferay_document_library_web_portlet_DLPortlet_INSTANCE_v2WsRK3ZlEig_redirect=https%3A%2F%2Fkhub.net%3A443%2Fweb%2Fphe-national%2Fpublic-library%2F-%2Fdocument_library%2Fv2WsRK3ZlEig%2Fview%2F479607266
+[^45]: https://spiral.imperial.ac.uk/bitstream/10044/1/90800/2/react1_r13_final_preprint_final.pdf
+[^46]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
+[^47]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1010472/Vaccine_surveillance_report_-_week_32.pdf
+[^48]: https://www.medrxiv.org/content/10.1101/2021.08.20.21262158v1
+[^49]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
+[^50]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00475-8/fulltext
+[^51]: https://www.medrxiv.org/content/10.1101/2021.08.24.21262423v1
