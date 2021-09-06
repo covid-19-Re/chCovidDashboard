@@ -244,14 +244,16 @@ Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisat
 Die bestätigten Fälle gingen
 <!---- UPDATE fielen/stiegen ---->
 um `r valueUIchange(rankingCHEcases)` pro Woche zurück,
-die Hospitalisationen stiegen um `r valueUIchange(rankingCHEhospitalizations)`
+die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
 und die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)`.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, außer bei Kindern unter 12 Jahren, bei denen ein Anstieg zu beobachten ist. Hospitalisierungen sind stabil und betreffen hauptsächlich Erwachsene im Alter von 35 bis 64 Jahren.
+Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, außer bei Kindern unter 10 Jahren und bei Personen zwischen 70 und 80 Jahren, bei denen ein signifikanter Anstieg zu beobachten ist.
+Hospitalisierungen sind in den meisten Altersgruppen stabil.
+In den Gruppen der 20 bis 30-Jährigen, 40 bis 50-Jährigen und 50 bis 60-Jährigen fielen die Hospitalisierungen über die letzten zwei erfassten Wochen signifikant.
 <!------ UPDATE -------->
 
 
@@ -285,9 +287,9 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
-in der Kalenderwoche 32 eine Häufigkeit von 99%
+in der Kalenderwoche 34 eine Häufigkeit von 99%
 unter den sequenzierten Fällen[^25].
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 68-75% berechnen.
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 62-70% berechnen.
 Delta dominiert jetzt die weltweite Epidemie. Im Durchschnitt wurde der Übertragungsvorteil von Delta gegenüber Alpha auf 56% (95% UI: 34%-81%) geschätzt[^33].
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
@@ -304,19 +306,20 @@ und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
 In einem neuen Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterscheiden).
 
 Symptomatische Infektion:
-Der Impfschutz gegen symptomatische Infektionen mit Delta ist auch reduziert.
+Der Impfschutz gegen symptomatische Infektionen mit Delta ist reduziert.
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
 Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
-Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40,5% (95% UI: 8,7-61,2%).
-Bisher ist unklar, warum die Wirksamkeit in Israel tiefer zu sein scheint als in anderen Ländern: Nachlassende Impfwirkung bei früh geimpften Personen in Israel, unterschiedliche Impfstoffe (in Kanada neben Pfizer/BioNtech auch Moderna) oder das prolongierte Zeitintervall zwischen den beiden Impfungen (insbesondere in UK) könnte eine Rolle spielen.
+Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
+Ein wichtiger Faktor für die niedrige Wirksamkeit der Impfung gegen Delta in Israel, ist dass dort schon mehr Zei als in anderen Ländern seit der Impfung vergangen ist[^51].
 
 Schwere Erkrankung / Hospitalisierung: 
-Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
+Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39][^51].
 (Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
 Das bedeutet, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
-Die aktuelle Datenlage unterstützt, dass die Impfung einen substantiellen Beitrag zur Reduktion von Transmissionen leistet. Dies basierend auf einer etwa 40% Reduktion der Infektionen, den Hinweisen hinsichtlich einer kürzeren infektiösen Phase im Falle einer Infektion, sowie milderer Symptomatik[^49].
+Wie oben beschrieben, verhindert die Impfung mindestens zu 40%, dass sich eine geimpfte Person eine Infektion zuzieht.
+Die Impfung scheint auch die Transmission, die von einer infizierten geimpften Person ausgeht, zu reduzieren (aufgrund von kürzerer infektiöser Phase[^46][^49], und milderer Symptomatik[^49]).
 Das genaue Ausmass der Reduktion kann noch nicht genau beziffert werden.
 Während ein neuer Bericht des CDC[^38] zeigt, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in Ungeimpften, zeigen die Daten der REACT-Studie aus England[^45], dass Geimpfte niedrigere Viruslasten haben.
 Zeitlich aufgelöste Daten aus Singapur[^46] legen nahe, dass die Viruslast bei Geimpften auf einem ähnlich hohen Level beginnt wie bei Ungeimpften aber dann schneller abfällt.
@@ -373,3 +376,4 @@ Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten 
 [^48]: https://www.medrxiv.org/content/10.1101/2021.08.20.21262158v1
 [^49]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
 [^50]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00475-8/fulltext
+[^51]: https://www.medrxiv.org/content/10.1101/2021.08.24.21262423v1
