@@ -6,9 +6,9 @@ library(here)
 source(here("R/trendsModule-Files/trendsModule-global.R"))
 
 eventCounts <- list()
-eventCounts$cases <- bagData %>% getEventCounts2(fall_dt, "cases")
-eventCounts$hospitalizations <- bagData %>% getEventCounts2(hospdatin, "hospitalizations")
-eventCounts$deaths <- bagData %>% getEventCounts2(pttoddat, "deaths")
+eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases")
+eventCounts$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations")
+eventCounts$deaths <- bagData %>% getEventCounts(pttoddat, "deaths")
 eventCounts$icu <- icuDataRaw %>% filter(region == "CH")
 
 qs::qsave(eventCounts, here("data/trends-eventCounts.qs"))
