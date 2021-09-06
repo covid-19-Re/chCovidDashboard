@@ -318,7 +318,7 @@ Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit l
 Das bedeutet, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
-Wie oben beschrieben, verhindert die Impfung mindestens zu 40%, dass sich eine geimpfte Person eine Infektion zuzieht.
+Wie oben beschrieben, verhindert die Impfung zu mindestens 40%, dass sich eine geimpfte Person eine Infektion zuzieht.
 Die Impfung scheint auch die Transmission, die von einer infizierten geimpften Person ausgeht, zu reduzieren (aufgrund von kürzerer infektiöser Phase[^46][^49], und milderer Symptomatik[^49]).
 Das genaue Ausmass der Reduktion kann noch nicht genau beziffert werden.
 Während ein neuer Bericht des CDC[^38] zeigt, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in Ungeimpften, zeigen die Daten der REACT-Studie aus England[^45], dass Geimpfte niedrigere Viruslasten haben.
