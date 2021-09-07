@@ -289,7 +289,7 @@ in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
 in der Kalenderwoche 34 eine Häufigkeit von 99%
 unter den sequenzierten Fällen[^25].
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 62-70% berechnen.
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 62-70% berechnen,
 konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33].
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
