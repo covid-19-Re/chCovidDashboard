@@ -6,9 +6,9 @@ library(here)
 source(here("R/trendsModule-Files/trendsModule-global.R"))
 
 eventCounts <- list()
-eventCounts$cases <- bagData %>% getEventCounts2(fall_dt, "cases")
-eventCounts$hospitalizations <- bagData %>% getEventCounts2(hospdatin, "hospitalizations")
-eventCounts$deaths <- bagData %>% getEventCounts2(pttoddat, "deaths")
+eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases")
+eventCounts$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations")
+eventCounts$deaths <- bagData %>% getEventCounts(pttoddat, "deaths")
 eventCounts$icu <- icuDataRaw %>% filter(region == "CH")
 
 qs::qsave(eventCounts, here("data/trends-eventCounts.qs"))
@@ -34,7 +34,7 @@ qs::qsave(ranking, here("data/trends-ranking.qs"))
 
 doublingTimesTable <- doublingTimes %>%
   transmute(
-    region, age_class, event,
+    region, age_class_type, age_class, event,
     dt_estimate = estimate,
     dt_lower = lower,
     dt_upper = upper)
@@ -50,6 +50,21 @@ trendsTable <- doublingTimesTable %>%
   full_join(rankingTable, by = c("region", "age_class", "event"))
 
 qs::qsave(trendsTable, here("data/trends-predictionsTable.qs"))
+
+
+# age class plot
+# cols <- RColorBrewer::brewer.pal(4, "Set1")
+#       t.cols <- cols
+#       for (i in seq_along(cols)) {
+#         x <- col2rgb(cols[i])
+#         t.cols[i] <- rgb(x[1, ], x[2, ], x[3, ], alpha = 125, maxColorValue = 255)
+#       }
+
+# ageClassPlot <- plotAgeClass(predictions, doublingTimes, ranking, eventSelect = "cases", color = t.cols[4],
+#           lang = "de")
+
+# ggsave("ageClassPlot.pdf", width = 50, height = 20, units = "cm", dpi = 600)  
+
 
 popSizes <- read_csv(here("data/popSizeAgeCHELIE.csv"),
   col_types = cols(
@@ -106,15 +121,18 @@ vaccDosesAdministered <- read_csv(
   relocate(date, geoRegion, pop)
 
 fullyVaccPersons <- read_csv(
-    urlfile$sources$individual$csv$fullyVaccPersons,
+    urlfile$sources$individual$csv$vaccPersons,
     col_types = cols_only(
       date = col_date(format = ""),
       geoRegion = col_character(),
       entries = col_double(),
       pop = col_double(),
-      sumTotal = col_double()
+      sumTotal = col_double(),
+      type = col_character()
     )
   ) %>%
+  filter(type == "COVID19FullyVaccPersons") %>%
+  select(-type) %>%
   rename(
     nFullyVacc = entries,
     nFullyVaccTotal = sumTotal
@@ -152,16 +170,19 @@ vaccDosesAdministeredByAge <- read_csv(
   relocate(date, geoRegion, ageClass, pop)
 
 fullyVaccinatedByAge <- read_csv(
-    urlfile$sources$individual$csv$weeklyVacc$byAge$fullyVaccPersons,
+    urlfile$sources$individual$csv$weeklyVacc$byAge$vaccPersons,
     col_types = cols_only(
       date = col_double(),
       geoRegion = col_character(),
       altersklasse_covid19 = col_character(),
       entries = col_double(),
       pop = col_double(),
-      sumTotal = col_double()
+      sumTotal = col_double(),
+      type = col_character()
     )
   ) %>%
+  filter(type == "COVID19FullyVaccPersons") %>%
+  select(-type) %>%
   rename(
     ageClass = altersklasse_covid19,
     nFullyVacc = entries,
