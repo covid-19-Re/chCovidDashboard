@@ -167,20 +167,24 @@ trendsServer <- function(id) {
 
         doublingTimesTable <- doublingTimesRaw %>%
           transmute(
-            region, age_class, event,
+            region, age_class_type, age_class, event,
             dt_estimate = estimate,
             dt_lower = lower,
             dt_upper = upper)
 
         rankingTable <- rankingRaw %>%
           transmute(
-            region, age_class, event,
+            region, age_class_type, age_class, event,
             wc_estimate = estimate * 100,
             wc_lower = lower * 100,
             wc_upper = upper * 100)
 
         allData <- doublingTimesTable %>%
-          full_join(rankingTable, by = c("region", "age_class", "event"))
+          full_join(rankingTable, by = c("region", "age_class_type", "age_class", "event"))
+
+        print(allData)
+
+        return(allData)
       })
 
       output$comparisonDataTable <- renderDataTable({
@@ -189,6 +193,7 @@ trendsServer <- function(id) {
           thead(
             tr(
               th(rowspan = 2, "Region"),
+              th(rowspan = 2, "Age class type"),
               th(rowspan = 2, "Age class"),
               th(rowspan = 2, "Event"),
               th(colspan = 3, "Doubling time (d)"),

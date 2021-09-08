@@ -34,7 +34,7 @@ qs::qsave(ranking, here("data/trends-ranking.qs"))
 
 doublingTimesTable <- doublingTimes %>%
   transmute(
-    region, age_class, event,
+    region, age_class_type, age_class, event,
     dt_estimate = estimate,
     dt_lower = lower,
     dt_upper = upper)
@@ -50,6 +50,21 @@ trendsTable <- doublingTimesTable %>%
   full_join(rankingTable, by = c("region", "age_class", "event"))
 
 qs::qsave(trendsTable, here("data/trends-predictionsTable.qs"))
+
+
+# age class plot
+# cols <- RColorBrewer::brewer.pal(4, "Set1")
+#       t.cols <- cols
+#       for (i in seq_along(cols)) {
+#         x <- col2rgb(cols[i])
+#         t.cols[i] <- rgb(x[1, ], x[2, ], x[3, ], alpha = 125, maxColorValue = 255)
+#       }
+
+# ageClassPlot <- plotAgeClass(predictions, doublingTimes, ranking, eventSelect = "cases", color = t.cols[4],
+#           lang = "de")
+
+# ggsave("ageClassPlot.pdf", width = 50, height = 20, units = "cm", dpi = 600)  
+
 
 popSizes <- read_csv(here("data/popSizeAgeCHELIE.csv"),
   col_types = cols(

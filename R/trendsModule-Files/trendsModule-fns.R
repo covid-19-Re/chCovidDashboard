@@ -51,7 +51,8 @@ getEventCounts <- function(df, event_dt, event_name) {
       count = n(),
       .groups = "drop"
     ) %>%
-    transmute(region = "CH", age_class = "all", date = {{ event_dt }}, event = event_name, count = count)
+    transmute(region = "CH", age_class_type = "all", age_class = "all",
+      date = {{ event_dt }}, event = event_name, count = count)
 
   # cantons
   countsRegions <- df %>%
@@ -61,25 +62,48 @@ getEventCounts <- function(df, event_dt, event_name) {
       count = n(),
       .groups = "drop"
     ) %>%
-    transmute(region = ktn, age_class = "all", date = {{ event_dt }}, event = event_name, count = count)
+    transmute(region = ktn, age_class_type = "all", age_class = "all",
+      date = {{ event_dt }}, event = event_name, count = count)
 
   # age groups
-  countsAgeClass <- df %>%
-    mutate(age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 200), right = FALSE)) %>%
+  countsAgeClassDecade <- df %>%
+    mutate(
+      age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 200), right = FALSE)) %>%
     dplyr::select({{ event_dt }}, age_class) %>%
     group_by(age_class, {{ event_dt }}) %>%
     summarize(
       count = n(),
       .groups = "drop"
     ) %>%
-    transmute(region = "CH", age_class = age_class, date = {{ event_dt }}, event = event_name, count = count) %>%
-    complete(region, age_class, date, event, fill = list(count = 0))
+    transmute(region = "CH", age_class_type = "decade",
+      age_class = age_class, date = {{ event_dt }}, event = event_name, count = count) %>%
+    complete(region, age_class_type, age_class, date, event, fill = list(count = 0))
 
-  levels(countsAgeClass$age_class)[levels(countsAgeClass$age_class) == "[80,200)"] <- "[80,∞)"
+  levels(countsAgeClassDecade$age_class)[levels(countsAgeClassDecade$age_class) == "[80,200)"] <- "[80,∞)"
+
+  countsAgeClassVaccGroup <- df %>%
+    mutate(
+      age_class = cut(altersjahr, breaks = c(0, 7, 16, 25, 35, 45, 55, 65, 75, 200), right = FALSE)) %>%
+    dplyr::select({{ event_dt }}, age_class) %>%
+    group_by(age_class, {{ event_dt }}) %>%
+    summarize(
+      count = n(),
+      .groups = "drop"
+    ) %>%
+    transmute(region = "CH", age_class_type = "Vaccination Group", age_class = age_class,
+      date = {{ event_dt }}, event = event_name, count = count) %>%
+    complete(region, age_class_type, age_class, date, event, fill = list(count = 0))
+
+  levels(countsAgeClassVaccGroup$age_class)[levels(countsAgeClassVaccGroup$age_class) == "[75,200)"] <- "[75,∞)"
+
+  countsAgeClass <- bind_rows(
+    countsAgeClassDecade,
+    countsAgeClassVaccGroup
+  )
 
   # all
   counts <- bind_rows(countsCH, countsRegions) %>%
-    complete(region, age_class, date, event, fill = list(count = 0)) %>%
+    complete(region, age_class_type, age_class, date, event, fill = list(count = 0)) %>%
     bind_rows(countsAgeClass) %>%
     filter(!is.na(date)) %>%
     mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
@@ -145,7 +169,7 @@ calcTrendsModel <- function(eventCounts) {
     bind_rows()
 
   models <- eventCountsDf %>%
-    group_by(region, age_class, event) %>%
+    group_by(region, age_class_type, age_class, event) %>%
     nest() %>%
     mutate(model = map(data, trendsModelFunction))
 
