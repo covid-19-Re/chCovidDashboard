@@ -83,7 +83,7 @@ getEventCounts <- function(df, event_dt, event_name) {
 
   countsAgeClassVaccGroup <- df %>%
     mutate(
-      age_class = cut(altersjahr, breaks = c(0, 7, 16, 25, 35, 45, 55, 65, 75, 200), right = FALSE)) %>%
+      age_class = cut(altersjahr, breaks = c(0, 7, 12, 18, 25, 35, 45, 55, 65, 75, 200), right = FALSE)) %>%
     dplyr::select({{ event_dt }}, age_class) %>%
     group_by(age_class, {{ event_dt }}) %>%
     summarize(
