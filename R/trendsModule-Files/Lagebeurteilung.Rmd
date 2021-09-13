@@ -252,8 +252,8 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, ausser bei Personen über 80 Jahren, bei denen ein leichter aber signifikanter Anstieg zu beobachten ist.
-Hospitalisierungen fielen über die letzten 14 erfasste Tage signifikant.
-In den meisten Altersgruppen ist der Abfall nicht signifikant, ausser in der Altersgrupp von 30 bis 40 und 60 bis 70  Jahren.
+Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant.
+In den meisten Altersgruppen ist der Abfall nicht signifikant, ausser in der Altersgruppe von 30 bis 40 und 60 bis 70  Jahren.
 <!------ UPDATE -------->
 
 
