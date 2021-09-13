@@ -220,7 +220,7 @@ Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Varian
 ### Dynamik
 
 <!------- UPDATE -------->
-Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Seitdem hat sich die Zahl der neuen Infektionen auf hohem Niveau stabilisiert: in den letzten zwei Wochen wurden durchschnittlich rund 2500 neue Fälle pro Tag diagnostiziert. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Seitdem hat sich die Zahl der neuen Infektionen auf hohem Niveau stabilisiert: in den letzten Wochen wurden durchschnittlich rund 2500 neue Fälle pro Tag diagnostiziert. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen:
@@ -251,9 +251,9 @@ und die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, außer bei Kindern unter 10 Jahren und bei Personen zwischen 70 und 80 Jahren, bei denen ein signifikanter Anstieg zu beobachten ist.
-Hospitalisierungen sind in den meisten Altersgruppen stabil.
-In den Gruppen der 20 bis 30-Jährigen, 40 bis 50-Jährigen und 50 bis 60-Jährigen fielen die Hospitalisierungen über die letzten zwei erfassten Wochen signifikant.
+Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, ausser bei Personen über 80 Jahren, bei denen ein leichter aber signifikanter Anstieg zu beobachten ist.
+Hospitalisierungen fielen über die letzten 14 erfasste Tage signifikant.
+In den meisten Altersgruppen ist der Abfall nicht signifikant, ausser in der Altersgrupp von 30 bis 40 und 60 bis 70  Jahren.
 <!------ UPDATE -------->
 
 
@@ -287,9 +287,9 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
-in der Kalenderwoche 34 eine Häufigkeit von 99%
+in der Kalenderwoche 35 eine Häufigkeit von 97%
 unter den sequenzierten Fällen[^25].
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 62-70% berechnen,
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 56-64% berechnen,
 konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33].
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
@@ -311,12 +311,13 @@ Der Impfschutz gegen symptomatische Infektionen mit Delta ist reduziert.
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
 Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
 Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
-Ein wichtiger Faktor für die niedrige Wirksamkeit der Impfung gegen Delta in Israel, ist dass dort schon mehr Zei als in anderen Ländern seit der Impfung vergangen ist[^51].
+Ein wichtiger Faktor für die niedrige Wirksamkeit der Impfung gegen Delta in Israel, ist dass dort schon mehr Zeit als in anderen Ländern seit der Impfung vergangen ist.
 
-Schwere Erkrankung / Hospitalisierung: 
-Der Impfschutz gegen schwere Erkrankung ist nach wie vor hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39][^51].
+Schwere Erkrankung / Hospitalisierung: ü
+Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39][^51].
 (Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
-Das bedeutet, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
+Gemäss dem neuen Preprints aus Israel[^51] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
+Zusammengenommen bedeuten diese Daten aber, dass rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
 Wie oben beschrieben, verhindert die Impfung zu mindestens 40%, dass sich eine geimpfte Person eine Infektion zuzieht.
