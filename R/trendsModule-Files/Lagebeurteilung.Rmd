@@ -213,6 +213,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die in den letzten zwei Monaten die anderen in der Schweiz zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August deutlich an und stabilisierte sich dann auf hohem Niveau.
+Seit dieser Woche ist ein leichter Abfall der Epidemie zu verzeichnen.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -245,15 +246,15 @@ Die bestätigten Fälle gingen
 <!---- UPDATE fielen/stiegen ---->
 um `r valueUIchange(rankingCHEcases)` pro Woche zurück,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-und die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)`.
+und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen stabil oder leicht rückläufig, ausser bei Personen über 80 Jahren, bei denen ein leichter aber signifikanter Anstieg zu beobachten ist.
+Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig, ausser bei Personen über 70-80 Jahren, bei denen ein der Ruckgang nicht signifikant ist.
 Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant.
-In den meisten Altersgruppen ist der Abfall nicht signifikant, ausser in den Altersgruppen von 30 bis 40 und 60 bis 70  Jahren.
+Weil in jeder einzelnen Altersgruppe die Hospitalisierungszahlen niedrig sind, ist der Abfall in den meisten Altersgruppen nicht signifikant.
 <!------ UPDATE -------->
 
 
@@ -287,9 +288,9 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
-in der Kalenderwoche 35 eine Häufigkeit von 97%
+in der Kalenderwoche 36 eine Häufigkeit von 97%
 unter den sequenzierten Fällen[^25].
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 56-64% berechnen,
+Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 41-49% berechnen,
 konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33].
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
