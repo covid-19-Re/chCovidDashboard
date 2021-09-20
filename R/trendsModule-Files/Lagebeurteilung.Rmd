@@ -252,9 +252,9 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig, ausser bei Personen über 70-80 Jahren, bei denen ein der Ruckgang nicht signifikant ist.
+Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig, ausser bei den 70-80 Jährigen, bei denen ein der Rückgang nicht signifikant ist.
 Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant.
-Weil in jeder einzelnen Altersgruppe die Hospitalisierungszahlen niedrig sind, ist der Abfall in den meisten Altersgruppen nicht signifikant.
+In den meisten Altersgruppen ist der Abfall nicht signifikant, ausser in den 40-49 Jährigen.
 <!------ UPDATE -------->
 
 
