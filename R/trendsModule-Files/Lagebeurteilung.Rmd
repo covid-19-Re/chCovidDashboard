@@ -212,8 +212,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die in den letzten zwei Monaten die anderen in der Schweiz zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August deutlich an und stabilisierte sich dann auf hohem Niveau.
-Seit dieser Woche ist ein leichter Abfall der Epidemie zu verzeichnen.
+Die SARS-CoV-2-Epidemie wird zurzeit ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August an, stabilisierte sich dann einen Monat lang auf hohem Niveau, bevor sie in den letzten beiden Wochen wieder zurückging.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -221,7 +220,7 @@ Seit dieser Woche ist ein leichter Abfall der Epidemie zu verzeichnen.
 ### Dynamik
 
 <!------- UPDATE -------->
-Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Seitdem hat sich die Zahl der neuen Infektionen auf hohem Niveau stabilisiert: in den letzten Wochen wurden durchschnittlich rund 2500 neue Fälle pro Tag diagnostiziert. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Danach stabilisierte sich die Zahl der Neuinfektionen einen Monat lang auf einem hohen Niveau (mit etwa 2 500 neuen Fällen pro Tag). In den letzten zwei Wochen ist die Tendenz mit einem deutlichen Rückgang der Zahl der Fälle wieder günstig. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen:
@@ -252,9 +251,8 @@ und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig, ausser bei den 70-80 Jährigen, bei denen ein der Rückgang nicht signifikant ist.
-Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant.
-In den meisten Altersgruppen ist der Abfall nicht signifikant, ausser in den 40-49 Jährigen.
+Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig.
+Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant. Dieser Trend ist nicht signifikant, wenn die Altersgruppen getrennt betrachtet werden, da die Zahlen zu klein sind.
 <!------ UPDATE -------->
 
 
@@ -283,7 +281,7 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 
 
-### Neue Varianten
+### SARS-CoV-2 Varianten
 
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
