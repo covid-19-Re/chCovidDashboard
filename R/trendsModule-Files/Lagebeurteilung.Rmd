@@ -314,14 +314,14 @@ Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
 Mehrere Faktoren könnten die niedrige Wirksamkeit der Impfung gegen Delta in Israel erklären: dort schon mehr Zeit als in anderen Ländern seit der Impfung vergangen ist; der Abstand zwischen den beiden Impfdosen war minimal (3 Wochen); und es wurde nur der Impfstoff von Pfizer/BioNtech verabreicht, der etwas weniger wirksam zu sein scheint als der von Moderna.
 
 Schwere Erkrankung / Hospitalisierung: 
-Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39][^51].
+Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39],[^51].
 (Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
 Gemäss dem neuen Preprints aus Israel[^51] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 Zusammengenommen bedeuten diese Daten aber, dass momentan rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
 Wie oben beschrieben, verringert die Impfung das Risiko einer Ansteckung bei einer geimpften Person um etwa 50%.
-Die Impfung scheint auch die Transmission, die von einer infizierten geimpften Person ausgeht, zu reduzieren (aufgrund von kürzerer infektiöser Phase[^46][^49], und milderer Symptomatik[^49]).
+Die Impfung scheint auch die Transmission, die von einer infizierten geimpften Person ausgeht, zu reduzieren (aufgrund von kürzerer infektiöser Phase[^46],[^49], und milderer Symptomatik[^49]).
 Das genaue Ausmass der Reduktion kann noch nicht genau beziffert werden.
 Während ein Bericht des CDC[^38] darauf hindeutet, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in Ungeimpften, deuten die Daten der REACT-Studie aus England[^45] darauf hin, dass Geimpfte niedrigere Viruslasten haben.
 Zeitlich aufgelöste Daten aus Singapur[^46] legen nahe, dass die Viruslast bei Geimpften auf einem ähnlich hohen Level beginnt wie bei Ungeimpften aber dann schneller abfällt.
