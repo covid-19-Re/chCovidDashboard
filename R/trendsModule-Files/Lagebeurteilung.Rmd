@@ -316,7 +316,7 @@ Mehrere Faktoren könnten die niedrige Wirksamkeit der Impfung gegen Delta in Is
 Schwere Erkrankung / Hospitalisierung: 
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39],[^51].
 (Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
-Gemäss dem neuen Preprints aus Israel[^51] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
+Gemäss dem neuen Preprints aus Israel[^51] und den Analysen von Public Health England[^52] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 Zusammengenommen bedeuten diese Daten aber, dass momentan rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
@@ -379,3 +379,4 @@ Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten 
 [^49]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
 [^50]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00475-8/fulltext
 [^51]: https://www.medrxiv.org/content/10.1101/2021.08.24.21262423v1
+[^52]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1017309/S1362_PHE_duration_of_protection_of_COVID-19_vaccines_against_clinical_disease.pdf
