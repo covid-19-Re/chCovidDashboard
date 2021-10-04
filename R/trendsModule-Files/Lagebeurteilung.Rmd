@@ -245,7 +245,7 @@ Die bestätigten Fälle gingen
 <!---- UPDATE fielen/stiegen ---->
 um `r valueUIchange(rankingCHEcases)` pro Woche zurück,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
+während die Todesfälle leicht um `r valueUIchange(rankingCHEdeaths)` zunahmen.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
