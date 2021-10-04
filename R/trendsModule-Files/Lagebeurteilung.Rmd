@@ -316,17 +316,16 @@ Mehrere Faktoren könnten die niedrige Wirksamkeit der Impfung gegen Delta in Is
 Schwere Erkrankung / Hospitalisierung: 
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39],[^51].
 (Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
-Gemäss dem neuen Preprints aus Israel[^51] und den Analysen von Public Health England[^52] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
+Gemäss einem Preprint aus Israel[^51] und den Analysen von Public Health England[^52] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 Zusammengenommen bedeuten diese Daten aber, dass momentan rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
-Wie oben beschrieben, verringert die Impfung das Risiko einer Ansteckung bei einer geimpften Person um etwa 50%.
-Die Impfung scheint auch die Transmission, die von einer infizierten geimpften Person ausgeht, zu reduzieren (aufgrund von kürzerer infektiöser Phase[^46],[^49], und milderer Symptomatik[^49]).
-Das genaue Ausmass der Reduktion kann noch nicht genau beziffert werden.
-Während ein Bericht des CDC[^38] darauf hindeutet, dass die Viruslast von Delta in Geimpften ähnlich hoch ist wie in Ungeimpften, deuten die Daten der REACT-Studie aus England[^45] darauf hin, dass Geimpfte niedrigere Viruslasten haben.
-Zeitlich aufgelöste Daten aus Singapur[^46] legen nahe, dass die Viruslast bei Geimpften auf einem ähnlich hohen Level beginnt wie bei Ungeimpften aber dann schneller abfällt.
-Daten aus den Niederlanden zeigen, dass Geimpfte, trotz ähnlicher Viruslasten, eine niedrigere Wahrscheinlichkeit haben infektiöse Viren  in sich zu tragen[^48].
-Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten diese Daten in jedem Fall darauf hin, dass Geimpfte, die mit Delta infiziert sind, das Virus übertragen können, wenn auch weniger häufig.
+Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mechanismen: 
+erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen; 
+und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
+Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
+Ein aktuelle preprint zeigt, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer um etwa 2/3 geringer ist[^53]
+Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er teilweise durch eine kürzere infektiöse Phase[^46],[^49] oder durch eine geringere Infektiosität des Virus bei geimpften Personen[^48] erklärt werden kann.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
@@ -380,3 +379,4 @@ Da die Viruslast ein wichtiges Korrelat der Übertragungsfähigkeit ist, deuten 
 [^50]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00475-8/fulltext
 [^51]: https://www.medrxiv.org/content/10.1101/2021.08.24.21262423v1
 [^52]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1017309/S1362_PHE_duration_of_protection_of_COVID-19_vaccines_against_clinical_disease.pdf
+[^53]: https://www.medrxiv.org/content/10.1101/2021.09.28.21264260v1.full.pdf
