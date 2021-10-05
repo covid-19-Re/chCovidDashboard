@@ -212,7 +212,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August an, stabilisierte sich dann einen Monat lang auf hohem Niveau, bevor sie in den letzten drei Wochen wieder zurückging.
+Die SARS-CoV-2-Epidemie wird zurzeit ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August an, stabilisierte sich dann einen Monat lang auf hohem Niveau, bevor sie in den letzten drei Wochen wieder zurückging. Es wird erwartet, dass die Zirkulation saisonal bedingt wieder zunehmen wird was zu einem R-Wert von über 1 führen könnte. Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -220,7 +220,7 @@ Die SARS-CoV-2-Epidemie wird zurzeit ausschliesslich durch die Delta-Variante (B
 ### Dynamik
 
 <!------- UPDATE -------->
-Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Danach stabilisierte sich die Zahl der Neuinfektionen einen Monat lang auf einem hohen Niveau (mit etwa 2 500 neuen Fällen pro Tag). In den letzten drei Wochen ist die Tendenz mit einem deutlichen Rückgang der Zahl der Fälle wieder günstig. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Danach stabilisierte sich die Zahl der Neuinfektionen einen Monat lang auf einem hohen Niveau. In den letzten drei Wochen ist die Zahl der Fälle deutlich zurückgegangen. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen:
