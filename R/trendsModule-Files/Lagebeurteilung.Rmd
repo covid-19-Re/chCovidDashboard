@@ -312,13 +312,19 @@ Symptomatische Infektion:
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist, verglichen mit Alpha, reduziert.
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
 Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
+Eine neue Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Moderna gegen Infektionen mit Delta auf 87% (95% UI: 84-89%), gegen Infektion mit Alpha auf 98% (95% UI: 97-99%).
+<!---
+[^54]: "Our study also had several limitations. Although test-negative designs might reduce bias due to factors associated with care-seeking,40 this design was generalizable to individuals who were tested and was therefore less generalizable to individuals with mild or no symptoms who did not seek testing. "
+---->
+Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
 Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
 Mehrere Faktoren könnten die niedrige Wirksamkeit der Impfung gegen Delta in Israel erklären: dort schon mehr Zeit als in anderen Ländern seit der Impfung vergangen ist; der Abstand zwischen den beiden Impfdosen war minimal (3 Wochen); und es wurde nur der Impfstoff von Pfizer/BioNtech verabreicht, der etwas weniger wirksam zu sein scheint als der von Moderna.
 
 Schwere Erkrankung / Hospitalisierung: 
-Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% [91-98%] basierend auf Daten aus Grossbritannien[^47],[^44] und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
-(Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.)
-Gemäss einem preprint aus Israel[^51] und den Analysen von Public Health England[^52] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
+Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
+Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
+Gemäss einem neuem Preprint[^54], basierend auf Daten aus Kalifornien, schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hopitalisation nach einer Infektion mit der Delta-Variante. 
+Gemäss einem Preprint aus Israel[^51] und den Analysen von Public Health England[^52] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 Zusammengenommen bedeuten diese Daten aber, dass momentan rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
 Transmission:
@@ -326,7 +332,7 @@ Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mec
 erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
 Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
-Ein neuer preprint[^53] beschreibt eine Studie, die schätzt, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 2/3 geringer ist als bei Ungeimpften.
+Ein neuer Preprint[^53] beschreibt eine Studie, die schätzt, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 2/3 geringer ist als bei Ungeimpften.
 Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Infektiosität des Virus bei geimpften Personen[^48] erklärt werden könnte.
 
 
@@ -382,3 +388,4 @@ Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine 
 [^51]: https://www.medrxiv.org/content/10.1101/2021.08.24.21262423v1
 [^52]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1017309/S1362_PHE_duration_of_protection_of_COVID-19_vaccines_against_clinical_disease.pdf
 [^53]: https://www.medrxiv.org/content/10.1101/2021.09.28.21264260v1.full.pdf
+[^54]: https://www.medrxiv.org/content/10.1101/2021.09.29.21264199v1.full.pdf
