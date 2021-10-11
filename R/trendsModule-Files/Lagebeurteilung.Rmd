@@ -323,7 +323,7 @@ Mehrere Faktoren könnten die niedrige Wirksamkeit der Impfung gegen Delta in Is
 Schwere Erkrankung / Hospitalisierung: 
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
 Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
-Gemäss einem neuem Preprint[^54], basierend auf Daten aus Kalifornien, schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hopitalisation nach einer Infektion mit der Delta-Variante. 
+Gemäss einem neuen Preprint[^54] basierend auf Daten aus Kalifornien schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hopitalisation nach einer Infektion mit der Delta-Variante. 
 Gemäss einem Preprint aus Israel[^51] und den Analysen von Public Health England[^52] scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 Zusammengenommen bedeuten diese Daten aber, dass momentan rund 9 von 10 Hospitalisationen durch eine vollständige Impfung verhindert werden können.
 
