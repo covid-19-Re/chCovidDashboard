@@ -212,7 +212,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August an, stabilisierte sich dann einen Monat lang auf hohem Niveau, bevor sie in den letzten drei Wochen wieder zurückging. Es wird erwartet, dass die Zirkulation saisonal bedingt wieder zunehmen wird was zu einem R-Wert von über 1 führen könnte. Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig.
+Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und geht seit Anfang September 2021 wieder zurück. Es wird erwartet, dass die Zirkulation saisonal bedingt wieder zunehmen wird was zu einem R-Wert von über 1 führen könnte. Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -220,7 +220,7 @@ Die SARS-CoV-2-Epidemie wird zurzeit ausschliesslich durch die Delta-Variante (B
 ### Dynamik
 
 <!------- UPDATE -------->
-Die SARS-CoV-2-Epidemie hat zwischen Ende Juni und Mitte August 2021 stark zugenommen. Danach stabilisierte sich die Zahl der Neuinfektionen einen Monat lang auf einem hohen Niveau. In den letzten drei Wochen ist die Zahl der Fälle deutlich zurückgegangen. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
+Seit Anfang September 2021 nimmt die SARS-CoV-2-Epidemie ab. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen:
@@ -245,14 +245,14 @@ Die bestätigten Fälle gingen
 <!---- UPDATE fielen/stiegen ---->
 um `r valueUIchange(rankingCHEcases)` pro Woche zurück,
 die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-während die Todesfälle leicht um `r valueUIchange(rankingCHEdeaths)` zunahmen.
+und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig, mit Ausnahme der über 70-Jährigen, bei denen der beobachtete Rückgang aufgrund der geringeren Zahl nicht signifikant ist.
-Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant. Bei getrennter Betrachtung der Altersgruppen ist dieser Trend nur für die Altersgruppen 30-40 und 40-50 signifikant.
+Die Zahl der Fälle ist in allen Altersgruppen signifikant rückläufig, mit Ausnahme der Altersgruppen der 20-30, 70-80 und über 80-Jährigen.
+Hospitalisierungen fielen über die letzten 14 erfassten Tage signifikant. Bei getrennter Betrachtung der Altersgruppen ist dieser Trend aber für keine der Altersgruppen signifikant.
 <!------ UPDATE -------->
 
 
@@ -286,10 +286,10 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz. Diese ursprünglich in Indien beschriebene Variante hatte
 in der Kalenderwoche 19 eine Häufigkeit von 1%,
 in der Kalenderwoche 24 eine Häufigkeit von 24% und
-in der Kalenderwoche 36 eine Häufigkeit von 97%
+in der Kalenderwoche 38 eine Häufigkeit von 99.9%
 unter den sequenzierten Fällen[^25].
-Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von 41-49% berechnen,
-konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33].
+<!--- Aus diesem Anstieg der Häufigkeit von Delta kann man einen Transmissionsvorteil gegenüber Alpha von XXX% berechnen, konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33]. ---->
+In England wurde der Übertragungsvorteil von Delta gegenüber Alpha auf 56% (95% UI: 34%-81%) geschätzt[^33].
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
@@ -321,11 +321,11 @@ Zusammengenommen bedeuten diese Daten aber, dass momentan rund 9 von 10 Hospital
 
 Transmission:
 Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mechanismen: 
-erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen; 
+erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
 Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
-Ein neuer preprint zeigt, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 2/3 geringer ist[^53]
-Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er teilweise durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Infektiosität des Virus bei geimpften Personen[^48] erklärt werden kann.
+Ein neuer preprint[^53] beschreibt eine Studie, die schätzt, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 2/3 geringer ist als bei Ungeimpften.
+Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Infektiosität des Virus bei geimpften Personen[^48] erklärt werden könnte.
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
