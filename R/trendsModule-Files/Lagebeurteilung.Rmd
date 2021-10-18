@@ -215,7 +215,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging seit Anfang September 2021 wieder zurück. Diese Woche ist kein Rückgang mehr zu verzeichnen.
 
 Es wird erwartet, dass die Zirkulation saisonal bedingt wieder zunehmen wird was zu einem R-Wert von über 1 führen könnte.
-Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnelich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
+Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
 Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
