@@ -224,7 +224,7 @@ Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundh
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Anfang September 2021 nam die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit dieser Woche aber ist der R-wert sehr nahe bei 1.
+Seit Anfang September 2021 nahm die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit dieser Woche aber ist der R-Wert sehr nahe bei 1 und die Positivitätsrate steigt sogar signifikant (*R~e~*= 1,12; 95% UI: 1,02-1,21).
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -256,7 +256,7 @@ und die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist keiner der Altersgruppen signifikant rückläufig, mit Ausnahme der Altersgruppen der 0-10 und 10-20-Jährigen.
+Die Zahl der Fälle ist keiner der Altersgruppen signifikant rückläufig, mit Ausnahme der Altersgruppen der 0-10 und 10-20-Jährigen, was durch veringerten Kontakt und Testung in den Herbstferien erklärt werden könnte.
 Hospitalisierungen fielen über die letzten 14 erfassten Tage nicht signifikant. Bei getrennter Betrachtung der Altersgruppen ist dieser Trend für keine der Altersgruppen signifikant.
 <!------ UPDATE -------->
 
