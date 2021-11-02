@@ -212,7 +212,7 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante (B.1.617.2) verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging seit Anfang September 2021 wieder zurück. Seit zwei Wochen steigen die Fallzahlen wieder signifikant.
+Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging seit Anfang September 2021 wieder zurück. Seit zwei Wochen steigen die Fallzahlen wieder signifikant.
 Dieser Anstieg ist in jeder einzelnen Grossregion signifikant ausser in der von Genf und dem Tessin.
 <!------ UPDATE  -------->
 
@@ -292,7 +292,7 @@ Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen de
 
 ### Neue Varianten
 
-Seit Kalenderwoche 26 ist Delta (B.1.617) die dominante Variante in der Schweiz.
+Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
 Diese ursprünglich in Indien beschriebene Variante hat seit
 der Kalenderwoche 38 eine Häufigkeit von 100%
 unter den sequenzierten Fällen[^25].
