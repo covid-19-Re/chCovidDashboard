@@ -217,6 +217,7 @@ Dieser Anstieg ist in jeder einzelnen Grossregion signifikant ausser in der von 
 <!------ UPDATE  -------->
 
 Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
+Nachdem der Anstieg der Epidemie im Herbst 2021 später begann als im Herbst 2020, erwarten wir Ende November noch keine Überschreitung der Maximal-Last. Solch ein Szenario ist aber über den Winter nicht auszuschliessen.
 Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
@@ -327,17 +328,16 @@ Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Mo
 [^54]: "Our study also had several limitations. Although test-negative designs might reduce bias due to factors associated with care-seeking,40 this design was generalizable to individuals who were tested and was therefore less generalizable to individuals with mild or no symptoms who did not seek testing. "
 ---->
 Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
-Eine Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfizer eine Reduktion Schutzes
+Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
+Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfizer eine Reduktion Schutzes
 gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei Wochen nach der Impfung auf Null nach 211 Tagen
 und für den Impfstoff von Moderna auf 59% (95% UI: 18-79%).
-Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
-Mehrere Faktoren könnten die niedrige Wirksamkeit der Impfung gegen Delta in Israel erklären: dort ist schon mehr Zeit als in anderen Ländern seit der Impfung vergangen; der Abstand zwischen den beiden Impfdosen war minimal (3 Wochen); und es wurde nur der Impfstoff von Pfizer/BioNtech verabreicht, der etwas weniger wirksam zu sein scheint als der von Moderna.
 
 Schwere Erkrankung / Hospitalisierung: 
-Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
+Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
 Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
 Gemäss einem neuen Preprint[^54] basierend auf Daten aus Kalifornien schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hospitalisation nach einer Infektion mit der Delta-Variante. 
-Gemäss einem Preprint aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
+Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
 Für Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87% im Oktober[^57]. Diese Abnahme ist konsistent mit Daten aus anderen Ländern. 
@@ -400,7 +400,7 @@ Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine 
 [^48]: https://www.medrxiv.org/content/10.1101/2021.08.20.21262158v1
 [^49]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
 [^50]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00475-8/fulltext
-[^51]: https://www.medrxiv.org/content/10.1101/2021.08.24.21262423v1
+[^51]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114228
 [^52]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1017309/S1362_PHE_duration_of_protection_of_COVID-19_vaccines_against_clinical_disease.pdf
 [^53]: https://www.medrxiv.org/content/10.1101/2021.09.28.21264260v1.full.pdf
 [^54]: https://www.medrxiv.org/content/10.1101/2021.09.29.21264199v1.full.pdf
