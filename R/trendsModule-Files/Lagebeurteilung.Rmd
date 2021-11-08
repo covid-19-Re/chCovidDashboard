@@ -259,6 +259,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
+In den Altersgruppen der 0-9 und 10-19 Jährigen ist dieser Anstieg mit 71% und 51% pro Woche am höchsten. 
 Hospitalisierungen stiegen oder fielen in keiner Altersgruppe über die letzten 14 erfassten Tage signifikant.
 <!------ UPDATE -------->
 
