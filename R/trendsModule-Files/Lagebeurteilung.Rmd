@@ -212,8 +212,8 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging seit Anfang September 2021 wieder zurück. Seit zwei Wochen steigen die Fallzahlen wieder signifikant.
-Dieser Anstieg ist in jeder einzelnen Grossregion signifikant ausser in der von Genf und dem Tessin.
+Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging seit Anfang September 2021 wieder zurück. Seit drei Wochen steigen die Fallzahlen wieder signifikant.
+Dieser Anstieg ist in jeder einzelnen Grossregion signifikant.
 <!------ UPDATE  -------->
 
 Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
@@ -226,7 +226,7 @@ Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundh
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Anfang September 2021 nahm die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit letzter Woche aber ist die Schätzung des R-Wertes wieder signifikant über 1.
+Seit Anfang September 2021 nahm die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit Ende Oktober 2021 aber ist die Schätzung des R-Wertes wieder signifikant über 1.
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -251,14 +251,14 @@ Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisat
 Die bestätigten Fälle stiegen
 <!---- UPDATE fielen/stiegen ---->
 um `r valueUIchange(rankingCHEcases)` pro Woche,
-die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
+die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`.
+Die Todesfälle gingen um `r valueUIchange(rankingCHEdeaths)` zurück.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend, mit Ausnahme der Altersgruppen der 20-29 und 60-69-Jährigen.
+Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
 Hospitalisierungen stiegen oder fielen in keiner Altersgruppe über die letzten 14 erfassten Tage signifikant.
 <!------ UPDATE -------->
 
@@ -303,7 +303,7 @@ konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) 
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt und hatte in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 50 Mal gefunden und die Häufigkeit war in Kalenderwoche 41 0.9%[^25].
+Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt und hatte in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 50 Mal gefunden und die Häufigkeit war in Kalenderwoche 42 0.8%[^25].
 <!--- UPDATE cov-spectrum.ethz.ch ---->
 
 Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patient:innen mit Delta im Vergleich zu Patient:innen mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
@@ -340,7 +340,7 @@ Gemäss einem neuen Preprint[^54] basierend auf Daten aus Kalifornien schützt d
 Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
-Für Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87% im Oktober[^57]. Diese Abnahme ist konsistent mit Daten aus anderen Ländern. 
+Für Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87% im Oktober[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
 
 Transmission:
 Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mechanismen: 
