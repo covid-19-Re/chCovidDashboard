@@ -259,7 +259,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
-In den Altersgruppen der 0-9 und 10-19 Jährigen ist dieser Anstieg mit 71% und 51% pro Woche am höchsten. 
+In den Altersgruppen der 0-9 und 10-19 Jährigen ist dieser Anstieg mit 78% und 61% pro Woche am höchsten. 
 Hospitalisierungen stiegen oder fielen in keiner Altersgruppe über die letzten 14 erfassten Tage signifikant.
 <!------ UPDATE -------->
 
@@ -331,8 +331,8 @@ Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Mo
 Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
 Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
 Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfizer eine Reduktion Schutzes
-gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei Wochen nach der Impfung auf Null nach 211 Tagen
-und für den Impfstoff von Moderna auf 59% (95% UI: 18-79%).
+gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei Wochen nach der Impfung auf Null nach 211 Tagen.
+Für den Impfstoff von Moderna reduzierte sich der Schutz nach 211 Tagen auf 59% (95% UI: 18-79%).
 
 Schwere Erkrankung / Hospitalisierung: 
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
@@ -341,7 +341,7 @@ Gemäss einem neuen Preprint[^54] basierend auf Daten aus Kalifornien schützt d
 Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
-Für Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87% im Oktober[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
+Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
 
 Transmission:
 Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mechanismen: 
