@@ -331,8 +331,8 @@ Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Mo
 Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
 Studien aus Israel[^39] schätzen eine Wirksamkeit von nur 40% (95% UI: 9-61%).
 Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfizer eine Reduktion Schutzes
-gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei Wochen nach der Impfung auf Null nach 211 Tagen.
-Für den Impfstoff von Moderna reduzierte sich der Schutz nach 211 Tagen auf 59% (95% UI: 18-79%).
+gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf Null nach 210 Tagen.
+Für den Impfstoff von Moderna reduzierte sich der Schutz von 96% (95% UI:94-97%) zwei bis vier Wochen nach der Impfungauf 59% (95% UI: 18-79%) nach 180 Tagen.
 
 Schwere Erkrankung / Hospitalisierung: 
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
