@@ -312,16 +312,44 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 
 
 
-### Delta und Impfstoff Wirksamkeit
+### Impfschutz über die Zeit
 
-Infektion: 
+Die Impfung hat mehrere Wirkungen: sie schützt vor der Infektion, davor, dass man die Infektion weitergibt (Transmission), und vor schweren Verläufen und dem Tod. Es ist wichtig diese verschiedenen Wirkungen auseinander zu halten, weil sie verschieden schnell über die Zeit und Altersgruppen abnehmen.
+Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoffe verringern. Welches dieser beiden Ziele man in der Vordergrung stellt, entscheidet über die Impfstrategie, also welche Altersgruppen man wann impft, und ob and wann man boostet.
+
+Im folgenden stellen wir kurz dar, was man über diese Wirkungen und ihre zeitliche Abnahme weiss:
+
+<!---
+# Schutz vor Infektion
+Der Schutz vor der symptomatischen Infektion ist anfänglich mit den in der Schweiz verwendeten mRNA Impfstoffen bei über 90%. Das gilt sowohl für die ursprüngliche Variante als auch für Delta.
+Innerhalb weniger Monate nimmt der Schutz vor der Infektion aber über alle Altersklassen hinweg ab
+(zum Beispiel für BioNTech[^101][^102] und für Moderna und BioNTech zusammen [^103][^104][^105])
+Eine Übersicht in [^106].
+Nach 6 Monaten ist der Schutz nur noch bei rund 50% gegenüber >90% direkt nach doppelter Impfung.
+
+# Schutz vor Transmission
+
+○
+●
+Innerhalb von 14 Wochen ist eine Abnahme des Schutzes als infizierter Geimpfter die Infektion
+weiterzugeben von 50% auf 20% für Pfizer/BioNTech beobachtet worden 7 (im Vergleich zu infizierter
+Ungeimpfter)
+Schutz vor Hospitalisierung
+○ Abnahme in älteren Personen nach 4-6 Monaten von >90% auf 80% für BioNTech 8 (auch in der
+Schweiz im Oktober für über 80-Jährige beobachtet 9 ).
+○ In breiter Bevölkerung ist Schutz bislang weiter sehr gut jedoch deuten Daten aus Israel ab 40-Jährigen
+auf leichte Abnahme 10 .
+---->
+
+# Infektion (symptomatisch und asymptomatisch):
+Die Wirksamkeit der Impfung auf Infektionen einschliesslich asymptomatischer ist schwierig, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
 Es gibt übereinstimmende Hinweise auf eine geringere Wirksamkeit von mRNA-Impfstoffen gegen SARS-CoV-2-Delta-Infektionen, einschliesslich asymptomatischer Infektionen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
 und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
 In einem Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterschieden).
 Zusammenfassend lässt sich sagen, dass mRNA-Impfstoffe das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbieren. 
 
-Symptomatische Infektion:
+# Symptomatische Infektion:
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist, verglichen mit Alpha, reduziert.
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
 Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
@@ -335,7 +363,7 @@ Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfize
 gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf Null nach 210 Tagen.
 Für den Impfstoff von Moderna reduzierte sich der Schutz von 96% (95% UI:94-97%) zwei bis vier Wochen nach der Impfungauf 59% (95% UI: 18-79%) nach 180 Tagen.
 
-Schwere Erkrankung / Hospitalisierung: 
+# Schwere Erkrankung / Hospitalisierung: 
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
 Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
 Gemäss einem neuen Preprint[^54] basierend auf Daten aus Kalifornien schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hospitalisation nach einer Infektion mit der Delta-Variante. 
@@ -344,13 +372,36 @@ Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
 Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
 
-Transmission:
+# Transmission:
 Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mechanismen: 
 erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
 Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
 Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 66% geringer ist als bei Ungeimpften.
 Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Infektiosität des Virus bei geimpften Personen[^48] erklärt werden könnte.
+
+
+### Wirkung von Boostern
+
+# Schutz vor Infektion
+Zwei Preprints[^111][^112] beschreiben, dass Booster des Level neutralisierender Antikörper um das 10-fache erhöhen (verglichen mit dem Level unmittelbar vor dem Booster).
+Der Schutz vor der Infektion erhöht sich durch eine Booster-Impfung von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113]. 
+Dies reduziert gleichzeitig die Viruslast [^102] und damit wahrscheinlich auch die Weitergabe der Infektion nach der Booster-Impfung.
+
+# Schutz vor Hospitalisierung
+Der Schutz vor der Hospitalisierung erhöht sich durch eine Booster-Impfung von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113].
+
+Wenn das Hauptziel der Impfkampagne die Reduzierung von zukünftigen Hospitalisationen ist, könnten Booster-Impfungen bei über 65-Jährigen und anderen Risikogruppen ausreichen.
+Wenn dagegen die Eindämmung der Transmission angestrebt wird (auch um untragbare Spitzen in Hospitalisierungen zu vermeiden), wären Booster-Impfungen aller Altersklassen ratsam. Dies könnte auch die Prävalenz von Long-Covid verringern.
+Allerdings könnten, anstatt Boostern, natürliche Infektionen einen breiteren Schutz auch gegen neue Varianten erzeugen und damit den Übergang zur Endemizität von SARS-CoV-2 erleichtern.
+
+Bei anderen nicht-replikationsfähigen Impfstoffen gilt die Grundimmunisierung erst mit einer
+zusätzlichen Dosis nach 6-12 Monaten als abgeschlossen (z.B. Hepatitis A und B, FSME,
+Haemophilus influenzae type B, Poliovirus, Diphterie, Tetanus oder Pertussis).
+Ein Booster ist deshalb nicht aussergewöhnlich und könnte auh zu einem dauerhafteren Schutz führen, sodass nicht weitere Booster-Impfungen notwendig wären.
+
+
+<!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
 
 
 [^1]: https://sciencetaskforce.ch/reproduktionszahl/ und https://ibz-shiny.ethz.ch/covid-19-re-international/: Die Schätzungen von *R~e~* über die letzten Tage können leichten Schwankungen unterliegen. Diese Schwankungen treten insbesondere in kleinen Regionen, bei sich ändernder Dynamik und bei niederen Fallzahlen auf.
@@ -411,3 +462,22 @@ Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine 
 [^57]: https://sciencetaskforce.ch/en/scientific-update-of-26-october-2021/
 [^58]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3949410
 
+[^101]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114228
+[^102]: https://www.nature.com/articles/s41591-021-01575-4
+[^103]: https://www.medrxiv.org/content/10.1101/2021.08.06.21261707v
+[^104]: https://www.medrxiv.org/content/10.1101/2021.08.11.21261885v1
+[^105]: https://www.science.org/doi/10.1126/science.abm0620
+[^106]: https://sciencetaskforce.ch/en/overview-and-evolution-of-the-situation-2-november-2021/
+[^107]: https://www.medrxiv.org/content/10.1101/2021.09.28.21264260v2
+[^108]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114228
+[^109]: https://sciencetaskforce.ch/en/scientific-update-of-26-october-2021/
+[^110]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114228
+[^111]: https://www.medrxiv.org/content/10.1101/2021.09.29.21264089v1.full
+[^112]: https://www.medrxiv.org/content/10.1101/2021.10.10.21264827v2.full.pdf
+[^113]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114255
+[^114]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02249-2/fulltext
+[^115]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02249-2/fulltext
+[^116]: https://www.medrxiv.org/content/10.1101/2021.09.29.21264089v1.full
+[^117]: https://www.medrxiv.org/content/10.1101/2021.10.10.21264827v2
+[^118]: https://g-f-v.org/2021/09/30/4411/
+[^119]: https://sciencetaskforce.ch/en/scientific-update-of-21-september-2021/
