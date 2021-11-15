@@ -338,7 +338,7 @@ Schweiz im Oktober für über 80-Jährige beobachtet 9 ).
 auf leichte Abnahme 10 .
 ---->
 
-#### Infektion (symptomatisch und asymptomatisch):
+#### Infektion (symptomatisch und asymptomatisch)
 Die Wirksamkeit der Impfung auf Infektionen einschliesslich asymptomatischer ist schwierig, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
 Es gibt übereinstimmende Hinweise auf eine geringere Wirksamkeit von mRNA-Impfstoffen gegen SARS-CoV-2-Delta-Infektionen, einschliesslich asymptomatischer Infektionen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
@@ -346,7 +346,7 @@ und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
 In einem Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterschieden).
 Zusammenfassend lässt sich sagen, dass mRNA-Impfstoffe das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbieren. 
 
-#### Symptomatische Infektion:
+#### Symptomatische Infektion
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist, verglichen mit Alpha, reduziert.
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
 Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
@@ -360,7 +360,7 @@ Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfize
 gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf Null nach 210 Tagen.
 Für den Impfstoff von Moderna reduzierte sich der Schutz von 96% (95% UI:94-97%) zwei bis vier Wochen nach der Impfungauf 59% (95% UI: 18-79%) nach 180 Tagen.
 
-#### Schwere Erkrankung / Hospitalisierung: 
+#### Schwere Erkrankung / Hospitalisierung
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
 Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
 Gemäss einem neuen Preprint[^54] basierend auf Daten aus Kalifornien schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hospitalisation nach einer Infektion mit der Delta-Variante. 
@@ -369,7 +369,7 @@ Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
 Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
 
-#### Transmission:
+#### Transmission
 Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mechanismen: 
 erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
