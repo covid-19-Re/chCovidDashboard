@@ -390,7 +390,7 @@ Zwei Preprints[^111], [^112] beschreiben, dass eine dritte Impfdosis das Level n
 Der Schutz vor der Infektion erhöht sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113]. 
 Dies reduziert gleichzeitig die Viruslast [^102] und damit wahrscheinlich auch die Weitergabe der Infektion nach der dritten Impfdosis.
 
-Zusammengefasst steigt der Schutz gegen Infektion von rund 2 Mal auf über 20 Mal durch eine dritte Impfung, im Vergleich zu Ungeimpften in allen Altersgruppen.
+Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf über 20-fach durch eine dritte Impfung, im Vergleich zu Ungeimpften in allen Altersgruppen.
 
 #### Schutz vor Hospitalisierung
 Der Schutz vor der Hospitalisierung durch eine dritte Impfdosis wurde für Personen über 40 Jahre auf 93% geschätzt verglichen mit einer Kontrollgruppe die vor länger als 5 Monaten ihre zweite Impfdosis erhalten hatten [^114]
@@ -403,7 +403,10 @@ In der Pandemie war das oberste Ziel durch Impfung einen raschen Schutz für die
 
 Wenn das Hauptziel der Impfkampagne die Reduzierung des individuellen Risikos einer Hospitalisierung ist, sind dritte Impfdosen in der älteren Bevölkerung momentan basierend auf den internationalen Daten wie auch den Schweizer Daten angezeigt (siehe auch Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
 
-Wenn die Reduzierung von Infektionen angestrebt wird, ist, basierend auf den Daten eine dritte Impfung (6 Monate nach der zweiten Impfdosis) in allen Altersklassen angezeigt (siehe auch Conclusions in Policy Brief vom 25.6.2021 [^59]). Diese dritten Impfungdosen wären ein effektives Werkzeug die Zahl der Infektionen diesen Winter zu reduzieren (der Schutz vor Infektion steigt nach dritter Dosis von 2-fach auf 20-fach gegenüber Ungeimpften, siehe oben). Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck auf das Gesundheitssystem zu reduzieren. Gleichzeitig können Menschen, welche sich nicht selbst durch Impfung schützen können (zum Beispiel Kinder unter 12 Jahren), durch die dritte Impfung von Eltern oder Bezugspersonen geschützt werden - diese Bezugspersonen haben nach dritter Impfung einen 20-fachen Schutz vor Infektion und verringern daher das Risiko Überträger zu sein. Die Vermeidung von Infektionen kann weiter die Prävalenz von Long-Covid verringern. 
+Wenn die Reduzierung von Infektionen angestrebt wird, ist, basierend auf den Daten eine dritte Impfung (6 Monate nach der zweiten Impfdosis) in allen Altersklassen angezeigt (siehe auch Conclusions in Policy Brief vom 25.6.2021 [^59]). Diese dritten Impfungdosen wären ein effektives Werkzeug die Zahl der Infektionen diesen Winter zu reduzieren (der Schutz vor Infektion steigt nach dritter Dosis von 2-fach auf 20-fach gegenüber Ungeimpften, siehe oben).
+In einem Positionspapier[^60], das letzte Woche publiziert wurde, vertreten deutsche Wissenschaftler - unterstützt von Simulationen - die Ansicht, dass eine Booster-Kampagne bei einer Impfgeschwindigkeit von 7% pro Woche
+bereits nach einem Monat erste Wirkung auf die Ausbreitung der Infektionen zeigen könnte.
+Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck auf das Gesundheitssystem zu reduzieren. Gleichzeitig können Menschen, welche sich nicht selbst durch Impfung schützen können (zum Beispiel Kinder unter 12 Jahren), durch die dritte Impfung von Eltern oder Bezugspersonen geschützt werden - diese Bezugspersonen haben nach dritter Impfung einen 20-fachen Schutz vor Infektion und verringern daher das Risiko Überträger zu sein. Die Vermeidung von Infektionen kann weiter die Prävalenz von Long-Covid verringern. 
 
 
 
@@ -469,6 +472,7 @@ Wenn die Reduzierung von Infektionen angestrebt wird, ist, basierend auf den Dat
 [^57]: https://sciencetaskforce.ch/en/scientific-update-of-26-october-2021/
 [^58]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3949410
 [^59]: https://sciencetaskforce.ch/wp-content/uploads/2021/06/Protection_Duration16Jun2021_EN.pdf
+[^60]: https://arxiv.org/abs/2111.08000
 
 [^101]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114228
 [^102]: https://www.nature.com/articles/s41591-021-01575-4
