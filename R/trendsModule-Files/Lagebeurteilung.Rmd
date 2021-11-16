@@ -315,7 +315,7 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 ### Impfschutz durch zwei Impfdosen über die Zeit
 
 Die Impfung hat mehrere Wirkungen: sie schützt vor der Infektion, davor, dass man die Infektion weitergibt (Transmission), und vor schweren Verläufen und dem Tod. Es ist wichtig diese verschiedenen Wirkungen auseinander zu halten, weil sie verschieden schnell über die Zeit und Altersgruppen abnehmen.
-Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoffe verringern. Welches dieser beiden Ziele man in der Vordergrung stellt, entscheidet über die Impfstrategie, also welche Altersgruppen man wann impft, und ob and wann man eine 3. Dosis einsetzt.
+Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoffe verringern. Welches dieser beiden Ziele man in den Vordergrund stellt, entscheidet über die Impfstrategie, also welche Altersgruppen man wann impft, und ob und wann man eine dritte Dosis einsetzt.
 
 Im folgenden stellen wir kurz dar, was man über diese Impfwirkungen und ihre zeitliche Abnahme weiss:
 
@@ -339,7 +339,7 @@ auf leichte Abnahme 10 .
 ---->
 
 #### Schutz durch zwei Impfdosen vor Infektion (symptomatisch und asymptomatisch)
-Die Wirksamkeit der Impfung auf Infektionen einschliesslich asymptomatischer ist schwierig, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
+Die Wirksamkeit der Impfung auf Infektionen einschliesslich asymptomatischer ist schwierig abzuschätzen, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
 Es gibt übereinstimmende Hinweise auf eine geringere Wirksamkeit von mRNA-Impfstoffen gegen SARS-CoV-2-Delta-Infektionen, einschliesslich asymptomatischer Infektionen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
 und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
@@ -388,7 +388,7 @@ Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
 #### Schutz der dritten Impfdosis vor Infektion
 Zwei Preprints[^111], [^112] beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöhen (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
 Der Schutz vor der Infektion erhöht sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113]. 
-Dies reduziert gleichzeitig die Viruslast [^102] und damit wahrscheinlich auch die Weitergabe der Infektion nach der dritten Impfdosis.
+Gleichzeitig ist im Falle einer Infektion die Viruslast reduziert[^102] und dadurch wahrscheinlich auch die Weitergabe der Infektion nach einer dritten Impfdosis.
 
 Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf über 20-fach durch eine dritte Impfung, im Vergleich zu Ungeimpften in allen Altersgruppen.
 
