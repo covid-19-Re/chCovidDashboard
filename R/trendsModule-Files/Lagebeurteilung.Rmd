@@ -212,14 +212,14 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging seit Anfang September 2021 wieder zurück. Seit Mitte Oktober 2021 steigen die Fallzahlen wieder signifikant.
+Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging Anfang September 2021 wieder zurück. Seit Mitte Oktober 2021 steigen die Fallzahlen wieder signifikant.
 Dieser Anstieg ist seit letzter Woche in jeder einzelnen Grossregion signifikant.
 Seit dieser Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant mit 14% pro Woche (95% UI: 3-21%)..
 <!------ UPDATE  -------->
 
 Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
 Nachdem der Anstieg der Epidemie in der Schweiz diesen Herbst später begann als im Herbst 2020 und auch später als in anderen mitteleuropäischen Ländern, erwarten wir Ende November noch keine Überschreitung der Maximal-Last. Solch ein Szenario ist aber über den Winter nicht auszuschliessen.
-Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen.
+Eine rasche Zunahme der Fälle und damit auch Hospitalisationen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -227,7 +227,7 @@ Eine rasche Zunahme der Zahlen wäre für das immer noch stark belastete Gesundh
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Anfang September 2021 nahm die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit Ende Oktober 2021 aber ist die Schätzung des R-Wertes wieder signifikant über 1.
+Von Anfang September bis Ende Oktober 2021 nahm die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit Ende Oktober 2021 aber ist die Schätzung des R-Wertes wieder signifikant über 1.
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -317,7 +317,7 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 Die Impfung hat mehrere Wirkungen: sie schützt vor der Infektion, davor, dass man die Infektion weitergibt (Transmission), und vor schweren Verläufen und dem Tod. Es ist wichtig diese verschiedenen Wirkungen auseinander zu halten, weil sie verschieden schnell über die Zeit und Altersgruppen abnehmen.
 Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoffe verringern. Welches dieser beiden Ziele man in den Vordergrund stellt, entscheidet über die Impfstrategie, also welche Altersgruppen man wann impft, und ob und wann man eine dritte Dosis einsetzt.
 
-Im folgenden stellen wir kurz dar, was man über diese Impfwirkungen und ihre zeitliche Abnahme weiss:
+Im Folgenden stellen wir kurz dar, was man über diese Impfwirkungen und ihre zeitliche Abnahme weiss:
 
 <!---
 #### Schutz durch zwei Impfdosen vor Infektion
@@ -339,7 +339,7 @@ auf leichte Abnahme 10 .
 ---->
 
 #### Schutz durch zwei Impfdosen vor Infektion (symptomatisch und asymptomatisch)
-Die Wirksamkeit der Impfung auf Infektionen einschliesslich asymptomatischer ist schwierig abzuschätzen, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
+Die Wirksamkeit der Impfung auf Infektionen, einschliesslich asymptomatischer Infektionen, ist schwierig abzuschätzen, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
 Es gibt übereinstimmende Hinweise auf eine geringere Wirksamkeit von mRNA-Impfstoffen gegen SARS-CoV-2-Delta-Infektionen, einschliesslich asymptomatischer Infektionen.
 Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
 und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
@@ -348,7 +348,7 @@ In einem Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von
 
 #### Schutz durch zwei Impfdosen vor symptomatische Infektion
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist, verglichen mit den 2020 vorherrschenden Virusvarianten und Alpha, reduziert.
-In den Zulassungsstudien für Pfizer/BioNtech wurde die die Wirksamkeit gegen die 2020 vorherrschenden Virusvarianten auf 95% (95% UI: 90-98%) geschätzt[^201] und für Moderna auf 94% (95% UI, 89-97%)[^202].
+In den Zulassungsstudien wurde die die Wirksamkeit gegen die 2020 vorherrschenden Virusvarianten für Pfizer/BioNtech auf 95% (95% UI: 90-98%) geschätzt[^201] und für Moderna auf 94% (95% UI, 89-97%)[^202].
 Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
 Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
 Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Moderna gegen Infektionen mit Delta auf 87% (95% UI: 84-89%), gegen Infektion mit Alpha auf 98% (95% UI: 97-99%).
@@ -358,20 +358,20 @@ Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Mo
 Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
 Studien aus Israel[^39] schätzen eine Wirksamkeit für BioNTec/Pfizer von nur 40% (95% UI: 9-61%) 6 Monate nach der zweiten Impfdosis.
 Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfizer einen Abfall des Schutzes
-gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf Null nach 210 Tagen.
+gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf 0% nach 210 Tagen.
 Für den Impfstoff von Moderna reduzierte sich der Schutz von 96% (95% UI:94-97%) zwei bis vier Wochen nach der Impfungauf 59% (95% UI: 18-79%) nach 180 Tagen. Die Schätzungen in dieser Studie beziehen sich vor allem auf die Delta-Variante.
 Zusammenfassend bedeutet dies: 6 Monate nach doppelter Impfung mit einem mRNA-Impfstoffe ist das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbiert im Vergleich zu nicht geimpten Menschen.
 
 #### Schutz durch zwei Impfdosen vor schwerer Erkrankung / Hospitalisierung
 Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
-Diese Schätzungen beziehen sich auf den Schutz den Geimpfte gegenüber Ungeimpften haben und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
+Diese Schätzungen beziehen sich auf den Schutz, den Geimpfte gegenüber Ungeimpften haben, und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
 Gemäss einem Preprint[^54] basierend auf Daten aus Kalifornien schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hospitalisation nach einer Infektion mit der Delta-Variante. 
 Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
 Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
 
-Dies bedeutet dass junge doppelt geimpfte Menschen nach wie vor rund 20 Mal besser vor einer Hospitalisierung geschuetzt sind als nicht geimpfte Menschen (entspricht Schutz 95%). Bei aelteren doppelt geimpfte Menschen hat der Schutz abgenommen, sind noch rund 5 Mal besser geschützt (entspricht Schutz 80%).
+Dies bedeutet dass junge doppelt geimpfte Menschen nach wie vor rund 20 Mal besser vor einer Hospitalisierung geschützt sind als nicht geimpfte Menschen (entspricht Schutz 95%). Bei älteren doppelt geimpften Menschen hat der Schutz abgenommen, sind noch rund 5 Mal besser geschützt (entspricht Schutz 80%).
 
 
 #### Schutz durch zwei Impfdosen vor Transmission
@@ -379,14 +379,14 @@ Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mec
 erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
 Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
-Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 66% geringer ist als bei Ungeimpften (bedeutet ungeimpfte Infizierte übertragen 3x so viel im Vergleich zu geimpften Infizierten).
-Die genauen Gründe für diesen Schutz sind nicht bekannt, obwohl er durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Menge infektiöser Partikel des abgegebenen Virus bei geimpften Personen[^48] erklärt werden könnte.
+Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 66% geringer ist als bei Ungeimpften (das bedeutet, dass ungeimpfte Infizierte 3 Mal so viel übertragen wie geimpfte Infizierte).
+Die genauen Gründe für diesen Schutz sind nicht bekannt; er könnte zum Beispiel durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Menge infektiöser Partikel des abgegebenen Virus bei geimpften Personen[^48] erklärt werden.
 Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
 
 ### Wirkung der dritten Impfdosis 
 
 #### Schutz der dritten Impfdosis vor Infektion
-Zwei Preprints[^111], [^112] beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöhen (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
+Zwei Preprints[^111], [^112] beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöht (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
 Der Schutz vor der Infektion erhöht sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113]. 
 Gleichzeitig ist im Falle einer Infektion die Viruslast reduziert[^102] und dadurch wahrscheinlich auch die Weitergabe der Infektion nach einer dritten Impfdosis.
 
@@ -395,18 +395,19 @@ Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf über 20-f
 #### Schutz vor Hospitalisierung
 Der Schutz vor der Hospitalisierung durch eine dritte Impfdosis wurde für Personen über 40 Jahre auf 93% geschätzt verglichen mit einer Kontrollgruppe die vor länger als 5 Monaten ihre zweite Impfdosis erhalten hatten [^114]
 und in über 60-Jährigen auf 95% [^113].
-Insbesondere wird der Schutz in den über 80 Jährigen von 80% auf 95% erhöht[^113]. Für die Schweiz bedeutet dies dass eine dritte Impfdosis in dieser Alterskategorie ganz grob 10'000 Hospitalisierungen verhindern kann (Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
+Insbesondere wird der Schutz in den über 80 Jährigen von 80% auf 95% erhöht[^113]. Für die Schweiz bedeutet dies dass eine dritte Impfdosis in dieser Alterskategorie ganz grob bis zu 10'000 Hospitalisierungen verhindern kann (Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
 
 ### Ziele einer Impfkampagne
 
-In der Pandemie war das oberste Ziel durch Impfung einen raschen Schutz für die Menschen gegen schwere Verläufe zu erzielen. Daher wurden zwei Impfdosen mit sehr kurzem Abstand (meist 3-4 Wochen) verabreicht. Bei anderen nicht-replikationsfähigen Impfstoffen gilt die Grundimmunisierung erst mit einer zusätzlichen Dosis nach 6-12 Monaten als abgeschlossen (z.B. Hepatitis A und B, FSME, Haemophilus influenzae type B, Poliovirus, Diphterie, Tetanus oder Pertussis). Eine dritte Impfdosis ist deshalb nicht aussergewöhnlich und könnte zu einem dauerhafteren Schutz führen, sodass möglicherweise in der breiten Bevölkerung jährliche Auffrischungs-Impfungen nicht notwendig wären. Langfristig könnten, nach einem Impfschema mit drei Dosen, milde natürliche Infektionen möglicherweise einen breiten Schutz auch gegen neue Varianten erzeugen und den Übergang zur Endemizität von SARS-CoV-2 erleichtern.
+Das primäre Ziel der Schweizer Impfkampagne war, einen raschen Schutz für die Menschen gegen schwere Verläufe zu erzielen. Daher wurden zwei Impfdosen mit sehr kurzem Abstand (meist 3-4 Wochen) verabreicht. Bei anderen nicht-replikationsfähigen Impfstoffen gilt die Grundimmunisierung erst mit einer dritten Dosis nach 6-12 Monaten als abgeschlossen (z.B. Hepatitis A und B, FSME, Haemophilus influenzae type B, Poliovirus, Diphterie, Tetanus oder Pertussis). Eine dritte Impfdosis ist deshalb nicht aussergewöhnlich und könnte zu einem dauerhafteren Schutz in allen Altergruppen führen, sodass möglicherweise in der breiten Bevölkerung jährliche Auffrischungs-Impfungen nicht notwendig wären. Langfristig könnten, nach einem Impfschema mit drei Dosen, milde natürliche Infektionen möglicherweise einen breiten Schutz auch gegen neue Varianten erzeugen und den Übergang zur Endemizität von SARS-CoV-2 erleichtern.
 
 Wenn das Hauptziel der Impfkampagne die Reduzierung des individuellen Risikos einer Hospitalisierung ist, sind dritte Impfdosen in der älteren Bevölkerung momentan basierend auf den internationalen Daten wie auch den Schweizer Daten angezeigt (siehe auch Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
 
-Wenn die Reduzierung von Infektionen angestrebt wird, ist, basierend auf den Daten eine dritte Impfung (6 Monate nach der zweiten Impfdosis) in allen Altersklassen angezeigt (siehe auch Conclusions in Policy Brief vom 25.6.2021 [^59]). Diese dritten Impfungdosen wären ein effektives Werkzeug die Zahl der Infektionen diesen Winter zu reduzieren (der Schutz vor Infektion steigt nach dritter Dosis von 2-fach auf 20-fach gegenüber Ungeimpften, siehe oben).
+Wenn die Reduzierung von Infektionen angestrebt wird, ist, basierend auf den Daten eine dritte Impfung (6 Monate nach der zweiten Impfdosis) in allen Altersklassen angezeigt (siehe auch Conclusions in Policy Brief vom 25.6.2021 [^59]). Diese dritten Impfungdosen wären ein effektives Werkzeug, die Zahl der Infektionen diesen Winter zu reduzieren. 
+(Der Schutz vor Infektion steigt nach dritter Dosis von 2-fach auf 20-fach gegenüber Ungeimpften, siehe oben).
 In einem Positionspapier[^60], das letzte Woche publiziert wurde, vertreten deutsche Wissenschaftler - unterstützt von Simulationen - die Ansicht, dass eine Booster-Kampagne bei einer Impfgeschwindigkeit von 7% pro Woche
 bereits nach einem Monat erste Wirkung auf die Ausbreitung der Infektionen zeigen könnte.
-Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck auf das Gesundheitssystem zu reduzieren. Gleichzeitig können Menschen, welche sich nicht selbst durch Impfung schützen können (zum Beispiel Kinder unter 12 Jahren), durch die dritte Impfung von Eltern oder Bezugspersonen geschützt werden - diese Bezugspersonen haben nach dritter Impfung einen 20-fachen Schutz vor Infektion und verringern daher das Risiko Überträger zu sein. Die Vermeidung von Infektionen kann weiter die Prävalenz von Long-Covid verringern. 
+Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck auf das Gesundheitssystem zu reduzieren. Gleichzeitig können Menschen, welche sich nicht selbst durch Impfung schützen können (zum Beispiel Kinder unter 12 Jahren), durch die dritte Impfung von Eltern oder Bezugspersonen geschützt werden - diese Bezugspersonen haben nach dritter Impfung einen 20-fachen Schutz vor Infektion und verringern daher das Risiko, Überträger zu sein. Die Vermeidung von Infektionen kann weiter die Prävalenz von gesundheitlichen Spät- oder Langzeitfolgen von COVID-19 (Long-Covid) verringern. 
 
 
 
