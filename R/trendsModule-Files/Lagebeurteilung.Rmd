@@ -213,13 +213,14 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging Anfang September 2021 wieder zurück. Seit Mitte Oktober 2021 steigen die Fallzahlen wieder signifikant.
-Dieser Anstieg ist seit letzter Woche in jeder einzelnen Grossregion signifikant.
-Seit dieser Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant mit 14% pro Woche (95% UI: 3-21%)..
+Dieser Anstieg ist seit vorletzter Woche in jeder einzelnen Grossregion signifikant.
+Seit letzter Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, mittlerweile mit einer Rate von 20% (95% UI: 12-28%) pro Woche.
+Seit dieser Woche steigen auch die Hospitalisierungen mit 40% pro Woche (95% UI: 23-61%) signifikant an.
 <!------ UPDATE  -------->
 
 Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
 Nachdem der Anstieg der Epidemie in der Schweiz diesen Herbst später begann als im Herbst 2020 und auch später als in anderen mitteleuropäischen Ländern, erwarten wir Ende November noch keine Überschreitung der Maximal-Last. Solch ein Szenario ist aber über den Winter nicht auszuschliessen.
-Eine rasche Zunahme der Fälle und damit auch Hospitalisationen wäre für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen.
+Die beobachtbare rasche Zunahme der Fälle und Hospitalisationen wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -260,8 +261,9 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
-In den Altersgruppen der 0-9 und 10-19 Jährigen ist dieser Anstieg mit 65% und 43% pro Woche am höchsten, in den über 80 Jährigen mit 29% pro Woche am niedrigsten.
-Hospitalisierungen stiegen oder fielen in keiner Altersgruppe über die letzten 14 erfassten Tage signifikant ausser in der Altersgruppe der über 80 Jährigen, in denen sie um 34% (95% UI: 1-78%) stiegen.
+In den Altersgruppen der 0-9 Jährigen ist dieser Anstieg mit 56% pro Woche am höchsten, in den über 80 Jährigen mit 22% pro Woche am niedrigsten.
+Hospitalisierungen stiegen über die letzten 14 erfassten Tage signifikant in den Altersgruppen der 30-39, 60-69 und über 80 Jährigen.
+Die täglichen Hopsitalisierungen sind in jeder Altersklasse noch vorwiegend einstellig, was die Schätzung ihrer ihrer zeitlichen Trends erschwert.
 <!------ UPDATE -------->
 
 
@@ -305,7 +307,7 @@ konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) 
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt und hatte in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 60 Mal gefunden und die Häufigkeit war in Kalenderwoche 43 0.6%[^25].
+Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt und hatte in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25].
 <!--- UPDATE cov-spectrum.ethz.ch ---->
 
 Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patient:innen mit Delta im Vergleich zu Patient:innen mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
@@ -319,45 +321,26 @@ Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoff
 
 Im Folgenden stellen wir kurz dar, was man über diese Impfwirkungen und ihre zeitliche Abnahme weiss:
 
-<!---
-#### Schutz durch zwei Impfdosen vor Infektion
-Der Schutz vor der symptomatischen Infektion ist anfänglich mit den in der Schweiz verwendeten mRNA Impfstoffen bei über 90%. Das gilt sowohl für die ursprüngliche Variante als auch für Delta.
-Innerhalb weniger Monate nimmt der Schutz vor der Infektion aber über alle Altersklassen hinweg ab
-(zum Beispiel für BioNTech[^101][^102] und für Moderna und BioNTech zusammen [^103][^104][^105])
-Eine Übersicht in [^106].
-Nach 6 Monaten ist der Schutz nur noch bei rund 50% gegenüber >90% direkt nach doppelter Impfung.
-
-#### Schutz durch zwei Impfdosen vor Transmission
-Innerhalb von 14 Wochen ist eine Abnahme des Schutzes als infizierter Geimpfter die Infektion
-weiterzugeben von 50% auf 20% für Pfizer/BioNTech beobachtet worden 7 (im Vergleich zu infizierter
-Ungeimpfter)
-Schutz vor Hospitalisierung
-○ Abnahme in älteren Personen nach 4-6 Monaten von >90% auf 80% für BioNTech 8 (auch in der
-Schweiz im Oktober für über 80-Jährige beobachtet 9 ).
-○ In breiter Bevölkerung ist Schutz bislang weiter sehr gut jedoch deuten Daten aus Israel ab 40-Jährigen
-auf leichte Abnahme 10 .
----->
-
 #### Schutz durch zwei Impfdosen vor Infektion (symptomatisch und asymptomatisch)
 Die Wirksamkeit der Impfung auf Infektionen, einschliesslich asymptomatischer Infektionen, ist schwierig abzuschätzen, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
 Es gibt übereinstimmende Hinweise auf eine geringere Wirksamkeit von mRNA-Impfstoffen gegen SARS-CoV-2-Delta-Infektionen, einschliesslich asymptomatischer Infektionen.
-Die Wirksamkeit gegen Infektion des Impfstoffs von Pfizer/BioNtech ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
+Die Wirksamkeit gegen Infektion des Impfstoffs von BioNTech/Pfizer ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
 und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
 In einem Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterschieden).
 <!--- Zusammenfassend lässt sich sagen, dass mRNA-Impfstoffe das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbieren. ---->
 
 #### Schutz durch zwei Impfdosen vor symptomatische Infektion
 Der Impfschutz gegen symptomatische Infektionen mit Delta ist, verglichen mit den 2020 vorherrschenden Virusvarianten und Alpha, reduziert.
-In den Zulassungsstudien wurde die die Wirksamkeit gegen die 2020 vorherrschenden Virusvarianten für Pfizer/BioNtech auf 95% (95% UI: 90-98%) geschätzt[^201] und für Moderna auf 94% (95% UI, 89-97%)[^202].
-Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; Pfizer/BioNtech).
-Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (Pfizer/BioNtech und Moderna).
+In den Zulassungsstudien wurde die die Wirksamkeit gegen die 2020 vorherrschenden Virusvarianten für BioNTech/Pfizer auf 95% (95% UI: 90-98%) geschätzt[^201] und für Moderna auf 94% (95% UI, 89-97%)[^202].
+Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; BioNTech/Pfizer).
+Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (BioNTech/Pfizer und Moderna).
 Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Moderna gegen Infektionen mit Delta auf 87% (95% UI: 84-89%), gegen Infektion mit Alpha auf 98% (95% UI: 97-99%).
 <!---
 [^54]: "Our study also had several limitations. Although test-negative designs might reduce bias due to factors associated with care-seeking,40 this design was generalizable to individuals who were tested and was therefore less generalizable to individuals with mild or no symptoms who did not seek testing. "
 ---->
 Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
-Studien aus Israel[^39] schätzen eine Wirksamkeit für BioNTec/Pfizer von nur 40% (95% UI: 9-61%) 6 Monate nach der zweiten Impfdosis.
-Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTec/Pfizer einen Abfall des Schutzes
+Studien aus Israel schätzen eine Wirksamkeit für BioNTech/Pfizer von nur 40% (95% UI: 9-61%) sechs Monate nach der zweiten Impfdosis[^39] und eine mehr als doppelt so hohe Wahrscheinlichkeit von Durchbruchsinfektionen nach drei Monaten[^121].
+Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTech/Pfizer einen Abfall des Schutzes
 gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf 0% nach 210 Tagen.
 Für den Impfstoff von Moderna reduzierte sich der Schutz von 96% (95% UI:94-97%) zwei bis vier Wochen nach der Impfungauf 59% (95% UI: 18-79%) nach 180 Tagen. Die Schätzungen in dieser Studie beziehen sich vor allem auf die Delta-Variante.
 Zusammenfassend bedeutet dies: 6 Monate nach doppelter Impfung mit einem mRNA-Impfstoffe ist das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbiert im Vergleich zu nicht geimpten Menschen.
@@ -379,18 +362,21 @@ Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mec
 erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
 Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
-Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von Pfizer/BioNtech um etwa 66% geringer ist als bei Ungeimpften (das bedeutet, dass ungeimpfte Infizierte 3 Mal so viel übertragen wie geimpfte Infizierte).
+Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von BioNTech/Pfizer um etwa 66% geringer ist als bei Ungeimpften (das bedeutet, dass ungeimpfte Infizierte 3 Mal so viel übertragen wie geimpfte Infizierte).
 Die genauen Gründe für diesen Schutz sind nicht bekannt; er könnte zum Beispiel durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Menge infektiöser Partikel des abgegebenen Virus bei geimpften Personen[^48] erklärt werden.
 Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
+
 
 ### Wirkung der dritten Impfdosis 
 
 #### Schutz der dritten Impfdosis vor Infektion
-Zwei Preprints[^111], [^112] beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöht (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
-Der Schutz vor der Infektion erhöht sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113]. 
+Eine Reihe von Studien zeigen, dass eine dritte Impfdosis den Schutz vor Infektion verbessert.
+Studien aus Israel beobachten, dass der Schutz vor der Infektion sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113] erhöht.
+Gemäss einem neuen Preprint aus England erhöht eine dritte Dosis des Impfstoffs von BioNTech/Pfizer den Schutz vor der symptomatischen Infektion in über 50-Jährigen auf 94% (95% UI:93-95%)[^120].
+Die Verbesserung ist konsistent mit zwei Preprints[^111], [^112], die beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöht (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
 Gleichzeitig ist im Falle einer Infektion die Viruslast reduziert[^102] und dadurch wahrscheinlich auch die Weitergabe der Infektion nach einer dritten Impfdosis.
 
-Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf über 20-fach durch eine dritte Impfung, im Vergleich zu Ungeimpften in allen Altersgruppen.
+Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf 20-fach durch eine dritte Impfung, im Vergleich zu Ungeimpften in allen Altersgruppen.
 
 #### Schutz vor Hospitalisierung
 Der Schutz vor der Hospitalisierung durch eine dritte Impfdosis wurde für Personen über 40 Jahre auf 93% geschätzt verglichen mit einer Kontrollgruppe die vor länger als 5 Monaten ihre zweite Impfdosis erhalten hatten [^114]
@@ -494,6 +480,8 @@ Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck 
 [^117]: https://www.medrxiv.org/content/10.1101/2021.10.10.21264827v2
 [^118]: https://g-f-v.org/2021/09/30/4411/
 [^119]: https://sciencetaskforce.ch/en/scientific-update-of-21-september-2021/
+[^120]: https://www.medrxiv.org/content/10.1101/2021.11.15.21266341v1.full.pdf
+[^121]: https://www.nature.com/articles/s41467-021-26672-3.pdf
 
 [^201]: https://www.nejm.org/doi/10.1056/NEJMoa2034577
 [^202]: https://www.nejm.org/doi/10.1056/NEJMoa2035389
