@@ -279,13 +279,14 @@ Tendenz `r positivityTrend`;  CHECK
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
 
-Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei rund 20. Hospitalisiert werden momentan überwiegend Menschen, die sich in der Schweiz angesteckt hatten[^57]. Der Anteil der doppelt geimpften Menschen unter den hospitalisierten Menschen hat bei den über 80–Jährigen in den letzten Wochen stark zugenommen[^57].
+Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei über 50.
+Hospitalisiert werden momentan überwiegend Menschen, die sich in der Schweiz angesteckt hatten[^57].
 
 Die Anzahl der COVID-19-Patient:innen auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
-Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
+Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 Tage zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
 <!--- 
 Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
 Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
