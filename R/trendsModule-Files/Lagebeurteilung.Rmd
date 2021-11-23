@@ -219,7 +219,7 @@ Seit dieser Woche steigen auch die Hospitalisierungen mit 40% pro Woche (95% UI:
 <!------ UPDATE  -------->
 
 Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
-Nachdem der Anstieg der Epidemie in der Schweiz diesen Herbst später begann als im Herbst 2020 und auch später als in anderen mitteleuropäischen Ländern, erwarten wir Ende November noch keine Überschreitung der Maximal-Last. Solch ein Szenario ist aber über den Winter nicht auszuschliessen.
+Nachdem der Anstieg der Epidemie in der Schweiz diesen Herbst später begann als im Herbst 2020 und auch später als in anderen mitteleuropäischen Ländern, erwarten wir Ende November noch keine Überschreitung der bisherigen Maximal-Last. Solch ein Szenario ist aber über den Winter nicht auszuschliessen.
 Die beobachtbare rasche Zunahme der Fälle und Hospitalisationen wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
@@ -259,7 +259,7 @@ die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
-Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
+Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
 In den Altersgruppen der 0-9 Jährigen ist dieser Anstieg mit 56% pro Woche am höchsten, in den über 80 Jährigen mit 22% pro Woche am niedrigsten.
 Hospitalisierungen stiegen über die letzten 14 erfassten Tage signifikant in den Altersgruppen der 30-39, 60-69 und über 80 Jährigen.
@@ -308,7 +308,7 @@ konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) 
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt und hatte in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25].
+Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25].
 <!--- UPDATE cov-spectrum.ethz.ch ---->
 
 Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patient:innen mit Delta im Vergleich zu Patient:innen mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
@@ -363,7 +363,7 @@ Die Impfung verhindert die Weiterverbreitung des Virus durch mindestens zwei Mec
 erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
 und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
 Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
-Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von BioNTech/Pfizer um etwa 66% geringer ist als bei Ungeimpften (das bedeutet, dass ungeimpfte Infizierte 3 Mal so viel übertragen wie geimpfte Infizierte).
+Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von BioNTech/Pfizer um etwa 66% geringer ist als bei Ungeimpften (das bedeutet, dass ungeimpfte Infizierte 3 Mal soviel übertragen wie geimpfte Infizierte).
 Die genauen Gründe für diesen Schutz sind nicht bekannt; er könnte zum Beispiel durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Menge infektiöser Partikel des abgegebenen Virus bei geimpften Personen[^48] erklärt werden.
 Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
 
@@ -373,7 +373,7 @@ Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
 #### Schutz der dritten Impfdosis vor Infektion
 Eine Reihe von Studien zeigen, dass eine dritte Impfdosis den Schutz vor Infektion verbessert.
 Studien aus Israel beobachten, dass der Schutz vor der Infektion sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113] erhöht.
-Gemäss einem neuen Preprint aus England erhöht eine dritte Dosis des Impfstoffs von BioNTech/Pfizer den Schutz vor der symptomatischen Infektion in über 50-Jährigen auf 94% (95% UI:93-95%)[^120].
+Gemäss einem neuen Preprint aus England erhöht eine dritte Dosis des Impfstoffs von BioNTech/Pfizer den Schutz vor symptomatischen Infektion in über 50-Jährigen auf 94% (95% UI:93-95%)[^120].
 Die Verbesserung ist konsistent mit zwei Preprints[^111], [^112], die beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöht (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
 Gleichzeitig ist im Falle einer Infektion die Viruslast reduziert[^102] und dadurch wahrscheinlich auch die Weitergabe der Infektion nach einer dritten Impfdosis.
 
