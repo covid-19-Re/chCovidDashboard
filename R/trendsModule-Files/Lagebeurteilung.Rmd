@@ -320,11 +320,22 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 
 #### Omikron
 
-Am 26. November 2021 stufte die Weltgesundheitsorganisation die Variante Omikron (B.1.1.529) als besorgniserregend ein.
-Diese Variante wurde in Südafrika entdeckt und ist schon in vielen Ländern nachgewiesen worden.
+Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Spike Protein auszeichnet. 
+Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
+Mittlerweile wurde die Variante in verschiedenen Europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
+In der Schweiz ist die Variante bis heute noch nicht eindeutig nachgewiesen.
 
+In Südafrika hat sich Omikron seit Anfang November schnell ausgebreitet.
+<!--- und scheint sich effizient zu übertragen, obwohl vermutlich ein Grossteil der Bevölkerung geimpft oder genesen ist, was möglicherweise auf eine erhebliche Immunevasion zurückzuführen ist. ---->
+Es besteht die Sorge, dass Omikron gegenüber Delta einen Übertragungsvorteil hat und dass die Impfung oder die Immunität nach der Infektion schlechter gegen Omikron schützt (iimunflucht). 
+Konkrete quantitative Informationen zur Übertragungsrate von Omikron, dem Ausmass der Immunflucht, oder der Schwere von Erkrankungen liegen aber noch nicht vor.
 
-<!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
+Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht aus einer anderen besorgnis-erregenden Variante entstanden.
+Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten.
+Diese Mutationen haben wichtige Teile des Spike Proteins deutlich verändert.
+Einer detaillierte Beurteilung dieser Veränderungen müssen aber Laboruntersuchungen und epidemiologische Analysen vorangehen.
+Weltweit arbeiten Labors an der Frage, ob eine Immunflucht vor Antikörper besteht. Dies wird aufgrund der Sequenz erwartet, kann aber noch nicht quantifiziert werden. Zudem wird die epidemiologische Lage von den Experten vor Ort in Südafrika genau verfolgt und es werden zeitnah erste Informationen bezüglich Durchbruchsinfektionen erwartet.
+
 
 ### Impfschutz durch zwei Impfdosen über die Zeit
 
@@ -497,3 +508,7 @@ Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck 
 
 [^201]: https://www.nejm.org/doi/10.1056/NEJMoa2034577
 [^202]: https://www.nejm.org/doi/10.1056/NEJMoa2035389
+
+[^301]: https://www.who.int/news/item/26-11-2021-classification-of-omicron-(b.1.1.529)-sars-cov-2-variant-of-concern
+[^302]: https://bnonews.com/index.php/2021/11/omicron-tracker/
+[^303]: gisaid.org
