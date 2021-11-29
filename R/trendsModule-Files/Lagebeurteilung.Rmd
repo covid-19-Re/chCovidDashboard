@@ -214,13 +214,15 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat. Die Zahl der Fälle und Krankenhausaufenthalte stieg zwischen Ende Juni und Mitte August 2021 an, stabilisierte sich dann einen Monat lang auf hohem Niveau, und ging Anfang September 2021 wieder zurück. Seit Mitte Oktober 2021 steigen die Fallzahlen wieder signifikant.
 Dieser Anstieg ist seit vorletzter Woche in jeder einzelnen Grossregion signifikant.
-Seit letzter Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, mittlerweile mit einer Rate von 20% (95% UI: 12-28%) pro Woche.
-Seit dieser Woche steigen auch die Hospitalisierungen mit 40% pro Woche (95% UI: 23-61%) signifikant an.
+Seit letzter Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, mittlerweile mit einer Rate von 29% (95% UI: 12-28%) pro Woche.
+In der letzten Woche wurde auch schon die erste kritische Schwelle von 200 Intensivbettenbelegungen überschritten,
+über der mit regelmässigen regionalen und überregionalen Transfers von Patient:innen zu rechnen ist und weniger dringlichen Eingriffe verschoben werden.
+Seit dieser Woche steigen auch die Todesfälle mit 41% pro Woche (95% UI: 6-87%) signifikant an.
 <!------ UPDATE  -------->
 
 Simulationsstudien des ECDC sagen für europäische Länder mit einer Impfdeckung ähnlich der Schweiz voraus, dass die Maximal-Last der Hospitalisierungen bis Ende November 2021 die Maximal-Last des letzten Jahres übersteigen könnte[^55].
 Nachdem der Anstieg der Epidemie in der Schweiz diesen Herbst später begann als im Herbst 2020 und auch später als in anderen mitteleuropäischen Ländern, erwarten wir Ende November noch keine Überschreitung der bisherigen Maximal-Last. Solch ein Szenario ist aber über den Winter nicht auszuschliessen.
-Die beobachtbare rasche Zunahme der Fälle und Hospitalisationen wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
+Die beobachtbare rasche Zunahme der Fälle, und damit der Hospitalisationen und Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 
@@ -261,9 +263,10 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
-In den Altersgruppen der 0-9 Jährigen ist dieser Anstieg mit 56% pro Woche am höchsten, in den über 80 Jährigen mit 22% pro Woche am niedrigsten.
-Hospitalisierungen stiegen über die letzten 14 erfassten Tage signifikant in den Altersgruppen der 30-39, 60-69 und über 80 Jährigen.
-Die täglichen Hopsitalisierungen sind in jeder Altersklasse noch vorwiegend einstellig, was die Schätzung ihrer ihrer zeitlichen Trends erschwert.
+In der Altersgruppe der 0-9 Jährigen ist dieser Anstieg mit 46% pro Woche am höchsten,
+in der Altersgruppe der 10-19 Jährigen mit 41% pro Woche am zweithöchsten.
+und in den über 80 Jährigen mit 37% pro Woche am dritthöchsten.
+Im Gegensatz zu letzter Woche, stiegen die Hospitalisierungen über die letzten 14 erfassten Tage in keiner Altersgruppe signifikant.
 <!------ UPDATE -------->
 
 
@@ -279,7 +282,7 @@ Tendenz `r positivityTrend`;  CHECK
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
 
-Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei über 50.
+Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei rund 60.
 Hospitalisiert werden momentan überwiegend Menschen, die sich in der Schweiz angesteckt hatten[^57].
 
 Die Anzahl der COVID-19-Patient:innen auf Intensivstationen lag über die letzten 14 Tage
@@ -308,12 +311,20 @@ konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) 
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
 
-Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25].
+<!--- BORING: Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25]. ---->
 <!--- UPDATE cov-spectrum.ethz.ch ---->
 
 Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patient:innen mit Delta im Vergleich zu Patient:innen mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
 
 
+
+#### Omikron
+
+Am 26. November 2021 stufte die Weltgesundheitsorganisation die Variante Omikron (B.1.1.529) als besorgniserregend ein.
+Diese Variante wurde in Südafrika entdeckt und ist schon in vielen Ländern nachgewiesen worden.
+
+
+<!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
 
 ### Impfschutz durch zwei Impfdosen über die Zeit
 
