@@ -214,11 +214,10 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat.
 Seit Mitte Oktober 2021 steigen die Fallzahlen signifikant.
-Dieser Anstieg ist seit vorletzter Woche in jeder einzelnen Grossregion signifikant.
-Seit letzter Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, mittlerweile mit einer Rate von 29% (95% UI: 12-28%) pro Woche.
-In der letzten Woche wurde auch schon die erste kritische Schwelle von 200 Intensivbettenbelegungen überschritten,
+Seit vorletzter Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, mittlerweile mit einer Rate von 22% (95% UI: 5-29%) pro Woche.
+In der vorletzten Woche wurde auch schon die erste kritische Schwelle von 200 Intensivbettenbelegungen überschritten,
 über der mit regelmässigen regionalen und überregionalen Transfers von Patient:innen zu rechnen ist und weniger dringlichen Eingriffe verschoben werden[^61].
-Seit dieser Woche steigen auch die Todesfälle mit 41% pro Woche (95% UI: 6-87%) signifikant an.
+Seit letzter Woche steigen auch die Todesfälle signifikant an, mit einer momentanen Rate von 42% pro Woche (95% UI: 12-82%). 
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 Die beobachtbare weitere rasche Zunahme der Fälle, und damit der Hospitalisationen und Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
@@ -230,7 +229,7 @@ Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.
 ### Dynamik
 
 <!------- UPDATE -------->
-Von Anfang September bis Ende Oktober 2021 nahm die SARS-CoV-2-Epidemie ab (*R~e~*<1). Seit Ende Oktober 2021 aber ist die Schätzung des R-Wertes wieder signifikant über 1.
+Seit Ende Oktober 2021 ist die Schätzung des R-Wertes wieder signifikant über 1.
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -262,11 +261,10 @@ die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend.
-In der Altersgruppe der 0-9 Jährigen ist dieser Anstieg mit 46% pro Woche am höchsten,
-in der Altersgruppe der 10-19 Jährigen mit 41% pro Woche am zweithöchsten.
-und in den über 80 Jährigen mit 37% pro Woche am dritthöchsten.
-Im Gegensatz zu letzter Woche, stiegen die Hospitalisierungen über die letzten 14 erfassten Tage in keiner Altersgruppe signifikant.
+Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend ausser in den 60-69 Jährigen, 70-79 Jährigen und über 80 Jährigen.
+In der Altersgruppe der 0-9 Jährigen ist dieser Anstieg mit 22% (95% UI: 11-34%) pro Woche am höchsten,
+Im Gegensatz zu vorletzter Woche, stiegen
+Die Hospitalisierungen stiegen nur in der Altersgruppe der 50-59 Jährigen signifikant an mit einer Rate von 37% (95% UI: 3-83%) pro Woche über die letzten 14 erfassten Tage.
 <!------ UPDATE -------->
 
 
@@ -282,7 +280,8 @@ Tendenz `r positivityTrend`;  CHECK
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
 
-Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei rund 60.
+Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei rund 80.
+<!--- UPDATE ---->
 Hospitalisiert werden momentan überwiegend Menschen, die sich in der Schweiz angesteckt hatten[^57].
 
 Die Anzahl der COVID-19-Patient:innen auf Intensivstationen lag über die letzten 14 Tage
@@ -290,12 +289,6 @@ im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
 Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 Tage zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
-<!--- 
-Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
-Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
-Die Sterblichkeitsstatistik vom Bundesamt für Statistik zeigt zwischen Kalenderwoche 43 im Jahr 2020 und Kalenderwoche 3 im Jahr 2021 eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. Insgesamt sind rund 8’400 zusätzliche Todesfälle in diesem Zeitraum im Vergleich zu Vorjahren verzeichnet. <!--- Seitdem wurde keine Übersterblichkeit mehr beobachtet.  CHECK 
-Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen der Schweiz immer noch sichtbar: Ostschweiz, Zürich und Zentralschweiz[^8].  CHECK ---> 
-
 
 
 ### Neue Varianten
@@ -323,15 +316,18 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein auszeichnet. 
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
 Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante mehrmals nachgewiesen[^306].
+In der Schweiz wurde die Variante mehrmals nachgewiesen[^303] (in Basel, Zurich und Bern).
+<!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
 Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert. Das könnte bedeuten, dass Antikörper diese Variante schlechter neutralisieren könnten (was zu niedrigerem Schutz durch die Impfung oder die Immunität nach der Infektion führen würde) und das Virus wirksamer an menschliche Zellen bindet (was zu einer höheren Übertragungsrate führen könnte).
+<!--- UPDATE ---->
 
 In Südafrika hat sich Omikron seit Anfang November in verschiedenen Regionen schnell ausgebreitet[^305]. In diesen Regionen hat vormals Delta dominiert und Delta hat sich im Gegensatz zu Omikron nicht vermehrt ausgebreitet. Basierend auf diesen epidemiologischen Beobachtungen und den oben beschriebenen Veränderungen im Stachelprotein besteht die Sorge, dass Omikron gegenüber Delta einen Übertragungsvorteil hat und dass die Impfung oder die Immunität nach der Infektion schlechter gegen Omikron schützt (Immunflucht). Konkrete quantitative Informationen zur Übertragungsrate von Omikron, dem Ausmass der Immunflucht, oder der Schwere von Erkrankungen liegen aber noch nicht vor. Insbesondere ist unklar ob eine partielle Immunflucht den Schutz vor Infektion oder auch den Schutz vor schweren Verläufen in Geimpften und Genesenen verschlechtert.
+<!--- UPDATE ---->
 
 Um die Auswirkungen dieser Veränderungen im Stachelprotein von Omikron beurteilen zu können, benötigt man Laboruntersuchungen, klinische Studien und epidemiologische Analysen.
 Weltweit arbeiten Labore an der Frage, ob eine - zumindest partielle - Immunflucht vor Antikörper besteht. Dies wird aufgrund der Sequenz erwartet, kann aber noch nicht quantifiziert werden. Zudem wird die epidemiologische Lage von den Experten vor Ort in Südafrika genau verfolgt und es werden zeitnah erste Informationen bezüglich Durchbruchsinfektionen erwartet.
-
+<!--- UPDATE ---->
 
 
 ### Impfschutz durch zwei Impfdosen über die Zeit
