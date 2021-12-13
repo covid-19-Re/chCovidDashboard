@@ -214,10 +214,10 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat.
 Seit Mitte Oktober 2021 steigen die Fallzahlen signifikant.
-Seit vorletzter Woche steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, mittlerweile mit einer Rate von 22% (95% UI: 5-29%) pro Woche.
-In der vorletzten Woche wurde auch schon die erste kritische Schwelle von 200 Intensivbettenbelegungen überschritten,
-über der mit regelmässigen regionalen und überregionalen Transfers von Patient:innen zu rechnen ist und weniger dringlichen Eingriffe verschoben werden[^61].
-Seit letzter Woche steigen auch die Todesfälle signifikant an, mit einer momentanen Rate von 42% pro Woche (95% UI: 12-82%). 
+Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 16% (95% UI: 6-28%) pro Woche.
+Die zweite kritische Schwelle von 300 Intensivbettenbelegungen ist schon fast überschritten,
+über der alle Spitäler weniger dringliche Eingriffe verschieben müssen und in manchen Spitälern implizit triagiert werden muss und ad-hoc Betten bereitgestellt werden[^61].
+Seit vorletzter Woche steigen auch die Todesfälle signifikant an, mit einer momentanen Rate von 40% pro Woche (95% UI: 14-71%). 
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 Die beobachtbare weitere rasche Zunahme der Fälle, und damit der Hospitalisationen und Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
@@ -230,6 +230,7 @@ Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.
 
 <!------- UPDATE -------->
 Seit Ende Oktober 2021 ist die Schätzung des R-Wertes wieder signifikant über 1.
+Diese Woche ist der R-Wert aber etwas niedriger als noch vor zwei Wochen, jedoch immer noch signifikant über 1.
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -261,10 +262,11 @@ die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant steigend ausser in den 60-69 Jährigen, 70-79 Jährigen und über 80 Jährigen.
-In der Altersgruppe der 0-9 Jährigen ist dieser Anstieg mit 22% (95% UI: 11-34%) pro Woche am höchsten.
+Die Zahl der Fälle ist nur in der Altersgruppe der 0-9 Jährigen signifikant steigend.
+In den 70-79 Jährigen und über 80 Jährigen sinkt sie sogar signifikant.
 Im Gegensatz zu vorletzter Woche, stiegen
-Die Hospitalisierungen stiegen nur in der Altersgruppe der 50-59 Jährigen signifikant an mit einer Rate von 37% (95% UI: 3-83%) pro Woche über die letzten 14 erfassten Tage.
+Die Hospitalisierungen stiegen nur in der Altersgruppe der 40-49 Jährigen signifikant an.
+Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein.
 <!------ UPDATE -------->
 
 
@@ -279,10 +281,6 @@ Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivi
 Tendenz `r positivityTrend`;  CHECK  
 *R~e~* basierend auf Positivität für `r format(r_tests$date, "%d.%m.%Y")` ist `r valueUIr(r_tests)`). 
 --->
-
-Die Zahl der täglich neu hospitalisierten Menschen ist im 7-Tage Mittel bei rund 80.
-<!--- UPDATE ---->
-Hospitalisiert werden momentan überwiegend Menschen, die sich in der Schweiz angesteckt hatten[^57].
 
 Die Anzahl der COVID-19-Patient:innen auf Intensivstationen lag über die letzten 14 Tage
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
@@ -313,24 +311,28 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 
 #### Omikron
 
+<!------ ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű -------->
+
 Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein auszeichnet. 
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
 Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante mehrmals nachgewiesen[^303] (in Basel, Zurich und Bern).
+In der Schweiz wurde die Variante mehrmals nachgewiesen[^303].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
-Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert. Das könnte bedeuten, dass Antikörper diese Variante schlechter neutralisieren könnten (was zu niedrigerem Schutz durch die Impfung oder die Immunität nach der Infektion führen würde) und das Virus wirksamer an menschliche Zellen bindet (was zu einer höheren Übertragungsrate führen könnte).
+In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an, was einen Wachstumsvorteil in mehrheitlich geimpften Populationen suggeriert.
+Daten aus Südafrika erlauben eine vorläufige Schätzung des Transmissionsvorteils von Omikron gegenüber Delta von 0.32 (95% UI: 0.09-0.55) pro Tag[^314].
+
+Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
+
+Forschungsergebnisse der letzten Woche[^307],[^308],[^309],[^310] zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
+Allgemein ergibt sich das Bild, dass Seren Geimpfter Genesener mehr neutralisieren als die Seren doppelt Geimpfter.
+Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
+Ein Preprint hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNtec/Pfizer gegen Omikron geschätzt.
+Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes.
 <!--- UPDATE ---->
 
-In Südafrika hat sich Omikron seit Anfang November in verschiedenen Regionen schnell ausgebreitet[^305]. In diesen Regionen hat vormals Delta dominiert und Delta hat sich im Gegensatz zu Omikron nicht vermehrt ausgebreitet. Basierend auf diesen epidemiologischen Beobachtungen und den oben beschriebenen Veränderungen im Stachelprotein besteht die Sorge, dass Omikron gegenüber Delta einen Übertragungsvorteil hat und dass die Impfung oder die Immunität nach der Infektion schlechter gegen Omikron schützt (Immunflucht). Konkrete quantitative Informationen zur Übertragungsrate von Omikron, dem Ausmass der Immunflucht, oder der Schwere von Erkrankungen liegen aber noch nicht vor. Insbesondere ist unklar ob eine partielle Immunflucht den Schutz vor Infektion oder auch den Schutz vor schweren Verläufen in Geimpften und Genesenen verschlechtert.
-<!--- UPDATE ---->
 
-Um die Auswirkungen dieser Veränderungen im Stachelprotein von Omikron beurteilen zu können, benötigt man Laboruntersuchungen, klinische Studien und epidemiologische Analysen.
-Weltweit arbeiten Labore an der Frage, ob eine - zumindest partielle - Immunflucht vor Antikörper besteht. Dies wird aufgrund der Sequenz erwartet, kann aber noch nicht quantifiziert werden. Zudem wird die epidemiologische Lage von den Experten vor Ort in Südafrika genau verfolgt und es werden zeitnah erste Informationen bezüglich Durchbruchsinfektionen erwartet.
-<!--- UPDATE ---->
-
-
-### Impfschutz durch zwei Impfdosen über die Zeit
+### Impfschutz gegen Delta durch zwei Impfdosen über die Zeit
 
 Die Impfung hat mehrere Wirkungen: sie schützt vor der Infektion, davor, dass man die Infektion weitergibt (Transmission), und vor schweren Verläufen und dem Tod. Es ist wichtig diese verschiedenen Wirkungen auseinander zu halten, weil sie verschieden schnell über die Zeit und Altersgruppen abnehmen.
 Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoffe verringern. Welches dieser beiden Ziele man in den Vordergrund stellt, entscheidet über die Impfstrategie, also welche Altersgruppen man wann impft, und ob und wann man eine dritte Dosis einsetzt.
@@ -368,9 +370,11 @@ Gemäss einem Preprint[^54] basierend auf Daten aus Kalifornien schützt der Imp
 Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
 
 In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
-Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57]. Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
+Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57].
+Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
+Ein neuer Preprint[^122] beschreibt eine umfassendere Studie der Universität Bern, die eine niedrigere Wirksamkeit der Impfung gegen Hospitalisierung in Menschen über 70 Jahren schätzt als in der allgemeinen Bevölkerung und auch eine Abnahme der Impfwirksamkeit gegen Hospitalisation nach 25 Wochen feststellt, aber nicht in Menschen über 70 Jahren. 
 
-Dies bedeutet, dass junge doppelt geimpfte Menschen nach wie vor rund 20-mal besser vor einer Hospitalisierung geschützt sind als nicht geimpfte Menschen (entspricht Schutz 95%). Bei älteren doppelt geimpften Menschen hat der Schutz abgenommen, sind noch rund 5-mal besser geschützt (entspricht Schutz 80%).
+Dies bedeutet, dass junge doppelt geimpfte Menschen nach wie vor rund 20-mal besser vor einer Hospitalisierung geschützt sind als nicht geimpfte Menschen (entspricht Schutz 95%). Bei älteren doppelt geimpften Menschen ist der Schutz niedriger, aber immer noch rund 5-mal besser als in Ungeimpften (entspricht Schutz 80%).
 
 
 #### Schutz durch zwei Impfdosen vor Transmission
@@ -383,7 +387,7 @@ Die genauen Gründe für diesen Schutz sind nicht bekannt; er könnte zum Beispi
 Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
 
 
-### Wirkung der dritten Impfdosis 
+### Wirkung der dritten Impfdosis gegen Delta
 
 #### Schutz der dritten Impfdosis vor Infektion
 Eine Reihe von Studien zeigen, dass eine dritte Impfdosis den Schutz vor Infektion verbessert.
@@ -398,20 +402,6 @@ Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf 20-fach du
 Der Schutz vor der Hospitalisierung durch eine dritte Impfdosis wurde für Personen über 40 Jahre auf 93% geschätzt verglichen mit einer Kontrollgruppe die vor länger als 5 Monaten ihre zweite Impfdosis erhalten hatten [^114]
 und in über 60-Jährigen auf 95% [^113].
 Insbesondere wird der Schutz in den über 80 Jährigen von 80% auf 95% erhöht[^113]. Für die Schweiz bedeutet dies dass eine dritte Impfdosis in dieser Alterskategorie ganz grob bis zu 10'000 Hospitalisierungen verhindern kann (Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
-
-### Ziele einer Impfkampagne
-
-Das primäre Ziel der Schweizer Impfkampagne war, einen raschen Schutz für die Menschen gegen schwere Verläufe zu erzielen. Daher wurden zwei Impfdosen mit sehr kurzem Abstand (meist 3-4 Wochen) verabreicht. Bei anderen nicht-replikationsfähigen Impfstoffen gilt die Grundimmunisierung erst mit einer dritten Dosis nach 6-12 Monaten als abgeschlossen (z.B. Hepatitis A und B, FSME, Haemophilus influenzae type B, Poliovirus, Diphterie, Tetanus oder Pertussis). Eine dritte Impfdosis ist deshalb nicht aussergewöhnlich und könnte zu einem dauerhafteren Schutz in allen Altergruppen führen, sodass möglicherweise in der breiten Bevölkerung jährliche Auffrischungs-Impfungen nicht notwendig wären. Langfristig könnten, nach einem Impfschema mit drei Dosen, milde natürliche Infektionen möglicherweise einen breiten Schutz auch gegen neue Varianten erzeugen und den Übergang zur Endemizität von SARS-CoV-2 erleichtern.
-
-Wenn das Hauptziel der Impfkampagne die Reduzierung des individuellen Risikos einer Hospitalisierung ist, sind dritte Impfdosen in der älteren Bevölkerung momentan basierend auf den internationalen Daten wie auch den Schweizer Daten angezeigt (siehe auch Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
-
-Wenn die Reduzierung von Infektionen angestrebt wird, ist, basierend auf den Daten eine dritte Impfung (6 Monate nach der zweiten Impfdosis) in allen Altersklassen angezeigt (siehe auch Conclusions in Policy Brief vom 25.6.2021 [^59]). Diese dritten Impfdosen wären ein effektives Werkzeug, die Zahl der Infektionen diesen Winter zu reduzieren. 
-(Der Schutz vor Infektion steigt nach dritter Dosis von 2-fach auf 20-fach gegenüber Ungeimpften, siehe oben).
-In einem Positionspapier[^60] vertreten deutsche Wissenschaftler - unterstützt von Simulationen - die Ansicht, dass eine Booster-Kampagne bei einer Impfgeschwindigkeit von 7% pro Woche
-bereits nach einem Monat erste Wirkung auf die Ausbreitung der Infektionen zeigen könnte.
-Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck auf das Gesundheitssystem zu reduzieren. Gleichzeitig können Menschen, welche sich nicht selbst durch Impfung schützen können (zum Beispiel Kinder unter 12 Jahren), durch die dritte Impfung von Eltern oder Bezugspersonen geschützt werden - diese Bezugspersonen haben nach dritter Impfung einen 20-fachen Schutz vor Infektion und verringern daher das Risiko, Überträger zu sein. Die Vermeidung von Infektionen kann weiter die Prävalenz von gesundheitlichen Spät- oder Langzeitfolgen von COVID-19 (Long-Covid) verringern. 
-
-
 
 
 <!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
@@ -499,6 +489,8 @@ Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck 
 [^119]: https://sciencetaskforce.ch/en/scientific-update-of-21-september-2021/
 [^120]: https://www.medrxiv.org/content/10.1101/2021.11.15.21266341v1.full.pdf
 [^121]: https://www.nature.com/articles/s41467-021-26672-3.pdf
+<!---- VE against Delta in CH (Anderegg et al): ---->
+[^122]: https://osf.io/rxk9b/
 
 [^201]: https://www.nejm.org/doi/10.1056/NEJMoa2034577
 [^202]: https://www.nejm.org/doi/10.1056/NEJMoa2035389
@@ -509,3 +501,17 @@ Diese Reduktion an Infektionen erlaubt die Viruszirkulation und damit den Druck 
 [^304]: https://nextstrain.org/
 [^305]: https://www.nicd.ac.za/frequently-asked-questions-for-the-b-1-1-529-mutated-sars-cov-2-lineage-in-south-africa/
 [^306]: https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529
+<!---- Omicron neut data: ---->
+[^307]: https://www.medrxiv.org/content/10.1101/2021.12.08.21267417v1.full.pdf
+[^308]: https://www.medrxiv.org/content/10.1101/2021.12.07.21267432v1.full.pdf
+[^309]: https://drive.google.com/file/d/1CuxmNYj5cpIuxWXhjjVmuDqntxXwlfXQ/view
+[^310]: https://drive.google.com/file/d/1zjJWsybGaa3egiyn5nQqTzBtl0kmvMUu/view
+<!---- Omicron VE est: ---->
+[^311]: https://khub.net/documents/135939561/430986542/Effectiveness+of+COVID-19+vaccines+against+Omicron+variant+of+concern.pdf/f423c9f4-91cb-0274-c8c5-70e8fad50074
+<!---- Omicron spread UK: ---->
+[^312]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1040076/Technical_Briefing_31.pdf
+<!---- Omicron spread Denmark: ---->
+[^313]: https://files.ssi.dk/covid19/omikron/statusrapport/rapport-omikronvarianten-11122021-uy12
+<!---- Omicron transmission advantage South Africa (Althaus): ---->
+[^314]: https://www.mcid.unibe.ch/unibe/portal/fak_vetmedizin/vetsuisse_kzen/micro_mcidi/content/e1047007/e1047011/e1047016/e1153060/e1155633/files1155634/MCID-OmicronEvent_Althaus_eng.pdf
+
