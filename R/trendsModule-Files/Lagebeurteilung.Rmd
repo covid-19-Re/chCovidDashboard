@@ -264,9 +264,9 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist nur in der Altersgruppe der 0-9 Jährigen signifikant steigend.
 In den 70-79 Jährigen und über 80 Jährigen sinkt sie sogar signifikant.
-Im Gegensatz zu vorletzter Woche, stiegen
-Die Hospitalisierungen stiegen nur in der Altersgruppe der 40-49 Jährigen signifikant an.
-Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein.
+Im Gegensatz zu vorletzter Woche stiegen die Hospitalisierungen
+nur in der Altersgruppe der 40-49 Jährigen signifikant an.
+Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
 <!------ UPDATE -------->
 
 
@@ -292,9 +292,9 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 ### Neue Varianten
 
 Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
-Diese ursprünglich in Indien beschriebene Variante hat seit
-der Kalenderwoche 38 eine Häufigkeit von 100%
-unter den sequenzierten Fällen[^25].
+Diese ursprünglich in Indien beschriebene Variante hat
+von Kalenderwoche 38 bis Kalenderwoche 49 eine Häufigkeit von 100% unter den sequenzierten Fällen.
+In der aktuellen Kalenderwoche 51 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 Aus dem Anstieg der Häufigkeit von Delta in der Schweiz kann man einen Transmissionsvorteil gegenüber Alpha von 58% (95% UI: 56-60%) berechnen,
 <!--- https://cov-spectrum.ethz.ch/explore/Switzerland/AllSamples/AllTimes/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.617.2*%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/chen-2021-fitness
 set start date to 2021-04-15 ---->
@@ -313,23 +313,28 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 
 <!------ ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű -------->
 
-Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein auszeichnet. 
+Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein ("spike protein") auszeichnet. 
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
 Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
 In der Schweiz wurde die Variante mehrmals nachgewiesen[^303].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
 In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an, was einen Wachstumsvorteil in mehrheitlich geimpften Populationen suggeriert.
-Daten aus Südafrika erlauben eine vorläufige Schätzung des Transmissionsvorteils von Omikron gegenüber Delta von 0.32 (95% UI: 0.09-0.55) pro Tag[^314].
+Daten aus Südafrika erlauben eine vorläufige Schätzung des logistischen Wachstumsrate von Omikron gegenüber Delta von 0,32 (95% UI: 0,09-0,55) pro Tag[^314]. (Als Referenz: die logistische Wachstumsrate von Alpha gegenüber der ursprünglichen Variante wurde mit derselben Methode 5-mal niedriger, zu 0.065 pro Tag, geschätzt.)
+<!--- Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. ---->
 
 Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
 
 Forschungsergebnisse der letzten Woche[^307],[^308],[^309],[^310] zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
 Allgemein ergibt sich das Bild, dass Seren Geimpfter Genesener mehr neutralisieren als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
-Ein Preprint[^311] hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNtec/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt: der Schutz von Pfizer/BioNtec fiel von 88% 2-9 Woche nach der zweiten Impfung auf rund 35% nach 15 Wochen.
+Ein Preprint[^311] hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt: der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Woche nach der zweiten Impfung auf rund 35% nach 15 Wochen.
 Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des reduzierten Schutzes.
 <!--- UPDATE ---->
+
+Die aktuelle Datenlage legt also nahe, dass eine dritte Impfdosis die zu erwartete Krankheitslast durch Infektionen mit Omikron reduzieren kann. Eine massive Erhöhung der Impfgeschwindigkeit würde erlauben, dass ein grösserer Teil der Geimpften ihre dritte Dosis erhalten könnten vor einer Ansteckung mit Omikron.
+
+Wir erwarten in den kommenden Wochen weitere Informationen über die Eigenschaften von Omikron und detailliertere Daten über den Schutz durch Impfung und Genesung vor einer Ansteckung und vor einem schweren Krankheitsverlauf. Für Delta, die aktuell dominierende Variante, ist solche Information schon vorhanden; wir fassen den momentanen Kenntnisstand im Folgenden kurz zusammen. 
 
 
 ### Impfschutz gegen Delta durch zwei Impfdosen über die Zeit
@@ -491,6 +496,7 @@ Insbesondere wird der Schutz in den über 80 Jährigen von 80% auf 95% erhöht[^
 [^121]: https://www.nature.com/articles/s41467-021-26672-3.pdf
 <!---- VE against Delta in CH (Anderegg et al): ---->
 [^122]: https://osf.io/rxk9b/
+[^123]: https://sciencetaskforce.ch/en/scientific-update-of-07-december-2021/
 
 [^201]: https://www.nejm.org/doi/10.1056/NEJMoa2034577
 [^202]: https://www.nejm.org/doi/10.1056/NEJMoa2035389
