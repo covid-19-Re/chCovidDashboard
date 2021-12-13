@@ -327,8 +327,8 @@ Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbj
 Forschungsergebnisse der letzten Woche[^307],[^308],[^309],[^310] zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
 Allgemein ergibt sich das Bild, dass Seren Geimpfter Genesener mehr neutralisieren als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
-Ein Preprint hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNtec/Pfizer gegen Omikron geschätzt.
-Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes.
+Ein Preprint[^311] hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNtec/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt: der Schutz von Pfizer/BioNtec fiel von 88% 2-9 Woche nach der zweiten Impfung auf rund 35% nach 15 Wochen.
+Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des reduzierten Schutzes.
 <!--- UPDATE ---->
 
 
