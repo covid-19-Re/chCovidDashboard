@@ -299,14 +299,6 @@ Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
 Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 49 eine Häufigkeit von 100% unter den sequenzierten Fällen.
 In der aktuellen Kalenderwoche 51 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
-<!--- Urs bored by this: 
-Aus dem Anstieg der Häufigkeit von Delta in der Schweiz kann man einen Transmissionsvorteil gegenüber Alpha von 58% (95% UI: 56-60%) berechnen,
-<!--- https://cov-spectrum.ethz.ch/explore/Switzerland/AllSamples/AllTimes/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.617.2*%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/chen-2021-fitness
-set start date to 2021-04-15 ---->
-konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33]. 
-Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
-<!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
----->
 
 <!--- BORING: Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25]. ---->
 <!--- UPDATE cov-spectrum.ethz.ch ---->
