@@ -215,15 +215,17 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat.
 Seit Mitte Oktober 2021 steigen die Fallzahlen signifikant.
 Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 16% (95% UI: 6-28%) pro Woche.
-Die zweite kritische Schwelle von 300 Intensivbettenbelegungen ist schon fast überschritten,
-über der alle Spitäler weniger dringliche Eingriffe verschieben müssen und in manchen Spitälern implizit triagiert werden muss und ad-hoc Betten bereitgestellt werden[^61].
+Die zweite kritische Schwelle von 300 Intensivbettenbelegungen ist schon fast erreicht.
+Über dieser Schwelle werden alle Spitäler weniger dringliche Eingriffe verschieben müssen,
+in manchen Spitälern wird implizite Triage stattfinden und ad-hoc Betten werden bereitgestellt[^61].
 Seit vorletzter Woche steigen auch die Todesfälle signifikant an, mit einer momentanen Rate von 40% pro Woche (95% UI: 14-71%). 
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
-Die beobachtbare weitere rasche Zunahme der Fälle, und damit der Hospitalisationen und Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein.
+Die beobachtete rasche Zunahme der Fälle in den letzten Wochen, und damit der momentane Anstieg in Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein. 
 <!------ UPDATE  -------->
 
 Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. Auch in der Schweiz wurde diese Variante schon mehrmals nachgewiesen.
+Wir rechnen damit, dass diese Variante in den nächsten Wochen dominant wird und Anfang 2022 das Infektionsgeschehen dominiert.
 
 
 ### Dynamik
@@ -246,6 +248,8 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
+Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig und werden die Zahlen werden daher wohl noch nach oben korrigiert werden.
+<!--- UPDATE: delete above sentence soon ---->
 Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
@@ -263,7 +267,7 @@ Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
 Die Zahl der Fälle ist nur in der Altersgruppe der 0-9 Jährigen signifikant steigend.
-In den 70-79 Jährigen und über 80 Jährigen sinkt sie sogar signifikant.
+In den 70-79 Jährigen und über 80 Jährigen sinkt sie signifikant.
 Im Gegensatz zu vorletzter Woche stiegen die Hospitalisierungen
 nur in der Altersgruppe der 40-49 Jährigen signifikant an.
 Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
@@ -289,24 +293,29 @@ im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 Tage zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
 
 
-### Neue Varianten
+### Varianten
 
 Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
 Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 49 eine Häufigkeit von 100% unter den sequenzierten Fällen.
 In der aktuellen Kalenderwoche 51 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
+<!--- Urs bored by this: 
 Aus dem Anstieg der Häufigkeit von Delta in der Schweiz kann man einen Transmissionsvorteil gegenüber Alpha von 58% (95% UI: 56-60%) berechnen,
 <!--- https://cov-spectrum.ethz.ch/explore/Switzerland/AllSamples/AllTimes/variants/json=%7B%22variant%22%3A%7B%22name%22%3A%22B.1.617.2*%22%2C%22mutations%22%3A[]%7D%2C%22matchPercentage%22%3A1%7D/chen-2021-fitness
 set start date to 2021-04-15 ---->
 konsistent mit Schätzungen des Übertragungsvorteils von 56% (95% UI: 34%-81%) aus England[^33]. 
 Wegen dieses Übertragungsvorteils dominiert Delta jetzt die Pandemie in vielen Teilen der Welt.
 <!--- UPDATE cov-spectrum.ethz.ch-> click on B.1.617.2 and look at the number/percentage by calendar week on the right graph  ---->
+---->
 
 <!--- BORING: Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25]. ---->
 <!--- UPDATE cov-spectrum.ethz.ch ---->
 
+<!--- Urs bored by this: 
 Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patient:innen mit Delta im Vergleich zu Patient:innen mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
+---->
 
+Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren nach 6 Monaten) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
 
 
 #### Omikron
@@ -316,97 +325,34 @@ Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden 
 Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein ("spike protein") auszeichnet. 
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
 Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante mehrmals nachgewiesen[^303].
+In der Schweiz wurde die Variante 37-mal nachgewiesen[^303].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
-In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an, was einen Wachstumsvorteil in mehrheitlich geimpften Populationen suggeriert.
-Daten aus Südafrika erlauben eine vorläufige Schätzung des logistischen Wachstumsrate von Omikron gegenüber Delta von 0,32 (95% UI: 0,09-0,55) pro Tag[^314]. (Als Referenz: die logistische Wachstumsrate von Alpha gegenüber der ursprünglichen Variante wurde mit derselben Methode 5-mal niedriger, zu 0.065 pro Tag, geschätzt.)
-<!--- Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. ---->
+In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an
+(Verdopplung alle 2-4 Tage),
+was einen Wachstumsvorteil in mehrheitlich geimpften Populationen suggeriert.
+Daten aus Südafrika erlauben eine vorläufige Schätzung des logistischen Wachstumsrate von Omikron gegenüber Delta von 0,32 (95% UI: 0,09-0,55) pro Tag[^314], was einer Verdopplung des Anteils von Omikron an neuen Infektionen ungefähr alle 2-8 Tage entspricht.
+<!--- (Als Referenz: die logistische Wachstumsrate von Alpha gegenüber der ursprünglichen Variante wurde mit derselben Methode 5-mal niedriger, zu 0.065 pro Tag, geschätzt.)
+Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. ---->
 
 Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
 
-Forschungsergebnisse der letzten Woche[^307],[^308],[^309],[^310] zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
-Allgemein ergibt sich das Bild, dass Seren Geimpfter Genesener mehr neutralisieren als die Seren doppelt Geimpfter.
+Forschungsergebnisse der letzten Woche[^307],[^308],[^309],[^310],[^315] zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
+Allgemein ergibt sich das Bild, dass Seren
+von Personen, welche sowohl genesen als auch geimpft sind, starker neutralisieren
+als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
-Ein Preprint[^311] hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt: der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Woche nach der zweiten Impfung auf rund 35% nach 15 Wochen.
-Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des reduzierten Schutzes.
+
+Ein Preprint[^311] hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
+der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Wochen nach der zweiten Impfung auf rund 35% (95% UI: 10-50%) nach 4 Monaten.
+Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes, nämlich, zumindest kurzfristig, auf 60-85%.
+Dies entspricht in etwa dem Schutz von doppelt Geimfpten bei Delta. Die langfristige Wirkung kann noch nicht beurteilt werden.
 <!--- UPDATE ---->
 
-Die aktuelle Datenlage legt also nahe, dass eine dritte Impfdosis die zu erwartete Krankheitslast durch Infektionen mit Omikron reduzieren kann. Eine massive Erhöhung der Impfgeschwindigkeit würde erlauben, dass ein grösserer Teil der Geimpften ihre dritte Dosis erhalten könnten vor einer Ansteckung mit Omikron.
+Die aktuelle Datenlage legt also nahe, dass eine dritte Impfdosis die zu erwartete Krankheitslast durch Infektionen mit Omikron reduzieren kann. Eine massive Erhöhung der Impfgeschwindigkeit und ein Verkürzen des Abstands zwischen zweiter und dritter Impfung auf 3-4 Monate würde erlauben, dass ein grösserer Teil der Geimpften ihre dritte Dosis erhalten könnten vor einer Ansteckung mit Omikron.
 
-Wir erwarten in den kommenden Wochen weitere Informationen über die Eigenschaften von Omikron und detailliertere Daten über den Schutz durch Impfung und Genesung vor einer Ansteckung und vor einem schweren Krankheitsverlauf. Für Delta, die aktuell dominierende Variante, ist solche Information schon vorhanden; wir fassen den momentanen Kenntnisstand im Folgenden kurz zusammen. 
-
-
-### Impfschutz gegen Delta durch zwei Impfdosen über die Zeit
-
-Die Impfung hat mehrere Wirkungen: sie schützt vor der Infektion, davor, dass man die Infektion weitergibt (Transmission), und vor schweren Verläufen und dem Tod. Es ist wichtig diese verschiedenen Wirkungen auseinander zu halten, weil sie verschieden schnell über die Zeit und Altersgruppen abnehmen.
-Man kann also sowohl die Verbreitung als auch die Krankheitslast durch Impfstoffe verringern. Welches dieser beiden Ziele man in den Vordergrund stellt, entscheidet über die Impfstrategie, also welche Altersgruppen man wann impft, und ob und wann man eine dritte Dosis einsetzt.
-
-Im Folgenden stellen wir kurz dar, was man über diese Impfwirkungen und ihre zeitliche Abnahme weiss:
-
-#### Schutz durch zwei Impfdosen vor Infektion (symptomatisch und asymptomatisch)
-Die Wirksamkeit der Impfung auf Infektionen, einschliesslich asymptomatischer Infektionen, ist schwierig abzuschätzen, weil gerade asymptomatische Infektionen schwer zu erfassen sind.
-Es gibt übereinstimmende Hinweise auf eine geringere Wirksamkeit von mRNA-Impfstoffen gegen SARS-CoV-2-Delta-Infektionen, einschliesslich asymptomatischer Infektionen.
-Die Wirksamkeit gegen Infektion des Impfstoffs von BioNTech/Pfizer ist laut Daten aus Israel bei 39% (95% UI: 9-59%)[^39];
-und laut Daten aus Schottland bei 79% (95% UI: 75-82%)[^37].
-In einem Bericht der REACT-Studie wird die Impfwirksamkeit gegen Infektionen von 49% (95% UI: 22-67%) errechnet[^45] (hierbei wurde nicht zwischen den in England verwendeten Impfstoffen unterschieden).
-<!--- Zusammenfassend lässt sich sagen, dass mRNA-Impfstoffe das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbieren. ---->
-
-#### Schutz durch zwei Impfdosen vor symptomatische Infektion
-Der Impfschutz gegen symptomatische Infektionen mit Delta ist, verglichen mit den 2020 vorherrschenden Virusvarianten und Alpha, reduziert.
-In den Zulassungsstudien wurde die die Wirksamkeit gegen die 2020 vorherrschenden Virusvarianten für BioNTech/Pfizer auf 95% (95% UI: 90-98%) geschätzt[^201] und für Moderna auf 94% (95% UI, 89-97%)[^202].
-Gemäss einem Bericht von Public Health England[^47] ist die Wirksamkeit von 89% (95% UI: 87-90%) gegen Alpha auf 79% (95% UI: 78-80%) gegen Delta gesunken (siehe auch[^42],[^36]; BioNTech/Pfizer).
-Aus kanadischen Daten ergibt sich eine Wirksamkeit gegen symptomatische Infektionen mit Delta von 85% (95% UI: 78-89%)[^43] (BioNTech/Pfizer und Moderna).
-Eine Studie aus Kalifornien[^54], schätzt die Wirksamkeit des Impfstoffs von Moderna gegen Infektionen mit Delta auf 87% (95% UI: 84-89%), gegen Infektion mit Alpha auf 98% (95% UI: 97-99%).
-<!---
-[^54]: "Our study also had several limitations. Although test-negative designs might reduce bias due to factors associated with care-seeking,40 this design was generalizable to individuals who were tested and was therefore less generalizable to individuals with mild or no symptoms who did not seek testing. "
----->
-Gemäss dieser Studie fiel die Wirksamkeit gegen Delta nach fünf Monaten auf 80% (95% UI: 70-87%).
-Studien aus Israel schätzen eine Wirksamkeit für BioNTech/Pfizer von nur 40% (95% UI: 9-61%) sechs Monate nach der zweiten Impfdosis[^39] und eine mehr als doppelt so hohe Wahrscheinlichkeit von Durchbruchsinfektionen nach drei Monaten[^121].
-Eine neue Studie aus Schweden[^58] schätzt für den Impfstoff von BioNTech/Pfizer einen Abfall des Schutzes
-gegen symptomatische Infektion von 92% (95% UI: 92-93%) zwei bis vier Wochen nach der Impfung auf 0% nach 210 Tagen.
-Für den Impfstoff von Moderna reduzierte sich der Schutz von 96% (95% UI:94-97%) zwei bis vier Wochen nach der Impfungauf 59% (95% UI: 18-79%) nach 180 Tagen. Die Schätzungen in dieser Studie beziehen sich vor allem auf die Delta-Variante.
-Zusammenfassend bedeutet dies: 6 Monate nach doppelter Impfung mit einem mRNA-Impfstoffe ist das Risiko, sich mit der Delta-Variante zu infizieren, schätzungsweise halbiert im Vergleich zu nicht geimpten Menschen.
-
-#### Schutz durch zwei Impfdosen vor schwerer Erkrankung / Hospitalisierung
-Der Impfschutz gegen schwere Erkrankung ist auch für die Delta-Variante anfänglich hoch. Die Wirksamkeit liegt bei ungefähr 96% (95% UI: 91-98%) basierend auf Daten aus Grossbritannien[^47],[^44],  und 88% (95% UI: 78,9-93,2%) basierend auf Daten aus Israel[^39].
-Diese Schätzungen beziehen sich auf den Schutz, den Geimpfte gegenüber Ungeimpften haben, und sind nicht für die verschiedenen Impfstoffe, die in diesen Ländern verwendet werden, aufgelöst.
-Gemäss einem Preprint[^54] basierend auf Daten aus Kalifornien schützt der Impfstoff von Moderna zu 98% (95% UI: 93-99%) vor einer Hospitalisation nach einer Infektion mit der Delta-Variante. 
-Gemäss einer Studie aus Israel[^51], den Analysen von Public Health England[^52] und einer Studie aus Schweden[^58]  scheint der Schutz vor schweren Erkrankungen über die Zeit abzufallen.
-
-In den Schweizer Daten sahen wir einen Impfschutz gegen Hospitalisierung von rund 90% oder höher in allen Altersklassen in den Monaten Juli, August und September 2021[^57].
-Seit Oktober sehen wir in der Schweiz nun jedoch eine Abnahme der Wirksamkeit in den über 80-Jährigen von 89-94% im September auf 73-87%[^57].
-Diese Abnahme der Impfwirksamkeit ist konsistent mit Daten aus anderen Ländern. 
-Ein neuer Preprint[^122] beschreibt eine umfassendere Studie der Universität Bern, die eine niedrigere Wirksamkeit der Impfung gegen Hospitalisierung in Menschen über 70 Jahren schätzt als in der allgemeinen Bevölkerung und auch eine Abnahme der Impfwirksamkeit gegen Hospitalisation nach 25 Wochen feststellt, aber nicht in Menschen über 70 Jahren. 
-
-Dies bedeutet, dass junge doppelt geimpfte Menschen nach wie vor rund 20-mal besser vor einer Hospitalisierung geschützt sind als nicht geimpfte Menschen (entspricht Schutz 95%). Bei älteren doppelt geimpften Menschen ist der Schutz niedriger, aber immer noch rund 5-mal besser als in Ungeimpften (entspricht Schutz 80%).
-
-
-#### Schutz durch zwei Impfdosen vor Transmission
-Die Impfung verhindert die Weiterverbreitung von SARS-CoV-2 durch mindestens zwei Mechanismen: 
-erstens durch die Verringerung der symptomatischen und asymptomatischen Infektionen und damit der Zahl der infizierten Personen (siehe oben); 
-und zweitens durch die Verringerung der Weiterverbreitung durch diejenigen, die sich trotz Impfung infizieren. 
-Tatsächlich überträgt eine geimpfte Person das Virus selbst bei einer Infektion seltener als eine nicht geimpfte Person. 
-Ein Preprint[^53] beschreibt eine Studie, in der geschätzt wurde, dass das Übertragungsrisiko bei einer Durchbruchsinfektion mit der Delta-Variante nach zwei Injektionen des mRNA-Impfstoffs von BioNTech/Pfizer um etwa 66% geringer ist als bei Ungeimpften (das bedeutet, dass ungeimpfte Infizierte 3-mal soviel übertragen wie geimpfte Infizierte).
-Die genauen Gründe für diesen Schutz sind nicht bekannt; er könnte zum Beispiel durch eine kürzere infektiöse Phase[^46] oder durch eine geringere Menge infektiöser Partikel des abgegebenen Virus bei geimpften Personen[^48] erklärt werden.
-Der Schutz nimmt in den ersten 3.5 Monaten nach zwei Impfdosen auf rund 20% ab.
-
-
-### Wirkung der dritten Impfdosis gegen Delta
-
-#### Schutz der dritten Impfdosis vor Infektion
-Eine Reihe von Studien zeigen, dass eine dritte Impfdosis den Schutz vor Infektion verbessert.
-Studien aus Israel beobachten, dass der Schutz vor der Infektion sich durch eine dritte Impfdosis von rund 50% auf mindestens 95% in allen Altersgruppen [^114] und auch in über 60-Jährigen [^113] erhöht.
-Gemäss einem neuen Preprint aus England erhöht eine dritte Dosis des Impfstoffs von BioNTech/Pfizer den Schutz vor symptomatischen Infektion in über 50-Jährigen auf 94% (95% UI:93-95%)[^120].
-Die Verbesserung ist konsistent mit zwei Preprints[^111], [^112], die beschreiben, dass eine dritte Impfdosis das Level neutralisierender Antikörper um das 10-fache erhöht (verglichen mit dem Level unmittelbar vor der dritten Impfdosis).
-Gleichzeitig ist im Falle einer Infektion die Viruslast reduziert[^102] und dadurch wahrscheinlich auch die Weitergabe der Infektion nach einer dritten Impfdosis.
-
-Zusammengefasst steigt der Schutz gegen Infektion von rund 2-fach auf 20-fach durch eine dritte Impfung, im Vergleich zu Ungeimpften in allen Altersgruppen.
-
-#### Schutz vor Hospitalisierung
-Der Schutz vor der Hospitalisierung durch eine dritte Impfdosis wurde für Personen über 40 Jahre auf 93% geschätzt verglichen mit einer Kontrollgruppe die vor länger als 5 Monaten ihre zweite Impfdosis erhalten hatten [^114]
-und in über 60-Jährigen auf 95% [^113].
-Insbesondere wird der Schutz in den über 80 Jährigen von 80% auf 95% erhöht[^113]. Für die Schweiz bedeutet dies dass eine dritte Impfdosis in dieser Alterskategorie ganz grob bis zu 10'000 Hospitalisierungen verhindern kann (Berechnungen der Task Force vom 21.9.2021: Anhang A in [^57]).
+Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch keine Daten vor.
+Diese werden in den nächsten Wochen erwartet. 
 
 
 <!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
@@ -520,4 +466,5 @@ Insbesondere wird der Schutz in den über 80 Jährigen von 80% auf 95% erhöht[^
 [^313]: https://files.ssi.dk/covid19/omikron/statusrapport/rapport-omikronvarianten-11122021-uy12
 <!---- Omicron transmission advantage South Africa (Althaus): ---->
 [^314]: https://www.mcid.unibe.ch/unibe/portal/fak_vetmedizin/vetsuisse_kzen/micro_mcidi/content/e1047007/e1047011/e1047016/e1153060/e1155633/files1155634/MCID-OmicronEvent_Althaus_eng.pdf
-
+<!---- Omicron neut data Oxford: ---->
+[^315]: https://www.medrxiv.org/content/10.1101/2021.12.10.21267534v1.full.pdf
