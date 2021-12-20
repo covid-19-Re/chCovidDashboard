@@ -212,26 +212,32 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat.
-Seit Mitte Oktober 2021 steigen die Fallzahlen signifikant.
+Die SARS-CoV-2-Epidemie wird zurzeit noch mehrheitlich durch die Delta-Variante bestimmt.
+Von Mitte Oktober bis Anfang Dezember 2021 stiegen die Fallzahlen signifikant.
 Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 10% (95% UI: 3-17%) pro Woche.
-Die zweite kritische Schwelle von 300 Intensivbettenbelegungen ist schon seit letzter Woche überschritten.
+Die kritische Schwelle von 300 Intensivbettenbelegungen ist seit letzter Woche überschritten.
 Über dieser Schwelle werden alle Spitäler weniger dringliche Eingriffe verschieben müssen,
 in manchen Spitälern wird implizite Triage stattfinden und ad-hoc Betten werden bereitgestellt[^61].
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
-Die beobachtete rasche Zunahme der Fälle in den letzten Wochen, und damit der momentane Anstieg in Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein. 
+Die beobachtete rasche Zunahme der Fälle bis Anfang Dezember und damit der momentane Anstieg in Intensivbettenbelegungen, wird für das stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein. 
 <!------ UPDATE  -------->
 
-Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen.
-Wir rechnen damit, dass diese Variante in den nächsten Wochen dominant wird und Anfang 2022 das Infektionsgeschehen dominiert.
+Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert.
+Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen und der Anteil an den bestätigten Fällen wird in Kalenderwoche 49 auf 3-9% geschätzt.
+Die Häufigkeit von Omikron hat sich um das 2 bis 3-fache pro Woche erhöht.
+Wir rechnen daher damit, dass diese Variante in den nächsten Wochen dominant wird und Anfang 2022 das Infektionsgeschehen dominiert.
+
+Weil sich Omikron momentan rasch in der Schweiz ausbreitet, erwarten wir, dass Fallzahlen dann auch wieder rasch steigen (mit einer Zunahme um das 2 bis 3-fache pro Woche), wenn Kontakte nicht weiter reduziert werden.
+Eine solch starke Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten.
+Parallel zur Kontaktreduktion kann der Schutz vor Infektion und damit ein Bremsen der Ausbreitung durch ein rasches Ausrollen der dritten Impfungen von rund 30% auf, zumindest kurzfristig, 60-85% erhöht werden.
 
 
 ### Dynamik
 
 <!------- UPDATE -------->
 Seit Ende Oktober 2021 war bis letzte Woche die Schätzung des R-Wertes signifikant über 1.
-Diese Woche ist der R-Wert nicht mehr über 1.
+Diese Woche ist der R-Wert unter 1.
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -293,6 +299,7 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 
 ### Varianten
 
+#### Delta
 Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
 Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
@@ -309,13 +316,10 @@ Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 9
 
 
 #### Omikron
-
-<!------ ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű -------->
-
 Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein ("spike protein") auszeichnet. 
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
 Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante 135-mal nachgewiesen und hatte in der Kalenderwoche 49 einen Anteil von 8.6%[^25].
+In der Schweiz wurde die Variante 135-mal nachgewiesen und hatte in der Kalenderwoche 49 einen Anteil von 8.6% unter allen sequenzierten Proben und 3% unter den sequenzierten Proben, die im Rahmen des Surveillance Programms untersucht wurden[^25].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
 In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an
@@ -326,6 +330,10 @@ Daten aus Südafrika erlauben eine vorläufige Schätzung des logistischen Wachs
 Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. ---->
 Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate des Anteils von Omikron in England auf
 0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entspricht.
+
+Für die Schweiz sind die geschätzten Werte noch sehr unsicher, liegen aber im Bereich der Werte aus Südafrika[^321].
+Das relative Wachstum in der Schweiz scheint mit rund 0.2 pro Tag etwas langsamer als in Südafrika und Grossbritannien, was möglicherweise auf eine vermehrte Verimpfung von Moderna zurückzuführen ist.
+Ob allein die schnelle Verbesserung des Impfschutzes in der Bevölkerung durch eine dritte Impfdosis die Ausbreitung von Omikron aufhalten kann, hängt einer neuen schweizer Modellierungsstudie[^320] zufolge davon ab, ob der rasche Ausbreitung von Omikron eine höhere Transmissibilität oder Immunflucht zugrunde liegt.
 
 Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
 
@@ -339,11 +347,12 @@ Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
 Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
 der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Wochen nach der zweiten Impfung auf rund 35% (95% UI: 10-50%) nach 4 Monaten.
 Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes, nämlich, zumindest kurzfristig, auf 60-85%.
-Zu ähnlichen Schätzungen kommt eine andere Studie des Imperial College[^318]: durch eine dritte Impfung wird der Schutz gegen symptomatische Infektion mit Omikron von 19% (95% UI: 13-24%) auf 77% (72-80%) erhöht.
+Zu ähnlichen Schätzungen zur Wirksamkeit des Impfstoffs von BioNTech/Pfizer kommt eine andere Studie des Imperial College[^318]: durch eine dritte Impfung wird der Schutz gegen symptomatische Infektion mit Omikron von 19% (95% UI: 13-24%) auf 77% (72-80%) erhöht.
 Dies entspricht in etwa dem Schutz von doppelt Geimpften bei Delta. Die langfristige Wirkung kann noch nicht beurteilt werden.
 <!--- UPDATE ---->
 
-Die aktuelle Datenlage legt also nahe, dass eine dritte Impfdosis die zu erwartete Krankheitslast durch Infektionen mit Omikron reduzieren kann. Eine massive Erhöhung der Impfgeschwindigkeit und ein Verkürzen des Abstands zwischen zweiter und dritter Impfung auf 3-4 Monate würde erlauben, dass ein grösserer Teil der Geimpften ihre dritte Dosis erhalten könnten vor einer Ansteckung mit Omikron.
+Die aktuelle Datenlage legt also nahe, dass eine dritte Impfdosis die zu erwartete Krankheitslast durch Infektionen mit Omikron reduzieren kann.
+Hierbei ist wichtig, dass die dritte Impfdosis allen Menschen, bei denen die zweite Impfung 4 Monate zurückliegt, sehr schnell verabreicht wird, sodass der Schutz aufgebaut ist, bevor sie sich mit Omikron anstecken.
 
 Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch nicht viele Daten vor.
 Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Südafrika[^316] schätzt, dass Personen, die zwei Dosen des Impfstoffs von mit BioNTech/Pfizer erhalten haben, 70% gegen schwere Verläufe nach Infektion mit Omikron geschützt sind.
@@ -473,3 +482,6 @@ Weitere Studien zu der schwere der Infektion mit Omikron werden in den nächsten
 [^318]: https://spiral.imperial.ac.uk/bitstream/10044/1/93038/32/2021-12-16%20COVID19%20Report%2049.pdf
 <!---- Omicron neut data pptx Derek Smith group Cambridge, UK (contains many neut studies! slide 4!): ---->
 [^319]: https://docs.google.com/presentation/d/13NFT3GjMluTbDQZRSl7VIua6G3FvwSHYgbU9gMoWI4U/edit#slide=id.g1075171e1cf_6_372.
+<!---- Melissa's Omicron preprint ---->
+[^320]: https://www.medrxiv.org/content/10.1101/2021.12.12.21267673v1.full.pdf
+[^321]: https://cov-spectrum.org/explore/Switzerland/Surveillance/Past6M/variants/chen-2021-fitness?pangoLineage=B.1.1.529*
