@@ -214,25 +214,24 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 Die SARS-CoV-2-Epidemie wird zurzeit fast ausschliesslich durch die Delta-Variante verursacht, die im Sommer die zuvor zirkulierenden Varianten abgelöst hat.
 Seit Mitte Oktober 2021 steigen die Fallzahlen signifikant.
-Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 16% (95% UI: 6-28%) pro Woche.
-Die zweite kritische Schwelle von 300 Intensivbettenbelegungen ist schon fast erreicht.
+Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 10% (95% UI: 3-17%) pro Woche.
+Die zweite kritische Schwelle von 300 Intensivbettenbelegungen ist schon seit letzter Woche überschritten.
 Über dieser Schwelle werden alle Spitäler weniger dringliche Eingriffe verschieben müssen,
 in manchen Spitälern wird implizite Triage stattfinden und ad-hoc Betten werden bereitgestellt[^61].
-Seit vorletzter Woche steigen auch die Todesfälle signifikant an, mit einer momentanen Rate von 40% pro Woche (95% UI: 14-71%). 
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
 Die beobachtete rasche Zunahme der Fälle in den letzten Wochen, und damit der momentane Anstieg in Intensivbettenbelegungen, wird für das immer noch stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein. 
 <!------ UPDATE  -------->
 
-Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. Auch in der Schweiz wurde diese Variante schon mehrmals nachgewiesen.
+Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen.
 Wir rechnen damit, dass diese Variante in den nächsten Wochen dominant wird und Anfang 2022 das Infektionsgeschehen dominiert.
 
 
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Ende Oktober 2021 ist die Schätzung des R-Wertes wieder signifikant über 1.
-Diese Woche ist der R-Wert aber etwas niedriger als noch vor zwei Wochen, jedoch immer noch signifikant über 1.
+Seit Ende Oktober 2021 war bis letzte Woche die Schätzung des R-Wertes signifikant über 1.
+Diese Woche ist der R-Wert nicht mehr über 1.
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -256,20 +255,19 @@ Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mind
 für Todesfälle bis zu 23 Tagen.
 
 Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
-Die bestätigten Fälle stiegen
+Die bestätigten Fälle nahmen
 <!---- UPDATE fielen/stiegen ---->
-um `r valueUIchange(rankingCHEcases)` pro Woche,
-die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)` und
-die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
+mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche ab,
+die Hospitalisationen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche und
+die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)` pro Woche.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist nur in der Altersgruppe der 0-9 Jährigen signifikant steigend.
-In den 70-79 Jährigen und über 80 Jährigen sinkt sie signifikant.
-Im Gegensatz zu vorletzter Woche stiegen die Hospitalisierungen
-nur in der Altersgruppe der 40-49 Jährigen signifikant an.
+Die Zahl der Fälle ist nur in allen Altersgruppen signifikant abnehmend ausser 
+in den 20-29, 30-39 und 40-49 Jährigen.
+Die Hospitalisierungen nahmen nur in der Altersgruppe der über 80-Jährigen signifikant ab.
 Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
 <!------ UPDATE -------->
 
@@ -297,8 +295,8 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 
 Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
 Diese ursprünglich in Indien beschriebene Variante hat
-von Kalenderwoche 38 bis Kalenderwoche 49 eine Häufigkeit von 100% unter den sequenzierten Fällen.
-In der aktuellen Kalenderwoche 51 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
+von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
+Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 
 <!--- BORING: Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25]. ---->
 <!--- UPDATE cov-spectrum.ethz.ch ---->
@@ -317,7 +315,7 @@ Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 9
 Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein ("spike protein") auszeichnet. 
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
 Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante 37-mal nachgewiesen[^303].
+In der Schweiz wurde die Variante 135-mal nachgewiesen und hatte in der Kalenderwoche 49 einen Anteil von 8.6%[^25].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
 In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an
@@ -326,25 +324,31 @@ was einen Wachstumsvorteil in mehrheitlich geimpften Populationen suggeriert.
 Daten aus Südafrika erlauben eine vorläufige Schätzung des logistischen Wachstumsrate von Omikron gegenüber Delta von 0,32 (95% UI: 0,09-0,55) pro Tag[^314], was einer Verdopplung des Anteils von Omikron an neuen Infektionen ungefähr alle 2-8 Tage entspricht.
 <!--- (Als Referenz: die logistische Wachstumsrate von Alpha gegenüber der ursprünglichen Variante wurde mit derselben Methode 5-mal niedriger, zu 0.065 pro Tag, geschätzt.)
 Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. ---->
+Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate des Anteils von Omikron in England auf
+0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entspricht.
 
 Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
 
-Forschungsergebnisse der letzten Woche[^307],[^308],[^309],[^310],[^315] zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
+Laboruntersuchungen der letzten zwei Wochen (z.B. [^307],[^308],[^309],[^310],[^315]) zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
+Die Studien zur Neutralisation von Omikron werden in einem ständig aktualisierten Dokument[^319] zusammengetragen und in Zusammenhang gesetzt.
 Allgemein ergibt sich das Bild, dass Seren
 von Personen, welche sowohl genesen als auch geimpft sind, starker neutralisieren
 als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
 
-Ein Preprint[^311] hat auf Grund epidemiologischer Daten die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
+Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
 der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Wochen nach der zweiten Impfung auf rund 35% (95% UI: 10-50%) nach 4 Monaten.
 Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes, nämlich, zumindest kurzfristig, auf 60-85%.
-Dies entspricht in etwa dem Schutz von doppelt Geimfpten bei Delta. Die langfristige Wirkung kann noch nicht beurteilt werden.
+Zu ähnlichen Schätzungen kommt eine andere Studie des Imperial College[^318]: durch eine dritte Impfung wird der Schutz gegen symptomatische Infektion mit Omikron von 19% (95% UI: 13-24%) auf 77% (72-80%) erhöht.
+Dies entspricht in etwa dem Schutz von doppelt Geimpften bei Delta. Die langfristige Wirkung kann noch nicht beurteilt werden.
 <!--- UPDATE ---->
 
 Die aktuelle Datenlage legt also nahe, dass eine dritte Impfdosis die zu erwartete Krankheitslast durch Infektionen mit Omikron reduzieren kann. Eine massive Erhöhung der Impfgeschwindigkeit und ein Verkürzen des Abstands zwischen zweiter und dritter Impfung auf 3-4 Monate würde erlauben, dass ein grösserer Teil der Geimpften ihre dritte Dosis erhalten könnten vor einer Ansteckung mit Omikron.
 
-Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch keine Daten vor.
-Diese werden in den nächsten Wochen erwartet. 
+Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch nicht viele Daten vor.
+Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Südafrika[^316] schätzt, dass Personen, die zwei Dosen des Impfstoffs von mit BioNTech/Pfizer erhalten haben, 70% gegen schwere Verläufe nach Infektion mit Omikron geschützt sind.
+Gemäss dieser Studie ist die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in vorherigen Wellen, bei Kindern aber 20% höher (bei vornehmlich milden Verläufen).
+Weitere Studien zu der schwere der Infektion mit Omikron werden in den nächsten Wochen erwartet. 
 
 
 <!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
@@ -460,3 +464,12 @@ Diese werden in den nächsten Wochen erwartet.
 [^314]: https://www.mcid.unibe.ch/unibe/portal/fak_vetmedizin/vetsuisse_kzen/micro_mcidi/content/e1047007/e1047011/e1047016/e1153060/e1155633/files1155634/MCID-OmicronEvent_Althaus_eng.pdf
 <!---- Omicron neut data Oxford: ---->
 [^315]: https://www.medrxiv.org/content/10.1101/2021.12.10.21267534v1.full.pdf
+
+<!---- Omicron hosp South Africa Incurance database: ---->
+[^316]: https://www.bmj.com/content/375/bmj.n3104
+<!---- Omicron and boosting Imperial: ---->
+[^317]: https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-48-global-omicron/
+<!---- Omicron transmission advantage England (Gani): ---->
+[^318]: https://spiral.imperial.ac.uk/bitstream/10044/1/93038/32/2021-12-16%20COVID19%20Report%2049.pdf
+<!---- Omicron neut data pptx Derek Smith group Cambridge, UK (contains many neut studies! slide 4!): ---->
+[^319]: https://docs.google.com/presentation/d/13NFT3GjMluTbDQZRSl7VIua6G3FvwSHYgbU9gMoWI4U/edit#slide=id.g1075171e1cf_6_372.
