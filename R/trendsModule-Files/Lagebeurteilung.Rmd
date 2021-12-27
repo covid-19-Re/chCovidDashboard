@@ -213,18 +213,20 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 Die SARS-CoV-2-Epidemie wird zurzeit noch mehrheitlich durch die Delta-Variante bestimmt.
-Von Mitte Oktober bis Anfang Dezember 2021 stiegen die Fallzahlen signifikant.
-Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 10% (95% UI: 3-17%) pro Woche.
-Die kritische Schwelle von 300 Intensivbettenbelegungen ist seit letzter Woche überschritten.
+Von Mitte Oktober bis Anfang Dezember 2021 stiegen die Fallzahlen signifikant und stagnierten in den letzten Wochen.
+Diese Woche sehen wir wieder eine Anstieg der Fallzahlen und der R-Wert ist in drei Grossregionen signifikant über 1.
+
+Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 6% (95% UI: 3-17%) pro Woche.
+Die kritische Schwelle von 300 Intensivbettenbelegungen ist seit vorletzter Woche überschritten.
 Über dieser Schwelle müssen praktisch alle Spitäler weniger dringliche Eingriffe verschieben,
 in manchen Spitälern findet implizite Triage statt und ad-hoc Betten werden bereitgestellt[^61].
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
-Die beobachtete rasche Zunahme der Fälle bis Anfang Dezember und damit der weiter anhaltende Anstieg in Intensivbettenbelegungen, ist für das stark belastete Gesundheitswesen sehr schwierig zu bewältigen. 
+Die beobachtete rasche Zunahme der Fälle bis Anfang Dezember, der erneute Anstieg diese Woche und damit der weiter anhaltende Anstieg in Intensivbettenbelegungen, ist für das stark belastete Gesundheitswesen sehr schwierig zu bewältigen. 
 <!------ UPDATE  -------->
 
 Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert.
-Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen und der Anteil an den bestätigten Fällen wird in Kalenderwoche 49 auf 3-8% geschätzt.
+Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen und der Anteil an den bestätigten Fällen wird in Kalenderwoche 50 auf 8-25% geschätzt.
 Die Häufigkeit von Omikron hat sich um das 2 bis 3-fache pro Woche erhöht.
 Wir rechnen daher damit, dass diese Variante ab Anfang 2022 das Infektionsgeschehen dominieren wird.
 
@@ -234,8 +236,10 @@ Wenn die Übertragungsgeschwindigkeit gleich bleibt, werden sich die Fallzahlen 
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Ende Oktober 2021 war bis letzte Woche die Schätzung des R-Wertes signifikant über 1.
-Diese Woche ist der R-Wert unter 1.
+Seit Ende Oktober 2021 war bis vorletzte Woche die Schätzung des R-Wertes signifikant über 1.
+Nach einem krzen Abfall des R-Wertes letzte Woche unter 1, ist er diese Woche wieder über 1.
+In den Grossregionen Genf, Tessin und Zürich ist er signifikant über 1.
+
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
@@ -251,7 +255,7 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig und werden die Zahlen werden daher wohl noch nach oben korrigiert werden.
+Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig und die Zahlen werden daher wohl noch nach oben korrigiert werden.
 <!--- UPDATE: delete above sentence soon ---->
 Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
@@ -262,15 +266,16 @@ Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisat
 Die bestätigten Fälle nahmen
 <!---- UPDATE fielen/stiegen ---->
 mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche ab,
-die Hospitalisationen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche und
-die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)` pro Woche.
+die Hospitalisationen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche
+und
+die Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist in allen Altersgruppen signifikant abnehmend ausser 
-in den 20-29, 30-39 und 40-49 Jährigen.
+Die Zahl der Fälle nimmt in den Altersgruppen der 0-9, 10-19, 70-79 und über 80 Jährigen signifikant ab.
+und steigt in den 20-29 Jährigen signifikant an.
 Die Hospitalisierungen nahmen nur in der Altersgruppe der über 80-Jährigen signifikant ab.
 Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
 <!------ UPDATE -------->
@@ -319,7 +324,7 @@ Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als B
 ##### Epidemiologische Verbreitung
 
 Mittlerweile wurde die Variante in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante 135-mal nachgewiesen und hatte in der Kalenderwoche 49 einen Anteil von 8.6% unter allen sequenzierten Proben und 3% unter den sequenzierten Proben, die im Rahmen des Surveillance Programms untersucht wurden[^25].
+In der Schweiz wurde die Variante 469-mal nachgewiesen und hatte in der Kalenderwoche 50 einen Anteil von 24.5% unter allen sequenzierten Proben und 8% unter den sequenzierten Proben, die im Rahmen des Surveillance Programms untersucht wurden[^25].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
 In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an
@@ -332,7 +337,7 @@ Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate 
 0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entspricht.
 
 Für die Schweiz sind die geschätzten Werte der Wachstumsrate noch sehr unsicher, liegen aber im Bereich der Werte aus Südafrika[^321].
-Das relative Wachstum in der Schweiz scheint mit rund 0,17 (95% UI: 0,13-0,21) pro Tag etwas langsamer als in Südafrika und Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca zurückzuführen ist.
+Das relative Wachstum in der Schweiz scheint mit rund 0,20 (95% UI: 0,19-0,22) pro Tag etwas langsamer als in Südafrika und Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca zurückzuführen ist.
 
 
 ##### Szenario zur epidemiologischen Ausbreitung in der Schweiz
