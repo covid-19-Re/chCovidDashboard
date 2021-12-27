@@ -303,7 +303,7 @@ Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
 Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 
-Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nah der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisiernug wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
+Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nach der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisiernug wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
 
 
 #### Omikron
@@ -367,8 +367,29 @@ Hierbei ist wichtig, dass die dritte Impfdosis allen Menschen, bei denen die zwe
 
 Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch nicht viele Daten vor.
 Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Südafrika[^316] schätzt, dass Personen, die zwei Dosen des Impfstoffs von mit BioNTech/Pfizer erhalten haben, 70% gegen schwere Verläufe nach Infektion mit Omikron geschützt sind.
-Gemäss dieser Studie ist die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher (bei vornehmlich milden Verläufen).
-Weitere Studien zu der schwere der Infektion mit Omikron werden in den nächsten Wochen erwartet. 
+
+
+##### Schwere der Infektion
+
+Die Beurteilung, ob eine Infektion mit Omikron schwerer verläuft als eine mit einer früheren Variante, wird dadurch erschwert, dass Omikron mehr Ansteckungen in Geimpften oder Genesen verursacht, die durch ihre Immunität, zumindest teilweise, gegen schwere Krankheitsverläufe geschützt sind.
+Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stellt vor allem in Ländern eine besondere Herausforderung dar, in denen viele Menschen durch eine Infektion immunisiert wurden, wie zum Beispiel Südafrika. Immunität durch eine Infektion ist nämlich oft nicht erfasst.
+
+Wenn man nicht fuer den Impfstatus korrigiert, sieht man, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
+In einer Studie aus Südafrika[^329] ist das bereinigte Chancenverhältnis der Hospitalisation nach einer Omikron-Infektion (verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
+
+Nach einer Korrektur bezüglich des Impfstatus schätzt die oben erwähnte Versicherungs-Studie aus Südafrika[^316] die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher.
+Einer Studie des UK HSA zufolge [^327] ist die Hazard Ratio einer Hospitalisierung nach einer Omikron-Infektion 0.62 (95% UI: 0.55 to 0.69), was einer 38% niedrigeren Hospitalizationsrate entspricht.
+Gemäss einer Studie[^322] des Imperial College (beruhend auf ähnlichen Datenquellen[^327]) ist die Hazard Ratio 0.8 (95% UI 0.75-0.85).
+Diese Schätzungen sind nicht korrigiert für nicht-diagnostizierte Infektionen.
+
+Einem Preprint[^328] zufolge, ist die Viruslast von Omikron in Goldhamstern drei Grössenordnungen niedriger als die, die bei Infektionen mit früheren Varianten beobachtet wird.
+
+Diese Daten und Analysen sind alle noch vorläufig.
+Auch sind die geschätzten Hazard Ratios sensitiv bezüglich der genaue Definition einer Hospitalisierung[^327],[^322].
+Es ist wichtig zu betonen, dass die potentiell niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden wird (ca. nach 2-3 Tagen). 
+Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der Infektion mit Omikron werden in den nächsten Wochen erwartet. 
+
+
 
 
 <!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
@@ -503,3 +524,6 @@ Weitere Studien zu der schwere der Infektion mit Omikron werden in den nächsten
 [^324]: https://www.who.int/publications/m/item/enhancing-readiness-for-omicron-(b.1.1.529)-technical-brief-and-priority-actions-for-member-states
 [^325]: https://sciencetaskforce.ch/wissenschaftliches-update-26-januar-2021/
 [^326]: https://www.sciencedirect.com/science/article/pii/S1755436521000335?via%3Dihub beschrieben.
+[^327]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1043807/technical-briefing-33.pdf
+[^328]: https://www.biorxiv.org/content/10.1101/2021.12.24.474086v1
+[^329]: https://www.medrxiv.org/content/10.1101/2021.12.21.21268116v1.full.pdf
