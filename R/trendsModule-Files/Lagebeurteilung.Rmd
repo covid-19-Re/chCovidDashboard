@@ -216,21 +216,19 @@ Die SARS-CoV-2-Epidemie wird zurzeit noch mehrheitlich durch die Delta-Variante 
 Von Mitte Oktober bis Anfang Dezember 2021 stiegen die Fallzahlen signifikant.
 Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 10% (95% UI: 3-17%) pro Woche.
 Die kritische Schwelle von 300 Intensivbettenbelegungen ist seit letzter Woche überschritten.
-Über dieser Schwelle werden alle Spitäler weniger dringliche Eingriffe verschieben müssen,
-in manchen Spitälern wird implizite Triage stattfinden und ad-hoc Betten werden bereitgestellt[^61].
+Über dieser Schwelle müssen praktisch alle Spitäler weniger dringliche Eingriffe verschieben,
+in manchen Spitälern findet implizite Triage statt und ad-hoc Betten werden bereitgestellt[^61].
 <!------ UPDATE  -------->
 <!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
-Die beobachtete rasche Zunahme der Fälle bis Anfang Dezember und damit der momentane Anstieg in Intensivbettenbelegungen, wird für das stark belastete Gesundheitswesen sehr schwierig zu bewältigen sein. 
+Die beobachtete rasche Zunahme der Fälle bis Anfang Dezember und damit der weiter anhaltende Anstieg in Intensivbettenbelegungen, ist für das stark belastete Gesundheitswesen sehr schwierig zu bewältigen. 
 <!------ UPDATE  -------->
 
 Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert.
-Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen und der Anteil an den bestätigten Fällen wird in Kalenderwoche 49 auf 3-9% geschätzt.
+Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen und der Anteil an den bestätigten Fällen wird in Kalenderwoche 49 auf 3-8% geschätzt.
 Die Häufigkeit von Omikron hat sich um das 2 bis 3-fache pro Woche erhöht.
-Wir rechnen daher damit, dass diese Variante in den nächsten Wochen dominant wird und Anfang 2022 das Infektionsgeschehen dominiert.
+Wir rechnen daher damit, dass diese Variante ab Anfang 2022 das Infektionsgeschehen dominieren wird.
 
-Weil sich Omikron momentan rasch in der Schweiz ausbreitet, erwarten wir, dass Fallzahlen dann auch wieder rasch steigen (mit einer Zunahme um das 2 bis 3-fache pro Woche), wenn Kontakte nicht weiter reduziert werden.
-Eine solch starke Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten.
-Parallel zur Kontaktreduktion kann der Schutz vor Infektion und damit ein Bremsen der Ausbreitung durch ein rasches Ausrollen der dritten Impfungen von rund 30% auf, zumindest kurzfristig, 60-85% erhöht werden.
+Wenn die Übertragungsgeschwindigkeit gleich bleibt, werden sich die Fallzahlen pro Woche mehr als verdoppeln sobald Omikron dominant ist. Eine solch starke Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten. Wenn Kontakte weiter reduziert werden kann dieser absolute Anstieg der Fallzahlen gebremst werden. Parallel zur Kontaktreduktion kann der Schutz vor Infektion durch ein rasches Ausrollen der dritten Impfungen von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöht werden. Somit sind dritte Impfungen ein weiteres effektives Werkzeug um den Anstieg der Fallzahlen zu bremsen und Spitalaufenthalte zu vermeiden.
 
 
 ### Dynamik
@@ -271,7 +269,7 @@ die Todesfälle stiegen um `r valueUIchange(rankingCHEdeaths)` pro Woche.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle ist nur in allen Altersgruppen signifikant abnehmend ausser 
+Die Zahl der Fälle ist in allen Altersgruppen signifikant abnehmend ausser 
 in den 20-29, 30-39 und 40-49 Jährigen.
 Die Hospitalisierungen nahmen nur in der Altersgruppe der über 80-Jährigen signifikant ab.
 Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
@@ -305,20 +303,22 @@ Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
 Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 
-<!--- BORING: Am 20. Oktober 2021 deklarierte Public Health England AY.4.2, eine Untervariante von Delta, zu einer "variant under investigation" (VUI-21OCT-01)[^56]. In England wurde der Wachstumstvorteil von AY.4.2 auf 17% gegenüber anderen Delta-Untervarianten geschätzt. AY.4.2. hatte dort in der Kalenderwoche 40 eine Häufigkeit von 5.9%[^56]. Diese Variante wurde in der Schweiz in den letzten 2 Monaten rund 70 Mal gefunden und die Häufigkeit war in Kalenderwoche 44 0.4%[^25]. ---->
-<!--- UPDATE cov-spectrum.ethz.ch ---->
-
-<!--- Urs bored by this: 
-Delta verursacht schwerere Verläufe als die zuvor in der Schweiz dominierenden Stämme. In einer grossen Studie in England hatten Patient:innen mit Delta im Vergleich zu Patient:innen mit Alpha ein mehr als doppelt so hohes Hospitalisierungsrisiko[^50]. Ein ähnlicher Anstieg des Risikos wurde in Schottland[^37] und in Kanada[^36] beobachtet.
----->
-
-Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren nach 6 Monaten) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
+Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nah der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisiernug wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
 
 
 #### Omikron
+
 Am 23. November 2021 wurde erstmalig eine neue SARS-CoV-2 Variante in Südafrika und Botswana beschrieben, die sich durch eine starke Häufung von Veränderungen im Stachelprotein ("spike protein") auszeichnet. 
+Diese Variante ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304].
+Diese neue Variante unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303].
+Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
+
 Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als Besorgnis erregende ein und bezeichnete sie mit dem Namen "Omikron" [^301].
-Mittlerweile wurde die Variante in verschiedenen europäischen Ländern, Australien, Kanada, und Hongkong festgestellt [^302],[^303], meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
+
+
+##### Epidemiologische Verbreitung
+
+Mittlerweile wurde die Variante in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
 In der Schweiz wurde die Variante 135-mal nachgewiesen und hatte in der Kalenderwoche 49 einen Anteil von 8.6% unter allen sequenzierten Proben und 3% unter den sequenzierten Proben, die im Rahmen des Surveillance Programms untersucht wurden[^25].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 
@@ -331,11 +331,18 @@ Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. -
 Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate des Anteils von Omikron in England auf
 0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entspricht.
 
-Für die Schweiz sind die geschätzten Werte noch sehr unsicher, liegen aber im Bereich der Werte aus Südafrika[^321].
-Das relative Wachstum in der Schweiz scheint mit rund 0.2 pro Tag etwas langsamer als in Südafrika und Grossbritannien, was möglicherweise auf eine vermehrte Verimpfung von Moderna zurückzuführen ist.
-Ob allein die schnelle Verbesserung des Impfschutzes in der Bevölkerung durch eine dritte Impfdosis die Ausbreitung von Omikron aufhalten kann, hängt einer neuen schweizer Modellierungsstudie[^320] zufolge davon ab, ob der rasche Ausbreitung von Omikron eine höhere Transmissibilität oder Immunflucht zugrunde liegt.
+Für die Schweiz sind die geschätzten Werte der Wachstumsrate noch sehr unsicher, liegen aber im Bereich der Werte aus Südafrika[^321].
+Das relative Wachstum in der Schweiz scheint mit rund 0,17 (95% UI: 0,13-0,21) pro Tag etwas langsamer als in Südafrika und Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca zurückzuführen ist.
 
-Omikron ist genetisch am engsten verwandt mit den Varianten, die im ersten Halbjahr 2020 zirkulierten, und ist nicht direkt aus einer anderen besorgniserregenden Variante entstanden[^304]. Omikron unterscheidet sich durch rund 30 Mutationen im Stachelprotein von den ursprünglich zirkulierenden Varianten[^303]. Diese Mutationen haben wichtige Teile des Stachelproteins deutlich verändert.
+
+##### Szenario zur epidemiologischen Ausbreitung in der Schweiz
+
+Mit der für die Schweiz momentan geschätzten Wachstumsrate basierend auf sequenzierten Proben aus dem Zeitraum 24.11.2021-08.12.2021 kann ein Szenario für die zukünftige Entwicklung der Fallzahlen berechnet werden (Proben nach dem 8.12.2021 werden noch sequenziert und sind daher hier nicht eingeschlossen). Die Annahmen des Szenarios sind in der Legende von Abb. 1 beschrieben. Omikron wird in dem Szenario zwischen 24.12.2021 und 6.1.2022 mehr als 50% der Fälle ausmachen. In diesem Szenario werden vor Jahresende die Fallzahlen wieder anfangen zu steigen. Mit Reduzierung der Kontakte und dritten Impfungen kann die Dynamik verlangsamt werden und somit die Zunahme von Omikron verzögert werden. Das hier gezeigte Szenario sind Berechnungen unter der Annahme dass sich nichts aendert. Die Berechnungen erfolgen analog zu unseren Berechnungen für Alpha im Januar 2021 https://sciencetaskforce.ch/wissenschaftliches-update-26-januar-2021/. und sind im Detail in https://www.sciencedirect.com/science/article/pii/S1755436521000335?via%3Dihub beschrieben.
+
+Abb. 1. Szenario zur Entwicklung der Fallzahlen. Wir nehmen an dass mit Start von KW 49 der R-Wert von Delta bei 0,9 lag und sich nicht weiter verändern wird. Die damit erwarteten Fallzahlen von Delta sind in Abb. 1 in blau dargelegt. Weiter nehmen wir an, dass die Häufigkeit von Omikron in den bestätigten Fällen zum Start von KW 49 bei 4% lag. Die logistische Wachstumsrate von Omikron im Vergleich zu Delta wird auf 0,17 (0,13-0,21) geschätzt. Die damit erwarteten Omikron Fallzahlen sind in orange dargestellt (durchgezogen mit Wachstum von 0,17; gestrichelte Linien mit 0,13 und 0,21). 
+
+
+##### Schutzwirkung der Impfung
 
 Laboruntersuchungen der letzten zwei Wochen (z.B. [^307],[^308],[^309],[^310],[^315]) zeigen eine starke Verringerung der Neutralisation von Omikron mit Seren von Geimpften und Genesenen.
 Die Studien zur Neutralisation von Omikron werden in einem ständig aktualisierten Dokument[^319] zusammengetragen und in Zusammenhang gesetzt.
@@ -478,10 +485,15 @@ Weitere Studien zu der schwere der Infektion mit Omikron werden in den nächsten
 [^316]: https://www.bmj.com/content/375/bmj.n3104
 <!---- Omicron and boosting Imperial: ---->
 [^317]: https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-48-global-omicron/
-<!---- Omicron transmission advantage England (Gani): ---->
+<!---- Omicron transmission advantage and VE England (Gani): ---->
 [^318]: https://spiral.imperial.ac.uk/bitstream/10044/1/93038/32/2021-12-16%20COVID19%20Report%2049.pdf
 <!---- Omicron neut data pptx Derek Smith group Cambridge, UK (contains many neut studies! slide 4!): ---->
 [^319]: https://docs.google.com/presentation/d/13NFT3GjMluTbDQZRSl7VIua6G3FvwSHYgbU9gMoWI4U/edit#slide=id.g1075171e1cf_6_372.
 <!---- Melissa's Omicron preprint ---->
 [^320]: https://www.medrxiv.org/content/10.1101/2021.12.12.21267673v1.full.pdf
 [^321]: https://cov-spectrum.org/explore/Switzerland/Surveillance/Past6M/variants/chen-2021-fitness?pangoLineage=B.1.1.529*
+<!---- Omicron hosp rate England ---->
+[^322]: https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-50-severity-omicron/
+<!---- Omicron hosp rate Scotland ---->
+[^323]: https://www.ed.ac.uk/usher/eave-ii/key-outputs/our-publications/severity-of-omicron-variant-of-concern-and-vaccine
+[^324]: https://www.who.int/publications/m/item/enhancing-readiness-for-omicron-(b.1.1.529)-technical-brief-and-priority-actions-for-member-states
