@@ -212,26 +212,14 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die SARS-CoV-2-Epidemie wird zurzeit noch mehrheitlich durch die Delta-Variante bestimmt.
-Von Mitte Oktober bis Anfang Dezember 2021 stiegen die Fallzahlen signifikant und stagnierten in den letzten Wochen.
-Diese Woche sehen wir wieder eine Anstieg der Fallzahlen und der R-Wert ist in drei Grossregionen signifikant über 1.
+Die vergangenen Monate hatte Delta das epidemiologische Geschehen bestimmt. Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. In der Schweiz ist diese Variante das erste Mal in einer Probe vom 22.11.2021 nachgewiesen worden und hat sich in den vergangenen sechs Wochen sehr rasch ausgebreitet, so dass sie inzwischen den Grossteil der neuen Infektionen ausmacht. Seit Kalenderwoche 51 sehen wir einen Anstieg der Fallzahlen und der R-Wert ist in drei Grossregionen signifikant über 1. <!------- UPDATE Grossregionen -------->
 
-Seit Ende November 2021 steigt auch die Belegung der Intensivstationen mit COVID-19 Patienten signifikant an, momentan mit einer Rate von 6% (95% UI: 3-17%) pro Woche.
-Die kritische Schwelle von 300 Intensivbettenbelegungen ist seit vorletzter Woche überschritten.
-Über dieser Schwelle müssen praktisch alle Spitäler weniger dringliche Eingriffe verschieben,
-in manchen Spitälern findet implizite Triage statt und ad-hoc Betten werden bereitgestellt[^61].
-<!------ UPDATE  -------->
-<!------ NOT QUITE TRUE AT THE MOMENT: Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends.  -------->
-Die beobachtete rasche Zunahme der Fälle bis Anfang Dezember, der erneute Anstieg diese Woche und damit der weiter anhaltende Anstieg in Intensivbettenbelegungen, ist für das stark belastete Gesundheitswesen sehr schwierig zu bewältigen. 
-<!------ UPDATE  -------->
+Wenn die Kontakthäufigkeit gleich bleibt, werden durch die Zunahme von Omikron die absoluten Fallzahlen zunehmend schneller ansteigen. Momentan steigen die Fallzahlen um rund 50% pro Woche. Eine weitere Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten. Wenn Kontakte reduziert werden, kann dieser absolute Anstieg der Fallzahlen gebremst werden. Eine Bereitstellung von Selbsttests können sicherstellen, dass sich alle Menschen weiter testen können und so notwendige Kontakt sicherer gemacht werden.
 
-Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert.
-Auch in der Schweiz wurde diese Variante schon über 100-mal nachgewiesen und der Anteil an den bestätigten Fällen wird in Kalenderwoche 50 auf 8-25% geschätzt.
-Die Häufigkeit von Omikron hat sich um das 2 bis 3-fache pro Woche erhöht.
-Wir rechnen daher damit, dass diese Variante ab Anfang 2022 das Infektionsgeschehen dominieren wird.
+Weiter reduziert konsequentes dauerhaftes Maskentragen in Innenräumen die Zahl der neuen Infektionen sehr effektiv. Eine Labor-Studie zeigte ein Risiko einer SARS-CoV-2-Übertragung innerhalb von 20 Minuten in einer bestimmten Expositionssituation von mehr als 90% ohne Masken, von 10% mit korrekt getragenen medizinischen Masken und von 0.14% mit korrekt getragenen FFP2-Masken[^330]. Die Autoren gehen davon aus, dass im täglichen Leben – ausserhalb des Labors – die Infektionswahrscheinlichkeiten nochmals 10-100 mal tiefer sind[^331]. FFP2 Masken reduzieren also das verbleibende Risiko von 0.1-1% einer Infektion bei medizinischen Masken auf 0.001-0.014% und geben so insbesondere in Situationen mit erhöhter Exposition einen zusätzlichen Schutz. Da das Atmen durch eine korrekt getragene FFP2-Maske stärker beeinträchtigt wird als durch eine korrekt getragene medizinische Maske[^332], bieten sich FFP2-Masken insbesondere in Situationen ohne oder mit nur leichter körperliche Betätigung an (im öffentlichen Verkehr, bei Publikumsanlässen, etc.). Gleichzeitig sollte für eine gute Belüftung gesorgt werden.
 
-Wenn die Übertragungsgeschwindigkeit gleich bleibt, werden sich die Fallzahlen pro Woche mehr als verdoppeln sobald Omikron dominant ist. Eine solch starke Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten. Wenn Kontakte weiter reduziert werden kann dieser absolute Anstieg der Fallzahlen gebremst werden. Parallel zur Kontaktreduktion kann der Schutz vor Infektion durch ein rasches Ausrollen der dritten Impfungen von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöht werden. Somit sind dritte Impfungen ein weiteres effektives Werkzeug um den Anstieg der Fallzahlen zu bremsen und Spitalaufenthalte zu vermeiden.
-
+Zusätzlich zur Kontaktreduktion kann ein rasches Ausrollen der dritten Impfungen den individuellen Schutz vor Infektion von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöhen. Somit sind dritte Impfungen ein weiteres effektives Werkzeug, um den Anstieg der Fallzahlen zu bremsen. Aktuell sind 24% <!------- UPDATED Jan 3 in morning --------> 
+der Schweizer Bevölkerung zum 3. Mal geimpft worden. Nachdem darunter vorwiegend ältere Menschen sind, hilft dies, um Spitaleinweisungen zu verhindern. Soll die Ausbreitung von Omikron mit Hilfe der dritten Dosis gebremst werden, braucht es rasch weitere dritte Impfungen in der breiten Bevölkerung.
 
 ### Dynamik
 
@@ -324,31 +312,35 @@ Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als B
 ##### Epidemiologische Verbreitung
 
 Mittlerweile wurde die Variante in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante 469-mal nachgewiesen und hatte in der Kalenderwoche 50 einen Anteil von 24.5% unter allen sequenzierten Proben und 8% unter den sequenzierten Proben, die im Rahmen des Surveillance Programms untersucht wurden[^25].
+In der Schweiz wurde die Variante 469-mal nachgewiesen und hatte in der Kalenderwoche 50 einen Anteil von 24.5% unter allen sequenzierten Proben und 8% unter den sequenzierten Proben, die auf GISAID als Teil des Surveillance Programms deklariert sind[^25].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
+Auch sogenannte «S gene target failure» Daten aus Laboren in Genf[^333], Zürich und dem Tessin deuten darauf hin, dass Omikron inzwischen dominant ist.
 
-In Grossbritannien [^312] und in Dänemark[^313] steigt der Anteil an Omikron sehr schnell an
+Aus diesen Häufigkeiten von Omikron kann die relative logistische Wachstumsrate von Omikron im Vergleich zu Delta geschätzt werden[^321]. Das relative Wachstum in der Schweiz wird auf 0.22 (0.20-0.23) <!---- updated on Jan 3 ---> pro Tag geschätzt basierend auf allen verfügbaren Sequenz-Daten. Unabhängige Schätzungen basierend auf «S gene target failure» Daten aus Genf kommen auf 0.26-0.32[^334]. Schätzungen basierend auf Abwasserproben kommen auf 0.23 (0.19 – 0.28) für Zürich und 0.27 (0.20-0.34) für Genf [^335][^336].
+
+In Grossbritannien [^312] und in Dänemark[^313] stieg der Anteil an Omikron sehr schnell an
 (Verdopplung alle 2-4 Tage),
-was einen Wachstumsvorteil in mehrheitlich geimpften Populationen suggeriert.
-Daten aus Südafrika erlauben eine vorläufige Schätzung des logistischen Wachstumsrate von Omikron gegenüber Delta von 0,32 (95% UI: 0,09-0,55) pro Tag[^314], was einer Verdopplung des Anteils von Omikron an neuen Infektionen ungefähr alle 2-8 Tage entspricht.
+was einen Wachstumsvorteil in mehrheitlich geimpften Populationen nahelegt.
+Daten aus Südafrika erlauben eine  Schätzung des logistischen Wachstumsrate von Omikron gegenüber Delta von 0,32 (95% UI: 0,09-0,55) pro Tag[^314], was einer Verdopplung des Anteils von Omikron an neuen Infektionen ungefähr alle 2-8 Tage entsprach.
 <!--- (Als Referenz: die logistische Wachstumsrate von Alpha gegenüber der ursprünglichen Variante wurde mit derselben Methode 5-mal niedriger, zu 0.065 pro Tag, geschätzt.)
 Ganz grob entspräche diese logistische das einem Sprung von Re von 1.1 auf 3. ---->
 Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate des Anteils von Omikron in England auf
-0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entspricht.
+0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entsprach.
 
-Für die Schweiz sind die geschätzten Werte der Wachstumsrate noch sehr unsicher, liegen aber im Bereich der Werte aus Südafrika[^321].
-Das relative Wachstum in der Schweiz scheint mit rund 0,20 (95% UI: 0,19-0,22) pro Tag etwas langsamer als in Südafrika und Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca zurückzuführen ist.
-
+Für die Schweiz sind die geschätzten Werte der Wachstumsrate im Bereich der Werte aus Südafrika[^321].
+Das relative Wachstum in der Schweiz scheint etwas langsamer als in Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca in der Schweiz zurückzuführen ist.
 
 ##### Szenario zur epidemiologischen Ausbreitung in der Schweiz
 
-Mit der für die Schweiz momentan geschätzten Wachstumsrate basierend auf sequenzierten Proben aus dem Zeitraum 24.11.2021-08.12.2021 kann ein Szenario für die zukünftige Entwicklung der Fallzahlen berechnet werden (Proben nach dem 8.12.2021 werden noch sequenziert und sind daher hier nicht eingeschlossen). Die Annahmen des Szenarios sind in der Legende von Abb. 1 beschrieben. Omikron wird in dem Szenario zwischen 24.12.2021 und 6.1.2022 mehr als 50% der Fälle ausmachen. In diesem Szenario wird erwartet, dass die Fallzahlen noch vor Jahresende ein zwischenzeitliches Minimum erreichen und wieder anfangen zu steigen. Weiter sind in diesem Szenario Fallzahlen von über 20’000 pro Tag in der zweiten Januarwoche plausibel.
+Mit der für die Schweiz momentan geschätzten Wachstumsrate basierend auf sequenzierten Proben aus dem Zeitraum 24.11.2021-27.12.2021 können Szenarien für die zukünftige Entwicklung der Fallzahlen berechnet werden basierend auf einem R-Wert = 0.9 von Delta bis zum 20.12.2021, der Häufigkeit von Omikron Anfang Dezember und der relativen Wachstumsrate von Omikron im Vergleich zu Delta (Abb. 1). In diesen Szenarien wird erwartet, dass die Fallzahlen in der zweiten Dezember-Hälfte wieder ansteigen. In der Tat steigen die Fallzahlen seit wenigen Tagen wieder (Abb. 1, schwarze Linie).
 
-Mit Reduzierung der Kontakte und dritten Impfungen kann die Dynamik verlangsamt werden und somit die Zunahme von Omikron verzögert werden. Das hier gezeigte Szenario basiert auf der Annahme, dass sich an der Übertragunsgsgeschwindigkeit nichts ändert. Die Berechnungen erfolgen analog zu unseren Berechnungen für Alpha im Januar 2021 [^325] und sind im Detail in [^326] beschrieben.
+Mit einer Reduzierung der Kontakte und schnellem Ausrollen der dritten Impfungen kann die Dynamik verlangsamt und die Zunahme von Omikron verzögert werden. Ab 20.12.2021 wurden neue Massnahmen eingeführt. Wir machen drei verschiedene Annahmen für den R-Wert von Delta nach dem 20.12.2021: Szenario 1: der R-Wert für Delta bleibt bei 0.9; Szenario 2: der R-Wert für Delta sinkt auf 0.7; Szenario 2: der R-Wert für Delta sinkt auf 0.5. In diesen Szenarien sind Fallzahlen von über 20’000 pro Tag in der ersten Januarhälfte 2022 plausibel.
 
-Das gezeigte Szenario ignoriert Unsicherheiten im R-Wert der Delta-Variante und in der Häufigkeit von Omikron in KW 49. Die Unsicherheit in der logistischen Wachstumsrate von Omikron im Vergleich zu Delta ist durch die gestrichelten Linien aufgetragen. Wir nehmen, basierend auf den sequenzierten klinischen Proben, ein Wachstum von 0.17 (0.13-0.21) an. Insgesamt ist diese geschätzte Wachstumsrate in der Schweiz tiefer als die Schätzungen aus Grossbritannien und Südafrika (siehe oben). Falls wir die Wachstumsrate basierend auf den vorliegenden schweizer Datenpunkten momentan unterschätzen, dann ist auch die Schnelligkeit der Ausbreitung von Omikron in Abb. 1 eine Unterschätzung.
+Die Berechnungen erfolgen analog zu unseren Berechnungen für Alpha im Januar 2021 [^325] und sind im Detail in [^326] beschrieben.
 
-Abbildung 1. Szenario zur Entwicklung der Fallzahlen bis zum 09.01.2022. Wir nehmen an, dass mit Start von KW 49 der R-Wert von Delta bei 0.9 lag und sich nicht weiter verändern wird. Die damit erwarteten Fallzahlen für Delta sind in Abb. 1 in blau dargelegt. Weiter nehmen wir an, dass die Häufigkeit von Omikron in den bestätigten Fällen zum Start von KW 49 bei 4% lag. Die logistische Wachstumsrate von Omikron im Vergleich zu Delta wird auf 0.17 (0.13-0.21) geschätzt. Die damit erwarteten Omikron Fallzahlen sind in orange dargestellt (durchgezogen mit Wachstum von 0.17; gestrichelte Linien mit 0.13 und 0.21).
+Das gezeigte Szenario ignoriert Unsicherheiten im R-Wert der Delta-Variante und in der Häufigkeit von Omikron in Kalenderwoche 49, 2021. Die Unsicherheit in der logistischen Wachstumsrate von Omikron im Vergleich zu Delta ist durch die dunklere orange Fläche markiert. Wir nehmen, basierend auf den sequenzierten klinischen Proben, ein Wachstum von Omikron relativ zu Delta von 0.19 (0.18-0.21) pro Tag an. Insgesamt ist diese geschätzte Wachstumsrate in der Schweiz tiefer als die Schätzungen aus Grossbritannien und Südafrika (siehe oben). Falls wir die Wachstumsrate basierend auf den vorliegenden Schweizer Datenpunkten momentan unterschätzen, dann ist auch die Schnelligkeit der Ausbreitung von Omikron in Abb. 1 und die Geschwindigkeit, mit der die absoluten Fallzahlen zunehmen, eine Unterschätzung.
+
+Abbildung 1. Szenarien zur Entwicklung der Fallzahlen bis zum 09.01.2022. Wir nehmen an, dass mit Start von KW 49, 2021 der R-Wert von Delta bei 0.9 lag und sich bis 20.12.2021 nicht veränderte. In Szenario 1 ist nach 20.12.2021 der R-Wert für Delta weiter bei 0.9, in Szenario 2 bei 0.7 und in Szenario 3 bei 0.5. Die damit erwarteten Fallzahlen für Delta sind in Abb. 1 in blau dargelegt. Weiter nehmen wir an, dass die Häufigkeit von Omikron in den bestätigten Fällen zum Start von KW 49 bei rund 4% lag. Die logistische Wachstumsrate von Omikron im Vergleich zu Delta wird auf 0.19 (0.18-0.21) pro Tag geschätzt. Die damit erwarteten Omikron Fallzahlen sind in orange dargestellt (durchgezogen mit Wachstum von 0.19 pro Tag; gestrichelte Linien mit Wachstum von 0.18 und 0.21 pro Tag).
 
 
 ##### Schutzwirkung der Impfung
@@ -379,19 +371,17 @@ Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Süd
 Die Beurteilung, ob eine Infektion mit Omikron schwerer verläuft als eine mit einer früheren Variante, wird dadurch erschwert, dass Omikron mehr Ansteckungen in Geimpften oder Genesen verursacht, die durch ihre Immunität, zumindest teilweise, gegen schwere Krankheitsverläufe geschützt sind.
 Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stellt vor allem in Ländern eine besondere Herausforderung dar, in denen viele Menschen durch eine Infektion immunisiert wurden, wie zum Beispiel Südafrika. Immunität durch eine Infektion ist nämlich oft nicht erfasst.
 
-Wenn man nicht fuer den Impfstatus korrigiert, sieht man, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
-In einer Studie aus Südafrika[^329] ist das bereinigte Chancenverhältnis der Hospitalisation nach einer Omikron-Infektion (verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
+Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
+In einer Studie aus Südafrika[^329] ist die Odds Ratio (bereinigt bezüglich demographischer und klinischer Kofaktoren und dokumentierter Genesung, aber nicht Impfstatus) der Hospitalisation nach einer wahrscheinlichen Omikron-Infektion (basierend auf «S gene target failure» Daten; verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
 
 Nach einer Korrektur bezüglich des Impfstatus schätzt die oben erwähnte Versicherungs-Studie aus Südafrika[^316] die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher.
 Einer Studie des UK HSA zufolge [^327] ist die Hazard Ratio einer Hospitalisierung nach einer Omikron-Infektion 0.62 (95% UI: 0.55 to 0.69), was einer 38% niedrigeren Hospitalizationsrate entspricht.
 Gemäss einer Studie[^322] des Imperial College (beruhend auf ähnlichen Datenquellen[^327]) ist die Hazard Ratio 0.8 (95% UI 0.75-0.85).
-Diese Schätzungen sind nicht korrigiert für nicht-diagnostizierte Infektionen.
-
-Einem Preprint[^328] zufolge, ist die Viruslast von Omikron in Goldhamstern drei Grössenordnungen niedriger als die, die bei Infektionen mit früheren Varianten beobachtet wird.
+Diese Schätzungen sind nicht korrigiert für nicht-diagnostizierte Infektionen. Man erwartet, dass durch eine solche Korrektur die Unterschiede zwischen Delta und Omikron kleiner ausfallen werden.
 
 Diese Daten und Analysen sind alle noch vorläufig.
 Auch sind die geschätzten Hazard Ratios sensitiv bezüglich der genaue Definition einer Hospitalisierung[^327],[^322].
-Es ist wichtig zu betonen, dass die potentiell niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden wird (ca. nach 2-3 Tagen). 
+Es ist wichtig zu betonen, dass die potentiell niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden wird. 
 Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der Infektion mit Omikron werden in den nächsten Wochen erwartet. 
 
 
@@ -532,3 +522,10 @@ Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der In
 [^327]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1043807/technical-briefing-33.pdf
 [^328]: https://www.biorxiv.org/content/10.1101/2021.12.24.474086v1
 [^329]: https://www.medrxiv.org/content/10.1101/2021.12.21.21268116v1.full.pdf
+[^330] https://www.pnas.org/content/118/49/e2110117118
+[^331] https://www.mpg.de/17915640/corona-risiko-maske-schutz
+[^332] https://medcraveonline.com/JLPRR/effects-of-long-duration-wearing-of-n95-respirator-and-surgical-facemask-a-pilot-study.html
+[^333] https://www.hug.ch/laboratoire-virologie
+[^334] https://twitter.com/C_Althaus/status/1475404257155297281
+[^335] https://www.medrxiv.org/content/10.1101/2021.08.22.21262024v1
+[^336] https://www.eawag.ch/en/department/sww/projects/sars-cov2-in-wastewater/
