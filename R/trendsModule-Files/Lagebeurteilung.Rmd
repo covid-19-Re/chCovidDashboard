@@ -212,9 +212,9 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-Die vergangenen Monate hatte Delta das epidemiologische Geschehen bestimmt. Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. In der Schweiz ist diese Variante das erste Mal in einer Probe vom 22.11.2021 nachgewiesen worden und hat sich in den vergangenen sechs Wochen sehr rasch ausgebreitet, so dass sie inzwischen den Grossteil der neuen Infektionen ausmacht. Seit Kalenderwoche 51 sehen wir einen Anstieg der Fallzahlen und der R-Wert ist in drei Grossregionen signifikant über 1. <!------- UPDATE Grossregionen -------->
+Die vergangenen Monate hatte Delta das epidemiologische Geschehen bestimmt. Von der Weltgesundheitsorganisation (WHO) wurde die neue Variante Omikron am 26.11.2021 als besorgniserregend deklariert. In der Schweiz ist diese Variante das erste Mal in einer Probe vom 22.11.2021 nachgewiesen worden und hat sich in den vergangenen sechs Wochen sehr rasch ausgebreitet, so dass sie inzwischen den Grossteil der neuen Infektionen ausmacht. Seit Kalenderwoche 51 2021 sehen wir einen Anstieg der Fallzahlen und der R-Wert ist nun in allen Grossregionen signifikant über 1. <!------- UPDATE Grossregionen -------->
 
-Wenn die Kontakthäufigkeit gleich bleibt, werden durch die Zunahme von Omikron die absoluten Fallzahlen zunehmend schneller ansteigen. Momentan steigen die Fallzahlen um rund 50% pro Woche. Eine weitere Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten. Wenn Kontakte reduziert werden, kann dieser absolute Anstieg der Fallzahlen gebremst werden. Eine Bereitstellung von Selbsttests können sicherstellen, dass sich alle Menschen weiter testen können und so notwendige Kontakt sicherer gemacht werden.
+Wenn die Kontakthäufigkeit gleich bleibt, werden durch die Zunahme von Omikron die absoluten Fallzahlen zunehmend schneller ansteigen. Momentan steigen die Fallzahlen um rund 45% pro Woche. Eine weitere Zunahme der Fälle würde zu vielen Krankheitsfällen und damit auch Arbeitsausfällen in kritischen Bereichen wie dem Gesundheitsssytem führen und Testkapazitäten überlasten. Wenn Kontakte reduziert werden, kann dieser absolute Anstieg der Fallzahlen gebremst werden. Eine Bereitstellung von Selbsttests können sicherstellen, dass sich alle Menschen weiter testen können und so notwendige Kontakt sicherer gemacht werden.
 
 Weiter reduziert konsequentes dauerhaftes Maskentragen in Innenräumen die Zahl der neuen Infektionen sehr effektiv. Eine Labor-Studie zeigte ein Risiko einer SARS-CoV-2-Übertragung innerhalb von 20 Minuten in einer bestimmten Expositionssituation von mehr als 90% ohne Masken, von 10% mit korrekt getragenen medizinischen Masken und von 0.14% mit korrekt getragenen FFP2-Masken[^330]. Die Autoren gehen davon aus, dass im täglichen Leben – ausserhalb des Labors – die Infektionswahrscheinlichkeiten nochmals 10-100 mal tiefer sind[^331]. FFP2 Masken reduzieren also das verbleibende Risiko von 0.1-1% einer Infektion bei medizinischen Masken auf 0.001-0.014% und geben so insbesondere in Situationen mit erhöhter Exposition einen zusätzlichen Schutz. Da das Atmen durch eine korrekt getragene FFP2-Maske stärker beeinträchtigt wird als durch eine korrekt getragene medizinische Maske[^332], bieten sich FFP2-Masken insbesondere in Situationen ohne oder mit nur leichter körperliche Betätigung an (im öffentlichen Verkehr, bei Publikumsanlässen, etc.). Gleichzeitig sollte für eine gute Belüftung gesorgt werden.
 
@@ -224,9 +224,8 @@ der Schweizer Bevölkerung zum 3. Mal geimpft worden. Nachdem darunter vorwiegen
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Ende Oktober 2021 war bis vorletzte Woche die Schätzung des R-Wertes signifikant über 1.
-Nach einem kurzzeitigen Abfall des R-Wertes letzte Woche unter 1, ist er diese Woche wieder über 1.
-In den Grossregionen Genf, Tessin und Zürich ist er signifikant über 1.
+Von Ende Oktober bis Anfang Dezember 2021 war die Schätzung des R-Wertes signifikant über 1.
+Nach einem kurzzeitigen Abfall des R-Wertes Mitte Dezember 2021 unter 1, ist er seit Ende Dezember 2021 wieder signifikant über 1.
 
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
@@ -253,8 +252,8 @@ für Todesfälle bis zu 23 Tagen.
 Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle nahmen
 <!---- UPDATE fielen/stiegen ---->
-mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche ab,
-die Hospitalisationen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche
+mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche zu.
+Die fielen Hospitalisationen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche
 und
 die Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
 <!---- UPDATE ---->
@@ -262,9 +261,9 @@ die Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle nimmt in den Altersgruppen der 0-9, 10-19, 70-79 und über 80 Jährigen signifikant ab.
-und steigt in den 20-29 Jährigen signifikant an.
-Die Hospitalisierungen nahmen nur in der Altersgruppe der über 80-Jährigen signifikant ab.
+Die Zahl der Fälle nimmt in allen Altersgruppen signifikant zu ausser in den 0-9 Jährigen.
+Die Hospitalisierungen nahmen in den Altersgruppe der 10-19 und 20-29 Jährigen signifikant zu
+und in den Altersgruppen der 50-59 und über 80-Jährigen signifikant ab.
 Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
 <!------ UPDATE -------->
 
@@ -272,7 +271,7 @@ Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, untersch�
 ### Absolute Zahlen
 
 Die kumulierte Anzahl der bestätigten Fälle über die letzten 14 Tage liegt bei `r round(cases14d_CH$valueNorm14daySum, 0)` pro 100'000 Einwohner:innen. 
-Die Positivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
+Die Testpositivität liegt bei `r format(round(mostRecentTestPositivity$testPositivityP, positivityDigits), decimal.mark = ',')`% 
 (Stand `r format(mostRecentTestPositivity$date, "%d.%m.%Y")`, das ist der letzte Tag für welchen nur noch wenige Nachmeldungen erwartet werden).
 <!---- check if indeed 3 days ago. ie on Jan 10, we want to see positivity for Jan 7; to change in line 13---->
 
@@ -291,10 +290,8 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 ### Varianten
 
 #### Delta
-Seit Kalenderwoche 26 ist Delta die dominante Variante in der Schweiz.
-Diese ursprünglich in Indien beschriebene Variante hat
-von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
-Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
+
+Ab Kalenderwoche 26 war Delta die dominante Variante in der Schweiz. Diese Variante hatte von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen. Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 
 Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nach der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisiernug wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
 
@@ -311,8 +308,9 @@ Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als B
 
 ##### Epidemiologische Verbreitung
 
-Mittlerweile wurde die Variante in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante 469-mal nachgewiesen und hatte in der Kalenderwoche 50 einen Anteil von 24.5% unter allen sequenzierten Proben und 8% unter den sequenzierten Proben, die auf GISAID als Teil des Surveillance Programms deklariert sind[^25].
+Mittlerweile wurde Omikron in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
+In der Schweiz wurde die Variante 779-mal nachgewiesen und hatte in der Kalenderwoche 51 einen Anteil von 67% unter allen sequenzierten Proben[^25].
+<!---- und 8% unter den sequenzierten Proben, die auf GISAID als Teil des Surveillance Programms deklariert sind ---->
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 Auch sogenannte «S gene target failure» Daten aus Laboren in Genf[^333], Zürich und dem Tessin deuten darauf hin, dass Omikron inzwischen dominant ist.
 
@@ -330,9 +328,13 @@ Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate 
 Für die Schweiz sind die geschätzten Werte der Wachstumsrate im Bereich der Werte aus Südafrika[^321].
 Das relative Wachstum in der Schweiz scheint etwas langsamer als in Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca in der Schweiz zurückzuführen ist.
 
+Um aus den Schätzungen der Wachstumsrate eine R-Wert zu berechnen, benötigt man Informationen über die Dauer einer Infektion. Laut einer Studie des CDC[^338] ist die Inkubationszeit einer Infektion mit Omikron mit ungefähr 3 Tagen kürzer als die der früher zirkulierenden Varianten.
+
+
 ##### Szenario zur epidemiologischen Ausbreitung in der Schweiz
 
-Mit der für die Schweiz momentan geschätzten Wachstumsrate basierend auf sequenzierten Proben aus dem Zeitraum 24.11.2021-27.12.2021 können Szenarien für die zukünftige Entwicklung der Fallzahlen berechnet werden basierend auf einem R-Wert = 0.9 von Delta bis zum 20.12.2021, der Häufigkeit von Omikron Anfang Dezember und der relativen Wachstumsrate von Omikron im Vergleich zu Delta (Abb. 1). In diesen Szenarien wird erwartet, dass die Fallzahlen in der zweiten Dezember-Hälfte wieder ansteigen. In der Tat steigen die Fallzahlen seit wenigen Tagen wieder (Abb. 1, schwarze Linie).
+Mit der für die Schweiz momentan geschätzten Wachstumsrate basierend auf sequenzierten Proben aus dem Zeitraum 24.11.2021-27.12.2021 können Szenarien für die zukünftige Entwicklung der Fallzahlen berechnet werden basierend auf einem R-Wert = 0.9 von Delta bis zum 20.12.2021, der Häufigkeit von Omikron Anfang Dezember und der relativen Wachstumsrate von Omikron im Vergleich zu Delta (Abb. 1).
+<!--- In diesen Szenarien wird erwartet, dass die Fallzahlen in der zweiten Dezember-Hälfte wieder ansteigen. In der Tat steigen die Fallzahlen seit wenigen Tagen wieder (Abb. 1, schwarze Linie). ----> 
 
 Mit einer Reduzierung der Kontakte und schnellem Ausrollen der dritten Impfungen kann die Dynamik verlangsamt und die Zunahme von Omikron verzögert werden. Ab 20.12.2021 wurden neue Massnahmen eingeführt. Wir machen drei verschiedene Annahmen für den R-Wert von Delta nach dem 20.12.2021: Szenario 1: der R-Wert für Delta bleibt bei 0.9; Szenario 2: der R-Wert für Delta sinkt auf 0.7; Szenario 2: der R-Wert für Delta sinkt auf 0.5. In diesen Szenarien sind Fallzahlen von über 20’000 pro Tag in der ersten Januarhälfte 2022 plausibel.
 
@@ -373,15 +375,39 @@ Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stell
 
 Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
 In einer Studie aus Südafrika[^329] ist die Odds Ratio (bereinigt bezüglich demographischer und klinischer Kofaktoren und dokumentierter Genesung, aber nicht Impfstatus) der Hospitalisation nach einer wahrscheinlichen Omikron-Infektion (basierend auf «S gene target failure» Daten; verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
+Eine neue Studie mit grosser Stichprobengrösse aus den USA[^339] schätzt, dass Omikron-Infektionen bezüglich vieler angewendeten Masse höchstens halb so schwer verlaufen wie Delta-Infektionen. Insbesondere ist die Hospitalisierungsrate in der Omikron-Kohorte 1,8%, während sie in der Delta-Kohorte 4,0% beträgt,
+und die Rate der IPS-Einweisungen 0.3% nach einer Infektion mit Omikron statt 0.8% mit Delta.
+<!--- ED visit: 4.55% vs. 
+15.22% (risk ratio or RR: 0.30, 95% CI: 0.28-0.33); hospitalization: 1.75% vs. 3.95% (RR: 0.44, 
+95% CI: 0.38-0.52]); ICU admission: 0.26% vs. 0.78% (RR: 0.33, 95% CI:0.23-0.48); 
+mechanical ventilation: 0.07% vs. 0.43% (RR: 0.16, 95% CI: 0.08-0.32). In children under 5 
+years old, the overall risks of ED visits and hospitalization in the Emergent Omicron cohort were 
+3.89% and 0.96% respectively, significantly lower than 21.01% and 2.65% in the matched Delta 
+cohort (RR for ED visit: 0.19, 95% CI: 0.14-0.25; RR for hospitalization: 0.36, 95% CI: 0.19-
+0.68). ---->
 
 Nach einer Korrektur bezüglich des Impfstatus schätzt die oben erwähnte Versicherungs-Studie aus Südafrika[^316] die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher.
-Einer Studie des UK HSA zufolge [^327] ist die Hazard Ratio einer Hospitalisierung nach einer Omikron-Infektion 0.62 (95% UI: 0.55 to 0.69), was einer 38% niedrigeren Hospitalizationsrate entspricht.
-Gemäss einer Studie[^322] des Imperial College (beruhend auf ähnlichen Datenquellen[^327]) ist die Hazard Ratio 0.8 (95% UI 0.75-0.85).
+Einer Studie des UKHSA zufolge [^337] ist die Hazard Ratio eines Spitaleintritts nach einer Omikron-Infektion 0.33 (95% UI: 0.30 to 0.37), was einer 67% niedrigeren Hospitalizationsrate entspricht.
+<!--- UPDATE! [^337]
+An update on the analysis published last week finds the risk of presentation to emergency care 
+or hospital admission with Omicron was approximately half of that for Delta (Hazard Ratio 0.53, 
+95% CI: 0.50 to 0.57). The risk of hospital admission from emergency departments with 
+Omicron was approximately one-third of that for Delta (Hazard Ratio 0.33, 95% CI: 0.30 to 
+0.37). These analyses were stratified on date of specimen and area of residence and further 
+adjusted for age, sex, ethnicity, local area deprivation, international travel, vaccination status. 
+They are also adjusted for whether the current infection is a known reinfection, although as 
+reinfections are substantially under-ascertained, the adjustment may not have fully accounted 
+for the effect of reinfections.  
+In this analysis, the risk of hospitalisation is lower for Omicron cases after 2 and 3 doses of 
+vaccine, with an 81% (77 to 85%) reduction in the risk of hospitalisation after 3 doses compared 
+to unvaccinated Omicron cases. 
+---->
+Gemäss einer Studie[^322] des Imperial College (beruhend auf ähnlichen Datenquellen wie die UKHSA Studie[^337]) ist die Hazard Ratio 0.8 (95% UI 0.75-0.85).
 Diese Schätzungen sind nicht korrigiert für nicht-diagnostizierte Infektionen. Man erwartet, dass durch eine solche Korrektur die Unterschiede zwischen Delta und Omikron kleiner ausfallen werden.
+<!---- Diese Daten und Analysen sind alle noch vorläufig.
+Auch sind die geschätzten Hazard Ratios sensitiv bezüglich der genaue Definition einer Hospitalisierung[^327],[^322]. ---->
 
-Diese Daten und Analysen sind alle noch vorläufig.
-Auch sind die geschätzten Hazard Ratios sensitiv bezüglich der genaue Definition einer Hospitalisierung[^327],[^322].
-Es ist wichtig zu betonen, dass die potentiell niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden wird. 
+Es ist wichtig zu betonen, dass die niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden wird. 
 Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der Infektion mit Omikron werden in den nächsten Wochen erwartet. 
 
 
@@ -513,7 +539,7 @@ Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der In
 [^320]: https://www.medrxiv.org/content/10.1101/2021.12.12.21267673v1.full.pdf
 [^321]: https://cov-spectrum.org/explore/Switzerland/Surveillance/Past6M/variants/chen-2021-fitness?pangoLineage=B.1.1.529*
 <!---- Omicron hosp rate England ---->
-[^322]: https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-50-severity-omicron/
+[^322]: https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2021-12-22-COVID19-Report-50.pdf
 <!---- Omicron hosp rate Scotland ---->
 [^323]: https://www.ed.ac.uk/usher/eave-ii/key-outputs/our-publications/severity-of-omicron-variant-of-concern-and-vaccine
 [^324]: https://www.who.int/publications/m/item/enhancing-readiness-for-omicron-(b.1.1.529)-technical-brief-and-priority-actions-for-member-states
@@ -522,10 +548,13 @@ Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der In
 [^327]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1043807/technical-briefing-33.pdf
 [^328]: https://www.biorxiv.org/content/10.1101/2021.12.24.474086v1
 [^329]: https://www.medrxiv.org/content/10.1101/2021.12.21.21268116v1.full.pdf
-[^330] https://www.pnas.org/content/118/49/e2110117118
-[^331] https://www.mpg.de/17915640/corona-risiko-maske-schutz
-[^332] https://medcraveonline.com/JLPRR/effects-of-long-duration-wearing-of-n95-respirator-and-surgical-facemask-a-pilot-study.html
-[^333] https://www.hug.ch/laboratoire-virologie
-[^334] https://twitter.com/C_Althaus/status/1475404257155297281
-[^335] https://www.medrxiv.org/content/10.1101/2021.08.22.21262024v1
-[^336] https://www.eawag.ch/en/department/sww/projects/sars-cov2-in-wastewater/
+[^330]: https://www.pnas.org/content/118/49/e2110117118
+[^331]: https://www.mpg.de/17915640/corona-risiko-maske-schutz
+[^332]: https://medcraveonline.com/JLPRR/effects-of-long-duration-wearing-of-n95-respirator-and-surgical-facemask-a-pilot-study.html
+[^333]: https://www.hug.ch/laboratoire-virologie
+[^334]: https://twitter.com/C_Althaus/status/1475404257155297281
+[^335]: https://www.medrxiv.org/content/10.1101/2021.08.22.21262024v1
+[^336]: https://www.eawag.ch/en/department/sww/projects/sars-cov2-in-wastewater/
+[^337]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1044481/Technical-Briefing-31-Dec-2021-Omicron_severity_update.pdf
+[^338]: https://www.cdc.gov/mmwr/volumes/70/wr/mm705152e3.htm
+[^339]: https://www.medrxiv.org/content/10.1101/2021.12.30.21268495v1.full.pdf
