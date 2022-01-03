@@ -296,7 +296,7 @@ Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
 Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 
-Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nach der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisiernug wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
+Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nach der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisierung wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
 
 
 #### Omikron
@@ -352,7 +352,7 @@ von Personen, welche sowohl genesen als auch geimpft sind, starker neutralisiere
 als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
 
-Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
+Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraZeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
 der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Wochen nach der zweiten Impfung auf rund 35% (95% UI: 10-50%) nach 4 Monaten.
 Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes, nämlich, zumindest kurzfristig, auf 60-85%.
 Zu ähnlichen Schätzungen zur Wirksamkeit des Impfstoffs von BioNTech/Pfizer kommt eine andere Studie des Imperial College[^318]: durch eine dritte Impfung wird der Schutz gegen symptomatische Infektion mit Omikron von 19% (95% UI: 13-24%) auf 77% (72-80%) erhöht.
@@ -371,7 +371,7 @@ Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Süd
 Die Beurteilung, ob eine Infektion mit Omikron schwerer verläuft als eine mit einer früheren Variante, wird dadurch erschwert, dass Omikron mehr Ansteckungen in Geimpften oder Genesen verursacht, die durch ihre Immunität, zumindest teilweise, gegen schwere Krankheitsverläufe geschützt sind.
 Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stellt vor allem in Ländern eine besondere Herausforderung dar, in denen viele Menschen durch eine Infektion immunisiert wurden, wie zum Beispiel Südafrika. Immunität durch eine Infektion ist nämlich oft nicht erfasst.
 
-Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
+Wenn man nicht für den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
 In einer Studie aus Südafrika[^329] ist die Odds Ratio (bereinigt bezüglich demographischer und klinischer Kofaktoren und dokumentierter Genesung, aber nicht Impfstatus) der Hospitalisation nach einer wahrscheinlichen Omikron-Infektion (basierend auf «S gene target failure» Daten; verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
 
 Nach einer Korrektur bezüglich des Impfstatus schätzt die oben erwähnte Versicherungs-Studie aus Südafrika[^316] die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher.
