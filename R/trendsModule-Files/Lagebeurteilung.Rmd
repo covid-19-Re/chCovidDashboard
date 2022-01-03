@@ -296,7 +296,7 @@ Diese ursprünglich in Indien beschriebene Variante hat
 von Kalenderwoche 38 bis Kalenderwoche 46 eine Häufigkeit von 100% unter den sequenzierten Fällen.
 Seit Kalenderwoche 47 sehen wir jetzt vermehrt auch Sequenzen der Omikron-Variante[^25].
 
-Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nach der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisiernug wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
+Die Impfung wirkt sehr gut gegen schwere Verläufe bei Delta (80% in Älteren, 95% in Jüngeren; je 6 Monate nach der zweiten Impfdosis) und bietet gewissen Schutz gegen Infektion (rund 50% nach 6 Monaten). Eine dritte Impfdosis erhöht den Schutz gegen Infektion und Hospitalisierung wieder auf mind. 95%. Weitere Darlegungen finden sich in dem Epi. Update vom 7.12.2021[^123].
 
 
 #### Omikron
@@ -311,7 +311,7 @@ Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als B
 
 ##### Epidemiologische Verbreitung
 
-Mittlerweile wurde die Variante in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
+Mittlerweile wurde die Omikron Variante in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
 In der Schweiz wurde die Variante 469-mal nachgewiesen und hatte in der Kalenderwoche 50 einen Anteil von 24.5% unter allen sequenzierten Proben und 8% unter den sequenzierten Proben, die auf GISAID als Teil des Surveillance Programms deklariert sind[^25].
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 Auch sogenannte «S gene target failure» Daten aus Laboren in Genf[^333], Zürich und dem Tessin deuten darauf hin, dass Omikron inzwischen dominant ist.
@@ -352,7 +352,7 @@ von Personen, welche sowohl genesen als auch geimpft sind, starker neutralisiere
 als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
 
-Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
+Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraZeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
 der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Wochen nach der zweiten Impfung auf rund 35% (95% UI: 10-50%) nach 4 Monaten.
 Auch in dieser Studie führt eine dritte Impfdosis zu einer starken Erhöhung des Schutzes, nämlich, zumindest kurzfristig, auf 60-85%.
 Zu ähnlichen Schätzungen zur Wirksamkeit des Impfstoffs von BioNTech/Pfizer kommt eine andere Studie des Imperial College[^318]: durch eine dritte Impfung wird der Schutz gegen symptomatische Infektion mit Omikron von 19% (95% UI: 13-24%) auf 77% (72-80%) erhöht.
@@ -371,11 +371,11 @@ Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Süd
 Die Beurteilung, ob eine Infektion mit Omikron schwerer verläuft als eine mit einer früheren Variante, wird dadurch erschwert, dass Omikron mehr Ansteckungen in Geimpften oder Genesen verursacht, die durch ihre Immunität, zumindest teilweise, gegen schwere Krankheitsverläufe geschützt sind.
 Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stellt vor allem in Ländern eine besondere Herausforderung dar, in denen viele Menschen durch eine Infektion immunisiert wurden, wie zum Beispiel Südafrika. Immunität durch eine Infektion ist nämlich oft nicht erfasst.
 
-Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
+Wenn man nicht für den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
 In einer Studie aus Südafrika[^329] ist die Odds Ratio (bereinigt bezüglich demographischer und klinischer Kofaktoren und dokumentierter Genesung, aber nicht Impfstatus) der Hospitalisation nach einer wahrscheinlichen Omikron-Infektion (basierend auf «S gene target failure» Daten; verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
 
 Nach einer Korrektur bezüglich des Impfstatus schätzt die oben erwähnte Versicherungs-Studie aus Südafrika[^316] die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher.
-Einer Studie des UK HSA zufolge [^327] ist die Hazard Ratio einer Hospitalisierung nach einer Omikron-Infektion 0.62 (95% UI: 0.55 to 0.69), was einer 38% niedrigeren Hospitalizationsrate entspricht.
+Einer Studie des UKHSA zufolge [^327] ist die Hazard Ratio einer Hospitalisierung nach einer Omikron-Infektion 0.62 (95% UI: 0.55 to 0.69), was einer 38% niedrigeren Hospitalizationsrate entspricht.
 Gemäss einer Studie[^322] des Imperial College (beruhend auf ähnlichen Datenquellen[^327]) ist die Hazard Ratio 0.8 (95% UI 0.75-0.85).
 Diese Schätzungen sind nicht korrigiert für nicht-diagnostizierte Infektionen. Man erwartet, dass durch eine solche Korrektur die Unterschiede zwischen Delta und Omikron kleiner ausfallen werden.
 
@@ -522,10 +522,10 @@ Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der In
 [^327]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1043807/technical-briefing-33.pdf
 [^328]: https://www.biorxiv.org/content/10.1101/2021.12.24.474086v1
 [^329]: https://www.medrxiv.org/content/10.1101/2021.12.21.21268116v1.full.pdf
-[^330] https://www.pnas.org/content/118/49/e2110117118
-[^331] https://www.mpg.de/17915640/corona-risiko-maske-schutz
-[^332] https://medcraveonline.com/JLPRR/effects-of-long-duration-wearing-of-n95-respirator-and-surgical-facemask-a-pilot-study.html
-[^333] https://www.hug.ch/laboratoire-virologie
-[^334] https://twitter.com/C_Althaus/status/1475404257155297281
-[^335] https://www.medrxiv.org/content/10.1101/2021.08.22.21262024v1
-[^336] https://www.eawag.ch/en/department/sww/projects/sars-cov2-in-wastewater/
+[^330]: https://www.pnas.org/content/118/49/e2110117118
+[^331]: https://www.mpg.de/17915640/corona-risiko-maske-schutz
+[^332]: https://medcraveonline.com/JLPRR/effects-of-long-duration-wearing-of-n95-respirator-and-surgical-facemask-a-pilot-study.html
+[^333]: https://www.hug.ch/laboratoire-virologie
+[^334]: https://twitter.com/C_Althaus/status/1475404257155297281
+[^335]: https://www.medrxiv.org/content/10.1101/2021.08.22.21262024v1
+[^336]: https://www.eawag.ch/en/department/sww/projects/sars-cov2-in-wastewater/
