@@ -326,23 +326,7 @@ Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate 
 0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entsprach.
 
 Für die Schweiz sind die geschätzten Werte der Wachstumsrate im Bereich der Werte aus Südafrika[^321].
-Das relative Wachstum in der Schweiz scheint etwas langsamer als in Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca in der Schweiz
-<!--- UPDATE: cite https://www.covid19.admin.ch/en/vaccination/persons ---->
-zurückzuführen ist.
-
-
-##### Szenario zur epidemiologischen Ausbreitung in der Schweiz
-
-Mit der für die Schweiz momentan geschätzten Wachstumsrate basierend auf sequenzierten Proben aus dem Zeitraum 24.11.2021-27.12.2021 können Szenarien für die zukünftige Entwicklung der Fallzahlen berechnet werden basierend auf einem R-Wert = 0.9 von Delta bis zum 20.12.2021, der Häufigkeit von Omikron Anfang Dezember und der relativen Wachstumsrate von Omikron im Vergleich zu Delta (Abb. 1).
-<!--- In diesen Szenarien wird erwartet, dass die Fallzahlen in der zweiten Dezember-Hälfte wieder ansteigen. In der Tat steigen die Fallzahlen seit wenigen Tagen wieder (Abb. 1, schwarze Linie). ----> 
-
-Mit einer Reduzierung der Kontakte und schnellem Ausrollen der dritten Impfungen kann die Dynamik verlangsamt und die Zunahme von Omikron verzögert werden. Ab 20.12.2021 wurden neue Massnahmen eingeführt. Wir machen drei verschiedene Annahmen für den R-Wert von Delta nach dem 20.12.2021: Szenario 1: der R-Wert für Delta bleibt bei 0.9; Szenario 2: der R-Wert für Delta sinkt auf 0.7; Szenario 2: der R-Wert für Delta sinkt auf 0.5. In diesen Szenarien sind Fallzahlen von über 20’000 pro Tag in der ersten Januarhälfte 2022 plausibel.
-
-Die Berechnungen erfolgen analog zu unseren Berechnungen für Alpha im Januar 2021 [^325] und sind im Detail in [^326] beschrieben.
-
-Das gezeigte Szenario ignoriert Unsicherheiten im R-Wert der Delta-Variante und in der Häufigkeit von Omikron in Kalenderwoche 49, 2021. Die Unsicherheit in der logistischen Wachstumsrate von Omikron im Vergleich zu Delta ist durch die dunklere orange Fläche markiert. Wir nehmen, basierend auf den sequenzierten klinischen Proben, ein Wachstum von Omikron relativ zu Delta von 0.19 (0.18-0.21) pro Tag an. Insgesamt ist diese geschätzte Wachstumsrate in der Schweiz tiefer als die Schätzungen aus Grossbritannien und Südafrika (siehe oben). Falls wir die Wachstumsrate basierend auf den vorliegenden Schweizer Datenpunkten momentan unterschätzen, dann ist auch die Schnelligkeit der Ausbreitung von Omikron in Abb. 1 und die Geschwindigkeit, mit der die absoluten Fallzahlen zunehmen, eine Unterschätzung.
-
-Abbildung 1. Szenarien zur Entwicklung der Fallzahlen bis zum 09.01.2022. Wir nehmen an, dass mit Start von KW 49, 2021 der R-Wert von Delta bei 0.9 lag und sich bis 20.12.2021 nicht veränderte. In Szenario 1 ist nach 20.12.2021 der R-Wert für Delta weiter bei 0.9, in Szenario 2 bei 0.7 und in Szenario 3 bei 0.5. Die damit erwarteten Fallzahlen für Delta sind in Abb. 1 in blau dargelegt. Weiter nehmen wir an, dass die Häufigkeit von Omikron in den bestätigten Fällen zum Start von KW 49 bei rund 4% lag. Die logistische Wachstumsrate von Omikron im Vergleich zu Delta wird auf 0.19 (0.18-0.21) pro Tag geschätzt. Die damit erwarteten Omikron Fallzahlen sind in orange dargestellt (durchgezogen mit Wachstum von 0.19 pro Tag; gestrichelte Linien mit Wachstum von 0.18 und 0.21 pro Tag).
+Das relative Wachstum in der Schweiz scheint etwas langsamer als in Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca in der Schweiz[^5] zurückzuführen ist.
 
 
 ##### Schutzwirkung der Impfung
@@ -423,7 +407,7 @@ Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der In
 [^2]: https://ibz-shiny.ethz.ch/covidDashboard/trends: Aufgrund von Melderverzögerungen werden die letzten 3 respektive 5 Tage für bestätigte Fälle und Hospitalisationen/Todesfälle nicht berücksichtigt.
 [^3]: https://icumonitoring.ch
 [^4]: https://www.covid19.admin.ch
-[^5]: https://www.covid19.admin.ch
+[^5]: https://www.covid19.admin.ch/en/vaccination/persons
 [^6]: https://github.com/openZH/covid_19 und https://github.com/daenuprobst/covid19-cases-switzerland
 [^7]: https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen.html
 [^8]: https://www.experimental.bfs.admin.ch/expstat/de/home/innovative-methoden/momo.html
