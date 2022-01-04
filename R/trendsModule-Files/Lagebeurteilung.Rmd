@@ -218,7 +218,7 @@ Wenn die Kontakthäufigkeit gleich bleibt, werden durch die Zunahme von Omikron 
 
 Weiter reduziert konsequentes dauerhaftes Maskentragen in Innenräumen die Zahl der neuen Infektionen sehr effektiv. Eine Labor-Studie zeigte ein Risiko einer SARS-CoV-2-Übertragung innerhalb von 20 Minuten in einer bestimmten Expositionssituation von mehr als 90% ohne Masken, von 10% mit korrekt getragenen medizinischen Masken und von 0.14% mit korrekt getragenen FFP2-Masken[^330]. Die Autoren gehen davon aus, dass im täglichen Leben – ausserhalb des Labors – die Infektionswahrscheinlichkeiten nochmals 10-100 mal tiefer sind[^331]. FFP2 Masken reduzieren also das verbleibende Risiko von 0.1-1% einer Infektion bei medizinischen Masken auf 0.001-0.014% und geben so insbesondere in Situationen mit erhöhter Exposition einen zusätzlichen Schutz. Da das Atmen durch eine korrekt getragene FFP2-Maske stärker beeinträchtigt wird als durch eine korrekt getragene medizinische Maske[^332], bieten sich FFP2-Masken insbesondere in Situationen ohne oder mit nur leichter körperliche Betätigung an (im öffentlichen Verkehr, bei Publikumsanlässen, etc.). Gleichzeitig sollte für eine gute Belüftung gesorgt werden.
 
-Zusätzlich zur Kontaktreduktion kann ein rasches Ausrollen der dritten Impfungen den individuellen Schutz vor Infektion von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöhen. Somit sind dritte Impfungen ein weiteres effektives Werkzeug, um den Anstieg der Fallzahlen zu bremsen. Aktuell sind 25% <!------- UPDATED Jan 3 in morning --------> 
+Zusätzlich zur Kontaktreduktion kann ein rasches Ausrollen der dritten Impfungen den individuellen Schutz vor Infektion von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöhen[^311]. Somit sind dritte Impfungen ein weiteres effektives Werkzeug, um den Anstieg der Fallzahlen zu bremsen. Aktuell sind 25%[^4] <!------- UPDATE https://www.covid19.admin.ch/en/overview --------> 
 der Schweizer Bevölkerung zum 3. Mal geimpft worden. Nachdem darunter vorwiegend ältere Menschen sind, hilft dies, um Spitaleinweisungen zu verhindern. Soll die Ausbreitung von Omikron mit Hilfe der dritten Dosis gebremst werden, braucht es rasch weitere dritte Impfungen in der breiten Bevölkerung.
 
 ### Dynamik
@@ -326,9 +326,9 @@ Ein Bericht des Imperial College[^318] schätzt die exponentielle Wachstumsrate 
 0,34 pro Tag (95% UI: 0,33-0,35), was einer Verdopplungzeit von 2 Tagen entsprach.
 
 Für die Schweiz sind die geschätzten Werte der Wachstumsrate im Bereich der Werte aus Südafrika[^321].
-Das relative Wachstum in der Schweiz scheint etwas langsamer als in Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca in der Schweiz zurückzuführen ist.
-
-Um aus den Schätzungen der Wachstumsrate eine R-Wert zu berechnen, benötigt man Informationen über die Dauer einer Infektion. Laut einer Studie des CDC[^338] ist die Inkubationszeit einer Infektion mit Omikron mit ungefähr 3 Tagen kürzer als die der früher zirkulierenden Varianten.
+Das relative Wachstum in der Schweiz scheint etwas langsamer als in Grossbritannien zu sein, was möglicherweise auf eine vermehrte Verimpfung von Moderna und keinerlei Verimpfung von Oxford/AstraZeneca in der Schweiz
+<!--- UPDATE: cite https://www.covid19.admin.ch/en/vaccination/persons ---->
+zurückzuführen ist.
 
 
 ##### Szenario zur epidemiologischen Ausbreitung in der Schweiz
@@ -371,12 +371,14 @@ Die UKHSA[^337] schätzt, dass das Hospitalisierungsrisiko einer Person, die sym
 
 ##### Schwere der Infektion
 
+Laut einer Studie des CDC[^338] ist die Inkubationszeit einer Infektion mit Omikron mit ungefähr 3 Tagen kürzer als die der früher zirkulierenden Varianten.
+
 Die Beurteilung, ob eine Infektion mit Omikron schwerer verläuft als eine mit einer früheren Variante, wird dadurch erschwert, dass Omikron mehr Ansteckungen in Geimpften oder Genesen verursacht, die durch ihre Immunität, zumindest teilweise, gegen schwere Krankheitsverläufe geschützt sind.
 Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stellt vor allem in Ländern eine besondere Herausforderung dar, in denen viele Menschen durch eine Infektion immunisiert wurden, wie zum Beispiel Südafrika. Immunität durch eine Infektion ist nämlich oft nicht erfasst.
 
 Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
 In einer Studie aus Südafrika[^329] ist die Odds Ratio (bereinigt bezüglich demographischer und klinischer Kofaktoren und dokumentierter Genesung, aber nicht Impfstatus) der Hospitalisation nach einer wahrscheinlichen Omikron-Infektion (basierend auf «S gene target failure» Daten; verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
-Eine neue Studie mit grosser Stichprobengrösse aus den USA[^339] schätzt, dass Omikron-Infektionen bezüglich vieler angewendeten Masse höchstens halb so schwer verlaufen wie Delta-Infektionen. Insbesondere ist die Hospitalisierungsrate in der Omikron-Kohorte 1,8%, während sie in der Delta-Kohorte 4,0% beträgt,
+Eine neue, noch nicht begutachtete Studie mit einer grossen Stichprobe aus den USA[^339] schätzt, dass Omikron-Infektionen bezüglich vieler angewendeten Masse höchstens halb so schwer verlaufen wie Delta-Infektionen. Insbesondere ist die Hospitalisierungsrate in der Omikron-Kohorte 1,8%, während sie in der Delta-Kohorte 4,0% beträgt,
 und die Rate der IPS-Einweisungen 0.3% nach einer Infektion mit Omikron statt 0.8% mit Delta.
 <!--- ED visit: 4.55% vs. 
 15.22% (risk ratio or RR: 0.30, 95% CI: 0.28-0.33); hospitalization: 1.75% vs. 3.95% (RR: 0.44, 
