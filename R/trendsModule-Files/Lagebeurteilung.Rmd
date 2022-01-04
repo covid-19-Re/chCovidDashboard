@@ -218,7 +218,7 @@ Wenn die Kontakthäufigkeit gleich bleibt, werden durch die Zunahme von Omikron 
 
 Weiter reduziert konsequentes dauerhaftes Maskentragen in Innenräumen die Zahl der neuen Infektionen sehr effektiv. Eine Labor-Studie zeigte ein Risiko einer SARS-CoV-2-Übertragung innerhalb von 20 Minuten in einer bestimmten Expositionssituation von mehr als 90% ohne Masken, von 10% mit korrekt getragenen medizinischen Masken und von 0.14% mit korrekt getragenen FFP2-Masken[^330]. Die Autoren gehen davon aus, dass im täglichen Leben – ausserhalb des Labors – die Infektionswahrscheinlichkeiten nochmals 10-100 mal tiefer sind[^331]. FFP2 Masken reduzieren also das verbleibende Risiko von 0.1-1% einer Infektion bei medizinischen Masken auf 0.001-0.014% und geben so insbesondere in Situationen mit erhöhter Exposition einen zusätzlichen Schutz. Da das Atmen durch eine korrekt getragene FFP2-Maske stärker beeinträchtigt wird als durch eine korrekt getragene medizinische Maske[^332], bieten sich FFP2-Masken insbesondere in Situationen ohne oder mit nur leichter körperliche Betätigung an (im öffentlichen Verkehr, bei Publikumsanlässen, etc.). Gleichzeitig sollte für eine gute Belüftung gesorgt werden.
 
-Zusätzlich zur Kontaktreduktion kann ein rasches Ausrollen der dritten Impfungen den individuellen Schutz vor Infektion von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöhen. Somit sind dritte Impfungen ein weiteres effektives Werkzeug, um den Anstieg der Fallzahlen zu bremsen. Aktuell sind 24% <!------- UPDATED Jan 3 in morning --------> 
+Zusätzlich zur Kontaktreduktion kann ein rasches Ausrollen der dritten Impfungen den individuellen Schutz vor Infektion von rund 20-30% auf, zumindest kurzfristig, rund 70-80% erhöhen. Somit sind dritte Impfungen ein weiteres effektives Werkzeug, um den Anstieg der Fallzahlen zu bremsen. Aktuell sind 25% <!------- UPDATED Jan 3 in morning --------> 
 der Schweizer Bevölkerung zum 3. Mal geimpft worden. Nachdem darunter vorwiegend ältere Menschen sind, hilft dies, um Spitaleinweisungen zu verhindern. Soll die Ausbreitung von Omikron mit Hilfe der dritten Dosis gebremst werden, braucht es rasch weitere dritte Impfungen in der breiten Bevölkerung.
 
 ### Dynamik
@@ -366,6 +366,7 @@ Hierbei ist wichtig, dass die dritte Impfdosis allen Menschen, bei denen die zwe
 
 Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch nicht viele Daten vor.
 Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Südafrika[^316] schätzt, dass Personen, die zwei Dosen des Impfstoffs von mit BioNTech/Pfizer erhalten haben, 70% gegen schwere Verläufe nach Infektion mit Omikron geschützt sind.
+Die UKHSA[^337] schätzt, dass das Hospitalisierungsrisiko einer Person, die symptomatisch mit Omikron infiziert ist, um 68% (95% UI: 42-82%) reduziert ist.
 
 
 ##### Schwere der Infektion
@@ -407,7 +408,7 @@ Diese Schätzungen sind nicht korrigiert für nicht-diagnostizierte Infektionen.
 <!---- Diese Daten und Analysen sind alle noch vorläufig.
 Auch sind die geschätzten Hazard Ratios sensitiv bezüglich der genaue Definition einer Hospitalisierung[^327],[^322]. ---->
 
-Es ist wichtig zu betonen, dass die niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden wird. 
+Es ist wichtig zu betonen, dass die niedrigere Hospitalisationsrate von Omikron auf der Populationsebene schnell durch die stark erhöhte Ausbreitung aufgewogen werden könnte. 
 Weitere, detailliertere Studien mit grösseren Stichproben zu der schwere der Infektion mit Omikron werden in den nächsten Wochen erwartet. 
 
 
