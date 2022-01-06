@@ -77,7 +77,11 @@ quarantineDurationUI <- function(id) {
                      "of seven reported log-normal distributions.",
                      "</span>"),
                 sourceLink("Ferretti et al., medRxiv 2020.09.04.20188516",
-                           doi = "10.1101/2020.09.04.20188516")
+                           doi = "10.1101/2020.09.04.20188516"),
+                HTML("<br><b>ALTERNATIVE MEAN INCUBATION PERIOD</b>"),
+                checkboxInput(ns("altMeanInc"), "use alt. mean incubation period (plot above not acurate if on)",
+                  value = FALSE, width = NULL),
+                numericInput(ns("incMean"), "mean incubation period", step = 0.1, value = 5.7)
               )
             )
           )

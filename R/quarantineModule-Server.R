@@ -52,7 +52,13 @@ quarantineDurationServer <- function(id) {
         return(infProf)
       })
 
-      incParams <- incParamsDefault
+      incParams <- reactive({
+         incParams <- incParamsDefault
+         if (input$altMeanInc) {
+           incParams$mean <- input$incMean
+         }
+         return(incParams)
+      })
 
       # DISTRIBUTION PLOTS ----
       yLim <- c(0, 0.22)
@@ -60,10 +66,10 @@ quarantineDurationServer <- function(id) {
       labY <- 0.21
       output$incDistPlot <- renderPlot({
         ggplot(incDist, aes(x = t, y = pdf)) +
-          geom_vline(xintercept = incParams$mean[1], linetype = "dashed", alpha = 0.5) +
+          geom_vline(xintercept = incParams()$mean[1], linetype = "dashed", alpha = 0.5) +
           annotate("text",
-                   label = paste0(" mean = ", format(round(incParams$mean[1], 1), nsmall = 1), " days"),
-                   x = incParams$mean[1], y = labY,
+                   label = paste0(" mean = ", format(round(incParams()$mean[1], 1), nsmall = 1), " days"),
+                   x = incParams()$mean[1], y = labY,
                    hjust = 0, vjust = 0
           ) +
           geom_line() +
@@ -236,7 +242,7 @@ quarantineDurationServer <- function(id) {
             tQ = tQ,
             tT = tT.vals,
             tR = tR.vals,
-            DeltaT = factor(DeltaT, levels = c("noTest",DeltaT.vals)),
+            DeltaT = factor(DeltaT, levels = c("noTest", DeltaT.vals)),
             release = tR.vals - tE,
             relUtility = utility / utility_compare
           )
@@ -565,11 +571,12 @@ quarantineDurationServer <- function(id) {
 
       # SC1: ADHERENCE AND SYMPTOMS ----
       sc1_further_pars <- reactive({
+        input$meanInc
         sc1_further_pars <- list(
           tQ = input$sc1_test_DeltaQ,
           DeltaT.vals = seq(input$sc1_test_DeltaT[2],input$sc1_test_DeltaT[1]),
           tR.compare = input$sc1_test_tRCompare,
-          tS = incParams$mean[1],
+          tS = incParams()$mean[1],
           a.vals = seq(0, 1, 0.25),
           DeltaI = input$sc1_isolation_Delta
         )
@@ -1306,6 +1313,7 @@ quarantineDurationServer <- function(id) {
       })
 
       sc2_further_data <- reactive({
+        input$meanInc
         # Define input parameters locally
         y <- sc2_further_pars()$y
         tE.vals <- sc2_further_pars()$tE.vals
@@ -1313,7 +1321,7 @@ quarantineDurationServer <- function(id) {
         tR.compare <- sc2_further_pars()$tR.compare
         tR.vals <- seq(tQ, max(tR.compare, 10))
         DeltaT.vals <- sc2_further_pars()$DeltaT.vals
-        tS.vals <- tE.vals + incParams$mean[1]
+        tS.vals <- tE.vals + incParams()$mean[1]
         tEnd <- 10
         a.vals <- sc2_further_pars()$a.vals
         DeltaI <- sc2_further_pars()$DeltaI
@@ -1480,7 +1488,7 @@ quarantineDurationServer <- function(id) {
       output$sc2_further_caption <- renderUI({
         tR.compare <- sc2_further_pars()$tR.compare
         y <- sc2_further_pars()$y
-        meanInc <- format(round(incParams$mean[1], 1), nsmall = 1)
+        meanInc <- format(round(incParams()$mean[1], 1), nsmall = 1)
         DeltaI <- sc2_further_pars()$DeltaI
 
         HTML(glue(
