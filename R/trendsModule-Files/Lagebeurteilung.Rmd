@@ -253,17 +253,16 @@ Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisat
 Die bestätigten Fälle nahmen
 <!---- UPDATE fielen/stiegen ---->
 mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche zu.
-Die fielen Hospitalisationen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche
+Die Hospitalisierungen waren stabil mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche
 und
-die Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
+die fielen Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle nimmt in allen Altersgruppen signifikant zu ausser in den 0-9 Jährigen.
-Die Hospitalisierungen nahmen in den Altersgruppe der 10-19 und 20-29 Jährigen signifikant zu
-und in den Altersgruppen der 50-59 und über 80-Jährigen signifikant ab.
+Die Zahl der Fälle nimmt in allen Altersgruppen signifikant zu.
+Die Hospitalisierungen nahmen in den Altersgruppe der 20-29 Jährigen signifikant zu und waren stabil in den anderen Altersgruppen.
 Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123].
 <!------ UPDATE -------->
 
