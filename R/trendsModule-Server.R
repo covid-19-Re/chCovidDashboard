@@ -123,7 +123,6 @@ trendsServer <- function(id) {
       })
 
       output$ageClassPlotsCases <- renderPlot({
-        print(input$plot_language)
         plot <- plotAgeClass(modelOutput()$predictions, modelOutput()$doublingTimes, modelOutput()$ranking,
           eventSelect = "cases", color = t.cols[4],
           lang = input$plot_language)
@@ -133,7 +132,6 @@ trendsServer <- function(id) {
       })
 
       output$ageClassPlotsHospitalizations <- renderPlot({
-        print(input$plot_language)
         plot <- plotAgeClass(modelOutput()$predictions, modelOutput()$doublingTimes, modelOutput()$ranking,
           eventSelect = "hospitalizations", color = t.cols[3],
           lang = input$plot_language)
