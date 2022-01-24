@@ -67,8 +67,9 @@ getEventCounts <- function(df, event_dt, event_name) {
 
   # age groups
   countsAgeClassDecade <- df %>%
+    mutate(altersjahr = abs(altersjahr)) %>%
     mutate(
-      age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 200), right = FALSE)) %>%
+      age_class = cut(altersjahr, breaks = c(seq(0, 80, by = 10), 500), right = FALSE)) %>%
     dplyr::select({{ event_dt }}, age_class) %>%
     group_by(age_class, {{ event_dt }}) %>%
     summarize(
@@ -82,8 +83,9 @@ getEventCounts <- function(df, event_dt, event_name) {
   levels(countsAgeClassDecade$age_class)[levels(countsAgeClassDecade$age_class) == "[80,200)"] <- "[80,∞)"
 
   countsAgeClassVaccGroup <- df %>%
+    mutate(altersjahr = abs(altersjahr)) %>%
     mutate(
-      age_class = cut(altersjahr, breaks = c(0, 7, 12, 18, 25, 35, 45, 55, 65, 75, 200), right = FALSE)) %>%
+      age_class = cut(altersjahr, breaks = c(0, 7, 12, 18, 25, 35, 45, 55, 65, 75, 500), right = FALSE)) %>%
     dplyr::select({{ event_dt }}, age_class) %>%
     group_by(age_class, {{ event_dt }}) %>%
     summarize(
@@ -94,7 +96,7 @@ getEventCounts <- function(df, event_dt, event_name) {
       date = {{ event_dt }}, event = event_name, count = count) %>%
     complete(region, age_class_type, age_class, date, event, fill = list(count = 0))
 
-  levels(countsAgeClassVaccGroup$age_class)[levels(countsAgeClassVaccGroup$age_class) == "[75,200)"] <- "[75,∞)"
+  levels(countsAgeClassVaccGroup$age_class)[levels(countsAgeClassVaccGroup$age_class) == "[75,500)"] <- "[75,∞)"
 
   countsAgeClass <- bind_rows(
     countsAgeClassDecade,
