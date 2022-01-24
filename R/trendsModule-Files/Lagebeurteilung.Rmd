@@ -213,17 +213,17 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante dominant.
-Nach einem raschen Anstieg der Fallzahlen in den darauffolgenden zwei Wochen, sind sie nun auf sehr hohem Niveau.
-Der Anstieg ist deutlich abgeflacht: der R-Wert ist nur noch marginal, aber statistisch signifikant, über 1 und die Anzahl der erfassten Fälle stiegen während der letzten zwei Wochen nicht signifikant.
-Der flachere Antieg der erfassten Fälle könnte auf das Ende der Omikron-welle hindeuten.
-Allerdings könnte er auch durch die Grenzen der Erfassung durch Tests zustande kommen
-(denn die Fallzahlen und der Anteil der positiven Tests sind höher als je zuvor in der Pandemie).
+Die Zahl der bestätigten Fälle ist in den darauffolgenden zwei Wochen schnell angestiegen und hat ein sehr hohes Niveau erreicht.
+Der Anstieg ist nun deutlich abgeflacht: der R-Wert ist diese Woche nicht mehr über 1
+Der flachere Anstieg der bestätigten Fälle könnte darauf hindeuten, dass ein Höchststand der Omikron-Welle erreicht sein könnte.
+Diese Interpretation wird unterstützt durch Messungen von SARS-CoV-2 im Abwasser[^23], die auf keine grossen Diskrepanzen mit den gemeldeten Fällen hindeuten.
+<!---- Allerdings könnte er auch durch die Grenzen der Erfassung durch Tests zustande kommen, denn die Fallzahlen und der Anteil der positiven Tests sind höher als je zuvor in der Pandemie. ---->
 
 
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit Mitte Dezember 2021 ist der R-Wert signifikant über 1, hat Ende Dezember einen Höchststand von 1.6 erreicht und ist seitdem gesunken. Der aktuellste Wert ist allerdings immer noch signifikant über 1.
+Seit Mitte Dezember 2021 ist der R-Wert signifikant über 1, hat Ende Dezember einen Höchststand von 1.6 erreicht und ist seitdem gesunken. Der aktuellste Wert ist nicht mehr signifikant über 1.
 
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
@@ -240,7 +240,7 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig und die Zahlen werden daher wohl noch nach oben korrigiert werden.
+Insbesondere sind Spitalmeldungen zur Zeit unvollständig.
 <!--- UPDATE: delete above sentence soon ---->
 Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
@@ -251,18 +251,17 @@ Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisat
 Die bestätigten Fälle nahmen
 <!---- UPDATE fielen/stiegen ---->
 mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche zu.
-Die Hospitalisierungen fielen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche
-und
-die Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
+Die gemeldeten Hospitalisierungen fielen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche,
+wobei diese Zahl wegen den oben erwähnten Meldeverzögerungen verfälscht ist.
+Die Todesfälle mit `r valueUIchange(rankingCHEdeaths)` pro Woche.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle nahm in den Altersgruppen der 0-9 und 10-19 Jährigen signifikant zu, und in den 20-29 Jährigen signifikant ab.
+Die Zahl der Fälle nahm in den Altersgruppen der 0-9, 10-19, 30-39 und 40-49 Jährigen signifikant zu.
+Mit der Rate von 74% (95% UI: 54-96%) war der Anstieg in den 0-9 Jährigen am stärksten.
 Der Anstieg in den 0-9 Jährigen war mit 70% (95% UI: 55-86%) pro Woche am schnellsten.
-In dieser Altergruppe nahmen auch die Hospitalisierungen signifikant zu.
-In den Altersgruppen der 60-69, 70-79 und über 80 Jährigen fielen die Hospitalisierungen signifikant.
 <!------ Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123]. -------->
 <!------ UPDATE -------->
 
@@ -298,8 +297,8 @@ Am 26. November 2021 stufte die Weltgesundheitsorganisation diese Variante als B
 
 #### Epidemiologische Verbreitung
 
-Mittlerweile wurde Omikron in 89 Ländern in Europa und weltweit nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
-In der Schweiz wurde die Variante über 3000-mal nachgewiesen und hatte in der ersten Kalenderwoche 2022 einen Anteil von 83% unter allen sequenzierten Proben[^25].
+Mittlerweile wurde Omikron in 89 Ländern nachgewiesen (Stand 16. Dezember 2021) [^302],[^303],[^324], anfänglich meist verknüpft mit Einreise von Ländern aus dem Süden Afrikas.
+In der Schweiz wurde die Variante etwa 6000-mal nachgewiesen und hatte in der zweiten Kalenderwoche 2022 einen Anteil von 93% unter allen sequenzierten Proben[^25].
 <!---- und 8% unter den sequenzierten Proben, die auf GISAID als Teil des Surveillance Programms deklariert sind ---->
 <!--- UPDATE https://cov-spectrum.org/explore/Switzerland/AllSamples/AllTimes/variants?pangoLineage=B.1.1.529 ---->
 <!---- Auch sogenannte «S gene target failure» Daten aus Laboren in Genf[^333], Zürich und dem Tessin deuten darauf hin, dass Omikron inzwischen dominant ist. ---->
@@ -327,7 +326,7 @@ Allgemein ergibt sich das Bild, dass Seren
 von Personen, welche sowohl genesen als auch geimpft sind, starker neutralisieren
 als die Seren doppelt Geimpfter.
 Eine dritte Impfdosis führt zu einer starken Erhöhung der Neutralisation.
-Gemäss einem neuem Preprint sind T-Zell Antworten in Geimpften und Genesenen gegen Omikron Stachelprotein nur wenig schächer als gegen die ursprüngliche Variante[^341]. 
+Gemäss einem neuem Preprint sind T-Zell-Antworten in Geimpften und Genesenen gegen Omikron Stachelprotein nur wenig schächer als gegen die ursprüngliche Variante[^341]. 
 
 Ein Preprint[^311] hat auf Grund epidemiologischer Daten aus England die Wirksamkeit der Impfstoffe von Oxford/AstraSeneca und BioNTech/Pfizer gegen die symptomatische Infektion mit Omikron geschätzt:
 der Schutz von BioNTech/Pfizer fiel von 88% 2-9 Wochen nach der zweiten Impfung auf rund 35% (95% UI: 10-50%) nach 4 Monaten.
@@ -341,18 +340,19 @@ Hierbei ist wichtig, dass die dritte Impfdosis allen Menschen, bei denen die zwe
 
 Zur Schutzwirkung der Impfung gegen schwere Verläufe bei Infektion mit Omikron liegen noch nicht viele Daten vor.
 Ein Studie basierend auf Daten eines der grössten Krankenversicherungen in Südafrika[^316] schätzt, dass Personen, die zwei Dosen des Impfstoffs von mit BioNTech/Pfizer erhalten haben, 70% gegen schwere Verläufe nach Infektion mit Omikron geschützt sind.
-Die UKHSA[^337] schätzt, dass das Hospitalisierungsrisiko einer Person, die symptomatisch mit Omikron infiziert ist, um 68% (95% UI: 42-82%) reduziert ist.
+Die UKHSA[^337] schätzt, dass das Hospitalisierungsrisiko einer Person, die symptomatisch mit Omikron infiziert ist, verglichen mit einer Delta-infizierten Person um 68% (95% UI: 42-82%) reduziert ist. Gemäss diesem Bericht ist das Hospitalisierungsrisiko nach einer Omikron-Infektion bei Personen, die zwei Impfdosen erhalten haben, 65% niedriger und bei Personen, die drei Impfdosen erhalten haben, 81% niedriger als bei Ungeimpften
 
 
 #### Schwere der Infektion
 
-Laut einer Studie des CDC[^338] ist die Inkubationszeit einer Infektion mit Omikron mit ungefähr 3 Tagen kürzer als die der früher zirkulierenden Varianten.
+Laut einer Studie des CDC[^338] an 6 Personen, die teilweise geimpft oder genesen waren, ist die Inkubationszeit einer Infektion mit Omikron mit ungefähr 3 Tagen kürzer als die der früher zirkulierenden Varianten.
 Laut einem Bericht der Harvard Universität[^343] ist die mittlere Dauer einer Omikron-Infektion mit 9,9 Tagen (95% UI: 8.8-10.9 Tagen) etwa einen Tag kürzer als eine Delta-Infektion und die Peak-Viruslast niedriger.
+Die Analyse in dieser Studie war nicht bezüglich des Immunstatus der Probanden bereinigt.
 
 Die Beurteilung, ob eine Infektion mit Omikron schwerer verläuft als eine mit einer früheren Variante, wird dadurch erschwert, dass Omikron mehr Ansteckungen in Geimpften oder Genesen verursacht, die durch ihre Immunität, zumindest teilweise, gegen schwere Krankheitsverläufe geschützt sind.
 Die intrinsische von der beobachtbaren Virulenz zu statistisch zu trennen, stellt vor allem in Ländern eine besondere Herausforderung dar, in denen viele Menschen durch eine Infektion immunisiert wurden, wie zum Beispiel Südafrika. Immunität durch eine Infektion ist nämlich oft nicht erfasst.
 
-Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen.
+Wenn man nicht fuer den Impfstatus korrigiert, kommt man zum Schluss, dass Infektionen mit Omikron seltener zu einer Hospitalisation führen als Infektionen mit Delta.
 In einem Preprint aus Südafrika[^329] ist die Odds Ratio (bereinigt bezüglich demographischer und klinischer Kofaktoren und dokumentierter Genesung, aber nicht Impfstatus) der Hospitalisation nach einer wahrscheinlichen Omikron-Infektion (basierend auf «S gene target failure» Daten; verglichen mit Delta-Infektionen) 0.2 (95% UI: 0.1-0.3).
 Eine neue Studie aus Südafrika[^342] schätzt eine 4-mal niedrigere Wahrscheinlichkeit einer IPS-Einweisung und des Todes nach einem Spitaleintritt.
 Eine neue, noch nicht begutachtete Studie mit einer grossen Stichprobe aus den USA[^339] schätzt, dass Omikron-Infektionen bezüglich vieler angewendeten Masse höchstens halb so schwer verlaufen wie Delta-Infektionen. Insbesondere ist die Hospitalisierungsrate in der Omikron-Kohorte 1,8%, während sie in der Delta-Kohorte 4,0% beträgt,
@@ -368,7 +368,7 @@ cohort (RR for ED visit: 0.19, 95% CI: 0.14-0.25; RR for hospitalization: 0.36, 
 [^342].
 
 Nach einer Korrektur bezüglich des Impfstatus schätzt die oben erwähnte Versicherungs-Studie aus Südafrika[^316] die Hospitalisierungsrate nach Infektionen mit Omikron 29% niedriger als in der ersten Welle im Jahr 2020, bei Kindern aber 20% höher.
-Einer Studie des UKHSA zufolge [^337] ist die Hazard Ratio eines Spitaleintritts nach einer Omikron-Infektion 0.33 (95% UI: 0.30 to 0.37), was einer 67% niedrigeren Hospitalizationsrate entspricht.
+Einer Studie des UKHSA zufolge [^337] ist die Hazard Ratio eines Spitaleintritts nach einer Omikron-Infektion 0.33 (95% UI: 0.30 to 0.37), was einer 67% niedrigeren Hospitalizationsrate als nach einer Delta-Infektion entspricht.
 <!--- UPDATE! [^337]
 An update on the analysis published last week finds the risk of presentation to emergency care 
 or hospital admission with Omicron was approximately half of that for Delta (Hazard Ratio 0.53, 
