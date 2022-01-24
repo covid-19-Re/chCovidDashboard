@@ -182,8 +182,6 @@ trendsServer <- function(id) {
         allData <- doublingTimesTable %>%
           full_join(rankingTable, by = c("region", "age_class_type", "age_class", "event"))
 
-        print(allData)
-
         return(allData)
       })
 
