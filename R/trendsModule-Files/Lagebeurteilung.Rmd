@@ -212,20 +212,22 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante dominant.
-Die Zahl der bestätigten Fälle steigt seit dem kontinuierlich an, obwohl dieser Antieg während der letzten 14 Tage nicht mehr signifikant war.
-Der R-Wert war in der ersten Woche des Jahres 2022 kurzzeitig nicht mehr über 1,
-ist aber seit der zweiten Kalenderwoche signifikant über 1.
-Diese Bewegung des R-Wertes könnte auf Anstieg der Test-Intesität von der ersten zur zweiten Jahreswoche hindeuten.
-Diese Interpretation wird unterstützt durch Messungen von SARS-CoV-2 im Abwasser[^23]: im Gegensatz zu den gemeldeten Fällen steigt die SARS-CoV-2 Konzentration in keinem der sechs beobachteten Kläranlagen an.
-Es ist deshalb, trotz der noch steigenden Fallmeldungen möglich, dass der Peak der Omikronwelle schon überschritten ist.
+<!--- UPDATE ENTIRE PARAGRAPH BELOW ---->
+In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante BA.1 dominant und hatte in der Kalenderwoche 4 2022 eine Häufigkeit von 96%.
+Die Zahl der bestätigten Fälle stieg bis vorletzte Woche kontinuierlich an, fällt aber seit letzter Woche.
+Auch die aktuelle Schätzung des R-Werts ist diese Woche signifikant unter 1.
+Dies könnte darauf hindeuten das der Höhepunkt der Infektionen mit dem Omikron-Subtyp BA.1 erreicht wurde.
+Unter Annahme einer Dunkelziffer von 3-4, sind in den letzten drei Wochen
+geschätzt rund ein Drittel der Schweizer Bevölkerung infiziert worden.
+
+Der Omikron-Subtyp BA.2 hat die letzten Wochen zugenommen und machte in Kalenderwoche 4 2022 2.5% der sequenzierten Proben aus.
 
 
 ### Dynamik
 
 <!------- UPDATE -------->
-Am Anfang des Jahres 2022 war der R-Wert kurzzeitig unter 1.
-Seit Kalenderwoche 2 2022 ist er signifikant über 1.
+Seit seinem Höchststand von 1,5 am 25.12.2021 war der R-Wert bis auf Kalenderwoche 1 2022 signifikant über 1.
+Diese Woche ist die aktuellste Schätzung des R-Werts signifikant unter 1.
 
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
@@ -235,6 +237,7 @@ Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schw
 * `r valueUIr(r_cases, uiText = "95% UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
 
 * `r valueUIr(r_hosp)` aufgrund der Hospitalisationen, per `r format(r_hosp$date, "%d.%m.%Y")`.
+Wie im epidemiologischen Bericht vom 25. Januar 2022 diskutiert[^345], ist diese Schätzung aber verfälscht durch Meldeverzögerungen.
 Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeHosp)` geschätzt. 
 
 * `r valueUIr(r_deaths)` aufgrund der Todesfälle, per `r format(r_deaths$date, "%d.%m.%Y")`.
@@ -242,7 +245,7 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig.
+Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig[^345].
 <!--- UPDATE: delete above sentence soon ---->
 Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
@@ -252,16 +255,16 @@ für Todesfälle bis zu 23 Tagen.
 Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
 Die bestätigten Fälle nahmen
 <!---- UPDATE fielen/stiegen ---->
-mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche zu.
-Die gemeldeten Hospitalisierungen stiegen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche,
-wobei diese Zahl wegen den oben erwähnten Meldeverzögerungen noch verfälscht sein könnte.
-Die Todesfälle fielen mit einer Rate von `r valueUIchange(rankingCHEdeaths)` pro Woche.
+mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche ab.
+Die gemeldeten Hospitalisierungen fielen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche,
+wobei diese Zahl wegen den erwähnten Meldeverzögerungen[^345] noch verfälscht sein könnte.
+Die Todesfälle stiegen mit einer Rate von `r valueUIchange(rankingCHEdeaths)` pro Woche.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle nahm in keiner Altersgruppe signifikant zu.
+Die Zahl der Fälle nahm in allen Altersgruppen signifikant ab, ausser in den 60-69, 70-79 und über 80 Jährigen.
 <!------ Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123]. -------->
 <!------ UPDATE -------->
 
@@ -287,13 +290,16 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 
 ### Varianten
 
-Seit Kalenderwoche 51 2021 ist die Omikron Variante In der Schweiz dominant
-und wurde etwa 9000-mal nachgewiesen und hatte in der Kalenderwoche 3 2022 einen Anteil von 98% unter allen sequenzierten Proben[^25].
+Seit Kalenderwoche 51 2021 ist der Omikron-Subtyp BA.1 in der Schweiz dominant, wurde über 10'000-mal nachgewiesen und hatte in der Kalenderwoche 4 2022 einen Anteil von 96% unter allen sequenzierten Proben[^25].
+Der Omikron-Subtyp BA.2 wurde 67-mal nachgewiesen und hatte in Kalenderwoche 4 2022 einen Anteil von 2.5% unter allen sequenzierten Proben[^25].
 <!--- UPDATE ---->
 
-Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron, den Impfschutz gegen diese Variante und der Schwere von Omikron-Infektionen sind im epidemiologischen Bericht vom 3. Januar 2022[^344] zusammengefasst.
-
-
+Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron BA.1, den Impfschutz gegen diese Variante und der Schwere von Omikron-Infektionen sind in unseren Berichten den Task Force Berichten der letzten Wochen diskutiert[^346].
+Über die relevanten Eigenschaften von BA.2 - Übertragbarkeit, mögliche Immunevasion, Virulenz - liegen noch wenig Informationen vor.
+BA.2 scheint aber einen Übertragungsvorteil gegenüber BA.2 zu besitzten: in einer in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].
+<!--- The secondary attack rate (SAR) was estimated as 29% and 39% in17
+households infected with Omicron BA.1 and BA.2, respectively.  ---->
+<!--- UPDATE ---->
 
 
 <!--- ä ö ü Ä Ö Ü ß á é í ó ú Á Ó Ú ő ű Ő Ű ---->
@@ -446,3 +452,6 @@ Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron, den Impfsc
 [^342]: https://www.sciencedirect.com/science/article/pii/S120197122101256X
 [^343]: https://dash.harvard.edu/bitstream/handle/1/37370587/omicron_ct.1-13-22.4.pdf?sequence=1&isAllowed=y
 [^344]: https://sciencetaskforce.ch/en/overview-and-evolution-of-the-situation-3-january-2022/
+[^345]: https://sciencetaskforce.ch/en/scientific-update-of-25-january-2022/
+[^346]: https://sciencetaskforce.ch/en/home/
+[^347]: https://www.medrxiv.org/content/10.1101/2022.01.28.22270044v1.full.pdf
