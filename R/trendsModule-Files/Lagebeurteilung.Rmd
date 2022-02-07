@@ -217,8 +217,8 @@ In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante BA.1 dominant
 Die Zahl der bestätigten Fälle stieg bis vorletzte Woche kontinuierlich an, fällt aber seit letzter Woche.
 Auch die aktuelle Schätzung des R-Werts ist diese Woche signifikant unter 1.
 Dies könnte darauf hindeuten das der Höhepunkt der Infektionen mit dem Omikron-Subtyp BA.1 erreicht wurde.
-Unter Annahme einer Dunkelziffer von 3-4, sind in den letzten drei Wochen
-geschätzt rund ein Drittel der Schweizer Bevölkerung infiziert worden.
+In den letzten drei Wochen sind insgesamt 700'000 Menschen positiv auf COVID-19 getestet worden.
+Unter Annahme einer Dunkelziffer von 3-4, sind in den letzten drei Wochen geschätzt rund ein Viertel bis ein Drittel der Schweizer Bevölkerung infiziert worden.
 
 Der Omikron-Subtyp BA.2 hat die letzten Wochen zugenommen und machte in Kalenderwoche 4 2022 2.5% der sequenzierten Proben aus.
 
@@ -296,7 +296,7 @@ Der Omikron-Subtyp BA.2 wurde 67-mal nachgewiesen und hatte in Kalenderwoche 4 2
 
 Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron BA.1, den Impfschutz gegen diese Variante und der Schwere von Omikron-Infektionen sind in unseren Berichten den Task Force Berichten der letzten Wochen diskutiert[^346].
 Über die relevanten Eigenschaften von BA.2 - Übertragbarkeit, mögliche Immunevasion, Virulenz - liegen noch wenig Informationen vor.
-BA.2 scheint aber einen Übertragungsvorteil gegenüber BA.2 zu besitzten: in einer in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].
+BA.2 scheint aber einen Übertragungsvorteil gegenüber BA.1 zu besitzten: in einer in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].
 <!--- The secondary attack rate (SAR) was estimated as 29% and 39% in17
 households infected with Omicron BA.1 and BA.2, respectively.  ---->
 <!--- UPDATE ---->
