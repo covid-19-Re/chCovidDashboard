@@ -213,21 +213,22 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 <!--- UPDATE ENTIRE PARAGRAPH BELOW ---->
-In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante BA.1 dominant und hatte in der Kalenderwoche 4 2022 eine Häufigkeit von 96%.
-Die Zahl der bestätigten Fälle stieg bis vorletzte Woche kontinuierlich an, fällt aber seit letzter Woche.
-Auch die aktuelle Schätzung des R-Werts ist diese Woche signifikant unter 1.
-Dies könnte darauf hindeuten das der Höhepunkt der Infektionen mit dem Omikron-Subtyp BA.1 erreicht wurde.
-In den letzten drei Wochen sind insgesamt 700'000 Menschen positiv auf COVID-19 getestet worden.
-Unter Annahme einer Dunkelziffer von 3-4, sind in den letzten drei Wochen geschätzt rund ein Viertel bis ein Drittel der Schweizer Bevölkerung infiziert worden.
+In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante BA.1 dominant und hatte in der Kalenderwoche 5 2022 eine Häufigkeit von 91%. 
+Die Zahl der bestätigten Fälle stieg bis Ende Januar 2022 kontinuierlich an, nimmt aber seit ungefähr Anfang Februar 2022 ab.
+Auch die der R-Wert ist seit der zweiten Januarhälfte signifikant unter 1.
 
-Der Omikron-Subtyp BA.2 hat die letzten Wochen zugenommen und machte in Kalenderwoche 4 2022 2.5% der sequenzierten Proben aus.
+Zum Teil kann diese Abnahme der gemeldeteten Fälle auf eine Verringerung der durchgeführten Tests in den letzten zwei Wochen zurückgeführt werden.
+Allerdings sind auch die Abwasser-Messungen in allen überwachten Kläranlagen rückläufig[^23].
+Dies ist ein starkes Indiz dafür, dass der Höhepunkt der Infektionen mit dem Omikron-Subtyp BA.1 erreicht wurde.
+
+Der Omikron-Untervariante BA.2 hat die letzten Wochen zugenommen und machte in Kalenderwoche 5 2022 7.8% der sequenzierten Proben aus.
 
 
 ### Dynamik
 
 <!------- UPDATE -------->
-Seit seinem Höchststand von 1,5 am 25.12.2021 war der R-Wert bis auf Kalenderwoche 1 2022 signifikant über 1.
-Diese Woche ist die aktuellste Schätzung des R-Werts signifikant unter 1.
+Gemäss den aktuellsten Schätzung war der R-Wert seit seinem Höchststand von 1,5 am 25.12.2021 bis auf wenige Tage in der ersten Kalenderwoche 2022 signifikant über 1, ist dann gefallen und 
+ist seit 21. Januar 2022 signifikant unter 1.
 
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
@@ -258,13 +259,13 @@ Die bestätigten Fälle nahmen
 mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche ab.
 Die gemeldeten Hospitalisierungen fielen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche,
 wobei diese Zahl wegen den erwähnten Meldeverzögerungen[^345] noch verfälscht sein könnte.
-Die Todesfälle stiegen mit einer Rate von `r valueUIchange(rankingCHEdeaths)` pro Woche.
+Die Todesfälle nahmen mit einer Rate von `r valueUIchange(rankingCHEdeaths)` pro Woche ab.
 <!---- UPDATE ---->
 <!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle nahm in allen Altersgruppen signifikant ab, ausser in den 60-69, 70-79 und über 80 Jährigen.
+Die Zahl der Fälle nahm in allen Altersgruppen signifikant ab, ausser in den 70-79 und über 80 Jährigen.
 <!------ Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123]. -------->
 <!------ UPDATE -------->
 
@@ -290,8 +291,8 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 
 ### Varianten
 
-Seit Kalenderwoche 51 2021 ist der Omikron-Subtyp BA.1 in der Schweiz dominant, wurde über 10'000-mal nachgewiesen und hatte in der Kalenderwoche 4 2022 einen Anteil von 96% unter allen sequenzierten Proben[^25].
-Der Omikron-Subtyp BA.2 wurde 67-mal nachgewiesen und hatte in Kalenderwoche 4 2022 einen Anteil von 2.5% unter allen sequenzierten Proben[^25].
+Seit Kalenderwoche 51 2021 ist der Omikron-Subtyp BA.1 in der Schweiz dominant, wurde über 14'500-mal nachgewiesen und hatte in der Kalenderwoche 5 2022 einen Anteil von 91% unter allen sequenzierten Proben[^25].
+Der Omikron-Subtyp BA.2 wurde 223-mal nachgewiesen und hatte in Kalenderwoche 5 2022 einen Anteil von 7.8% unter allen sequenzierten Proben[^25].
 <!--- UPDATE ---->
 
 Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron BA.1, den Impfschutz gegen diese Variante und der Schwere von Omikron-Infektionen sind in unseren Berichten den Task Force Berichten der letzten Wochen diskutiert[^346].
