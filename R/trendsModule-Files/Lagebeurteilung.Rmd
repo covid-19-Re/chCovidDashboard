@@ -213,22 +213,24 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 ## Allgemeine Situation
 
 <!--- UPDATE ENTIRE PARAGRAPH BELOW ---->
-In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante BA.1 dominant und hatte in der Kalenderwoche 5 2022 eine Häufigkeit von 91%. 
+In der Schweiz ist seit Kalenderwoche 51 2021 die Omikron Variante BA.1 dominant und hatte in der Kalenderwoche 6 2022 eine Häufigkeit von 86%. 
 Die Zahl der bestätigten Fälle stieg bis Ende Januar 2022 kontinuierlich an, nimmt aber seit ungefähr Anfang Februar 2022 ab.
 Auch die der R-Wert ist seit der zweiten Januarhälfte signifikant unter 1.
+Seit dieser Woche ist auch die Abnahme der IPS-Belegungen über die leztten zwei Wochen statistisch signifikant.
 
-Zum Teil kann diese Abnahme der gemeldeteten Fälle auf eine Verringerung der durchgeführten Tests in den letzten zwei Wochen zurückgeführt werden.
-Allerdings sind auch die Abwasser-Messungen in allen überwachten Kläranlagen rückläufig[^23].
-Dies ist ein starkes Indiz dafür, dass der Höhepunkt der Infektionen mit dem Omikron-Subtyp BA.1 erreicht wurde.
+Zum Teil kann diese Abnahme der gemeldeteten Fälle auf eine Verringerung der durchgeführten Tests in den letzten drei Wochen zurückgeführt werden.
+Allerdings fällt die Anzahl der gemeldeten Fälle schneller als die Anzahl der durchgeführten Tests bei leicht abnehmender Testpositivität.
+Ausserdem sind auch die Abwasser-Messungen in allen überwachten Kläranlagen rückläufig[^23].
+Dies ist ein starkes Indiz dafür, dass der Höhepunkt der Infektionen mit dem Omikron-Subtyp BA.1 überschritten ist.
 
-Der Omikron-Untervariante BA.2 hat die letzten Wochen zugenommen und machte in Kalenderwoche 5 2022 7.8% der sequenzierten Proben aus.
+Der Omikron-Untervariante BA.2 hat die letzten Wochen zugenommen und machte in Kalenderwoche 6 2022 12.7% der sequenzierten Proben aus.
 
 
 ### Dynamik
 
 <!------- UPDATE -------->
 Gemäss den aktuellsten Schätzung war der R-Wert seit seinem Höchststand von 1,5 am 25.12.2021 bis auf wenige Tage in der ersten Kalenderwoche 2022 signifikant über 1, ist dann gefallen und 
-ist seit 21. Januar 2022 signifikant unter 1.
+ist seit 20. Januar 2022 signifikant unter 1.
 
 Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
@@ -265,7 +267,7 @@ Die Todesfälle nahmen mit einer Rate von `r valueUIchange(rankingCHEdeaths)` pr
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
 Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
-Die Zahl der Fälle nahm in allen Altersgruppen signifikant ab, ausser in den 70-79 und über 80 Jährigen.
+Die Zahl der Fälle nahm in allen Altersgruppen signifikant ab.
 <!------ Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123]. -------->
 <!------ UPDATE -------->
 
@@ -291,13 +293,13 @@ Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 T
 
 ### Varianten
 
-Seit Kalenderwoche 51 2021 ist der Omikron-Subtyp BA.1 in der Schweiz dominant, wurde über 14'500-mal nachgewiesen und hatte in der Kalenderwoche 5 2022 einen Anteil von 91% unter allen sequenzierten Proben[^25].
-Der Omikron-Subtyp BA.2 wurde 223-mal nachgewiesen und hatte in Kalenderwoche 5 2022 einen Anteil von 7.8% unter allen sequenzierten Proben[^25].
+Seit Kalenderwoche 51 2021 ist der Omikron-Subtyp BA.1 in der Schweiz dominant, wurde über 16'000-mal nachgewiesen und hatte in der Kalenderwoche 6 2022 einen Anteil von 86% unter allen sequenzierten Proben[^25].
+Der Omikron-Subtyp BA.2 wurde 421-mal nachgewiesen und hatte in Kalenderwoche 6 2022 einen Anteil von 12.7% unter allen sequenzierten Proben[^25].
 <!--- UPDATE ---->
 
 Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron BA.1, den Impfschutz gegen diese Variante und der Schwere von Omikron-Infektionen sind in unseren Berichten den Task Force Berichten der letzten Wochen diskutiert[^346].
-Über die relevanten Eigenschaften von BA.2 - Übertragbarkeit, mögliche Immunevasion, Virulenz - liegen noch wenig Informationen vor.
-BA.2 scheint aber einen Übertragungsvorteil gegenüber BA.1 zu besitzten: in einer in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].
+<!--- Über die relevanten Eigenschaften von BA.2 - Übertragbarkeit, mögliche Immunevasion, Virulenz - liegen noch wenig Informationen vor.
+BA.2 scheint aber einen Übertragungsvorteil gegenüber BA.1 zu besitzten: in einer in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].  ---->
 <!--- The secondary attack rate (SAR) was estimated as 29% and 39% in17
 households infected with Omicron BA.1 and BA.2, respectively.  ---->
 <!--- UPDATE ---->
