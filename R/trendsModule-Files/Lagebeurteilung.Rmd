@@ -303,7 +303,7 @@ BA.2 scheint einen Übertragungsvorteil gegenüber BA.1 zu besitzten: in einem P
 households infected with Omicron BA.1 and BA.2, respectively.  ---->
 <!--- UPDATE ---->
 Vorläufige Reinfektions-Daten in der Bevölkerung legen Nahe, dass eine Infektion mit der Untervariante BA.1 starke Kreuzimmunität gegen eine Infektion mit BA.2 erzeugt[^351].
-Gemäss der UKHSA ist der Schutz der Impfung vor symptomatischer Infektion mit BA.2 gleich wie für BA.1[]^354].
+Gemäss der UKHSA ist der Schutz der Impfung vor symptomatischer Infektion mit BA.2 gleich wie für BA.1[^354].
 <!--- initial data from population-level reinfection studies suggest that infection with BA.1 provides strong protection against reinfection with BA.2 ---->
 Hingegen ist bei BA.2 die Aktivität des monoklonalen Antikörpers Sotrovimab, der in der Schweiz therapeutisch eingesetzt wird, deutlich vermindert[^348],[^349].
 Obwohl BA.2 in Hamstern schwerere Verläufe zeigt als BA.1[^352], gibt in epidemiologischen Daten aus Südafrika[^353], Grossbritannien und Dänemark keine Anzeichen für einen Unterschied in der Schwere[^351].
