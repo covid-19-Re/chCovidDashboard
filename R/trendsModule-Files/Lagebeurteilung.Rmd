@@ -298,14 +298,15 @@ Der Omikron-Subtyp BA.2 wurde 921-mal nachgewiesen und hatte in Kalenderwoche 7 
 <!--- UPDATE ---->
 
 Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron BA.1, den Impfschutz gegen diese Variante und der Schwere von Omikron-Infektionen sind in unseren Berichten den Task Force Berichten der letzten Wochen diskutiert[^346].
-BA.2 scheint einen Übertragungsvorteil gegenüber BA.1 zu besitzten: in einer in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].  
+BA.2 scheint einen Übertragungsvorteil gegenüber BA.1 zu besitzten: in einem Preprint beschriebenen dänischen Studie wurden Sekundärangriffsraten von BA.1 und BA.2 zu 29% and 39% geschätzt [^347].  
 <!--- The secondary attack rate (SAR) was estimated as 29% and 39% in17
 households infected with Omicron BA.1 and BA.2, respectively.  ---->
 <!--- UPDATE ---->
-Vorläufige Reinfektions-Daten in der Bevölkerung legen Nahe, dass eine Infektion mit der Untervariante BA.1 starke Kreuzimmunität gegen eine Infektion mit BA.2 erzeugt[^351]. 
+Vorläufige Reinfektions-Daten in der Bevölkerung legen Nahe, dass eine Infektion mit der Untervariante BA.1 starke Kreuzimmunität gegen eine Infektion mit BA.2 erzeugt[^351].
+Gemäss der UKHSA ist der Schutz der Impfung vor symptomatischer Infektion mit BA.2 gleich wie für BA.1[]^354].
 <!--- initial data from population-level reinfection studies suggest that infection with BA.1 provides strong protection against reinfection with BA.2 ---->
 Hingegen ist bei BA.2 die Aktivität des monoklonalen Antikörpers Sotrovimab, der in der Schweiz therapeutisch eingesetzt wird, deutlich vermindert[^348],[^349].
-Obwohl BA.2 in Hamstern schwerere Verläufe zeigt als BA.1[^352], gibt in epidemiologischen Daten aus Südafrika, Grossbritannien und Dänemark keine Anzeichen für einen Unterschied in der Schwere[^351].
+Obwohl BA.2 in Hamstern schwerere Verläufe zeigt als BA.1[^352], gibt in epidemiologischen Daten aus Südafrika[^353], Grossbritannien und Dänemark keine Anzeichen für einen Unterschied in der Schwere[^351].
 <!--- They also considered real-world data on clinical severity from South Africa, the United Kingdom, and Denmark, where immunity from vaccination or natural infection is high: in this data, there was no reported difference in severity between BA.2 and BA.1. ---->
 <!--- UPDATE ---->
 
@@ -469,3 +470,6 @@ Obwohl BA.2 in Hamstern schwerere Verläufe zeigt als BA.1[^352], gibt in epidem
 [^350]: https://depositonce.tu-berlin.de/bitstream/11303/16461/4/2022-02-23_MODUS-COVID_Bericht.pdf
 [^351]: https://www.who.int/news/item/22-02-2022-statement-on-omicron-sublineage-ba.2
 [^352]: https://www.biorxiv.org/content/10.1101/2022.02.14.480335v1
+[^353]: https://www.medrxiv.org/content/10.1101/2022.02.17.22271030v1
+[^354]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1054071/vaccine-surveillance-report-week-6.pdf
+[^355]: https://www.medrxiv.org/content/10.1101/2022.02.06.22270533v1.full
