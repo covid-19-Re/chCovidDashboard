@@ -32,8 +32,14 @@ pars <- list(
       hospitalizations = 5,
       icu = 0,
       deaths = 5
+    ),
+  lastday = c(
+    cases = today(),
+    hospitalizations = today(),
+    icu = max(icuDataRaw$date),
+    deaths = today()
     )
 )
-pars$lastday <- today()
+
 pars$begin <- pars$lastday - pars$delete + 1 - pars$time_window
 pars$end <- pars$lastday - pars$delete
