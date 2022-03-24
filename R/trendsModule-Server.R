@@ -86,7 +86,7 @@ trendsServer <- function(id) {
             regionSelect = "CH", eventSelect = "icu",
             fillColor = t.cols[2],
             lang = input$plot_language
-          ) + labs(caption = if_else(input$plot_language == "de", "Daten: BAG", "Data: BAG")),
+          ) + labs(caption = if_else(input$plot_language == "de", "Daten: BAG", "Data: FOPH")),
           plotPredictions(modelOutput()$predictions, modelOutput()$doublingTimes, modelOutput()$ranking,
             regionSelect = "CH", eventSelect = "deaths",
             fillColor = t.cols[1],
