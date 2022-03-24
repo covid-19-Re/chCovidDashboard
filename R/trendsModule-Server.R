@@ -33,17 +33,13 @@ trendsServer <- function(id) {
       })
 
       output$lastDataUpdate <- renderUI({
-        HTML(glue::glue("<b>Last Data Update:</b> {updateDate}"))
+        HTML(glue::glue("<b>Last Data Update:</b> {max(modelOutput()$predictions$date)}"))
       })
 
       eventCounts <- reactive({
         reactPars <- reactPars()
 
-        eventCountsAll <- list()
-        eventCountsAll$cases <- bagData %>% getEventCounts(fall_dt, "cases")
-        eventCountsAll$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations")
-        eventCountsAll$deaths <- bagData %>% getEventCounts(pttoddat, "deaths")
-        eventCountsAll$icu <- icuDataRaw %>% filter(region == "CH")
+        eventCountsAll <- getEventCountsPublic()
 
         eventCounts <- lapply(eventCountsAll, function(df) {
           df2wk <- df %>%
@@ -90,7 +86,7 @@ trendsServer <- function(id) {
             regionSelect = "CH", eventSelect = "icu",
             fillColor = t.cols[2],
             lang = input$plot_language
-          ) + labs(caption = if_else(input$plot_language == "de", "Daten: KSD", "Data: KSD")),
+          ) + labs(caption = if_else(input$plot_language == "de", "Daten: BAG", "Data: BAG")),
           plotPredictions(modelOutput()$predictions, modelOutput()$doublingTimes, modelOutput()$ranking,
             regionSelect = "CH", eventSelect = "deaths",
             fillColor = t.cols[1],

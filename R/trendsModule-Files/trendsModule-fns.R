@@ -42,6 +42,110 @@ getNewestICUfile <- function(path = "data/ICU") {
   return(newestICUfile)
 }
 
+getEventCountsPublic <- function(event) {
+  eventCounts <- list()
+  
+  urlfile <- jsonlite::fromJSON("https://www.covid19.admin.ch/api/data/context")
+
+  # cases
+  casesTotal <- read_csv(
+    urlfile$sources$individual$csv$daily$cases,
+    col_types = cols_only(
+      geoRegion = col_character(),
+      datum = col_date(format = ""),
+      entries = col_double()
+    )) %>%
+    transmute(
+      region = geoRegion,
+      age_class_type = "all",
+      age_class = "all",
+      date = datum,
+      count = entries
+    ) %>%
+    complete(region, age_class_type, age_class, date, fill = list(count = 0))
+
+  casesAgeGroup <- read_csv(
+    urlfile$sources$individual$csv$rawData$dailyCasesAgeRange,
+    col_types = cols(
+      date = col_date(format = ""),
+      geoRegion = col_character(),
+      ageRange = col_character(),
+      .default = col_double())) %>%
+    transmute(
+      region = geoRegion,
+      age_class_type = "decade",
+      age_class = ageRange,
+      date = date,
+      count = entries
+    ) %>%
+    complete(region, age_class_type, age_class, date, fill = list(count = 0))
+
+  eventCounts$cases <- bind_rows(casesTotal, casesAgeGroup) %>%
+    mutate(event = "cases", .before = count) %>%
+    mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+
+  # hospitalisations
+  eventCounts$hospitalizations <- read_csv(
+    urlfile$sources$individual$csv$daily$hosp,
+    col_types = cols_only(
+      geoRegion = col_character(),
+      datum = col_date(format = ""),
+      entries = col_double()
+    )) %>%
+    transmute(
+      region = geoRegion,
+      age_class_type = "all",
+      age_class = "all",
+      date = datum,
+      event = "",
+      count = entries) %>%
+    mutate(event = "hospitalizations", .before = count) %>%
+    complete(region, age_class_type, age_class, date, event, fill = list(count = 0)) %>%
+    mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+
+  # deaths
+  eventCounts$deaths <- read_csv(
+    urlfile$sources$individual$csv$daily$death,
+    col_types = cols_only(
+      geoRegion = col_character(),
+      datum = col_date(format = ""),
+      entries = col_double()
+    )) %>%
+    transmute(
+      region = geoRegion,
+      age_class_type = "all",
+      age_class = "all",
+      date = datum,
+      event = "",
+      count = entries) %>%
+    mutate(event = "deaths", .before = count) %>%
+    complete(region, age_class_type, age_class, date, event, fill = list(count = 0)) %>%
+    mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+
+  # icu
+  eventCounts$icu <- read_csv(
+    urlfile$sources$individual$csv$daily$hospCapacity,
+    col_types = cols_only(
+      geoRegion = col_character(),
+      date = col_date(format = ""),
+      ICU_Covid19Patients = col_double(),
+      type_variant = col_character()
+    )) %>%
+    filter(type_variant == "fp7d") %>%
+    transmute(
+      region = geoRegion,
+      age_class_type = "all",
+      age_class = "all",
+      date,
+      event = "",
+      count = ICU_Covid19Patients) %>%
+    mutate(event = "icu", .before = count) %>%
+    complete(region, age_class_type, age_class, date, event, fill = list(count = 0)) %>%
+    mutate(weekend = ifelse(wday(date) == 1 | wday(date) == 7, 1, 0))
+
+  return(eventCounts)
+}
+
 getEventCounts <- function(df, event_dt, event_name) {
   # CH
   countsCH <- df %>%

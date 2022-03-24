@@ -56,12 +56,12 @@ trendsUI <- function(id) {
           div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
             plotOutput(ns("ageClassPlotsCases"), height = "800px") %>% withSpinner()
           ))
-        ),
-        tabPanel(p(class = "tab-title", "Age Groups: Hospitalisations"), value = "hospitalizations",
-          div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
-            plotOutput(ns("ageClassPlotsHospitalizations"), height = "800px") %>% withSpinner()
-          ))
-        )
+        )#,
+        # tabPanel(p(class = "tab-title", "Age Groups: Hospitalisations"), value = "hospitalizations",
+        #   div(class = "panel panel-primary panel-tab", div(class = "panel-body", style = "background:white;",
+        #     plotOutput(ns("ageClassPlotsHospitalizations"), height = "800px") %>% withSpinner()
+        #   ))
+        # )
       ),
       tabsetPanel(
         type = "pills", id = "cantonTabs",
