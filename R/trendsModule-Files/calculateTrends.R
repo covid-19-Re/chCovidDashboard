@@ -5,12 +5,8 @@ library(here)
 
 source(here("R/trendsModule-Files/trendsModule-global.R"))
 
-eventCounts <- list()
-eventCounts$cases <- bagData %>% getEventCounts(fall_dt, "cases")
-eventCounts$hospitalizations <- bagData %>% getEventCounts(hospdatin, "hospitalizations")
-eventCounts$deaths <- bagData %>% getEventCounts(pttoddat, "deaths")
-eventCounts$icu <- icuDataRaw %>% filter(region == "CH")
 
+eventCounts <- getEventCountsPublic()
 qs::qsave(eventCounts, here("data/trends-eventCounts.qs"))
 
 # save data if on testServer
@@ -218,4 +214,3 @@ rmarkdown::render(
   output_dir = here("www/lagebeurteilung"),
   encoding = "UTF-8",
   quiet = TRUE)
-
