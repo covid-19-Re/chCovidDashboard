@@ -1,4 +1,6 @@
 tsUI <- function(id) {
+  return ("This dashboard is currently disabled.")
+
   ns <- NS(id)
 
   tagList(
