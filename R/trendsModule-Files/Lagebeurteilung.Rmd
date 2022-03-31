@@ -199,14 +199,22 @@ valueUIchange <- function(df, uiText = "UI", uiSep = " bis ", unit = "%", digits
 
 ## Allgemeine Situation
 
-In der Schweiz zirkulieren verschiedene Stämme von SARS-CoV-2 unter welchen B.1.1.7 dominiert. Die allgemeinen epidemiologischen Parameter – Fallzahlen, Hospitalisationen, Intensivstation-Belegung, Todesfälle – geben eine Gesamtsicht, ohne zwischen einzelnen Stämmen zu unterscheiden. Insgesamt deuten all diese Indikatoren auf eine rückläufige Epidemie hin. <!------ UPDATE  -------->
+<!--- UPDATE ENTIRE PARAGRAPH BELOW ---->
+Omikron BA.2 ist die dominante Variante in der Schweiz.
+Nach einem zwei-wöchigen signifikanten Anstieg der Fallzahlen nehmen diese nun ab.
+Die aktuellste Schätzung des R-Wertes, welche das Infektionsgeschehen bis zum 18.3.2022 wiedergibt, ist signifikant unter 1.
+Abwasserdaten bestätigen diesen Trend[^23].
+Der Höchststand der BA.2-Welle scheint überschritten zu sein.
 
-Eine genaue Quantifizierung ist momentan schwierig durch das veränderte Testverhalten und die fortschreitenden Impfungen. Daten aus der Abwasserüberwachung sind ein vom Testverhalten unabhängiger wichtiger Indikator. Abwasseranalysen von sechs Standorten[^27] bestätigen die basierend auf Fallzahlen beobachteten epidemiologischen Trends, d.h. einen stabilen und neuerdings fallenden Trend im April, nach einem Anstieg im Februar und März.
 
+### Dynamik
 
-### Dynamik  
-<!------ UPDATE -------->
-Basierend auf den aktuellen Daten schätzen wir eine Abnahme der SARS-CoV-2 Epidemie. Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei 0.89 (0.78 - 1.01); dies reflektiert das Infektionsgeschehen vom 24.04.-30.04.2021[^1].
+<!------- UPDATE -------->
+Gemäss den aktuellsten Schätzungen war der R-Wert
+vom 20. Februar bis 3. März 2022 signifikant über 1.
+Seit 13. März 2022 ist er signifikant unter 1.
+
+Der 7-Tageschnitt der schweizweiten Reproduktionszahl ist bei `r valueUIr(r_mean7d, uiText = "95% Unsicherheitsintervall, UI")`; dies reflektiert das Infektionsgeschehen vom `r r_mean7d_dateRange_str`[^1].
 
 
 Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schweiz betragen[^1]:
@@ -214,6 +222,7 @@ Tagesbasierte Schätzungen der effektiven Reproduktionszahl *R~e~* für die Schw
 * `r valueUIr(r_cases, uiText = "95% Unsicherheitsintervall, UI")` aufgrund der bestätigten Fälle, per `r format(r_cases$date, "%d.%m.%Y")`.
 
 * `r valueUIr(r_hosp)` aufgrund der Hospitalisationen, per `r format(r_hosp$date, "%d.%m.%Y")`.
+Wie im epidemiologischen Bericht vom 25. Januar 2022 diskutiert[^345], ist diese Schätzung aber verfälscht durch Meldeverzögerungen.
 Zum Vergleich aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeHosp)` geschätzt. 
 
 * `r valueUIr(r_deaths)` aufgrund der Todesfälle, per `r format(r_deaths$date, "%d.%m.%Y")`.
@@ -221,22 +230,28 @@ Zum Vergleich aufgrund der Hospitalisationen wird *R~e~* für den selben Tag auf
 Aufgrund der bestätigten Fälle wird *R~e~* für den selben Tag auf `r valueUIr(r_cases_timeDeath)` geschätzt.
 
 Wegen Meldeverzögerungen und Fluktuationen in den Daten könnten die Schätzwerte nachkorrigiert werden.
-Wir weisen darauf hin dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
+Insbesondere waren Spitalmeldungen in den letzten Wochen unvollständig[^345].
+<!--- UPDATE: delete above sentence soon ---->
+Wir weisen darauf hin, dass die *R~e~* Werte das Infektionsgeschehen nur verzögert widerspiegeln, weil
 eine gewisse Zeit vergeht zwischen der Infektion und dem Testresultat oder dem etwaigen Tod.
 Für *R~e~* Werte, die auf Fallzahlen basieren, beträgt diese Verzögerung mindestens 10 Tage,
 für Todesfälle bis 23 Tage.
 Durch fortschreitende Impfungen erwarten wir, dass in den nächsten Wochen die Reproduktionszahl basierend auf Hospitalisierungen und Todesfällen die Transmissionsdynamik unterschätzt.
 
-Parallel bestimmen wir die  Verdopplungs- bzw. Halbwertszeiten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
-Die bestätigten Fälle änderten sich um `r valueUIchange(rankingCHEcases)` pro Woche,
-die Hospitalisationen um `r valueUIchange(rankingCHEhospitalizations)`
-und die Todesfälle um `r valueUIchange(rankingCHEdeaths)`.
+Parallel bestimmen wir die Änderungsraten der bestätigten Fälle, Hospitalisationen und Todesfälle über die letzten 14 Tage[^2].
+Die bestätigten Fälle nahmen
+<!---- UPDATE fielen/stiegen ---->
+mit einer Rate von `r valueUIchange(rankingCHEcases)` pro Woche ab.
+Die gemeldeten Hospitalisierungen fielen mit einer Rate von `r valueUIchange(rankingCHEhospitalizations)` pro Woche,
+wobei diese Zahl wegen den erwähnten Meldeverzögerungen[^345] noch verfälscht sein könnte.
+Die Todesfälle nahmen mit einer Rate von `r valueUIchange(rankingCHEdeaths)` pro Woche zu.
+<!---- UPDATE ---->
+<!---- Todesfälle traten nur vereinzelt auf und lassen eine Berechnung des zeitlichen Trends auf der Basis der letzten 14 Tage nicht zu (entsprechend kommt das Re auf Basis der Todesfälle mit einem sehr grossen Unsicherheitsbereich). ---->
 Diese Werte spiegeln das Infektionsgeschehen vor mehreren Wochen wider.
 
-Eine Veränderung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17]. Der Effekt der Impfkampagne ist in der Altersgruppe über 75 Jahre sichtbar, wo wir einen Rückgang der Fallzahlen, Hospitalisierungen und Todesfälle beobachten. Während die Altersgruppe 75+ in der 2. Welle (November 2020) rund 50% der Hospitalisierungen ausgemacht hat, waren es im April 2021 noch rund 20%-25%. Dagegen sind die Hospitalisierungen bei den unter 65-jährigen von unter 30% in der 2. Welle (November 2020) auf über 60% im April 2021 gestiegen.
-<!------ UPDATE -------->
-Wir beobachten sinkende Hospitalisierungszahlen in allen Altersklassen.
-Für die Gruppe der 55 bis 64-Jährigen ist diese Reduktion statistisch signifikant.
+Die Entwicklung der Fallzahlen, Hospitalisierungen und Todesfällen stratifiziert nach Alter kann auf unserem Dashboard verfolgt werden[^17].
+Die Zahl der Fälle nahmen in allen Altersgruppen über die letzten 14 Tage signifikant ab.
+<!------ Aber die Anzahl der Hospitalisierungen könnte, wie auch letzte Woche, unterschätzt sein[^123]. -------->
 <!------ UPDATE -------->
 
 
@@ -255,14 +270,19 @@ Die Anzahl der COVID-19-Patienten auf Intensivstationen lag über die letzten 14
 im Bereich von `r range(icu$count)[1]`-`r range(icu$count)[2]`[^3] Personen
 (die Änderung war `r valueUIchange(rankingCHEicu)` pro Woche).
 
-Die Zahl der täglichen laborbestätigten Todesfälle über die letzten 14 Tage war zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
-<!--- 
-Seit dem 1. Oktober 2020 weist das Bundesamt für Gesundheit `r format(deaths_total, big.mark = "'")` laborbestätigte Todesfälle aus[^5].
-Die Kantone meldeten in dieser Zeit `r format(corona_data_deaths, big.mark = "'")` Todesfälle[^6].
-Die Sterblichkeitsstatistik vom Bundesamt für Statistik zeigt zwischen Kalenderwoche 43 im Jahr 2020 und Kalenderwoche 3 im Jahr 2021 eine Übersterblichkeit in der Altersgruppe 65 Jahre und älter[^7]. Insgesamt sind rund 8’400 zusätzliche Todesfälle in diesem Zeitraum im Vergleich zu Vorjahren verzeichnet. <!--- Seitdem wurde keine Übersterblichkeit mehr beobachtet.  CHECK 
-Diese Übersterblichkeit nimmt ab, ist aber in den folgenden großen Regionen der Schweiz immer noch sichtbar: Ostschweiz, Zürich und Zentralschweiz[^8].  CHECK ---> 
+Die Zahl der täglichen laborbestätigten Todesfälle lag über die letzten 14 Tage zwischen `r range(deaths$count)[1]` und `r range(deaths$count)[2]`[^4].
 
 
+### Varianten
+
+Seit Kalenderwoche 9 2022 ist der Omikron-Subtyp BA.2 in der Schweiz dominant.
+Der Omikron-Subtyp BA.2 wurde erstmals in KW 52 2021 in der Schweiz nachgewiesen.
+In Kalenderwoche 11 2022 hatte BA.2 einen Anteil von 81% unter allen sequenzierten Proben[^25].
+Der Omikron-Subtyp BA.1 hatte noch einen Anteil von 19%. 
+<!--- UPDATE ---->
+
+Die bisherigen Studien zur epidemiologischen Ausbreitung von Omikron BA.1 und BA.2, den Impfschutz gegen diese Varianten und der Schwere von Omikron-Infektionen sind in unseren Berichten den Task Force Berichten der letzten Wochen diskutiert[^346].
+<!--- UPDATE ---->
 
 ## Neue Varianten
 In der Schweiz sind die ursprünglich in Grossbritannien und Südafrika beschriebenen Varianten B.1.1.7 und B.1.351 erstmals
@@ -316,17 +336,49 @@ Die SARS-CoV-2-Epidemie zeigt auf nationaler Ebene seit mehreren Wochen einen re
 [^16]: https://ispmbern.github.io/covid-19/variants/
 [^17]: https://ibz-shiny.ethz.ch/covidDashboard/, Dashboard Time Series
 [^18]: https://www.medrxiv.org/content/10.1101/2021.03.05.21252520v2
-[^19]: https://www.nature.com/articles/s41586-021-03426-1
-[^20]: https://www.bmj.com/content/bmj/372/bmj.n579.full.pdf
-[^21]: https://www.medrxiv.org/content/10.1101/2021.03.04.21252528v2.full.pdf
-[^22]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3792894
-[^23]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
-[^24]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00170-5/fulltext
-[^25]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
-[^26]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
-[^27]: https://sensors-eawag.ch/sars/overview.html
-[^28]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/
-[^29]: https://cov-spectrum.ethz.ch/
+[^19]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
+[^20]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00170-5/fulltext
+[^21]: https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(21)00055-4/fulltext
+[^22]: http://parsivel-eawag.ch/sarscov2/ARA_Werdhoelzli_ddPCR.html
+[^23]: https://sensors-eawag.ch/sars/overview.html
+[^24]: https://cov-spectrum.ethz.ch/explore/Switzerland/Surveillance/AllTimes/
+[^25]: https://cov-spectrum.ethz.ch/
+[^26]: https://khub.net/documents/135939561/430986542/Effectiveness+of+COVID-19+vaccines+against+the+B.1.617.2+variant.pdf/204c11a4-e02e-11f2-db19-b3664107ac42
+[^27]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/990101/27_May_2021_Risk_assessment_for_SARS-CoV-2_variant_VOC-21APR-02__B.1.617.2_.pdf
+[^28]: https://sciencetaskforce.ch/wissenschaftliches-update-07-april-2021/
+[^29]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)00947-8/fulltext
+[^30]: https://www.nejm.org/doi/pdf/10.1056/NEJMc2102179?articleTools=true
+[^31]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/991135/3_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
+[^32]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/994761/18_June_2021_Risk_assessment_for_SARS-CoV-2_variant_DELTA.pdf
+[^33]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/993358/s1288_Warwick_RoadMap_Step_4.pdf
+[^34]: https://sciencetaskforce.ch/en/scientific-update-of-20-july-2021/
+[^35]: https://depositonce.tu-berlin.de/handle/11303/13423
+[^36]: https://doi.org/10.1101/2021.07.05.21260050
+[^37]: https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)01358-1/fulltext
+[^38]: https://www.cdc.gov/mmwr/volumes/70/wr/mm7031e2.htm?s_cid=mm7031e2_w
+[^39]: https://www.gov.il/BlobFolder/reports/vaccine-efficacy-safety-follow-up-committee/he/files_publications_corona_two-dose-vaccination-data.pdf
+[^41]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1007376/Vaccine_surveillance_report_-_week_30.pdf
+[^42]: https://www.nejm.org/doi/full/10.1056/NEJMoa2108891
+[^43]: https://www.alberta.ca/stats/covid-19-alberta-statistics.htm#vaccine-outcomes
+[^44]: https://khub.net/web/phe-national/public-library/-/document_library/v2WsRK3ZlEig/view_file/479607329?_com_liferay_document_library_web_portlet_DLPortlet_INSTANCE_v2WsRK3ZlEig_redirect=https%3A%2F%2Fkhub.net%3A443%2Fweb%2Fphe-national%2Fpublic-library%2F-%2Fdocument_library%2Fv2WsRK3ZlEig%2Fview%2F479607266
+[^45]: https://spiral.imperial.ac.uk/bitstream/10044/1/90800/2/react1_r13_final_preprint_final.pdf
+[^46]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
+[^47]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1010472/Vaccine_surveillance_report_-_week_32.pdf
+[^48]: https://www.medrxiv.org/content/10.1101/2021.08.20.21262158v1
+[^49]: https://www.medrxiv.org/content/10.1101/2021.07.28.21261295v1.full.pdf
+[^50]: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(21)00475-8/fulltext
+[^51]: https://www.nejm.org/doi/full/10.1056/NEJMoa2114228
+[^52]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1017309/S1362_PHE_duration_of_protection_of_COVID-19_vaccines_against_clinical_disease.pdf
+[^53]: https://www.medrxiv.org/content/10.1101/2021.09.28.21264260v1.full.pdf
+[^54]: https://www.medrxiv.org/content/10.1101/2021.09.29.21264199v1.full.pdf
+[^55]: https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-16th-update-september-2021.pdf , Seite 17, Figur 9
+[^56]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1028113/Technical_Briefing_26.pdf
+[^57]: https://sciencetaskforce.ch/en/scientific-update-of-26-october-2021/
+[^58]: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3949410
+[^59]: https://sciencetaskforce.ch/wp-content/uploads/2021/06/Protection_Duration16Jun2021_EN.pdf
+[^60]: https://arxiv.org/abs/2111.08000
+[^61]: https://sciencetaskforce.ch/en/scientific-update-of-23-november-2021/
+[^62]: https://ibz-shiny.ethz.ch/wastewaterRe/
 
 
 <!---- deleted stuff! ---->
@@ -340,46 +392,21 @@ regional <- subset(reproduction,
 regional <- regional[regional$date == max(regional$date), ]
 regional <- regional[order(regional$median_R_mean), ]
 
-regional$region[regional$region == "grR Central Switzerland"] <- "Zentralschweiz"
-regional$region[regional$region == "grR Eastern Switzerland"] <- "Ostschweiz"
-regional$region[regional$region == "grR Espace Mittelland"] <- "Espace Mittelland"
-regional$region[regional$region == "grR Lake Geneva Region"] <- "Région lémanique"
-regional$region[regional$region == "grR Northwestern Switzerland"] <- "Nordwestschweiz"
-regional$region[regional$region == "grR Ticino"] <- "Ticino"
-regional$region[regional$region == "grR Zurich"] <- "Zürich"
+[^341]: https://www.medrxiv.org/content/10.1101/2021.12.26.21268380v1
+[^342]: https://www.sciencedirect.com/science/article/pii/S120197122101256X
+[^343]: https://dash.harvard.edu/bitstream/handle/1/37370587/omicron_ct.1-13-22.4.pdf?sequence=1&isAllowed=y
+[^344]: https://sciencetaskforce.ch/en/overview-and-evolution-of-the-situation-3-january-2022/
+[^345]: https://sciencetaskforce.ch/en/scientific-update-of-25-january-2022/
+[^346]: https://sciencetaskforce.ch/en/home/
+[^347]: https://www.medrxiv.org/content/10.1101/2022.01.28.22270044v1.full.pdf
+[^348]: https://www.medrxiv.org/content/10.1101/2022.02.06.22270533v1
+[^349]: https://www.biorxiv.org/content/10.1101/2022.02.07.479306v1
 
-threshold <- 0.8
-
-regional_below <- regional[regional$median_R_mean <= threshold, ]
-below <- ""
-for(i in 1:dim(regional_below)[1]) {
-  ifelse(i < dim(regional_below)[1], last <- ", ", last <- "")
-  below <- paste0(below,
-                  regional_below$region[i], 
-                  " mit ",
-                  format(round(regional_below$median_R_mean[i], 2), decimal.mark = ","),
-                  "; 95% UI: ",
-                  format(round(regional_below$median_R_lowHPD[i], 2), decimal.mark = ","),
-                  "-",
-                  format(round(regional_below$median_R_highHPD[i], 2), decimal.mark = ","),
-                  last)
-}
-
-regional_above <- regional[regional$median_R_mean > threshold, ]
-above <- ""
-for(i in 1:dim(regional_above)[1]) {
-  ifelse(i < dim(regional_above)[1], last <- "), ", last <- ")")
-  above <- paste0(above,
-                  regional_above$region[i], 
-                  " (",
-                  format(round(regional_above$median_R_mean[i], 2), decimal.mark = ","),
-                  "; 95% UI: ",
-                  format(round(regional_above$median_R_lowHPD[i], 2), decimal.mark = ","),
-                  "-",
-                  format(round(regional_above$median_R_highHPD[i], 2), decimal.mark = ","),
-                  last)
-}
-```
-
-<!---- ## Regionale Unterschiede
-Es bestehen regionale und kantonale Unterschiede im Verlauf der SARS-CoV-2-Epidemie. Die kumulierte Anzahl der täglich bestätigten Fälle über die letzten 14 Tage pro 100'000 Einwohner liegt zwischen `r round(cases14d_min$valueNorm14daySum, 0)` (`r cases14d_min$regionName`) und `r round(cases14d_max$valueNorm14daySum, 0)` (`r cases14d_max$regionName`). In allen 7 Grossregionen liegt *R~e~* aufgrund der bestätigten Fälle (Median) derzeit über dem von der Swiss National COVID-19 Science Task Force vorgeschlagenen Zielwert von 0,8, welcher zu einer Halbierung der Anzahl Neuinfektionen innerhalb maximal 14 Tagen führt:[^9] `r above`. Die Werte von *R~e~* können auf kantonaler Ebene auch innerhalb einer Grossregion grössere Unterschiede aufweisen.[^10] --->
+[^350]: https://depositonce.tu-berlin.de/bitstream/11303/16461/4/2022-02-23_MODUS-COVID_Bericht.pdf
+[^351]: https://www.who.int/news/item/22-02-2022-statement-on-omicron-sublineage-ba.2
+[^352]: https://www.biorxiv.org/content/10.1101/2022.02.14.480335v1
+[^353]: https://www.medrxiv.org/content/10.1101/2022.02.17.22271030v1
+[^354]: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1054071/vaccine-surveillance-report-week-6.pdf
+[^355]: https://www.medrxiv.org/content/10.1101/2022.02.06.22270533v1.full
+[^356]: https://www.medrxiv.org/content/10.1101/2022.03.10.22272177v1
+[^357]: https://www.medrxiv.org/content/10.1101/2022.03.13.22272308v1
