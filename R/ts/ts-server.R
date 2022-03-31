@@ -52,6 +52,8 @@ ts_create_initial_model <- function () {
 }
 
 tsServer <- function(id, global_session) {
+  return()
+
   moduleServer(
     id,
     function(input, output, session) {
