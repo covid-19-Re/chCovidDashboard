@@ -200,17 +200,17 @@ vaccinationDataByAge <- fullyVaccinatedByAge %>%
 qs::qsave(vaccinationData, here("data/vaccinationData.qs"))
 qs::qsave(vaccinationDataByAge, here("data/vaccinationDataByAge.qs"))
 
-rmarkdown::render(
-  here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
-  output_format = "all",
-  output_dir = here("www/lagebeurteilung"),
-  encoding = "UTF-8",
-  quiet = TRUE)
+# rmarkdown::render(
+#   here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
+#   output_format = "all",
+#   output_dir = here("www/lagebeurteilung"),
+#   encoding = "UTF-8",
+#   quiet = TRUE)
 
-rmarkdown::render(
-  here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
-  output_file = "lagebeurteilung-shiny.html",
-  output_format = "html_fragment",
-  output_dir = here("www/lagebeurteilung"),
-  encoding = "UTF-8",
-  quiet = TRUE)
+# rmarkdown::render(
+#   here("R/trendsModule-Files/Lagebeurteilung.Rmd"),
+#   output_file = "lagebeurteilung-shiny.html",
+#   output_format = "html_fragment",
+#   output_dir = here("www/lagebeurteilung"),
+#   encoding = "UTF-8",
+#   quiet = TRUE)
