@@ -14,20 +14,6 @@ cd "$parent_path"
 
 git pull
 
-latestDir=$(ls -td ../data/BAG/*/ | head -1)
-if [ -f lastBAGdir.txt ]; then
-  lastDir=$(<lastBAGdir.txt)
-else
-  lastDir="no latest dir found"
-fi
-
-latestFile=$(ls -t ../data/BAG/*/*FOPH_COVID19_data_extract.csv | head -1)
-if [ -f lastBAGFile.txt ]; then
-  lastFile=$(<lastBAGFile.txt)
-else
-  lastFile="no latest dir found"
-fi
-
 LBupdate=$(stat -c ‘%y’ ../R/trendsModule-Files/Lagebeurteilung.Rmd)
 if [ -f lastLBupdate.txt ]; then
   lastLBupdate=$(<lastLBupdate.txt)
@@ -49,11 +35,6 @@ else
   lastReUpdate="no latest Re update found"
 fi
 
-# scripts to be run when new BAG data is available 
-if [ "$latestFile" != "$lastFile" ]; then
-  bash ../R/trendsModule-Files/updateTrends.sh
-  echo "$latestFile">lastBAGFile.txt
-fi
 
 # scripts to be run when new lagebericht is available 
 if [ "$LBupdate" != "$lastLBupdate" ]; then
